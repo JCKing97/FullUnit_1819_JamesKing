@@ -1,0 +1,21 @@
+<div class="panel panel-info" style="margin: 10px">
+    <div class="panel-heading">Unsure of an agents strategy? Read these descriptions!</div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for strategy in strategies %}
+                    <tr>
+                        <td>{{ strategy.name }}</td>
+                        <td>{{ strategy.description }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
