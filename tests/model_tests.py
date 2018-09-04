@@ -9,7 +9,6 @@ class GameModelCase(unittest.TestCase):
         db.create_all()
 
     def tearDown(self):
-        db.session.remove()
         db.drop_all()
 
     def test_get_interaction_history(self):
@@ -25,13 +24,13 @@ class GameModelCase(unittest.TestCase):
         agent1 = Agent(strategy_name='strat3', game_id=1)
         agent2 = Agent(strategy_name='strat1', game_id=2)
         agent3 = Agent(strategy_name='strat2', game_id=2)
-        round1game1 = Round(game_id=1)
-        round2game1 = Round(game_id=1)
-        round3game1 = Round(game_id=1)
-        round4game1 = Round(game_id=1)
-        round1game2 = Round(game_id=2)
-        round2game2 = Round(game_id=2)
-        round3game2 = Round(game_id=2)
+        round1game1 = Round(id=1, game_id=1)
+        round2game1 = Round(id=2, game_id=1)
+        round3game1 = Round(id=3, game_id=1)
+        round4game1 = Round(id=4, game_id=1)
+        round1game2 = Round(id=1, game_id=2)
+        round2game2 = Round(id=2, game_id=2)
+        round3game2 = Round(id=3, game_id=2)
         db.session.add(strategy1)
         db.session.add(strategy2)
         db.session.add(strategy3)
@@ -78,4 +77,3 @@ class GameModelCase(unittest.TestCase):
         db.session.commit()
         print(game2.get_interaction_history().all())
         print(game1.get_interaction_history().all())
-        print(Round.query.all())

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, SubmitField, StringField
+from wtforms import SelectField, SubmitField
 
 
 class GameSelectAgentsForm(FlaskForm):

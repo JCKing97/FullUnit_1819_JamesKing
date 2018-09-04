@@ -16,7 +16,7 @@ class Game(db.Model):
 
     def get_interaction_history(self):
         interaction_history = Action.query.join(Round).filter(Round.game_id == self.id)
-        return interaction_history.order_by(Action.round_id.desc())
+        return interaction_history.order_by(Action.round_id.asc()).all()
 
     def __repr__(self):
         return "<Game: {}>".format(self.id)
@@ -41,7 +41,7 @@ class Action(db.Model):
 
 
 class Round(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True)
     game_id = db.Column(db.Integer, db.ForeignKey('game.id'), primary_key=True)
     actions = db.relationship('Action', primaryjoin=(Action.round_id == id), backref='round_action', lazy='dynamic')
 

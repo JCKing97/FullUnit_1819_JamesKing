@@ -1,9 +1,9 @@
 from flask import render_template, redirect, url_for
 from app import app
-from flask_babel import _
 from app.forms import GameSelectAgentsForm
 from app.game_analysis import get_points
-from app.models import Strategy
+from app.models import Strategy, Agent, Game
+from sqlalchemy.orm import load_only
 
 
 @app.route('/')
@@ -18,7 +18,6 @@ def game():
     form = GameSelectAgentsForm()
     edit_agents(form, strategies)
     if form.validate_on_submit():
-        agents = {'agent1': form.strats_field1.data, 'agent2': form.strats_field2.data}
         return redirect(url_for('game_finished', game_id=1))
     return render_template('game.html', title='Game', form=form, strategies=strategies)
 
@@ -30,11 +29,10 @@ def edit_agents(form, strategies):
 
 @app.route('/game_finished/<game_id>')
 def game_finished(game_id):
-    interaction_history = [{'agent1': False, 'agent2': True}, {'agent1': False, 'agent2': True},
-                           {'agent1': False, 'agent2': False}, {'agent1': False, 'agent2': False},
-                           {'agent1': True, 'agent2': True}, {'agent1': True, 'agent2': True}]
+    interaction_history = Game.query.filter_by(id=game_id).first().get_interaction_history()
     agent_points = get_points(interaction_history)
-    strategies = Strategy.query.all()
+    strategies = Strategy.query.join(Game.query.filter_by(id=game_id).first().agents)
+    print(interaction_history)
     return render_template('game_finished.html', title='Game Finished', game_id=game_id,
                            interaction_history=interaction_history, agent_points=agent_points,
                            strategies=strategies)

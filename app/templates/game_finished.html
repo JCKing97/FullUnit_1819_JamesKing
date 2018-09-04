@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <p>{{ _('The game has concluded and the results are in!') }}</p>
+    <p>The game has concluded and the results are in!</p>
     <div class="container">
         <div class="jumbotron" style="padding: 10px">
             <h2>How did the agents points stack up?</h2>
             {% for agents_name, points in agent_points.items() %}
-                <label>{{ "{}: {} points".format(agents_name, points) }}</label>
+                <label>{{ agents_name }}: {{ points }} points</label>
                 <div class="progress">
                     <div class="progress-bar {% if points==agent_points.values()|max %}progress-bar-success{% else %}progress-bar-warning{% endif %}" role="progressbar" aria-valuenow="{{ points }}" aria-valuemin="0" aria-valuemax="{{ "{}".format(5*interaction_history|length) }}" style="{{ "width: {}%".format(100 * (points / (5*(interaction_history|length)))) }}"></div>
                 </div>
@@ -19,19 +19,21 @@
                     <thead>
                         <tr>
                             <th>Round</th>
-                            {% for key in interaction_history[0].keys() %}
-                                <th>{{ key }}</th>
+                            {% set count = 0 %}
+                            {% for action in interaction_history %}
+                                {% if count%2==0 %}
+                                    <th>{{ action.round_id }}</th>
+                                {% endif %}
+                                {% set count = count + 1 %}
                             {% endfor %}
                         </tr>
                     </thead>
                     <tbody>
-                        {% for i in range(0,(interaction_history|length)) %}
-                            <tr>
-                                <th>{{ i + 1 }}</th>
-                                {% for key in interaction_history[i].keys() %}
-                                    <td class="{% if interaction_history[i][key] == True %}success{% else %}danger{% endif %}">{% if interaction_history[i][key] == True %}Cooperate{% else %}Defect{% endif %}</td>
-                                {% endfor %}
-                            </tr>
+                        {% set count = 0 %}
+                        {% for action in interaction_history %}
+                            {% if count%2==0 %}<tr>{% endif %}
+                                <td class="{% if action.cooperates == True %}success{% else %}danger{% endif %}">{% if action.cooperates == True %}Cooperate{% else %}Defect{% endif %}</td>
+                            {% if count%2!=0 %}</tr>{% endif %}
                         {% endfor %}
                     </tbody>
                 </table>
