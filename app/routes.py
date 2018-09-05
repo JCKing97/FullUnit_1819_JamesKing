@@ -5,7 +5,7 @@ from app.game_analysis import get_points
 from app.models import Strategy, Agent, Game
 
 
-reports = [1, 2, 3]
+reports = ["Strategy Theory", "Strategy Analysis", "Tournaments and Communities", "Tournament Development Methodology"]
 
 @app.route('/')
 @app.route('/index')
@@ -53,6 +53,11 @@ def tournament():
 @app.route('/communities')
 def communities():
     return render_template('communities.html', title='Communities', reports=reports)
+
+
+@app.route('/multiplayer')
+def multiplayer():
+    return render_template('multiplayer.html', title='Multiplayer', reports=reports)
 
 
 @app.route('/about')
