@@ -8,11 +8,13 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
+#Connect the relevant extensions to Flask
 app = Flask(__name__)
 app.config.from_object(Config)
 mail = Mail(app)
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
+db.app = app
 migrate = Migrate(app, db)
 
 # Set up the settings for when server is in production
@@ -34,7 +36,7 @@ if not app.debug:
         mail_handler.setLevel(logging.ERROR)
         app.logger.addHandler(mail_handler)
 
-    #Set up logs when in production
+    # Set up logs when in production
     if not os.path.exists('logs'):
         os.mkdir('logs')
     file_handler = RotatingFileHandler('logs/microblog.log', maxBytes=10240,

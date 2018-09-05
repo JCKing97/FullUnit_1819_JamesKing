@@ -2,9 +2,10 @@
 {%  import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <p>Welcome! Here we will run an instance of the iterated prisoner's dilemma, where two agents interact with each other.</p>
     <div class="container">
-    <div class="jumbotron" style="padding: 10px">
+    <p style="margin: 10px">Welcome! Here we will run an instance of the iterated prisoner's dilemma, where two agents interact with each other.</p>
+    {% include "_strategies_description.html" %}
+    <div class="jumbotron" style="margin: 10px">
     <div class="row">
         <div class="col-md-4">
             {{ wtf.quick_form(form) }}
@@ -12,5 +13,4 @@
     </div>
     </div>
     </div>
-    {% include "_strategies_description.html" %}
 {% endblock %}

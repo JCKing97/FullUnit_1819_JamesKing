@@ -1,44 +1,41 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <p>The game has concluded and the results are in!</p>
     <div class="container">
-        <div class="jumbotron" style="padding: 10px">
+        <p style="margin: 10px">The game has concluded and the results are in!</p>
+        {% include "_agent_strategy_description.html" %}
+        <div class="jumbotron" style="margin: 10px">
             <h2>How did the agents points stack up?</h2>
             {% for agents_name, points in agent_points.items() %}
-                <label>{{ agents_name }}: {{ points }} points</label>
+                <label>Agent {{ agents_name }}: {{ points }} points</label>
                 <div class="progress">
-                    <div class="progress-bar {% if points==agent_points.values()|max %}progress-bar-success{% else %}progress-bar-warning{% endif %}" role="progressbar" aria-valuenow="{{ points }}" aria-valuemin="0" aria-valuemax="{{ "{}".format(5*interaction_history|length) }}" style="{{ "width: {}%".format(100 * (points / (5*(interaction_history|length)))) }}"></div>
+                    <div class="progress-bar {% if points==agent_points.values()|max %}progress-bar-success{% else %}progress-bar-warning{% endif %}" role="progressbar" aria-valuenow="{{ points }}" aria-valuemin="0" aria-valuemax="{{ "{}".format((5*interaction_history|length)/2) }}" style="{{ "width: {}%".format(100 * (points / ((5*(interaction_history|length)/2)))) }}"></div>
                 </div>
             {% endfor %}
         </div>
-        <div class="jumbotron" style="padding: 10px">
+        <div class="jumbotron" style="margin: 10px">
             <h2>What interactions occurred?</h2>
             <div class="container">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Round</th>
-                            {% set count = 0 %}
-                            {% for action in interaction_history %}
-                                {% if count%2==0 %}
-                                    <th>{{ action.round_id }}</th>
-                                {% endif %}
-                                {% set count = count + 1 %}
+                            {% for agent in agents %}
+                                <th>Agent {{ agent.id }}</th>
                             {% endfor %}
                         </tr>
                     </thead>
                     <tbody>
-                        {% set count = 0 %}
+                        {% set count=[0] %}
                         {% for action in interaction_history %}
-                            {% if count%2==0 %}<tr>{% endif %}
-                                <td class="{% if action.cooperates == True %}success{% else %}danger{% endif %}">{% if action.cooperates == True %}Cooperate{% else %}Defect{% endif %}</td>
-                            {% if count%2!=0 %}</tr>{% endif %}
+                            {% if count[0]%2==0 %}<tr><th>{{ action.round_num }}</th>{% endif %}
+                            <td class="{% if action.cooperates == True %}success{% else %}danger{% endif %}">{% if action.cooperates == True %}Cooperate{% else %}Defect{% endif %}</td>
+                            {% if count[0]%2!=0 %}</tr>{% endif %}
+                            {% if count.append(count.pop() + 1) %}{% endif %}
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    {% include "_strategies_description.html" %}
 {% endblock %}
