@@ -1,86 +1,133 @@
-def strat_2(db, strategy):
-    db.session.add(strategy(name="Tit-For-Tat", description='Start by cooperating, then copy the last turn from the other agent'))
-    db.session.add(strategy(name="Grudger", description='Start by cooperating, if the other agent defects switch and defect from then on'))
-    db.session.add(strategy(name="Always Cooperate", description='Cooperate no matter what'))
-    db.session.add(strategy(name="Always Defect", description='Defect no matter what'))
+def strat_2(db, Strategy):
+    db.session.add_all([Strategy(name="Tit-For-Tat", description='Start by cooperating, then copy the last turn from the other agent'),
+                        Strategy(name="Grudger", description='Start by cooperating, if the other agent defects switch and defect from then on'),
+                        Strategy(name="Always Cooperate", description='Cooperate no matter what'),
+                        Strategy(name="Always Defect", description='Defect no matter what')])
     db.session.commit()
 
 
-def games_2(db, game, agent, action, game_agent_association):
-    game1 = game()
-    game2 = game()
-    game3 = game()
-    agent1 = agent(strategy_name='Tit-For-Tat')
-    agent2 = agent(strategy_name='Grudger')
-    agent3 = agent(strategy_name='Always Cooperate')
-    agent4 = agent(strategy_name='Always Defect')
-    agent1game1 = game_agent_association(game_id=1, agent_id=1)
-    agent2game1 = game_agent_association(game_id=1, agent_id=2)
-    agent3game2 = game_agent_association(game_id=2, agent_id=3)
-    agent4game2 = game_agent_association(game_id=2, agent_id=4)
-    agent2game3 = game_agent_association(game_id=3, agent_id=2)
-    agent4game3 = game_agent_association(game_id=3, agent_id=4)
-    action1agent1game1 = action(game_id=1, round_num=1, agent_id=1, cooperates=True)
-    action1agent2game1 = action(game_id=1, round_num=1, agent_id=2, cooperates=True)
-    action2agent1game1 = action(game_id=1, round_num=2, agent_id=1, cooperates=True)
-    action2agent2game1 = action(game_id=1, round_num=2, agent_id=2, cooperates=True)
-    action3agent1game1 = action(game_id=1, round_num=3, agent_id=1, cooperates=True)
-    action3agent2game1 = action(game_id=1, round_num=3, agent_id=2, cooperates=True)
-    action4agent1game1 = action(game_id=1, round_num=4, agent_id=1, cooperates=True)
-    action4agent2game1 = action(game_id=1, round_num=4, agent_id=2, cooperates=True)
-    action1agent3game2 = action(game_id=2, round_num=1, agent_id=3, cooperates=True)
-    action1agent4game2 = action(game_id=2, round_num=1, agent_id=4, cooperates=False)
-    action2agent3game2 = action(game_id=2, round_num=2, agent_id=3, cooperates=True)
-    action2agent4game2 = action(game_id=2, round_num=2, agent_id=4, cooperates=False)
-    action3agent3game2 = action(game_id=2, round_num=3, agent_id=3, cooperates=True)
-    action3agent4game2 = action(game_id=2, round_num=3, agent_id=4, cooperates=False)
-    action4agent3game2 = action(game_id=2, round_num=4, agent_id=3, cooperates=True)
-    action4agent4game2 = action(game_id=2, round_num=4, agent_id=4, cooperates=False)
-    action1agent2game3 = action(game_id=3, round_num=1, agent_id=2, cooperates=True)
-    action1agent4game3 = action(game_id=3, round_num=1, agent_id=4, cooperates=False)
-    action2agent2game3 = action(game_id=3, round_num=2, agent_id=2, cooperates=False)
-    action2agent4game3 = action(game_id=3, round_num=2, agent_id=4, cooperates=False)
-    action3agent2game3 = action(game_id=3, round_num=3, agent_id=2, cooperates=False)
-    action3agent4game3 = action(game_id=3, round_num=3, agent_id=4, cooperates=False)
-    action4agent2game3 = action(game_id=3, round_num=4, agent_id=2, cooperates=False)
-    action4agent4game3 = action(game_id=3, round_num=4, agent_id=4, cooperates=False)
-    db.session.add(game1)
-    db.session.add(game2)
-    db.session.add(game3)
-    db.session.add(agent1)
-    db.session.add(agent2)
-    db.session.add(agent3)
-    db.session.add(agent4)
-    db.session.add(agent1game1)
-    db.session.add(agent2game1)
-    db.session.add(agent3game2)
-    db.session.add(agent4game2)
-    db.session.add(agent2game3)
-    db.session.add(agent4game3)
-    db.session.add(action1agent1game1)
-    db.session.add(action1agent2game1)
-    db.session.add(action2agent1game1)
-    db.session.add(action2agent2game1)
-    db.session.add(action3agent1game1)
-    db.session.add(action3agent2game1)
-    db.session.add(action4agent1game1)
-    db.session.add(action4agent2game1)
-    db.session.add(action1agent3game2)
-    db.session.add(action1agent4game2)
-    db.session.add(action2agent3game2)
-    db.session.add(action2agent4game2)
-    db.session.add(action3agent3game2)
-    db.session.add(action3agent4game2)
-    db.session.add(action4agent3game2)
-    db.session.add(action4agent4game2)
-    db.session.add(action1agent2game3)
-    db.session.add(action1agent4game3)
-    db.session.add(action2agent2game3)
-    db.session.add(action2agent4game3)
-    db.session.add(action3agent2game3)
-    db.session.add(action3agent4game3)
-    db.session.add(action4agent2game3)
-    db.session.add(action4agent4game3)
+def games_2(db, Game, Agent, Action, GameAgentAssociation):
+    game1 = Game()
+    game2 = Game()
+    game3 = Game()
+    agent1 = Agent(strategy_name='Tit-For-Tat')
+    agent2 = Agent(strategy_name='Grudger')
+    agent3 = Agent(strategy_name='Always Cooperate')
+    agent4 = Agent(strategy_name='Always Defect')
+    db.session.add_all([game1, game2, game3, agent1, agent2, agent3, agent4])
+    db.session.commit()
+    agent_game_associations = [GameAgentAssociation(game_id=game1.id, agent_id=agent1.id),
+                               GameAgentAssociation(game_id=game1.id, agent_id=agent2.id),
+                               GameAgentAssociation(game_id=game2.id, agent_id=agent3.id),
+                               GameAgentAssociation(game_id=game2.id, agent_id=agent4.id),
+                               GameAgentAssociation(game_id=game3.id, agent_id=agent2.id),
+                               GameAgentAssociation(game_id=game3.id, agent_id=agent4.id)]
+    actions = [Action(game_id=game1.id, round_num=1, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game1.id, round_num=1, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game1.id, round_num=2, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game1.id, round_num=2, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game1.id, round_num=3, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game1.id, round_num=3, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game1.id, round_num=4, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game1.id, round_num=4, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game2.id, round_num=1, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game2.id, round_num=1, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game2.id, round_num=2, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game2.id, round_num=2, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game2.id, round_num=3, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game2.id, round_num=3, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game2.id, round_num=4, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game2.id, round_num=4, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game3.id, round_num=1, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game3.id, round_num=1, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game3.id, round_num=2, agent_id=agent2.id, cooperates=False),
+               Action(game_id=game3.id, round_num=2, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game3.id, round_num=3, agent_id=agent2.id, cooperates=False),
+               Action(game_id=game3.id, round_num=3, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game3.id, round_num=4, agent_id=agent2.id, cooperates=False),
+               Action(game_id=game3.id, round_num=4, agent_id=agent4.id, cooperates=False)]
+    db.session.add_all(agent_game_associations)
+    db.session.add_all(actions)
+    db.session.commit()
+
+def tournament(db, Game, Agent, Action, GameAgentAssociation, Tournament):
+    tournament = Tournament()
+    db.session.add(tournament)
+    db.session.commit()
+    game1 = Game(tournament=tournament.id)
+    game2 = Game(tournament=tournament.id)
+    game3 = Game(tournament=tournament.id)
+    game4 = Game(tournament=tournament.id)
+    game5 = Game(tournament=tournament.id)
+    game6 = Game(tournament=tournament.id)
+    agent1 = Agent(strategy_name='Tit-For-Tat')
+    agent2 = Agent(strategy_name='Grudger')
+    agent3 = Agent(strategy_name='Always Cooperate')
+    agent4 = Agent(strategy_name='Always Defect')
+    db.session.add_all([game1, game2, game3, game4, game5, game6, agent1, agent2, agent3, agent4])
+    db.session.commit()
+    agent_game_associations = [GameAgentAssociation(game_id=game1.id, agent_id=agent1.id),
+                               GameAgentAssociation(game_id=game1.id, agent_id=agent2.id),
+                               GameAgentAssociation(game_id=game2.id, agent_id=agent1.id),
+                               GameAgentAssociation(game_id=game2.id, agent_id=agent3.id),
+                               GameAgentAssociation(game_id=game3.id, agent_id=agent1.id),
+                               GameAgentAssociation(game_id=game3.id, agent_id=agent4.id),
+                               GameAgentAssociation(game_id=game4.id, agent_id=agent2.id),
+                               GameAgentAssociation(game_id=game4.id, agent_id=agent3.id),
+                               GameAgentAssociation(game_id=game5.id, agent_id=agent2.id),
+                               GameAgentAssociation(game_id=game5.id, agent_id=agent4.id),
+                               GameAgentAssociation(game_id=game6.id, agent_id=agent3.id),
+                               GameAgentAssociation(game_id=game6.id, agent_id=agent4.id)]
+    actions = [Action(game_id=game1.id, round_num=1, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game1.id, round_num=1, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game1.id, round_num=2, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game1.id, round_num=2, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game1.id, round_num=3, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game1.id, round_num=3, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game1.id, round_num=4, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game1.id, round_num=4, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game2.id, round_num=1, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game2.id, round_num=1, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game2.id, round_num=2, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game2.id, round_num=2, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game2.id, round_num=3, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game2.id, round_num=3, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game2.id, round_num=4, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game2.id, round_num=4, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game3.id, round_num=1, agent_id=agent1.id, cooperates=True),
+               Action(game_id=game3.id, round_num=1, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game3.id, round_num=2, agent_id=agent1.id, cooperates=False),
+               Action(game_id=game3.id, round_num=2, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game3.id, round_num=3, agent_id=agent1.id, cooperates=False),
+               Action(game_id=game3.id, round_num=3, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game3.id, round_num=4, agent_id=agent1.id, cooperates=False),
+               Action(game_id=game3.id, round_num=4, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game4.id, round_num=1, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game4.id, round_num=1, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game4.id, round_num=2, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game4.id, round_num=2, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game4.id, round_num=3, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game4.id, round_num=3, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game4.id, round_num=4, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game4.id, round_num=4, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game5.id, round_num=1, agent_id=agent2.id, cooperates=True),
+               Action(game_id=game5.id, round_num=1, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game5.id, round_num=2, agent_id=agent2.id, cooperates=False),
+               Action(game_id=game5.id, round_num=2, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game5.id, round_num=3, agent_id=agent2.id, cooperates=False),
+               Action(game_id=game5.id, round_num=3, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game5.id, round_num=4, agent_id=agent2.id, cooperates=False),
+               Action(game_id=game5.id, round_num=4, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game6.id, round_num=1, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game6.id, round_num=1, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game6.id, round_num=2, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game6.id, round_num=2, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game6.id, round_num=3, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game6.id, round_num=3, agent_id=agent4.id, cooperates=False),
+               Action(game_id=game6.id, round_num=4, agent_id=agent3.id, cooperates=True),
+               Action(game_id=game6.id, round_num=4, agent_id=agent4.id, cooperates=False)]
+    db.session.add_all(agent_game_associations)
+    db.session.add_all(actions)
     db.session.commit()
 
 

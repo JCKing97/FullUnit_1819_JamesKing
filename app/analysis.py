@@ -1,5 +1,10 @@
+"""A module for analysis on games, tournaments etc."""
+
+
 def get_game_points(interaction_history):
-    """Gets the points for the 2 players in a single game"""
+    """Gets the points for the 2 players in a single game
+    :rtype: a dictionary
+    :return: if there is no interaction history an empty dictionary, else a dictionary containing the keys of the players and their respective points earned"""
     player_points = {}
     round_history = {}
     for action in interaction_history:
@@ -24,16 +29,18 @@ def get_game_points(interaction_history):
 
 
 def get_tournament_points(games):
-    """Get the points for agents throughout a tournament"""
+    """Get the points for agents throughout a tournament
+    :rtype: a dictionary
+    :return: if there are no games an empty dictionary, else keys are players and their values are their respective points earned throughout the tournament"""
     player_points = {}
     for game in games:
         interaction_history = game.get_interaction_history()
         player_game_points = get_game_points(interaction_history)
         for player in player_game_points:
-            if player_points[player]:
+            try:
                 player_points[player] += player_game_points[player]
-            else:
-                player_points[player] = player_game_points[player_points]
+            except KeyError:
+                player_points[player] = player_game_points[player]
     return player_points
 
 

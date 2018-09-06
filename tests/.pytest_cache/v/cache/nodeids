@@ -1,3 +1,5 @@
 [
-  "model_tests.py::GameModelCase::test_get_interaction_history"
+  "analysis_tests.py::TournamentAnalysisCase::test_get_tournament_points_empty_games",
+  "analysis_tests.py::TournamentAnalysisCase::test_get_tournament_points_no_games",
+  "analysis_tests.py::TournamentAnalysisCase::test_get_tournaments_points_normal"
 ]

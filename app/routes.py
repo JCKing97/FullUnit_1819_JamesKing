@@ -1,8 +1,8 @@
 from flask import render_template, redirect, url_for
 from app import app
 from app.forms import GameSelectAgentsForm
-from app.game_analysis import get_game_points
-from app.models import Strategy, Agent, Game
+from app.analysis import get_game_points, get_tournament_points
+from app.models import Strategy, Game, Tournament
 
 
 reports = ["Strategy Theory", "Strategy Analysis", "Tournaments and Communities", "Tournament Development Methodology"]
@@ -48,6 +48,24 @@ def game_finished(game_id):
 @app.route('/tournament')
 def tournament():
     return render_template('tournament.html', title='Tournament', reports=reports)
+
+
+@app.route('/tournament_finished/<tournament_id>')
+def tournament_finished(tournament_id):
+    """Displays the information of a finished tournament with the tournament_id provided"""
+    games = Tournament.query.filter_by(id=tournament_id).first_or_404().games.all()
+    agent_points = get_tournament_points(games)
+    agents = []
+    for game in games:
+        for agent in game.agents:
+            agents.append(agent)
+    strategy_names = [agent.strategy_name for agent in agents]
+    strategies = []
+    for name in strategy_names:
+        strategies.append(Strategy.query.filter(Strategy.name==name).all())
+    return render_template('tournament_finished.html', title='Tournament Finished', tournament_id=tournament_id,
+                           agent_points=agent_points, strategies=strategies, agents=agents, game_length=4, games=games,
+                           reports=reports)
 
 
 @app.route('/communities')
