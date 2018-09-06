@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for
 from app import app
 from app.forms import GameSelectAgentsForm
-from app.game_analysis import get_points
+from app.game_analysis import get_game_points
 from app.models import Strategy, Agent, Game
 
 
@@ -36,7 +36,7 @@ def edit_agents(form, strategies):
 def game_finished(game_id):
     """Displays the information of a finished game with the game_id provided"""
     interaction_history = Game.query.filter_by(id=game_id).first_or_404().get_interaction_history()
-    agent_points = get_points(interaction_history)
+    agent_points = get_game_points(interaction_history)
     agents = Game.query.filter_by(id=game_id).first().agents
     strategy_names = [agent.strategy_name for agent in agents]
     strategies = Strategy.query.filter((Strategy.name==strategy_names[0]) | (Strategy.name==strategy_names[1])).all()
