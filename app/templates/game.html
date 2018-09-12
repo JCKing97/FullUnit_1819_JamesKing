@@ -2,15 +2,26 @@
 {%  import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
+    <div class="jumbotron" style="padding: 20px">
+        <h1>Game</h1>
+        <p>
+            A game consists of two agents interacting with each other over a number of rounds.
+            Each round an agent may choose to cooperate or defect, the choice of what the agent does depends on their selected strategy.
+            In a nature engine game you may select a strategy for each agent and run the game.
+            Select a strategy for each of the agents and press run to initiate a game, once finished you will be redirected to a page with the outcome and statistics produced by the game.
+            If you're unsure of any strategies have a look at the descriptions in the information panel at the bottom.
+        </p>
+    </div>
     <div class="container">
-    <h1 style="margin: 10px">Welcome! Here we will run an instance of the iterated prisoner's dilemma, where two agents interact with each other.</h1>
-    {% include "_strategies_description.html" %}
-    <div class="jumbotron" style="margin: 10px">
-    <div class="row">
-        <div class="col-md-4">
-            {{ wtf.quick_form(form) }}
+        <h1>Set up</h1>
+        <div class="row">
+            <div class="col-md-4">
+                {{ wtf.quick_form(form) }}
+            </div>
         </div>
-    </div>
-    </div>
+        <hr />
+        <div class="row">
+            {% include "_strategies_description.html" %}
+        </div>
     </div>
 {% endblock %}

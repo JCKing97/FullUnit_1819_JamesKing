@@ -1,6 +1,23 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h1>Coming Soon</h1>
-    <p>Set up and simulate an environment involving multiple communities and their agents.</p>
+    <div class="jumbotron" style="padding: 20px">
+        <h1>Communities</h1>
+        <p>
+            Communities is a new concept.
+            Communities contain agents, and have tournaments between their member agents.
+            Each community nominates a "leader strategy" to go onto a higher stage and partake in tournaments with the other communities' leader strategies.
+            As in our world communities go through generations, some strategies are more successful so reproduce more within the community and others are less successful so reproduce less.
+            A leader strategy may change between generations for a community, and the success of the community is measured by the success of their leader strategy.
+            The size of a community fluctuates depending upon this success.
+        </p>
+    </div>
+
+    <div class="container">
+        <h1 style="color: red">Here be the form to select agents' strategies!</h1>
+        <hr />
+        <div class="row">
+            {% include "_strategies_description.html" %}
+        </div>
+    </div>
 {% endblock %}

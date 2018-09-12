@@ -1,6 +1,22 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h1>Coming Soon</h1>
-    <p>Set up and simulate tournaments.</p>
+    <div class="jumbotron" style="padding: 20px">
+        <h1>Tournament</h1>
+        <p>
+            A tournament consists of a number of agents (more than 2) that are all interacting with each other.
+            Each agent in the tournament interacts with every other agent in a game between the two.
+            Agents accumulate points across the games they play against all the others.
+            In a nature engine game you may select a number of agents and assign each agent a strategy, press run to initiate the tournament.
+            If you're unsure of any strategies have a look at the descriptions in the information panel at the bottom.
+        </p>
+    </div>
+
+    <div class="container">
+        <h1 style="color: red">Here be the form to select agents' strategies!</h1>
+        <hr />
+        <div class="row">
+            {% include "_strategies_description.html" %}
+        </div>
+    </div>
 {% endblock %}

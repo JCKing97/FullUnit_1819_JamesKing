@@ -47,7 +47,8 @@ def game_finished(game_id):
 
 @app.route('/tournament')
 def tournament():
-    return render_template('tournament.html', title='Tournament', reports=reports)
+    strategies = Strategy.query.all()
+    return render_template('tournament.html', title='Tournament', strategies=strategies, reports=reports)
 
 
 @app.route('/tournament_finished/<tournament_id>')
@@ -70,7 +71,8 @@ def tournament_finished(tournament_id):
 
 @app.route('/communities')
 def communities():
-    return render_template('communities.html', title='Communities', reports=reports)
+    strategies = Strategy.query.all()
+    return render_template('communities.html', title='Communities', strategies=strategies, reports=reports)
 
 
 @app.route('/multiplayer')
