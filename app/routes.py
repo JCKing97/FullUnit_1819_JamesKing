@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, send_file
 from app import app
 from app.forms import GameSelectAgentsForm
 from app.analysis import get_game_points, get_tournament_points
@@ -85,4 +85,6 @@ def about():
 
 @app.route('/report/<report_name>')
 def report(report_name):
-    return render_template('report.html', title='Report: {}'.format(report_name), report_name=report_name, reports=reports)
+    return send_file('{}/static/docs/{}.pdf'.format(app.root_path, report_name),
+                     mimetype="application/pdf",
+                     as_attachment=True)
