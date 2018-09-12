@@ -4,6 +4,16 @@
     {% if title %}{{ title }} - Nature Engine{% else %}Welcome to Nature Engine{% endif %}
 {% endblock %}
 
+{% block head %}
+    {{ super() }}
+    <style>
+    hr {
+        background-color: #061539;
+        height: 1px;
+    }
+    </style>
+{% endblock %}
+
 {% block navbar %}
     <nav class="navbar navbar-inverse">
         <div class="container">
