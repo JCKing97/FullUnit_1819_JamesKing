@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/communities.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/communities.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/game.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/game_finished.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/game_finished.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/tournament.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/tournament.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/about.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,7 +20,7 @@
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$PopulateDB.coverage" NAME="PopulateDB Coverage Results" MODIFIED="1536080686131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase_test_get_tournament_points_no_games.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase.test_get_tournament_points_no_games Coverage Results" MODIFIED="1536229582875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_GameModelCase_test_get_interaction_history.coverage" NAME="pytest for model_tests.GameModelCase.test_get_interaction_history Coverage Results" MODIFIED="1535545404289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/NatureEngineWebApp$NatureEngineWebApp.coverage" NAME="NatureEngineWebApp Coverage Results" MODIFIED="1536787414988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$NatureEngineWebApp.coverage" NAME="NatureEngineWebApp Coverage Results" MODIFIED="1536787934930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -68,7 +63,7 @@
           <entry key="cfg" value="1" />
           <entry key="db" value="3" />
           <entry key="gitignore" value="2" />
-          <entry key="html" value="67" />
+          <entry key="html" value="68" />
           <entry key="ini" value="1" />
           <entry key="js" value="1" />
           <entry key="log" value="1" />
@@ -80,7 +75,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="67" />
+          <entry key="HTML" value="68" />
           <entry key="Ini" value="2" />
           <entry key="JavaScript" value="1" />
           <entry key="Locale" value="3" />
@@ -94,19 +89,19 @@
           <entry key="Python Console" value="2110" />
           <entry key="cfg" value="104" />
           <entry key="dummy" value="22" />
-          <entry key="html" value="10359" />
+          <entry key="html" value="10705" />
           <entry key="po" value="1" />
-          <entry key="py" value="17814" />
-          <entry key="txt" value="910" />
+          <entry key="py" value="17827" />
+          <entry key="txt" value="998" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="10359" />
+          <entry key="HTML" value="10705" />
           <entry key="Ini" value="104" />
           <entry key="Locale" value="1" />
-          <entry key="PLAIN_TEXT" value="933" />
-          <entry key="Python" value="19924" />
+          <entry key="PLAIN_TEXT" value="1021" />
+          <entry key="Python" value="19937" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
@@ -117,14 +112,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="57" column="47" lean-forward="true" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
+            <state relative-caret-position="472">
+              <caret line="74" column="91" selection-start-line="74" selection-start-column="91" selection-end-line="74" selection-end-column="91" />
               <folding>
                 <element signature="e#0#63#0" expanded="true" />
-                <marker date="1536786155348" expanded="true" signature="464:465" ph="..." />
-                <marker date="1536786155348" expanded="true" signature="3388:3476" ph="..." />
-                <marker date="1536786155348" expanded="true" signature="3646:3650" ph="..." />
+                <marker date="1536787414910" expanded="true" signature="464:465" ph="..." />
+                <marker date="1536787414910" expanded="true" signature="3449:3537" ph="..." />
+                <marker date="1536787414910" expanded="true" signature="3707:3711" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/templates/about.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="74" selection-start-line="5" selection-start-column="74" selection-end-line="5" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -197,11 +201,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/communities.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="11" column="75" selection-start-line="11" selection-start-column="75" selection-end-line="11" selection-end-column="75" />
+              <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
               <folding>
                 <element signature="e#78#99#0#HTML" expanded="true" />
                 <element signature="e#768#786#0#HTML" expanded="true" />
@@ -215,15 +219,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret column="37" lean-forward="true" selection-start-column="37" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Procfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -281,7 +276,6 @@
         <option value="$PROJECT_DIR$/app/templates/_strategies_description.html" />
         <option value="$PROJECT_DIR$/tests/ModelTests.py" />
         <option value="$PROJECT_DIR$/app/templates/404.html" />
-        <option value="$PROJECT_DIR$/app/templates/about.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/scripts/PopulateDB.py" />
         <option value="$PROJECT_DIR$/natureengine.py" />
@@ -306,9 +300,10 @@
         <option value="$PROJECT_DIR$/app/templates/base.html" />
         <option value="$PROJECT_DIR$/app/templates/game_finished.html" />
         <option value="$PROJECT_DIR$/app/templates/game.html" />
-        <option value="$PROJECT_DIR$/app/routes.py" />
         <option value="$PROJECT_DIR$/app/templates/tournament.html" />
         <option value="$PROJECT_DIR$/app/templates/communities.html" />
+        <option value="$PROJECT_DIR$/app/routes.py" />
+        <option value="$PROJECT_DIR$/app/templates/about.html" />
       </list>
     </option>
   </component>
@@ -650,7 +645,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536782292224</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Developing the tournament, community, game and game_finished pages look and feel.">
+      <created>1536787481651</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1536787481651</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -729,7 +731,8 @@
     <MESSAGE value="Added documents to return from static files and edited the reports route to link to them" />
     <MESSAGE value="Setting up for heroku deploy" />
     <MESSAGE value="Adding padding to make the site look better" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding padding to make the site look better" />
+    <MESSAGE value="Developing the tournament, community, game and game_finished pages look and feel." />
+    <option name="LAST_COMMIT_MESSAGE" value="Developing the tournament, community, game and game_finished pages look and feel." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app.py" />
@@ -778,13 +781,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="72" selection-start-line="4" selection-start-column="72" selection-end-line="4" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/about.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -969,19 +965,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="57" column="47" lean-forward="true" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#63#0" expanded="true" />
-            <marker date="1536786155348" expanded="true" signature="464:465" ph="..." />
-            <marker date="1536786155348" expanded="true" signature="3388:3476" ph="..." />
-            <marker date="1536786155348" expanded="true" signature="3646:3650" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/tournament.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -996,11 +979,31 @@
     <entry file="file://$PROJECT_DIR$/app/templates/communities.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="11" column="75" selection-start-line="11" selection-start-column="75" selection-end-line="11" selection-end-column="75" />
+          <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
           <folding>
             <element signature="e#78#99#0#HTML" expanded="true" />
             <element signature="e#768#786#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="74" column="91" selection-start-line="74" selection-start-column="91" selection-end-line="74" selection-end-column="91" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+            <marker date="1536787414910" expanded="true" signature="464:465" ph="..." />
+            <marker date="1536787414910" expanded="true" signature="3449:3537" ph="..." />
+            <marker date="1536787414910" expanded="true" signature="3707:3711" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="74" selection-start-line="5" selection-start-column="74" selection-end-line="5" selection-end-column="74" />
         </state>
       </provider>
     </entry>
