@@ -1,1 +1,1 @@
-web: flask db upgrade; guniconr natureengine:app
+web: flask db upgrade; gunicorn natureengine:app
