@@ -31,6 +31,21 @@ Martin~A. Nowak and Karl Sigmund.
 \newblock Evolution of indirect reciprocity by image scoring.
 \newblock {\em Nature}, 393:573--577, 1998.
 
+\bibitem{gossip_alt}
+Ralf~D. Sommerfeld, Hans-J{\"u}rgen Krambeck, Dirk Semmann, and Manfred
+  Milinski.
+\newblock Gossip as an alternative for direct observation in games of indirect
+  reciprocity.
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, 104:17435--17440, 2007.
+
+\bibitem{prosocs}
+Kostas Stathis, {Antonis C.} Kakas, Wenjin Lu, {Neophytos D} emetriou, Ulle
+  Endriss, and Andrea Bracciali.
+\newblock {\em PROSOCS: a platform for programming software agents in
+  computational logic}, pages 523--528.
+\newblock 4 2004.
+
 \bibitem{pyswip}
 Yuce Tekol.
 \newblock Pyswip.
