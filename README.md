@@ -6,4 +6,4 @@ Hopefully it will prove that I am able to create a basic web service using Prolo
 
 To do this I will be following this website http://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/http.html%27), this website http://www.swi-prolog.org/howto/http/ and Anne Ogborn's tutorials http://www.pathwayslms.com/swipltuts/html/index.html
 
-I will be skipping sections of these tutorials focusing on HTML generation as I will be serving JSON or XML to create my API
+I will not be skipping sections of these tutorials focusing on HTML generation even though I will be serving JSON or XML to create my API as these sections are useful to practice this work.
