@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{evolution_of_cooperation}
 Robert Axelrod and William~D. Hamilton.
@@ -15,6 +15,12 @@ Vince Knight; Owen Campbell;~Marc; eric-s-s; VSN Reddy Janga; James Campbell;
   Areeb~Ahmed.
 \newblock Axelrod: 4.3.0.
 \newblock \url{http://dx.doi.org/10.5281/zenodo.1405868}, September 2018.
+
+\bibitem{mvfcec}
+{\"O}zg{\"u}r Kafali, Alfonso~E. Romero, and Kostas Stathis.
+\newblock Agent-oriented activity recognition in the event calculus: an
+  application for diabetic patients.
+\newblock {\em Computational Intelligence}, 33:899--925, August 2017.
 
 \bibitem{five_rules_coop}
 Martin~A. Nowak.
@@ -40,7 +46,7 @@ Ralf~D. Sommerfeld, Hans-J{\"u}rgen Krambeck, Dirk Semmann, and Manfred
   States of America}, 104:17435--17440, 2007.
 
 \bibitem{prosocs}
-Kostas Stathis, {Antonis C.} Kakas, Wenjin Lu, {Neophytos D} emetriou, Ulle
+Kostas Stathis, {Antonis C.} Kakas, Wenjin Lu, Neophytos Demetriou, Ulle
   Endriss, and Andrea Bracciali.
 \newblock {\em PROSOCS: a platform for programming software agents in
   computational logic}, pages 523--528.
