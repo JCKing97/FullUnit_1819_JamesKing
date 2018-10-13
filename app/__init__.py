@@ -1,40 +1,25 @@
+"""__init__.py: Sets up the flask app and it's various extensions for the Nature Engine web app"""
+
+__author__ = "James King adapted from Miguel Grinberg Flask Mega Tutorial"
+
 import logging
-from logging.handlers import SMTPHandler, RotatingFileHandler
+from logging.handlers import RotatingFileHandler
 from flask import Flask
 from flask_bootstrap import Bootstrap
-from flask_mail import Mail
-from config import Config
-import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from config import Config
+import os
 
 #Connect the relevant extensions to Flask
 app = Flask(__name__)
 app.config.from_object(Config)
-mail = Mail(app)
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
-db.app = app
 migrate = Migrate(app, db)
 
 # Set up the settings for when server is in production
 if not app.debug:
-
-    # Set up reporting errors to an admin mail account
-    if app.config['MAIL_SERVER']:
-        auth = None
-        if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
-            auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
-        secure = None
-        if app.config['MAIL_USE_TLS']:
-            secure = ()
-        mail_handler = SMTPHandler(
-            mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
-            fromaddr='no-reply@' + app.config['MAIL_SERVER'],
-            toaddrs=app.config['ADMINS'], subject='Microblog Failure',
-            credentials=auth, secure=secure)
-        mail_handler.setLevel(logging.ERROR)
-        app.logger.addHandler(mail_handler)
 
     # Set up logs when in production
     if app.config['LOG_TO_STDOUT']:
@@ -44,7 +29,7 @@ if not app.debug:
     else:
         if not os.path.exists('logs'):
             os.mkdir('logs')
-        file_handler = RotatingFileHandler('logs/microblog.log', maxBytes=10240,
+        file_handler = RotatingFileHandler('logs/natureengine.log', maxBytes=10240,
                                            backupCount=10)
         file_handler.setFormatter(logging.Formatter(
             '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))

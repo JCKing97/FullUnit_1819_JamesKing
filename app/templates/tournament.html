@@ -1,22 +1,57 @@
+
+
 {% extends "base.html" %}
 
 {% block app_content %}
     <div class="jumbotron" style="padding: 20px">
         <h1>Tournament</h1>
         <p>
-            A tournament consists of a number of agents (more than 2) that are all interacting with each other.
-            Each agent in the tournament interacts with every other agent in a game between the two.
-            Agents accumulate points across the games they play against all the others.
-            In a nature engine game you may select a number of agents and assign each agent a strategy, press run to initiate the tournament.
+            A tournament consists of a number of players (more than 2) that are all interacting with each other.
+            Each player in the tournament interacts with every other player in a match between the two.
+            Players accumulate points across the matches they play against all the others.
+            In a nature engine tournament you may select a number of players and assign each player a strategy, press run to initiate the tournament.
             If you're unsure of any strategies have a look at the descriptions in the information panel at the bottom.
         </p>
     </div>
 
     <div class="container">
-        <h1 style="color: red">Here be the form to select agents' strategies!</h1>
+        <h1 style="color: red">Here be the form to select players' strategies!</h1>
+        <div id="select_agents"></div>
         <hr />
         <div class="row">
             {% include "_strategies_description.html" %}
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script type="text/babel">
+        class Counter extends React.Component {
+            state = { count: 0 };
+
+            render(){
+                return (
+                    <div>
+                        <span className="badge badge-primary m-2">{this.getCount()}</span>
+                        <button className="btn btn-secondary btn-sm">Inc</button>
+                    </div>
+                )
+            }
+
+            getCount(){
+                const {count} = this.state;
+                return count === 0 ? "Zero" : count;
+            }
+        }
+
+        ReactDOM.render(
+            <Counter/>,
+            document.getElementById('select_agents')
+        );
+
+    </script>
 {% endblock %}

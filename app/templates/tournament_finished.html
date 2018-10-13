@@ -3,12 +3,7 @@
 {% block app_content %}
     <h1 style="margin: 10px">Tournament has concluded, the results are in</h1>
     <div class="jumbotron" style="margin: 10px">
-            <h2>How did the agents points stack up?</h2>
-            {% for agents_name, points in agent_points.items() %}
-                <label>Agent {{ agents_name }}: {{ points }} points</label>
-                <div class="progress">
-                    <div class="progress-bar {% if points==agent_points.values()|max %}progress-bar-success{% else %}progress-bar-warning{% endif %}" role="progressbar" aria-valuenow="{{ points }}" aria-valuemin="0" aria-valuemax="{{ "{}".format(5*(game_length*((games|length)//2))) }}" style="{{ "width: {}%".format(100 * (points / (5*(game_length*((games|length)//2))))) }}"></div>
-                </div>
-            {% endfor %}
+            <h2>How did the players points stack up?</h2>
+
         </div>
 {% endblock %}

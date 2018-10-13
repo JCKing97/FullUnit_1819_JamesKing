@@ -1,92 +1,84 @@
-from flask import render_template, redirect, url_for, send_file
-from app import app
-from app.forms import GameSelectAgentsForm
-from app.analysis import get_game_points, get_tournament_points
-from app.models import Strategy, Game, Tournament
-
-
-reports = ["Strategy Theory", "Strategy Analysis", "Tournaments and Communities", "Tournament Development Methodology"]
+from app import app, db
+from app.models import Match, Round, Player, Action
+from app.forms import MatchSelectPlayersForm
+from flask import render_template, redirect, url_for
+import axelrod as axl
+from app.axelrod_database_conversion import match_result_to_database
+from app.analysis import get_match_points
 
 @app.route('/')
 @app.route('/index')
 def index():
     """The template to render for the home page"""
-    return render_template('index.html', title='Home', reports=reports)
+    return render_template('index.html', title='Home')
 
 
-@app.route('/game', methods=['POST', 'GET'])
-def game():
+@app.route('/match/<level>', methods=['POST', 'GET'])
+def match(level):
     """Handles rendering the template with the form to select
-    and start a game and also the logic when this form is posted"""
-    strategies = Strategy.query.all()
-    form = GameSelectAgentsForm()
-    edit_agents(form, strategies)
+    and start a match and also the logic when this form is posted"""
+    if level == "Advanced":
+        strategies = [s() for s in axl.strategies]
+    else:
+        strategies = [s() for s in axl.basic_strategies]
+    print(strategies)
+    form = MatchSelectPlayersForm()
+    edit_players(form, strategies)
     if form.validate_on_submit():
-        return redirect(url_for('game_finished', game_id=1))
-    return render_template('game.html', title='Game', form=form, strategies=strategies, reports=reports)
+        strat_dict = {strat.name: strat for strat in strategies}
+        players = (strat_dict[form.strats_field1.data], strat_dict[form.strats_field2.data])
+        result = axl.Match(players, turns=form.rounds.data).play()
+        match_id = match_result_to_database(results=result, players=players)
+        return redirect(url_for('match_run', match_id=match_id))
+    return render_template('match.html', title='Match', form=form, strategies=strategies)
 
-
-def edit_agents(form, strategies):
-    """Creates the choices for the strategy selection fields for an agent"""
+def edit_players(form, strategies):
+    """Creates the choices for the strategy selection fields for a player"""
     form.strats_field1.choices = [(strat.name, strat.name) for strat in strategies]
     form.strats_field2.choices = [(strat.name, strat.name) for strat in strategies]
 
 
-@app.route('/game_finished/<game_id>')
-def game_finished(game_id):
-    """Displays the information of a finished game with the game_id provided"""
-    interaction_history = Game.query.filter_by(id=game_id).first_or_404().get_interaction_history()
-    agent_points = get_game_points(interaction_history)
-    agents = Game.query.filter_by(id=game_id).first().agents
-    strategy_names = [agent.strategy_name for agent in agents]
-    strategies = Strategy.query.filter((Strategy.name==strategy_names[0]) | (Strategy.name==strategy_names[1])).all()
-    return render_template('game_finished.html', title='Game Finished', game_id=game_id,
-                           interaction_history=interaction_history, agent_points=agent_points,
-                           strategies=strategies, agents=agents, reports=reports)
+@app.route('/match_run/<match_id>')
+def match_run(match_id):
+    """Displays the information of a finished match with the match_id provided"""
+    interaction_history = Match.query.filter_by(id=match_id).first_or_404().get_interaction_history()
+    player_points = get_match_points(interaction_history)
+    players = Match.query.filter_by(id=match_id).first().players
+    strat_dict = {s().name: s() for s in axl.strategies}
+    return render_template('match_run.html', title='Match Finished', match_id=match_id,
+                           interaction_history=interaction_history, player_points=player_points,
+                           strat_dict=strat_dict, players=players)
 
 
-@app.route('/tournament')
-def tournament():
-    strategies = Strategy.query.all()
-    return render_template('tournament.html', title='Tournament', strategies=strategies, reports=reports)
+@app.route('/tournament/<level>')
+def tournament(level):
+    if level == "Advanced":
+        strategies = [s() for s in axl.strategies]
+    else:
+        strategies = [s() for s in axl.basic_strategies]
+    return render_template('tournament.html', title='Tournament', strategies=strategies)
 
 
 @app.route('/tournament_finished/<tournament_id>')
 def tournament_finished(tournament_id):
     """Displays the information of a finished tournament with the tournament_id provided"""
-    games = Tournament.query.filter_by(id=tournament_id).first_or_404().games.all()
-    agent_points = get_tournament_points(games)
-    agents = []
-    for game in games:
-        for agent in game.agents:
-            agents.append(agent)
-    strategy_names = [agent.strategy_name for agent in agents]
+    matches = Tournament.query.filter_by(id=tournament_id).first_or_404().matches.all()
+    player_points = get_tournament_points(matches)
+    players = []
+    for match in matches:
+        for player in match.players:
+            players.append(player)
+    strategy_names = [player.strategy_name for player in players]
     strategies = []
     for name in strategy_names:
         strategies.append(Strategy.query.filter(Strategy.name==name).all())
     return render_template('tournament_finished.html', title='Tournament Finished', tournament_id=tournament_id,
-                           agent_points=agent_points, strategies=strategies, agents=agents, game_length=4, games=games,
-                           reports=reports)
+                           player_points=player_points, strategies=strategies, players=players, match_length=4, matches=matches)
 
-
-@app.route('/communities')
-def communities():
-    strategies = Strategy.query.all()
-    return render_template('communities.html', title='Communities', strategies=strategies, reports=reports)
-
-
-@app.route('/multiplayer')
-def multiplayer():
-    return render_template('multiplayer.html', title='Multiplayer', reports=reports)
-
+@app.route('/reputation')
+def reputation():
+    return render_template('reputation.html', title='Reputation')
 
 @app.route('/about')
 def about():
-    return render_template('about.html', title='About', reports=reports)
-
-
-@app.route('/report/<report_name>')
-def report(report_name):
-    return send_file('{}/static/docs/{}.pdf'.format(app.root_path, report_name),
-                     mimetype="application/pdf",
-                     as_attachment=True)
+    return render_template('about.html', title='About')

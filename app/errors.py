@@ -1,3 +1,7 @@
+"""errors.py: A module to handle common web application errors such as 404 and 500"""
+
+__author__ = "James King adapted from Miguel Grinberg Flask Mega Tutorial"
+
 from flask import render_template
 from app import app
 
