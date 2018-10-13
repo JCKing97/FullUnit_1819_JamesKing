@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/NatureEngineWebApp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NatureEngineWebApp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/tournament.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/tournament.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,13 +16,15 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_GameModelCase.coverage" NAME="pytest for model_tests.GameModelCase Coverage Results" MODIFIED="1536227869615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase_test_get_tournaments_points_normal.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase.test_get_tournaments_points_normal Coverage Results" MODIFIED="1536229571594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_database_model_test_MatchTest.coverage" NAME="pytest for database_model_test.MatchTest Coverage Results" MODIFIED="1539271410453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_UserModelCase.coverage" NAME="pytest for model_tests.UserModelCase Coverage Results" MODIFIED="1535545105823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase Coverage Results" MODIFIED="1536233221336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_GameAnalysisCase.coverage" NAME="pytest for analysis_tests.GameAnalysisCase Coverage Results" MODIFIED="1536228077916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_axelrod_database_conversion_test_TestConversion.coverage" NAME="pytest for axelrod_database_conversion_test.TestConversion Coverage Results" MODIFIED="1539266483493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$PopulateDB.coverage" NAME="PopulateDB Coverage Results" MODIFIED="1536080686131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase_test_get_tournament_points_no_games.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase.test_get_tournament_points_no_games Coverage Results" MODIFIED="1536229582875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_GameModelCase_test_get_interaction_history.coverage" NAME="pytest for model_tests.GameModelCase.test_get_interaction_history Coverage Results" MODIFIED="1535545404289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/NatureEngineWebApp$NatureEngineWebApp.coverage" NAME="NatureEngineWebApp Coverage Results" MODIFIED="1536788274921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$NatureEngineWebApp.coverage" NAME="NatureEngineWebApp Coverage Results" MODIFIED="1539443032917" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -107,38 +110,119 @@
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
     </session>
+    <session id="979725720">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="8" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.8" value="4" />
+          <entry key="project.open.time.9" value="3" />
+          <entry key="project.opened" value="9" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="Procfile" value="3" />
+          <entry key="gitignore" value="1" />
+          <entry key="html" value="28" />
+          <entry key="md" value="1" />
+          <entry key="py" value="39" />
+          <entry key="txt" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="28" />
+          <entry key="Markdown" value="1" />
+          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="Python" value="39" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Python Console" value="29" />
+          <entry key="dummy" value="29" />
+          <entry key="html" value="3338" />
+          <entry key="py" value="6911" />
+          <entry key="txt" value="206" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="3338" />
+          <entry key="PLAIN_TEXT" value="235" />
+          <entry key="Python" value="6940" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts" />
+      <usages-collector id="statistics.vcs.git.usages" />
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/templates/tournament.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="74" column="91" selection-start-line="74" selection-start-column="91" selection-end-line="74" selection-end-column="91" />
+            <state relative-caret-position="441">
+              <caret line="107" column="10" lean-forward="true" selection-start-line="107" selection-start-column="10" selection-end-line="107" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/axelrod_database_conversion.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
               <folding>
-                <element signature="e#0#63#0" expanded="true" />
-                <marker date="1536787414910" expanded="true" signature="464:465" ph="..." />
-                <marker date="1536787414910" expanded="true" signature="3449:3537" ph="..." />
-                <marker date="1536787414910" expanded="true" signature="3707:3711" ph="..." />
+                <element signature="e#0#18#0" expanded="true" />
+                <marker date="1539274218068" expanded="true" signature="285:290" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/about.html">
+        <entry file="file://$PROJECT_DIR$/app/templates/reputation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+            <state relative-caret-position="165">
+              <caret line="11" column="65" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/match_run.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+            <state relative-caret-position="210">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/match.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Procfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -146,80 +230,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="35" column="112" selection-start-line="35" selection-start-column="112" selection-end-line="35" selection-end-column="112" />
-              <folding>
-                <element signature="e#91#112#0#HTML" expanded="true" />
-                <element signature="e#417#437#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/game.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-              <folding>
-                <element signature="e#120#141#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/report.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/game_finished.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
-              <folding>
-                <element signature="e#78#99#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/tournament.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="20" selection-end-column="10" />
-              <folding>
-                <element signature="e#78#99#0#HTML" expanded="true" />
-                <element signature="e#772#790#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/communities.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
-              <folding>
-                <element signature="e#78#99#0#HTML" expanded="true" />
-                <element signature="e#768#786#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/_strategies_description.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="37" lean-forward="true" selection-start-column="37" selection-end-column="37" />
+            <state relative-caret-position="210">
+              <caret line="14" column="86" selection-start-line="14" selection-start-column="86" selection-end-line="14" selection-end-column="86" />
             </state>
           </provider>
         </entry>
@@ -231,8 +243,8 @@
       <list>
         <option value="Flask Main" />
         <option value="JavaScript File" />
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -254,12 +266,16 @@
       <find>agent_id=</find>
       <find>agent_id=3</find>
       <find>agent_id=4</find>
-      <find>game</find>
       <find>strategy</find>
-      <find>agent</find>
       <find>action</find>
       <find>game_agent_association</find>
       <find>print</find>
+      <find>number</find>
+      <find>cooperates</find>
+      <find>agents</find>
+      <find>agent</find>
+      <find>game</find>
+      <find>strategies</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -274,37 +290,45 @@
         <option value="$PROJECT_DIR$/app/static/select_strat.js" />
         <option value="$PROJECT_DIR$/app/templates/agent_description.html" />
         <option value="$PROJECT_DIR$/app/templates/_agent_description.html" />
-        <option value="$PROJECT_DIR$/app/templates/_strategies_description.html" />
         <option value="$PROJECT_DIR$/tests/ModelTests.py" />
         <option value="$PROJECT_DIR$/app/templates/404.html" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/scripts/PopulateDB.py" />
-        <option value="$PROJECT_DIR$/natureengine.py" />
-        <option value="$PROJECT_DIR$/app/templates/_agent_strategy_description.html" />
         <option value="$PROJECT_DIR$/app/templates/500.html" />
-        <option value="$PROJECT_DIR$/app/errors.py" />
-        <option value="$PROJECT_DIR$/app/forms.py" />
-        <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/app/templates/report.html" />
         <option value="$PROJECT_DIR$/app/templates/multiplayer.html" />
         <option value="$PROJECT_DIR$/app/game_analysis.py" />
         <option value="$PROJECT_DIR$/tests/model_tests.py" />
         <option value="$PROJECT_DIR$/scripts/db_populate.py" />
-        <option value="$PROJECT_DIR$/app/analysis.py" />
         <option value="$PROJECT_DIR$/tests/analysis_tests.py" />
-        <option value="$PROJECT_DIR$/app/templates/tournament_finished.html" />
-        <option value="$PROJECT_DIR$/config.py" />
-        <option value="$PROJECT_DIR$/app/__init__.py" />
-        <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/Procfile" />
-        <option value="$PROJECT_DIR$/app/templates/game_finished.html" />
-        <option value="$PROJECT_DIR$/app/templates/tournament.html" />
         <option value="$PROJECT_DIR$/app/templates/communities.html" />
-        <option value="$PROJECT_DIR$/app/routes.py" />
-        <option value="$PROJECT_DIR$/app/templates/about.html" />
-        <option value="$PROJECT_DIR$/app/templates/index.html" />
         <option value="$PROJECT_DIR$/app/templates/game.html" />
+        <option value="$PROJECT_DIR$/natureengine.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/app/errors.py" />
+        <option value="$PROJECT_DIR$/app/templates/about.html" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/app/templates/game_finished.html" />
+        <option value="$PROJECT_DIR$/app/templates/game_run.html" />
+        <option value="$PROJECT_DIR$/app/models.py" />
+        <option value="$PROJECT_DIR$/app/axelrod_database_conversion.py" />
+        <option value="$PROJECT_DIR$/app/analysis.py" />
+        <option value="$PROJECT_DIR$/app/__init__.py" />
+        <option value="$PROJECT_DIR$/app/templates/_strategies_description.html" />
+        <option value="$PROJECT_DIR$/app/templates/_agent_strategy_description.html" />
+        <option value="$PROJECT_DIR$/app/templates/match_run.html" />
+        <option value="$PROJECT_DIR$/app/templates/index.html" />
+        <option value="$PROJECT_DIR$/app/templates/reputation.html" />
+        <option value="$PROJECT_DIR$/app/templates/tournament_finished.html" />
+        <option value="$PROJECT_DIR$/app/forms.py" />
+        <option value="$PROJECT_DIR$/tests/axelrod_database_conversion_test.py" />
+        <option value="$PROJECT_DIR$/tests/database_model_test.py" />
+        <option value="$PROJECT_DIR$/app/templates/_player_strategy_description.html" />
+        <option value="$PROJECT_DIR$/app/routes.py" />
+        <option value="$PROJECT_DIR$/app/templates/match.html" />
         <option value="$PROJECT_DIR$/app/templates/base.html" />
+        <option value="$PROJECT_DIR$/app/templates/tournament.html" />
       </list>
     </option>
   </component>
@@ -315,9 +339,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="745" />
-    <option name="width" value="1262" />
-    <option name="height" value="691" />
+    <option name="x" value="888" />
+    <option name="width" value="956" />
+    <option name="height" value="1044" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -341,37 +365,7 @@
               <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -383,7 +377,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ML/Labs" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -423,22 +417,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for analysis_tests.GameAnalysisCase" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="NatureEngineWebApp" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;analysis_tests.GameAnalysisCase&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="pytest for analysis_tests.TournamentAnalysisCase" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
@@ -489,7 +467,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for model_tests.GameModelCase" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for axelrod_database_conversion_test.TestConversion" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="NatureEngineWebApp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -501,25 +479,41 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;model_tests.GameModelCase&quot;" />
+      <option name="_new_target" value="&quot;axelrod_database_conversion_test.TestConversion&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for database_model_test.MatchTest" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="NatureEngineWebApp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;database_model_test.MatchTest&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Flask server.NatureEngineWebApp" />
-      <item itemvalue="Python tests.pytest for model_tests.GameModelCase" />
-      <item itemvalue="Python tests.pytest for analysis_tests.GameAnalysisCase" />
       <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase" />
       <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase.test_get_tournaments_points_normal" />
       <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase.test_get_tournament_points_no_games" />
+      <item itemvalue="Python tests.pytest for axelrod_database_conversion_test.TestConversion" />
+      <item itemvalue="Python tests.pytest for database_model_test.MatchTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.pytest for database_model_test.MatchTest" />
+        <item itemvalue="Python tests.pytest for axelrod_database_conversion_test.TestConversion" />
         <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase" />
         <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase.test_get_tournament_points_no_games" />
         <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase.test_get_tournaments_points_normal" />
-        <item itemvalue="Python tests.pytest for analysis_tests.GameAnalysisCase" />
-        <item itemvalue="Python tests.pytest for model_tests.GameModelCase" />
       </list>
     </recent_temporary>
   </component>
@@ -660,47 +654,54 @@
       <option name="project" value="LOCAL" />
       <updated>1536787962517</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Changed naming conventions and edited everywhere. Restructured te website. Linked up backend processing with the Axelrod library, a database and the front end for IPD matches.">
+      <created>1539424950383</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1539424950383</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_for_analysis_tests_TournamentAnalysisCase - 2018.09.06 at 11h 50m 09s.xml">
-      <configuration name="pytest for analysis_tests.TournamentAnalysisCase" configurationId="tests" />
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 27m 44s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_analysis_tests_TournamentAnalysisCase - 2018.09.06 at 11h 52m 01s.xml">
-      <configuration name="pytest for analysis_tests.TournamentAnalysisCase" configurationId="tests" />
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 29m 37s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_analysis_tests_TournamentAnalysisCase - 2018.09.06 at 11h 54m 39s.xml">
-      <configuration name="pytest for analysis_tests.TournamentAnalysisCase" configurationId="tests" />
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 30m 47s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_analysis_tests_TournamentAnalysisCase - 2018.09.06 at 11h 55m 46s.xml">
-      <configuration name="pytest for analysis_tests.TournamentAnalysisCase" configurationId="tests" />
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 30m 55s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_analysis_tests_TournamentAnalysisCase - 2018.09.06 at 11h 56m 12s.xml">
-      <configuration name="pytest for analysis_tests.TournamentAnalysisCase" configurationId="tests" />
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 32m 39s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_analysis_tests_TournamentAnalysisCase - 2018.09.06 at 11h 58m 16s.xml">
-      <configuration name="pytest for analysis_tests.TournamentAnalysisCase" configurationId="tests" />
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 53m 51s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_analysis_tests_TournamentAnalysisCase - 2018.09.06 at 11h 59m 10s.xml">
-      <configuration name="pytest for analysis_tests.TournamentAnalysisCase" configurationId="tests" />
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 16h 22m 16s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_analysis_tests_TournamentAnalysisCase - 2018.09.06 at 11h 59m 56s.xml">
-      <configuration name="pytest for analysis_tests.TournamentAnalysisCase" configurationId="tests" />
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 16h 22m 30s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_analysis_tests_TournamentAnalysisCase - 2018.09.06 at 12h 00m 31s.xml">
-      <configuration name="pytest for analysis_tests.TournamentAnalysisCase" configurationId="tests" />
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 16h 23m 18s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_analysis_tests_TournamentAnalysisCase - 2018.09.06 at 12h 27m 02s.xml">
-      <configuration name="pytest for analysis_tests.TournamentAnalysisCase" configurationId="tests" />
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 16h 23m 33s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
+    <frame x="-4" y="0" width="1928" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.13553895" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.15048026" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" weight="0.32896176" />
       <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49893278" weight="0.32786885" />
@@ -710,7 +711,7 @@
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.32896176" />
-      <window_info active="true" anchor="bottom" id="Run" order="8" sideWeight="0.49893278" visible="true" weight="0.32896176" />
+      <window_info active="true" anchor="bottom" id="Run" order="8" sideWeight="0.49893278" visible="true" weight="0.3136612" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.3989071" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
@@ -742,17 +743,12 @@
     <MESSAGE value="Adding padding to make the site look better" />
     <MESSAGE value="Developing the tournament, community, game and game_finished pages look and feel." />
     <MESSAGE value="Improving look and content on index and about page." />
-    <option name="LAST_COMMIT_MESSAGE" value="Improving look and content on index and about page." />
+    <MESSAGE value="Changed naming conventions and edited everywhere. Restructured te website. Linked up backend processing with the Axelrod library, a database and the front end for IPD matches." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed naming conventions and edited everywhere. Restructured te website. Linked up backend processing with the Axelrod library, a database and the front end for IPD matches." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app.py" />
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.7/site-packages/werkzeug/routing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="1775" selection-start-line="1775" selection-end-line="1775" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.7/site-packages/werkzeug/routing.py" />
     <entry file="file://$PROJECT_DIR$/babel.cfg" />
     <entry file="file://$PROJECT_DIR$/app/translations/el/LC_MESSAGES/messages.po" />
     <entry file="file://$PROJECT_DIR$/app/static/select_strat.js" />
@@ -764,28 +760,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/messages.pot" />
-    <entry file="file://$PROJECT_DIR$/tests/logs/microblog.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/logs/microblog.log" />
     <entry file="file://$PROJECT_DIR$/scripts/PopulateDB.py" />
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="520" column="74" lean-forward="true" selection-start-line="520" selection-start-column="74" selection-end-line="520" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/migrations/alembic.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-280" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/migrations/env.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/migrations/README">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py" />
+    <entry file="file://$PROJECT_DIR$/migrations/alembic.ini" />
+    <entry file="file://$PROJECT_DIR$/migrations/env.py" />
+    <entry file="file://$PROJECT_DIR$/migrations/README" />
     <entry file="file://$PROJECT_DIR$/migrations/versions/5490849570b9_resetting_tables.py" />
     <entry file="file://$PROJECT_DIR$/app/templates/500.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -794,103 +774,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/errors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/_agent_strategy_description.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="52" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/404.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/natureengine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/model_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="79" lean-forward="true" selection-start-line="44" selection-start-column="79" selection-end-line="44" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="72" column="72" selection-start-line="72" selection-start-column="72" selection-end-line="72" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/tournament_finished.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/analysis_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2516">
-          <caret line="151" column="47" selection-start-line="151" selection-start-column="47" selection-end-line="151" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.db">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="14" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="41" column="45" selection-start-line="41" selection-start-column="45" selection-end-line="41" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/multiplayer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/model_tests.py" />
+    <entry file="file://$PROJECT_DIR$/tests/analysis_tests.py" />
+    <entry file="file://$PROJECT_DIR$/app.db" />
+    <entry file="file://$PROJECT_DIR$/app/templates/multiplayer.html" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -898,122 +785,219 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/db_populate.py">
+    <entry file="file://$PROJECT_DIR$/scripts/db_populate.py" />
+    <entry file="file://$PROJECT_DIR$/app/templates/report.html" />
+    <entry file="file://$PROJECT_DIR$/app/templates/communities.html" />
+    <entry file="file://$PROJECT_DIR$/app/templates/404.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2244">
-          <caret line="132" selection-start-line="132" selection-end-line="132" />
+        <state relative-caret-position="60">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/errors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="64" selection-start-line="2" selection-start-column="62" selection-end-line="2" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
           <folding>
-            <marker date="1536231120462" expanded="true" signature="26:527" ph="..." />
-            <marker date="1536231120462" expanded="true" signature="586:591" ph="..." />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/axelrod_database_conversion_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
+          <folding>
+            <marker date="1539274218052" expanded="true" signature="551:607" ph="..." />
+            <marker date="1539274218052" expanded="true" signature="601:602" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/database_model_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1539274218116" expanded="true" signature="129:130" ph="..." />
+            <marker date="1539274218116" expanded="true" signature="129:131" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/natureengine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="22" lean-forward="true" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Procfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="315">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/_strategies_description.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="37" lean-forward="true" selection-start-column="37" selection-end-column="37" />
+        <state relative-caret-position="15">
+          <caret line="1" column="51" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/report.html">
+    <entry file="file://$PROJECT_DIR$/app/templates/_player_strategy_description.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="15">
+          <caret line="1" column="69" selection-start-line="1" selection-start-column="59" selection-end-line="1" selection-end-column="69" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/game_finished.html">
+    <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+        <state relative-caret-position="75">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
           <folding>
-            <element signature="e#78#99#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/tournament.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="20" selection-end-column="10" />
-          <folding>
-            <element signature="e#78#99#0#HTML" expanded="true" />
-            <element signature="e#772#790#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/communities.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
-          <folding>
-            <element signature="e#78#99#0#HTML" expanded="true" />
-            <element signature="e#768#786#0#HTML" expanded="true" />
+            <element signature="e#151#169#0" expanded="true" />
+            <marker date="1539274218148" expanded="true" signature="224:229" ph="..." />
+            <marker date="1539274218148" expanded="true" signature="854:859" ph="..." />
+            <marker date="1539274218148" expanded="true" signature="1180:1185" ph="..." />
+            <marker date="1539274218148" expanded="true" signature="1575:1580" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="74" column="91" selection-start-line="74" selection-start-column="91" selection-end-line="74" selection-end-column="91" />
+        <state relative-caret-position="82">
+          <caret line="58" column="4" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="4" />
           <folding>
-            <element signature="e#0#63#0" expanded="true" />
-            <marker date="1536787414910" expanded="true" signature="464:465" ph="..." />
-            <marker date="1536787414910" expanded="true" signature="3449:3537" ph="..." />
-            <marker date="1536787414910" expanded="true" signature="3707:3711" ph="..." />
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1539276608815" expanded="true" signature="3573:3641" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/about.html">
+    <entry file="file://$PROJECT_DIR$/app/templates/tournament_finished.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
+          <folding>
+            <element signature="e#176#190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/axelrod_database_conversion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1539274218068" expanded="true" signature="285:290" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/reputation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="65" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/match_run.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/match.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Procfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="35" column="112" selection-start-line="35" selection-start-column="112" selection-end-line="35" selection-end-column="112" />
-          <folding>
-            <element signature="e#91#112#0#HTML" expanded="true" />
-            <element signature="e#417#437#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="210">
+          <caret line="14" column="86" selection-start-line="14" selection-start-column="86" selection-end-line="14" selection-end-column="86" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/game.html">
+    <entry file="file://$PROJECT_DIR$/tests/.pytest_cache/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
-          <folding>
-            <element signature="e#120#141#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="1" column="1" lean-forward="true" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/.pytest_cache/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+        <state relative-caret-position="210">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/tournament.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="107" column="10" lean-forward="true" selection-start-line="107" selection-start-column="10" selection-end-line="107" selection-end-column="10" />
         </state>
       </provider>
     </entry>

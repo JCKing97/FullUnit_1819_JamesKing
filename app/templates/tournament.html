@@ -1,4 +1,4 @@
-
+{# Author: James King adapted from code in https://www.youtube.com/watch?v=Ke90Tje7VS0&t=3352s #}
 
 {% extends "base.html" %}
 
@@ -30,26 +30,80 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script type="text/babel">
+
+        class SelectAgents extends React.Component{
+            state = {
+                counters: [
+                    {id:1, name:'Tit for Tat', value:0},
+                    {id:2, name:'Defector', value:0},
+                    {id:3, name:'Cooperator', value:0},
+                    {id:4, name:'Anti Tit for Tat', value:0},
+                ],
+                players: []
+            };
+
+            add = (player) => {
+                const { players } = this.state;
+                if(players.length < 50){
+                    players.push(player);
+                }
+                console.log(this.state.players)
+            };
+
+            remove = (player) => {
+                const { players } = this.state;
+                const index = players.indexOf(player);
+                if(index !== -1){
+                    players.splice(index, 1);
+                }
+                console.log(this.state.players)
+            };
+
+            render(){
+                return(
+                    <div>
+                        <Counters counters={this.state.counters} add={this.add} remove={this.remove()}/>
+                    </div>
+                )
+            }
+        }
+
+        class Counters extends React.Component{
+            state = {};
+
+            render(){
+                return(
+                    <div>
+                        { this.props.counters.map(counter => <Counter key={counter.id} counter={counter} add={this.props.add} remove={this.props.remove}/>) }
+                    </div>)
+            }
+        }
+
         class Counter extends React.Component {
-            state = { count: 0 };
+            state = {
+                value: this.props.counter.value,
+                name: this.props.counter.name
+            };
 
             render(){
                 return (
                     <div>
-                        <span className="badge badge-primary m-2">{this.getCount()}</span>
-                        <button className="btn btn-secondary btn-sm">Inc</button>
+                        {this.props.children}
+                        <span className="badge badge-primary m-2">{ this.getValue() }</span>
+                        <button onClick={() => this.props.add(this.state.name) } className="btn btn-secondary btn-sm">Inc</button>
+                        <button onClick={() => this.props.remove(this.state.name) } className="btn btn-danger btn-sm">Dec</button>
                     </div>
                 )
             }
 
-            getCount(){
-                const {count} = this.state;
-                return count === 0 ? "Zero" : count;
+            getValue(){
+                const { value } = this.state;
+                return value === 0 ? "Zero" : value;
             }
         }
 
         ReactDOM.render(
-            <Counter/>,
+            <SelectAgents/>,
             document.getElementById('select_agents')
         );
 
