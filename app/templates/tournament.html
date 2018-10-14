@@ -33,72 +33,111 @@
 
         class SelectAgents extends React.Component{
             state = {
-                counters: [
-                    {id:1, name:'Tit for Tat', value:0},
-                    {id:2, name:'Defector', value:0},
-                    {id:3, name:'Cooperator', value:0},
-                    {id:4, name:'Anti Tit for Tat', value:0},
+                strategies: [
+                    {id:1, name:'Tit for Tat'},
+                    {id:2, name:'Defector'},
+                    {id:3, name:'Cooperator'},
+                    {id:4, name:'Anti Tit for Tat'},
                 ],
-                players: []
+                players: [],
+                next_player_id: 0
             };
 
             add = (player) => {
                 const { players } = this.state;
                 if(players.length < 50){
-                    players.push(player);
+                    players.push({name: player, id:this.state.next_player_id});
+                    this.setState({players:players, next_player_id: this.state.next_player_id + 1})
                 }
                 console.log(this.state.players)
             };
 
             remove = (player) => {
+                console.log(player);
                 const { players } = this.state;
-                const index = players.indexOf(player);
+                var index = -1;
+                for (var i = 0; i < players.length; i++){
+                    console.log(players[i]);
+                    if(players[i].name === player){
+                        index = i;
+                        break;
+                    }
+                }
                 if(index !== -1){
                     players.splice(index, 1);
+                    console.log(this.state.players);
+                    this.setState({players:players})
                 }
-                console.log(this.state.players)
+                console.log(index)
+            };
+
+            get_id = () => {
+                return( this.state.next_player_id )
             };
 
             render(){
                 return(
-                    <div>
-                        <Counters counters={this.state.counters} add={this.add} remove={this.remove()}/>
+                    <div className="container">
+                        <div className="row">
+                            <div className="col">
+                                <Strategies strategies={this.state.strategies} add={this.add} remove={this.remove}/>
+                            </div>
+                            <div className="col">
+                                <SelectedPlayersList selected={this.state.players} get_id={this.get_id}/>
+                            </div>
+                        </div>
                     </div>
                 )
             }
         }
 
-        class Counters extends React.Component{
+        class SelectedPlayersList extends React.Component {
             state = {};
 
             render(){
                 return(
                     <div>
-                        { this.props.counters.map(counter => <Counter key={counter.id} counter={counter} add={this.props.add} remove={this.props.remove}/>) }
-                    </div>)
+                        { this.props.selected.map(player => <SelectedPlayer key={player.id} name={player.name}/>) }
+                    </div>
+                )
             }
         }
 
-        class Counter extends React.Component {
+        class SelectedPlayer extends React.Component {
+            state = {};
+
+            render(){
+                return(
+                    <div><span className="badge badge-primary m-2">{this.props.name}</span></div>
+                )
+            }
+        }
+
+        class Strategies extends React.Component{
+            state = {};
+
+            render(){
+                return(
+                    <div>
+                        { this.props.strategies.map(strategy => <Strategy key={strategy.id} name={strategy.name} add={this.props.add} remove={this.props.remove}/>) }
+                    </div>
+                )
+            }
+        }
+
+        class Strategy extends React.Component {
             state = {
-                value: this.props.counter.value,
-                name: this.props.counter.name
+                name: this.props.name
             };
 
             render(){
                 return (
                     <div>
-                        {this.props.children}
-                        <span className="badge badge-primary m-2">{ this.getValue() }</span>
-                        <button onClick={() => this.props.add(this.state.name) } className="btn btn-secondary btn-sm">Inc</button>
-                        <button onClick={() => this.props.remove(this.state.name) } className="btn btn-danger btn-sm">Dec</button>
+                        <span className="badge badge-primary m-2">{ this.state.name }</span>
+                        <button onClick={() => this.props.add(this.state.name) } className="btn btn-secondary btn-sm">Add</button>
+                        <button onClick={() => this.props.remove(this.state.name) } className="btn btn-danger btn-sm">Remove</button>
                     </div>
                 )
-            }
-
-            getValue(){
-                const { value } = this.state;
-                return value === 0 ? "Zero" : value;
             }
         }
 
