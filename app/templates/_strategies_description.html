@@ -11,8 +11,8 @@
             <tbody>
                 {% for strategy in strategies %}
                     <tr>
-                        <td>{{ strategy.__class__.__name__ }}</td>
-                        <td>{{ strategy.__doc__ }}</td>
+                        <td>{{ strategy['name'] }}</td>
+                        <td>{{ strat_dict[strategy['name']].__doc__ }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

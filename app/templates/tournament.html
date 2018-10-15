@@ -1,4 +1,4 @@
-{# Author: James King adapted from code in https://www.youtube.com/watch?v=Ke90Tje7VS0&t=3352s #}
+{# Author: James King adapted from code in https://www.youtube.com/watch?v=Ke90Tje7VS0&t=3352s and Phil's comment on https://stackoverflow.com/questions/11456771/using-json-post-request#11457051 #}
 
 {% extends "base.html" %}
 
@@ -29,63 +29,97 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/babel">
 
         class SelectAgents extends React.Component{
             state = {
-                strategies: [
-                    {id:1, name:'Tit for Tat'},
-                    {id:2, name:'Defector'},
-                    {id:3, name:'Cooperator'},
-                    {id:4, name:'Anti Tit for Tat'},
-                ],
+                strategies: {{ strategies|tojson|safe }},
                 players: [],
                 next_player_id: 0
             };
 
             add = (player) => {
                 const { players } = this.state;
-                if(players.length < 50){
-                    players.push({name: player, id:this.state.next_player_id});
-                    this.setState({players:players, next_player_id: this.state.next_player_id + 1})
+                // Check the count of the players added so far
+                let player_count = 0;
+                for(let i = 0; i < players.length; i++){
+                    player_count += players[i].count
                 }
-                console.log(this.state.players)
+                // Limit the amount of players added to 50
+                if(player_count < 50){
+                    // Find if their is already an instance of this strategy in the players list
+                    let index = -1;
+                    for (let i = 0; i < players.length; i++){
+                        if(players[i].name === player){
+                            index = i;
+                            break;
+                        }
+                    }
+                    // If their is an instance add to that instances count
+                    if(index !== -1){
+                        players[index].count += 1;
+                        this.setState({players:players});
+                    } else {
+                         // If their is not an instance create one
+                        players.push({name: player, id:this.state.next_player_id, count:1});
+                        this.setState({players:players, next_player_id: this.state.next_player_id + 1});
+                    }
+                }
             };
 
             remove = (player) => {
-                console.log(player);
                 const { players } = this.state;
-                var index = -1;
-                for (var i = 0; i < players.length; i++){
-                    console.log(players[i]);
+                // Find if their is an instance of this strategy in the list
+                let index = -1;
+                for (let i = 0; i < players.length; i++){
                     if(players[i].name === player){
                         index = i;
                         break;
                     }
                 }
+                // If their is an instance
                 if(index !== -1){
-                    players.splice(index, 1);
-                    console.log(this.state.players);
-                    this.setState({players:players})
+                    // If there is more than one count of the instance decrement the count
+                    if(players[index].count>1){
+                        players[index].count -= 1;
+                        this.setState({players:players});
+                    } else {
+                        // If there is only one instance remove this instance from the list
+                        players.splice(index, 1);
+                        this.setState({players:players});
+                    }
                 }
-                console.log(index)
             };
 
-            get_id = () => {
-                return( this.state.next_player_id )
+            handleSubmit = () => {
+                const { players } = this.state;
+                // Check the count of the players added so far
+                let player_count = 0;
+                for(let i = 0; i < players.length; i++){
+                    player_count += players[i].count
+                }
+                // If the user has selected the right amount of players, post
+                if(player_count < 50 && player_count > 2) {
+                    $.ajax({
+                        url: "{{ url_for('tournament', level=level) }}",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ strategy_counts: players })
+                    });
+                }
             };
 
             render(){
                 return(
-                    <div className="container">
-                        <div className="row">
-                            <div className="col">
-                                <Strategies strategies={this.state.strategies} add={this.add} remove={this.remove}/>
-                            </div>
-                            <div className="col">
-                                <SelectedPlayersList selected={this.state.players} get_id={this.get_id}/>
+                    <div>
+                        <div className="container">
+                            <div className="row">
+                                <Strategies strategies={this.state.strategies} add={this.add} remove={this.remove} />
+                                <SelectedPlayersList selected={this.state.players} />
                             </div>
                         </div>
+                        <button onClick={ this.handleSubmit } className="btn btn-success btn-lg">Submit</button>
                     </div>
                 )
             }
@@ -96,8 +130,8 @@
 
             render(){
                 return(
-                    <div>
-                        { this.props.selected.map(player => <SelectedPlayer key={player.id} name={player.name}/>) }
+                    <div className="col-md-6">
+                        { this.props.selected.map(player => <SelectedPlayer key={player.id} count={player.count} name={player.name}/>) }
                     </div>
                 )
             }
@@ -108,7 +142,7 @@
 
             render(){
                 return(
-                    <div><span className="badge badge-primary m-2">{this.props.name}</span></div>
+                    <div><span className="badge bg-info">{this.props.count}</span><span className="badge badge-primary m-2">{this.props.name}</span></div>
                 )
             }
         }
@@ -118,8 +152,10 @@
 
             render(){
                 return(
-                    <div>
-                        { this.props.strategies.map(strategy => <Strategy key={strategy.id} name={strategy.name} add={this.props.add} remove={this.props.remove}/>) }
+                    <div className="col-md-6">
+                        <div className="container-fluid">
+                            { this.props.strategies.map(strategy => <Strategy key={strategy.id} name={strategy.name} add={this.props.add} remove={this.props.remove}/>) }
+                        </div>
                     </div>
                 )
             }
@@ -132,10 +168,16 @@
 
             render(){
                 return (
-                    <div>
-                        <span className="badge badge-primary m-2">{ this.state.name }</span>
-                        <button onClick={() => this.props.add(this.state.name) } className="btn btn-secondary btn-sm">Add</button>
-                        <button onClick={() => this.props.remove(this.state.name) } className="btn btn-danger btn-sm">Remove</button>
+                    <div className="row border-box-sizing">
+                        <div className="col-md-4 center-block">
+                            <span className="badge badge-primary m-2">{ this.state.name }</span>
+                        </div>
+                        <div className="col-md-4">
+                            <button onClick={() => this.props.add(this.state.name) } className="btn btn-secondary btn-sm">Add</button>
+                        </div>
+                        <div className="col-md-4">
+                            <button onClick={() => this.props.remove(this.state.name) } className="btn btn-danger btn-sm">Remove</button>
+                        </div>
                     </div>
                 )
             }
