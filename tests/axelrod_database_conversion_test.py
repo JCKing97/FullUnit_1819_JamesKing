@@ -4,19 +4,23 @@ __author__ = "James King adapted from Miguel Grinberg"
 
 import unittest
 import axelrod
-from app.axelrod_database_conversion import match_result_to_database
-from app import app, db
+from app.main.axelrod_database_conversion import match_result_to_database
+from app import create_app, db
 from app.models import Match, Player, Round, Action
+from tests.test_config import TestConfig
 
 class TestConversion(unittest.TestCase):
 
     def setUp(self):
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
         db.create_all()
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+        self.app_context.pop()
 
     def test_matcb_result_to_database_tft_defector(self):
         players = (axelrod.TitForTat(), axelrod.Defector())

@@ -24,29 +24,29 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url_for('index') }}"><span class="glyphicon glyphicon-leaf"></span>Nature Engine</a>
+                <a class="navbar-brand" href="{{ url_for('main.index') }}"><span class="glyphicon glyphicon-leaf"></span>Nature Engine</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                    <li><a href="{{ url_for('main.index') }}">Home</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Match<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ url_for('match', level="Basic") }}">Basic</a></li>
-                            <li><a href="{{ url_for('match', level="Advanced") }}">Advanced</a></li>
+                            <li><a href="{{ url_for('main.match', level="Basic") }}">Basic</a></li>
+                            <li><a href="{{ url_for('main.match', level="Advanced") }}">Advanced</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tournament<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ url_for('tournament', level="Basic") }}">Basic</a></li>
-                            <li><a href="{{ url_for('tournament', level="Advanced") }}">Advanced</a></li>
+                            <li><a href="{{ url_for('main.tournament', level="Basic") }}">Basic</a></li>
+                            <li><a href="{{ url_for('main.tournament', level="Advanced") }}">Advanced</a></li>
                         </ul>
                     </li>
-                    <li><a href="{{ url_for('reputation') }}">Reputation</a></li>
+                    <li><a href="{{ url_for('main.reputation') }}">Reputation</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('main.about') }}">About</a></li>
                 </ul>
             </div>
         </div>

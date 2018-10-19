@@ -102,7 +102,7 @@
                 // If the user has selected the right amount of players, post
                 if(player_count < 50 && player_count > 2) {
                     $.ajax({
-                        url: "{{ url_for('tournament', level=level) }}",
+                        url: "{{ url_for('main.tournament', level=level) }}",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify({ strategy_counts: players })

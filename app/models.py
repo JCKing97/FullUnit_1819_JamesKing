@@ -6,10 +6,6 @@ from app import db
 from datetime import datetime
 
 
-class Tournament(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    pprint = db.Column(db.String(1000))
-
 class Match(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow())
@@ -52,3 +48,11 @@ class Action(db.Model):
 
     def __repr__(self):
         return '<Cooperated? {}, Player {}, Round {}, Match {}>'.format(self.cooperate, self.player_id, self.round_num, self.match_id)
+
+
+class Tournament(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    completed = db.Column(db.Boolean, default=False)
+
+    def is_finished(self):
+        return self.completed

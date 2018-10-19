@@ -1,17 +1,24 @@
-from app import app, db
-from app.models import Match, Round, Player, Action
-import unittest
+"""database_model_test.py: Test the model"""
 
+__author__ = "James King adapted from Miguel Grinberg"
+
+from app import db, create_app
+from app.models import Match, Round, Player, Action
+from tests.test_config import TestConfig
+import unittest
 
 class MatchTest(unittest.TestCase):
 
     def setUp(self):
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
         db.create_all()
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+        self.app_context.pop()
 
     def test_interaction_history_normal(self):
         match = Match()
