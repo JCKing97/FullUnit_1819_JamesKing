@@ -53,6 +53,7 @@ class Action(db.Model):
 class Tournament(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     completed = db.Column(db.Boolean, default=False)
+    error = db.Column(db.Boolean, default=False)
 
     def is_finished(self):
         return self.completed

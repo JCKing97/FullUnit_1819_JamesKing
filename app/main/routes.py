@@ -2,11 +2,11 @@ from app import db
 from app.main import bp
 from app.models import Match, Tournament
 from app.main.forms import MatchSelectPlayersForm
-from flask import render_template, redirect, url_for, request, flash
+from flask import render_template, redirect, url_for, request, jsonify, current_app
 import axelrod as axl
 from app.main.axelrod_database_conversion import match_result_to_database
 from app.main.analysis import get_match_points
-import pprint
+from rq import get_current_job
 
 @bp.route('/')
 @bp.route('/index')
@@ -72,26 +72,35 @@ def tournament(level):
             new_tournament = Tournament()
             db.session.add(new_tournament)
             db.session.commit()
-            results = axl.Tournament(players).play()
-
-            pprint.pprint(results.summarise())
-            return redirect(url_for('main.tournament_run', tournament_id=new_tournament.id))
+            job = current_app.task_queue.enqueue('app.main.axelrod_database_conversion.tournament_run', players, new_tournament.id)
+            return jsonify({'url': url_for('main.tournament_run', tournament_id=new_tournament.id, job_id=job.get_id())})
         else:
-            flash("Must have selected between 3 and 50 players for the tournament")
-            return render_template('tournament.html', title='Tournament', strategies=strategies, strat_dict=strat_dict)
+            return render_template('tournament.html', title='Tournament', level=level, strategies=strategies, strat_dict=strat_dict)
 
 
-@bp.route('/tournament_run/<tournament_id>')
-def tournament_run(tournament_id):
-    """Displays the information of a finished tournament with the tournament_id provided"""
-    tournament = Tournament.query.filter_by(id=tournament_id).first_or_404()
-    if tournament.is_finished():
-        return render_template('tournament.html', title='Tournament', strategies=strategies, strat_dict=strat_dict)
+@bp.route('/tournament_run/<tournament_id>/<job_id>')
+def tournament_run(tournament_id, job_id):
+    """Displays the information of a running or finished tournament with the tournament_id provided"""
+    this_tournament = Tournament.query.filter_by(id=tournament_id).first_or_404()
+    if this_tournament.is_finished():
+        return render_template('tournament_finished.html', title='Tournament')
+    else:
+        return render_template('tournament_running.html', title='Tournament', tournament_id=tournament_id, job_id=job_id)
+
+
+@bp.route('/is_tournament_finished/<tournament_id>/<job_id>')
+def is_tournament_finished(tournament_id, job_id):
+    this_tournament = Tournament.query.filter_by(id=tournament_id).first_or_404()
+    print(get_current_job())
+    print("Job id {}".format(job_id))
+    return jsonify({'finished': this_tournament.is_finished(),
+                    'url': url_for('main.tournament_run', tournament_id=tournament_id, job_id=job_id)})
 
 
 @bp.route('/reputation')
 def reputation():
     return render_template('reputation.html', title='Reputation')
+
 
 @bp.route('/about')
 def about():
