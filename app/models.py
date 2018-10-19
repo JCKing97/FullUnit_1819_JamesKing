@@ -54,6 +54,17 @@ class Tournament(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     completed = db.Column(db.Boolean, default=False)
     error = db.Column(db.Boolean, default=False)
+    players = db.relationship('TournamentPlayer', backref='tournament', lazy='dynamic')
 
     def is_finished(self):
         return self.completed
+
+
+class TournamentPlayer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    tournament_id = db.Column(db.Integer, db.ForeignKey('tournament.id'), primary_key=True)
+    strategy = db.Column(db.String(120))
+    score = db.Column(db.Integer)
+    rank = db.Column(db.Integer)
+    cooperation_rating = db.Column(db.Float)
+    wins = db.Column(db.Integer)

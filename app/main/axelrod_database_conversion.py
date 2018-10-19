@@ -1,5 +1,5 @@
 from app import db, create_app
-from app.models import Match, Round, Player, Action, Tournament
+from app.models import Match, Round, Player, Action, Tournament, TournamentPlayer
 import axelrod as axl
 
 app = create_app()
@@ -30,7 +30,13 @@ def tournament_run(players, tournament_id):
     tournament = Tournament.query.filter_by(id=tournament_id).first()
     try:
         results = axl.Tournament(players).play()
-
+        tournament_players = []
+        for i in range(0, len(players)):
+            tournament_players.append(TournamentPlayer(id=i, tournament_id=tournament_id, strategy=players[i].name,
+                                                       score=results.scores[i], rank=results.ranking[i],
+                                                       cooperation_rating=results.cooperating_rating[i],
+                                                       wins=results.wins[i]))
+        db.session.add_all(tournament_players)
         tournament.completed = True
         db.session.commit()
     except:
