@@ -1,8 +1,8 @@
 /*-------------------------------------------
 Author:         James King adapted from Anne Ogborn 
-Title:          new_abstract_path.pl
-Created:        4th Oct 2018
-Desc:           Part of my proof of concept Prolog service
+Title:          html2.pl
+Created:        7th Oct 2018
+Desc:		Further exploration of html in Prolog web services           
 -------------------------------------------*/
 
 :- use_module(library(http/thread_httpd)).
@@ -20,14 +20,12 @@ server(Port):-
 
 home_page(Request):-
 	reply_html_page(
-		proof_style,
 		[title('Prolog Service - Home')],
 		[\home_page_content(_Request)]
 	).
 
 new_agent(Request):-
 	reply_html_page(
-		proof_style,
 		[title('Prolog Service - New Agent')],
 		[\new_agent_page_content(Request)]
 	).
@@ -35,15 +33,19 @@ new_agent(Request):-
 home_page_content(_Request) -->
 	html([
 		h1("Home"),
+		div(\nav_bar),
 		p("Welcome to my proof of concept for a Prolog web service"),
-		\my_fancy_border(p(["Message of the day: ", \motd]))
+		\my_fancy_border(p(["Message of the day: ", \motd])),
+		div(\html_receive(bottom_nav))
 	]).
 
 new_agent_page_content(_Request) -->
 	html([
 		h1("New Agent"),
+		div(\nav_bar),
 		p("Create new agents here"),
-		\my_fancy_border(\new_agent_form(Request))
+		\my_fancy_border(\new_agent_form(Request)),
+		div(\html_receive(bottom_nav))
 	]).
 
 new_agent_form(_Request) -->
@@ -57,17 +59,21 @@ new_agent_form(_Request) -->
 		])
 	]).
 
-:- multifile user:body//2.
+nav_bar -->
+	{
+		findall(Name, nav(Name, _), ButtonNames),
+		maplist(as_top_nav, ButtonNames, TopButtons),
+		maplist(as_bottom_nav, ButtonNames, BottomButtons)
+	},
+	html([\html_post(bottom_nav, BottomButtons) | TopButtons]).
 
-user:body(proof_style, Body) -->
-        {
-                http_link_to_id(home_page, [], HomeHREF),
-                http_link_to_id(new_agent, [], NewAgentHREF)
-        },
-        html(body([
-		div(id(top),[
-                	div([a([href(HomeHREF), style="border: 1px solid black; margin: 2px; padding: 2px"], 'Home'), a([href(NewAgentHREF), style="border: 1px solid black; margin: 2px; padding: 2px"], 'New Agent')])
-		]),
-		div(id(content), Body)
-        ])).
+nav('Home', HREF):-
+	http_link_to_id(home_page, [], HREF).
+nav('New Agent', HREF):-
+	http_link_to_id(new_agent, [], HREF).
 
+as_top_nav(Name, a([href(HREF), class=topnav], Name)):-
+	name(Name, HREF).
+
+as_bottom_nav(Name, a([href(HREF), class=bottomnav], Name)):-
+	name(Name, HREF).
