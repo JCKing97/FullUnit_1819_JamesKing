@@ -1,8 +1,8 @@
 /*-------------------------------------------
 Author:         James King adapted from Anne Ogborn 
-Title:          html.pl
+Title:          main.pl
 Created:        4th Oct 2018
-Desc:           Exploring html in Prolog web services
+Desc:           The main file of my proof of concept application for a Prolog web service
 -------------------------------------------*/
 
 :- use_module(library(http/thread_httpd)).
@@ -14,6 +14,7 @@ Desc:           Exploring html in Prolog web services
 :- use_module(library(http/http_session)).
 :- use_module(library(lists)).
 :- use_module(border).
+:- use_module(home).
 :- use_module(message_of_the_day).
 
 :- http_handler(root(.), home_page, []).
@@ -23,7 +24,7 @@ Desc:           Exploring html in Prolog web services
 
 server(Port):-
         http_server(http_dispatch, [port(Port)]).
-
+        
 home_page(Request):-
 	member(method(get), Request), !,
 	reply_html_page(
@@ -31,7 +32,6 @@ home_page(Request):-
 		[title('Prolog Service - Home')],
 		[\home_page_content]
 	).
-
 new_agent(Request):-
 	member(method(get), Request), !,
 	reply_html_page(
@@ -72,13 +72,6 @@ get_session_agents(Request):-
 		[title('Prolog Service - Session Agents')],
 		[\get_session_agents_page_content(Request)]
 	).
-
-home_page_content -->
-	html([
-		h1("Home"),
-		p("Welcome to my proof of concept for a Prolog web service"),
-		\my_fancy_border(p(["Message of the day: ", \motd]))
-	]).
 
 new_agent_page_content -->
 	html([
