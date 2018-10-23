@@ -38,6 +38,8 @@ http:location(agent_selection, '/agent_selection', []).
 :- http_handler(agents(new_agent), new_agent, []).
 :- http_handler(agents(get_agents), get_agents, []).
 :- http_handler(agent_selection(session_agents), session_agents, []).
+:- http_handler(agent_selection(get_session_agents), get_session_agents, []).
+:- http_handler(root(forbidden_operation), forbidden_operation, []).
 
 % Handle by serving a static file from the directory assets
 http:location(files, '/f', []).
@@ -70,7 +72,9 @@ new_agent(Request):-
 	member(method(post), Request), !,
 	http_read_data(Request, [agent_name=AgentName,agent_description=AgentDescription|_], []),
 	assert(agents:agent(AgentName, AgentDescription)),
-	get_agents(Request).
+	http_link_to_id(get_agents, [], GetAgentsHREF),
+	http_redirect(see_other, GetAgentsHREF, Request).
+
 
 % Handler for the get_agents route, getting the agents currently in the system and displaying them
 % Must deal with post and get requests due to the redirect upon submission of the new_agent form
@@ -96,17 +100,23 @@ session_agents(Request):-
 	member(method(post), Request), !,
 	http_read_data(Request, [agent_selector=Agent|_], []),
 	( agents:agent(Agent, _) -> http_session_assert(session_agents:session_agent(Agent)) ; http_session_assert(session_agents:session_agent("No such agent")) ),
-	get_session_agents(Request).
+	http_link_to_id(get_session_agents, [], GetSessionAgentsHREF),
+	http_redirect(see_other, GetSessionAgentsHREF, Request).
 	
 % Gets the agents currently selected for this session
 get_session_agents(Request):-
-	( member(method(get), Request) ; member(method(post), Request) ),
+	( member(method(get), Request) ; member(method(post), Request) ), !,
 	findall(AgentName, http_session_data(session_agents:session_agent(AgentName)), Agents),
 	reply_html_page(
 		proof_style,
 		[title('Prolog Service - Session Agents')],
 		[\get_session_agents_page_content(Agents)]
 	).
+
+% A user has committed a forbidden operation so throw an error at them
+forbidden_operation(Request):-
+	member(path(URL), Request),
+	throw(http_reply(forbidden(URL))).
 		
 % In every response hook the user:body non-term into the top of the body
 :- multifile user:body//2.
@@ -116,16 +126,28 @@ user:body(proof_style, Body) -->
                 http_link_to_id(home_page, [], HomeHREF),
                 http_link_to_id(new_agent, [], NewAgentHREF),
 		http_link_to_id(get_agents, [], GetAgentsHREF),
-		http_link_to_id(session_agents, [], SessionAgentsHREF)
+		http_link_to_id(session_agents, [], SessionAgentsHREF),
+		http_link_to_id(forbidden_operation, [], ForbiddenOperationHREF)
         },
         html(body([
 		div(id(top),[
                 	div([a([href(HomeHREF), style="border: 1px solid black; margin: 2px; padding: 2px"], 'Home'),
 				a([href(NewAgentHREF), style="border: 1px solid black; margin: 2px; padding: 2px"], 'New Agent'),
 				a([href(GetAgentsHREF), style="border: 1px solid black; margin: 2px; padding: 2px"], 'Agents'),
-				a([href(SessionAgentsHREF), style="border: 1px solid black; margin: 2px; padding: 2px;"], 'Session agents')
+				a([href(SessionAgentsHREF), style="border: 1px solid black; margin: 2px; padding: 2px;"], 'Session agents'),
+				a([href(ForbiddenOperationHREF), style="border: 1px solid black; margin: 2px; padding: 2px;"], 'Forbidden operation')
 			])
 		]),
 		div(id(content), Body)
         ])).
 
+% Error handling for 404 errors
+:- multifile http:status_page/3.
+
+http:status_page(not_found(URL), _Context, HTML):-
+	phrase(page([
+		title('404 - Page Not Found')],
+		{|html(URL)||
+		<h1>Sorry, page not foud</h1>
+		<p>It appears the page you requested has not been found</p>|}),
+		HTML).
