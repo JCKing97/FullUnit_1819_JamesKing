@@ -1,0 +1,153 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.4 (15/5/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com) with extensive modifications by
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[twoside,twocolumn]{article}
+
+\usepackage{blindtext} % Package to generate dummy text throughout this template 
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[english]{babel} % Language hyphenation and typographical rules
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+\usepackage{titling} % Customizing the title section
+
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{ Report on indirect reciprocity, strategies for agents and the development of a concrete model to implement} % Article title
+\author{%
+\textsc{James King} \\% Your name
+\normalsize Supervisor: Kostas Stathis \\ % Your supervisor
+}
+\date{October 2018} % Leave empty to omit a date
+\renewcommand{\maketitlehookd}{%
+\begin{abstract}
+\noindent Indirect reciprocity is a mechanism that uses reciprocation theory to aid in the evolution of cooperation. It is a promising motivator for cooperation in societies with agents of higher intelligence levels, such as human societies or even multi-agent systems. I plan to implement the mechanism programmatically, but there are many formulations and many possible additions. In this report I will explore past approaches to indirect reciprocity, comparing and contrasting the variations proposed and considering their impact on multi-agent systems. The outcome of this exploration of approaches will be a concrete model to implement in this project.
+\end{abstract}
+}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+% Milestone: Report on indirect reciprocity, strategies for agents and the development of a concrete model to implement
+% Report on past work on indirect reciprocity including the strategies agents have employed playing this game.
+% From this collated work I shall define a model which I am to implement and a number of key strategies to implement as well.
+% Link to goal: This is a part of my exploration of the mechanisms that aid in the evolution of cooperation and will help provide a model to implement in system for running indirect reciprocity tournaments across the Prolog service and environment.
+
+
+
+% Print the title
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+The evolution and preservation of cooperation has been a puzzle for evolutionary theorists for a long time. Many different approaches have been taken to give an explanation to cooperative phenomena, especially from the field of game-theory. Often these approaches have come from the idea of reciprocity, where agents can grow mutually beneficial relationships by repeated interactions. The most popular mechanism of this being direct reciprocity where interactions are repeated between the same two individuals, and thus they may reciprocate directly with each other.\\
+There is another game-theoretic mechanism known as indirect reciprocity, which works on the idea that nice agents will help those who help each other. A number of models have been proposed to run indirect reciprocity. It is these models I shall be describing and reviewing, before using them to formulate a concrete model to implement in my project.
+
+
+%------------------------------------------------
+
+\section{Review of Past Work}
+\subsection{Nowak, Sigmund and Image Scoring}
+I will begin by discussing possibly the most popular model of indirect reciprocity presented by Nowak and Sigmund~\cite{evol_indirect_image}.\\
+Nowak 2005\\
+The model, its good parts and limitations/criticisms.
+
+\subsection{Standing Strategy}
+Leimar Hammerstein\\
+
+
+\subsection{Roberts' Mixed Reciprocity Model}
+Gilbert Roberts compares a number of models of indirect reciprocity~\cite{evoldirindir} and fuses both indirect and direct reciprocity together, to suggest a mixed framework. Roberts put forward this notion due to his perception that indirect reciprocity alone is not a generalisable concept due to the nature of interactions being repeated in most societies. In the framework Roberts puts forwards, agents base their decisions on a reputation score and/or an experience score.\\
+The model is laid out on an island system which effectively splits the whole population into islands and then into groups on each island in which the inhabitants interact with each other.Interactions occurred by randomly selecting a donor and receiver, if the donor helps it incurs a cost of -1 and the receiver receives a benefit of 2. These interactions were repeated until on average all group members interacted with each other a certain specified amount of times.\\
+The model includes a reproductive system where individuals reproduce if they have a measure of success locally and globally - each individual has a higher chance of reproducing locally and a smaller chance of reproducing locally. Mutation can occur with a very small chance, where a strategy is replaced by another randomly.\\
+
+
+\subsection{Gossip and Onlookers}
+~\cite{gossip_alt}\\
+
+Simpson altruism reciprocity\\
+Judgement Bias\\
+Competitive altruism\\
+
+%------------------------------------------------
+
+\section{A Concrete Model}
+\subsection{Comparison of Models}
+~\cite{evoldirindir} points out that in Nowak and Sigmunds model it may not be strategically a good idea to punish those with a lower reputation, as this lowers yours and in turn fails to distinguish justified and unjustified defection. Roberts' model reduces genetic drift.
+
+\subsection{Specification of the Model}
+
+
+%------------------------------------------------
+
+\section{Discussion and Conclusion}
+
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\bibliography{../refs.bib}{}
+\bibliographystyle{plain}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

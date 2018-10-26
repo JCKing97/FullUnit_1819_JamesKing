@@ -1,8 +1,87 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{evolution_of_cooperation}
 Robert Axelrod and William~D. Hamilton.
 \newblock The evolution of cooperation.
 \newblock {\em Science}, 211:1390--1396, 1981.
+
+\bibitem{selfish_gene}
+Richard Dawkins.
+\newblock {\em The Selfish Gene}.
+\newblock Oxford University Press, 2016.
+
+\bibitem{kinhamilton}
+W.~D. Hamilton.
+\newblock The genetical evolution of social behaviour.
+\newblock {\em Journal of Theoretical Biology}, 7:1--16, July 1964.
+
+\bibitem{ethnicselection}
+Doug Jones.
+\newblock Kin selection and ethnic group selection.
+\newblock {\em Evolution and Human Behavior}, 39:9--18, August 2017.
+
+\bibitem{prisonersdilemma}
+Menusch Khadjavi and Andreas Lange.
+\newblock Prisoner's and their dilemma.
+\newblock {\em Journal of Economic Behavior and Organisation}, 92:163--175,
+  August 2013.
+
+\bibitem{sticklebacks}
+M.~Milinski.
+\newblock Tit for tat in sticklebacks and the evolution of cooperation.
+\newblock {\em Nature}, 325:433--435, January 1987.
+
+\bibitem{five_rules_coop}
+Martin~A. Nowak.
+\newblock Five rules for the evolution of cooperation.
+\newblock {\em Science}, 314, 2006.
+
+\bibitem{spatial}
+Martin~A. Nowak and Robert~M. May.
+\newblock Evolutionary games and spatial chaos.
+\newblock {\em Nature}, 359:826--829, 1992.
+
+\bibitem{heterogenous}
+Martin~A. Nowak and Karl Sigmund.
+\newblock Tit for tat in heterogenous populations.
+\newblock {\em Nature}, 355:250--252, January 1992.
+
+\bibitem{evol_indirect_image}
+Martin~A. Nowak and Karl Sigmund.
+\newblock Evolution of indirect reciprocity by image scoring.
+\newblock {\em Nature}, 393:573--577, 1998.
+
+\bibitem{arithmetics_of_mutual_help}
+Martin~A. Nowak, Karl Sigmund, and Robert~M. May.
+\newblock The arithmetics of mutual help.
+\newblock {\em Scientific American}, 272:76--86, 1995.
+
+\bibitem{phelps_game_theoretic_analysis}
+Steve Phelps.
+\newblock An empirical game-theoretic analysis of the dynamics of cooperation
+  in small groups.
+\newblock 2016.
+
+\bibitem{evoldirindir}
+Gilbert Roberts.
+\newblock Evolution of direct and indirect reciprocity.
+\newblock {\em Proceedings of The Royal Society}, 275:173--179, September 2008.
+
+\bibitem{extortion}
+Alexander~J. Stewart and Joshua~B. Plotkin.
+\newblock Extortion and cooperation in the prisoner's dilemma.
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, 109:10134--10135, June 2012.
+
+\bibitem{evol_graph}
+Gy{\"o}rgy Szab{\'o} and G{\'a}bor F{\'a}th.
+\newblock Evolutionary games on graphs.
+\newblock {\em Physics Reports}, 446:96--216, 2007.
+
+\bibitem{multilevel_nowak}
+Arne Traulsen and Martin~A. Nowak.
+\newblock Evolution of cooperation by multilevel selection.
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, 103:10952--10955, 2006.
 
 \end{thebibliography}
