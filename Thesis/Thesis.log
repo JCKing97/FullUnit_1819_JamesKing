@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  26 OCT 2018 13:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  26 OCT 2018 14:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -248,7 +248,7 @@ Missing character: There is no â in font pplr7t!
 Missing character: There is no € in font pplr7t!
 Missing character: There is no ™ in font pplr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 170--173
+Underfull \hbox (badness 10000) in paragraph at lines 169--172
 
  []
 
@@ -257,7 +257,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 170--173
 ]
 Chapter 3.
 
-Underfull \hbox (badness 10000) in paragraph at lines 176--182
+Underfull \hbox (badness 10000) in paragraph at lines 175--181
 
  []
 
@@ -273,7 +273,7 @@ Chapter 4.
 Here is how much of TeX's memory you used:
  1794 strings out of 494880
  25318 string characters out of 6179600
- 75738 words of memory out of 5000000
+ 74738 words of memory out of 5000000
  5077 multiletter control sequences out of 15000+600000
  24214 words of font info for 58 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
@@ -283,7 +283,7 @@ nc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Thesis.pdf (21 pages, 101122 bytes).
+Output written on Thesis.pdf (21 pages, 100868 bytes).
 PDF statistics:
  91 PDF objects out of 1000 (max. 8388607)
  61 compressed objects within 1 object stream

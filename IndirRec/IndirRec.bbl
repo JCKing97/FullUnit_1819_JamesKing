@@ -1,14 +1,15 @@
 \begin{thebibliography}{1}
 
-\bibitem{evolution_of_cooperation}
-Robert Axelrod and William~D. Hamilton.
-\newblock The evolution of cooperation.
-\newblock {\em Science}, 211:1390--1396, 1981.
-
-\bibitem{five_rules_coop}
-Martin~A. Nowak.
-\newblock Five rules for the evolution of cooperation.
-\newblock {\em Science}, 314, 2006.
+\bibitem{axelrodproject}
+Vince Knight; Owen Campbell;~Marc; eric-s-s; VSN Reddy Janga; James Campbell;
+  Karol M. Langner; T.J. Gaffney; Sourav Singh; Nikoleta; Julie Rymer; Thomas
+  Campbell; Jason Young; MHakem; Geraint Palmer; Kristian Glass;
+  edouardArgenson; Daniel Mancia; Martin Jones; Cameron
+  Davidson-Pilon;~alajara; Ranjini Das; Marios Zoulias; Aaron Kratz; Timothy
+  Standen; Paul Slavin; Adam Pohl; Jochen Müller; Georgios Koutsovoulos;
+  Areeb~Ahmed.
+\newblock Axelrod: 4.3.0.
+\newblock \url{http://dx.doi.org/10.5281/zenodo.1405868}, September 2018.
 
 \bibitem{evol_indirect_image}
 Martin~A. Nowak and Karl Sigmund.
