@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{%  import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <div class="jumbotron" style="padding: 20px">
+        <h1>Match</h1>
+        <p>
+            A match consists of two players interacting with each other over a number of rounds.
+            Each round a player may choose to cooperate or defect, the choice of what the player does depends on their selected strategy.
+            In a nature engine match you may select a strategy for each player and run the match.
+            Select a strategy for each of the players and press run to initiate a match, once finished you will be redirected to a page with the outcome and statistics produced by the match.
+            If you're unsure of any strategies have a look at the descriptions in the information panel at the bottom.
+        </p>
+    </div>
+    <div class="container">
+        <h1>Set up</h1>
+        <div class="row">
+            <div class="col-md-4">
+                {{ wtf.quick_form(form) }}
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            {% include "_strategies_description.html" %}
+        </div>
+    </div>
+{% endblock %}

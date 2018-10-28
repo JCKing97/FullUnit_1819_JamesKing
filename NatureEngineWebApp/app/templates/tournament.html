@@ -1,0 +1,195 @@
+{# Author: James King adapted from code in https://www.youtube.com/watch?v=Ke90Tje7VS0&t=3352s and Phil's comment on https://stackoverflow.com/questions/11456771/using-json-post-request#11457051 #}
+
+{% extends "base.html" %}
+
+{% block app_content %}
+    <div class="jumbotron" style="padding: 20px">
+        <h1>Tournament</h1>
+        <p>
+            A tournament consists of a number of players (more than 2) that are all interacting with each other.
+            Each player in the tournament interacts with every other player in a match between the two.
+            Players accumulate points across the matches they play against all the others.
+            In a nature engine tournament you may select a number of players and assign each player a strategy, press run to initiate the tournament.
+            If you're unsure of any strategies have a look at the descriptions in the information panel at the bottom.
+        </p>
+    </div>
+
+    <div class="container">
+        <div id="select_agents"></div>
+        <hr />
+        <div class="row">
+            {% include "_strategies_description.html" %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/babel">
+
+        class SelectAgents extends React.Component{
+            state = {
+                strategies: {{ strategies|tojson|safe }},
+                players: [],
+                next_player_id: 0
+            };
+
+            add = (player) => {
+                const { players } = this.state;
+                // Check the count of the players added so far
+                let player_count = 0;
+                for(let i = 0; i < players.length; i++){
+                    player_count += players[i].count
+                }
+                // Limit the amount of players added to 50
+                if(player_count < 50){
+                    // Find if their is already an instance of this strategy in the players list
+                    let index = -1;
+                    for (let i = 0; i < players.length; i++){
+                        if(players[i].name === player){
+                            index = i;
+                            break;
+                        }
+                    }
+                    // If their is an instance add to that instances count
+                    if(index !== -1){
+                        players[index].count += 1;
+                        this.setState({players:players});
+                    } else {
+                         // If their is not an instance create one
+                        players.push({name: player, id:this.state.next_player_id, count:1});
+                        this.setState({players:players, next_player_id: this.state.next_player_id + 1});
+                    }
+                }
+            };
+
+            remove = (player) => {
+                const { players } = this.state;
+                // Find if their is an instance of this strategy in the list
+                let index = -1;
+                for (let i = 0; i < players.length; i++){
+                    if(players[i].name === player){
+                        index = i;
+                        break;
+                    }
+                }
+                // If their is an instance
+                if(index !== -1){
+                    // If there is more than one count of the instance decrement the count
+                    if(players[index].count>1){
+                        players[index].count -= 1;
+                        this.setState({players:players});
+                    } else {
+                        // If there is only one instance remove this instance from the list
+                        players.splice(index, 1);
+                        this.setState({players:players});
+                    }
+                }
+            };
+
+            handleSubmit = () => {
+                const { players } = this.state;
+                // Check the count of the players added so far
+                let player_count = 0;
+                for(let i = 0; i < players.length; i++){
+                    player_count += players[i].count
+                }
+                // If the user has selected the right amount of players, post
+                if(player_count < 50 && player_count > 2) {
+                    $.ajax({
+                        url: "{{ url_for('main.tournament', level=level) }}",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ strategy_counts: players })
+                    }).done(function(data) {
+                        window.location = data['url'];
+                    });
+                } else {
+                    alert("You must select between 3 and 50 players");
+                }
+            };
+
+            render(){
+                return(
+                    <div>
+                        <div className="container">
+                            <div className="row">
+                                <Strategies strategies={this.state.strategies} add={this.add} remove={this.remove} />
+                                <SelectedPlayersList selected={this.state.players} />
+                            </div>
+                        </div>
+                        <button onClick={ this.handleSubmit } className="btn btn-success btn-lg">Submit</button>
+                    </div>
+                )
+            }
+        }
+
+        class SelectedPlayersList extends React.Component {
+            state = {};
+
+            render(){
+                return(
+                    <div className="col-md-6">
+                        { this.props.selected.map(player => <SelectedPlayer key={player.id} count={player.count} name={player.name}/>) }
+                    </div>
+                )
+            }
+        }
+
+        class SelectedPlayer extends React.Component {
+            state = {};
+
+            render(){
+                return(
+                    <div><span className="badge bg-info">{this.props.count}</span><span className="badge badge-primary m-2">{this.props.name}</span></div>
+                )
+            }
+        }
+
+        class Strategies extends React.Component{
+            state = {};
+
+            render(){
+                return(
+                    <div className="col-md-6">
+                        <div className="container-fluid">
+                            { this.props.strategies.map(strategy => <Strategy key={strategy.id} name={strategy.name} add={this.props.add} remove={this.props.remove}/>) }
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        class Strategy extends React.Component {
+            state = {
+                name: this.props.name
+            };
+
+            render(){
+                return (
+                    <div className="row border-box-sizing">
+                        <div className="col-md-4 center-block">
+                            <span className="badge badge-primary m-2">{ this.state.name }</span>
+                        </div>
+                        <div className="col-md-4">
+                            <button onClick={() => this.props.add(this.state.name) } className="btn btn-secondary btn-sm">Add</button>
+                        </div>
+                        <div className="col-md-4">
+                            <button onClick={() => this.props.remove(this.state.name) } className="btn btn-danger btn-sm">Remove</button>
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <SelectAgents/>,
+            document.getElementById('select_agents')
+        );
+
+    </script>
+{% endblock %}

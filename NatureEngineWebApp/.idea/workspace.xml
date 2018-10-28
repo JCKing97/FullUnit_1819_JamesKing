@@ -1,0 +1,1163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/axelrod_database_conversion.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main/axelrod_database_conversion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/tournament.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/tournament.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/tournament_running.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/tournament_running.html" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_GameModelCase.coverage" NAME="pytest for model_tests.GameModelCase Coverage Results" MODIFIED="1536227869615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase_test_get_tournaments_points_normal.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase.test_get_tournaments_points_normal Coverage Results" MODIFIED="1536229571594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_database_model_test_MatchTest.coverage" NAME="pytest for database_model_test.MatchTest Coverage Results" MODIFIED="1539271410453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_UserModelCase.coverage" NAME="pytest for model_tests.UserModelCase Coverage Results" MODIFIED="1535545105823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase Coverage Results" MODIFIED="1536233221336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_GameAnalysisCase.coverage" NAME="pytest for analysis_tests.GameAnalysisCase Coverage Results" MODIFIED="1536228077916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_axelrod_database_conversion_test_TestConversion.coverage" NAME="pytest for axelrod_database_conversion_test.TestConversion Coverage Results" MODIFIED="1539266483493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$PopulateDB.coverage" NAME="PopulateDB Coverage Results" MODIFIED="1536080686131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase_test_get_tournament_points_no_games.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase.test_get_tournament_points_no_games Coverage Results" MODIFIED="1536229582875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_GameModelCase_test_get_interaction_history.coverage" NAME="pytest for model_tests.GameModelCase.test_get_interaction_history Coverage Results" MODIFIED="1535545404289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$NatureEngineWebApp.coverage" NAME="NatureEngineWebApp Coverage Results" MODIFIED="1539982985686" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-986447435">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="12" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.open.time.33" value="1" />
+          <entry key="project.open.time.36" value="1" />
+          <entry key="project.open.time.39" value="1" />
+          <entry key="project.open.time.4" value="2" />
+          <entry key="project.open.time.45" value="1" />
+          <entry key="project.open.time.50" value="1" />
+          <entry key="project.open.time.58" value="1" />
+          <entry key="project.open.time.60" value="1" />
+          <entry key="project.opened" value="13" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="Procfile" value="1" />
+          <entry key="README" value="2" />
+          <entry key="cfg" value="1" />
+          <entry key="db" value="3" />
+          <entry key="gitignore" value="2" />
+          <entry key="html" value="68" />
+          <entry key="ini" value="1" />
+          <entry key="js" value="1" />
+          <entry key="log" value="1" />
+          <entry key="po" value="1" />
+          <entry key="pot" value="2" />
+          <entry key="py" value="78" />
+          <entry key="txt" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="68" />
+          <entry key="Ini" value="2" />
+          <entry key="JavaScript" value="1" />
+          <entry key="Locale" value="3" />
+          <entry key="PLAIN_TEXT" value="11" />
+          <entry key="Python" value="78" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Procfile" value="1" />
+          <entry key="Python Console" value="2110" />
+          <entry key="cfg" value="104" />
+          <entry key="dummy" value="22" />
+          <entry key="html" value="10809" />
+          <entry key="po" value="1" />
+          <entry key="py" value="17827" />
+          <entry key="txt" value="1054" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="10809" />
+          <entry key="Ini" value="104" />
+          <entry key="Locale" value="1" />
+          <entry key="PLAIN_TEXT" value="1077" />
+          <entry key="Python" value="19937" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts" />
+    </session>
+    <session id="979725720">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="12" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.8" value="7" />
+          <entry key="project.open.time.9" value="4" />
+          <entry key="project.opened" value="13" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="Procfile" value="3" />
+          <entry key="gitignore" value="2" />
+          <entry key="html" value="62" />
+          <entry key="md" value="1" />
+          <entry key="py" value="79" />
+          <entry key="txt" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="62" />
+          <entry key="Markdown" value="1" />
+          <entry key="PLAIN_TEXT" value="8" />
+          <entry key="Python" value="79" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Python Console" value="408" />
+          <entry key="dummy" value="54" />
+          <entry key="gitignore" value="11" />
+          <entry key="html" value="8114" />
+          <entry key="py" value="11591" />
+          <entry key="txt" value="1228" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="HTML" value="8114" />
+          <entry key="PLAIN_TEXT" value="1293" />
+          <entry key="Python" value="11999" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts" />
+      <usages-collector id="statistics.vcs.git.usages" />
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/tournament.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="428">
+              <caret line="65" column="40" lean-forward="true" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+              <folding>
+                <element signature="e#151#169#0" expanded="true" />
+                <marker date="1539984555595" expanded="true" signature="199:202" ph="..." />
+                <marker date="1539984555595" expanded="true" signature="2053:2058" ph="..." />
+                <marker date="1539984555595" expanded="true" signature="2386:2391" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/tournament_finished.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/main/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/match_run.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/main/axelrod_database_conversion.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="518">
+              <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+                <marker date="1539984555631" expanded="true" signature="380:385" ph="..." />
+                <marker date="1539984555631" expanded="true" signature="920:1642" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/tournament_running.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+              <folding>
+                <element signature="e#78#99#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/main/routes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="473">
+              <caret line="87" column="73" selection-start-line="87" selection-start-column="73" selection-end-line="87" selection-end-column="73" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+                <marker date="1539982259240" expanded="true" signature="4693:5012" ph="..." />
+                <marker date="1539982259240" expanded="true" signature="5054:5123" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/natureengine.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+                <marker date="1539972890689" expanded="true" signature="171:176" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="25" column="50" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="50" />
+              <folding>
+                <element signature="e#176#190#0" expanded="true" />
+                <marker date="1539974142937" expanded="true" signature="615:1975" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Flask Main" />
+        <option value="JavaScript File" />
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Action</find>
+      <find>join</find>
+      <find>round</find>
+      <find>Round</find>
+      <find>game1.id</find>
+      <find>game2.id</find>
+      <find>game3.id</find>
+      <find>agent1.id</find>
+      <find>agent2.id</find>
+      <find>agent3.id</find>
+      <find>agent4.id</find>
+      <find>agent_id=1</find>
+      <find>agent_id=2</find>
+      <find>agent_id=</find>
+      <find>agent_id=3</find>
+      <find>agent_id=4</find>
+      <find>strategy</find>
+      <find>action</find>
+      <find>game_agent_association</find>
+      <find>print</find>
+      <find>number</find>
+      <find>cooperates</find>
+      <find>agents</find>
+      <find>agent</find>
+      <find>game</find>
+      <find>strategies</find>
+      <find>strat_dict</find>
+      <find>url_for</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/static/select_strat.js" />
+        <option value="$PROJECT_DIR$/app/templates/agent_description.html" />
+        <option value="$PROJECT_DIR$/app/templates/_agent_description.html" />
+        <option value="$PROJECT_DIR$/tests/ModelTests.py" />
+        <option value="$PROJECT_DIR$/app/templates/404.html" />
+        <option value="$PROJECT_DIR$/scripts/PopulateDB.py" />
+        <option value="$PROJECT_DIR$/app/templates/500.html" />
+        <option value="$PROJECT_DIR$/app/templates/report.html" />
+        <option value="$PROJECT_DIR$/app/templates/multiplayer.html" />
+        <option value="$PROJECT_DIR$/app/game_analysis.py" />
+        <option value="$PROJECT_DIR$/tests/model_tests.py" />
+        <option value="$PROJECT_DIR$/scripts/db_populate.py" />
+        <option value="$PROJECT_DIR$/tests/analysis_tests.py" />
+        <option value="$PROJECT_DIR$/Procfile" />
+        <option value="$PROJECT_DIR$/app/templates/communities.html" />
+        <option value="$PROJECT_DIR$/app/templates/game.html" />
+        <option value="$PROJECT_DIR$/app/templates/about.html" />
+        <option value="$PROJECT_DIR$/app/templates/game_finished.html" />
+        <option value="$PROJECT_DIR$/app/templates/game_run.html" />
+        <option value="$PROJECT_DIR$/app/analysis.py" />
+        <option value="$PROJECT_DIR$/app/templates/_agent_strategy_description.html" />
+        <option value="$PROJECT_DIR$/app/templates/match_run.html" />
+        <option value="$PROJECT_DIR$/app/templates/index.html" />
+        <option value="$PROJECT_DIR$/app/templates/reputation.html" />
+        <option value="$PROJECT_DIR$/app/forms.py" />
+        <option value="$PROJECT_DIR$/app/templates/_player_strategy_description.html" />
+        <option value="$PROJECT_DIR$/app/templates/match.html" />
+        <option value="$PROJECT_DIR$/app/templates/_strategies_description.html" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/app/axelrod_database_conversion.py" />
+        <option value="$PROJECT_DIR$/app/routes.py" />
+        <option value="$PROJECT_DIR$/app/errors.py" />
+        <option value="$PROJECT_DIR$/app/errors/__init__.py" />
+        <option value="$PROJECT_DIR$/app/errors/handlers.py" />
+        <option value="$PROJECT_DIR$/app/main/__init__.py" />
+        <option value="$PROJECT_DIR$/app/templates/base.html" />
+        <option value="$PROJECT_DIR$/app/templates/errors/404.html" />
+        <option value="$PROJECT_DIR$/app/templates/errors/500.html" />
+        <option value="$PROJECT_DIR$/natureengine.py" />
+        <option value="$PROJECT_DIR$/tests/test_config.py" />
+        <option value="$PROJECT_DIR$/tests/database_model_test.py" />
+        <option value="$PROJECT_DIR$/tests/axelrod_database_conversion_test.py" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/app/__init__.py" />
+        <option value="$PROJECT_DIR$/app/templates/tournament_finished.html" />
+        <option value="$PROJECT_DIR$/app/main/routes.py" />
+        <option value="$PROJECT_DIR$/app/templates/tournament.html" />
+        <option value="$PROJECT_DIR$/app/templates/tournament_running.html" />
+        <option value="$PROJECT_DIR$/app/main/axelrod_database_conversion.py" />
+        <option value="$PROJECT_DIR$/app/models.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="964" />
+    <option name="width" value="956" />
+    <option name="height" value="1048" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="errors" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ML/Labs" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/main" />
+      <recent name="$PROJECT_DIR$/app/templates/errors" />
+      <recent name="$PROJECT_DIR$/app/errors" />
+      <recent name="$PROJECT_DIR$/app/static/images" />
+      <recent name="$PROJECT_DIR$/app" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Flask server.NatureEngineWebApp">
+    <configuration name="NatureEngineWebApp" type="Python.FlaskServer" factoryName="Flask server">
+      <option name="additionalOptions" value="" />
+      <option name="application" value="" />
+      <option name="flaskDebug" value="true" />
+      <module name="NatureEngineWebApp" />
+      <option name="target" value="$PROJECT_DIR$/app/__init__.py" />
+      <option name="targetType" value="PATH" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for analysis_tests.TournamentAnalysisCase" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="NatureEngineWebApp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;analysis_tests.TournamentAnalysisCase&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for analysis_tests.TournamentAnalysisCase.test_get_tournament_points_no_games" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="NatureEngineWebApp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;analysis_tests.TournamentAnalysisCase.test_get_tournament_points_no_games&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for analysis_tests.TournamentAnalysisCase.test_get_tournaments_points_normal" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="NatureEngineWebApp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;analysis_tests.TournamentAnalysisCase.test_get_tournaments_points_normal&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for axelrod_database_conversion_test.TestConversion" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="NatureEngineWebApp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;axelrod_database_conversion_test.TestConversion&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for database_model_test.MatchTest" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="NatureEngineWebApp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;database_model_test.MatchTest&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Flask server.NatureEngineWebApp" />
+      <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase" />
+      <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase.test_get_tournaments_points_normal" />
+      <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase.test_get_tournament_points_no_games" />
+      <item itemvalue="Python tests.pytest for axelrod_database_conversion_test.TestConversion" />
+      <item itemvalue="Python tests.pytest for database_model_test.MatchTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.pytest for database_model_test.MatchTest" />
+        <item itemvalue="Python tests.pytest for axelrod_database_conversion_test.TestConversion" />
+        <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase" />
+        <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase.test_get_tournament_points_no_games" />
+        <item itemvalue="Python tests.pytest for analysis_tests.TournamentAnalysisCase.test_get_tournaments_points_normal" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="" />
+      <created>1535040160564</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1535040160564</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit of components">
+      <created>1535647227999</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1535647227999</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Connecting backend with frontend">
+      <created>1536090426975</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1536090426975</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Changed the database to make it more logical to use, updated the front end adding reports links and a structure and design to the home page.">
+      <created>1536187141230</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1536187141230</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Adding multiplayer pages and routes, creating nicer content on coming soon pages">
+      <created>1536187813429</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1536187813429</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Adding images to display on other devices">
+      <created>1536224452077</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1536224452077</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Adding images to display on other devices">
+      <created>1536224542657</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1536224542657</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Moving images, added tournament analysis for points">
+      <created>1536225615052</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1536225615052</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Changed the population of the local database for tournaments and added unit testing for tournaments, games and their analysis. Began the front end of th tournament_finished page.">
+      <created>1536233744526</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1536233744526</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added documents to return from static files and edited the reports route to link to them">
+      <created>1536772918853</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1536772918854</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Setting up for heroku deploy">
+      <created>1536776755944</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1536776755945</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Setting up for heroku deploy">
+      <created>1536778266849</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1536778266849</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Setting up for heroku deploy">
+      <created>1536778320479</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1536778320479</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Setting up for heroku deploy">
+      <created>1536779652104</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1536779652104</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Setting up for heroku deploy">
+      <created>1536780306992</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1536780306992</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Setting up for heroku deploy">
+      <created>1536781247537</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1536781247537</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Adding padding to make the site look better">
+      <created>1536782292224</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1536782292224</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Developing the tournament, community, game and game_finished pages look and feel.">
+      <created>1536787481651</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1536787481651</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Improving look and content on index and about page.">
+      <created>1536787962517</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1536787962517</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Changed naming conventions and edited everywhere. Restructured te website. Linked up backend processing with the Axelrod library, a database and the front end for IPD matches.">
+      <created>1539424950383</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1539424950383</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Working on the React component to select a number of agents and display it dynamically in a list.">
+      <created>1539443173678</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1539443173678</updated>
+    </task>
+    <task id="LOCAL-00021" summary="The react component now dynamically adds to and displays a list of selected players">
+      <created>1539541158814</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1539541158814</updated>
+    </task>
+    <task id="LOCAL-00022" summary="The react component can now send the players to the server to play the tournament. Reformatted some of the match and html components to display correctly with the changes I had to make for the react component. Next step is to throw the tournament to a redis task queue and then once completed redirect them to an analysis page.">
+      <created>1539622013438</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1539622013438</updated>
+    </task>
+    <task id="LOCAL-00023" summary="The react component can now send the players to the server to play the tournament. Reformatted some of the match and html components to display correctly with the changes I had to make for the react component. Next step is to throw the tournament to a redis task queue and then once completed redirect them to an analysis page.">
+      <created>1539622029190</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1539622029190</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Restructured application to make it more scalable">
+      <created>1539974453588</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1539974453588</updated>
+    </task>
+    <task id="LOCAL-00025" summary="I have added server side functionality to throw a tournament into a redis queue and client side functionality that redirects to a page stating that the tournament is being run whilst the redis queue is running it. Using ajax it queries the server every 2 seconds to check if the job is finished, and when it is redirects to a finished page.">
+      <created>1539983417705</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1539983417705</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 27m 44s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 29m 37s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 30m 47s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 30m 55s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 32m 39s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 15h 53m 51s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 16h 22m 16s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 16h 22m 30s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 16h 23m 18s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_database_model_test_MatchTest - 2018.10.11 at 16h 23m 33s.xml">
+      <configuration name="pytest for database_model_test.MatchTest" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.15688367" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" order="0" weight="0.32896176" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="1" sideWeight="0.49839914" visible="true" weight="0.32786885" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50160086" side_tool="true" weight="0.32786885" />
+      <window_info anchor="bottom" id="Version Control" order="3" weight="0.32896176" />
+      <window_info anchor="bottom" id="Python Console" order="4" sideWeight="0.49893278" weight="0.32896176" />
+      <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="6" />
+      <window_info anchor="bottom" id="Find" order="7" weight="0.32896176" />
+      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.49893278" weight="0.3136612" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.3989071" />
+      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info anchor="right" id="Database" order="0" weight="0.32977587" />
+      <window_info anchor="right" id="Commander" order="1" weight="0.4" />
+      <window_info anchor="right" id="SciView" order="2" />
+      <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit of components" />
+    <MESSAGE value="Connecting backend with frontend" />
+    <MESSAGE value="Changed the database to make it more logical to use, updated the front end adding reports links and a structure and design to the home page." />
+    <MESSAGE value="Adding multiplayer pages and routes, creating nicer content on coming soon pages" />
+    <MESSAGE value="Adding images to display on other devices" />
+    <MESSAGE value="Moving images, added tournament analysis for points" />
+    <MESSAGE value="Changed the population of the local database for tournaments and added unit testing for tournaments, games and their analysis. Began the front end of th tournament_finished page." />
+    <MESSAGE value="Added documents to return from static files and edited the reports route to link to them" />
+    <MESSAGE value="Setting up for heroku deploy" />
+    <MESSAGE value="Adding padding to make the site look better" />
+    <MESSAGE value="Developing the tournament, community, game and game_finished pages look and feel." />
+    <MESSAGE value="Improving look and content on index and about page." />
+    <MESSAGE value="Changed naming conventions and edited everywhere. Restructured te website. Linked up backend processing with the Axelrod library, a database and the front end for IPD matches." />
+    <MESSAGE value="Working on the React component to select a number of agents and display it dynamically in a list." />
+    <MESSAGE value="The react component now dynamically adds to and displays a list of selected players" />
+    <MESSAGE value="The react component can now send the players to the server to play the tournament. Reformatted some of the match and html components to display correctly with the changes I had to make for the react component. Next step is to throw the tournament to a redis task queue and then once completed redirect them to an analysis page." />
+    <MESSAGE value="Restructured application to make it more scalable" />
+    <MESSAGE value="I have added server side functionality to throw a tournament into a redis queue and client side functionality that redirects to a page stating that the tournament is being run whilst the redis queue is running it. Using ajax it queries the server every 2 seconds to check if the job is finished, and when it is redirects to a finished page." />
+    <option name="LAST_COMMIT_MESSAGE" value="I have added server side functionality to throw a tournament into a redis queue and client side functionality that redirects to a page stating that the tournament is being run whilst the redis queue is running it. Using ajax it queries the server every 2 seconds to check if the job is finished, and when it is redirects to a finished page." />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/translations/el/LC_MESSAGES/messages.po" />
+    <entry file="file://$PROJECT_DIR$/app/static/select_strat.js" />
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/_jb_pytest_runner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/messages.pot" />
+    <entry file="file://$PROJECT_DIR$/tests/logs/microblog.log" />
+    <entry file="file://$PROJECT_DIR$/scripts/PopulateDB.py" />
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.7/site-packages/sqlalchemy/engine/default.py" />
+    <entry file="file://$PROJECT_DIR$/migrations/alembic.ini" />
+    <entry file="file://$PROJECT_DIR$/migrations/env.py" />
+    <entry file="file://$PROJECT_DIR$/migrations/README" />
+    <entry file="file://$PROJECT_DIR$/migrations/versions/5490849570b9_resetting_tables.py" />
+    <entry file="file://$PROJECT_DIR$/tests/model_tests.py" />
+    <entry file="file://$PROJECT_DIR$/tests/analysis_tests.py" />
+    <entry file="file://$PROJECT_DIR$/app.db" />
+    <entry file="file://$PROJECT_DIR$/app/templates/multiplayer.html" />
+    <entry file="file://$PROJECT_DIR$/scripts/db_populate.py" />
+    <entry file="file://$PROJECT_DIR$/app/templates/report.html" />
+    <entry file="file://$PROJECT_DIR$/app/templates/communities.html" />
+    <entry file="file://$PROJECT_DIR$/tests/.pytest_cache/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="1" lean-forward="true" selection-start-line="1" selection-start-column="1" selection-end-line="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/.pytest_cache/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Procfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/errors/handlers.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/axelrod_database_conversion_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/database_model_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="40" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
+          <folding>
+            <marker date="1539973272681" expanded="true" signature="52:57" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/errors/404.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/errors/500.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/_player_strategy_description.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="69" selection-start-line="1" selection-start-column="59" selection-end-line="1" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/_strategies_description.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="14" column="86" selection-start-line="14" selection-start-column="86" selection-end-line="14" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/match.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/errors/handlers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#121#154#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/errors/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="48" column="50" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/reputation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="65" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="24" selection-start-line="2" selection-start-column="24" selection-end-line="2" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/natureengine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+            <marker date="1539972890689" expanded="true" signature="171:176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="25" column="50" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="50" />
+          <folding>
+            <element signature="e#176#190#0" expanded="true" />
+            <marker date="1539974142937" expanded="true" signature="615:1975" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/tournament.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/tournament_running.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+          <folding>
+            <element signature="e#78#99#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/match_run.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/tournament_finished.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="87" column="73" selection-start-line="87" selection-start-column="73" selection-end-line="87" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1539982259240" expanded="true" signature="4693:5012" ph="..." />
+            <marker date="1539982259240" expanded="true" signature="5054:5123" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/main/axelrod_database_conversion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+            <marker date="1539984555631" expanded="true" signature="380:385" ph="..." />
+            <marker date="1539984555631" expanded="true" signature="920:1642" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="65" column="40" lean-forward="true" selection-start-line="65" selection-start-column="40" selection-end-line="65" selection-end-column="40" />
+          <folding>
+            <element signature="e#151#169#0" expanded="true" />
+            <marker date="1539984555595" expanded="true" signature="199:202" ph="..." />
+            <marker date="1539984555595" expanded="true" signature="2053:2058" ph="..." />
+            <marker date="1539984555595" expanded="true" signature="2386:2391" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

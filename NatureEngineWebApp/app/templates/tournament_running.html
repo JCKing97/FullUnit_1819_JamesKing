@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <div class="jumbotron" style="padding: 20px">
+        <h1 style="">Tournament Running</h1>
+        <p>
+            You will be redirected soon.
+        </p>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        setInterval(function() {
+            $.ajax({
+                url: "{{ url_for('main.is_tournament_finished', tournament_id=tournament_id, job_id=job_id) }}",
+                method: "GET"
+            }).done(function(data) {
+                console.log(data);
+                if (data['finished']){
+                    window.location = data['url'];
+                }
+            });
+        }, 2000);
+    </script>
+{% endblock %}

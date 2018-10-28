@@ -1,0 +1,23 @@
+<div class="panel panel-info" style="margin: 10px">
+<div class="panel-heading">How players ids are assigned to strategies</div>
+<div class="panel-body">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Player ID</th>
+                <th>Strategy</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player in players %}
+                <tr>
+                    <td>{{ player.id }}</td>
+                    <td>{{ player.strategy }}</td>
+                    <td>{{ strat_dict[player.strategy].__doc__ }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
