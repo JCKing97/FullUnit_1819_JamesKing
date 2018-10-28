@@ -1,0 +1,169 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.4 (15/5/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com) with extensive modifications by
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[twoside,twocolumn]{article}
+
+\usepackage{blindtext} % Package to generate dummy text throughout this template 
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[english]{babel} % Language hyphenation and typographical rules
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+\usepackage{titling} % Customizing the title section
+
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{ Report on indirect reciprocity, strategies for agents and the development of a concrete model to implement} % Article title
+\author{%
+\textsc{James King} \\% Your name
+\normalsize Supervisor: Kostas Stathis \\ % Your supervisor
+}
+\date{October 2018} % Leave empty to omit a date
+\renewcommand{\maketitlehookd}{%
+\begin{abstract}
+\noindent Indirect reciprocity is a mechanism that uses reciprocation theory to aid in the evolution of cooperation. It is a promising motivator for cooperation in societies with agents of higher intelligence levels, such as human societies or even multi-agent systems. I plan to implement the mechanism programmatically, but there are many formulations and many possible additions. In this report I will explore past approaches to indirect reciprocity, comparing and contrasting the variations proposed and considering their impact on multi-agent systems. The outcome of this exploration of approaches will be a concrete model to implement in this project.
+\end{abstract}
+}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+% Milestone: Report on indirect reciprocity, strategies for agents and the development of a concrete model to implement
+% Report on past work on indirect reciprocity including the strategies agents have employed playing this game.
+% From this collated work I shall define a model which I am to implement and a number of key strategies to implement as well.
+% Link to goal: This is a part of my exploration of the mechanisms that aid in the evolution of cooperation and will help provide a model to implement in system for running indirect reciprocity tournaments across the Prolog service and environment.
+
+
+
+% Print the title
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+The evolution and preservation of cooperation has been a puzzle for evolutionary theorists for a long time. Many different approaches have been taken to give an explanation to cooperative phenomena, especially from the field of game-theory. Often these approaches have come from the idea of reciprocity, where agents can grow mutually beneficial relationships by repeated interactions. The most popular mechanism of this being direct reciprocity where interactions are repeated between the same two individuals, and thus they may reciprocate directly with each other.\\
+There is another game-theoretic mechanism known as indirect reciprocity, which works on the idea that nice agents will help those who help each other. A number of models have been proposed to run indirect reciprocity. It is these models I shall be describing and reviewing, before using them to formulate a concrete model to implement in my project.
+
+
+%------------------------------------------------
+
+\section{Review of Past Work}
+\subsection{Nowak, Sigmund and Image Scoring}
+I will begin by discussing possibly the most popular model of indirect reciprocity presented by Nowak and Sigmund~\cite{evol_indirect_image}.\\
+Nowak 2005\\
+The model, its good parts and limitations/criticisms.
+
+\subsection{Standing Strategy}
+Leimar Hammerstein\\
+
+
+\subsection{Roberts' Mixed Reciprocity Model}
+Gilbert Roberts compares a number of models of indirect reciprocity~\cite{evoldirindir} and fuses both indirect and direct reciprocity together, to suggest a mixed framework. Roberts put forward this notion due to his perception that indirect reciprocity alone is not a generalisable concept due to the close knit nature of many societies. In the framework Roberts puts forwards, agents base their decisions on a reputation score and/or an experience score.\\
+The model is laid out on an island system which effectively splits the whole population into islands and then into groups on each island in which the inhabitants interact with each other. Interactions occurred by randomly selecting a donor and receiver, if the donor helps it incurs a cost of -1 and the receiver receives a benefit of 2. These interactions were repeated until on average all group members interacted with each other a certain specified amount of times.\\
+The model includes a reproductive system where individuals reproduce if they have a measure of success locally and globally - each individual has a higher chance of reproducing locally and a smaller chance of reproducing locally. Mutation can occur with a very small chance, where a strategy is replaced by another randomly. Interestingly Roberts also considers the case where an agent has no resources to cooperate and thus must defect.\\
+
+\subsection{Phelps' Mixed Reciprocity Model}
+
+\subsection{Gossip and Onlookers}
+~\cite{gossip_alt}\\
+
+Simpson altruism reciprocity\\
+Judgement Bias\\
+Competitive altruism\\
+
+%------------------------------------------------
+
+\section{A Concrete Model}
+\subsection{Comparison of Models}
+The aim of Roberts~\cite{evoldirindir} is to compare the effectiveness of indirect reciprocity models and direct reciprocity. Roberts' results support Nowak and Sigmund's 1998 result that image scoring can support cooperation is robust even when criticisms relating to genetic drift and errors are taken into consideration.\\
+However, it is highlighted that image scoring does not take into account who the donor is defecting against, whereas standing strategy does. Due to this image scoring suffers from an inability to distinguish between pure defectors and those who would cooperate with a cooperator. From this paper it appears that standing strategy is not only stable with respect to other indirect reciprocity strategies and non-cooperation but also against direct reciprocity. Standing strategy gives information both about how agents have interacted and the context of this action, an advantage over image scoring.\\
+Roberts also inadvertently provides a counter-point to the effectiveness of gossip as an alternative to direct observation, stating that cooperation is only worth it when that cooperation is improving your chance of being cooperated with. Gossip would seem to be a barrier, especially as information could be distorted by other agents.\\
+Another point is highlighted by Nowak and Sigmund~\cite{evol_indirect_image} that appears to reduce the effectiveness of a model that uses gossip, stating that the probability of knowing the 'image' of the recipient must exceed the cost-to-benefit ratio of the altruistic act. Which Robert's notes is dependent on factors such as how many interactions are public and how reliably they are observed.\\
+Roberts' model seems to more accurately portray interaction due to the possibility of basing decisions when re-meeting on experience rather than just reputation, whilst other models do not. An example of this would be where a human wishes to employ someone to do a job for them, say person A has a good reputation so they choose them. If person A does a good job their reputation may be maintained or even increased. However, if they do not even attempt to do a good job their reputation may be besmirched, but this exact person hiring them will not likely base their future decisions on person A's reputation but their experience with them. \\
+A limitation of Roberts' model is it's inability to use a long interaction history to motivate decisions, so not truly representing the more developed direct reciprocity mechanisms. This is analogous to our job story if person A had done a few good jobs for the person hiring them, and then one bad job. The hirer will likely base their future decisions on their history of decisions not the one just before. Though this may not always be the case, I feel it is important that direct reciprocity mechanisms should give the opportunity to view the whole history.\\
+
+\subsection{Specification of the Model}
+Things to consider:
+\begin{itemize}
+	\item Image scoring vs. standing strategy vs. gossip dependent vs. interaction history
+	\item The case where an individual has no resources to cooperate with
+	\item Direct observation vs gossip vs hybrid
+	\item Pure reputation vs experience and reputation hybrid
+	\item Context and action split
+\end{itemize}
+
+\subsection{Specification of Strategies to implement}
+
+
+%------------------------------------------------
+
+\section{Discussion and Conclusion}
+
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\bibliography{../refs.bib}{}
+\bibliographystyle{plain}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

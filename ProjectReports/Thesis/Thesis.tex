@@ -1,0 +1,194 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Academic Title Page
+% LaTeX Template
+% Version 2.0 (17/7/17)
+%
+% This template was downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% WikiBooks (LaTeX - Title Creation) with modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+% Instructions for using this template:
+% This title page is capable of being compiled as is. This is not useful for 
+% including it in another document. To do this, you have two options: 
+%
+% 1) Copy/paste everything between \begin{document} and \end{document} 
+% starting at \begin{titlepage} and paste this into another LaTeX file where you 
+% want your title page.
+% OR
+% 2) Remove everything outside the \begin{titlepage} and \end{titlepage}, rename
+% this file and move it to the same directory as the LaTeX file you wish to add it to. 
+% Then add \input{./<new filename>.tex} to your LaTeX file where you want your
+% title page.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,letterpaper ,twoside ,openright]{book}
+
+\usepackage{mathpazo} % Palatino font
+\usepackage{graphicx}
+
+\newcommand\abstractname{Abstract}
+\newenvironment{abstract}
+{\cleardoublepage\null \vfill\begin{center}
+\bfseries \abstractname \end{center}}
+	{\vfill\null}
+
+\usepackage{fancyhdr}
+\pagestyle{empty}
+
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage} % Suppresses displaying the page number on the title page and the subsequent page counts as page 1
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for horizontal lines, change thickness here
+	
+	\center
+	
+	%------------------------------------------------
+	%	Headings
+	%------------------------------------------------
+	
+	\textsc{\LARGE Royal Holloway, University of London}\\[1.5cm] % Main heading such as the name of your university/college
+	
+	\textsc{\Large Full Unit Project}\\[0.5cm] % Major heading such as course name
+	
+	\textsc{\large Final Project Report}\\[0.5cm] % Minor heading such as course title
+	
+	%------------------------------------------------
+	%	Title
+	%------------------------------------------------
+	
+	\HRule\\[0.4cm]
+	
+	{\huge\bfseries Cooperative Strategies in Multi-Agent Systems}\\[0.4cm] % Title of your document
+	
+	\HRule\\[1.5cm]
+	
+	%------------------------------------------------
+	%	Author(s)
+	%------------------------------------------------
+	
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushleft}
+			\large
+			\textit{Author}\\
+			James \textsc{King} % Your name
+		\end{flushleft}
+	\end{minipage}
+	~
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushright}
+			\large
+			\textit{Supervisor}\\
+			Prof. Kostas \textsc{Stathis} % Supervisor's name
+		\end{flushright}
+	\end{minipage}
+	
+	% If you don't want a supervisor, uncomment the two lines below and comment the code above
+	%{\large\textit{Author}}\\
+	%John \textsc{Smith} % Your name
+	
+	%------------------------------------------------
+	%	Date
+	%------------------------------------------------
+	
+	\vfill\vfill\vfill % Position the date 3/4 down the remaining page
+	
+	{\large\today} % Date, change the \today to a set date if you want to be precise
+	
+	%------------------------------------------------
+	%	Logo
+	%------------------------------------------------
+	
+	\vfill\vfill
+	\includegraphics[width=0.2\textwidth]{Rhulcoa.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
+	 
+	%----------------------------------------------------------------------------------------
+	
+	\vfill % Push the date up 1/4 of the remaining page
+		
+		
+\end{titlepage}
+%----------------------------------------------------------------------------------------
+
+\section*{Acknowledgements}
+\addtocounter{section}{1}
+%I would like to thank my awesome girlfriend Kira cos she is amazing and the bestest ever.\\
+%Plus she said to split up strategies into basic and advanced :P\\
+Miguel Grinberg, Vince Knight, Nikoleta Glynetski, Owen Campbell, Annie Ogborne, Martin A. Nowak, Robert Axelrod
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\begin{abstract}
+Hello this is my abstract\\
+
+https://users.ece.cmu.edu/~koopman/essays/abstract.html
+\end{abstract}
+
+\chapter{Introduction}
+How to structure:\\
+\begin{itemize}
+	\item Intoduction and review on past work on indirect reciprocity and the evolution of cooperation
+	\item Methods: 
+	\begin{itemize}
+		\item My model of reciprocity, it's variables etc.
+		\item System design (Prolog + environ)
+		\item Interesting programming techniques
+		\item Software engineering techniques, tools and processes
+	\end{itemize}
+	\item Results
+	\begin{itemize}
+		\item Analysis and evaluation of the results produced by my model
+	\end{itemize}
+	\item Discussion and Conclusion
+	\begin{itemize}
+		\item Impacts in real life and intelligent agents
+		\item Limitations of the system and how this could be improved
+		\item Issues in the development process and how these could have been avoided/accounted for
+	\end{itemize}
+	\item Professional issues
+\end{itemize}
+
+\chapter{Review of Literature}
+Evol Coop ~\cite{evolution_of_cooperation}
+Milestone: The report should describe the theory behind indirect reciprocity and it’s strategies in relation to game-theory\\
+Milestone: The report should describe the link between indirect reciprocity theory and real life biological and intelligent agent interactions\\
+
+
+\chapter{Contents and Knowledge}
+Methods
+Milestone: The report should describe the onlookers and gossip aspects of indirect reciprocity\\
+Milestone: The report should contain a design of the web application and environment, Prolog service and agents, and the connection between them\\
+Milestone: The report should provide an analysis and evaluation of strategies in indirect reciprocity tournaments\\
+Milestone: The report should contain a discussion of the software engineering techniques, tools and processes used and issues encountered\\
+Milestone: The report should contain any interesting programming techniques employed to develop the final prototype\\
+
+
+\chapter{Discussion and conclusions}
+Discussion
+
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliography{../refs.bib}{}
+\bibliographystyle{plain}
+
+\addcontentsline{toc}{chapter}{Professional Issues}
+\chapter*{Professional Issues}
+Professional Issues
+
+\end{document}

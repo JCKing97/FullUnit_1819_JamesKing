@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: IndirRec.aux
+The style file: plain.bst
+Database file #1: ../refs.bib.bib
+Illegal end of database file---line 186 of file ../refs.bib.bib
+ : 
+ : 
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+You've used 4 entries,
+            2118 wiz_defined-function locations,
+            523 strings with 5017 characters,
+and the built_in function-call counts, 1248 in all, are:
+= -- 121
+> -- 50
+< -- 0
++ -- 20
+- -- 16
+* -- 87
+:= -- 216
+add.period$ -- 12
+call.type$ -- 4
+change.case$ -- 20
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 40
+empty$ -- 105
+format.name$ -- 16
+if$ -- 259
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 3
+newline$ -- 23
+num.names$ -- 8
+pop$ -- 18
+preamble$ -- 1
+purify$ -- 16
+quote$ -- 0
+skip$ -- 29
+stack$ -- 0
+substring$ -- 95
+swap$ -- 4
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 16
+warning$ -- 0
+while$ -- 11
+width$ -- 5
+write$ -- 45
+(There was 1 error message)

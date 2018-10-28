@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: ProjectPlan2.aux
+The style file: plain.bst
+Database file #1: ../refs.bib.bib
+Name 4 in "Kostas Stathis and Kakas, {Antonis C.} and Wenjin Lu and Neophytos Demetriou, and Ulle Endriss and Andrea Bracciali" has a comma at the end for entry prosocs
+while executing---line 1049 of file plain.bst
+Name 4 in "Kostas Stathis and Kakas, {Antonis C.} and Wenjin Lu and Neophytos Demetriou, and Ulle Endriss and Andrea Bracciali" has a comma at the end for entry prosocs
+while executing---line 1090 of file plain.bst
+Warning--can't use both author and editor fields in prosocs
+Warning--empty publisher in prosocs
+You've used 10 entries,
+            2118 wiz_defined-function locations,
+            557 strings with 5924 characters,
+and the built_in function-call counts, 3314 in all, are:
+= -- 322
+> -- 147
+< -- 1
++ -- 59
+- -- 48
+* -- 230
+:= -- 557
+add.period$ -- 30
+call.type$ -- 10
+change.case$ -- 53
+chr.to.int$ -- 0
+cite$ -- 12
+duplicate$ -- 112
+empty$ -- 266
+format.name$ -- 48
+if$ -- 694
+int.to.chr$ -- 0
+int.to.str$ -- 10
+missing$ -- 9
+newline$ -- 53
+num.names$ -- 20
+pop$ -- 53
+preamble$ -- 1
+purify$ -- 44
+quote$ -- 0
+skip$ -- 85
+stack$ -- 0
+substring$ -- 239
+swap$ -- 20
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 38
+warning$ -- 2
+while$ -- 29
+width$ -- 12
+write$ -- 109
+(There were 2 error messages)
