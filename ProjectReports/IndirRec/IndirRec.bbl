@@ -1,20 +1,26 @@
 \begin{thebibliography}{1}
 
-\bibitem{axelrodproject}
-Vince Knight; Owen Campbell;~Marc; eric-s-s; VSN Reddy Janga; James Campbell;
-  Karol M. Langner; T.J. Gaffney; Sourav Singh; Nikoleta; Julie Rymer; Thomas
-  Campbell; Jason Young; MHakem; Geraint Palmer; Kristian Glass;
-  edouardArgenson; Daniel Mancia; Martin Jones; Cameron
-  Davidson-Pilon;~alajara; Ranjini Das; Marios Zoulias; Aaron Kratz; Timothy
-  Standen; Paul Slavin; Adam Pohl; Jochen Müller; Georgios Koutsovoulos;
-  Areeb~Ahmed.
-\newblock Axelrod: 4.3.0.
-\newblock \url{http://dx.doi.org/10.5281/zenodo.1405868}, September 2018.
+\bibitem{leimarhammer}
+Olof Leimar and Peter Hammerstein.
+\newblock Evolution of cooperation through indirect reciprocity.
+\newblock {\em Proceedings of The Royal Society}, 268:745--753, May 2001.
+
+\bibitem{imagevsstanding}
+Theo C. M.~Bakker Manfred~Milinski, Dirk~Semmann and Hans-J{\"u}rgen Krambeck.
+\newblock Cooperation through indirect reciprocity: image scoring or standing
+  strategy?
+\newblock {\em Proceedings of The Royal Society}, 268:2495--2501, May 2001.
 
 \bibitem{evol_indirect_image}
 Martin~A. Nowak and Karl Sigmund.
 \newblock Evolution of indirect reciprocity by image scoring.
 \newblock {\em Nature}, 393:573--577, 1998.
+
+\bibitem{phelps_game_theoretic_analysis}
+Steve Phelps.
+\newblock An empirical game-theoretic analysis of the dynamics of cooperation
+  in small groups.
+\newblock {\em Journal of Artificial Societies and Social Simulation}, 2016.
 
 \bibitem{evoldirindir}
 Gilbert Roberts.
