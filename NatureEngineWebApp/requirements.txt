@@ -47,6 +47,7 @@ wcwidth==0.1.7
 Werkzeug==0.14.1
 wrapt==1.10.11
 WTForms==2.2.1
+requests==2.20.0
 
 #For heroku
 gunicorn==19.7.1

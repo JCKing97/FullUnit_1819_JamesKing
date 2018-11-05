@@ -18,6 +18,7 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 migrate = Migrate()
 
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -33,6 +34,8 @@ def create_app(config_class=Config):
     app.register_blueprint(errors_bp)
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
+    from app.indir_rec import bp as indir_rec_bp
+    app.register_blueprint(indir_rec_bp)
 
     # Set up the settings for when server is in production
     if not app.debug and not app.testing:

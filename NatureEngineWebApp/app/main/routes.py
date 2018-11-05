@@ -97,10 +97,6 @@ def is_tournament_finished(tournament_id, job_id):
                     'url': url_for('main.tournament_run', tournament_id=tournament_id, job_id=job_id)})
 
 
-@bp.route('/reputation')
-def reputation():
-    return render_template('reputation.html', title='Reputation')
-
 
 @bp.route('/about')
 def about():
