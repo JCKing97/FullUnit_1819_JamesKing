@@ -22,8 +22,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
-      <y>750</y>
+      <x>100</x>
+      <y>690</y>
       <w>240</w>
       <h>180</h>
     </coordinates>
@@ -32,10 +32,12 @@
 -cooperated: bool
 -donor: Agent
 -recipient: Agent
+-onlookers: Agent[]
 -timepoint: int
 --
 +getEvent(): {donor:Agent,
             recipient:Agent,
+            onlookers:Agent[],
             cooperated:bool,
             timepoint:int}
 +eventOccurs(): void</panel_attributes>
@@ -44,9 +46,9 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>720</x>
+      <x>770</x>
       <y>230</y>
-      <w>330</w>
+      <w>240</w>
       <h>140</h>
     </coordinates>
     <panel_attributes>Indir_Rec::Generation
@@ -64,7 +66,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1000</x>
+      <x>980</x>
       <y>440</y>
       <w>270</w>
       <h>180</h>
@@ -86,7 +88,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1000</x>
+      <x>980</x>
       <y>360</y>
       <w>110</w>
       <h>100</h>
@@ -110,8 +112,8 @@ lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>750</y>
+      <x>400</x>
+      <y>690</y>
       <w>240</w>
       <h>230</h>
     </coordinates>
@@ -135,8 +137,8 @@ lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>180</x>
-      <y>600</y>
+      <x>280</x>
+      <y>530</y>
       <w>240</w>
       <h>110</h>
     </coordinates>
@@ -152,31 +154,31 @@ Indir_Rec::Event
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>350</x>
-      <y>700</y>
+      <x>450</x>
+      <y>630</y>
       <w>50</w>
-      <h>70</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>is a
 lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>210</x>
-      <y>700</y>
+      <x>310</x>
+      <y>630</y>
       <w>50</w>
-      <h>70</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>is a
 lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>170</x>
+      <x>270</x>
       <y>310</y>
       <w>260</w>
       <h>50</h>
@@ -190,38 +192,38 @@ lt=&lt;&lt;-</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>420</x>
+      <x>520</x>
       <y>320</y>
-      <w>320</w>
+      <w>270</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; asks for an event</panel_attributes>
-    <additional_attributes>10.0;20.0;300.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;250.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>200</x>
+      <x>300</x>
       <y>350</y>
       <w>200</w>
-      <h>270</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; creates event</panel_attributes>
-    <additional_attributes>10.0;250.0;10.0;150.0;180.0;150.0;180.0;10.0</additional_attributes>
+    <additional_attributes>10.0;180.0;10.0;110.0;180.0;110.0;180.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
+      <x>510</x>
       <y>360</y>
-      <w>370</w>
-      <h>310</h>
+      <w>280</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; uses</panel_attributes>
-    <additional_attributes>10.0;290.0;350.0;290.0;350.0;10.0</additional_attributes>
+    <additional_attributes>10.0;220.0;260.0;220.0;260.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
@@ -240,35 +242,35 @@ bg=blue</panel_attributes>
     <coordinates>
       <x>950</x>
       <y>500</y>
-      <w>70</w>
+      <w>50</w>
       <h>50</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>10.0;10.0;50.0;30.0</additional_attributes>
+    <additional_attributes>10.0;10.0;30.0;30.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>410</x>
-      <y>610</y>
-      <w>640</w>
-      <h>80</h>
+      <x>510</x>
+      <y>580</y>
+      <w>490</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-
 uses &gt;</panel_attributes>
-    <additional_attributes>10.0;60.0;620.0;60.0;620.0;10.0</additional_attributes>
+    <additional_attributes>10.0;20.0;470.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>980</x>
       <y>70</y>
-      <w>240</w>
+      <w>220</w>
       <h>390</h>
     </coordinates>
     <panel_attributes>lt=-
 creates &gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;220.0;20.0;220.0;370.0</additional_attributes>
+    <additional_attributes>10.0;20.0;200.0;20.0;200.0;370.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -309,11 +311,11 @@ creates &gt;</panel_attributes>
     <coordinates>
       <x>620</x>
       <y>190</y>
-      <w>120</w>
+      <w>170</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=-
 uses &gt;</panel_attributes>
-    <additional_attributes>100.0;50.0;10.0;50.0;10.0;10.0</additional_attributes>
+    <additional_attributes>150.0;50.0;10.0;50.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
