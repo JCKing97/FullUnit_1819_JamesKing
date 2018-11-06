@@ -9,8 +9,8 @@ Desc:		Contains the logic related to agents strategies
 
 strategy( "cooperator" , 'cooperates every time').
 strategy( "defector" , 'defects every time').
-strategy_action( "defector", _, "defect").
-strategy_action( "cooperator", _, "cooperate").
+strategy_action( "defector", _, false).
+strategy_action( "cooperator", _, true).
 
 agent_action(Dict, Action):-
 	DonorID = Dict.donorID,

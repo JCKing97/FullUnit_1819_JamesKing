@@ -47,7 +47,7 @@ get_action(Request):-
 	member(method(post), Request), !,
 	http_read_json_dict(Request, DictIn),
 	strategies:agent_action(DictIn, Action),
-	reply_json(action{action: Action}).
+	reply_json(action{cooperated: Action}).
 
 % Handles a request to create a new agent in the knowledge base
 new_agent(Request):-

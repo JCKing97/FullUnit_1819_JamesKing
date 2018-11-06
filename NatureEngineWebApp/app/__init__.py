@@ -13,7 +13,7 @@ import rq
 from config import Config
 import os
 
-#Create the relevant extension objects for Flask as global variables
+# Create the relevant extension objects for Flask as global variables
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 migrate = Migrate()

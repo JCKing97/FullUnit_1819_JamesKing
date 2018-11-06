@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>100</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>IndirRec::Community
+--
+-generations: Generation[]
+-currentTime: int
+--
++simulate(): Results
+-reproduce(): Generation</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>300</y>
+      <w>290</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>IndirRec::Generation
+--
+-players: Player[]
+-actions: Action[]
+-startTime: int
+-endTime: int
+--
++simulate(): Action[]
+-generateMeetingPairsAndObservers(): 
+                   Dict[str, Player[]]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>350</x>
+      <y>280</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Runs the cycle steps
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>310</y>
+      <w>60</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;40.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>940</x>
+      <y>400</y>
+      <w>310</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+Indir_Rec::Player
+--
+-id: int
+-fitness: int
+--
++getId(): int
++updateFitness(update_value: int): void
++getFitness(): int
+/+decide(timepoint: int): Action/
+/+perceive(new_percepts: Percept[]): void/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>570</y>
+      <w>240</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Indir_Rec::Action
+--
+-timepoint: int
+--
++getEvent(): Dict
++execute(): Percept[]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>370</x>
+      <y>730</y>
+      <w>240</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::Gossip
+--
+-positive: bool
+-about: Agent
+-gossiper: Agent
+-recipient: Agent
+-interaction: Interaction
+-timepoint: int
+--
++getEvent(): Dict
++execute(): Percept[]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>730</y>
+      <w>240</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::Interaction
+--
+-cooperated: bool
+-donor: Agent
+-recipient: Agent
+-onlookers: Agent[]
+-timepoint: int
+--
++getEvent(): Dict
++execute(): Percept[]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>550</y>
+      <w>270</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::Percept
+--
+-perceiver: Player
+-event: Event
+--
++getPercept(): Dict</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>250</x>
+      <y>670</y>
+      <w>110</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>implements
+lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>370</x>
+      <y>670</y>
+      <w>110</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>implements
+lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>190</y>
+      <w>120</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+generation of</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>970</x>
+      <y>180</y>
+      <w>110</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=-
+creates &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0;90.0;80.0;90.0;220.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>410</y>
+      <w>160</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+member of</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>830</x>
+      <y>560</y>
+      <w>200</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>10.0;70.0;180.0;70.0;180.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>590</x>
+      <y>440</y>
+      <w>120</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;70.0;100.0;70.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>610</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+generates &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;100.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>410</y>
+      <w>210</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; executes</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;110.0;130.0;110.0;130.0;10.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1060</x>
+      <y>640</y>
+      <w>310</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::PrologPlayer
+--
+-strategy: str
+--
++decide(timepoint: int): Action
++perceive(new_percepts: Percept[]): void
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>560</y>
+      <w>110</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>implements
+lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>150</y>
+      <w>150</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+ask for player &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>710</x>
+      <y>190</y>
+      <w>300</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>lt=-
+assign to generation &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;200.0;40.0;280.0;130.0;280.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>850</x>
+      <y>130</y>
+      <w>200</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::PlayerFactory
+--
++new_player(strategy: str):
+                         Player</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>560</y>
+      <w>580</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; generates</panel_attributes>
+    <additional_attributes>10.0;110.0;560.0;110.0;560.0;10.0</additional_attributes>
+  </element>
+</diagram>

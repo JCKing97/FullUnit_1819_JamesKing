@@ -25,7 +25,7 @@
       <x>100</x>
       <y>690</y>
       <w>240</w>
-      <h>180</h>
+      <h>220</h>
     </coordinates>
     <panel_attributes>Indir_Rec::Interaction
 --
@@ -78,7 +78,7 @@
 -fitness: int
 --
 +getAction(Agent): bool
-+updateFitness(Interaction): void
++updateFitness(int): void
 +observe(Interaction): void
 +getGossip(Interaction): Gossip[]
 +spreadGossip(Gossip): void
@@ -127,7 +127,7 @@ lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
 -timepoint: int
 --
 +getEvent(): {about:Agent,
-            donor:Agent,
+            gossiper:Agent,
             recipient:Agent,
             positive:bool,
             timepoint:int}

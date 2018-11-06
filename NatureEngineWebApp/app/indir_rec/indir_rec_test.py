@@ -5,7 +5,7 @@ __author__ = "James King adapted from Miguel Grinberg"
 import unittest
 from tests.test_config import TestConfig
 from app import create_app
-from app.indir_rec.run_population import PlayerFactory, PlayerCreationException
+from app.indir_rec.player_logic import PlayerFactory, PlayerCreationException
 
 
 class PlayerTest(unittest.TestCase):
