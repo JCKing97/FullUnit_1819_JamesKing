@@ -1,69 +1,85 @@
-"""community_logic.py: Contains the objects and logic for the generations of a community"""
+"""community_logic.py: Contains the objects and logic for communities"""
 
-from typing import Dict, List
-from app.indir_rec.player_logic import Player, PlayerFactory
-from app.indir_rec.action_logic import Action
-from app.indir_rec.percept_logic import Percept, PerceptDonor, PerceptRecipient
-import random
-import copy
+from typing import Dict
+import requests
+from flask import current_app
+from .generation_logic import Generation, GenerationCreationException
+from .player_logic import PlayerCreationException
+
+
+class CommunityCreationException(Exception):
+    """An exception to raise when there is an error when creating a community"""
+
+    def __init__(self, message):
+        super(CommunityCreationException, self).__init__(message)
 
 
 class Community:
     """A community that goes through a number of generations"""
 
-    def __init__(self, onlooker_number: int, generation_length: int):
+    def __init__(self, initial_strategies: Dict[str, int], onlooker_number: int = 5, generation_length: int = 10,
+                 generation_number: int = 5):
         self._generations = []
         self._current_time = 0
         self._onlooker_number = onlooker_number
         self._generation_length = generation_length
-
-
-class Generation:
-    """A generation of players inside a community"""
-
-    def __init__(self, strategies: Dict[str, int], start_time: int, end_time: int, community: Community):
-        self._players = {}
-        for strategy, strategy_count in strategies.items():
-            for i in range(strategy_count):
-                new_player = PlayerFactory.new_player(strategy)
-                self._players[new_player.get_id()] = new_player
-        self._start_time = start_time
-        self._end_time = end_time
-        self._community = community
-        self._actions = []
-        self._new_percepts = []
-
-    def id_to_player(self, id: int) -> Player:
-        return self._players[id]
-
-    def _generate_meeting_percept_and_onlookers(self):
-        ids = copy.deepcopy(self._players.keys())
-        donor_id = random.choice(ids)
-        del ids[donor_id]
-        recipient_id = random.choice(ids)
-        onlooker_number = self._community.get_onlooker_number()
-        onlookers = []
-        for i in range(onlooker_number):
-            if len(ids) > 0:
-                onlooker_id = random.choice(ids)
-                onlookers.append(self._players[onlooker_id])
-            else:
-                break
-        return [PerceptDonor(self._players[donor_id]), PerceptRecipient(self._players[recipient_id])], onlookers
+        self._generation_number = generation_number
+        response = requests.get(current_app.config['AGENTS_URL'] + "new_community")
+        if response.status_code != 200:
+            raise CommunityCreationException("Failed when attempting to create community, cannot simulate reciprocity")
+        self._id = response.json()['id']
+        self._initial_strategies = initial_strategies
 
     def simulate(self):
-        for current_time_point in range(self._start_time, self._end_time):
-            # Perceive
-            for perception in self._new_percepts:
-                perception.get_perceiver().perceive(perception)
-            self._new_percepts = []
-            # Decide
-            actions = []
-            for player in self._players.values()
-                actions.append(player.decide(current_time_point))
-            self._actions.extend(actions)
-            # Execute
-            for action in actions:
-                self._new_percepts.extend(action.execute())
+        """
+        Simulate the community
+        """
+        for i in range(self._generation_number):
+            self._generations.append(self._build_generation(i))
+            self._generations[i].simulate()
+
+    def _build_generation(self, generation_id: int) -> Generation:
+        """
+        Build a new generation
+        :param generation_id: The id of the generation to create
+        :type generation_id: int
+        :return: The new generation
+        :rtype: Generation
+        """
+        try:
+            if generation_id == 0:
+                return Generation(self._initial_strategies, 0, self._generation_length, self._id, 0, self._onlooker_number)
+            else:
+                return self._reproduce(generation_id)
+        except PlayerCreationException as e:
+            raise e
+        except GenerationCreationException as e:
+            raise e
+
+    def _reproduce(self, generation_id: int) -> Generation:
+        """
+        Based on reproduction rules using fitness create a new generation based on the last
+        :return: The new generation
+        :rtype: Generation
+        """
+        # REPLACE THIS IT IS A STUB
+        current_time = len(self._generations)*self._generation_length
+        return Generation(self._initial_strategies, current_time,
+                          current_time+self._generation_length, self._id, generation_id, self._onlooker_number)
+
+    def get_onlooker_number(self) -> int:
+        """
+        Get the amount of onlookers for each interaction in this community
+        :return: The number of onlookers for each interaction
+        """
+        return self._onlooker_number
+
+    def get_id(self) -> int:
+        """
+        Get the id of this community
+        :return: The id of this commnunity
+        """
+        return self._id
+
 
 

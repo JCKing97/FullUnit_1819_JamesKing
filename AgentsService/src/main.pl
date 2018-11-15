@@ -15,6 +15,7 @@ Desc:		Contains the central code and handlers for the Agents web service
 
 % My modules 
 :- use_module(strategies).
+:- use_module(communities).
 
 % Set correct handling of JSON
 :- use_module(library(http/http_json)).
@@ -30,6 +31,9 @@ http_json:json_type('text/x-json').
 :- http_handler(root(get_strategies), get_strategies, []).
 :- http_handler(root(get_action), get_action, []).
 :- http_handler(root(new_agent), new_agent, []).
+:- http_handler(root(new_community), new_community, []).
+:- http_handler(root(new_generation), new_generation, []).
+
 
 % Starts the server on the port number passed in Port
 % Creates a number of threads and returns to the top level
@@ -46,12 +50,25 @@ get_strategies(Request):-
 get_action(Request):-
 	member(method(post), Request), !,
 	http_read_json_dict(Request, DictIn),
-	strategies:agent_action(DictIn, Action),
-	reply_json(action{cooperated: Action}).
+	strategies:agent_action(DictIn, Action, Status),
+	( Status == "Good" -> reply_json(return{action: Action, status: Status}) ; reply_json(return{status: Status}) ).
 
+% Handles a request to create a new agent in the knowledge base
+new_community(Request):-
+	member(method(get), Request), !,
+	communities:new_community(ID),
+	reply_json(return{id: ID}).
+	
 % Handles a request to create a new agent in the knowledge base
 new_agent(Request):-
 	member(method(post), Request), !,
 	http_read_json_dict(Request, DictIn),
-	strategies:new_agent(DictIn, ID, Status),
-	( Status == "Good" -> reply_json(return{id: ID, status: Status}) ; reply_json(return{status: Status}) ).
+	strategies:new_agent(DictIn, Status),
+	reply_json(return{status: Status}).
+
+% Handles a request to create a new generation in the logic base
+new_generation(Request):-
+	member(method(post), Request), !,
+	http_read_json_dict(Request, DictIn),
+	communities:new_generation(DictIn, Status),
+	reply_json(return{status: Status}).

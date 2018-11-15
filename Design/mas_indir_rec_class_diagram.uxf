@@ -3,10 +3,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>100</y>
-      <w>210</w>
-      <h>100</h>
+      <x>610</x>
+      <y>10</y>
+      <w>270</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>IndirRec::Community
 --
@@ -14,16 +14,20 @@
 -currentTime: int
 --
 +simulate(): Results
--reproduce(): Generation</panel_attributes>
+-build_generation(generation_id: int):
+            Generation
+-reproduce(): Generation
++get_onlooker_number(): int
++get_id():int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>520</x>
-      <y>300</y>
+      <x>610</x>
+      <y>240</y>
       <w>290</w>
-      <h>150</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>IndirRec::Generation
 --
@@ -32,16 +36,19 @@
 -startTime: int
 -endTime: int
 --
-+simulate(): Action[]
++simulate(): void
 -generateMeetingPairsAndObservers(): 
-                   Dict[str, Player[]]</panel_attributes>
+                   Dict[str, Player[]]
++id_to_player(id: int): Player
++get_players(): List[Player]
++get_id(): int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>350</x>
-      <y>280</y>
+      <x>440</x>
+      <y>230</y>
       <w>140</w>
       <h>70</h>
     </coordinates>
@@ -52,8 +59,8 @@ bg=blue</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>310</y>
+      <x>570</x>
+      <y>260</y>
       <w>60</w>
       <h>110</h>
     </coordinates>
@@ -63,10 +70,10 @@ bg=blue</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>940</x>
-      <y>400</y>
+      <x>1030</x>
+      <y>350</y>
       <w>310</w>
-      <h>170</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Indir_Rec::Player
@@ -78,31 +85,31 @@ Indir_Rec::Player
 +updateFitness(update_value: int): void
 +getFitness(): int
 /+decide(timepoint: int): Action/
-/+perceive(new_percepts: Percept[]): void/</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>240</x>
-      <y>570</y>
+      <x>330</x>
+      <y>520</y>
       <w>240</w>
       <h>110</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
 Indir_Rec::Action
 --
 -timepoint: int
 --
-+getEvent(): Dict
-+execute(): Percept[]</panel_attributes>
+/+getEvent(): Dict/
+/+execute(): Percept[]/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>370</x>
-      <y>730</y>
+      <x>100</x>
+      <y>690</y>
       <w>240</w>
       <h>170</h>
     </coordinates>
@@ -122,8 +129,8 @@ Indir_Rec::Action
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
-      <y>730</y>
+      <x>120</x>
+      <y>330</y>
       <w>240</w>
       <h>150</h>
     </coordinates>
@@ -142,72 +149,73 @@ Indir_Rec::Action
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>570</x>
-      <y>550</y>
+      <x>660</x>
+      <y>470</y>
       <w>270</w>
-      <h>90</h>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>Indir_Rec::Percept
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+Indir_Rec::Percept
 --
 -perceiver: Player
 -event: Event
 --
-+getPercept(): Dict</panel_attributes>
+/+execute(): void/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>250</x>
-      <y>670</y>
+      <x>340</x>
+      <y>470</y>
       <w>110</w>
-      <h>80</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>implements
 lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>370</x>
-      <y>670</y>
+      <x>330</x>
+      <y>620</y>
       <w>110</w>
-      <h>80</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>implements
 lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>190</y>
+      <x>720</x>
+      <y>170</y>
       <w>120</w>
-      <h>130</h>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 generation of</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>970</x>
-      <y>180</y>
-      <w>110</w>
-      <h>240</h>
+      <x>1100</x>
+      <y>290</y>
+      <w>100</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=-
-creates &gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0;90.0;80.0;90.0;220.0</additional_attributes>
+&lt; creates </panel_attributes>
+    <additional_attributes>80.0;10.0;80.0;30.0;10.0;30.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>800</x>
-      <y>410</y>
+      <x>890</x>
+      <y>360</y>
       <w>160</w>
       <h>40</h>
     </coordinates>
@@ -218,32 +226,20 @@ member of</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>830</x>
-      <y>560</y>
-      <w>200</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>lt=-
-&lt; uses</panel_attributes>
-    <additional_attributes>10.0;70.0;180.0;70.0;180.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>590</x>
-      <y>440</y>
+      <x>680</x>
+      <y>430</y>
       <w>120</w>
-      <h>130</h>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; uses</panel_attributes>
-    <additional_attributes>10.0;110.0;10.0;70.0;100.0;70.0;100.0;10.0</additional_attributes>
+    <additional_attributes>10.0;40.0;10.0;30.0;100.0;30.0;100.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>610</y>
+      <x>560</x>
+      <y>530</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -254,29 +250,29 @@ generates &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>330</x>
-      <y>410</y>
-      <w>210</w>
+      <x>450</x>
+      <y>360</y>
+      <w>180</w>
       <h>180</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; executes</panel_attributes>
-    <additional_attributes>10.0;160.0;10.0;110.0;130.0;110.0;130.0;10.0;190.0;10.0</additional_attributes>
+    <additional_attributes>10.0;160.0;10.0;110.0;100.0;110.0;100.0;10.0;160.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1060</x>
-      <y>640</y>
-      <w>310</w>
-      <h>90</h>
+      <x>1160</x>
+      <y>580</y>
+      <w>270</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>Indir_Rec::PrologPlayer
 --
 -strategy: str
 --
 +decide(timepoint: int): Action
-+perceive(new_percepts: Percept[]): void
+
 
 </panel_attributes>
     <additional_attributes/>
@@ -284,7 +280,134 @@ generates &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1080</x>
+      <x>1150</x>
+      <y>490</y>
+      <w>110</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>implements
+lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>270</y>
+      <w>180</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+ask for player &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1050</x>
+      <y>200</y>
+      <w>280</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::PlayerFactory
+--
++new_player(strategy: str,
+          communityID: int,
+          generation: Generation,
+          playerID: int): Player</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>490</y>
+      <w>710</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=-
+uses &gt;</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;290.0;690.0;290.0;690.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1230</x>
+      <y>690</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Effectively an adapter model for the agents service
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1250</x>
+      <y>640</y>
+      <w>50</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>30.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>630</y>
+      <w>190</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::PerceptAction
+--
+-perceiver: Player
+-event: Event
+-action: Action
+--
++getPercept(): Dict
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>700</x>
+      <y>640</y>
+      <w>190</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::PerceptDonor
+--
+-perceiver: Player
+-event: Event
+--
++getPercept(): Dict
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>640</y>
+      <w>200</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::PerceptRecipient
+--
+-perceiver: Player
+-event: Event
+--
++getPercept(): Dict
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>660</x>
       <y>560</y>
       <w>110</w>
       <h>100</h>
@@ -296,51 +419,25 @@ lt=&lt;&lt;-</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>720</x>
-      <y>150</y>
-      <w>150</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=-
-ask for player &gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;130.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>710</x>
-      <y>190</y>
-      <w>300</w>
-      <h>230</h>
-    </coordinates>
-    <panel_attributes>lt=-
-assign to generation &gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;40.0;200.0;40.0;280.0;130.0;280.0;210.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>850</x>
-      <y>130</y>
-      <w>200</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>Indir_Rec::PlayerFactory
---
-+new_player(strategy: str):
-                         Player</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>470</x>
+      <x>750</x>
       <y>560</y>
-      <w>580</w>
-      <h>130</h>
+      <w>110</w>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>lt=-
-&lt; generates</panel_attributes>
-    <additional_attributes>10.0;110.0;560.0;110.0;560.0;10.0</additional_attributes>
+    <panel_attributes>implements
+lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>890</x>
+      <y>560</y>
+      <w>110</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>implements
+lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
   </element>
 </diagram>

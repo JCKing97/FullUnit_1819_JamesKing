@@ -5,79 +5,38 @@ __author__ = "James King adapted from Miguel Grinberg"
 import unittest
 from tests.test_config import TestConfig
 from app import create_app
-from app.indir_rec.player_logic import PlayerFactory, PlayerCreationException
+from .community_logic import Community, CommunityCreationException
+from .generation_logic import Generation, GenerationCreationException
 
 
-class PlayerTest(unittest.TestCase):
+class CreationTest(unittest.TestCase):
 
     def setUp(self):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
-        self.factory = PlayerFactory()
 
     def tearDown(self):
         self.app_context.pop()
 
-    def test_create_defector(self):
+    def test_create_community(self):
+        strategies = {"cooperator": 2, "defector": 2}
         try:
-            self.factory.new_player("defector")
-        except PlayerCreationException:
-            self.fail("Should not have raised an exception, player information was correct")
+            Community(initial_strategies=strategies)
+        except CommunityCreationException:
+            self.fail("Shouldn't fail to create the community")
 
-    def test_create_2_defector_2_coop(self):
-        players = []
+    def test_create_generation_and_players(self):
+        strategies = {"cooperator": 2, "defector": 2}
         try:
-            for i in range(4):
-                if i < 2:
-                    players.append(self.factory.new_player("defector"))
-                else:
-                    players.append(self.factory.new_player("cooperator"))
-        except PlayerCreationException:
-            self.fail("Should not have raised exception, player information was correct")
-
-    def test_create_incorrect(self):
-        with self.assertRaises(PlayerCreationException):
-            self.factory.new_player("no strategy")
-
-    def test_create_correct_then_incorrect(self):
+            community = Community(initial_strategies=strategies)
+        except CommunityCreationException:
+            self.fail("Shouldn't fail to create the community")
         try:
-            self.factory.new_player("defector")
-        except PlayerCreationException:
-            self.fail("Should not have raised an exception, player information was correct")
-        with self.assertRaises(PlayerCreationException):
-            self.factory.new_player("no strategy")
-
-    def test_create_incorrect_then_correct(self):
-        with self.assertRaises(PlayerCreationException):
-            self.factory.new_player("no strategy")
-        try:
-            self.factory.new_player("defector")
-        except PlayerCreationException:
-            self.fail("Should not have raised an exception, player information was correct")
-
-    def test_defector_get_action(self):
-        player = self.factory.new_player("defector")
-        other_player = self.factory.new_player("defector")
-        self.assertTrue(player.get_action(other_player) == "defect")
-
-    def test_cooperator_get_action(self):
-        player = self.factory.new_player("cooperator")
-        other_player = self.factory.new_player("defector")
-        self.assertTrue(player.get_action(other_player) == "cooperate")
-
-    def test_fitness(self):
-        player = self.factory.new_player("cooperator")
-        self.assertTrue(player.get_fitness() == 0)
-        player.update_fitness(2)
-        self.assertTrue(player.get_fitness() == 2)
-        player.update_fitness(2)
-        self.assertTrue(player.get_fitness() == 4)
-        player.update_fitness(-1)
-        self.assertTrue(player.get_fitness() == 3)
-        player.update_fitness(0)
-        self.assertTrue(player.get_fitness() == 3)
-
+            Generation(strategies, communityID=community.get_id(),
+                       start_time=0, end_time=10, id=0, onlooker_number=5)
+        except GenerationCreationException:
+            self.fail("Shouldn't fail to create the generation")
 
 
 
