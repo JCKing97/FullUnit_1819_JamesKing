@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  16 NOV 2018 12:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  16 NOV 2018 12:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -525,11 +525,11 @@ Package rerunfilecheck Info: File `IndirRec.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 180.
  ) 
 Here is how much of TeX's memory you used:
- 9452 strings out of 494880
- 146706 string characters out of 6179600
+ 9448 strings out of 494880
+ 146675 string characters out of 6179600
  279234 words of memory out of 5000000
  12386 multiletter control sequences out of 15000+600000
- 51891 words of font info for 246 fonts, out of 8000000 for 9000
+ 51668 words of font info for 243 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  36i,10n,43p,842b,456s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -538,7 +538,7 @@ f-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pa
 latino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri
 8a.pfb>
-Output written on IndirRec.pdf (6 pages, 90905 bytes).
+Output written on IndirRec.pdf (6 pages, 90932 bytes).
 PDF statistics:
  122 PDF objects out of 1000 (max. 8388607)
  107 compressed objects within 2 object streams
