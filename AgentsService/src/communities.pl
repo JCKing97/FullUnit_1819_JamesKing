@@ -5,11 +5,12 @@ Created:	4th Nov 2018
 Desc:		Contains the logic related to creating communities
 --------------------------------------*/
 
-:- module(communities, [new_community//1, new_generation//3, community//1, generation//2]).
+:- module(communities, [new_community/1, new_generation/2, community/1, generation/2]).
+:- dynamic community/1, generation/2.
 
 new_community(ID):-
 	get_new_id(ID),
-	assert(community(ID)).
+	assert(communities:community(ID)).
 
 get_new_id(NewID):-
 	current_predicate(id/1),
@@ -25,18 +26,18 @@ new_generation(DictIn, Status):-
 	current_predicate(generation/2),
 	current_predicate(community/1),
 	CommunityID = DictIn.community,
-	community(CommunityID),
+	Community = communities:community(CommunityID),
 	GenerationID = DictIn.generation,
 	(generation(CommunityID, GenerationID) -> fail ;
-	assert(generation(CommunityID, GenerationID)),
-	Status = "Good").
+	assert(communities:generation(Community, GenerationID)),
+	Status = "Good"), !.
 new_generation(DictIn, Status):-
-    	\+current_predicate(generation/2),
+    \+current_predicate(generation/2),
 	current_predicate(community/1),
 	CommunityID = DictIn.community,
-	community(CommunityID),
+	Community = communities:community(CommunityID),
 	GenerationID = DictIn.generation,
-	assert(generation(CommunityID, GenerationID)),
-	Status = "Good".
+	assert(communities:generation(Community, GenerationID)),
+	Status = "Good", !.
 new_generation(_, Status):-
 	Status = "Bad".

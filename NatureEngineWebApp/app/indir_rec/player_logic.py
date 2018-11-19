@@ -95,7 +95,7 @@ class PlayerFactory:
         :raises PlayerCreationError: Raised if there is an error in creation of the player"""
         initialise_data = {"strategy": strategy, "community": communityID,
                            "generation": generationID, "player": playerID}
-        response = requests.post(current_app.config['AGENTS_URL'] + "new_agent", json=initialise_data)
+        response = requests.post(current_app.config['AGENTS_URL'] + "create/new_agent", json=initialise_data)
         if response.status_code != 200:
             raise PlayerCreationException('Failed to create player, agent service error')
         if response.json()['status'] != "Good":

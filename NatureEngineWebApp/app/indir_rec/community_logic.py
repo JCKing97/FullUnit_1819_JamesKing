@@ -24,7 +24,7 @@ class Community:
         self._onlooker_number = onlooker_number
         self._generation_length = generation_length
         self._generation_number = generation_number
-        response = requests.get(current_app.config['AGENTS_URL'] + "new_community")
+        response = requests.get(current_app.config['AGENTS_URL'] + "create/new_community")
         if response.status_code != 200:
             raise CommunityCreationException("Failed when attempting to create community, cannot simulate reciprocity")
         self._id = response.json()['id']

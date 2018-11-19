@@ -3,46 +3,44 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: EvolCoopReport.aux
 The style file: plain.bst
 Database file #1: ../refs.bib.bib
-Warning--empty journal in phelps_game_theoretic_analysis
 You've used 16 entries,
             2118 wiz_defined-function locations,
-            594 strings with 5788 characters,
-and the built_in function-call counts, 4702 in all, are:
-= -- 466
+            595 strings with 5841 characters,
+and the built_in function-call counts, 4703 in all, are:
+= -- 467
 > -- 171
 < -- 0
 + -- 73
 - -- 52
 * -- 317
-:= -- 812
+:= -- 813
 add.period$ -- 48
 call.type$ -- 16
 change.case$ -- 73
 chr.to.int$ -- 0
-cite$ -- 17
+cite$ -- 16
 duplicate$ -- 175
 empty$ -- 396
 format.name$ -- 52
-if$ -- 979
+if$ -- 980
 int.to.chr$ -- 0
 int.to.str$ -- 16
 missing$ -- 17
 newline$ -- 83
 num.names$ -- 32
-pop$ -- 52
+pop$ -- 50
 preamble$ -- 1
 purify$ -- 58
 quote$ -- 0
 skip$ -- 119
 stack$ -- 0
 substring$ -- 361
-swap$ -- 15
+swap$ -- 16
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 62
-warning$ -- 1
+warning$ -- 0
 while$ -- 45
 width$ -- 18
-write$ -- 175
-(There was 1 warning)
+write$ -- 176

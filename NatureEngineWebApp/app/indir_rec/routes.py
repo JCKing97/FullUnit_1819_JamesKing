@@ -7,7 +7,7 @@ import requests
 
 @bp.route('/reputation', methods=['GET', 'POST'])
 def reputation():
-    response = requests.get(current_app.config['AGENTS_URL'] + "get_strategies")
+    response = requests.get(current_app.config['AGENTS_URL'] + "get/strategies")
     strategies = response.json()['strategies']
     if request.method == 'GET':
         return render_template('reputation.html', title='Reputation', strategies=strategies)
