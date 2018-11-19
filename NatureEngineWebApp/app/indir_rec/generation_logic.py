@@ -38,7 +38,7 @@ class Generation:
                  communityID: int, id: int, onlooker_number: int):
         self._players = {}
         self._id = id
-        response = requests.post(current_app.config['AGENTS_URL'] + "new_generation",
+        response = requests.post(current_app.config['AGENTS_URL'] + "create/new_generation",
                                  json={"community": communityID, "generation": self._id})
         if response.status_code != 200:
             raise GenerationCreationException("Error when creating generation, not 200 status code")
@@ -97,7 +97,7 @@ class Generation:
             self._new_percepts.extend(donor_recipient_perceptions)
             for perception in self._new_percepts:
                 try:
-                    perception.perceive()
+                    perception.perceive(self._communityID, self.get_id())
                 except PerceptionException as e:
                     raise e
             self._new_percepts = []

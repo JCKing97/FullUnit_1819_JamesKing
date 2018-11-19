@@ -26,11 +26,12 @@ class Percept(ABC):
         """Get this percept represented in a dictionary format"""
         raise NotImplementedError
 
-    def perceive(self):
+    def perceive(self, communityID: int, generationID: int):
         """
         Add the percepts to the prolog player
         """
-        perception_data = {"perceiverId": self._perceiver.get_id(),
+        perception_data = {"community": communityID, "generation": generationID,
+                           "perceiverId": self._perceiver.get_id(),
                            "timepoint": self._timepoint, "percept": self.get_percept()}
         response = requests.post(current_app.config['AGENTS_URL'] + "perceive", json=perception_data)
         if response.status_code != 200:

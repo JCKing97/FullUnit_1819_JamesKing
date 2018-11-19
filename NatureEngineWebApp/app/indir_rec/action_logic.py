@@ -70,7 +70,7 @@ class Interaction(Action):
         :return: A dictionary representation of the event
         :rtype: Dict
         """
-        event_dict = {"donor": self._donor, "recipient": self._recipient,
+        event_dict = {"type": self.get_type(), "donor": self._donor, "recipient": self._recipient,
                       "onlookers": self._onlookers, "timepoint": self._timepoint}
         if self._occurred:
             event_dict['cooperated'] = self._cooperated
@@ -126,7 +126,7 @@ class Gossip(Action):
         :return: The dictionary representation of the gossip
         :rtype: Dict
         """
-        return {"about": self._about, "gossiper": self._gossiper, "recipient": self._recipient,
+        return {"type": self.get_type(), "about": self._about, "gossiper": self._gossiper,
                 "positive": self._positive, "timepoint": self._timepoint}
 
     def get_type(self) -> str:
