@@ -99,35 +99,38 @@
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-In the seminal paper on the evolution of cooperation~\cite{evolution_of_cooperation} Axelrod and Hamilton highlighted the failure of past ideas on Darwinian evolutionary theory to account for cooperative phenomena. Their paper identifies two theories proposed to solve the problem: kinship theory and reciprocation theory, focusing on the latter - particularly the Iterated Prisoner's Dilemma.\\ 
-In relation to kinship theory Richard Dawkins~\cite{selfish_gene} put forward the view that cooperation has evolved due to genes that have the aim of replicating in future generations. This appears to Axelrod and Hamilton to limit cooperation to those who have related genes. However, in an earlier paper~\cite{kinhamilton} Hamilton appears to be a proponent of kin selection, arguing that agents act to improve inclusive fitness - even formulating the biological model in a mathematical way. Inclusive fitness also takes into account the fitness of other related players.\\
-There are a number of game-theoretic models proposed to solve the problem posed. The Iterated Prisoner's Dilemma is a popular example, and the one described in Axelrod and Hamilton's paper. Martin A. Nowak explores this dilemma and multiple other models~\cite{five_rules_coop} and also the mathematics behind cooperation~\cite{arithmetics_of_mutual_help}. It is both these mathematical models and models from kinship theory that in this report I will describe including their motivation, reasoning and any conclusions that can be drawn from them. I will also attempt to relate them to multi-agent systems or even point out how they are inapplicable to this domain if appropriate.\\
+In the seminal paper on the evolution of cooperation~\cite{evolution_of_cooperation} Axelrod and Hamilton highlighted the failure of past ideas on Darwinian evolutionary theory to account for altruistic behaviour. Their paper identifies two theories proposed to solve the problem: kinship theory and reciprocation theory, focusing on the latter - particularly the Iterated Prisoner's Dilemma.\\ 
+Altruistic acts are actions where an individual puts others above themselves, meaning that they act in a way that benefits others and is detrimental in some way to themselves. The proposed theories attempt to explain how altruistic behaviours have evolved in our world.\\
+Here I will explore these mechanisms that attempt to explain altruistic behaviour and attempt to relate them to multi-agent systems or even point out how they are inapplicable to this domain if appropriate.\\
 
 %------------------------------------------------
 
 \section{Content and Knowledge}
 \subsection{Kinship Theory}
-As I have described above kinship theory approached the evolution of cooperation problem by claiming that agents are given incentive to cooperate with other agents that are sufficiently related to them. \\
-
-~\cite{ethnicselection}\\
-~\cite{evolution_of_cooperation}\\
-~\cite{kinhamilton}\\
-
-
-
+Kinship theory is an umbrella term for a number of theories that attempt tp solve the problem of the evolution of cooperation. The tie between these theories is that the individuals who choose to cooperate with each other are in some way `kin'. The definition of what `kin' is varies depending on the theory and the purpose for that theory.\\
+Richard Dawkins popularized the idea of the `selfish gene'~\cite{selfish_gene}. This `selfish gene' idea argues that as genes are the actual replicators, actors are hardwired to have a will to propagate the gene. This propagation does not only involve reproduction but also acts of cooperation to support and maintain others who share the gene. This is evident in many areas of nature especially in the family groups of different species, shown even recently in the BBC series Dynasties.\\
+W.D. Hamilton supports a similar view~\cite{kinhamilton}: that agents with shared genes will work together to preserve those genes. He argues that to do this individuals don't work to add to their own fitness, but work to improve their `inclusive fitness', which includes the fitness of other related individuals. His model converts the extent of the relatedness of an individual to a quantitative value using Wright's Coefficient of Relationship, which is shown in figure~\ref{fig:coefrelate} on page~\pageref{fig:coefrelate}. The model then uses this coefficient of relatedness to calculate inclusive fitness.\\
+\begin{figure}
+	\includegraphics[width=0.5\textwidth]{coefrelate.png}
+	\caption{By Citynoise - Own work, CC BY-SA 4.0, \url{https://commons.wikimedia.org/w/index.php?curid=37723128}}
+	\label{fig:coefrelate}
+\end{figure}
+Axelrod and Hamilton~\cite{evolution_of_cooperation} highlight that although the theory works well to explain cooperation between related individual it falls short in explaining the evolution of cooperation between unrelated individuals. This also makes it difficult to apply kinship theory as an aid to the evolution of cooperation in multi-agent systems. Kinship theory requires a reproductive drive and metrics for relatedness in order to motivate altruistic acts, both of which would likely be missing in a decentralised multi-agent system.
 
 \subsection{The Iterated Prisoner's Dilemma}
-The Iterated Prisoner's Dilemma is one such example of a game-theoretic model that uses direct reciprocity to attempt to solve the problem that the evolution of cooperation puts forward. This Dilemma is in fact a game played between two individuals. The game is made up of rounds in which the two players can choose between cooperating with or defecting against each other. A payoff matrix is provided such as the one in figure~\ref{fig:payoffmatrix} on page~\pageref{fig:payoffmatrix}. In a single round game it is mathematically best to defect, however as you can see cooperation between two individuals actually pays more than defection.
+The Iterated Prisoner's Dilemma is one such example of a game-theoretic model that uses direct reciprocity to attempt to solve the problem that the evolution of cooperation puts forward. Direct reciprocity is the idea: ``If I cooperate now, you may cooperate later''~\cite{five_rules_coop}. The Dilemma is in fact a game played between two individuals. The game is made up of a number of repeated rounds, in each round the two players can choose between cooperating with or defecting against each other.\\
+A payoff matrix is provided such as the one in figure~\ref{fig:payoffmatrix} on page~\pageref{fig:payoffmatrix}. These matrices provide a temptation to defect, but a reward if both players cooperate over multiple rounds. In a single round game it is mathematically best to defect, but in repeated rounds agents are encouraged to cooperate by a mutual gain in payoff. These payoffs attempt to simulate resource gains from interactions in real life.\\
+The dilemma has been extended into tournaments such as the one in Axelrod and Hamilton~\cite{evolution_of_cooperation}. You can even run tournaments directly in Python using the Axelrod-Python library~\cite{axelrodproject}. Tournaments can come in a variety of styles but the most popular is the round-robin tournament where every player plays a match of the iterated prisoner's dilemma against every other player. Players accumulate points throughout these games, based on the payoff matrix.\\
+This has been even further extended to include a genetic algorithm to simulate evolution by reproducing players into a next generation. Multiple different algorithms have been used, one common one is the Moran Process (A stochastic process used to model evolution in a finite, unstructured population) available in the Axelrod-Python library. 
 \begin{figure}
-	\includegraphics[scale=1]{payoffmatrix.png}
+	\includegraphics[width=0.5\textwidth]{payoffmatrix.png}
 	\caption{The payoff matrix given in Axelrod and Hamilton's paper~\cite{evolution_of_cooperation}}
 	\label{fig:payoffmatrix}
 \end{figure}
 \subsection{Strategies}
 
-\subsection{Other Game-Theoretic Models}
+\subsection{Other Reciprocation Theories}
 
-\subsection{Strategies}
 
 
 ~\cite{arithmetics_of_mutual_help}\\
@@ -145,6 +148,7 @@ The Iterated Prisoner's Dilemma is one such example of a game-theoretic model th
 %------------------------------------------------
 
 \section{Discussion and Conclusion}
+Talk about why I am choosing indirect reciprocity.\\
 Talk about impact in real life and multi-agent systems.\\
 ~\cite{sticklebacks}\\
 ~\cite{prisonersdilemma}\\

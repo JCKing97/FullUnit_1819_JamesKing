@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  25 OCT 2018 18:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  19 NOV 2018 16:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -541,16 +541,6 @@ LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
 (Font)              Font shape `T1/pplx/b/n' tried instead on input line 96.
 
 Underfull \hbox (badness 10000) in paragraph at lines 102--105
-\T1/pplx/m/n/10 (+20) In re-la-tion to kin-ship the-ory Richard
- []
-
-
-Underfull \hbox (badness 1077) in paragraph at lines 102--105
-\T1/pplx/m/n/10 (+20) It-er-ated Pris-oner's Dilemma is a pop-u-lar
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 102--105
 
  []
 
@@ -558,57 +548,101 @@ Underfull \hbox (badness 10000) in paragraph at lines 102--105
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+LaTeX Warning: Reference `fig:coefrelate' on page 1 undefined on input line 112
+.
+
+
+LaTeX Warning: Reference `fig:coefrelate' on page 1 undefined on input line 112
+.
+
+
+LaTeX Warning: File `coefrelate.png' not found on input line 114.
+
+
+! Package pdftex.def Error: File `coefrelate.png' not found: using draft settin
+g.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.114 ...hics[width=0.5\textwidth]{coefrelate.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 114.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+Overfull \hbox (10.0pt too wide) in paragraph at lines 114--115
+[][] 
+ []
+
+LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <9> not available
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 115.
+
+Underfull \hbox (badness 1910) in paragraph at lines 115--115
+[][]|\T1/pplx/m/it/9 (+20) By Citynoise - Own work, CC BY-SA
+ []
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-Underfull \hbox (badness 2495) in paragraph at lines 110--111
-\T1/pplx/m/n/10 (+20) ap-proached the evo-lu-tion of co-op-er-a-tion
- []
+
+LaTeX Warning: Citation `axelrodproject' on page 2 undefined on input line 123.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 110--111
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 112--115
-
- []
-
-<payoffmatrix.png, id=60, 200.24812pt x 120.45pt>
+<payoffmatrix.png, id=56, 200.24812pt x 120.45pt>
 File: payoffmatrix.png Graphic file (type png)
 <use payoffmatrix.png>
-Package pdftex.def Info: payoffmatrix.png  used on input line 122.
-(pdftex.def)             Requested size: 200.24763pt x 120.44969pt.
-LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <9> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 123.
+Package pdftex.def Info: payoffmatrix.png  used on input line 126.
+(pdftex.def)             Requested size: 215.0023pt x 129.33234pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 133--144
+Overfull \hbox (10.0pt too wide) in paragraph at lines 126--127
+[][] 
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 136--147
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 148--151
+Underfull \hbox (badness 2326) in paragraph at lines 151--155
+\T1/pplx/m/n/10 (+20) Talk about why I am choos-ing in-di-rect
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 151--155
 
  []
 
-(./EvolCoopReport.bbl [2 <./payoffmatrix.png (PNG copy)>]
+(./EvolCoopReport.bbl
+Underfull \vbox (badness 1308) has occurred while \output is active []
+
+
 Underfull \hbox (badness 2846) in paragraph at lines 71--75
 []\T1/pplx/m/n/10 (+20) Alexander J. Stew-art and Joshua B.
  []
 
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 162.
- [3
+[3 <./payoffmatrix.png (PNG copy)>])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 166.
+ [4
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 162.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 166.
  (./EvolCoopReport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 162.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 162.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 166.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 166.
 
 
 Package rerunfilecheck Warning: File `EvolCoopReport.out' has changed.
@@ -616,28 +650,39 @@ Package rerunfilecheck Warning: File `EvolCoopReport.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `EvolCoopReport.out':
-(rerunfilecheck)             Before: 1728E6106474A412B8B9DF5069C2A410;501
-(rerunfilecheck)             After:  355EE6EB463F40A13DB6844DC73AEC64;500.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 162.
+(rerunfilecheck)             Before: 355EE6EB463F40A13DB6844DC73AEC64;500
+(rerunfilecheck)             After:  012436B32779CC6FC31AD6C46307CDFF;442.
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 166.
  ) 
 Here is how much of TeX's memory you used:
- 10175 strings out of 494880
- 157518 string characters out of 6179600
- 279273 words of memory out of 5000000
- 13138 multiletter control sequences out of 15000+600000
- 49948 words of font info for 197 fonts, out of 8000000 for 9000
+ 10244 strings out of 494880
+ 158701 string characters out of 6179600
+ 281273 words of memory out of 5000000
+ 13170 multiletter control sequences out of 15000+600000
+ 54147 words of font info for 225 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 39i,13n,43p,1330b,464s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+ 40i,13n,43p,1330b,530s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{subsection.2.5} has been referenced but does not 
+exist, replaced by a fixed one
+
+ </home/james/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit0900.600pk
+> </home/james/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600p
+k>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/fpl/fplrc8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pa
 latino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri
 8a.pfb>
-Output written on EvolCoopReport.pdf (3 pages, 95467 bytes).
+Output written on EvolCoopReport.pdf (4 pages, 112194 bytes).
 PDF statistics:
- 124 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
- 29 named destinations out of 1000 (max. 500000)
- 45638 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 179 PDF objects out of 1000 (max. 8388607)
+ 123 compressed objects within 2 object streams
+ 31 named destinations out of 1000 (max. 500000)
+ 47686 words of extra memory for PDF output out of 51595 (max. 10000000)
 
