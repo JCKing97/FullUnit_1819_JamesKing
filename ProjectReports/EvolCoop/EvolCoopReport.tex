@@ -99,8 +99,9 @@
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-In the seminal paper on the evolution of cooperation~\cite{evolution_of_cooperation} Axelrod and Hamilton highlighted the failure of past ideas on Darwinian evolutionary theory to account for altruistic behaviour. Their paper identifies two theories proposed to solve the problem: kinship theory and reciprocation theory, focusing on the latter - particularly the Iterated Prisoner's Dilemma.\\ 
-Altruistic acts are actions where an individual puts others above themselves, meaning that they act in a way that benefits others and is detrimental in some way to themselves. The proposed theories attempt to explain how altruistic behaviours have evolved in our world.\\
+Early Darwinians often focused on the struggle for survival as a means to explain the phenomena of evolution. This focus falls short on explaining the phenomena of altruistic behaviour, this failure was highlighted very early by Kropotkin~\cite{arithmetics_of_mutual_help}. The phenomena presented a problem for evolutionary biologists, how could it be explained?\\
+Altruistic acts are actions where an individual puts others above themselves, meaning that they act in a way that benefits others and is at a cost in some way to themselves. These acts and behaviours have been well documented and pervade both the natural world and human society.\\
+In the seminal paper on the evolution of cooperation~\cite{evolution_of_cooperation} Axelrod and Hamilton identify two theories proposed to solve the problem: kinship theory and reciprocation theory, focusing on the latter - particularly the Iterated Prisoner's Dilemma.\\ 
 Here I will explore these mechanisms that attempt to explain altruistic behaviour and attempt to relate them to multi-agent systems or even point out how they are inapplicable to this domain if appropriate.\\
 
 %------------------------------------------------
@@ -119,7 +120,7 @@ Axelrod and Hamilton~\cite{evolution_of_cooperation} highlight that although the
 
 \subsection{The Iterated Prisoner's Dilemma}
 The Iterated Prisoner's Dilemma is one such example of a game-theoretic model that uses direct reciprocity to attempt to solve the problem that the evolution of cooperation puts forward. Direct reciprocity is the idea: ``If I cooperate now, you may cooperate later''~\cite{five_rules_coop}. The Dilemma is in fact a game played between two individuals. The game is made up of a number of repeated rounds, in each round the two players can choose between cooperating with or defecting against each other.\\
-A payoff matrix is provided such as the one in figure~\ref{fig:payoffmatrix} on page~\pageref{fig:payoffmatrix}. These matrices provide a temptation to defect, but a reward if both players cooperate over multiple rounds. In a single round game it is mathematically best to defect, but in repeated rounds agents are encouraged to cooperate by a mutual gain in payoff. These payoffs attempt to simulate resource gains from interactions in real life.\\
+A payoff matrix is provided such as the one in figure~\ref{fig:payoffmatrix} on page~\pageref{fig:payoffmatrix}. These matrices provide a temptation to defect, but a reward if both players cooperate over multiple rounds. In a single round game it is mathematically best to defect, but in repeated rounds agents are encouraged to cooperate by a mutual gain in payoff. The mathematics are explained by Martin A. Nowak \textit{et al.} in their paper ``The Arithmetics of Mutual Help''~\cite{arithmetics_of_mutual_help}.\\
 The dilemma has been extended into tournaments such as the one in Axelrod and Hamilton~\cite{evolution_of_cooperation}. You can even run tournaments directly in Python using the Axelrod-Python library~\cite{axelrodproject}. Tournaments can come in a variety of styles but the most popular is the round-robin tournament where every player plays a match of the iterated prisoner's dilemma against every other player. Players accumulate points throughout these games, based on the payoff matrix.\\
 This has been even further extended to include a genetic algorithm to simulate evolution by reproducing players into a next generation. Multiple different algorithms have been used, one common one is the Moran Process (A stochastic process used to model evolution in a finite, unstructured population) available in the Axelrod-Python library. 
 \begin{figure}
@@ -127,10 +128,15 @@ This has been even further extended to include a genetic algorithm to simulate e
 	\caption{The payoff matrix given in Axelrod and Hamilton's paper~\cite{evolution_of_cooperation}}
 	\label{fig:payoffmatrix}
 \end{figure}
+
 \subsection{Strategies}
+Players in the iterated prisoner's dilemma have to be able to decide whether to defect or cooperate in any given round against any given opponent. The player has access to the history of interaction between the two individuals and can base their decision on that - though the simplest of strategies don't use this such as pure defector, pure cooperator and random choice.\\
+Some more interesting strategies include the world famous tit-for-tat, grudger and pavlov (win-stay, lose-shift~\cite{nowak-1993a}). The classical form of tit-for-tat begins by cooperating in the first round and then copying the other player's last move, this strategy is so effective as it gives the other player a chance to cooperate (so working well with cooperators) but still punishes a defecting player and doesn't let them score well against the tit-for-tat player. There are many versions of tit-for-tat, a good example being forgiving tit-for-tat which only defects if the other player defects for two turns in a row.\\
+Grudger works by beginning to cooperate but if the other player defects the individual switches and defects for the rest of the time, this is not so effective as tit-for-tat as it never forgives another player.\\
+Pavlov works by continuing to act the way it just has if the action was successful, if it is not successful the strategy switches the action it has taken. Nowak and Sigmund claims that it outperforms tit-for-tat as tit-for-tat is unsuccessful non-deterministic environments (such as one that has a random chance that an action will not be what a player chooses). The real world is non-deterministic and so tit-for-tat doesn't transfer into it so well. Pavlov considers a success in a round to be: you both cooperate or you defect and the other player cooperated, and considers a failure to be: you both defect or you cooperate and the other player defects.
 
 \subsection{Other Reciprocation Theories}
-
+Using reciprocity to aid in the evolution of cooperation has not been limited to the iterated prisoner's dilemma. Martin A. Nowak presents 3 other mechanisms that use reciprocation~\cite{five_rules_coop}: indirect reciprocity, network reciprocity (also known as spatial tournaments) and group selection.
 
 
 ~\cite{arithmetics_of_mutual_help}\\
