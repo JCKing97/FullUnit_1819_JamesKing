@@ -1,4 +1,4 @@
-/* ---------------------------------------------------
+ /* ---------------------------------------------------
 Author:  Kostas Stathis
 Title:   config.pl 
 Created: Jan 2010
@@ -36,7 +36,7 @@ domains_dir('../domains/').
 % indexed by +From to +To, where +From <= +To.
 
 % Experiments with one file
-experimental_data(
+/*experimental_data(
                     promotion,
                     exp0,
                     data,
@@ -67,7 +67,17 @@ experimental_data(
                     simulation_,
                     0,
                     364
+).*/
+
+experimental_data(
+                    percepts,
+                    exp0,
+                    data,
+                    0,
+                    0
 ).
+
+
 
 
 % debug_level(+Level).

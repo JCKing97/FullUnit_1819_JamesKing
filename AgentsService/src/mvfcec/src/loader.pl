@@ -17,3 +17,5 @@ run(3):-
     run_experiment(diabetes, test2, [dd_rules_ec2]).
 run(3):-
     run_experiment(diabetes, exp1, [dd_rules_ec2]).
+run(4):-
+	run_experiment(percepts, exp0, [percept_rules]).

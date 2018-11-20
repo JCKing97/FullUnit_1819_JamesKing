@@ -1,4 +1,0 @@
-What are multi-valued fluents exactly?
-When I discover an event how do I assert it? happens_at? update_at?
-How do I use initiates_at and terminates_at in order to initiate and terminate fluents?
-Any other things I should be doing with the MVFCEC to develop correctly?
