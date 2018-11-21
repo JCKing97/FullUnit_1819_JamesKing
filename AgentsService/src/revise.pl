@@ -1,8 +1,9 @@
-/*
-Author: James King
-Date: 20 Nov 2018
-Contains the rules for adding percepts to an agent
-*/
+/*--------------------------------------
+Author:		James King
+Title:		percepts.pl
+Created:	20th Nov 2018
+Desc:		Contains the logic related to revising agents beliefs using the events calculus
+--------------------------------------*/
 
 :- use_module(library(lists)).
 

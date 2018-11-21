@@ -4,85 +4,86 @@ Title:		percepts.pl
 Created:	4th Nov 2018
 Desc:		Contains the logic related to adding percepts to an agents memory
 --------------------------------------*/
-:- use_module(strategies).
-:- use_module(communities).
+?- ['./strategies'].
+?- ['./communities'].
 :- use_module(library(http/http_log)).
-:- multifile happens_at/2, initiates_at/4, terminates_at/4.
 
-add_percept(DictIn, Status):-
+% Add an action percepts to a recipient
+add_new_percept(DictIn, Status):-
 	Percept = DictIn.percept,
 	Type = Percept.type,
 	Type == "action",
 	Action_type = Percept.content.type,
 	Action_type == "interaction",
 	CommunityID = DictIn.community,
-	Community = communities:community(CommunityID),
+	community(CommunityID),
 	GenerationID = DictIn.generation,
-	Generation = communities:generation(Community, GenerationID),
+	generation(community(CommunityID), GenerationID),
 	PerceiverId = DictIn.perceiverId,
-	Perceiver = strategies:agent(_, Community, Generation, PerceiverId),
-	Timepoint = DictIn.timepoint,
-	CooperatedOrNot = Percept.content.cooperated,
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverId),
+	Action = Percept.content.action,
 	DonorID = Percept.content.donor,
-	Donor = strategies:agent(_, Community, Generation, DonorID),
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), DonorID),
 	RecipientID = Percept.content.recipient,
-	Recipient = strategies:agent(_, Community, Generation, RecipientID),
-	l_cautious_assert(happens_at(observed(Perceiver, did(Donor, Recipient, CooperatedOrNot)), Timepoint)),
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID),
+	Timepoint = DictIn.timepoint,
+	assert(observed_at(did(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), DonorID), 
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverId), 
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID),
+		Action), Timepoint)),
 	Status = "Good", !.
-add_percept(DictIn, Status):-
+% Add a gossip percepts to a recipient
+add_new_percept(DictIn, Status):-
 	Percept = DictIn.percept,
 	Type = Percept.type,
 	Type == "action",
 	Action_type = Percept.content.type,
 	Action_type == "gossip",
 	CommunityID = DictIn.community,
-	Community = communities:community(CommunityID),
+	community(CommunityID),
 	GenerationID = DictIn.generation,
-	Generation = communities:generation(Community, GenerationID),
+	generation(community(CommunityID), GenerationID),
 	PerceiverId = DictIn.perceiverId,
-	Perceiver = strategies:agent(_, Community, Generation, PerceiverId),
-	PositiveOrNot = Percept.content.positive,
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverId),
+	Gossip = Percept.content.gossip,
 	AboutID = Percept.content.about,
-	About = strategies:agent(_, Community, Generation, AboutID),
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
 	GossiperID = Percept.content.gossiper,
-	Gossiper = strategies:agent(_, Community, Generation, GossiperID),
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), GossiperID),
 	Timepoint = DictIn.timepoint,
-	l_cautious_assert(happens_at(observed(Perceiver, said(Gossiper, About, PositiveOrNot)), Timepoint)),
+	assert(observed_at(said(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), GossiperID),
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverId),
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
+		Gossip), Timepoint)),
 	Status = "Good", !.
-add_percept(DictIn, Status):-
+% Add a donor percept
+add_new_percept(DictIn, Status):-
 	Percept = DictIn.percept,
 	Type = Percept.type,
 	Type == "donor",
 	CommunityID = DictIn.community,
-	Community = communities:community(CommunityID),
+	community(CommunityID),
 	GenerationID = DictIn.generation,
-	Generation = communities:generation(Community, GenerationID),
+	generation(community(CommunityID), GenerationID),
 	PerceiverId = DictIn.perceiverId,
-	Perceiver = strategies:agent(_, Community, Generation, PerceiverId),
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverId),
 	Timepoint = DictIn.timepoint,
-	l_cautious_assert(happens_at(observed(Perceiver, donor(Perceiver)), Timepoint)),
+	assert(observed_at(donor(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverId)), Timepoint)),
 	Status = "Good", !.
-add_percept(DictIn, Status):-
+% Add a recipient percept
+add_new_percept(DictIn, Status):-
 	Percept = DictIn.percept,
 	Type = Percept.type,
 	Type == "recipient",
 	CommunityID = DictIn.community,
-	Community = communities:community(CommunityID),
+	community(CommunityID),
 	GenerationID = DictIn.generation,
-	Generation = communities:generation(Community, GenerationID),
+	generation(community(CommunityID), GenerationID),
 	PerceiverId = DictIn.perceiverId,
-	Perceiver = strategies:agent(_, Community, Generation, PerceiverId),
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverId),
 	Timepoint = DictIn.timepoint,
-	l_cautious_assert(happens_at(observed(Perceiver, recipient(Perceiver)), Timepoint)),
+	assert(observed_at(recipient(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverId)), Timepoint)),
 	Status = "Good", !.
-add_percept(_, Status):-
+% Nice fail as there is no such percept
+add_new_percept(_, Status):-
 	Status = "Bad".
-
-initiates_at(observed(Perceiver, said(Gossiper, About, Positive)), [], bad_standing(Perceiver, About), T):-
-	happens_at(observed(Perceiver, said(Gossiper, About, Positive)), T),
-	Positive == false,
-	\+holds_at(bad_standing(Perceiver, Gossiper), T).
-terminates_at(observed(Perceiver, said(Gossiper, About, Positive)), [], bad_standing(Perceiver, About), T):-
-	happens_at(observed(Perceiver, said(Gossiper, About, Positive)), T),
-	Positive == true,
-	\+holds_at(bad_standing(Perceiver, Gossiper), T).

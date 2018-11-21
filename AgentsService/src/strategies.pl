@@ -5,55 +5,11 @@ Created:	4th Nov 2018
 Desc:		Contains the logic related to agents strategies
 --------------------------------------*/
 
-:- module(strategies, [agent_action/3, new_agent/2, find_strategies/1, agents/4]).
-:- dynamic agents/4.
+strategy( "Cooperator" , "Cooperates every time", []).
+strategy( "Defector" , "Defects every time", []).
+strategy( "Standing Discriminator", "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts other agents gossip", ["trusting"]).
+strategy( "Standing Discriminator", "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn't trust other agents gossip", ["distrusting"]).
 
-:- use_module(communities).
-
-strategy( "cooperator" , 'cooperates every time').
-strategy( "defector" , 'defects every time').
-strategy_action( "defector", _, false).
-strategy_action( "cooperator", _, true).
-
-agent_action(DictIn, Action, Status):-
-	DonorID = DictIn.donor,
-	RecipientID = DictIn.recipient,
-	CommunityID = DictIn.community,
-	communities:community(CommunityID),
-	GenerationID = DictIn.generation,
-	communities:generation(CommunityID, GenerationID),
-	agent(DonorStrategy, CommunityID, GenerationID, DonorID),
-	agent(_, CommunityID, GenerationID, RecipientID),
-	strategy_action(DonorStrategy, RecipientID, Action),
-	Status = "Good", !.
-agent_action(_, _, Status):-
-    Status = "Bad".
 
 find_strategies(Strategies):-
-	findall(strategy{name: Name, description: Desc}, strategy(Name, Desc), Strategies).
-
-new_agent(DictIn, Status):-
-	current_predicate(agent/4),
-	current_predicate(communities:community/1),
-	current_predicate(communities:generation/2),
-	Strategy = DictIn.strategy,
-	CommunityID = DictIn.community,
-	Community = communities:community(CommunityID),
-	GenerationID = DictIn.generation,
-	Generation = communities:generation(Community, GenerationID),
-	AgentID = DictIn.player,
-	( agent(_, Community, Generation, AgentID) -> fail ;
-	assert(agent(strategy(Strategy, _), Community, Generation, AgentID)),
-	Status = "Good"), !.
-new_agent(DictIn, Status):-
-	\+current_predicate(agent/4),
-	current_predicate(communities:community/1),
-	current_predicate(communities:generation/2),
-	Strategy = DictIn.strategy,
-	CommunityID = DictIn.community,
-	GenerationID = DictIn.generation,
-	AgentID = DictIn.player,
-	assert(agent(strategy(Strategy, _), communities:community(CommunityID), communities:generation(communities:community(CommunityID), GenerationID), AgentID)),
-	Status = "Good", !.
-new_agent(_, Status):-
-	Status = "Bad".
+	findall(strategy{name: Name, description: Desc, options: Options}, strategy(Name, Desc, Options), Strategies).
