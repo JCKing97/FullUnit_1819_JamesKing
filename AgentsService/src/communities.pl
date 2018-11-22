@@ -7,10 +7,12 @@ Desc:		Contains the logic related to creating communities
 
 :- dynamic community/1, generation/2.
 
+% Create a new community and return the ID
 new_community(ID):-
 	get_new_id(ID),
 	assert(community(ID)).
 
+% Get a new community id
 get_new_id(NewID):-
 	current_predicate(id/1),
 	id(ID), !,
@@ -20,7 +22,8 @@ get_new_id(NewID):-
 get_new_id(ID):-
 	assert(id(0)),
 	ID is 0.
-	
+
+% Create a new generation, if one with the same community and generation ID doesn't already exist
 new_generation(DictIn, Status):-
 	current_predicate(generation/2),
 	current_predicate(community/1),
@@ -30,6 +33,7 @@ new_generation(DictIn, Status):-
 	(generation(community(CommunityID), GenerationID) -> fail ;
 	assert(generation(community(CommunityID), GenerationID)),
 	Status = "Good"), !.
+% Create the first generation in the system
 new_generation(DictIn, Status):-
     \+current_predicate(generation/2),
 	current_predicate(community/1),
@@ -38,5 +42,6 @@ new_generation(DictIn, Status):-
 	GenerationID = DictIn.generation,
 	assert(generation(community(CommunityID), GenerationID)),
 	Status = "Good", !.
+% Fail to create the generation, maybe a bad input?
 new_generation(_, Status):-
 	Status = "Bad".

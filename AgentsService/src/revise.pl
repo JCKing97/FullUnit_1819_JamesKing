@@ -14,15 +14,15 @@ get_strategy(Strategy, Options, agent(strategy(Strategy, _, Options), _, _, _)).
 ----------- General -----------
 -----------------------------*/
 
-initiates_at(donor(agent(strategy(_, _, _), Community, Generation, Player)), [], last_donor_timepoint(agent(strategy(_, _, _), Community, Generation, Player))=T, T):-
-	happens_at(donor(agent(strategy(_, _, _), Community, Generation, Player)), T).
-
-initiates_at(recipient(agent(strategy(_, _, _), Community, Generation, Player)), [], last_recipient_timepoint(agent(strategy(_, _, _), Community, Generation, Player))=T, T):-
-	happens_at(recipient(agent(strategy(_, _, _), Community, Generation, Player)), T).
+% Change when the last interaction occurred between two agents
+initiates_at(interaction(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient)), [],
+  last_interaction_timepoint(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient))=T, T):-
+	happens_at(interaction(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient)), T).
 
 % Is nothing ok?
 causes_at(said(_, _,_,_), nothing, _).
 causes_at(did(_, _,_,_), nothing, _).
+causes_at(interaction(_, _), nothing, _).
 
 /*-----------------------------
 ------ Standing Strategy ------

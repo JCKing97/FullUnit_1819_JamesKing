@@ -5,11 +5,13 @@ Created:	4th Nov 2018
 Desc:		Contains the central code and handlers for the Agents web service
 -------------------------------------------*/
 
-% Compile the mvfcec as well
+% Compile and set up mvfcec
 ?- ['./mvfcec/src/lib/utilities'].
 ?- ['./mvfcec/src/compiler/basic_V1.0'].
 ?- ['./mvfcec/src/lib/activity_recognition_lifecycles'].
 dialect(swi).
+:- dynamic observed_at/2.
+input_format(observed_at(E, T), E, T).
 
 % The libraries required for a server
 :- use_module(library(http/thread_httpd)).
@@ -25,6 +27,7 @@ dialect(swi).
 ?- ['./percepts'].
 ?- ['./agents'].
 ?- ['./check_beliefs'].
+?- ['./revise'].
 
 
 % Set correct handling of JSON
@@ -68,8 +71,8 @@ get_strategies(Request):-
 get_action(Request):-
 	member(method(post), Request), !,
 	http_read_json_dict(Request, DictIn),
-	agent_action(DictIn, Action, Status),
-	( Status == "Good" -> reply_json(return{action: Action, status: Status}) ; reply_json(return{status: Status}) ).
+	agent_action(DictIn, Action),
+	reply_json(return{action: Action}).
 
 % Handles a request to create a new agent in the knowledge base
 create_new_community(Request):-
