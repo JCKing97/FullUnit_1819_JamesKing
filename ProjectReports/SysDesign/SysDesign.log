@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  25 OCT 2018 11:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  22 NOV 2018 14:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -491,7 +491,7 @@ LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.108 ... sql injection, remove library(http/http_
+l.109 ... sql injection, remove library(http/http_
                                                   errors.pl) in production t...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -499,36 +499,36 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.109 
+l.110 
       
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-Overfull \hbox (30.554pt too wide) in paragraph at lines 108--109
+Overfull \hbox (30.554pt too wide) in paragraph at lines 109--110
 \T1/pplx/m/n/10 (-20) library(http/http$[]\OML/zplm/m/it/10 rrors\OT1/pplx/m/n/
 10 (-20) .\OML/zplm/m/it/10 pl\OT1/zplm/m/n/10 )\OML/zplm/m/it/10 inproductiont
 omakeitharder$ 
  []
 
 No file SysDesign.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 140.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 141.
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 140.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 141.
  (./SysDesign.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 140.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 140.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 141.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 141.
 Package rerunfilecheck Info: File `SysDesign.out' has not changed.
 (rerunfilecheck)             Checksum: 29716C146ECE62B564016EE9BAE542F6;532.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 140.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 141.
  ) 
 Here is how much of TeX's memory you used:
  9249 strings out of 494880
  144809 string characters out of 6179600
- 267425 words of memory out of 5000000
+ 268385 words of memory out of 5000000
  12376 multiletter control sequences out of 15000+600000
  42861 words of font info for 114 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
@@ -539,7 +539,7 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
 ype1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pal
 atino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8
 a.pfb>
-Output written on SysDesign.pdf (1 page, 61020 bytes).
+Output written on SysDesign.pdf (1 page, 61335 bytes).
 PDF statistics:
  73 PDF objects out of 1000 (max. 8388607)
  64 compressed objects within 1 object stream
