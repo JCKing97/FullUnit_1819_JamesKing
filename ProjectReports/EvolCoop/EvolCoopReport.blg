@@ -3,44 +3,44 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: EvolCoopReport.aux
 The style file: plain.bst
 Database file #1: ../refs.bib.bib
-You've used 16 entries,
+You've used 14 entries,
             2118 wiz_defined-function locations,
-            595 strings with 5841 characters,
-and the built_in function-call counts, 4703 in all, are:
-= -- 467
-> -- 171
+            584 strings with 6140 characters,
+and the built_in function-call counts, 4229 in all, are:
+= -- 419
+> -- 167
 < -- 0
-+ -- 73
++ -- 71
 - -- 52
-* -- 317
-:= -- 813
-add.period$ -- 48
-call.type$ -- 16
-change.case$ -- 73
+* -- 286
+:= -- 729
+add.period$ -- 43
+call.type$ -- 14
+change.case$ -- 67
 chr.to.int$ -- 0
-cite$ -- 16
-duplicate$ -- 175
-empty$ -- 396
+cite$ -- 14
+duplicate$ -- 150
+empty$ -- 350
 format.name$ -- 52
-if$ -- 980
+if$ -- 879
 int.to.chr$ -- 0
-int.to.str$ -- 16
-missing$ -- 17
-newline$ -- 83
-num.names$ -- 32
-pop$ -- 50
+int.to.str$ -- 14
+missing$ -- 14
+newline$ -- 74
+num.names$ -- 28
+pop$ -- 51
 preamble$ -- 1
-purify$ -- 58
+purify$ -- 54
 quote$ -- 0
-skip$ -- 119
+skip$ -- 104
 stack$ -- 0
-substring$ -- 361
-swap$ -- 16
+substring$ -- 316
+swap$ -- 14
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 62
+type$ -- 54
 warning$ -- 0
-while$ -- 45
-width$ -- 18
-write$ -- 176
+while$ -- 40
+width$ -- 16
+write$ -- 156
