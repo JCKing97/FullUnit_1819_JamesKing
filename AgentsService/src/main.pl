@@ -53,14 +53,14 @@ http:location(percept_action, percept(action), []).
 
 
 % The handlers for different routes
-:- http_handler(strategies(.), strategies, []).
-:- http_handler(community(.), community, []).
-:- http_handler(generation(.), generation, []).
-:- http_handler(agent(.), agent, []).
+:- http_handler(root(strategies), strategies, []).
+:- http_handler(root(community), community, []).
+:- http_handler(root(generation), generation, []).
+:- http_handler(root(agent), agent, []).
 :- http_handler(percept_action(interaction), percept_action_interaction, []).
 :- http_handler(percept_action(gossip), percept_action_gossip, []).
 :- http_handler(percept(interaction), percept_interaction, []).
-:- http_handler(action(.), action, []).
+:- http_handler(root(action), action, []).
 
 
 % Starts the server on the port number passed in Port
@@ -98,11 +98,11 @@ agent(Request):-
 generation(Request):-
 	http_log('Generation', []),
 	member(method(put), Request), !,
-	http_log('Generation2', []),
+	http_log('DictIn', []),
 	http_read_json_dict(Request, DictIn),
-	http_log('Generation3', [])
+	http_log('Generation3', []),
 	new_generation(DictIn, Success),
-	http_log('Success: ~w~n',[Success])
+	http_log('Success: ~w~n',[Success]),
 	reply_json(return{data: DictIn, success: Success, status: 200}).
 
 % Handles a request to add a new percept to an agent
