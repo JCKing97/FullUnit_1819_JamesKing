@@ -92,25 +92,48 @@ agent(Request):-
 	member(method(put), Request), !,
 	http_read_json_dict(Request, DictIn),
 	new_agent(DictIn, Success),
-	reply_json(return{data: DictIn, success: Success, status: 200}).
+	(Success == true ->
+		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
+		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
 
 % Handles a request to create a new generation in the logic base
 generation(Request):-
-	http_log('Generation', []),
 	member(method(put), Request), !,
-	http_log('DictIn', []),
 	http_read_json_dict(Request, DictIn),
-	http_log('Generation3', []),
 	new_generation(DictIn, Success),
-	http_log('Success: ~w~n',[Success]),
-	reply_json(return{data: DictIn, success: Success, status: 200}).
+	http_log('Success: ~w~n', [Success]),
+	( Success == true -> 
+		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
+		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
 
-% Handles a request to add a new percept to an agent
-add_percept(Request):-
+% Handles a request to add a new interaction percept to an agent
+percept_interaction(Request):-
 	member(method(post), Request), !,
 	http_read_json_dict(Request, DictIn),
-	add_new_percept(DictIn, Status),
-	reply_json(return{status: Status}).
+	add_new_interaction_percept(DictIn, Success),
+	(Success == true ->
+		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
+		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
+
+% Hanldes a request to add a new action interaction percept to an agent
+percept_action_interaction(Request):-
+	member(method(post), Request), !,
+	http_read_json_dict(Request, DictIn),
+	add_new_action_interaction_percept(DictIn, Success),
+	(Success == true ->
+		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
+		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
+
+
+% Hanldes a request to add a new action interaction percept to an agent
+percept_action_gossip(Request):-
+	member(method(post), Request), !,
+	http_read_json_dict(Request, DictIn),
+	add_new_action_gossip_percept(DictIn, Success),
+	(Success == true ->
+		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
+		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
+
 
 % Handles a request to check the value of a beliefs
 check_belief(Request):-

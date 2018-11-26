@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/agents_service_testing/percepts_beliefs_actions_testing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AgentsService/api_docs/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/api_docs/main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AgentsService/api_docs/main.raml" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/api_docs/main.raml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AgentsService/src/agents.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/src/agents.pl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AgentsService/src/communities.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/src/communities.pl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../AgentsService/src/main.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/src/main.pl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AgentsService/src/percepts.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/src/percepts.pl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/agents_service_testing/creation_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/agents_service_testing/creation_tests.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,9 +24,12 @@
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_StrategyTest.coverage" NAME="pytest for creation_tests.StrategyTest Coverage Results" MODIFIED="1543226750792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_StrategyTest_test_get_strategies.coverage" NAME="pytest for creation_tests.StrategyTest.test_get_strategies Coverage Results" MODIFIED="1543226692137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase Coverage Results" MODIFIED="1536233221336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_GenerationTest.coverage" NAME="pytest for creation_tests.GenerationTest Coverage Results" MODIFIED="1543229458982" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_percepts_beliefs_actions_testing_PerceptTests.coverage" NAME="pytest for percepts_beliefs_actions_testing.PerceptTests Coverage Results" MODIFIED="1543240236273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_GenerationTest.coverage" NAME="pytest for creation_tests.GenerationTest Coverage Results" MODIFIED="1543236521391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$NatureEngineWebApp.coverage" NAME="NatureEngineWebApp Coverage Results" MODIFIED="1541370498747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_CommunityTestUnordered.coverage" NAME="pytest for creation_tests.CommunityTestUnordered Coverage Results" MODIFIED="1543227636062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_GenerationTest_test_generation_creation1.coverage" NAME="pytest for creation_tests.GenerationTest.test_generation_creation1 Coverage Results" MODIFIED="1543236008822" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_AgentsTest.coverage" NAME="pytest for creation_tests.AgentsTest Coverage Results" MODIFIED="1543236744004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_GenerationIncorrectCommunityTest_test_generation_creation_incorrect_community.coverage" NAME="pytest for creation_tests.GenerationIncorrectCommunityTest.test_generation_creation_incorrect_community Coverage Results" MODIFIED="1543227231237" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$PopulateDB.coverage" NAME="PopulateDB Coverage Results" MODIFIED="1536080686131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase_test_get_tournaments_points_normal.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase.test_get_tournaments_points_normal Coverage Results" MODIFIED="1536229571594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -28,7 +38,7 @@
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_UserModelCase.coverage" NAME="pytest for model_tests.UserModelCase Coverage Results" MODIFIED="1535545105823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_GameModelCase_test_get_interaction_history.coverage" NAME="pytest for model_tests.GameModelCase.test_get_interaction_history Coverage Results" MODIFIED="1535545404289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_GameAnalysisCase.coverage" NAME="pytest for analysis_tests.GameAnalysisCase Coverage Results" MODIFIED="1536228077916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_GenerationIncorrectCommunityTest.coverage" NAME="pytest for creation_tests.GenerationIncorrectCommunityTest Coverage Results" MODIFIED="1543229218297" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_GenerationIncorrectCommunityTest.coverage" NAME="pytest for creation_tests.GenerationIncorrectCommunityTest Coverage Results" MODIFIED="1543235480110" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_GameModelCase.coverage" NAME="pytest for model_tests.GameModelCase Coverage Results" MODIFIED="1536227869615" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_indir_rec_indir_rec_test_CreationTest.coverage" NAME="pytest for indir_rec.indir_rec_test.CreationTest Coverage Results" MODIFIED="1542299114075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase_test_get_tournament_points_no_games.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase.test_get_tournament_points_no_games Coverage Results" MODIFIED="1536229582875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -50,18 +60,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/indir_rec/community_logic.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="26" column="75" selection-start-line="26" selection-start-column="75" selection-end-line="26" selection-end-column="75" />
-              <folding>
-                <element signature="e#74#97#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/indir_rec/player_logic.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -122,11 +120,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/creation_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="92" column="24" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
+            <state relative-caret-position="210">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/percepts_beliefs_actions_testing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="46">
+              <caret line="824" column="37" lean-forward="true" selection-start-line="824" selection-start-column="37" selection-end-line="824" selection-end-column="37" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -175,7 +185,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>game1.id</find>
       <find>game2.id</find>
       <find>game3.id</find>
       <find>agent1.id</find>
@@ -205,6 +214,7 @@
       <find>jsonify</find>
       <find>post</find>
       <find>assertEquals</find>
+      <find>No such agents</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -213,7 +223,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/tests/analysis_tests.py" />
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/app/templates/communities.html" />
         <option value="$PROJECT_DIR$/app/templates/game.html" />
@@ -264,10 +273,11 @@
         <option value="$PROJECT_DIR$/app/indir_rec/player_logic.py" />
         <option value="$PROJECT_DIR$/app/indir_rec/routes.py" />
         <option value="$PROJECT_DIR$/tests/agents_service_testing/creation_tests.py" />
+        <option value="$PROJECT_DIR$/tests/agents_service_testing/percepts_beliefs_actions_testing.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="964" />
     <option name="width" value="956" />
     <option name="height" value="1044" />
@@ -332,7 +342,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.pytest for creation_tests.GenerationTest">
+  <component name="RunManager" selected="Python tests.pytest for percepts_beliefs_actions_testing.PerceptTests">
     <configuration name="NatureEngineWebApp" type="Python.FlaskServer" factoryName="Flask server">
       <option name="flaskDebug" value="true" />
       <module name="NatureEngineWebApp" />
@@ -349,7 +359,7 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for creation_tests.CommunityTestStart" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for creation_tests.AgentsTest" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="NatureEngineWebApp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -361,23 +371,7 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;creation_tests.CommunityTestStart&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="pytest for creation_tests.CommunityTestUnordered" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="NatureEngineWebApp" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agents_service_testing" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;creation_tests.CommunityTestUnordered&quot;" />
+      <option name="_new_target" value="&quot;creation_tests.AgentsTest&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -397,22 +391,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest for creation_tests.GenerationIncorrectCommunityTest.test_generation_creation_incorrect_community" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
-      <module name="NatureEngineWebApp" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agents_service_testing" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;creation_tests.GenerationIncorrectCommunityTest.test_generation_creation_incorrect_community&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="pytest for creation_tests.GenerationTest" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="NatureEngineWebApp" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -429,21 +407,53 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="pytest for creation_tests.GenerationTest.test_generation_creation1" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="NatureEngineWebApp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agents_service_testing" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;creation_tests.GenerationTest.test_generation_creation1&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytest for percepts_beliefs_actions_testing.PerceptTests" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="NatureEngineWebApp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/agents_service_testing" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;percepts_beliefs_actions_testing.PerceptTests&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Flask server.NatureEngineWebApp" />
-      <item itemvalue="Python tests.pytest for creation_tests.CommunityTestUnordered" />
       <item itemvalue="Python tests.pytest for creation_tests.GenerationIncorrectCommunityTest" />
-      <item itemvalue="Python tests.pytest for creation_tests.GenerationIncorrectCommunityTest.test_generation_creation_incorrect_community" />
-      <item itemvalue="Python tests.pytest for creation_tests.CommunityTestStart" />
       <item itemvalue="Python tests.pytest for creation_tests.GenerationTest" />
+      <item itemvalue="Python tests.pytest for creation_tests.AgentsTest" />
+      <item itemvalue="Python tests.pytest for percepts_beliefs_actions_testing.PerceptTests" />
+      <item itemvalue="Python tests.pytest for creation_tests.GenerationTest.test_generation_creation1" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.pytest for percepts_beliefs_actions_testing.PerceptTests" />
+        <item itemvalue="Python tests.pytest for creation_tests.AgentsTest" />
         <item itemvalue="Python tests.pytest for creation_tests.GenerationTest" />
+        <item itemvalue="Python tests.pytest for creation_tests.GenerationTest.test_generation_creation1" />
         <item itemvalue="Python tests.pytest for creation_tests.GenerationIncorrectCommunityTest" />
-        <item itemvalue="Python tests.pytest for creation_tests.CommunityTestStart" />
-        <item itemvalue="Python tests.pytest for creation_tests.CommunityTestUnordered" />
-        <item itemvalue="Python tests.pytest for creation_tests.GenerationIncorrectCommunityTest.test_generation_creation_incorrect_community" />
       </list>
     </recent_temporary>
   </component>
@@ -460,7 +470,7 @@
       <workItem from="1542998330008" duration="2238000" />
       <workItem from="1543153489759" duration="2027000" />
       <workItem from="1543226041739" duration="2757000" />
-      <workItem from="1543229112288" duration="345000" />
+      <workItem from="1543229112288" duration="10865000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of components">
       <created>1535647227999</created>
@@ -641,46 +651,46 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_for_creation_tests_GenerationTest - 2018.11.26 at 10h 36m 41s.xml">
+    <history-entry file="pytest_for_creation_tests_GenerationTest - 2018.11.26 at 12h 46m 43s.xml">
       <configuration name="pytest for creation_tests.GenerationTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_creation_tests_GenerationIncorrectCommunityTest - 2018.11.26 at 10h 37m 39s.xml">
-      <configuration name="pytest for creation_tests.GenerationIncorrectCommunityTest" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_creation_tests_GenerationIncorrectCommunityTest - 2018.11.26 at 10h 38m 53s.xml">
-      <configuration name="pytest for creation_tests.GenerationIncorrectCommunityTest" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_creation_tests_GenerationIncorrectCommunityTest - 2018.11.26 at 10h 45m 18s.xml">
-      <configuration name="pytest for creation_tests.GenerationIncorrectCommunityTest" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_creation_tests_GenerationIncorrectCommunityTest - 2018.11.26 at 10h 46m 42s.xml">
-      <configuration name="pytest for creation_tests.GenerationIncorrectCommunityTest" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_creation_tests_GenerationIncorrectCommunityTest - 2018.11.26 at 10h 46m 59s.xml">
-      <configuration name="pytest for creation_tests.GenerationIncorrectCommunityTest" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_for_creation_tests_GenerationTest - 2018.11.26 at 10h 47m 36s.xml">
+    <history-entry file="pytest_for_creation_tests_GenerationTest - 2018.11.26 at 12h 48m 41s.xml">
       <configuration name="pytest for creation_tests.GenerationTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_creation_tests_GenerationTest - 2018.11.26 at 10h 48m 54s.xml">
-      <configuration name="pytest for creation_tests.GenerationTest" configurationId="tests" />
+    <history-entry file="pytest_for_creation_tests_AgentsTest - 2018.11.26 at 12h 52m 24s.xml">
+      <configuration name="pytest for creation_tests.AgentsTest" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_creation_tests_GenerationTest - 2018.11.26 at 10h 50m 02s.xml">
-      <configuration name="pytest for creation_tests.GenerationTest" configurationId="tests" />
+    <history-entry file="pytest_for_percepts_beliefs_actions_testing_PerceptTests - 2018.11.26 at 12h 55m 20s.xml">
+      <configuration name="pytest for percepts_beliefs_actions_testing.PerceptTests" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_for_creation_tests_GenerationTest - 2018.11.26 at 10h 50m 26s.xml">
-      <configuration name="pytest for creation_tests.GenerationTest" configurationId="tests" />
+    <history-entry file="pytest_for_percepts_beliefs_actions_testing_PerceptTests - 2018.11.26 at 13h 40m 23s.xml">
+      <configuration name="pytest for percepts_beliefs_actions_testing.PerceptTests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_percepts_beliefs_actions_testing_PerceptTests - 2018.11.26 at 13h 41m 55s.xml">
+      <configuration name="pytest for percepts_beliefs_actions_testing.PerceptTests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_percepts_beliefs_actions_testing_PerceptTests - 2018.11.26 at 13h 42m 52s.xml">
+      <configuration name="pytest for percepts_beliefs_actions_testing.PerceptTests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_percepts_beliefs_actions_testing_PerceptTests - 2018.11.26 at 13h 43m 24s.xml">
+      <configuration name="pytest for percepts_beliefs_actions_testing.PerceptTests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_percepts_beliefs_actions_testing_PerceptTests - 2018.11.26 at 13h 45m 14s.xml">
+      <configuration name="pytest for percepts_beliefs_actions_testing.PerceptTests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_for_percepts_beliefs_actions_testing_PerceptTests - 2018.11.26 at 13h 50m 37s.xml">
+      <configuration name="pytest for percepts_beliefs_actions_testing.PerceptTests" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7367000" />
+    <option name="totallyTimeSpent" value="17887000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
+    <frame x="964" y="0" width="956" height="1044" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.18676628" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.14175825" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" weight="0.32896176" />
       <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49839914" weight="0.32786885" />
@@ -728,7 +738,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="I have added server side functionality to throw a tournament into a redis queue and client side functionality that redirects to a page stating that the tournament is being run whilst the redis queue is running it. Using ajax it queries the server every 2 seconds to check if the job is finished, and when it is redirects to a finished page." />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/model_tests.py" />
     <entry file="file://$PROJECT_DIR$/tests/analysis_tests.py" />
     <entry file="file://$PROJECT_DIR$/app.db" />
     <entry file="file://$PROJECT_DIR$/app/templates/multiplayer.html" />
@@ -1043,8 +1052,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/creation_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="92" column="24" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="24" />
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/percepts_beliefs_actions_testing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="824" column="37" lean-forward="true" selection-start-line="824" selection-start-column="37" selection-end-line="824" selection-end-column="37" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
