@@ -847,11 +847,3 @@ class PerceptTests(unittest.TestCase):
         self.assertEqual(percept_payload, percept_response['data'])
         self.assertFalse(percept_response['success'])
         self.assertEqual(percept_response['message'], 'Incorrect gossip action should be either positive or negative')
-
-
-class BeliefTests(unittest.TestCase):
-
-    def setUp(self):
-        self.url = "http://localhost:8080"
-
-    def 

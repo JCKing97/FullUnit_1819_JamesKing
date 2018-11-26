@@ -132,3 +132,47 @@ percept_action_gossip(Request):-
 	(Success == true ->
 		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
 		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
+
+% Handles a request to check the belief of an agent on the last time they were a donor
+belief_donor(Request):-
+	member(method(get), Request), !,
+	http_parameters(
+		Request,
+		[
+			timepoint(Timepoint, []),
+			community(Community, []),
+			generation(Generation, []),
+			player(AgentID, [])
+		]
+	),
+	get_donor_belief(Community, Generation, AgentID, Timepoint, Success, Value, RecipientID),
+	(Success == true ->
+		reply_json(return{data:
+			data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
+			success: true, status: 200, timepoint: Value, recipient: RecipientID}) ;
+		reply_json(return{data: 
+						data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
+			success: false, status: 200, message: Success})
+	).
+
+% Handles a request to check the belief of an agent on the last time they were a donor
+belief_recipient(Request):-
+	member(method(get), Request), !,
+	http_parameters(
+		Request,
+		[
+			timepoint(Timepoint, []),
+			community(Community, []),
+			generation(Generation, []),
+			player(AgentID, [])
+		]
+	),
+	get_recipient_belief(Community, Generation, AgentID, Timepoint, Success, Value, RecipientID),
+	(Success == true ->
+		reply_json(return{data:
+			data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
+			success: true, status: 200, timepoint: Value, recipient: RecipientID}) ;
+		reply_json(return{data: 
+						data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
+			success: false, status: 200, message: Success})
+	).
