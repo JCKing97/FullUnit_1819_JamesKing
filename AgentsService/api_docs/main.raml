@@ -1,0 +1,435 @@
+#%RAML 1.0
+---
+title: Agent Mind as a Service
+baseUri: http://localhost:8080/api/
+version: 0.1
+description: Welcome to the documentation for the agent mind as a service API, the service hosts agents minds for a game-theoretic model that uses mixed indirect and direct reciprocity mechanisms. These agents have their own memory of events (input as percepts) which the agent then uses to form beliefs about their world upon which they can act.
+
+/strategies:
+  description: The strategies an agent can be.
+  get:
+    description: Retrieve a JSON object containing names, descriptions and options of the strategies an agent can be.
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "success": true,
+                "status" : 200,
+                "strategies": [
+                  {
+                    "description": "Cooperates every time",
+                    "name": "Cooperator",
+                    "options": []
+                  },
+                  {
+                    "description": "Defects every time",
+                    "name": "Defector",
+                    "options": []
+                  },
+                  {
+                   "description": "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts other agents gossip",
+                   "name": "Standing Discriminator",
+                   "options": [
+                     "trusting"
+                    ]
+                  },
+                  {
+                    "description": "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn't trust other agents gossip",
+                    "name": "Standing Discriminator",
+                    "options": [
+                      "distrusting"
+                    ]
+                  }
+                ]
+              }
+
+/community:
+  description: A community contains a group of generations which agents belong to.
+  post:
+    description: Create a new community in the service and get the id back.
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "success": true,
+                "status": 200,
+                "id": 322
+              }
+/generation:
+  description: A generation belongs to a community and agents reside in a generation.
+  post:
+    queryParameters:
+      community:
+        type: integer
+        description: The id for the pre-existing community that the generation belongs to
+      generation:
+        type: integer
+        description: The id for the new generation to have
+    description: Create a new generation for an existing community in the service.
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "data": {
+                  "community": 322,
+                  "generation": 7
+                },
+                "success": true,
+                "status": 200
+              }
+
+/agent:
+  description: The individuals in the system that perceive events, can believe things about their world and act on them. They are part of a generation in a community.
+  post:
+    queryParameters:
+      strategy:
+        type: string
+        description: The strategy for the new agent to have
+      options:
+        type: array
+        description: The options for the strategy that the new agent will have
+      community:
+        type: integer
+        description: The id for the pre-existing community the agent belongs to
+      generation:
+        type: integer
+        description: The id for the pre-existing generation the agent belongs to
+      player:
+        type: integer
+        description: The id for the new agent
+    description: Create a new agent the belongs to an existing community and generation in the service.
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "data": {
+                  "community": 322,
+                  "generation": 7,
+                  "player": 3,
+                  "strategy": "Standing Discriminator",
+                  "options": ["trusting"]
+                },
+                "success": true,
+                "status": 200
+              }
+
+
+/percept:
+  description: Agents perceive events and happenings in an environment, input percepts to them.
+  /action:
+    description: A particular type of percept where an action has been taken and the agent has perceived it.
+    /interaction:
+      description: An interaction between a donor-recipient pair where the donor has committed to an action.
+      post:
+        queryParameters:
+          community:
+            type: integer
+            description: The id for the community that the perceiver belongs to
+          generation:
+            type: integer
+            description: The id for the generation that the perceiver belongs to
+          perceiver:
+            type: integer
+            description: The id for the perceiver
+          action:
+            type: string
+            description:  The action (defect or cooperate) that the perceiver is perceiving
+          donor:
+            type: integer
+            description: The agent who has commited the action
+          recipient:
+            type: integer
+            description: The agent who is on the receiving end of the action
+          timepoint:
+            type: integer
+            description: The timepoint at which this interaction took place
+        description: Give an agent a percept of an interaction between a donor-recipient pair of agents at a specific timepoint and the action (defect or cooperate) that the donor took.
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "data": {
+                      "community": 45,
+                      "generation": 3,
+                      "perceiver": 1,
+                      "action": "defect",
+                      "donor": 3,
+                      "recipient": 4,
+                      "timepoint": 3
+                    },
+                    "success": true,
+                    "status": 200
+                  }
+    /gossip:
+      description: A gossiper has gossiped to the perceiver either a positive or negative statement about an agent.
+      post:
+        queryParameters:
+          community:
+            type: integer
+            description: The id for the community that the perceiver belongs to
+          generation:
+            type: integer
+            description: The id for the generation that the perceiver belongs to
+          perceiver:
+            type: integer
+            description: The id for the perceiver
+          gossip:
+            type: string
+            description: The content of the gossip ("positive" or "negative")
+          about:
+            type: integer
+            description: The id for the agent which the gossip is about
+          gossiper:
+            type: integer
+            description: The id for the agent who spread the gossip
+          timepoint:
+            type: integer
+            description: The timepoint at which the gossip occurred
+        description: Give an agent a percept of an agent gossiping to them about another agent at a particular timepoint, the gossip can either be "positive" or "negative".
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "data": {
+                      "community": 45,
+                      "generation": 3,
+                      "perceiver": 6,
+                      "gossip": "positive",
+                      "about": 3,
+                      "gossiper": 5,
+                      "timepoint": 7
+                    },
+                    "success": true,
+                    "status": 200
+                  }
+
+  /interaction:
+    description: A perception for a donor and recipient that they are members of a donor-recipient pair at this specific timepoint.
+    post:
+      queryParameters:
+        community:
+          type: integer
+          description: The id for the community that the donor and recipient belong to
+        generation:
+          type: integer
+          description: The id for the generation that the donor and recipient belong to
+        donor:
+          type: integer
+          description: The id for the donor of the interaction
+        recipient:
+          type: integer
+          description: The id for the recipient of the interaction
+        timepoint:
+          type: integer
+          description: The timepoint at which the interaction takes place
+      description: Give a percept to both a donor and a recipient that they are part of a donor-recipient pair at a particular timepoint.
+      responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "data": {
+                      "community": 45,
+                      "generation": 3,
+                      "donor": 3,
+                      "recipient": 4,
+                      "timepoint": 8
+                    },
+                    "succes": true,
+                    "status": 200
+                  }
+/belief:
+  description: Agents have beliefs derived from percepts which they use to judge how they should act.
+  /donor:
+    description: The last time the agent believed they were a donor, before a particular timepoint.
+    get:
+      description: Get the last timepoint a player believed themselves to be a donor in a donor-recipient pair before the given timepoint.
+      queryParameters:
+        timepoint:
+          type: integer
+          description: The timepoint at which you want to check the agent's belief
+        community:
+          type: integer
+          description: The id for the community to which the agent belongs
+        generation:
+          type: integer
+          description: The id for generation to which the agent belongs
+        player:
+          type: integer
+          description: The id for the player who's beliefs you wish to check
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "data": {
+                    "timepoint": 7,
+                    "community": 3,
+                    "generation": 4,
+                    "player": 2
+                  },
+                  "success": true,
+                  "status": 200,
+                  "timepoint": 4
+                }
+  /recipient:
+    description: The last time the agent believed they were a recipient, before a particular timepoint.
+    get:
+      description: Get the last timepoint before the given timepoint that a player believed they were a recipient in a donor-recipipent pair.
+      queryParameters:
+        timepoint:
+          type: integer
+          description: The timepoint at which you want to check the agent's belief
+        community:
+          type: integer
+          description: The id for the community to which the agent belongs
+        generation:
+          type: integer
+          description: The id for generation to which the agent belongs
+        player:
+          type: integer
+          description: The id for the player who's beliefs you wish to check
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "data": {
+                    "timepoint": 9,
+                    "community": 3,
+                    "generation": 4,
+                    "player": 6
+                  },
+                  "success": true,
+                  "status": 200,
+                  "timepoint": 4
+                }
+  /interaction:
+    description: The last time two agents believed they were in a donor-recipient pair interaction, before a particular timepoint.
+    get:
+      description: Get the last timepoint these two players believe they were in a donor-recipient pair, and who was the donor and the recipient.
+      queryParameters:
+        timepoint:
+          type: integer
+          description: The timepoint at which you want to check the agent's belief
+        community:
+          type: integer
+          description: The id for the community to which the agent belongs
+        generation:
+          type: integer
+          description: The id for generation to which the agents belongs
+        player1:
+          type: integer
+          description: The id for one of the player who's belief you wish to check
+        player2:
+          type: integer
+          description: The id for the other player who's belief you wish to check
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "data": {
+                    "timepoint": 7,
+                    "community": 3,
+                    "generation": 4,
+                    "player1": 2,
+                    "player2": 6
+                  },
+                  "success": true,
+                  "status": 200,
+                  "timepoint": 4,
+                  "donor": 2,
+                  "recipient": 6
+                }
+  /standing:
+    description: The standing strategy judges other players based on their perceived "standing" which can either be good or bad.
+    get:
+      description: The player must be using the standing strategy. Get the belief of a standing strategy player about another agent on whether they have a "good" or "bad" standing.
+      queryParameters:
+        timepoint:
+          type: integer
+          description: The timepoint at which you want to check the agent's belief
+        community:
+          type: integer
+          description: The id for the community to which both agents belong
+        generation:
+          type: integer
+          description: The id for generation to which both agents belong
+        perceiver:
+          type: integer
+          description: The id for the player who's beliefs you wish to check
+        about:
+          type: integer
+          description: The id for the other player whom the perceiver is believing about
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "data": {
+                    "timepoint": 11,
+                    "community": 3,
+                    "generation": 46,
+                    "perceiver": 7,
+                    "about": 9
+                  },
+                  "success": true,
+                  "status": 200,
+                  "standing": "good"
+                }
+/action:
+  description: An action is taken by an agent at a specific timepoint, this can either be idle, gossip or action.
+  get:
+    queryParameters:
+      timepoint:
+        type: integer
+        description: The timepoint at which the action is decided upon
+      community:
+        type: integer
+        description: The id for the community that the actor belongs to
+      generation:
+        type: integer
+        description: The id for the generation that the actor belongs to
+      player:
+        type: integer
+        description: The id for the actor
+    description: Get the action that an agent would choose to do at a particular timepoint with the beliefs that have been built from perceptions. The action can either be idle, gossip (positive or negative, with about and recipient parameters) or action (cooperate or defect, with recipient parameters)
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "data": {
+                  "timepoint": 8,
+                  "community": 45,
+                  "generation": 3,
+                  "player": 3
+                },
+                "success": true,
+                "status": 200,
+                "action": {
+                  "type": "gossip",
+                  "value": "positive",
+                  "about": 0,
+                  "recipient": 3
+                }
+              }

@@ -1,37 +1,34 @@
 import requests
 import unittest
 
-url = "http://localhost:8080/create/new_generation"
+class StrategyTest(unittest.TestCase):
 
-payload = "{\n\t\"community\": 0,\n\t\"generation\": 0\n}"
-headers = {
-    'Content-Type': "application/json",
-    'Cache-Control': "no-cache",
-    'Postman-Token': "750a9393-7a31-4bd7-982b-ee9e66f0e9db"
-    }
+    def setUp(self):
+        self.url = "http://localhost:8080"
 
-response = requests.request("POST", url, data=payload, headers=headers)
-
-print(response.text)
+    def test_get_strategies(self):
+        response = requests.request("GET", self.url + '/strategies').json()
+        self.assertTrue(response['success'])
+        self.assertEquals(response['status'], 200)
+        print(response)
 
 
 # Run when just started Agents service (with no previous communities
 class CommunityTestStart(unittest.TestCase):
 
-
     def setUp(self):
-        self.url = "http://localhost:8080/"
+        self.url = "http://localhost:8080"
 
     def test_community_creation(self):
-        response0 = requests.request("GET", self.url).json()
+        response0 = requests.request("PUT", self.url + '/community').json()
         self.assertEquals(response0['id'], 0)
-        response1 = requests.request("GET", self.url).json()
+        response1 = requests.request("PUT", self.url + '/community').json()
         self.assertEquals(response1['id'], 1)
-        response2 = requests.request("GET", self.url).json()
+        response2 = requests.request("PUT", self.url + '/community').json()
         self.assertEquals(response2['id'], 2)
-        response3 = requests.request("GET", self.url).json()
+        response3 = requests.request("PUT", self.url + '/community').json()
         self.assertEquals(response3['id'], 3)
-        response4 = requests.request("GET", self.url).json()
+        response4 = requests.request("PUT", self.url + '/community').json()
         self.assertEquals(response4['id'], 4)
 
 
@@ -39,25 +36,25 @@ class CommunityTestStart(unittest.TestCase):
 class CommunityTestUnordered(unittest.TestCase):
 
     def setUp(self):
-        self.url = "http://localhost:8080/"
+        self.url = "http://localhost:8080"
 
     def test_community_creation1(self):
-        response0 = requests.request("GET", self.url).json()
-        response1 = requests.request("GET", self.url).json()
+        response0 = requests.request("PUT", self.url + '/community').json()
+        response1 = requests.request("PUT", self.url + '/community').json()
         self.assertEquals(response1['id'], response0['id']+1)
-        response2 = requests.request("GET", self.url).json()
+        response2 = requests.request("PUT", self.url + '/community').json()
         self.assertEquals(response2['id'], response0['id'] + 2)
 
     def test_community_creation2(self):
-        response0 = requests.request("GET", self.url).json()
-        response1 = requests.request("GET", self.url).json()
+        response0 = requests.request("PUT", self.url + '/community').json()
+        response1 = requests.request("PUT", self.url + '/community').json()
         self.assertEquals(response1['id'], response0['id']+1)
-        response2 = requests.request("GET", self.url).json()
+        response2 = requests.request("PUT", self.url + '/community').json()
         self.assertEquals(response2['id'], response1['id'] + 1)
 
     def test_community_creation3(self):
-        response0 = requests.request("GET", self.url).json()
-        response1 = requests.request("GET", self.url).json()
+        response0 = requests.request("PUT", self.url + '/community').json()
+        response1 = requests.request("PUT", self.url + '/community').json()
         self.assertEquals(response1['id'], response0['id']+1)
 
 
@@ -65,20 +62,20 @@ class CommunityTestUnordered(unittest.TestCase):
 class GenerationIncorrectCommunityTest(unittest.TestCase):
 
     def setUp(self):
-        self.url = "http://localhost:8080/"
+        self.url = "http://localhost:8080"
 
     def test_generation_creation_incorrect_community(self):
-        community_response = requests.request("GET", self.url).json()
+        community_response = requests.request("PUT", self.url + '/community').json()
         payload = {"community": community_response['id']+1, "generation": 0}
-        generation_response = requests.request("POST", self.url, json=payload).json()
-        self.assertEquals(generation_response['status'], "Bad")
+        generation_response = requests.request("PUT", self.url + '/generation', json=payload).json()
+        self.assertEquals(generation_response['success'], False)
 
 
 # Run whenever
 class GenerationTest(unittest.TestCase):
 
     def setUp(self):
-        self.url = "http://localhost:8080/"
+        self.url = "http://localhost:8080"
 
     def test_generation_creation1(self):
         community_response = requests.request("GET", self.url).json()
