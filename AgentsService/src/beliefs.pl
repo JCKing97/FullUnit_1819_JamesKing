@@ -7,49 +7,207 @@ Desc:		Contains the logic related to querying agents beliefs
 
 % Get the value of a belief at a given timepoint
 
+/*-------------------------
+------ Donor Beliefs ------
+-------------------------*/
+
 % When did this agent last believe they were a donor?
-get_belief(DictIn, Value):-
-	Type = DictIn.type,
-	Type == "donor",
+get_donor_belief(DictIn, Success, Value, RecipientID):-
 	Timepoint = DictIn.timepoint,
 	CommunityID = DictIn.community,
+	community(CommunityID),
 	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
 	AgentID = DictIn.player,
-	holds_at(last_interaction_timepoint(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), _)=Value, Timepoint), !.
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	holds_at(last_interaction_timepoint(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=Value, Timepoint), 
+	Success = true, !.
+% When agent has no belief about it's last donor timepoint
+get_donor_belief(DictIn, Success, Value, RecipientID):-
+	Timepoint = DictIn.timepoint,
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
+	AgentID = DictIn.player,
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	Success = true, Value is -1, RecipientID is -1.
+% Fail nicely when no such community
+get_donor_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	\+community(CommunityID),
+	Success = 'No such community',
+	 Value is -1, RecipientID is -1.
+% Fail nicely when no such generation for this community
+get_donor_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	\+generation(community(CommunityID), GenerationID),
+	Success = 'No such generation for this community',
+	 Value is -1, RecipientID is -1.
+% Fail nicely when no such agent for the donor
+get_donor_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
+	AgentID = DictIn.player,
+	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	Success = 'No such agent in this generation and community',
+	Value is -1, RecipientID is -1.
+
+/*-----------------------------
+------ Recipient Beliefs ------
+-----------------------------*/
+
 % When did this agent last believe they were a recipient
-get_belief(DictIn, Value):-
-	Type = DictIn.type,
-	Type == "recipient",
+get_recipient_belief(DictIn, Success, Value, DonorID):-
 	Timepoint = DictIn.timepoint,
 	CommunityID = DictIn.community,
+	community(CommunityID),
 	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
 	AgentID = DictIn.player,
-	holds_at(last_interaction_timepoint(_,agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID))=Value, Timepoint), !.
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	holds_at(last_interaction_timepoint(agent(_, community(CommunityID), generation(community(CommunityID) GenerationID), DonorID),
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID))=Value, Timepoint),
+	Success = true, !.
+% When agent has no belief about it's last recipient timepoint
+get_recipient_belief(DictIn, Success, Value):-
+	Timepoint = DictIn.timepoint,
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
+	AgentID = DictIn.player,
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	Success = true, Value is -1, DonorID is -1.
+% fail nicely when there is no community
+get_recipient_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	\+community(CommunityID),
+	Success = 'No such community',
+	Value is -1, DonorID is -1.
+% Fail nicely when no such generation for this community
+get_recipient_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	\+generation(community(CommunityID), GenerationID),
+	Success = 'No such generation for this community',
+	Value is -1, DonorID is -1.
+% Fail nicely when no such agent for the recipient
+get_recipient_belief(DictIn, Success, Value):-
+	Timepoint = DictIn.timepoint,
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
+	AgentID = DictIn.player,
+	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	Success = 'No such agent in this generation and community',
+	Value is -1, DonorID is -1.
+
+/*-------------------------------
+------ Interaction Beliefs ------
+-------------------------------*/
+
 % When did these agents last believe they were part of an interaction together?
-get_belief(DictIn, Value):-
-	Type = DictIn.type,
-	Type == "interaction",
+get_interaction_belief(DictIn, Success, Value, Donor, Recipient):-
 	Timepoint = DictIn.timepoint,
 	CommunityID = DictIn.community,
+	community(CommunityID),
 	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
 	Agent1ID = DictIn.player1,
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent1ID),
 	Agent2ID = DictIn.player2,
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent2ID),
 	holds_at(last_interaction_timepoint(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent1ID),
-	 agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent2ID))=Value, Timepoint), !.
-get_belief(DictIn, Value):-
-	Type = DictIn.type,
-	Type == "interaction",
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent2ID))=Value, Timepoint),
+	Donor = Agent1ID, Recipient = Agent2ID, 
+	Success = true, !.
+get_interaction_belief(DictIn, Success, Value, Donor, Recipient):-
 	Timepoint = DictIn.timepoint,
 	CommunityID = DictIn.community,
+	community(CommunityID),
 	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
 	Agent1ID = DictIn.player1,
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent1ID),
 	Agent2ID = DictIn.player2,
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent2ID),
 	holds_at(last_interaction_timepoint(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent2ID),
-	 agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent1ID))=Value, Timepoint), !.
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent1ID))=Value, Timepoint),
+	Donor = Agent2ID, Recipient = Agent1ID, 
+	Success = true, !.
+% When the agents have not interacted
+	get_interaction_belief(DictIn, Success, Value, Donor, Recipient):-
+	Timepoint = DictIn.timepoint,
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
+	Agent1ID = DictIn.player1,
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent1ID),
+	Agent2ID = DictIn.player2,
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent2ID),
+	Success = true, Value is -1, Donor is -1, Recipient is -1.
+% Fail nicely when there is no such community
+get_interaction_belief(DictIn, Success, Value, Donor, Recipient):-
+	CommunityID = DictIn.community,
+	\+community(CommunityID),
+	Success = 'No such community',
+	Value is -1, Donor is -1, Recipient is -1.
+% Fail nicely when no such generation for this community
+get_interaction_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	\+generation(community(CommunityID), GenerationID),
+	Success = 'No such generation for this community',
+	Value is -1, Donor is -1, Recipient is -1.
+% Fail nicely when no such agent for both agents
+get_interaction_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
+	Agent1ID = DictIn.player1,
+	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent1ID),
+	Agent2ID = DictIn.player2,
+	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent2ID),
+	Success = 'No such agents for this generation and community',
+	Value is -1, Donor is -1, Recipient is -1.
+% Fail nicely when no such agent for player1
+get_interaction_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
+	Agent1ID = DictIn.player1,
+	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent1ID),
+	Success = 'No such agent for player1 for this generation and community',
+	Value is -1, Donor is -1, Recipient is -1.
+% Fail nicely when no such agent for player2
+get_interaction_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
+	Agent2ID = DictIn.player2,
+	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent2ID),
+	Success = 'No such agents for this generation and community',
+	Value is -1, Donor is -1, Recipient is -1.
+
+/*----------------------------
+------ Standing Beliefs ------
+----------------------------*/
+
 % What did the perceiver believe about the standing of this other agent?
-get_belief(DictIn, Value):-
-	Type = DictIn.type,
-	Type == "standing",
+get_standing_belief(DictIn, Success, Value):-
 	Timepoint = DictIn.timepoint,
 	CommunityID = DictIn.community,
 	GenerationID = DictIn.generation,
@@ -58,17 +216,66 @@ get_belief(DictIn, Value):-
 	agent(strategy("Standing Discriminator", StratDesc, StratOptions), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 	agent(Strat, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
 	holds_at(standing(agent(strategy("Standing Discriminator", StratDesc, StratOptions), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
-		agent(Strat, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID))=Value, Timepoint), !.
+		agent(Strat, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID))=Value, Timepoint),
+	Success = true, !.
 % If there is no holds_at value but the perceiver uses the standing strategy they will autobelieve them to be of a good standing
-get_belief(DictIn, Value):-
-	Type = DictIn.type,
-	Type == "standing",
+get_standing_belief(DictIn, Success, Value):-
 	CommunityID = DictIn.community,
 	GenerationID = DictIn.generation,
 	PerceiverID = DictIn.perceiver,
 	AboutID = DictIn.about,
 	agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
-	Value=good, !.
-% There is no applicable belief
-get_belief(_, "No applicable value").
+	Success = true, Value=good, !.
+% Fail nicely if the agent is not using the standing strategy
+get_standing_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	GenerationID = DictIn.generation,
+	PerceiverID = DictIn.perceiver,
+	AboutID = DictIn.about,
+	agent(strategy(StrategyName, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
+	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
+	StrategyName \== "Standing Discriminator",
+	Success = 'The perceiver is not using the standing strategy so has no beliefs on other players' standings, Value=false, !.
+% Fail nicely if there is no such community
+get_standing_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	\+community(CommunityID),
+	Success = 'No such community',
+	Value= false.
+% Fail nicely is no such generation for this community
+get_standing_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	\+generation(community(CommunityID), GenerationID),
+	Success='No such generation for this community',
+	Value=false.
+% Fail nicely if no such agent as perceiver or about
+get_standing_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
+	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
+	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
+	Success = 'No such agent as perceiver or about',
+	Value=false.
+% Fails nicely if no such agent as perceiver
+get_standing_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
+	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
+	Success='No such agent as perceiver',
+	Value=false.
+% Fail nicely if no such agent as about
+get_standing_belief(DictIn, Success, Value):-
+	CommunityID = DictIn.community,
+	community(CommunityID),
+	GenerationID = DictIn.generation,
+	generation(community(CommunityID), GenerationID),
+	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
+	Success = 'No such agent as about',
+	Value=false.

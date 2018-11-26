@@ -1,6 +1,6 @@
 /*--------------------------------------
 Author:		James King
-Title:		percepts.pl
+Title:		revise.pl
 Created:	20th Nov 2018
 Desc:		Contains the logic related to revising agents beliefs using the events calculus
 --------------------------------------*/

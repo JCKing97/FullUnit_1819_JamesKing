@@ -28,6 +28,7 @@ input_format(observed_at(E, T), E, T).
 ?- ['./agents'].
 ?- ['./beliefs'].
 ?- ['./revise'].
+?- ['./actions'].
 
 
 % Set correct handling of JSON
@@ -50,6 +51,7 @@ http:location(agent, root(agent), []).
 http:location(percept, root(percept), []).
 http:location(action, root(action), []).
 http:location(percept_action, percept(action), []).
+http:location(belief, root(belief), []).
 
 
 % The handlers for different routes
@@ -61,6 +63,10 @@ http:location(percept_action, percept(action), []).
 :- http_handler(percept_action(gossip), percept_action_gossip, []).
 :- http_handler(percept(interaction), percept_interaction, []).
 :- http_handler(root(action), action, []).
+:- http_handler(belief(donor), belief_donor, []).
+:- http_handler(belief(recipient), belief_recipient, []).
+:- http_handler(belief(interaction), belief_interaction, []).
+:- http_handler(belief(standing), belief_standing, []).
 
 
 % Starts the server on the port number passed in Port
@@ -73,13 +79,6 @@ strategies(Request):-
 	member(method(get), Request), !,
 	find_strategies(Strategies),
 	reply_json_dict(strategies{success: true, status: 200, strategies: Strategies}).
-
-% Handle a request to get an action from an agent
-get_action(Request):-
-	member(method(post), Request), !,
-	http_read_json_dict(Request, DictIn),
-	agent_action(DictIn, Action),
-	reply_json(return{action: Action}).
 
 % Handles a request to create a new agent in the knowledge base
 community(Request):-
@@ -133,11 +132,3 @@ percept_action_gossip(Request):-
 	(Success == true ->
 		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
 		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
-
-
-% Handles a request to check the value of a beliefs
-check_belief(Request):-
-	member(method(post), Request), !,
-	http_read_json_dict(Request, DictIn),
-	get_belief(DictIn, Value),
-	reply_json(return{value: Value}).

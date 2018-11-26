@@ -1,6 +1,7 @@
 import requests
 import unittest
 
+
 class PerceptTests(unittest.TestCase):
 
     def setUp(self):
@@ -286,7 +287,6 @@ class PerceptTests(unittest.TestCase):
         self.assertFalse(percept_response['success'])
         self.assertEqual(percept_response['message'], 'No such community')
 
-
     def test_action_interaction_percept_incorrect_generation(self):
         community_response = requests.request("PUT", self.url + '/community').json()
         self.assertTrue(community_response['success'])
@@ -345,7 +345,6 @@ class PerceptTests(unittest.TestCase):
         self.assertFalse(percept_response['success'])
         self.assertEqual(percept_response['message'], 'No such agent for: perceiver')
 
-
     def test_action_interaction_percept_incorrect_donor(self):
         community_response = requests.request("PUT", self.url + '/community').json()
         self.assertTrue(community_response['success'])
@@ -375,7 +374,6 @@ class PerceptTests(unittest.TestCase):
         self.assertFalse(percept_response['success'])
         self.assertEqual(percept_response['message'], 'No such agent for: donor')
 
-
     def test_action_interaction_percept_incorrect_recipient(self):
         community_response = requests.request("PUT", self.url + '/community').json()
         self.assertTrue(community_response['success'])
@@ -404,7 +402,6 @@ class PerceptTests(unittest.TestCase):
         self.assertEqual(percept_payload, percept_response['data'])
         self.assertFalse(percept_response['success'])
         self.assertEqual(percept_response['message'], 'No such agent for: recipient')
-
 
     def test_action_interaction_percept_incorrect_perceiver_and_donor_and_recipient(self):
         community_response = requests.request("PUT", self.url + '/community').json()
@@ -852,4 +849,9 @@ class PerceptTests(unittest.TestCase):
         self.assertEqual(percept_response['message'], 'Incorrect gossip action should be either positive or negative')
 
 
+class BeliefTests(unittest.TestCase):
 
+    def setUp(self):
+        self.url = "http://localhost:8080"
+
+    def 

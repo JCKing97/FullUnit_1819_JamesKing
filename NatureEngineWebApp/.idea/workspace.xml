@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/agents_service_testing/percepts_beliefs_actions_testing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AgentsService/api_docs/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/api_docs/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AgentsService/api_docs/main.raml" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/api_docs/main.raml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AgentsService/src/agents.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/src/agents.pl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AgentsService/src/communities.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/src/communities.pl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AgentsService/src/main.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/src/main.pl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AgentsService/src/percepts.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/src/percepts.pl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/agents_service_testing/creation_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/agents_service_testing/creation_tests.py" afterDir="false" />
-    </list>
+    <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,8 +125,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/percepts_beliefs_actions_testing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="824" column="37" lean-forward="true" selection-start-line="824" selection-start-column="37" selection-end-line="824" selection-end-column="37" />
+            <state relative-caret-position="533">
+              <caret line="856" column="8" lean-forward="true" selection-start-line="856" selection-start-column="8" selection-end-line="856" selection-end-column="8" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -470,7 +460,7 @@
       <workItem from="1542998330008" duration="2238000" />
       <workItem from="1543153489759" duration="2027000" />
       <workItem from="1543226041739" duration="2757000" />
-      <workItem from="1543229112288" duration="10865000" />
+      <workItem from="1543229112288" duration="11646000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of components">
       <created>1535647227999</created>
@@ -683,7 +673,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17887000" />
+    <option name="totallyTimeSpent" value="18668000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="964" y="0" width="956" height="1044" extended-state="0" />
@@ -1062,8 +1052,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/percepts_beliefs_actions_testing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="824" column="37" lean-forward="true" selection-start-line="824" selection-start-column="37" selection-end-line="824" selection-end-column="37" />
+        <state relative-caret-position="533">
+          <caret line="856" column="8" lean-forward="true" selection-start-line="856" selection-start-column="8" selection-end-line="856" selection-end-column="8" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
