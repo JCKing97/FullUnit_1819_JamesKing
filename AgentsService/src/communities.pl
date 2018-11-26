@@ -24,7 +24,7 @@ get_new_id(ID):-
 	ID is 0.
 
 % Create a new generation, if one with the same community and generation ID doesn't already exist
-new_generation(DictIn, Status):-
+new_generation(DictIn, Success):-
 	current_predicate(generation/2),
 	current_predicate(community/1),
 	CommunityID = DictIn.community,
@@ -32,16 +32,16 @@ new_generation(DictIn, Status):-
 	GenerationID = DictIn.generation,
 	(generation(community(CommunityID), GenerationID) -> fail ;
 	assert(generation(community(CommunityID), GenerationID)),
-	Status = "Good"), !.
+	Success = true), !.
 % Create the first generation in the system
-new_generation(DictIn, Status):-
+new_generation(DictIn, Success):-
     \+current_predicate(generation/2),
 	current_predicate(community/1),
 	CommunityID = DictIn.community,
 	community(CommunityID),
 	GenerationID = DictIn.generation,
 	assert(generation(community(CommunityID), GenerationID)),
-	Status = "Good", !.
+	Success = true, !.
 % Fail to create the generation, maybe a bad input?
-new_generation(_, Status):-
-	Status = "Bad".
+new_generation(_, Success):-
+	Success = false.

@@ -26,7 +26,7 @@ input_format(observed_at(E, T), E, T).
 ?- ['./communities'].
 ?- ['./percepts'].
 ?- ['./agents'].
-?- ['./check_beliefs'].
+?- ['./beliefs'].
 ?- ['./revise'].
 
 
@@ -43,17 +43,24 @@ http_json:json_type('text/x-json').
 % Divide the paths up into sections
 :- multifile http:location/3.
 :- dynamic   http:location/3.
-http:location(create, '/create', []).
-http:location(get_data, '/get', []).
+http:location(community, root(community), []).
+http:location(strategies, root(strategies), []).
+http:location(generation, root(generation), []).
+http:location(agent, root(agent), []).
+http:location(percept, root(percept), []).
+http:location(action, root(action), []).
+http:location(percept_action, percept(action), []).
+
 
 % The handlers for different routes
-:- http_handler(get_data(strategies), get_strategies, []).
-:- http_handler(root(get_action), get_action, []).
-:- http_handler(root(add_percept), add_percept, []).
-:- http_handler(root(check_belief), check_belief, []).
-:- http_handler(create(new_agent), create_new_agent, []).
-:- http_handler(create(new_community), create_new_community, []).
-:- http_handler(create(new_generation), create_new_generation, []).
+:- http_handler(strategies(.), strategies, []).
+:- http_handler(community(.), community, []).
+:- http_handler(generation(.), generation, []).
+:- http_handler(agent(.), agent, []).
+:- http_handler(percept_action(interaction), percept_action_interaction, []).
+:- http_handler(percept_action(gossip), percept_action_gossip, []).
+:- http_handler(percept(interaction), percept_interaction, []).
+:- http_handler(action(.), action, []).
 
 
 % Starts the server on the port number passed in Port
@@ -62,10 +69,10 @@ server(Port):-
 	http_server(http_dispatch, [port(Port)]).
 
 % Handler that finds all the strategies in the system and replies with a json
-get_strategies(Request):-
+strategies(Request):-
 	member(method(get), Request), !,
 	find_strategies(Strategies),
-	reply_json_dict(strategies{strategies: Strategies}).
+	reply_json_dict(strategies{success: true, status: 200, strategies: Strategies}).
 
 % Handle a request to get an action from an agent
 get_action(Request):-
@@ -75,24 +82,28 @@ get_action(Request):-
 	reply_json(return{action: Action}).
 
 % Handles a request to create a new agent in the knowledge base
-create_new_community(Request):-
-	member(method(get), Request), !,
+community(Request):-
+	member(method(put), Request), !,
 	new_community(ID),
-	reply_json(return{id: ID}).
+	reply_json(return{success: true, status: 200, id: ID}).
 	
 % Handles a request to create a new agent in the knowledge base
-create_new_agent(Request):-
-	member(method(post), Request), !,
+agent(Request):-
+	member(method(put), Request), !,
 	http_read_json_dict(Request, DictIn),
-	new_agent(DictIn, Status),
-	reply_json(return{status: Status}).
+	new_agent(DictIn, Success),
+	reply_json(return{data: DictIn, success: Success, status: 200}).
 
 % Handles a request to create a new generation in the logic base
-create_new_generation(Request):-
-	member(method(post), Request), !,
+generation(Request):-
+	http_log('Generation', []),
+	member(method(put), Request), !,
+	http_log('Generation2', []),
 	http_read_json_dict(Request, DictIn),
-	new_generation(DictIn, Status),
-	reply_json(return{status: Status}).
+	http_log('Generation3', [])
+	new_generation(DictIn, Success),
+	http_log('Success: ~w~n',[Success])
+	reply_json(return{data: DictIn, success: Success, status: 200}).
 
 % Handles a request to add a new percept to an agent
 add_percept(Request):-
