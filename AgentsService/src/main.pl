@@ -139,10 +139,10 @@ belief_donor(Request):-
 	http_parameters(
 		Request,
 		[
-			timepoint(Timepoint, []),
-			community(Community, []),
-			generation(Generation, []),
-			player(AgentID, [])
+			timepoint(Timepoint, [integer]),
+			community(Community, [integer]),
+			generation(Generation, [integer]),
+			player(AgentID, [integer])
 		]
 	),
 	get_donor_belief(Community, Generation, AgentID, Timepoint, Success, Value, RecipientID),
@@ -161,18 +161,41 @@ belief_recipient(Request):-
 	http_parameters(
 		Request,
 		[
-			timepoint(Timepoint, []),
-			community(Community, []),
-			generation(Generation, []),
-			player(AgentID, [])
+			timepoint(Timepoint, [integer]),
+			community(Community, [integer]),
+			generation(Generation, [integer]),
+			player(AgentID, [integer])
 		]
 	),
-	get_recipient_belief(Community, Generation, AgentID, Timepoint, Success, Value, RecipientID),
+	get_recipient_belief(Community, Generation, AgentID, Timepoint, Success, Value, DonorID),
 	(Success == true ->
 		reply_json(return{data:
 			data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
-			success: true, status: 200, timepoint: Value, recipient: RecipientID}) ;
+			success: true, status: 200, timepoint: Value, donor: DonorID}) ;
 		reply_json(return{data: 
 						data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
 			success: false, status: 200, message: Success})
+	).
+
+% Handles a request to check the belief of two agents on when they last interacted and what roles they took in the donor-recipient pair
+belief_interaction(Request):-
+	member(method(get), Request), !,
+	http_parameters(
+		Request,
+		[
+			timepoint(Timepoint, [integer]),
+			community(Community, [integer]),
+			generation(Generation, [integer]),
+			player1(Agent1ID, [integer]),
+			player2(Agent2ID, [integer])
+		]
+	),
+	get_interaction_belief(Community, Generation, Timepoint, Agent1ID, Agent2ID, Success, Value, DonorID, RecipientID),
+	(Success == true ->
+		reply_json(return{data:
+						data{community: Community, generation: Generation, player1: Agent1ID, player2: Agent2ID, timepoint: Timepoint},
+					success: true, status: 200, timepoint: Value, donor: DonorID, recipient: RecipientID}) ;
+		reply_json(return{data: 
+						data{community: Community, generation: Generation,  player1: Agent1ID, player2: Agent2ID, timepoint: Timepoint},
+					success: false, status: 200, message: Success})
 	).
