@@ -150,79 +150,53 @@ get_interaction_belief(CommunityID, GenerationID, _, _, Agent2ID, Success, Value
 ----------------------------*/
 
 % What did the perceiver believe about the standing of this other agent?
-get_standing_belief(DictIn, Success, Value):-
-	Timepoint = DictIn.timepoint,
-	CommunityID = DictIn.community,
-	GenerationID = DictIn.generation,
-	PerceiverID = DictIn.perceiver,
-	AboutID = DictIn.about,
+get_standing_belief(CommunityID, GenerationID, Timepoint, PerceiverID, AboutID, Success, Value):-
 	agent(strategy("Standing Discriminator", StratDesc, StratOptions), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 	agent(Strat, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
 	holds_at(standing(agent(strategy("Standing Discriminator", StratDesc, StratOptions), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 		agent(Strat, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID))=Value, Timepoint),
 	Success = true, !.
 % If there is no holds_at value but the perceiver uses the standing strategy they will autobelieve them to be of a good standing
-get_standing_belief(DictIn, Success, Value):-
-	CommunityID = DictIn.community,
-	GenerationID = DictIn.generation,
-	PerceiverID = DictIn.perceiver,
-	AboutID = DictIn.about,
+get_standing_belief(CommunityID, GenerationID, _, PerceiverID, AboutID, Success, Value):-
 	agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
 	Success = true, Value=good, !.
-% Fail nicely if the agent is not using the standing strategy
-get_standing_belief(DictIn, Success, Value):-
-	CommunityID = DictIn.community,
-	GenerationID = DictIn.generation,
-	PerceiverID = DictIn.perceiver,
-	AboutID = DictIn.about,
+% Fail nicely if the perceiver is not using the standing strategy
+get_standing_belief(CommunityID, GenerationID, _, PerceiverID, AboutID, Success, Value):-
 	agent(strategy(StrategyName, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
 	StrategyName \== "Standing Discriminator",
 	Success = 'The perceiver is not using the standing strategy so has no beliefs on other players standings', Value=false, !.
 % Fail nicely if there is no such community
-get_standing_belief(DictIn, Success, Value):-
-	CommunityID = DictIn.community,
+get_standing_belief(CommunityID, _, _, _, _, Success, Value):-
 	\+community(CommunityID),
 	Success = 'No such community',
 	Value= false.
 % Fail nicely is no such generation for this community
-get_standing_belief(DictIn, Success, Value):-
-	CommunityID = DictIn.community,
+get_standing_belief(CommunityID, GenerationID, _, _, _, Success, Value):-
 	community(CommunityID),
-	GenerationID = DictIn.generation,
 	\+generation(community(CommunityID), GenerationID),
 	Success='No such generation for this community',
 	Value=false.
 % Fail nicely if no such agent as perceiver or about
-get_standing_belief(DictIn, Success, Value):-
-	CommunityID = DictIn.community,
+get_standing_belief(CommunityID, GenerationID, _, PerceiverID, AboutID, Success, Value):-
 	community(CommunityID),
-	GenerationID = DictIn.generation,
 	generation(community(CommunityID), GenerationID),
-	PerceiverID = DictIn.perceiver,
-	AboutID = DictIn.about,
 	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
-	Success = 'No such agent as perceiver or about',
+	Success = 'No such agent as perceiver or about for this generation of this community',
 	Value=false.
 % Fails nicely if no such agent as perceiver
-get_standing_belief(DictIn, Success, Value):-
-	CommunityID = DictIn.community,
+get_standing_belief(CommunityID, GenerationID, _, PerceiverID, _, Success, Value):-
 	community(CommunityID),
-	GenerationID = DictIn.generation,
 	generation(community(CommunityID), GenerationID),
-	PerceiverID = DictIn.perceiver,
 	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
-	Success='No such agent as perceiver',
+	Success='No such agent as perceiver for this generation of this community',
 	Value=false.
 % Fail nicely if no such agent as about
-get_standing_belief(DictIn, Success, Value):-
-	CommunityID = DictIn.community,
+get_standing_belief(CommunityID, GenerationID, _, _, AboutID, Success, Value):-
 	community(CommunityID),
-	GenerationID = DictIn.generation,
-	AboutID = DictIn.about,
 	generation(community(CommunityID), GenerationID),
 	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
-	Success = 'No such agent as about',
+	Success = 'No such agent as about for this generation of this community',
 	Value=false.

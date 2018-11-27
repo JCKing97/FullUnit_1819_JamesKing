@@ -1,5 +1,12 @@
 \begin{thebibliography}{1}
 
+\bibitem{genetic_drift}
+Definition of ``genetic drift'' - english dictionary.
+\newblock
+  \url{https://dictionary.cambridge.org/us/dictionary/english/genetic-drift},
+  2018.
+\newblock Accessed: 27/11/2018.
+
 \bibitem{leimarhammer}
 Olof Leimar and Peter Hammerstein.
 \newblock Evolution of cooperation through indirect reciprocity.
@@ -10,6 +17,11 @@ Theo C. M.~Bakker Manfred~Milinski, Dirk~Semmann and Hans-J{\"u}rgen Krambeck.
 \newblock Cooperation through indirect reciprocity: image scoring or standing
   strategy?
 \newblock {\em Proceedings of The Royal Society}, 268:2495--2501, May 2001.
+
+\bibitem{five_rules_coop}
+Martin~A. Nowak.
+\newblock Five rules for the evolution of cooperation.
+\newblock {\em Science}, 314, 2006.
 
 \bibitem{evol_indirect_image}
 Martin~A. Nowak and Karl Sigmund.
@@ -26,13 +38,5 @@ Steve Phelps.
 Gilbert Roberts.
 \newblock Evolution of direct and indirect reciprocity.
 \newblock {\em Proceedings of The Royal Society}, 275:173--179, September 2008.
-
-\bibitem{gossip_alt}
-Ralf~D. Sommerfeld, Hans-J{\"u}rgen Krambeck, Dirk Semmann, and Manfred
-  Milinski.
-\newblock Gossip as an alternative for direct observation in games of indirect
-  reciprocity.
-\newblock {\em Proceedings of the National Academy of Sciences of the United
-  States of America}, 104:17435--17440, 2007.
 
 \end{thebibliography}

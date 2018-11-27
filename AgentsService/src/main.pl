@@ -199,3 +199,46 @@ belief_interaction(Request):-
 						data{community: Community, generation: Generation,  player1: Agent1ID, player2: Agent2ID, timepoint: Timepoint},
 					success: false, status: 200, message: Success})
 	).
+
+belief_standing(Request):-
+	member(method(get), Request), !,
+	http_parameters(
+		Request,
+		[
+			timepoint(Timepoint, [integer]),
+			community(Community, [integer]),
+			generation(Generation, [integer]),
+			perceiver(PerceiverID, [integer]),
+			about(AboutID, [integer])
+		]
+	),
+	get_standing_belief(Community, Generation, Timepoint, PerceiverID, AboutID, Success, Standing),
+	(Success == true ->
+		reply_json(return{data: 
+						data{community: Community, generation: Generation, perceiver: PerceiverID, about: AboutID, timepoint: Timepoint},
+					success: true, status: 200, standing: Standing}) ;
+		reply_json(return{data: 
+						data{community: Community, generation: Generation, perceiver: PerceiverID, about: AboutID, timepoint: Timepoint},
+					success: false, status: 200, message: Success})
+	).
+
+action(Request):-
+	member(method(get), Request), !,
+	http_parameters(
+		Request,
+		[
+			timepoint(Timepoint, [integer]),
+			community(Community, [integer]),
+			generation(Generation, [integer]),
+			player(AgentID, [integer])
+		]
+	),
+	agent_action(Timepoint, Community, Generation, AgentID, Success, Action),
+	(Success == true ->
+		reply_json(return{data:
+			data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
+			success: true, status: 200, action: Action}) ;
+		reply_json(return{data:
+			data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
+			success: false, status: 200, message: Success})
+	).

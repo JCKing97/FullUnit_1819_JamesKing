@@ -14,126 +14,80 @@ Desc:		Contains the logic related to agents actions
 -----------------------------*/
 
 % If the agent is a donor this turn
-agent_action(DictIn, Action):-
-	current_predicate(agent/4),
-	current_predicate(community/1),
-	current_predicate(generation/2),
-	Timepoint = DictIn.timepoint,
-	CommunityID = DictIn.community,
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
-	GenerationID = DictIn.generation,
 	generation(community(CommunityID), GenerationID),
-	AgentID = DictIn.player,
 	agent(strategy("Defector", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	http_log("Timepoint ~d~n", [Timepoint]),
-	CheckTimepoint is Timepoint-1,
-	holds_at(last_interaction_timepoint(agent(strategy("Defector", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),_)=CheckTimepoint, Timepoint),
-	http_log("Timepoint-1 ~d~n", [Timepoint-1]),
-	Action = "defect", !.	
+	holds_at(last_interaction_timepoint(agent(strategy("Defector", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=Timepoint, Timepoint),
+	Success = true, Action = action{type: action, value: defect, recipient: RecipientID}, !.	
 % Auto to idle if not a donor
-agent_action(DictIn, Action):-
-	current_predicate(agent/4),
-	current_predicate(community/1),
-	current_predicate(generation/2),
-	CommunityID = DictIn.community,
+agent_action(_, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
-	GenerationID = DictIn.generation,
 	generation(community(CommunityID), GenerationID),
-	AgentID = DictIn.player,
 	agent(strategy("Defector", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	Action = "idle", !.	
+	Success = true, Action = action{type: idle}, !.	
 
 /*-----------------------------
 ---------- Cooperator ---------
 -----------------------------*/
 
 % If the agent is a donor this turn
-agent_action(DictIn, Action):-
-	current_predicate(agent/4),
-	current_predicate(community/1),
-	current_predicate(generation/2),
-	Timepoint = DictIn.timepoint,
-	CommunityID = DictIn.community,
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
-	GenerationID = DictIn.generation,
 	generation(community(CommunityID), GenerationID),
-	AgentID = DictIn.player,
 	agent(strategy("Cooperator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	http_log("Timepoint ~d~n", [Timepoint]),
-	CheckTimepoint is Timepoint-1,
-	holds_at(last_interaction_timepoint(agent(strategy("Cooperator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),_)=CheckTimepoint, Timepoint),
-	http_log("Timepoint-1 ~d~n", [Timepoint-1]),
-	Action = "cooperate", !.
+	holds_at(last_interaction_timepoint(agent(strategy("Cooperator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=Timepoint, Timepoint),
+	Success = true, Action = action{type:action, value:cooperate, recipient: RecipientID}, !.
 % Auto to idle if not a donor
-agent_action(DictIn, Action):-
-	current_predicate(agent/4),
-	current_predicate(community/1),
-	current_predicate(generation/2),
-	CommunityID = DictIn.community,
+agent_action(_, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
-	GenerationID = DictIn.generation,
 	generation(community(CommunityID), GenerationID),
-	AgentID = DictIn.player,
 	agent(strategy("Cooperator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	Action = "idle", !.
+	Success = true, Action = action{type: idle}, !.
 
 /*-----------------------------
 ------ Standing Strategy ------
 -----------------------------*/
 
 % If the agent is a donor this turn and holds the recipient in good standing: cooperate
-agent_action(DictIn, Action):-
-	current_predicate(agent/4),
-	current_predicate(community/1),
-	current_predicate(generation/2),
-	Timepoint = DictIn.timepoint,
-	CommunityID = DictIn.community,
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
-	GenerationID = DictIn.generation,
 	generation(community(CommunityID), GenerationID),
-	AgentID = DictIn.player,
 	agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	http_log("Timepoint ~d~n", [Timepoint]),
-	CheckTimepoint is Timepoint-1,
 	holds_at(last_interaction_timepoint(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-		Recipient)=CheckTimepoint, Timepoint),
-	http_log("Timepoint-1 ~d~n", [Timepoint-1]),
-	\+holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), Recipient)=bad, Timepoint),
-	Action = "cooperate", !.
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=Timepoint, Timepoint),
+	\+holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=bad, Timepoint),
+	Success = true, Action = action{type: action, value: cooperate, recipient: RecipientID}, !.
 % If the agent is a donor this turn and holds the recipient in bad standing: defect
-agent_action(DictIn, Action):-
-	current_predicate(agent/4),
-	current_predicate(community/1),
-	current_predicate(generation/2),
-	Timepoint = DictIn.timepoint,
-	CommunityID = DictIn.community,
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
-	GenerationID = DictIn.generation,
 	generation(community(CommunityID), GenerationID),
-	AgentID = DictIn.player,
 	agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	http_log("Timepoint ~d~n", [Timepoint]),
-	CheckTimepoint is Timepoint-1,
 	holds_at(last_interaction_timepoint(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-		Recipient)=CheckTimepoint, Timepoint),
-	http_log("Timepoint-1 ~d~n", [Timepoint-1]),
-	holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), Recipient)=bad, Timepoint),
-	Action = "defect", !.
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=Timepoint, Timepoint),
+	holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=bad, Timepoint),
+	Success = true, Action = action{type: action, value: defect, recipient: RecipientID}, !.
 % If the agent is a donor this turn and holds the recipient in bad standing: defect
-agent_action(DictIn, Action):-
-	current_predicate(agent/4),
-	current_predicate(community/1),
-	current_predicate(generation/2),
-	CommunityID = DictIn.community,
+agent_action(_, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
-	GenerationID = DictIn.generation,
 	generation(community(CommunityID), GenerationID),
-	AgentID = DictIn.player,
 	agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	Action = "idle", !.
+	Success = true, Action = action{type: idle}, !.
 
 /*-----------------------------
 ----------- Failure -----------
 -----------------------------*/
 
-agent_action(_, "Fail").
+agent_action(_, CommunityID, _, _, Success, Action):-
+	\+community(CommunityID),
+	Success = 'No such community', Action = false, !.
+agent_action(_, CommunityID, GenerationID, _, Success, Action):-
+	\+generation(community(CommunityID), GenerationID),
+	Success = 'No such generation for this community', Action = false, !.
+agent_action(_, CommunityID, GenerationID, AgentID, Success, Action):-
+	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	Success = 'No such player for this generation of this community', Action = false, !.
