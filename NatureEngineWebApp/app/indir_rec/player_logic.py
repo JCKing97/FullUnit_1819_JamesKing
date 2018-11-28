@@ -48,11 +48,13 @@ class Player:
 
     def update_fitness(self, update_value: int):
         """
-        Update the fitness of the player by adding the update_value
+        Update the fitness of the player by adding the update_value, cannot go below zero
         :param update_value: Add this to the fitness of the player
         :type update_value: int
         """
         self._fitness += update_value
+        if self._fitness < 0:
+            self._fitness = 0
 
     def get_fitness(self) -> int:
         """
@@ -69,12 +71,13 @@ class Player:
         """
         action_data = {"community": self._community_id, "generation": self._generation_id,
                        "player": self._id, "timepoint": timepoint}
-        response = requests.post(current_app.config['AGENTS_URL'] + "decide", json=action_data)
+        response = requests.request("GET", current_app.config['AGENTS_URL'] + "action", params=action_data)
         if response.status_code != 200:
             raise DecisionException('Error when getting decision from the agents service')
-        if response.json()['status'] == "Bad":
-            raise DecisionException('Error when getting decision from the agents service')
-        return response.json()
+        if not response.json()['success']:
+            raise DecisionException('Error when getting decision from the agents service: ' +
+                                    response.json()['message'])
+        return response.json()['action']
 
 
 class PlayerFactory:
@@ -90,7 +93,7 @@ class PlayerFactory:
         :type generation_id: int
         :param community_id: id of the community this player is a part of
         :type community_id: str
-        :return: A new player instance of the strategy inpuy
+        :return: A new player instance of the strategy input
         :rtype: Player
         :raises PlayerCreationError: Raised if there is an error in creation of the player"""
         initialise_data = {"strategy": strategy, "options": options, "community": community_id,

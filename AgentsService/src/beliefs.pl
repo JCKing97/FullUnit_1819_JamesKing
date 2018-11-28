@@ -149,8 +149,9 @@ get_interaction_belief(CommunityID, GenerationID, _, _, Agent2ID, Success, Value
 get_standing_belief(CommunityID, GenerationID, Timepoint, PerceiverID, AboutID, Success, Value):-
 	agent(strategy("Standing Discriminator", StratDesc, StratOptions), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 	agent(Strat, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
+	CheckTimepoint is Timepoint + 1,
 	holds_at(standing(agent(strategy("Standing Discriminator", StratDesc, StratOptions), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
-		agent(Strat, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID))=Value, Timepoint+1),
+		agent(Strat, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID))=Value, CheckTimepoint),
 	Success = true, !.
 % If there is no holds_at value but the perceiver uses the standing strategy they will autobelieve them to be of a good standing
 get_standing_belief(CommunityID, GenerationID, _, PerceiverID, AboutID, Success, Value):-

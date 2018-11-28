@@ -63,11 +63,13 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	CheckTimepoint is Timepoint+1,
 	holds_at(interaction_timepoints(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=InteractionTimepoints, CheckTimepoint),
-	http_log('InteractionTimepoints: ', []),
-	log_list(InteractionTimepoints),
 	member(Timepoint, InteractionTimepoints),
-	\+holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
-		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=bad, Timepoint+1),
+	( 
+		\+holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+			agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=bad, Timepoint+1) ;
+	  	holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+			agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=good, Timepoint+1)
+	),
 	Success = true, Action = action{type: action, value: cooperate, recipient: RecipientID}, !.
 % If the agent is a donor this turn and holds the recipient in bad standing: defect
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
@@ -77,8 +79,6 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	CheckTimepoint is Timepoint+1,
 	holds_at(interaction_timepoints(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=InteractionTimepoints, CheckTimepoint),
-	http_log('InteractionTimepoints: ', []),
-	log_list(InteractionTimepoints),
 	member(Timepoint, InteractionTimepoints),
 	holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
 		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=bad, Timepoint+1),
