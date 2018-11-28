@@ -21,4 +21,3 @@ observed_at(interaction(agent(strategy("cooperator", "desc", []), community(0), 
 % Agent 8 is a donor at timepoints: 7. The recipient of that action is Agent 5.
 observed_at(interaction(agent(strategy("Standing Discriminator", "desc", ["trusting"]), community(0), generation(community(0), 0), 8),
 	agent(strategy("Standing Discriminator", "desc", ["trusting"]), community(0), generation(community(0), 0), 5)), 7).
-

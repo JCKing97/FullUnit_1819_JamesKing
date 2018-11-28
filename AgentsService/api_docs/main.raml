@@ -254,9 +254,9 @@ description: Welcome to the documentation for the agent mind as a service API, t
 /belief:
   description: Agents have beliefs derived from percepts which they use to judge how they should act.
   /donor:
-    description: The last time the agent believed they were a donor, before a particular timepoint.
+    description: A list of timepoints in which an agent is a donor and the recipients of those interactions
     get:
-      description: Get the last timepoint a player believed themselves to be a donor in a donor-recipient pair before the given timepoint.
+      description: Get a list of timepoints in which an agent believes it was a donor before the given timepoint and get the recipients of those interactions.
       queryParameters:
         timepoint:
           type: integer
@@ -284,8 +284,10 @@ description: Welcome to the documentation for the agent mind as a service API, t
                   },
                   "success": true,
                   "status": 200,
-                  "timepoint": 4,
-                  "recipient": 6
+                  "interactions": [
+                      {"recipient": 6, "timepoints": [4]},
+                      {"recipient": 3, "timepoints": [7,8]}
+                    ]
                 }
   /recipient:
     description: The last time the agent believed they were a recipient, before a particular timepoint.
@@ -318,8 +320,10 @@ description: Welcome to the documentation for the agent mind as a service API, t
                   },
                   "success": true,
                   "status": 200,
-                  "timepoint": 4,
-                  "donor": 2
+                  "interactions": [
+                      {"donor": 2, "timepoints": [4]},
+                      {"donor": 8, "timepoints": [3,5,8]}
+                    ]
                 }
   /interaction:
     description: The last time two agents believed they were in a donor-recipient pair interaction, before a particular timepoint.
@@ -357,8 +361,9 @@ description: Welcome to the documentation for the agent mind as a service API, t
                   "success": true,
                   "status": 200,
                   "timepoint": 4,
-                  "donor": 2,
-                  "recipient": 6
+                  "interactions": [
+                      {"donor": 2, "recipient": 6, "timepoints": [4]}
+                    ]
                 }
   /standing:
     description: The standing strategy judges other players based on their perceived "standing" which can either be good or bad.

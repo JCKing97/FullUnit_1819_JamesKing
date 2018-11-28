@@ -133,7 +133,7 @@ percept_action_gossip(Request):-
 		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
 		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
 
-% Handles a request to check the belief of an agent on the last time they were a donor
+% Handles a request to check the belief of an agent on all the times they were a donor
 belief_donor(Request):-
 	member(method(get), Request), !,
 	http_parameters(
@@ -145,17 +145,17 @@ belief_donor(Request):-
 			player(AgentID, [integer])
 		]
 	),
-	get_donor_belief(Community, Generation, AgentID, Timepoint, Success, Value, RecipientID),
+	get_donor_belief(Community, Generation, AgentID, Timepoint, Success, Value),
 	(Success == true ->
 		reply_json(return{data:
 			data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
-			success: true, status: 200, timepoint: Value, recipient: RecipientID}) ;
+			success: true, status: 200, interactions: Value}) ;
 		reply_json(return{data: 
 						data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
 			success: false, status: 200, message: Success})
 	).
 
-% Handles a request to check the belief of an agent on the last time they were a donor
+% Handles a request to check the belief of an agent on all the times they were a recipient
 belief_recipient(Request):-
 	member(method(get), Request), !,
 	http_parameters(
@@ -167,11 +167,11 @@ belief_recipient(Request):-
 			player(AgentID, [integer])
 		]
 	),
-	get_recipient_belief(Community, Generation, AgentID, Timepoint, Success, Value, DonorID),
+	get_recipient_belief(Community, Generation, AgentID, Timepoint, Success, Value),
 	(Success == true ->
 		reply_json(return{data:
 			data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
-			success: true, status: 200, timepoint: Value, donor: DonorID}) ;
+			success: true, status: 200, interactions: Value}) ;
 		reply_json(return{data: 
 						data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
 			success: false, status: 200, message: Success})
@@ -190,11 +190,11 @@ belief_interaction(Request):-
 			player2(Agent2ID, [integer])
 		]
 	),
-	get_interaction_belief(Community, Generation, Timepoint, Agent1ID, Agent2ID, Success, Value, DonorID, RecipientID),
+	get_interaction_belief(Community, Generation, Timepoint, Agent1ID, Agent2ID, Success, Value),
 	(Success == true ->
 		reply_json(return{data:
 						data{community: Community, generation: Generation, player1: Agent1ID, player2: Agent2ID, timepoint: Timepoint},
-					success: true, status: 200, timepoint: Value, donor: DonorID, recipient: RecipientID}) ;
+					success: true, status: 200, interactions: Value}) ;
 		reply_json(return{data: 
 						data{community: Community, generation: Generation,  player1: Agent1ID, player2: Agent2ID, timepoint: Timepoint},
 					success: false, status: 200, message: Success})

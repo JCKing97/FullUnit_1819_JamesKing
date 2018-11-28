@@ -14,8 +14,16 @@ get_strategy(Strategy, Options, agent(strategy(Strategy, _, Options), _, _, _)).
 -----------------------------*/
 
 initiates_at(interaction(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient)), [],
-  last_interaction_timepoint(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient))=T, T):-
-	happens_at(interaction(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient)), T).
+  interaction_timepoints(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient))=Timepoints, T):-
+	happens_at(interaction(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient)), T),
+	CheckTimepoint is T - 1,
+	holds_at(interaction_timepoints(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient))=OldTimepoints, CheckTimepoint),
+	append(OldTimepoints, [T], Timepoints).
+initiates_at(interaction(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient)), [],
+  interaction_timepoints(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient))=[T], T):-
+	happens_at(interaction(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient)), T),
+	CheckTimepoint is T - 1,
+	\+holds_at(interaction_timepoints(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient))=_, CheckTimepoint).
 
 % Is nothing ok?
 causes_at(said(_, _,_,_), nothing, _).

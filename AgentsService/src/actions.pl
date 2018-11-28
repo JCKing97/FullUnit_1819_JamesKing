@@ -5,6 +5,8 @@ Created:	Nov 2018
 Desc:		Contains the logic related to agents actions
 --------------------------------------*/
 
+:- use_module(library(http/http_log)).
+
 /*----------------------------------------------------------------------------------------
 ---------------------------------------- Get Actions -------------------------------------
 ----------------------------------------------------------------------------------------*/
@@ -18,8 +20,9 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
 	agent(strategy("Defector", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	holds_at(last_interaction_timepoint(agent(strategy("Defector", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=Timepoint, Timepoint),
+	holds_at(interaction_timepoints(agent(strategy("Defector", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=InteractionTimepoints, Timepoint+1),
+	member(Timepoint, InteractionTimepoints),
 	Success = true, Action = action{type: action, value: defect, recipient: RecipientID}, !.	
 % Auto to idle if not a donor
 agent_action(_, CommunityID, GenerationID, AgentID, Success, Action):-
@@ -37,8 +40,9 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
 	agent(strategy("Cooperator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	holds_at(last_interaction_timepoint(agent(strategy("Cooperator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=Timepoint, Timepoint),
+	holds_at(interaction_timepoints(agent(strategy("Cooperator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=InteractionTimepoints, Timepoint+1),
+	member(Timepoint, InteractionTimepoints),
 	Success = true, Action = action{type:action, value:cooperate, recipient: RecipientID}, !.
 % Auto to idle if not a donor
 agent_action(_, CommunityID, GenerationID, AgentID, Success, Action):-
@@ -56,20 +60,28 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
 	agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	holds_at(last_interaction_timepoint(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=Timepoint, Timepoint),
+	CheckTimepoint is Timepoint+1,
+	holds_at(interaction_timepoints(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=InteractionTimepoints, CheckTimepoint),
+	http_log('InteractionTimepoints: ', []),
+	log_list(InteractionTimepoints),
+	member(Timepoint, InteractionTimepoints),
 	\+holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
-		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=bad, Timepoint),
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=bad, Timepoint+1),
 	Success = true, Action = action{type: action, value: cooperate, recipient: RecipientID}, !.
 % If the agent is a donor this turn and holds the recipient in bad standing: defect
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
 	agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	holds_at(last_interaction_timepoint(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=Timepoint, Timepoint),
+	CheckTimepoint is Timepoint+1,
+	holds_at(interaction_timepoints(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=InteractionTimepoints, CheckTimepoint),
+	http_log('InteractionTimepoints: ', []),
+	log_list(InteractionTimepoints),
+	member(Timepoint, InteractionTimepoints),
 	holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
-		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=bad, Timepoint),
+		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=bad, Timepoint+1),
 	Success = true, Action = action{type: action, value: defect, recipient: RecipientID}, !.
 % If the agent is a donor this turn and holds the recipient in bad standing: defect
 agent_action(_, CommunityID, GenerationID, AgentID, Success, Action):-
@@ -91,3 +103,9 @@ agent_action(_, CommunityID, GenerationID, _, Success, Action):-
 agent_action(_, CommunityID, GenerationID, AgentID, Success, Action):-
 	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	Success = 'No such player for this generation of this community', Action = false, !.
+
+log_list([A]):-
+	http_log('~w~n', [A]).
+log_list([A|B]):-
+	http_log('~w, ', [A]),
+	log_list(B).

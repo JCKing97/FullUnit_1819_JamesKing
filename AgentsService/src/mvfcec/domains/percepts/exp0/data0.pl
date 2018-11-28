@@ -12,6 +12,13 @@ agent(strategy("Standing Discriminator", "desc", ["distrusting"]), community(0),
 agent(strategy("Standing Discriminator", "desc", ["distrusting"]), community(0), generation(community(0), 0),4).
 agent(strategy("Standing Discriminator", "desc", ["distrusting"]), community(0), generation(community(0), 0),5).
 
+observed_at(create_agent(agent(strategy("Standing Discriminator", "desc", ["trusting"]), community(0), generation(community(0), 0), 0)), 0).
+observed_at(create_agent(agent(strategy("Standing Discriminator", "desc", ["trusting"]), community(0), generation(community(0), 0), 1)), 0).
+observed_at(create_agent(agent(strategy("Standing Discriminator", "desc", ["trusting"]), community(0), generation(community(0), 0), 2)), 0).
+observed_at(create_agent(agent(strategy("Standing Discriminator", "desc", ["distrusting"]), community(0), generation(community(0), 0),3)), 0).
+observed_at(create_agent(agent(strategy("Standing Discriminator", "desc", ["distrusting"]), community(0), generation(community(0), 0),4)), 0).
+observed_at(create_agent(agent(strategy("Standing Discriminator", "desc", ["distrusting"]), community(0), generation(community(0), 0),5)), 0).
+
 % agent(strategy("Standing Discriminator", "desc", ["trusting"])agent(strategy("Standing Discriminator", "desc", ["trusting"]), community(0), generation(community(0), 0),1), 1) "defect"s against agent(strategy("Standing Discriminator", "desc", ["distrusting"]), community(0), generation(community(0), 0),3), and  agent(strategy("Standing Discriminator", "desc", ["trusting"]), community(0), generation(community(0), 0),2) observes this
 % agent(strategy("Standing Discriminator", "desc", ["trusting"])agent(strategy("Standing Discriminator", "desc", ["trusting"]), community(0), generation(community(0), 0),1), 1) will have a bad "Standing Discriminator" from  agent(strategy("Standing Discriminator", "desc", ["trusting"]), community(0), generation(community(0), 0),2)'s viewing after this
 observed_at(did(agent(strategy("Standing Discriminator", "desc", ["trusting"]), community(0), generation(community(0), 0),1),  agent(strategy("Standing Discriminator", "desc", ["trusting"]), community(0), generation(community(0), 0),2), agent(strategy("Standing Discriminator", "desc", ["distrusting"]), community(0), generation(community(0), 0),3), "defect"), 1).

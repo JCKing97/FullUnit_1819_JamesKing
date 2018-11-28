@@ -29,35 +29,37 @@ class BeliefsDonorRecipientInteractionTesting(unittest.TestCase):
         self.assertTrue(self.percept_response['success'])
 
     def test_donor_belief(self):
-        donor_belief_params = {"timepoint": 5, "community": self.community_response['id'],
+        donor_belief_params = {"timepoint": 4, "community": self.community_response['id'],
                                "generation": 0, "player": self.donor_payload['player']}
         donor_belief_response = requests.request("GET", self.url + '/belief/donor', params=donor_belief_params).json()
+        print(donor_belief_response['interactions'])
         self.assertEqual(donor_belief_params, donor_belief_response['data'])
         self.assertTrue(donor_belief_response['success'])
-        self.assertEqual(4, donor_belief_response['timepoint'])
-        self.assertEqual(self.recipient_payload['player'], donor_belief_response['recipient'])
+        self.assertEqual([{'timepoints': [4], 'recipient': self.recipient_payload['player']}],
+                         donor_belief_response['interactions'])
 
     def test_recipient_belief(self):
-        recipient_belief_params = {"timepoint": 5, "community": self.community_response['id'],
+        recipient_belief_params = {"timepoint": 4, "community": self.community_response['id'],
                                    "generation": 0, "player": self.recipient_payload['player']}
         recipient_belief_response = requests.request("GET", self.url + '/belief/recipient',
                                                      params=recipient_belief_params).json()
+        print(recipient_belief_response['interactions'])
         self.assertEqual(recipient_belief_params, recipient_belief_response['data'])
         self.assertTrue(recipient_belief_response['success'])
-        self.assertEqual(4, recipient_belief_response['timepoint'])
-        self.assertEqual(self.donor_payload['player'], recipient_belief_response['donor'])
+        self.assertEqual([{'timepoints': [4], 'donor': self.donor_payload['player']}],
+                         recipient_belief_response['interactions'])
 
     def test_interaction_belief(self):
-        interaction_belief_params = {"timepoint": 5, "community": self.community_response['id'],
+        interaction_belief_params = {"timepoint": 4, "community": self.community_response['id'],
                                      "generation": 0, "player1": self.recipient_payload['player'],
                                      "player2": self.donor_payload['player']}
         interaction_belief_response = requests.request("GET", self.url + '/belief/interaction',
                                                        params=interaction_belief_params).json()
+        print(interaction_belief_response['interactions'])
         self.assertEqual(interaction_belief_params, interaction_belief_response['data'])
         self.assertTrue(interaction_belief_response['success'])
-        self.assertEqual(4, interaction_belief_response['timepoint'])
-        self.assertEqual(self.donor_payload['player'], interaction_belief_response['donor'])
-        self.assertEqual(self.recipient_payload['player'], interaction_belief_response['recipient'])
+        self.assertEqual([{'timepoints': [4], 'recipient': self.recipient_payload['player'],
+                           'donor': self.donor_payload['player']}], interaction_belief_response['interactions'])
 
     def test_donor_incorrect_community(self):
         donor_belief_params = {"timepoint": 5, "community": self.community_response['id']+1000,
@@ -81,8 +83,7 @@ class BeliefsDonorRecipientInteractionTesting(unittest.TestCase):
         donor_belief_response = requests.request("GET", self.url + '/belief/donor', params=donor_belief_params).json()
         self.assertEqual(donor_belief_params, donor_belief_response['data'])
         self.assertTrue(donor_belief_response['success'])
-        self.assertEqual(-1, donor_belief_response['timepoint'])
-        self.assertEqual(-1, donor_belief_response['recipient'])
+        self.assertEqual([], donor_belief_response['interactions'])
 
     def test_donor_incorrect_donor(self):
         donor_belief_params = {"timepoint": 1, "community": self.community_response['id'],
@@ -126,8 +127,7 @@ class BeliefsDonorRecipientInteractionTesting(unittest.TestCase):
                                                      params=recipient_belief_params).json()
         self.assertEqual(recipient_belief_params, recipient_belief_response['data'])
         self.assertTrue(recipient_belief_response['success'])
-        self.assertEqual(-1, recipient_belief_response['timepoint'])
-        self.assertEqual(-1, recipient_belief_response['donor'])
+        self.assertEqual([], recipient_belief_response['interactions'])
 
     def test_interaction_incorrect_community(self):
         interaction_belief_params = {"timepoint": 5, "community": self.community_response['id']+100,
@@ -187,6 +187,4 @@ class BeliefsDonorRecipientInteractionTesting(unittest.TestCase):
                                                        params=interaction_belief_params).json()
         self.assertTrue(interaction_belief_response['success'])
         self.assertEqual(interaction_belief_params, interaction_belief_response['data'])
-        self.assertEqual(-1, interaction_belief_response['donor'])
-        self.assertEqual(-1, interaction_belief_response['recipient'])
-        self.assertEqual(-1, interaction_belief_response['timepoint'])
+        self.assertEqual([], interaction_belief_response['interactions'])
