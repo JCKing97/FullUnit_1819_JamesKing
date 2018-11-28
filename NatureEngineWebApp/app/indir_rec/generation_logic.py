@@ -2,7 +2,7 @@
 
 from typing import Dict
 from .player_logic import Player, PlayerFactory, PlayerCreationException
-from .percept_logic import PerceptDonor, PerceptRecipient, PerceptionException
+from .percept_logic import PerceptionException, PerceptInteraction
 import random
 import copy
 import requests
@@ -34,21 +34,21 @@ class ActionFactory:
 class Generation:
     """A generation of players inside a community"""
 
-    def __init__(self, strategies: Dict[str, int], start_time: int, end_time: int,
+    def __init__(self, strategies: Dict[Dict, int], start_time: int, end_time: int,
                  communityID: int, id: int, onlooker_number: int):
         self._players = {}
         self._id = id
-        response = requests.post(current_app.config['AGENTS_URL'] + "create/new_generation",
+        response = requests.request("PUT", current_app.config['AGENTS_URL'] + "generation",
                                  json={"community": communityID, "generation": self._id})
         if response.status_code != 200:
             raise GenerationCreationException("Error when creating generation, not 200 status code")
-        if response.json()['status'] == "Bad":
+        if not response.json()['succcess']:
             raise GenerationCreationException("Error when creating generation, bad status")
         id = 0
         for strategy, strategy_count in strategies.items():
             for i in range(strategy_count):
                 try:
-                    new_player = PlayerFactory.new_player(strategy, communityID, self._id, id)
+                    new_player = PlayerFactory.new_player(strategy['name'], strategy['options'], communityID, self._id, id)
                     self._players[new_player.get_id()] = new_player
                     id += 1
                 except PlayerCreationException as e:
@@ -65,7 +65,7 @@ class Generation:
         """Convert the passed id to a player object"""
         return self._players[id]
 
-    def _generate_meeting_percept_and_onlookers(self):
+    def _generate_meeting_percept_and_onlookers(self, timepoint):
         """Generate a donor-recipient pair and the onlookers for the pair
         :return: The first element: a perception that a player is the donor
          and a perception that a player is a recipient
@@ -85,16 +85,16 @@ class Generation:
                 onlookers.append(self._players[onlooker_id])
             else:
                 break
-        return [PerceptDonor(self._players[donor_id]), PerceptRecipient(self._players[recipient_id])], onlookers
+        return PerceptInteraction(self._players[donor_id], self._players[recipient_id], timepoint), onlookers
 
     def simulate(self):
         """Simulate the generation, in each timepoint: generate a donor-recipient pair and onlookers,
         then send perceptions to the agents, then ask them to decide on an action, then execute the action"""
         for current_time_point in range(self._start_time, self._end_time):
             # Generate the donor recipient pair and their onlookers
-            donor_recipient_perceptions, onlookers = self._generate_meeting_percept_and_onlookers()
+            donor_recipient_perception, onlookers = self._generate_meeting_percept_and_onlookers(current_time_point)
             # Perceive
-            self._new_percepts.extend(donor_recipient_perceptions)
+            self._new_percepts.append(donor_recipient_perception)
             for perception in self._new_percepts:
                 try:
                     perception.perceive(self._communityID, self.get_id())

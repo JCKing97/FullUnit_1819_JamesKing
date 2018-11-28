@@ -17,14 +17,14 @@ class CommunityCreationException(Exception):
 class Community:
     """A community that goes through a number of generations"""
 
-    def __init__(self, initial_strategies: Dict[str, int], onlooker_number: int = 5, generation_length: int = 10,
+    def __init__(self, initial_strategies: Dict[Dict, int], onlooker_number: int = 5, generation_length: int = 10,
                  generation_number: int = 5):
         self._generations = []
         self._current_time = 0
         self._onlooker_number = onlooker_number
         self._generation_length = generation_length
         self._generation_number = generation_number
-        response = requests.get(current_app.config['AGENTS_URL'] + "create/new_community")
+        response = requests.request("PUT", current_app.config['AGENTS_URL'] + "community")
         if response.status_code != 200:
             raise CommunityCreationException("Failed when attempting to create community, cannot simulate reciprocity")
         self._id = response.json()['id']
@@ -48,7 +48,8 @@ class Community:
         """
         try:
             if generation_id == 0:
-                return Generation(self._initial_strategies, 0, self._generation_length, self._id, 0, self._onlooker_number)
+                return Generation(self._initial_strategies, 0, self._generation_length, self._id, 0,
+                                  self._onlooker_number)
             else:
                 return self._reproduce(generation_id)
         except PlayerCreationException as e:

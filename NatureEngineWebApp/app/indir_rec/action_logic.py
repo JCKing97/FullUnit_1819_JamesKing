@@ -37,7 +37,7 @@ class Action(ABC):
 class Interaction(Action):
     """An interaction that occurs between a donor-recipient pair, with other players onlooking"""
 
-    def __init__(self, timepoint: int, donor: Player, recipient: Player, cooperated: bool):
+    def __init__(self, timepoint: int, donor: Player, recipient: Player, action: bool):
         """
         :param timepoint: The timepoint at which this interaction occurred
         :type timepoint: int
@@ -52,7 +52,7 @@ class Interaction(Action):
         self._donor = donor
         self._recipient = recipient
         self._occurred = False
-        self._cooperated = cooperated
+        self._action = action
         self._onlookers = []
 
     def get_type(self) -> str:
@@ -73,7 +73,7 @@ class Interaction(Action):
         event_dict = {"type": self.get_type(), "donor": self._donor, "recipient": self._recipient,
                       "onlookers": self._onlookers, "timepoint": self._timepoint}
         if self._occurred:
-            event_dict['cooperated'] = self._cooperated
+            event_dict['action'] = self._action
         return event_dict
 
     def set_onlookers(self, onlookers: List[Player]):
@@ -91,19 +91,20 @@ class Interaction(Action):
         :rtype: List[Percept]
         """
         self._occurred = True
-        if self._cooperated:
+        if self._action:
             self._donor.update_fitness(-1)
             self._recipient.update_fitness(2)
-        generated_percepts = [PerceptAction(onlooker, self.get_action()) for onlooker in self._onlookers]
-        generated_percepts.append(PerceptAction(self._donor, self.get_action()))
-        generated_percepts.append(PerceptAction(self._recipient, self.get_action()))
+        generated_percepts = [PerceptAction(onlooker, self._timepoint, self.get_action())
+                              for onlooker in self._onlookers]
+        generated_percepts.append(PerceptAction(self._donor.get_id(), self._timepoint, self.get_action()))
+        generated_percepts.append(PerceptAction(self._recipient.get_id(), self._timepoint, self.get_action()))
         return generated_percepts
 
 
 class Gossip(Action):
     """A piece of gossip about a certain player"""
 
-    def __init__(self, positive: bool, about: Player, gossiper: Player, recipient: Player, timepoint: int):
+    def __init__(self, gossip: bool, about: int, gossiper: int, recipient: int, timepoint: int):
         """
         :param positive: Is the gossip positive?
         :type positive: bool
@@ -114,7 +115,7 @@ class Gossip(Action):
         :param timepoint: The timepoint at which this gossip occurs
         :type timepoint: int
         """
-        self._positive = positive
+        self._gossip = gossip
         self._about = about
         self._gossiper = gossiper
         self._recipient = recipient
@@ -127,7 +128,7 @@ class Gossip(Action):
         :rtype: Dict
         """
         return {"type": self.get_type(), "about": self._about, "gossiper": self._gossiper,
-                "positive": self._positive, "timepoint": self._timepoint}
+                "gossip": self._gossip, "timepoint": self._timepoint}
 
     def get_type(self) -> str:
         """
@@ -139,8 +140,8 @@ class Gossip(Action):
 
     def execute(self) -> List[Percept]:
         """Create the percept from thi gossip"""
-        return [PerceptAction(self._recipient, self.get_action())]
+        return [PerceptAction(self._recipient, self._timepoint, self.get_action())]
 
-    def set_onlookers(cls, onlookers: List[Player]):
+    def set_onlookers(self, onlookers: List[Player]):
         """Set the onlookers for this action"""
         raise NotImplementedError
