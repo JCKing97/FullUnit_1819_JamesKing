@@ -22,7 +22,14 @@ class Percept(ABC):
     @classmethod
     def perceive(cls, community_id: int, generation_id: int):
         """
-        Add the percepts to the prolog player
+        Add the percepts to the player
+        """
+        raise NotImplementedError
+
+    @classmethod
+    def get_percept(cls):
+        """
+        Get the representation of the percept as a dictionary
         """
         raise NotImplementedError
 
@@ -44,15 +51,15 @@ class PerceptAction(Percept):
         if self._action_dict['type'] == "interaction":
             perception_data = {"community": community_id, "generation": generation_id,
                                "perceiver": self._perceiver, "action": self._action_dict['action'],
-                               "donor": self._action_dict['donor'], "recipient": self._action_dict['recipient'],
+                               "donor": self._action_dict['donor'].get_id(),
+                               "recipient": self._action_dict['recipient'].get_id(),
                                "timepoint": self._timepoint}
         elif self._action_dict['type'] == "gossip":
             perception_data = {"community": community_id, "generation": generation_id,
                                "perceiver": self._perceiver, "gossip": self._action_dict['gossip'],
-                               "about": self._action_dict['about'], "gossiper": self._action_dict['gossiper'],
-                               "timepoint": self._timepoint}
+                               "about": self._action_dict['about'].get_id(),
+                               "gossiper": self._action_dict['gossiper'].get_id(), "timepoint": self._timepoint}
         if perception_data is not None:
-            print(current_app.config['AGENTS_URL'] + "percept/action/" + url_extension)
             response = requests.post(current_app.config['AGENTS_URL'] + "percept/action/" + url_extension,
                                      json=perception_data)
             if response.status_code != 200:
@@ -62,6 +69,21 @@ class PerceptAction(Percept):
                                           response.json()['message'])
         else:
             raise PerceptionException('Error when sending perception to the agents service')
+
+    def get_percept(self):
+        """
+        Get a representation of the percept as a dictionary
+        :return: the representation of the percept as a dictionary
+        """
+        return {"action": self._action_dict, "perceiver": self._perceiver, "timepoint": self._timepoint}
+
+    def get_perceiver(self) -> int:
+        """
+        Get the id of the perceiver of this percept
+        :return: the id of the perceiver of this percept.
+        :rtype: int
+        """
+        return self._perceiver
 
 
 class PerceptInteraction(Percept):
@@ -79,7 +101,15 @@ class PerceptInteraction(Percept):
         perception_data = {"community": community_id, "generation": generation_id,
                            "donor": self._donor, "recipient": self._recipient,
                            "timepoint": self._timepoint}
-        response = requests.request("POST", current_app.config['AGENTS_URL'] + 'percept/interaction', json=perception_data)
+        response = requests.request("POST", current_app.config['AGENTS_URL'] + 'percept/interaction',
+                                    json=perception_data)
         if response.status_code != 200 or not response.json()['success']:
             raise PerceptionException('Error when sending perception to the agents service'+
                                       response.json()['message'])
+
+    def get_percept(self):
+        """
+        Get a representation of the percept as a dictionary
+        :return: the representation of the percept as a dictionary
+        """
+        return {"recipient": self._recipient, "donor": self._donor, "timepoint": self._timepoint}

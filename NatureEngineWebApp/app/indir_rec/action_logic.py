@@ -15,13 +15,8 @@ class Action(ABC):
         raise NotImplementedError
 
     @classmethod
-    def execute(cls) -> List[Percept]:
+    def execute(cls) -> List[PerceptAction]:
         """Execute the action in the environment, generating percepts for the involved players"""
-        raise NotImplementedError
-
-    @classmethod
-    def set_onlookers(cls, onlookers: List[Player]):
-        """Set the onlookers for this action"""
         raise NotImplementedError
 
     @classmethod
@@ -33,11 +28,15 @@ class Action(ABC):
         """
         raise NotImplementedError
 
+    @classmethod
+    def update_onlookers(cls, onlookers: List[Player]):
+        raise NotImplementedError
+
 
 class Interaction(Action):
     """An interaction that occurs between a donor-recipient pair, with other players onlooking"""
 
-    def __init__(self, timepoint: int, donor: Player, recipient: Player, action: bool):
+    def __init__(self, timepoint: int, donor: Player, recipient: Player, action: str):
         """
         :param timepoint: The timepoint at which this interaction occurred
         :type timepoint: int
@@ -45,8 +44,6 @@ class Interaction(Action):
         :type donor: Player
         :param recipient:The recipient of the donor-recipient pair in this interaction
         :type recipient: Player
-        :param onlookers: The players who have directly observed this interaction
-        :type onlookers: List[Player]
         """
         self._timepoint = timepoint
         self._donor = donor
@@ -70,31 +67,31 @@ class Interaction(Action):
         :return: A dictionary representation of the event
         :rtype: Dict
         """
-        event_dict = {"type": self.get_type(), "donor": self._donor, "recipient": self._recipient,
+        event_dict = {"donor": self._donor, "recipient": self._recipient, "type": self.get_type(),
                       "onlookers": self._onlookers, "timepoint": self._timepoint}
         if self._occurred:
             event_dict['action'] = self._action
         return event_dict
 
-    def set_onlookers(self, onlookers: List[Player]):
+    def update_onlookers(self, onlookers: List[Player]):
         """
         Set the onlookers for the interaction
         :param onlookers: The onlookers for the interaction
         :return: nothing
         """
-        self._onlookers = onlookers
+        self._onlookers.extend(onlookers)
 
-    def execute(self) -> List[Percept]:
+    def execute(self) -> List[PerceptAction]:
         """
         Execute the action, producing a list of percepts from it
         :return: The percepts produces from the action
-        :rtype: List[Percept]
+        :rtype: List[PerceptAction]
         """
         self._occurred = True
-        if self._action:
+        if self._action == "cooperate":
             self._donor.update_fitness(-1)
             self._recipient.update_fitness(2)
-        generated_percepts = [PerceptAction(onlooker, self._timepoint, self.get_action())
+        generated_percepts = [PerceptAction(onlooker.get_id(), self._timepoint, self.get_action())
                               for onlooker in self._onlookers]
         generated_percepts.append(PerceptAction(self._donor.get_id(), self._timepoint, self.get_action()))
         generated_percepts.append(PerceptAction(self._recipient.get_id(), self._timepoint, self.get_action()))
@@ -104,10 +101,10 @@ class Interaction(Action):
 class Gossip(Action):
     """A piece of gossip about a certain player"""
 
-    def __init__(self, gossip: bool, about: int, gossiper: int, recipient: int, timepoint: int):
+    def __init__(self, timepoint: int, about: Player, gossiper: Player, recipient: Player, gossip: str):
         """
-        :param positive: Is the gossip positive?
-        :type positive: bool
+        :param gossip: Either positive or negative
+        :type gossip: str
         :param about: The player that the gossip is about
         :type about: Player
         :param gossiper: The player that spread the gossip
@@ -127,7 +124,7 @@ class Gossip(Action):
         :return: The dictionary representation of the gossip
         :rtype: Dict
         """
-        return {"type": self.get_type(), "about": self._about, "gossiper": self._gossiper,
+        return {"type": self.get_type(), "about": self._about, "gossiper": self._gossiper, "recipient": self._recipient,
                 "gossip": self._gossip, "timepoint": self._timepoint}
 
     def get_type(self) -> str:
@@ -138,10 +135,9 @@ class Gossip(Action):
         """
         return "gossip"
 
-    def execute(self) -> List[Percept]:
-        """Create the percept from thi gossip"""
-        return [PerceptAction(self._recipient, self._timepoint, self.get_action())]
+    def execute(self) -> List[PerceptAction]:
+        """Create the percept from this gossip"""
+        return [PerceptAction(self._recipient.get_id(), self._timepoint, self.get_action())]
 
-    def set_onlookers(self, onlookers: List[Player]):
-        """Set the onlookers for this action"""
+    def update_onlookers(self, onlookers: List[Player]):
         raise NotImplementedError

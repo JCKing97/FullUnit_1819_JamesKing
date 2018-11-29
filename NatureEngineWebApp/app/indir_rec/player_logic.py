@@ -25,7 +25,7 @@ class DecisionException(Exception):
 class Player:
     """A class used to represent a player in the environment"""
 
-    def __init__(self, id: int, strategy: str, community_id: int, generation_id: int):
+    def __init__(self, id: int, strategy: str, strategy_options: List, community_id: int, generation_id: int):
         """
         :param id: The id of the player in the agents service
         :param strategy: The name of the strategy of the player
@@ -35,6 +35,7 @@ class Player:
         self._id = id
         self._fitness = 0
         self._strategy = strategy
+        self._strategy_options = strategy_options
         self._community_id = community_id
         self._generation_id = generation_id
 
@@ -79,6 +80,14 @@ class Player:
                                     response.json()['message'])
         return response.json()['action']
 
+    def get_strategy(self) -> Dict:
+        """
+        Get the strategy used by the player
+        :return: The action this player has committed to
+        :rtype: Dict
+        """
+        return {'name': self._strategy, 'options': self._strategy_options}
+
 
 class PlayerFactory:
     """A class used to create a new player both in the python application and agents service"""
@@ -103,4 +112,4 @@ class PlayerFactory:
             raise PlayerCreationException('Failed to create player, agent service error')
         if not response.json()['success']:
             raise PlayerCreationException('Failed to create player: ' + response.json()['message'])
-        return Player(player_id, strategy, community_id, generation_id)
+        return Player(player_id, strategy, options, community_id, generation_id)

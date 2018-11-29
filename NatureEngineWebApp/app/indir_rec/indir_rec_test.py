@@ -6,12 +6,13 @@ import unittest
 from tests.test_config import TestConfig
 from app import create_app
 import requests
+import random
 from flask import current_app
 from .community_logic import Community, CommunityCreationException
 from .generation_logic import Generation, GenerationCreationException
 from .percept_logic import PerceptInteraction, PerceptAction, PerceptionException
 from .player_logic import PlayerFactory, PlayerCreationException, Player, DecisionException
-from .action_logic import Action, Gossip
+from .action_logic import Interaction, Gossip
 
 
 # class CommunityTest(unittest.TestCase):
@@ -223,6 +224,10 @@ class PlayerTest(unittest.TestCase):
         self.assertEqual(2, self.player.get_id(), msg="Id should be the same as assigned")
         self.assertNotEqual(1,  self.player.get_id(), msg="Id should be the same as assigned")
 
+    def test_get_strategy(self):
+        self.assertEqual({'name': "Standing Discriminator", 'options': ['trusting']},
+                         self.player.get_strategy())
+
     def test_fitness(self):
         self.assertEqual(0, self.player.get_fitness(), msg="Fitness should start on 0")
         self.player.update_fitness(-2)
@@ -258,6 +263,167 @@ class PlayerTest(unittest.TestCase):
                 self.fail("Should not have failed to make a decision")
 
 
+class InteractionTest(unittest.TestCase):
+
+    def setUp(self):
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        self.community = requests.request("PUT", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        requests.request("PUT", current_app.config['AGENTS_URL'] + 'generation', json={"community": self.community,
+                                                                                       "generation": 0}).json()
+        self.generation = 0
+        strategies = requests.request("GET", current_app.config['AGENTS_URL'] + 'strategies').json()['strategies']
+        self.players = []
+        id = 0
+        for strategy in strategies:
+            self.players.append(PlayerFactory.new_player(strategy['name'], strategy['options'],
+                                                         self.community, self.generation, id))
+            id += 1
+
+    def tearDown(self):
+        self.app_context.pop()
+
+    def test_get_type(self):
+        interaction = Interaction(3, random.choice(self.players), random.choice(self.players), "defect")
+        self.assertEqual("interaction", interaction.get_type())
+
+    def test_get_action(self):
+        donor = random.choice(self.players)
+        recipient = random.choice(self.players)
+        action = "cooperate"
+        timepoint = 7
+        onlookers = []
+        interaction = Interaction(timepoint, donor, recipient, action)
+        self.assertEqual({"timepoint": timepoint, "donor": donor, "recipient": recipient, "onlookers": onlookers,
+                          "type": "interaction"},
+                         interaction.get_action())
+
+    def test_update_onlookers(self):
+        donor = random.choice(self.players)
+        recipient = random.choice(self.players)
+        action = "cooperate"
+        timepoint = 7
+        onlookers1 = []
+        interaction = Interaction(timepoint, donor, recipient, action)
+        for i in range(2):
+            onlookers1.append(random.choice(self.players))
+        interaction.update_onlookers(onlookers1)
+        self.assertEqual({"timepoint": timepoint, "donor": donor, "recipient": recipient, "onlookers": onlookers1,
+                          "type": "interaction"},
+                         interaction.get_action())
+        onlookers2 = []
+        for i in range(3):
+            onlookers2.append(random.choice(self.players))
+        interaction.update_onlookers(onlookers2)
+        self.assertEqual({"timepoint": timepoint, "donor": donor, "recipient": recipient,
+                          "onlookers": onlookers1 + onlookers2, "type": "interaction"}, interaction.get_action())
+
+    def test_execute_cooperate(self):
+        donor = random.choice(self.players)
+        recipient = random.choice(self.players)
+        action = "cooperate"
+        timepoint = 7
+        onlookers = [random.choice(self.players), random.choice(self.players)]
+        interaction = Interaction(timepoint, donor, recipient, action)
+        interaction.update_onlookers(onlookers)
+        perceivers = [donor.get_id(), recipient.get_id()]
+        perceivers.extend([onlooker.get_id() for onlooker in onlookers])
+        percepts = interaction.execute()
+        self.assertEqual(0, donor.get_fitness(), msg="Should not change as already 0")
+        self.assertEqual(2, recipient.get_fitness(), msg="Should have gained 2 from cooperation")
+        for percept in percepts:
+            print(percept.get_perceiver())
+            print(perceivers)
+            self.assertTrue(percept.get_perceiver() in perceivers)
+            perceivers.remove(percept.get_perceiver())
+            try:
+                percept.perceive(self.community, self.generation)
+            except PerceptionException as e:
+                print(e)
+                self.fail("Should not fail to perceive the interaction")
+        interaction2 = Interaction(8, recipient, donor, action)
+        interaction2.update_onlookers(onlookers)
+        perceivers2 = [donor.get_id(), recipient.get_id()]
+        perceivers2.extend([onlooker.get_id() for onlooker in onlookers])
+        percepts2 = interaction2.execute()
+        self.assertEqual(2, donor.get_fitness(), msg="Should have gained 2 from cooperation")
+        self.assertEqual(1, recipient.get_fitness(), msg="Should have lost 1 from cooperating")
+        for percept in percepts2:
+            self.assertTrue(percept.get_perceiver() in perceivers2)
+            perceivers2.remove(percept.get_perceiver())
+            try:
+                percept.perceive(self.community, self.generation)
+            except PerceptionException as e:
+                print(e)
+                self.fail("Should not fail to perceive the interaction")
+
+
+class GossipTest(unittest.TestCase):
+
+    def setUp(self):
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        self.community = requests.request("PUT", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        requests.request("PUT", current_app.config['AGENTS_URL'] + 'generation', json={"community": self.community,
+                                                                                       "generation": 0}).json()
+        self.generation = 0
+        strategies = requests.request("GET", current_app.config['AGENTS_URL'] + 'strategies').json()['strategies']
+        self.players = []
+        id = 0
+        for strategy in strategies:
+            self.players.append(PlayerFactory.new_player(strategy['name'], strategy['options'],
+                                                         self.community, self.generation, id))
+            id += 1
+
+    def tearDown(self):
+        self.app_context.pop()
+
+    def test_get_type(self):
+        gossip = Gossip(3, random.choice(self.players), random.choice(self.players),
+                        random.choice(self.players), "positive")
+        self.assertEqual("gossip", gossip.get_type())
+
+    def test_get_action(self):
+        gossip_action = "positive"
+        about = random.choice(self.players)
+        gossiper = random.choice(self.players)
+        recipient = random.choice(self.players)
+        timepoint = 1
+        gossip = Gossip(timepoint, about, gossiper, recipient, gossip_action)
+        self.assertEqual({"gossip": gossip_action, "about": about, "gossiper": gossiper, "recipient": recipient,
+                          "timepoint": timepoint, "type": "gossip"}, gossip.get_action())
+
+    def test_execute(self):
+        gossip_action = "positive"
+        about = random.choice(self.players)
+        gossiper = random.choice(self.players)
+        recipient = random.choice(self.players)
+        timepoint = 1
+        gossip = Gossip(timepoint, about, gossiper, recipient, gossip_action)
+        percepts = gossip.execute()
+        self.assertEqual(1, len(percepts))
+        self.assertEqual(PerceptAction(recipient.get_id(), timepoint, gossip.get_action()).get_percept(),
+                         percepts[0].get_percept())
+
+
+# class GenerationTest(unittest.TestCase):
+#
+#     def setUp(self):
+#         self.app = create_app(TestConfig)
+#         self.app_context = self.app.app_context()
+#         self.app_context.push()
+#         self.community = requests.request("PUT", current_app.config['AGENTS_URL'] + 'community').json()['id']
+#         requests.request("PUT", current_app.config['AGENTS_URL'] + 'generation', json={"community": self.community,
+#                                                                                        "generation": 0}).json()
+#         self.generation = 0
+#         strategies = requests.request("GET", current_app.config['AGENTS_URL'] + 'strategies').json()['strategies']
+#         self.generation_strategies = []
+#         id = 0
+#         for strategy in strategies:
+#             self.generation_strategies.append({strategy['name']})
+#             id += 1
 
 
 

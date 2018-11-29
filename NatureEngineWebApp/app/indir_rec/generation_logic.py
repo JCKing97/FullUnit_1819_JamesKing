@@ -26,20 +26,20 @@ class ActionFactory:
             return Interaction(timepoint, players[action_dict['donor']],
                                players[action_dict['recipient']], action_dict['cooperated'])
         elif action_dict['type'] == "gossip":
-            return Gossip(action_dict['positive'], players[action_dict['about']],
+            return Gossip(timepoint, players[action_dict['about']],
                           players[action_dict['gossiper']],
-                          players[action_dict['recipient']], timepoint)
+                          players[action_dict['recipient']], action_dict['gossip'])
 
 
 class Generation:
     """A generation of players inside a community"""
 
     def __init__(self, strategies: Dict[Dict, int], start_time: int, end_time: int,
-                 communityID: int, id: int, onlooker_number: int):
+                 community_id: int, id: int, onlooker_number: int):
         self._players = {}
         self._id = id
         response = requests.request("PUT", current_app.config['AGENTS_URL'] + "generation",
-                                 json={"community": communityID, "generation": self._id})
+                                    json={"community": community_id, "generation": self._id})
         if response.status_code != 200:
             raise GenerationCreationException("Error when creating generation, not 200 status code")
         if not response.json()['succcess']:
@@ -48,7 +48,7 @@ class Generation:
         for strategy, strategy_count in strategies.items():
             for i in range(strategy_count):
                 try:
-                    new_player = PlayerFactory.new_player(strategy['name'], strategy['options'], communityID, self._id, id)
+                    new_player = PlayerFactory.new_player(strategy['name'], strategy['options'], community_id, self._id, id)
                     self._players[new_player.get_id()] = new_player
                     id += 1
                 except PlayerCreationException as e:
@@ -56,7 +56,7 @@ class Generation:
             id += 1
         self._start_time = start_time
         self._end_time = end_time
-        self._communityID = communityID
+        self._community_id = community_id
         self._actions = []
         self._new_percepts = []
         self._onlooker_number = onlooker_number
@@ -85,7 +85,8 @@ class Generation:
                 onlookers.append(self._players[onlooker_id])
             else:
                 break
-        return PerceptInteraction(self._players[donor_id], self._players[recipient_id], timepoint), onlookers
+        return PerceptInteraction(self._players[donor_id].get_id(), self._players[recipient_id].get_id(), timepoint),\
+            onlookers
 
     def simulate(self):
         """Simulate the generation, in each timepoint: generate a donor-recipient pair and onlookers,
@@ -97,7 +98,7 @@ class Generation:
             self._new_percepts.append(donor_recipient_perception)
             for perception in self._new_percepts:
                 try:
-                    perception.perceive(self._communityID, self.get_id())
+                    perception.perceive(self._community_id, self.get_id())
                 except PerceptionException as e:
                     raise e
             self._new_percepts = []
@@ -107,7 +108,7 @@ class Generation:
                 action_dict = player.decide(current_time_point)
                 action = ActionFactory.generate_action(action_dict, self._players, current_time_point)
                 if type(action) == Interaction:
-                    action.set_onlookers(onlookers)
+                    action.update_onlookers(onlookers)
                 actions.append(action)
             self._actions.extend(actions)
             # Execute
