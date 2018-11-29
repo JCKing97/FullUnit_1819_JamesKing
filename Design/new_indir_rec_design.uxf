@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>40</y>
+      <w>270</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>IndirRec::Community
+--
+-generations: Generation[]
+-currentTime: int
+--
++simulate(): Results
+-build_generation(generation_id: int):
+            Generation
+-reproduce(): Generation
++get_onlooker_number(): int
++get_id():int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>200</y>
+      <w>120</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+generation of</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>590</x>
+      <y>270</y>
+      <w>290</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>IndirRec::Generation
+--
+-players: List[Player]
+-actions: List[List[Dict]]
+-startTime: int
+-endTime: int
+--
++simulate(): void
+-perceive(): void
+-decide(): void
+-execute(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>580</x>
+      <y>590</y>
+      <w>310</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::Player
+--
+-id: int
+-fitness: int
+--
++getId(): int
++updateFitness(update_value: int): void
++getFitness(): int
++decide(timepoint: int): Action
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>460</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>190.0;10.0;190.0;90.0;10.0;90.0;10.0;130.0</additional_attributes>
+  </element>
+</diagram>

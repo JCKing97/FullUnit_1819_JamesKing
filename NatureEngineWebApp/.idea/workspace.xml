@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/action_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/action_logic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/indir_rec/action_logic.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/indir_rec/generation_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/generation_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/player_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/player_logic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/indir_rec/indir_rec_test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/indir_rec/percept_logic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/indir_rec/player_logic.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,36 +76,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/indir_rec/generation_logic.py">
+        <entry file="file://$PROJECT_DIR$/app/indir_rec/routes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="71" column="48" lean-forward="true" selection-start-line="71" selection-start-column="48" selection-end-line="71" selection-end-column="48" />
+            <state relative-caret-position="135">
+              <caret line="9" column="68" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="68" />
               <folding>
-                <element signature="e#94#117#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/indir_rec/indir_rec_test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="407" column="50" selection-start-line="407" selection-start-column="50" selection-end-line="407" selection-end-column="50" />
-              <folding>
-                <element signature="e#133#148#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/indir_rec/percept_logic.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="113" column="68" selection-start-line="113" selection-start-column="68" selection-end-line="113" selection-end-column="68" />
-              <folding>
-                <element signature="e#92#115#0" expanded="true" />
+                <element signature="e#82#155#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -124,7 +102,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/creation_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
+            <state relative-caret-position="135">
               <caret line="10" column="75" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="75" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
@@ -148,34 +126,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/action_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1770">
+            <state relative-caret-position="834">
               <caret line="119" column="73" selection-start-line="119" selection-start-column="73" selection-end-line="119" selection-end-column="73" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/indir_rec/action_logic.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="105" column="50" lean-forward="true" selection-start-line="105" selection-start-column="50" selection-end-line="105" selection-end-column="50" />
-              <folding>
-                <element signature="e#110#129#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/indir_rec/player_logic.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="457">
-              <caret line="113" column="59" selection-start-line="113" selection-start-column="59" selection-end-line="113" selection-end-column="59" />
-              <folding>
-                <element signature="e#185#200#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -189,6 +143,15 @@
               <folding>
                 <element signature="e#74#97#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/indir_rec/generation_logic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="5" lean-forward="true" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -291,11 +254,11 @@
         <option value="$PROJECT_DIR$/tests/agents_service_testing/beliefs_interaction_donor_recipient_tests.py" />
         <option value="$PROJECT_DIR$/app/indir_rec/community_logic.py" />
         <option value="$PROJECT_DIR$/tests/agents_service_testing/action_tests.py" />
-        <option value="$PROJECT_DIR$/app/indir_rec/generation_logic.py" />
-        <option value="$PROJECT_DIR$/app/indir_rec/player_logic.py" />
-        <option value="$PROJECT_DIR$/app/indir_rec/action_logic.py" />
         <option value="$PROJECT_DIR$/app/indir_rec/indir_rec_test.py" />
         <option value="$PROJECT_DIR$/app/indir_rec/percept_logic.py" />
+        <option value="$PROJECT_DIR$/app/indir_rec/player_logic.py" />
+        <option value="$PROJECT_DIR$/app/indir_rec/action_logic.py" />
+        <option value="$PROJECT_DIR$/app/indir_rec/generation_logic.py" />
       </list>
     </option>
   </component>
@@ -474,10 +437,10 @@
     </configuration>
     <list>
       <item itemvalue="Flask server.NatureEngineWebApp" />
-      <item itemvalue="Python tests.pytest for indir_rec.indir_rec_test.PlayerFactoryTest" />
-      <item itemvalue="Python tests.pytest for indir_rec.indir_rec_test.PlayerTest" />
       <item itemvalue="Python tests.pytest for action_tests.ActionTesting" />
       <item itemvalue="Python tests.pytest for indir_rec.indir_rec_test.InteractionTest" />
+      <item itemvalue="Python tests.pytest for indir_rec.indir_rec_test.PlayerFactoryTest" />
+      <item itemvalue="Python tests.pytest for indir_rec.indir_rec_test.PlayerTest" />
       <item itemvalue="Python tests.pytest in indir_rec_test.py" />
     </list>
     <recent_temporary>
@@ -509,7 +472,8 @@
       <workItem from="1543402599505" duration="9340000" />
       <workItem from="1543416947088" duration="12872000" />
       <workItem from="1543440149865" duration="739000" />
-      <workItem from="1543495101046" duration="7834000" />
+      <workItem from="1543495101046" duration="8071000" />
+      <workItem from="1543507491019" duration="6854000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of components">
       <created>1535647227999</created>
@@ -690,9 +654,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_for_indir_rec_indir_rec_test_InteractionTest - 2018.11.29 at 14h 08m 32s.xml">
-      <configuration name="pytest for indir_rec.indir_rec_test.InteractionTest" configurationId="tests" />
-    </history-entry>
     <history-entry file="pytest_for_indir_rec_indir_rec_test_InteractionTest - 2018.11.29 at 14h 08m 57s.xml">
       <configuration name="pytest for indir_rec.indir_rec_test.InteractionTest" configurationId="tests" />
     </history-entry>
@@ -720,26 +681,28 @@
     <history-entry file="pytest_in_indir_rec_test_py - 2018.11.29 at 14h 56m 42s.xml">
       <configuration name="pytest in indir_rec_test.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="pytest_in_indir_rec_test_py - 2018.11.29 at 15h 04m 39s.xml">
+      <configuration name="pytest in indir_rec_test.py" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68575000" />
+    <option name="totallyTimeSpent" value="75666000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.100853786" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.10192102" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" weight="0.32896176" />
       <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49839914" weight="0.32786885" />
-      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50160086" side_tool="true" weight="0.32786885" />
+      <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.50160086" side_tool="true" weight="0.32751092" />
       <window_info anchor="bottom" id="Version Control" order="3" weight="0.32896176" />
       <window_info anchor="bottom" id="Python Console" order="4" sideWeight="0.49893278" weight="0.32896176" />
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.3286026" />
-      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.49893278" visible="true" weight="0.3133188" />
+      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.49893278" weight="0.3133188" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.39847162" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
@@ -987,16 +950,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/indir_rec/routes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="68" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="68" />
-          <folding>
-            <element signature="e#82#155#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/teamcity/diff_tools.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -1052,6 +1005,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/creation_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="10" column="75" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="75" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/beliefs_standing_tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1062,9 +1025,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/indir_rec/routes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="68" selection-start-line="9" selection-start-column="68" selection-end-line="9" selection-end-column="68" />
+          <folding>
+            <element signature="e#82#155#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/indir_rec/percept_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="e#92#115#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/indir_rec/indir_rec_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+          <folding>
+            <element signature="e#133#148#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/indir_rec/player_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="16" selection-end-column="62" />
+          <folding>
+            <element signature="e#185#200#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/indir_rec/action_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="609">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+          <folding>
+            <element signature="e#110#129#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/action_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1770">
+        <state relative-caret-position="834">
           <caret line="119" column="73" selection-start-line="119" selection-start-column="73" selection-end-line="119" selection-end-column="73" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
@@ -1082,63 +1095,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/agents_service_testing/creation_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="75" selection-start-line="10" selection-start-column="8" selection-end-line="10" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/indir_rec/generation_logic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="71" column="48" lean-forward="true" selection-start-line="71" selection-start-column="48" selection-end-line="71" selection-end-column="48" />
-          <folding>
-            <element signature="e#94#117#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/indir_rec/player_logic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="113" column="59" selection-start-line="113" selection-start-column="59" selection-end-line="113" selection-end-column="59" />
-          <folding>
-            <element signature="e#185#200#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/indir_rec/action_logic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="105" column="50" lean-forward="true" selection-start-line="105" selection-start-column="50" selection-end-line="105" selection-end-column="50" />
-          <folding>
-            <element signature="e#110#129#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/indir_rec/indir_rec_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="407" column="50" selection-start-line="407" selection-start-column="50" selection-end-line="407" selection-end-column="50" />
-          <folding>
-            <element signature="e#133#148#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/indir_rec/percept_logic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="113" column="68" selection-start-line="113" selection-start-column="68" selection-end-line="113" selection-end-column="68" />
-          <folding>
-            <element signature="e#92#115#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="30">
+          <caret line="2" column="5" lean-forward="true" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
         </state>
       </provider>
     </entry>
