@@ -48,6 +48,7 @@ generation of</panel_attributes>
 -startTime: int
 -endTime: int
 --
++Generation(players: List[Player]): void
 +simulate(): void
 -perceive(): void
 -decide(): void
