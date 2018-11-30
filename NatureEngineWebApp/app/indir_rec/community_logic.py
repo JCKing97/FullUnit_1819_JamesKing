@@ -73,15 +73,20 @@ class Community:
             overall_fitness += player.get_fitness()
         # Build choice intervals to get probability of a new player being a certain strategy
         choice_intervals: List[Dict] = []
-        for i in range(overall_fitness):
-            for strategy in strategy_fitness:
-                for j in range(i, i+strategy['count']):
-                    choice_intervals.append(strategy['strategy'])
+        current_interval = 0
+        for strategy in strategy_fitness:
+            j = current_interval + strategy['count']
+            while current_interval <= j:
+                choice_intervals.append(strategy['strategy'])
+                current_interval += 1
+        print(len(choice_intervals))
         # Create strategies for players in next generation
         strategies: List[Dict] = []
         for i in range(len(last_gen_players)):
             # Select a strategy for this player
-            player_choice: Dict = choice_intervals[random.randint(0, overall_fitness)]
+            selected_index = random.randint(0, overall_fitness)
+            print(selected_index)
+            player_choice: Dict = choice_intervals[selected_index]
             found_strategy = False
             for strategy in strategies:
                 if strategy['strategy'] == player_choice:

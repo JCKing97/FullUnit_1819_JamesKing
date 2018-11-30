@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{shoham1991agent0}
+Yoav Shoham.
+\newblock Agent0: A simple agent language and its interpreter.
+\newblock In {\em AAAI}, volume~91, page 704, 1991.
+
+\bibitem{kostas_deductive}
+Professor~Kostas Stathis.
+\newblock Lecture notes in intelligent agents and multi-agent systems, November
+  2018.
+
+\bibitem{wooldridge_jennings_1995}
+Michael Wooldridge and Nicholas~R. Jennings.
+\newblock Intelligent agents: theory and practice.
+\newblock {\em The Knowledge Engineering Review}, 10(2):115--152, 1995.
+
+\end{thebibliography}

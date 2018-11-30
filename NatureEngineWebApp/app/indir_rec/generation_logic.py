@@ -147,7 +147,6 @@ class Generation:
         # Send percepts produced from actions
         if timepoint > 0:
             for percept in self._percepts[timepoint-1]:
-                print("percept: " + str(percept))
                 if percept['type'] == "action":
                     percept['type'] = "action/interaction"
                 elif percept['type'] == "gossip":
@@ -175,9 +174,10 @@ class Generation:
                 raise SimulationException("Failed to get a decision: " + str(e))
             if decision['type'] == "gossip":
                 decision['gossiper'] = player.get_id()
+                print("decision: " + str(decision))
             elif decision['type'] == "action":
                 decision['donor'] = player.get_id()
-            print("decision: " + str(decision))
+                print("decision: " + str(decision))
             new_actions.append(decision)
         return new_actions
 
@@ -192,7 +192,6 @@ class Generation:
         # Process actions to get percepts and update players
         new_percepts = []
         for action in self._actions[timepoint]:
-            print("action: " + str(action))
             # Process gossip action into a percept
             if action['type'] == "gossip":
                 gossip_percept = copy.deepcopy(action)
@@ -205,6 +204,7 @@ class Generation:
                 gossip_percept['generation'] = self._generation_id
                 gossip_percept['timepoint'] = timepoint
                 new_percepts.append(gossip_percept)
+                print("percept : " + str(gossip_percept))
             # Process interaction action into percepts
             elif action['type'] == "action":
                 # Alter players fitness when cooperation has been chosen
@@ -224,6 +224,7 @@ class Generation:
                     action_percept['generation'] = self._generation_id
                     action_percept['timepoint'] = timepoint
                     action_percepts.append(action_percept)
+                    print("percept : " + str(action_percept))
                 new_percepts.extend(action_percepts)
         return new_percepts
 

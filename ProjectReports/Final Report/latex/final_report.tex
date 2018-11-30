@@ -1,7 +1,9 @@
 \documentclass[]{final_report}
 \usepackage{graphicx}
 \usepackage{hyperref}
-
+\usepackage{framed}
+\usepackage{multirow}
+\usepackage{caption}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%% Input project details
@@ -174,6 +176,24 @@ The details about how your project will be assessed, as well as the rules you mu
 \bibitem{COHEN:2013} Dave Cohen and Carlos Matos. \emph{Third Year Projects -- Rules and Guidelines}. Royal Holloway, University of London, 2013.
 \end{thebibliography}
 \label{endpage}
+
+\chapter{My work}
+The goal of agents' playing a game-theoretic model of indirect reciprocity is to maximise their utility (aka fitness). In our model both actions of a donor are Pareto optimal outcomes (see table:~\ref{tab:payoffmatrix}: if a donor cooperates the other option is to defect and the donor would be better off, but the recipient would be worse off and if a donor defects the other option is to cooperate and the recipient would be better off, but the donor would be worse off. As the donor is in control of the utility payoff you may assume that always defecting is the most optimal strategy (0 payoff instead of -1 see table~\ref{tab:payoffmatrix}).
+\begin{framed}
+	\begin{center}
+		\label{tab:payoffmatrix}
+		\begin{tabular}{c|c|c}
+		\multirow{2}{*}{Donor Action} & \multicolumn{2}{c}{Payoffs}\\		
+		& Donor & Recipient\\
+		\hline
+		Cooperation & -1 & 2\\
+		\hline
+		Defection & 0 & 0\\
+		\end{tabular}
+		\captionof{table}{The payoff for my indirect reciprocity model}
+	\end{center}	
+\end{framed}
+However this is not always true due to the idea of reputation in indirect reciprocity. A cooperative action maximises social welfare, even if it is at a cost to the donor. A cooperative action also leads to increased reputation for the donor and the possibility of being the recipient of other cooperative actions (boosting their fitness by 2). There is as such no one answer to the best strategy in games of indirect reciprocity.\\
 
 
 

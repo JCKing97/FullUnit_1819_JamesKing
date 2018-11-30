@@ -32,9 +32,9 @@ class CommunityTest(unittest.TestCase):
             {'strategy': {'name': 'Standing Discriminator', 'options': ['distrusting'],
                           'description': 'Don\'t trust, use the standing strat'}, 'count': random.randint(0, 20)}
         ]
-        num_of_onlookers = random.randint(5, 100)
-        num_of_generations = random.randint(2, 20)
-        length_of_generations = random.randint(5, 50)
+        num_of_onlookers = random.randint(6, 100)
+        num_of_generations = random.randint(3, 20)
+        length_of_generations = random.randint(6, 50)
         community = Community(strategies, num_of_onlookers, num_of_generations, length_of_generations)
         self.assertEqual(new_community_id+1, community.get_id())
 
@@ -50,9 +50,9 @@ class CommunityTest(unittest.TestCase):
             {'strategy': {'name': 'Standing Discriminator', 'options': ['distrusting'],
                           'description': 'Don\'t trust, use the standing strat'}, 'count': random.randint(0, 20)}
         ]
-        num_of_onlookers = random.randint(5, 100)
-        num_of_generations = random.randint(2, 20)
-        length_of_generations = random.randint(5, 50)
+        num_of_onlookers = random.randint(6, 100)
+        num_of_generations = random.randint(3, 20)
+        length_of_generations = random.randint(6, 50)
         community = Community(strategies, num_of_onlookers, num_of_generations, length_of_generations)
         self.assertEqual(num_of_onlookers, community.get_num_of_onlookers())
 

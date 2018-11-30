@@ -61,6 +61,10 @@
 \usepackage{hyperref} % For hyperlinks in the PDF
 
 \usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{framed}
+\usepackage{caption}
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -70,7 +74,7 @@
 
 \pretitle{\begin{center}\Huge\bfseries} % Article title formatting
 \posttitle{\end{center}} % Article title closing formatting
-\title{ Report on indirect reciprocity, strategies for agents and the development of a concrete model to implement} % Article title
+\title{Report on indirect reciprocity, strategies for agents and the development of a concrete model to implement} % Article title
 \author{%
 \textsc{James King} \\% Your name
 \normalsize Supervisor: Kostas Stathis \\ % Your supervisor
@@ -168,7 +172,21 @@ This requires an agent to have a view of past events and also a way to interpret
 For an agent to interpret gossip, the gossip must be comprehensible by them and thus should have a given structure. In our model, gossip shall be split into two categories: positive and negative. Gossip will also involve 3 agents, the agent gossiping, the recipient of the gossip, and the gossip that the agent is about (who shall not be able to view that the gossip has taken place). Gossip is intended to change how the recipient of the gossip views the agent the gossip is about - for example, if agent 2 trusts gossip from agent 3 that is negative about agent 1 and agent 2 is using the standing strategy, then agent 2 will revise their beliefs about agent 1 to have a bad standing.\\
 The structure of the game will be as follows. There is one singular population (this is to not overly complicate the model, though changing this to an island population model such as in Leimar and Hammerstein~\cite{leimarhammer}), a population is replaced by their offspring after the conclusion of a generation. A generation is made up of a number of interactions, all at a distinct time point (the number of interactions per generation is a variable).\\
 In each time point, each agent will perceive their environment and then decided what action to take, this action may be as a donor in an interaction or maybe a piece of gossip. Each interaction shall be made up of a donor-recipient pair, chosen at random from the population. For each interaction, a subset of the population should be chosen as direct observers (being onlookers and the donor-recipient pair).\\
-Finally, reproduction occurs at the end of every generation and will be relative to each players fitness. The fitness of a player represents how successful they are, fitness is altered in each interaction if the donor cooperates they lose a fitness point but the recipient gains two, if the donor defects they both gain nothing and lose nothing. Reproduction represents the replacement of agents with newer agents in a network. The new agents developed for a system would likely be influenced by successful strategies in past generations thus the reproduction in our system represents the trend towards certain successful strategies in a multi-agent system.\\
+Finally, reproduction occurs at the end of every generation and will be relative to each players fitness. The fitness of a player represents how successful they are, fitness is altered in each interaction if the donor cooperates they lose a fitness point but the recipient gains two, if the donor defects they both gain nothing and lose nothing see table~\ref{tab:payoffmatrix}. Reproduction represents the replacement of agents with newer agents in a network. The new agents developed for a system would likely be influenced by successful strategies in past generations thus the reproduction in our system represents the trend towards certain successful strategies in a multi-agent system.\\
+\begin{framed}
+	\begin{center}
+		\label{tab:payoffmatrix}
+		\begin{tabular}{c|c|c}
+		\multirow{2}{*}{Donor Action} & \multicolumn{2}{c}{Payoffs}\\		
+		& Donor & Recipient\\
+		\hline
+		Cooperation & -1 & 2\\
+		\hline
+		Defection & 0 & 0\\
+		\end{tabular}
+		\captionof{table}{The payoff for my indirect reciprocity model}
+	\end{center}	
+\end{framed}
 The group size remains the same over generations in order to measure the success of different strategies in certain group sizes, so in a new generation individuals are generated and assigned strategies. The chance an individual will be a certain strategy is worked out by summing the fitness of all individuals of that strategy and dividing it by the fitness of the overall group. Reproduction in this way has been chosen to represent the way that new agents will tend to be developed based on past successful strategies. The user will be able to select if mutation is active or not, if it is there will be a 1\% chance that a new individuals strategy will be chosen completely at random.
 
 \subsection{Specification of Agent Strategies}
