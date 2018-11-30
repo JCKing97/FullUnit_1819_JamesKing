@@ -3,15 +3,16 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>40</y>
+      <x>120</x>
+      <y>100</y>
       <w>270</w>
-      <h>170</h>
+      <h>190</h>
     </coordinates>
     <panel_attributes>IndirRec::Community
 --
--generations: Generation[]
+-generations: List[Generation]
 -currentTime: int
+-id: int
 --
 +simulate(): Results
 -build_generation(generation_id: int):
@@ -24,8 +25,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>700</x>
-      <y>200</y>
+      <x>220</x>
+      <y>280</y>
       <w>120</w>
       <h>90</h>
     </coordinates>
@@ -36,8 +37,8 @@ generation of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
-      <y>270</y>
+      <x>110</x>
+      <y>350</y>
       <w>290</w>
       <h>200</h>
     </coordinates>
@@ -47,6 +48,7 @@ generation of</panel_attributes>
 -actions: List[List[Dict]]
 -startTime: int
 -endTime: int
+-num_of_onlookers: int
 --
 +Generation(players: List[Player]): void
 +simulate(): void
@@ -59,8 +61,8 @@ generation of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>580</x>
-      <y>590</y>
+      <x>100</x>
+      <y>670</y>
       <w>310</w>
       <h>150</h>
     </coordinates>
@@ -79,8 +81,8 @@ generation of</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>640</x>
-      <y>460</y>
+      <x>160</x>
+      <y>540</y>
       <w>210</w>
       <h>150</h>
     </coordinates>

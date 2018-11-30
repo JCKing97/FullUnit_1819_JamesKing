@@ -43,7 +43,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	holds_at(interaction_timepoints(agent(strategy("Cooperator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=InteractionTimepoints, Timepoint+1),
 	member(Timepoint, InteractionTimepoints),
-	Success = true, Action = action{type:action, value:cooperate, recipient: RecipientID}, !.
+	Success = true, Action = action{type:action, value: cooperate, recipient: RecipientID}, !.
 % Auto to idle if not a donor
 agent_action(_, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),

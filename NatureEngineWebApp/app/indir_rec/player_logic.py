@@ -32,11 +32,11 @@ class Player:
         """
         self._player_id: int = player_id
         self._fitness: int = 0
-        self._strategy: int = strategy
+        self._strategy: Dict = strategy
         self._community_id: int = community_id
         self._generation_id: int = generation_id
         creation_payload: Dict = {"strategy": strategy['name'], "options": strategy['options'],
-                            "community": community_id, "generation": generation_id, "player": player_id}
+                                  "community": community_id, "generation": generation_id, "player": player_id}
         creation_response = requests.request("PUT", current_app.config['AGENTS_URL'] + 'agent',
                                              json=creation_payload)
         if creation_response.status_code != 200:
@@ -69,6 +69,14 @@ class Player:
         self._fitness += change
         if self._fitness < 0:
             self._fitness = 0
+
+    def get_strategy(self) -> Dict:
+        """
+        Get the strategy (name, description and options) of this player
+        :return: the strategy of this player
+        :rtype: Dict
+        """
+        return self._strategy
 
     def decide(self, timepoint: int) -> Dict:
         """

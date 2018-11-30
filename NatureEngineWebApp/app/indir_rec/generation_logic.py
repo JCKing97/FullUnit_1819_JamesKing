@@ -105,6 +105,14 @@ class Generation:
         """
         return self._end_point
 
+    def get_players(self) -> List[Player]:
+        """
+        Get the players from this generation
+        :return: The players from this generation
+        :rtype: List[Player]
+        """
+        return self._players
+
     def simulate(self):
         """
         Run the cycle steps: perceive, decide execute between the start and end points of this generation
@@ -232,12 +240,13 @@ class Generation:
         players.remove(self._find_deepcopy_player(action['recipient'], players))
         players.remove(self._find_deepcopy_player(action['donor'], players))
         for i in range(self._num_of_onlookers):
-            onlooker = random.choice(players)
-            try:
-                onlookers.append(self._id_player_map[onlooker.get_id()])
-            except PlayerNotFoundException as e:
-                raise e
-            players.remove(onlooker)
+            if len(players) <= 0:
+                onlooker = random.choice(players)
+                try:
+                    onlookers.append(self._id_player_map[onlooker.get_id()])
+                except PlayerNotFoundException as e:
+                    raise e
+                players.remove(onlooker)
         return onlookers
 
     def _find_deepcopy_player(self, player_id, deep_players) -> Player:
