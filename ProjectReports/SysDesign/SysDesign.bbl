@@ -1,5 +1,21 @@
 \begin{thebibliography}{1}
 
+\bibitem{kowalski1989logic}
+Robert Kowalski and Marek Sergot.
+\newblock A logic-based calculus of events.
+\newblock In {\em Foundations of knowledge base management}, pages 23--55.
+  Springer, 1989.
+
+\bibitem{evol_indirect_image}
+Martin~A. Nowak and Karl Sigmund.
+\newblock Evolution of indirect reciprocity by image scoring.
+\newblock {\em Nature}, 393:573--577, 1998.
+
+\bibitem{russell2016artificial}
+Stuart~J Russell and Peter Norvig.
+\newblock {\em Artificial intelligence: a modern approach}.
+\newblock Malaysia; Pearson Education Limited,, 2016.
+
 \bibitem{shoham1991agent0}
 Yoav Shoham.
 \newblock Agent0: A simple agent language and its interpreter.

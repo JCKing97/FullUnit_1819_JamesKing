@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  30 NOV 2018 19:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  2 DEC 2018 13:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -368,30 +368,50 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \fb@frh=\dimen161
 \FrameRule=\dimen162
 \FrameSep=\dimen163
-) (./SysDesign.aux)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen164
+\Gin@req@width=\dimen165
+)
+(./SysDesign.aux)
 \openout1 = `SysDesign.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 91.
-LaTeX Font Info:    ... okay on input line 91.
-LaTeX Font Info:    Try loading font information for T1+pplx on input line 91.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pplx.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Try loading font information for T1+pplx on input line 92.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pplx.fd
 File: t1pplx.fd 2004/09/06 font definitions for T1/pplx.
 )
-\big@size=\dimen164
-LaTeX Info: Redefining \microtypecontext on input line 91.
+\big@size=\dimen166
+LaTeX Info: Redefining \microtypecontext on input line 92.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -444,7 +464,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box30
-Package hyperref Info: Link coloring OFF on input line 91.
+Package hyperref Info: Link coloring OFF on input line 92.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
@@ -453,42 +473,73 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count133
 )
-LaTeX Info: Redefining \ref on input line 91.
-LaTeX Info: Redefining \pageref on input line 91.
-LaTeX Info: Redefining \nameref on input line 91.
+LaTeX Info: Redefining \ref on input line 92.
+LaTeX Info: Redefining \pageref on input line 92.
+LaTeX Info: Redefining \nameref on input line 92.
 
 (./SysDesign.out) (./SysDesign.out)
 \@outlinefile=\write3
 \openout3 = `SysDesign.out'.
 
-LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 99.
-LaTeX Font Info:    Try loading font information for OT1+pplx on input line 99.
 
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count134
+\scratchdimen=\dimen167
+\scratchbox=\box31
+\nofMPsegments=\count135
+\nofMParguments=\count136
+\everyMPshowfont=\toks19
+\MPscratchCnt=\count137
+\MPscratchDim=\dimen168
+\MPnumerator=\count138
+\makeMPintoPDFobject=\count139
+\everyMPtoPDFconversion=\toks20
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <24.88> not available
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 100.
+LaTeX Font Info:    Try loading font information for OT1+pplx on input line 100
+.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pplx.fd
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 99.
-
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 100
+.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 99.
-
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 100
+.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 99.
-
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 100
+.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 99.
-
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 100
+.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
@@ -501,27 +552,42 @@ Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/pplx/m/sc/12'.
 (microtype)             Ignoring protrusion settings for this character.
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 99.
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 100.
+
+Underfull \hbox (badness 1325) in paragraph at lines 118--122
+\T1/pplx/m/n/10 (+20) so-cial wel-fare, help in-duce the evo-lu-tion
+ []
+
+
+Underfull \hbox (badness 2221) in paragraph at lines 118--122
+\T1/pplx/m/n/10 (+20) the strat-egy al-ways co-op-er-ate as al-ways
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--122
+
+ []
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 129.
+(caption)                particular \caption on input line 132.
 See the caption package documentation for explanation.
 
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <9> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 129.
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 132.
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--138
+Underfull \hbox (badness 10000) in paragraph at lines 141--144
 $\OML/zplm/m/it/10 interaction\OT1/zplm/m/n/10 (\OML/zplm/m/it/10 me\OT1/pplx/m
 /n/10 (+20) , \OML/zplm/m/it/10 Recipient\OT1/pplx/m/n/10 (+20) , \OML/zplm/m/i
 t/10 time\OT1/zplm/m/n/10 ) \OMS/zplm/m/n/10 ^
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--138
+Underfull \hbox (badness 10000) in paragraph at lines 141--144
 \OML/zplm/m/it/10 image[]score\OT1/zplm/m/n/10 (\OML/zplm/m/it/10 me\OT1/pplx/m
 /n/10 (+20) , \OML/zplm/m/it/10 Recipient\OT1/pplx/m/n/10 (+20) , \OML/zplm/m/i
 t/10 Score\OT1/pplx/m/n/10 (+20) , \OML/zplm/m/it/10 time\OT1/zplm/m/n/10 ) \OM
@@ -529,19 +595,19 @@ S/zplm/m/n/10 ^
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--138
+Underfull \hbox (badness 10000) in paragraph at lines 141--144
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--138
+Underfull \hbox (badness 10000) in paragraph at lines 141--144
 \OML/zplm/m/it/10 interaction\OT1/zplm/m/n/10 (\OML/zplm/m/it/10 me\OT1/pplx/m/
 n/10 (+20) , \OML/zplm/m/it/10 Recipient\OT1/pplx/m/n/10 (+20) , \OML/zplm/m/it
 /10 time\OT1/zplm/m/n/10 ) \OMS/zplm/m/n/10 ^
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--138
+Underfull \hbox (badness 10000) in paragraph at lines 141--144
 \OML/zplm/m/it/10 image[]score\OT1/zplm/m/n/10 (\OML/zplm/m/it/10 me\OT1/pplx/m
 /n/10 (+20) , \OML/zplm/m/it/10 Recipient\OT1/pplx/m/n/10 (+20) , \OML/zplm/m/i
 t/10 Score\OT1/pplx/m/n/10 (+20) , \OML/zplm/m/it/10 time\OT1/zplm/m/n/10 ) \OM
@@ -549,88 +615,47 @@ S/zplm/m/n/10 ^
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--138
+Underfull \hbox (badness 10000) in paragraph at lines 141--144
 
  []
 
+<PerceiveReviseDecide.png, id=45, 450.68375pt x 169.63374pt>
+File: PerceiveReviseDecide.png Graphic file (type png)
+<use PerceiveReviseDecide.png>
+Package pdftex.def Info: PerceiveReviseDecide.png  used on input line 159.
+(pdftex.def)             Requested size: 215.0023pt x 80.92628pt.
 
-Underfull \hbox (badness 1292) in paragraph at lines 139--140
-[]\T1/pplx/m/n/10 (+20) Part of the de-duc-tive rea-son-ing agents
+Overfull \hbox (10.0pt too wide) in paragraph at lines 159--160
+ [] 
  []
 
-
-LaTeX Warning: Citation `russell2016artificial' on page 2 undefined on input li
-ne 147.
-
-
-LaTeX Warning: Citation `kowalski1989logic' on page 2 undefined on input line 1
-49.
-
-
-Underfull \hbox (badness 1675) in paragraph at lines 146--150
-[]\T1/pplx/m/n/10 (+20) This log-i-cal database is sim-i-lar to the
- []
-
-
-Underfull \hbox (badness 1394) in paragraph at lines 146--150
-\T1/pplx/m/n/10 (+20) act (re-stricted by the agent's ca-pa-bil-i-ties)
- []
-
-
-Underfull \hbox (badness 1270) in paragraph at lines 146--150
-\T1/pplx/m/n/10 (+20) In my sys-tem I wish to in-cor-po-rate the
- []
-
-
-Underfull \hbox (badness 1242) in paragraph at lines 146--150
-\T1/pplx/m/n/10 (+20) idea of be-liefs, com-mit-ments, ca-pa-bil-i-ties
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 146--150
-
- []
+[2]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [2]
-Underfull \hbox (badness 1231) in paragraph at lines 153--154
-\T1/pplx/m/n/10 (+20) proac-tive be com-mit-ting to ac-tions when
- []
+ [3 <./PerceiveReviseDecide.png>] (./SysDesign.bbl)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 195.
+ [4
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 153--154
-
- []
-
-
-Underfull \vbox (badness 3148) has occurred while \output is active []
-
-
-(./SysDesign.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 182.
- [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 182.
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 195.
  (./SysDesign.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 182.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 182.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 195.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 195.
 Package rerunfilecheck Info: File `SysDesign.out' has not changed.
 (rerunfilecheck)             Checksum: 31DEA520F82D8AEFF90C335A832EB38E;355.
-
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 182.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 195.
  ) 
 Here is how much of TeX's memory you used:
- 9497 strings out of 494880
- 147690 string characters out of 6179600
- 278396 words of memory out of 5000000
- 12482 multiletter control sequences out of 15000+600000
- 51580 words of font info for 210 fonts, out of 8000000 for 9000
+ 10305 strings out of 494880
+ 158990 string characters out of 6179600
+ 291564 words of memory out of 5000000
+ 13222 multiletter control sequences out of 15000+600000
+ 53234 words of font info for 233 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 36i,10n,43p,939b,355s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,10n,43p,730b,383s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
@@ -638,10 +663,10 @@ fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/fpl/fplrc8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/pal
 atino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on SysDesign.pdf (3 pages, 93443 bytes).
+Output written on SysDesign.pdf (4 pages, 107969 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
- 73 compressed objects within 1 object stream
- 14 named destinations out of 1000 (max. 500000)
- 45617 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 105 PDF objects out of 1000 (max. 8388607)
+ 89 compressed objects within 1 object stream
+ 19 named destinations out of 1000 (max. 500000)
+ 45622 words of extra memory for PDF output out of 51595 (max. 10000000)
 
