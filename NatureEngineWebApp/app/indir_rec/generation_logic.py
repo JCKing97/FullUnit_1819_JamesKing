@@ -69,17 +69,20 @@ class Generation:
         self._players: List[Player] = []
         self._id_player_map: Dict[int, Player] = {}
         player_id = 0
-        for strategy in strategies:
-            if strategy['count'] > 0:
-                for i in range(strategy['count']):
-                    try:
-                        player = Player(player_id, strategy['strategy'], self._community_id,
-                                        self._generation_id)
-                        self._players.append(player)
-                        self._id_player_map[player.get_id()] = player
-                        player_id += 1
-                    except PlayerCreationException as e:
-                        raise GenerationCreationException(str(e))
+        try:
+            for strategy in strategies:
+                if strategy['count'] > 0:
+                    for i in range(strategy['count']):
+                        try:
+                            player = Player(player_id, strategy['strategy'], self._community_id,
+                                            self._generation_id)
+                            self._players.append(player)
+                            self._id_player_map[player.get_id()] = player
+                            player_id += 1
+                        except PlayerCreationException as e:
+                            raise GenerationCreationException(str(e))
+        except KeyError:
+            raise GenerationCreationException("Incorrect strategies dictionary keys")
 
     def get_id(self):
         """

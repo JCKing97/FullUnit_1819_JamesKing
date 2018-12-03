@@ -82,13 +82,13 @@ strategies(Request):-
 
 % Handles a request to create a new agent in the knowledge base
 community(Request):-
-	member(method(put), Request), !,
+	member(method(post), Request), !,
 	new_community(ID),
 	reply_json(return{success: true, status: 200, id: ID}).
 	
 % Handles a request to create a new agent in the knowledge base
 agent(Request):-
-	member(method(put), Request), !,
+	member(method(post), Request), !,
 	http_read_json_dict(Request, DictIn),
 	new_agent(DictIn, Success),
 	(Success == true ->
@@ -97,12 +97,12 @@ agent(Request):-
 
 % Handles a request to create a new generation in the logic base
 generation(Request):-
-	member(method(put), Request), !,
+	member(method(post), Request), !,
 	http_read_json_dict(Request, DictIn),
 	new_generation(DictIn, Success),
 	http_log('Success: ~w~n', [Success]),
 	( Success == true -> 
-		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
+		reply_json(return{data: DictIn, success: Success, status: 200}) ; 	
 		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
 
 % Handles a request to add a new interaction percept to an agent

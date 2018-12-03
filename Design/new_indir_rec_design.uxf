@@ -3,91 +3,191 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>120</x>
-      <y>100</y>
-      <w>270</w>
-      <h>190</h>
+      <x>810</x>
+      <y>30</y>
+      <w>370</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>IndirRec::Community
 --
 -generations: List[Generation]
 -currentTime: int
 -id: int
+-first_strategies: List[Dict]
+-length_of_generations: int
+-num_of_onlookers: int
+-num_of_generations: int
 --
++Community(strategies: List[Dict], 
+      num_of_onlookers: int, num_of_generation: int)
++get_onlooker_number(): int
++get_id():int
++get_length_of_generations(): int
++get_generations(): List[Generation]
 +simulate(): Results
 -build_generation(generation_id: int):
             Generation
--reproduce(): Generation
-+get_onlooker_number(): int
-+get_id():int</panel_attributes>
+-reproduce(): Generation</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>220</x>
-      <y>280</y>
+      <x>950</x>
+      <y>340</y>
       <w>120</w>
-      <h>90</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 generation of</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>110</x>
-      <y>350</y>
-      <w>290</w>
-      <h>200</h>
+      <x>790</x>
+      <y>450</y>
+      <w>400</w>
+      <h>320</h>
     </coordinates>
     <panel_attributes>IndirRec::Generation
 --
 -players: List[Player]
--actions: List[List[Dict]]
--startTime: int
--endTime: int
+-actions: Dict[List[Dict]]
+-start_time: int
+-end_time: int
 -num_of_onlookers: int
 --
-+Generation(players: List[Player]): void
-+simulate(): void
--perceive(): void
--decide(): void
--execute(): void
++Generation(strategies: List[Dict], generation_id: int,
+      community_id: int, start_point: int, end_point: int,
+            num_of_onlookers: int)
++get_id(): int
++get_start_point(): int
++get_end_point():int
++get_players():List[Player]
++simulate()
+-perceive()
+-decide()
+-execute()
+-generate_onlookers(action: Dict): List[Player]
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>670</y>
+      <x>350</x>
+      <y>590</y>
       <w>310</w>
-      <h>150</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>Indir_Rec::Player
 --
 -id: int
 -fitness: int
+-strategy: Dict
 --
++Player(id: int, strategy: Dict,
+         community_id: int, generation_id: int)
 +getId(): int
-+updateFitness(update_value: int): void
++updateFitness(update_value: int)
 +getFitness(): int
-+decide(timepoint: int): Action
++getStrategy(): Dict
++decide(timepoint: int): Dict</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>340</x>
+      <y>10</y>
+      <w>380</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>IndirRec::ReputationGame
+--
+-run: boolean
+--
++ReputationGame(strategies: List[Dict], 
+      num_of_onlookers: int, num_of_generation: int)
++run(): Results
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>170</x>
+      <y>270</y>
+      <w>400</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>IndirRec::Results
+--
+-community: Community
+--
++Results(c: Community)
++get_all_interactions(): List[Dict]
++get_interactions_by_generation(): List[List[Dict]]
++get_all_gossip():List[Dict]
++get_gossip_by_generation(): List[List[Dict]]
++get_community_social_welfare: int
++get_social_welfare_by_generation: List[int]
++get_cooperation_rate(): int
++get_cooperation_rate_by_generation(): List[int]
++get_populations(): List[List[Player]]
++get_reproduction_success(): List[Dict]
++get_strategies_fitness(): List[Dict]
++get_strategies_fitness_by_generation(): List[List[Dict]]
++get_ranked_strategies(): List[Dict]
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>160</x>
-      <y>540</y>
-      <w>210</w>
-      <h>150</h>
+      <x>200</x>
+      <y>100</y>
+      <w>280</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; returns</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;110.0;260.0;110.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>100</y>
+      <w>310</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-
+simulates &gt;</panel_attributes>
+    <additional_attributes>290.0;110.0;10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>680</y>
+      <w>160</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; uses</panel_attributes>
-    <additional_attributes>190.0;10.0;190.0;90.0;10.0;90.0;10.0;130.0</additional_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>280</y>
+      <w>270</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>collect data on &gt;</panel_attributes>
+    <additional_attributes>250.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>

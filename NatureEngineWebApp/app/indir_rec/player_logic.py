@@ -35,14 +35,17 @@ class Player:
         self._strategy: Dict = strategy
         self._community_id: int = community_id
         self._generation_id: int = generation_id
-        creation_payload: Dict = {"strategy": strategy['name'], "options": strategy['options'],
-                                  "community": community_id, "generation": generation_id, "player": player_id}
-        creation_response = requests.request("PUT", current_app.config['AGENTS_URL'] + 'agent',
-                                             json=creation_payload)
-        if creation_response.status_code != 200:
-            raise PlayerCreationException("bad status code " + creation_response.status_code)
-        if not creation_response.json()['success']:
-            raise PlayerCreationException(creation_response.json()['message'])
+        try:
+            creation_payload: Dict = {"strategy": strategy['name'], "options": strategy['options'],
+                                      "community": community_id, "generation": generation_id, "player": player_id}
+            creation_response = requests.request("PUT", current_app.config['AGENTS_URL'] + 'agent',
+                                                 json=creation_payload)
+            if creation_response.status_code != 200:
+                raise PlayerCreationException("bad status code " + creation_response.status_code)
+            if not creation_response.json()['success']:
+                raise PlayerCreationException(creation_response.json()['message'])
+        except KeyError:
+            raise PlayerCreationException("Incorrect strategy keys")
 
     def get_id(self) -> int:
         """

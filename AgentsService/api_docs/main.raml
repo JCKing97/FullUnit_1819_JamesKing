@@ -5,7 +5,7 @@ baseUri: http://localhost:8080/api/
 version: 0.1
 description: Welcome to the documentation for the agent mind as a service API, the service hosts agents minds for a game-theoretic model that uses mixed indirect and direct reciprocity mechanisms. These agents have their own memory of events (input as percepts) which the agent then uses to form beliefs about their world upon which they can act.
 
-/strategies:
+/strategy:
   description: The strategies an agent can be.
   get:
     description: Retrieve a JSON object containing names, descriptions and options of the strategies an agent can be.
@@ -47,7 +47,7 @@ description: Welcome to the documentation for the agent mind as a service API, t
 
 /community:
   description: A community contains a group of generations which agents belong to.
-  put:
+  post:
     description: Create a new community in the service and get the id back.
     responses:
       200:
@@ -61,7 +61,7 @@ description: Welcome to the documentation for the agent mind as a service API, t
               }
 /generation:
   description: A generation belongs to a community and agents reside in a generation.
-  put:
+  post:
     queryParameters:
       community:
         type: integer
@@ -86,7 +86,7 @@ description: Welcome to the documentation for the agent mind as a service API, t
 
 /agent:
   description: The individuals in the system that perceive events, can believe things about their world and act on them. They are part of a generation in a community.
-  put:
+  post:
     queryParameters:
       strategy:
         type: string
