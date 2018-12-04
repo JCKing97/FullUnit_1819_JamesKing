@@ -20,7 +20,7 @@ class CommunityTest(unittest.TestCase):
         self.app_context.pop()
 
     def test_get_id(self):
-        new_community_id = requests.request("PUT", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        new_community_id = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
         strategies = [
             {'strategy': {'name': 'Defector', 'options': [], 'description': 'Always defect'},
              'count': random.randint(0, 20)},
@@ -71,7 +71,7 @@ class CommunityTest(unittest.TestCase):
         num_of_onlookers = random.randint(6, 100)
         num_of_generations = random.randint(3, 20)
         length_of_generations = random.randint(6, 50)
-        community = Community(strategies, num_of_onlookers,num_of_generations, length_of_generations)
+        community = Community(strategies, num_of_onlookers, num_of_generations, length_of_generations)
         community.simulate()
 
 

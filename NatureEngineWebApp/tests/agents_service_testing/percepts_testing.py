@@ -6,19 +6,19 @@ class PerceptInteractionTests(unittest.TestCase):
 
     def setUp(self):
         self.url = "http://localhost:8080"
-        self.community_response = requests.request("PUT", self.url + '/community').json()
+        self.community_response = requests.request("POST", self.url + '/community').json()
         self.assertTrue(self.community_response['success'])
         self.gen_payload = {"community": self.community_response['id'], "generation": 0}
-        self.generation_response = requests.request("PUT", self.url + '/generation', json=self.gen_payload).json()
+        self.generation_response = requests.request("POST", self.url + '/generation', json=self.gen_payload).json()
         self.assertTrue(self.generation_response['success'])
         self.donor_payload = {"strategy": "Defector", "options": [], "community": self.community_response['id'],
                          "generation": 0, "player": 0}
-        self.donor_response = requests.request("PUT", self.url + '/agent', json=self.donor_payload).json()
+        self.donor_response = requests.request("POST", self.url + '/agent', json=self.donor_payload).json()
         self.assertEqual(self.donor_response['data'], self.donor_payload)
         self.assertTrue(self.donor_response['success'])
         self.recipient_payload = {"strategy": "Cooperator", "options": [], "community": self.community_response['id'],
                                   "generation": 0, "player": 1}
-        self.recipient_response = requests.request("PUT", self.url + '/agent', json=self.recipient_payload).json()
+        self.recipient_response = requests.request("POST", self.url + '/agent', json=self.recipient_payload).json()
         self.assertEqual(self.recipient_response['data'], self.recipient_payload)
         self.assertTrue(self.recipient_response['success'])
 
@@ -75,24 +75,24 @@ class PerceptActionInteractionTests(unittest.TestCase):
 
     def setUp(self):
         self.url = "http://localhost:8080"
-        self.community_response = requests.request("PUT", self.url + '/community').json()
+        self.community_response = requests.request("POST", self.url + '/community').json()
         self.assertTrue(self.community_response['success'])
         self.gen_payload = {"community": self.community_response['id'], "generation": 0}
-        self.generation_response = requests.request("PUT", self.url + '/generation', json=self.gen_payload).json()
+        self.generation_response = requests.request("POST", self.url + '/generation', json=self.gen_payload).json()
         self.assertTrue(self.generation_response['success'])
         self.donor_payload = {"strategy": "Defector", "options": [], "community": self.community_response['id'],
                               "generation": 0, "player": 0}
-        self.donor_response = requests.request("PUT", self.url + '/agent', json=self.donor_payload).json()
+        self.donor_response = requests.request("POST", self.url + '/agent', json=self.donor_payload).json()
         self.assertEqual(self.donor_response['data'], self.donor_payload)
         self.assertTrue(self.donor_response['success'])
         self.recipient_payload = {"strategy": "Cooperator", "options": [], "community": self.community_response['id'],
                                   "generation": 0, "player": 1}
-        self.recipient_response = requests.request("PUT", self.url + '/agent', json=self.recipient_payload).json()
+        self.recipient_response = requests.request("POST", self.url + '/agent', json=self.recipient_payload).json()
         self.assertEqual(self.recipient_response['data'], self.recipient_payload)
         self.assertTrue(self.recipient_response['success'])
         self.perceiver_payload = {"strategy": "Standing Discriminator", "options": ["distrusting"],
                              "community": self.community_response['id'], "generation": 0, "player": 2}
-        self.perceiver_response = requests.request("PUT", self.url + '/agent', json=self.perceiver_payload).json()
+        self.perceiver_response = requests.request("POST", self.url + '/agent', json=self.perceiver_payload).json()
         self.assertEqual(self.perceiver_response['data'], self.perceiver_payload)
         self.assertTrue(self.perceiver_response['success'])
 
@@ -207,24 +207,24 @@ class PerceptActionGossipTests(unittest.TestCase):
 
     def setUp(self):
         self.url = "http://localhost:8080"
-        self.community_response = requests.request("PUT", self.url + '/community').json()
+        self.community_response = requests.request("POST", self.url + '/community').json()
         self.assertTrue(self.community_response['success'])
         self.gen_payload = {"community": self.community_response['id'], "generation": 0}
-        self.generation_response = requests.request("PUT", self.url + '/generation', json=self.gen_payload).json()
+        self.generation_response = requests.request("POST", self.url + '/generation', json=self.gen_payload).json()
         self.assertTrue(self.generation_response['success'])
         self.perceiver_payload = {"strategy": "Standing Discriminator", "options": ["distrusting"],
                                   "community": self.community_response['id'], "generation": 0, "player": 2}
-        self.perceiver_response = requests.request("PUT", self.url + '/agent', json=self.perceiver_payload).json()
+        self.perceiver_response = requests.request("POST", self.url + '/agent', json=self.perceiver_payload).json()
         self.assertEqual(self.perceiver_response['data'], self.perceiver_payload)
         self.assertTrue(self.perceiver_response['success'])
         self.about_payload = {"strategy": "Defector", "options": [], "community": self.community_response['id'],
                          "generation": 0, "player": 0}
-        self.about_response = requests.request("PUT", self.url + '/agent', json=self.about_payload).json()
+        self.about_response = requests.request("POST", self.url + '/agent', json=self.about_payload).json()
         self.assertEqual(self.about_payload, self.about_response['data'])
         self.assertTrue(self.about_response['success'])
         self.gossiper_payload = {"strategy": "Cooperator", "options": [], "community": self.community_response['id'],
                             "generation": 0, "player": 1}
-        self.gossiper_response = requests.request("PUT", self.url + '/agent', json=self.gossiper_payload).json()
+        self.gossiper_response = requests.request("POST", self.url + '/agent', json=self.gossiper_payload).json()
         self.assertEqual(self.gossiper_payload, self.gossiper_response['data'])
         self.assertTrue(self.gossiper_response['success'])
 

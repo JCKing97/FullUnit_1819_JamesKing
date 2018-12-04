@@ -6,23 +6,23 @@ class BeliefsStandingTrustingTest(unittest.TestCase):
 
     def setUp(self):
         self.url = "http://localhost:8080"
-        self.community_response = requests.request("PUT", self.url + '/community').json()
+        self.community_response = requests.request("POST", self.url + '/community').json()
         self.assertTrue(self.community_response['success'])
         self.gen_payload = {"community": self.community_response['id'], "generation": 0}
-        self.generation_response = requests.request("PUT", self.url + '/generation', json=self.gen_payload).json()
+        self.generation_response = requests.request("POST", self.url + '/generation', json=self.gen_payload).json()
         self.assertTrue(self.generation_response['success'])
         self.perceiver_payload = {"community": self.community_response['id'], "generation": 0,
                                   "strategy": "Standing Discriminator", "options": ["trusting"],
                                   "player": 0}
-        self.perceiver_response = requests.request("PUT", self.url + '/agent', json=self.perceiver_payload).json()
+        self.perceiver_response = requests.request("POST", self.url + '/agent', json=self.perceiver_payload).json()
         self.player1_payload = {"community": self.community_response['id'], "generation": 0,
                                 "strategy": "Cooperator", "options": [],
                                 "player": 1}
-        self.player1_response = requests.request("PUT", self.url + '/agent', json=self.player1_payload).json()
+        self.player1_response = requests.request("POST", self.url + '/agent', json=self.player1_payload).json()
         self.player2_payload = {"community": self.community_response['id'], "generation": 0,
                                 "strategy": "Defector", "options": [],
                                 "player": 2}
-        self.player2_response = requests.request("PUT", self.url + '/agent', json=self.player2_payload).json()
+        self.player2_response = requests.request("POST", self.url + '/agent', json=self.player2_payload).json()
         self.percept_player2_negative_payload = {"community": self.community_response['id'], "generation": 0,
                                                  "perceiver": self.perceiver_payload['player'],
                                                  "about": self.player1_payload['player'],
@@ -271,23 +271,23 @@ class BeliefsStandingDistrustingTest(unittest.TestCase):
 
     def setUp(self):
         self.url = "http://localhost:8080"
-        self.community_response = requests.request("PUT", self.url + '/community').json()
+        self.community_response = requests.request("POST", self.url + '/community').json()
         self.assertTrue(self.community_response['success'])
         self.gen_payload = {"community": self.community_response['id'], "generation": 0}
-        self.generation_response = requests.request("PUT", self.url + '/generation', json=self.gen_payload).json()
+        self.generation_response = requests.request("POST", self.url + '/generation', json=self.gen_payload).json()
         self.assertTrue(self.generation_response['success'])
         self.perceiver_payload = {"community": self.community_response['id'], "generation": 0,
                                   "strategy": "Standing Discriminator", "options": ["distrusting"],
                                   "player": 0}
-        self.perceiver_response = requests.request("PUT", self.url + '/agent', json=self.perceiver_payload).json()
+        self.perceiver_response = requests.request("POST", self.url + '/agent', json=self.perceiver_payload).json()
         self.player1_payload = {"community": self.community_response['id'], "generation": 0,
                         "strategy": "Cooperator", "options": [],
                         "player": 1}
-        self.player1_response = requests.request("PUT", self.url + '/agent', json=self.player1_payload).json()
+        self.player1_response = requests.request("POST", self.url + '/agent', json=self.player1_payload).json()
         self.player2_payload = {"community": self.community_response['id'], "generation": 0,
                         "strategy": "Defector", "options": [],
                         "player": 2}
-        self.player2_response = requests.request("PUT", self.url + '/agent', json=self.player2_payload).json()
+        self.player2_response = requests.request("POST", self.url + '/agent', json=self.player2_payload).json()
         self.percept_player2_negative_payload = {"community": self.community_response['id'], "generation": 0,
                            "perceiver": self.perceiver_payload['player'], "about": self.player1_payload['player'],
                            "gossiper": self.player2_payload['player'], "timepoint": 2, "gossip": "negative"}

@@ -102,9 +102,16 @@ Architectures and designs for intelligent agents and the environment they reside
 %----------------------------------------------------------------------------------------
 
 \section{Introduction}
-One of the aims of my project is to produce a multi-agent system to play games of indirect reciprocity, the model for which I have defined in my second report: ``Report on indirect reciprocity, strategies for agents and the development of a concrete model to implement''. For this I have designed a system that includes two main components: The environment and a web service to host agent's decision making components.\\
+One of the aims of my project is to produce a multi-agent system to play games of indirect reciprocity, the model for which I have defined in my second report: ``Report on indirect reciprocity, strategies for agents and the development of a concrete model to implement''. For this I have designed a system that includes two main components: The environment and a web service to host agent's decision making components (see figure~\ref{fig:syspackage}).\\
 I have already decided on a web service to host agent's minds for a number of reasons. One of the reasons being that in interactions across a network agents provide an API to work with (much like the API I will be providing). Meaning that it is good practice for me to consider how an API for an agent can be designed and deployed. Another reason is the difficulty interfacing between prolog and python and finally that a key use case for agents is as part of distributed systems, so using a web service to deploy them brings me closer to a real use case.\\
 In my project, I will be hosting the environment in my Flask web application, but, the aim is for the environment to be used as if it is a library, as long as it is connected to an application/service that runs agent's decision making component. As such I will not be addressing how the web application hosting the environment, but the environment itself and the agents service.
+\begin{figure}
+	\begin{center}
+	\includegraphics[width=0.5\textwidth]{SystemPackage.png}
+	\caption{UML Package diagram to display the system components}
+	\label{fig:syspackage}
+	\end{center}
+\end{figure}
 
 %------------------------------------------------
 
@@ -206,14 +213,12 @@ The environment comprises of a number of generations, which for a certain number
 %----------------------------------------------------------------------------------------
 %	REFERENCE LIST
 %----------------------------------------------------------------------------------------
-
 \bibliography{../refs.bib}{}
 \bibliographystyle{plain}
 
 %----------------------------------------------------------------------------------------
 
-\newpage
-
+\clearpage
 \begin{figure}
 	\includegraphics[width=1\textwidth]{EnvSequence.png}
 	\caption{Sequence diagram for the running of the environment}

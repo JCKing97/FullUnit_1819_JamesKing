@@ -15,10 +15,10 @@ class PlayerTest(unittest.TestCase):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
-        self.community = requests.request("PUT", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        self.community = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
         self.generation = 0
         generation_payload = {"community": self.community, "generation": self.generation}
-        requests.request("PUT", current_app.config['AGENTS_URL'] + 'generation', json=generation_payload)
+        requests.request("POST", current_app.config['AGENTS_URL'] + 'generation', json=generation_payload)
 
     def tearDown(self):
         self.app_context.pop()

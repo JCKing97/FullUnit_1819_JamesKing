@@ -18,7 +18,7 @@ class Community:
 
     def __init__(self, strategies: List[Dict], num_of_onlookers: int = 5, num_of_generations: int = 10,
                  length_of_generations: int = 30):
-        self._community_id = requests.request("PUT", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        self._community_id = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
         if num_of_onlookers <= 0:
             raise CommunityCreationException("number of onlookers <= 0")
         if length_of_generations <= 5:

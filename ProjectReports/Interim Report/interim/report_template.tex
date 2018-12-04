@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage[final]{pdfpages}
+\usepackage{natbib}
 
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -55,43 +56,58 @@ Signature:
 \end{abstract}
 \newpage
 
-\chapter{Aims, Objectives and Literature Survey}
+\chapter{Aims, Objectives and Literary Survey}
+\section{The Problem}
+To understand the aims and objectives of this project we must first grasp the history of the study of interaction between biological and computational agents (often known as intelligent agents in the field of computer science). It is important to distinguish between biological and computational agents as the study of natural selection and the evolution of cooperation in biological agents (biological lifeforms such as ourselves) has a long and separate history from the study of computational agents in computer science.\\
+The background I am about to explain is covered in my first two reports: on the evolution of cooperation in relation to game-theory and different game-theoretic mechanisms to aid it and on indirect reciprocity, strategies for agents and the development of a concrete model to implement. I will be applying this knowledge in a more convenient format for the interim report here, but if you are interested in a reading more in depth study by myself on this topic I suggest reading these two.\\
+As explained in my first report (on the evolution of cooperation in relation to game-theory and different game-theoretic mechanisms to aid it) early darwinian evolutionary theory was groundbreaking, but both opponents and even proponents of evolution such as Peter Kropotkin~\cite{kropotkin1902mutual} a Russian evolutionary scientist and political activist found it fell short in explaining cooperative phenomena.\\
+Cooperation is the idea of helping others at a detriment or cost to yourself. Of course this is a key part of the natural world, like the act of parents supporting their children and vice-versa in human family groups. There are even interspecies examples such as that of the Meerkat and Drongo Bird~\cite{bbcafrica}.\\
+The problematic question posed by this phenomena is that natural selections idea: the survival of the fittest~\cite{spencer1864principles}, pushes individuals to compete for resources, so why does cooperation exist when there is a process actively pushing for competition? How did cooperation evolve in a world focused on competition?
 
-\section{Project Specification}
-I will explore indirect reciprocity, by both researching and reporting on Nowak and other authors research on the mechanism, drawing on their research and possibly adding on to the ideas of onlookers and gossip to create a model for implementation. I shall be using the Axelrod-Python library to create a proof of concept that I am able to create a web application that allows users to set up and run games and tournaments. This web application will be hosted on Heroku and created using Flask and Python.\\\\
-The solution that we are exploring for the interfacing issues between Python and Prolog is to create a web service for the agent's decision-making component. This will have a Prolog server containing what~\cite{prosocs} refers to as ``agent's minds". A mind will represent information on the state of the environment using an efficient version of the Event Calculus reported in~\cite{mvfcec}. Percepts can be added to the agent's mind and based on these percepts an agent will be able to decide on an action and act on it by returning an action to the environment. Separating out the head and body as in Stathis \textit{et al.} 2002~\cite{prosocs}, though this solution would take this separation further, having the head based in the Prolog service and the body in the environment (Python web application).\\\\
-The capabilities of the Prolog service are to be demonstrated on the web application, which will run indirect reciprocity tournaments creating the environment that agents reside in and containing the body of the agent. The web application will use the service to input percepts and get actions.\\\\
-These have been the core parts of the project however, I could extend this to the other mechanisms presented by Nowak~\cite{five_rules_coop} if I have time. Axelrod-Python has an implementation for network reciprocity - which would be interesting to use so I could create an especially nice frontend for the patterns created in the population~\cite{spatial}. Due to the nature of group selection working on top of direct reciprocity~\cite{multilevel_nowak} it would be possible to implement it on top of the Axelrod-Python library. Leaving kin selection to implement using the Prolog service.
+\section{Cooperation Aids}
+There have been a number of attempts to explain the phenomena of cooperation~\cite{kropotkin1902mutual, selfish_gene, evolution_of_cooperation, five_rules_coop}. Richard Dawkins in his book the selfish gene~\cite{selfish_gene} attempted to explain how the idea that we do not act towards improving our personal fitness, but that the real replicator in natural selection is the gene not the individual and as such the gene is selfish and wishes to propagate itself.\\
+This idea comes under the banner of kinship theories, highlighted by Axelrod and Hamilton in their paper the evolution of cooperation~\cite{evolution_of_cooperation} as one of the theories seeking to explain cooperation. Hamilton wrote a paper on kinship theory earlier on~\cite{kinhamilton} explaining his version of kinship theory in which agents are encouraged to cooperate as they work on improving `inclusive fitness over 
+
+\section{Theory Surrounding Intelligent Agents and Multi-Agent Systems}
+
+\section{Relevance of The Problem to Multi-Agent Systems}
 
 \section{Aims and Objectives}
-\begin{itemize}
-\item To create a Prolog service that is able to support the decisions of a game-theoretic agent which interacts with other systems that wish to choose an agent, provide percepts from an environment and get actions from the agent.
-\item To explore in a game-theoretic context a mechanism to aid in the evolution of cooperation known as indirect reciprocity.
-\item To create a web application that allows users to set up and run game-theory tournaments of both direct and indirect reciprocity.
-\item To use the web application to demonstrate an environment that combines the Prolog service and a set of game-theory strategies and evaluate the results.
-\end{itemize}
-
-\section{Literature Survey}
-Description and critique of past work in relation to my project.
 
 \chapter{Planning and Timescale}
 Provide timeline of completed work and an updated one for next term.
 
 \chapter{Summary of Completed Work}
+Relevance to project aims
+\begin{itemize}
+	\item Evolution of cooperation report
+	\item Indirect reciprocity report
+	\item System design report
+	\item A prolog web app for proof of concept
+	\item A flask web application to begin educational tool and as a proof of concept
+	\item API documentation
+	\item Agents service:
+	\begin{itemize}
+		\item Vertical slice of 3 strategies: perceive, revise, decide
+		\item Use of mvfcec for revise
+		\item Agent management
+		\item Test agents revision
+		\item Get strategies implementation
+		\item 
+	\end{itemize}
+\end{itemize}
 Agents service, flask web app, environment, two reports
 
 \section{Practical}
 
-\subsection{Learning Web Dev}
-Refer to Flask web.
+\subsection{Proof Of Concepts}
 
 \subsection{System Design}
-Overall system design.
 
-\subsection{Agents Service and API Design}
-RESTful API. MVFCEC. Agent Template. Prolog service learning.
+\subsection{Agents Service and API}
+RESTful API. MVFCEC. Agent Template.
 
-\subsection{Environment Design}
+\subsection{The Environment}
 
 \subsection{Tools, Techniques and Processes}
 
@@ -99,6 +115,11 @@ TDD, UML, Processes in VCS, Testing Strategy
 
 \section{Theory}
 Summary of the reports and theory work.
+\subsection{Evolution of Cooperation Report}
+
+\subsection{Indirect Reciprocity Report}
+
+\subsection{System Design Report}
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
@@ -108,14 +129,14 @@ Summary of the reports and theory work.
 \footnote{A lot of my background theory work has been completed in my earlier reports so many of the references appear in those reports (see appendix)}
 \label{endpage}
 
+\chapter{Diary}
+
 \chapter{Appendix}
 Introduce the two reports
 
-\includepdf[pages=-]{../../EvolCoop/EvolCoopReport.pdf}
+%\includepdf[pages=-]{../../EvolCoop/EvolCoopReport.pdf}
 
-\includepdf[pages=-]{../../IndirRec/IndirRec.pdf}
-
-\chapter{Diary}
+%\includepdf[pages=-]{../../IndirRec/IndirRec.pdf}
 
 \end{document}
 

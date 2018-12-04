@@ -38,7 +38,7 @@ class Player:
         try:
             creation_payload: Dict = {"strategy": strategy['name'], "options": strategy['options'],
                                       "community": community_id, "generation": generation_id, "player": player_id}
-            creation_response = requests.request("PUT", current_app.config['AGENTS_URL'] + 'agent',
+            creation_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'agent',
                                                  json=creation_payload)
             if creation_response.status_code != 200:
                 raise PlayerCreationException("bad status code " + creation_response.status_code)

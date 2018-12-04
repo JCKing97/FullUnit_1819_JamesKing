@@ -60,10 +60,10 @@ class Generation:
         self._num_of_onlookers = num_of_onlookers
         self._actions: Dict = {}
         self._percepts: Dict = {}
-        creation_response = requests.request("PUT", current_app.config['AGENTS_URL'] + 'generation',
+        creation_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'generation',
                                              json={"community": community_id, "generation": generation_id})
         if creation_response.status_code != 200:
-            raise GenerationCreationException("bad status code: " + creation_response.status_code)
+            raise GenerationCreationException("bad status code: " + str(creation_response.status_code))
         if not creation_response.json()['success']:
             raise GenerationCreationException(creation_response.json()['message'])
         self._players: List[Player] = []

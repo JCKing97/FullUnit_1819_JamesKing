@@ -13,23 +13,23 @@ class ActionTesting(unittest.TestCase):
 
     def setUp(self):
         self.url = "http://localhost:8080"
-        self.community_response = requests.request("PUT", self.url + '/community').json()
+        self.community_response = requests.request("POST", self.url + '/community').json()
         self.assertTrue(self.community_response['success'])
         self.gen_payload = {"community": self.community_response['id'], "generation": 0}
-        self.generation_response = requests.request("PUT", self.url + '/generation', json=self.gen_payload).json()
+        self.generation_response = requests.request("POST", self.url + '/generation', json=self.gen_payload).json()
         self.assertTrue(self.generation_response['success'])
         self.standing_payload = {"community": self.community_response['id'], "generation": 0,
                                   "strategy": "Standing Discriminator", "options": ["distrusting"],
                                   "player": 0}
-        self.standing_response = requests.request("PUT", self.url + '/agent', json=self.standing_payload).json()
+        self.standing_response = requests.request("POST", self.url + '/agent', json=self.standing_payload).json()
         self.cooperator_payload = {"community": self.community_response['id'], "generation": 0,
                         "strategy": "Cooperator", "options": [],
                         "player": 1}
-        self.cooperator_response = requests.request("PUT", self.url + '/agent', json=self.cooperator_payload).json()
+        self.cooperator_response = requests.request("POST", self.url + '/agent', json=self.cooperator_payload).json()
         self.defector_payload = {"community": self.community_response['id'], "generation": 0,
                         "strategy": "Defector", "options": [],
                         "player": 2}
-        self.defector_response = requests.request("PUT", self.url + '/agent', json=self.defector_payload).json()
+        self.defector_response = requests.request("POST", self.url + '/agent', json=self.defector_payload).json()
         self.percept_defector_negative_payload = {"community": self.community_response['id'], "generation": 0,
                            "perceiver": self.standing_payload['player'], "about": self.cooperator_payload['player'],
                            "gossiper": self.defector_payload['player'], "timepoint": 2, "gossip": "negative"}

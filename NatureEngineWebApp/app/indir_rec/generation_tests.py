@@ -16,7 +16,7 @@ class GenerationTest(unittest.TestCase):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
-        self.community = requests.request("PUT", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        self.community = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
 
     def tearDown(self):
         self.app_context.pop()
