@@ -63,7 +63,7 @@ class Community:
         strategy_fitness: List = []
         overall_fitness = 0
         for player in last_gen_players:
-            found_strategy=False
+            found_strategy = False
             for strategy in strategy_fitness:
                 if strategy['strategy'] == player.get_strategy():
                     found_strategy = True

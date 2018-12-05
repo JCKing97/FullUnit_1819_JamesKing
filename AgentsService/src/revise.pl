@@ -27,7 +27,6 @@ initiates_at(interaction(agent(strategy(_, _, _), Community, Generation, Donor),
 	CheckTimepoint is T - 1,
 	\+holds_at(interaction_timepoints(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient))=_, CheckTimepoint).
 
-% Is nothing ok?
 causes_at(said(_, _,_,_), nothing, _).
 causes_at(did(_, _,_,_), nothing, _).
 causes_at(interaction(_, _), nothing, _).
