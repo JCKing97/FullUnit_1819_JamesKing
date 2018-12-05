@@ -33,9 +33,9 @@ def tournament_run(players, tournament_id):
         tournament_players = []
         for i in range(0, len(players)):
             tournament_players.append(TournamentPlayer(id=i, tournament_id=tournament_id, strategy=players[i].name,
-                                                       score=results.scores[i], rank=results.ranking[i],
+                                                       score=results.scores[i][0], rank=results.ranking[i],
                                                        cooperation_rating=results.cooperating_rating[i],
-                                                       wins=results.wins[i]))
+                                                       wins=results.wins[i][0]))
         db.session.add_all(tournament_players)
         tournament.completed = True
         db.session.commit()

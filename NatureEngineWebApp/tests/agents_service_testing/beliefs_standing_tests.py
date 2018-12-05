@@ -54,6 +54,15 @@ class BeliefsStandingTrustingTest(unittest.TestCase):
                                               "perceiver": self.perceiver_payload['player'],
                                               "donor": self.player1_payload['player'],
                                               "recipient": self.player2_payload['player'], "timepoint": 8,
+                                              "action": "defect"}
+        self.percept_player1_coop1_response = requests.request("POST", self.url + '/percept/action/interaction',
+                                                               json=self.percept_player1_coop1_payload).json()
+        self.assertEqual(self.percept_player1_coop1_payload, self.percept_player1_coop1_response['data'])
+        self.assertTrue(self.percept_player1_coop1_response['success'])
+        self.percept_player1_coop1_payload = {"community": self.community_response['id'], "generation": 0,
+                                              "perceiver": self.perceiver_payload['player'],
+                                              "donor": self.player1_payload['player'],
+                                              "recipient": self.player2_payload['player'], "timepoint": 9,
                                               "action": "cooperate"}
         self.percept_player1_coop1_response = requests.request("POST", self.url + '/percept/action/interaction',
                                                                json=self.percept_player1_coop1_payload).json()
@@ -313,9 +322,18 @@ class BeliefsStandingDistrustingTest(unittest.TestCase):
         self.percept_player1_coop1_payload = {"community": self.community_response['id'], "generation": 0,
                                      "perceiver": self.perceiver_payload['player'],
                                      "donor": self.player1_payload['player'],
-                                     "recipient": self.player2_payload['player'], "timepoint": 8, "action": "cooperate"}
+                                     "recipient": self.player2_payload['player'], "timepoint": 8, "action": "defect"}
         self.percept_player1_coop1_response = requests.request("POST", self.url + '/percept/action/interaction',
                                                       json=self.percept_player1_coop1_payload).json()
+        self.assertEqual(self.percept_player1_coop1_payload, self.percept_player1_coop1_response['data'])
+        self.assertTrue(self.percept_player1_coop1_response['success'])
+        self.percept_player1_coop1_payload = {"community": self.community_response['id'], "generation": 0,
+                                              "perceiver": self.perceiver_payload['player'],
+                                              "donor": self.player1_payload['player'],
+                                              "recipient": self.player2_payload['player'], "timepoint": 9,
+                                              "action": "cooperate"}
+        self.percept_player1_coop1_response = requests.request("POST", self.url + '/percept/action/interaction',
+                                                               json=self.percept_player1_coop1_payload).json()
         self.assertEqual(self.percept_player1_coop1_payload, self.percept_player1_coop1_response['data'])
         self.assertTrue(self.percept_player1_coop1_response['success'])
         self.percept_player2_negative1_payload = {"community": self.community_response['id'], "generation": 0,

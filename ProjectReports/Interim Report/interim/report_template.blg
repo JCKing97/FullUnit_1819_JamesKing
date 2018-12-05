@@ -4,46 +4,49 @@ The top-level auxiliary file: report_template.aux
 The style file: plain.bst
 Database file #1: ../../refs.bib.bib
 Warning--to sort, need author or key in bbcafrica
+Warning--to sort, need author or key in flask_tut
+Warning--to sort, need author or key in react_crash_course
+Warning--to sort, need author or key in swi_web_tut
 Warning--empty publisher in kropotkin1902mutual
-You've used 6 entries,
+You've used 17 entries,
             2118 wiz_defined-function locations,
-            527 strings with 4550 characters,
-and the built_in function-call counts, 1366 in all, are:
-= -- 127
-> -- 42
-< -- 0
-+ -- 21
-- -- 12
-* -- 67
-:= -- 236
-add.period$ -- 17
-call.type$ -- 6
-change.case$ -- 22
+            592 strings with 6345 characters,
+and the built_in function-call counts, 4471 in all, are:
+= -- 438
+> -- 152
+< -- 1
++ -- 68
+- -- 46
+* -- 260
+:= -- 723
+add.period$ -- 50
+call.type$ -- 17
+change.case$ -- 71
 chr.to.int$ -- 0
-cite$ -- 8
-duplicate$ -- 62
-empty$ -- 130
-format.name$ -- 12
-if$ -- 286
+cite$ -- 22
+duplicate$ -- 180
+empty$ -- 414
+format.name$ -- 46
+if$ -- 968
 int.to.chr$ -- 0
-int.to.str$ -- 6
-missing$ -- 7
-newline$ -- 32
-num.names$ -- 10
-pop$ -- 35
+int.to.str$ -- 17
+missing$ -- 15
+newline$ -- 86
+num.names$ -- 26
+pop$ -- 99
 preamble$ -- 1
-purify$ -- 18
+purify$ -- 57
 quote$ -- 0
-skip$ -- 42
+skip$ -- 131
 stack$ -- 0
-substring$ -- 60
-swap$ -- 6
-text.length$ -- 0
+substring$ -- 257
+swap$ -- 26
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 20
-warning$ -- 2
-while$ -- 11
-width$ -- 7
-write$ -- 61
-(There were 2 warnings)
+type$ -- 62
+warning$ -- 5
+while$ -- 35
+width$ -- 19
+write$ -- 178
+(There were 5 warnings)
