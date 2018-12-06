@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../AgentsService/src/main.pl" beforeDir="false" afterPath="$PROJECT_DIR$/../AgentsService/src/main.pl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/community_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/community_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/axelrod_database_conversion_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/axelrod_database_conversion_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProjectReports/IndirRec/IndirRec.log" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/IndirRec/IndirRec.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProjectReports/IndirRec/IndirRec.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/IndirRec/IndirRec.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.aux" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.aux" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.bcf" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.bcf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.run.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.synctex.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Interim Report/interim/report_template.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,8 +89,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="315">
+              <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
               <folding>
                 <element signature="e#176#190#0" expanded="true" />
               </folding>
@@ -507,7 +495,7 @@
       <workItem from="1543930198698" duration="1741000" />
       <workItem from="1543963566259" duration="125000" />
       <workItem from="1544025260538" duration="4532000" />
-      <workItem from="1544095318615" duration="6413000" />
+      <workItem from="1544095318615" duration="6675000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of components">
       <created>1535647227999</created>
@@ -720,7 +708,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115441000" />
+    <option name="totallyTimeSpent" value="115703000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
@@ -1136,8 +1124,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="315">
+          <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
           <folding>
             <element signature="e#176#190#0" expanded="true" />
           </folding>
