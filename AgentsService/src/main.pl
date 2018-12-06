@@ -55,6 +55,7 @@ http:location(belief, root(belief), []).
 
 
 % The handlers for different routes
+:- http_handler(root(.), strategies, []).
 :- http_handler(root(strategies), strategies, []).
 :- http_handler(root(community), community, []).
 :- http_handler(root(generation), generation, []).

@@ -22,7 +22,7 @@ class TestConversion(unittest.TestCase):
         db.drop_all()
         self.app_context.pop()
 
-    def test_matcb_result_to_database_tft_defector(self):
+    def test_match_result_to_database_tft_defector(self):
         players = (axelrod.TitForTat(), axelrod.Defector())
         check_players = [player.name for player in players]
         results = axelrod.Match(players=players, turns=5).play()
@@ -37,9 +37,9 @@ class TestConversion(unittest.TestCase):
         db_actions = Action.query.all()
         for action in db_actions:
             if action.player.strategy == axelrod.TitForTat().name and action.round_num == 1:
-                self.assertTrue(action.cooperate == True)
+                self.assertTrue(action.cooperate)
             else:
-                self.assertTrue(action.cooperate == False)
+                self.assertFalse(action.cooperate)
 
     def test_match_result_to_database_cooperators(self):
         players = (axelrod.Cooperator(), axelrod.Cooperator())

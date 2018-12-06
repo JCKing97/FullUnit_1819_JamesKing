@@ -79,13 +79,11 @@ class Community:
             while current_interval <= j:
                 choice_intervals.append(strategy['strategy'])
                 current_interval += 1
-        print(len(choice_intervals))
         # Create strategies for players in next generation
         strategies: List[Dict] = []
         for i in range(len(last_gen_players)):
             # Select a strategy for this player
             selected_index = random.randint(0, overall_fitness)
-            print(selected_index)
             player_choice: Dict = choice_intervals[selected_index]
             found_strategy = False
             for strategy in strategies:
