@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>main.pl</title>
+
+<link rel="stylesheet" type="text/css" href="pldoc.css">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+<body>
+
+
+<h1 class="file"><span style="float:right"></span>main.pl</h1>
+
+<dl>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="server/1"><b class="pred">server</b><var class="arglist">(++Post:int)</var></a> is <b class="det">semidet</b></dt><dd class="defbody">Run this predicate with the port you wish to use it on as the Port.
+@arg Port The port you wish the server to run on</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="strategies/1"><b class="pred">strategies</b><var class="arglist">(++Request:list)</var></a> is <b class="det">semidet</b></dt><dd class="defbody">The handler for the strategy route to reply with a list of strategies and some metadata.
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="community/1"><b class="pred">community</b><var class="arglist">(++Request:list)</var></a> is <b class="det">semidet</b></dt><dd class="defbody">The handler to create a new community in the service.
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="generation/1"><b class="pred">generation</b><var class="arglist">(++Request:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">The handler to create a new generation in the service,
+fails if not passed the correct parameters as stipulated in the api docs,
+responds unsuccessful to the client if the passed community doesn't exist or the generation for this community already exists.
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="agent/1"><b class="pred">agent</b><var class="arglist">(++Request:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">The handler to create a new agent in the service,
+fails if not passed the correct parameters as stipulated in the api docs,
+responds unsuccessful to the client if the passed community or generation for this community exists, or the agent id is already taken.
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="percept_interaction/1"><b class="pred">percept_interaction</b><var class="arglist">(++Request:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">The handler to give a new interaction percept (that they are in a donor-recipient pair) to the donor-recipient pair,
+fails if not passed the correct parameters as stipulated in the api docs,
+responds unsuccessful to the client if the passed community, generation or agents do not exist.
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="percept_action_interaction/1"><b class="pred">percept_action_interaction</b><var class="arglist">(++Request:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">The handler to give a new action percept (the viewing of another interaction) to an onlooker,
+fails if not passed the correct parameters as stipulated in the api docs,
+responds unsuccessful to the client if the passed community, generation or agents do not exist.
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="percept_action_gossip/1"><b class="pred">percept_action_gossip</b><var class="arglist">(++Request:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">The handler to give a new gossip percept (the perceiving of gossip) to an recipient,
+fails if not passed the correct parameters as stipulated in the api docs,
+responds unsuccessful to the client if the passed community, generation or agents do not exist.
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="belief_donor/1"><b class="pred">belief_donor</b><var class="arglist">(++Request:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">The handler to query an agents beliefs on when they have been a donor,
+fails if not passed the correct parameters as stipulated in the api docs,
+responds unsuccessful to the client if the passed community, generation or agents do not exist.
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="belief_recipient/1"><b class="pred">belief_recipient</b><var class="arglist">(++Request:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">The handler to query an agents beliefs on when they have been a recipient,
+fails if not passed the correct parameters as stipulated in the api docs,
+responds unsuccessful to the client if the passed community, generation or agents do not exist.
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="belief_interaction/1"><b class="pred">belief_interaction</b><var class="arglist">(++Request:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">The handler to query two agents beliefs on when they have been a part of a donor-recipient pair together,
+fails if not passed the correct parameters as stipulated in the api docs,
+responds unsuccessful to the client if the passed community, generation or agents do not exist.
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="belief_standing/1"><b class="pred">belief_standing</b><var class="arglist">(++Request:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">The handler to query an agents beliefs on the standing of another agent,
+fails if not passed the correct parameters as stipulated in the api docs,
+responds unsuccessful to the client if the passed community, generation, agents do not exist or believer doesn't use the standing strategy.
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="action/1"><b class="pred">action</b><var class="arglist">(++Request:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">The handler to get a commitment to an action from an agent at a particular timepoint,
+fails if not passed the correct parameters as stipulated in the api docs,
+responds unsuccessful to the client if the passed community, generation or the agent doesn't exist
+@arg <var>Request</var> The request object passed from the HTTP request</dd>
+</dl>
+
+</body>
+</html>

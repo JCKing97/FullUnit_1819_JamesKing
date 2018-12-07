@@ -1,9 +1,6 @@
-/*-------------------------------------------
-Author:		James King adapted from Anne Ogborn
-Title:		main.pl
-Created:	4th Nov 2018
-Desc:		Contains the central code and handlers for the Agents web service
--------------------------------------------*/
+/** <module> This file links the system logic together compiling it all and setting up the server, this file also creates the uri endpoints and associates them with handlers, dealing with all the http work.
+ * @author James King adapted from Anne Ogborn
+*/
 
 % Compile and set up mvfcec
 ?- ['./mvfcec/src/lib/utilities'].
@@ -55,8 +52,8 @@ http:location(belief, root(belief), []).
 
 
 % The handlers for different routes
-:- http_handler(root(.), strategies, []).
-:- http_handler(root(strategies), strategies, []).
+:- http_handler(root(.), strategy, []).
+:- http_handler(root(strategy), strategy, []).
 :- http_handler(root(community), community, []).
 :- http_handler(root(generation), generation, []).
 :- http_handler(root(agent), agent, []).
@@ -70,33 +67,45 @@ http:location(belief, root(belief), []).
 :- http_handler(belief(standing), belief_standing, []).
 
 
-% Starts the server on the port number passed in Port
-% Creates a number of threads and returns to the top level
+/**
+ * server(++Post:int) is semidet
+ * 
+ * Run this predicate with the port you wish to use it on as the Port.
+ * @arg Port The port you wish the server to run on
+ */
 server(Port):-
 	http_server(http_dispatch, [port(Port)]).
 
-% Handler that finds all the strategies in the system and replies with a json
-strategies(Request):-
+/**
+ * strategies(++Request:list) is semidet
+ *
+ * The handler for the strategy route to reply with a list of strategies and some metadata.
+ * @arg Request The request object passed from the HTTP request
+ */
+strategy(Request):-
 	member(method(get), Request), !,
 	find_strategies(Strategies),
 	reply_json_dict(strategies{success: true, status: 200, strategies: Strategies}).
 
-% Handles a request to create a new agent in the knowledge base
+/**
+ * community(++Request:list) is semidet
+ *
+ * The handler to create a new community in the service.
+ * @arg Request The request object passed from the HTTP request
+ */
 community(Request):-
 	member(method(post), Request), !,
 	new_community(ID),
 	reply_json(return{success: true, status: 200, id: ID}).
-	
-% Handles a request to create a new agent in the knowledge base
-agent(Request):-
-	member(method(post), Request), !,
-	http_read_json_dict(Request, DictIn),
-	new_agent(DictIn, Success),
-	(Success == true ->
-		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
-		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
 
-% Handles a request to create a new generation in the logic base
+/**
+ * generation(++Request:list) is nondet
+ *
+ * The handler to create a new generation in the service,
+ * fails if not passed the correct parameters as stipulated in the api docs,
+ * responds unsuccessful to the client if the passed community doesn't exist or the generation for this community already exists.
+ * @arg Request The request object passed from the HTTP request
+ */
 generation(Request):-
 	member(method(post), Request), !,
 	http_read_json_dict(Request, DictIn),
@@ -106,7 +115,30 @@ generation(Request):-
 		reply_json(return{data: DictIn, success: Success, status: 200}) ; 	
 		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
 
-% Handles a request to add a new interaction percept to an agent
+/**
+ * agent(++Request:list) is nondet
+ *
+ * The handler to create a new agent in the service,
+ * fails if not passed the correct parameters as stipulated in the api docs,
+ * responds unsuccessful to the client if the passed community or generation for this community exists, or the agent id is already taken.
+ * @arg Request The request object passed from the HTTP request
+ */
+agent(Request):-
+	member(method(post), Request), !,
+	http_read_json_dict(Request, DictIn),
+	new_agent(DictIn, Success),
+	(Success == true ->
+		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
+		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
+
+/**
+ * percept_interaction(++Request:list) is nondet
+ *
+ * The handler to give a new interaction percept (that they are in a donor-recipient pair) to the donor-recipient pair,
+ * fails if not passed the correct parameters as stipulated in the api docs,
+ * responds unsuccessful to the client if the passed community, generation or agents do not exist.
+ * @arg Request The request object passed from the HTTP request
+ */
 percept_interaction(Request):-
 	member(method(post), Request), !,
 	http_read_json_dict(Request, DictIn),
@@ -115,7 +147,14 @@ percept_interaction(Request):-
 		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
 		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
 
-% Hanldes a request to add a new action interaction percept to an agent
+/**
+ * percept_action_interaction(++Request:list) is nondet
+ *
+ * The handler to give a new action percept (the viewing of another interaction) to an onlooker,
+ * fails if not passed the correct parameters as stipulated in the api docs,
+ * responds unsuccessful to the client if the passed community, generation or agents do not exist.
+ * @arg Request The request object passed from the HTTP request
+ */
 percept_action_interaction(Request):-
 	member(method(post), Request), !,
 	http_read_json_dict(Request, DictIn),
@@ -125,7 +164,14 @@ percept_action_interaction(Request):-
 		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
 
 
-% Hanldes a request to add a new action interaction percept to an agent
+/**
+ * percept_action_gossip(++Request:list) is nondet
+ *
+ * The handler to give a new gossip percept (the perceiving of gossip) to an recipient,
+ * fails if not passed the correct parameters as stipulated in the api docs,
+ * responds unsuccessful to the client if the passed community, generation or agents do not exist.
+ * @arg Request The request object passed from the HTTP request
+ */
 percept_action_gossip(Request):-
 	member(method(post), Request), !,
 	http_read_json_dict(Request, DictIn),
@@ -134,7 +180,14 @@ percept_action_gossip(Request):-
 		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
 		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
 
-% Handles a request to check the belief of an agent on all the times they were a donor
+/**
+ * belief_donor(++Request:list) is nondet
+ *
+ * The handler to query an agents beliefs on when they have been a donor,
+ * fails if not passed the correct parameters as stipulated in the api docs,
+ * responds unsuccessful to the client if the passed community, generation or agents do not exist.
+ * @arg Request The request object passed from the HTTP request
+ */
 belief_donor(Request):-
 	member(method(get), Request), !,
 	http_parameters(
@@ -156,7 +209,14 @@ belief_donor(Request):-
 			success: false, status: 200, message: Success})
 	).
 
-% Handles a request to check the belief of an agent on all the times they were a recipient
+/**
+ * belief_recipient(++Request:list) is nondet
+ *
+ * The handler to query an agents beliefs on when they have been a recipient,
+ * fails if not passed the correct parameters as stipulated in the api docs,
+ * responds unsuccessful to the client if the passed community, generation or agents do not exist.
+ * @arg Request The request object passed from the HTTP request
+ */
 belief_recipient(Request):-
 	member(method(get), Request), !,
 	http_parameters(
@@ -178,7 +238,14 @@ belief_recipient(Request):-
 			success: false, status: 200, message: Success})
 	).
 
-% Handles a request to check the belief of two agents on when they last interacted and what roles they took in the donor-recipient pair
+/**
+ * belief_interaction(++Request:list) is nondet
+ *
+ * The handler to query two agents beliefs on when they have been a part of a donor-recipient pair together,
+ * fails if not passed the correct parameters as stipulated in the api docs,
+ * responds unsuccessful to the client if the passed community, generation or agents do not exist.
+ * @arg Request The request object passed from the HTTP request
+ */
 belief_interaction(Request):-
 	member(method(get), Request), !,
 	http_parameters(
@@ -201,6 +268,14 @@ belief_interaction(Request):-
 					success: false, status: 200, message: Success})
 	).
 
+/**
+ * belief_standing(++Request:list) is nondet
+ *
+ * The handler to query an agents beliefs on the standing of another agent,
+ * fails if not passed the correct parameters as stipulated in the api docs,
+ * responds unsuccessful to the client if the passed community, generation, agents do not exist or believer doesn't use the standing strategy.
+ * @arg Request The request object passed from the HTTP request
+ */
 belief_standing(Request):-
 	member(method(get), Request), !,
 	http_parameters(
@@ -223,6 +298,14 @@ belief_standing(Request):-
 					success: false, status: 200, message: Success})
 	).
 
+/**
+ * action(++Request:list) is nondet
+ *
+ * The handler to get a commitment to an action from an agent at a particular timepoint,
+ * fails if not passed the correct parameters as stipulated in the api docs,
+ * responds unsuccessful to the client if the passed community, generation or the agent doesn't exist
+ * @arg Request The request object passed from the HTTP request
+ */
 action(Request):-
 	member(method(get), Request), !,
 	http_parameters(

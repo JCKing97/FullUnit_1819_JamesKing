@@ -1,11 +1,19 @@
-/*--------------------------------------
-Author:		James King
-Title:		actions.pl
-Created:	Nov 2018
-Desc:		Contains the logic related to agents actions
---------------------------------------*/
+/** <module> This file handles getting commitments to actions from agents.
+ * @author James King
+ */
 
-:- use_module(library(http/http_log)).
+/**
+ * agent_action(++Timepoint:int, ++CommunityID:int, ++GenerationID:int, ++AgentID:int, -Success:bool, -Action:dict) is nondet
+ *
+ * Get an agents commitment to an action, responds unsuccessful if there is no such community, generation of the community or agent belonging to the generation of the community passed.
+ *
+ * @arg Timepoint The timepoint at which to get the action commitment at
+ * @arg CommunityID The community the agent belongs to
+ * @arg GenerationID The generation of the community the agent belongs to
+ * @arg AgentID The id of the agent
+ * @arg Success An output argument whether getting the action was successful or not
+ * @arg Action An output argument which is a dictionary representing the action commitment made
+ */
 
 /*----------------------------------------------------------------------------------------
 ---------------------------------------- Get Actions -------------------------------------
@@ -103,9 +111,3 @@ agent_action(_, CommunityID, GenerationID, _, Success, Action):-
 agent_action(_, CommunityID, GenerationID, AgentID, Success, Action):-
 	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	Success = 'No such player for this generation of this community', Action = false, !.
-
-log_list([A]):-
-	http_log('~w~n', [A]).
-log_list([A|B]):-
-	http_log('~w, ', [A]),
-	log_list(B).

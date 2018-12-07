@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: report_template.aux
+The style file: plain.bst
+Database file #1: ../../refs.bib.bib
+Warning--to sort, need author or key in bbcafrica
+Warning--empty publisher in kropotkin1902mutual
+You've used 14 entries,
+            2118 wiz_defined-function locations,
+            582 strings with 5953 characters,
+and the built_in function-call counts, 3953 in all, are:
+= -- 384
+> -- 149
+< -- 1
++ -- 64
+- -- 46
+* -- 242
+:= -- 663
+add.period$ -- 41
+call.type$ -- 14
+change.case$ -- 62
+chr.to.int$ -- 0
+cite$ -- 16
+duplicate$ -- 159
+empty$ -- 345
+format.name$ -- 46
+if$ -- 839
+int.to.chr$ -- 0
+int.to.str$ -- 14
+missing$ -- 15
+newline$ -- 71
+num.names$ -- 26
+pop$ -- 75
+preamble$ -- 1
+purify$ -- 51
+quote$ -- 0
+skip$ -- 113
+stack$ -- 0
+substring$ -- 241
+swap$ -- 23
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 50
+warning$ -- 2
+while$ -- 35
+width$ -- 16
+write$ -- 148
+(There were 2 warnings)

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>src</title>
+
+<link rel="stylesheet" type="text/css" href="pldoc.css">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+<body>
+
+
+<h1 class="wiki">Agent Mind as a Service</h1>
+
+<p>
+The agent mind as a service system hosts and manages agents minds for games of indirect reciprocity.
+The service provides an API through which to interact, documented in the AgentsService/api_docs folder.
+The agents minds can use the strategies implemented in the system, accessible at the /strategy uri.
+Tested in SWI-Prolog version 7.6.4</p>
+
+<h1 class="wiki">Running the service</h1>
+
+<p>
+To run the service run prolog and compile the <a class="file" href="main.html">main.pl</a> file under the src directory.
+Then execute the predicate: <code>server(Port)</code> with Port as the port you want to run it on for example 8080 or 5000 (preferably 8080 when running with the nature engine).
+Then use the uri endpoints and http methods specified in the api docs.</p>
+
+<h2 class="wiki subdirs">Sub directories</h2>
+
+<table class="subdirs">
+<tr><td><a class="subdir" href="mvfcec/index.html">[dir] mvfcec</a></td></tr>
+</table>
+
+<h2 class="wiki plfiles">Prolog files</h2>
+
+<table class="summary">
+<tr><th colspan="3" class="file"><span style="float:left"><a href="actions.html">actions.pl</a></span><span style="float:right"></span></th></tr>
+<tr><th colspan="3" class="file"><span style="float:left"><a href="agents.html">agents.pl</a></span><span style="float:right"></span></th></tr>
+<tr><th colspan="3" class="file"><span style="float:left"><a href="beliefs.html">beliefs.pl</a></span><span style="float:right"></span></th></tr>
+<tr><th colspan="3" class="file"><span style="float:left"><a href="communities.html">communities.pl</a></span><span style="float:right"></span></th></tr>
+<tr><th colspan="3" class="file"><span style="float:left"><a href="main.html">main.pl</a></span><span style="float:right"></span></th></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=module('This%20file%20links%20the%20system%20logic%20together%20compiling%20it%20all%20and%20setting%20up%20the%20server,%20this%20file%20also%20creates%20the%20uri%20endpoints%20and%20associates%20them%20with%20handlers,%20dealing%20with%20all%20the%20http%20work.')"></a></td><td class="summary">This file links the system logic together compiling it all and setting up the server, this file also creates the uri endpoints and associates them with handlers, dealing with all the http work.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=action/1">action/1</a></td><td class="summary">The handler to get a commitment to an action from an agent at a particular timepoint, fails if not passed the correct parameters as stipulated in the api docs, responds unsuccessful to the client if the passed community, generation or the agent doesn't exist.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=agent/1">agent/1</a></td><td class="summary">The handler to create a new agent in the service, fails if not passed the correct parameters as stipulated in the api docs, responds unsuccessful to the client if the passed community or generation for this community exists, or the agent id is already taken.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=belief_donor/1">belief_donor/1</a></td><td class="summary">The handler to query an agents beliefs on when they have been a donor, fails if not passed the correct parameters as stipulated in the api docs, responds unsuccessful to the client if the passed community, generation or agents do not exist.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=belief_interaction/1">belief_interaction/1</a></td><td class="summary">The handler to query two agents beliefs on when they have been a part of a donor-recipient pair together, fails if not passed the correct parameters as stipulated in the api docs, responds unsuccessful to the client if the passed community, generation or agents do not exist.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=belief_recipient/1">belief_recipient/1</a></td><td class="summary">The handler to query an agents beliefs on when they have been a recipient, fails if not passed the correct parameters as stipulated in the api docs, responds unsuccessful to the client if the passed community, generation or agents do not exist.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=belief_standing/1">belief_standing/1</a></td><td class="summary">The handler to query an agents beliefs on the standing of another agent, fails if not passed the correct parameters as stipulated in the api docs, responds unsuccessful to the client if the passed community, generation, agents do not exist or believer doesn't use the standing strategy.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=community/1">community/1</a></td><td class="summary">The handler to create a new community in the service.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=generation/1">generation/1</a></td><td class="summary">The handler to create a new generation in the service, fails if not passed the correct parameters as stipulated in the api docs, responds unsuccessful to the client if the passed community doesn't exist or the generation for this community already exists.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=percept_action_gossip/1">percept_action_gossip/1</a></td><td class="summary">The handler to give a new gossip percept (the perceiving of gossip) to an recipient, fails if not passed the correct parameters as stipulated in the api docs, responds unsuccessful to the client if the passed community, generation or agents do not exist.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=percept_action_interaction/1">percept_action_interaction/1</a></td><td class="summary">The handler to give a new action percept (the viewing of another interaction) to an onlooker, fails if not passed the correct parameters as stipulated in the api docs, responds unsuccessful to the client if the passed community, generation or agents do not exist.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=percept_interaction/1">percept_interaction/1</a></td><td class="summary">The handler to give a new interaction percept (that they are in a donor-recipient pair) to the donor-recipient pair, fails if not passed the correct parameters as stipulated in the api docs, responds unsuccessful to the client if the passed community, generation or agents do not exist.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=server/1">server/1</a></td><td class="summary">Run this predicate with the port you wish to use it on as the Port.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr class="public"><td><a href="/pldoc/doc_for?object=strategies/1">strategies/1</a></td><td class="summary">The handler for the strategy route to reply with a list of strategies and some metadata.</td><td align="right"><span style="white-space: nowrap"></span></td></tr>
+<tr><th colspan="3" class="file"><span style="float:left"><a href="percepts.html">percepts.pl</a></span><span style="float:right"></span></th></tr>
+<tr><th colspan="3" class="file"><span style="float:left"><a href="revise.html">revise.pl</a></span><span style="float:right"></span></th></tr>
+<tr><th colspan="3" class="file"><span style="float:left"><a href="strategies.html">strategies.pl</a></span><span style="float:right"></span></th></tr>
+</table>
+
+</body>
+</html>
