@@ -1,14 +1,22 @@
-/*--------------------------------------
-Author:		James King
-Title:		revise.pl
-Created:	20th Nov 2018
-Desc:		Contains the logic related to revising agents beliefs using the events calculus
---------------------------------------*/
+/** <module> This file handles the revision of beliefs triggered by events being asserted in the event calculus.
+ * @author James King
+ */
 
 :- use_module(library(lists)).
 
-% Some logic
+% Get the strategy from an agent
 get_strategy(Strategy, Options, agent(strategy(Strategy, _, Options), _, _, _)).
+
+/**
+ * initiates_at(++Event:term, @Options:list, ?Fluent:term, --T:int) is nondet
+ *
+ * Initiate a certain value for a fluent at the given timepoint T, based on the event passed in Event.
+ *
+ * @arg Event The event that may have happened
+ * @arg Options A list of options (keep empty for now)
+ * @arg Fluent The fluent and value that will now hold if the event happened and logic is satisfies
+ * @arg T The timepoint at which this fluent was initiated
+ */
 
 /*-----------------------------
 ----------- General -----------

@@ -17,6 +17,7 @@ input_format(observed_at(E, T), E, T).
 :- use_module(library(http/http_parameters)).
 :- use_module(library(http/http_log)).
 :- use_module(library(http/http_client)).
+:- use_module(library(doc_files)).
 
 % The agents system logic
 ?- ['./strategies'].

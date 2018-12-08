@@ -12,5 +12,83 @@
 
 <h1 class="file"><span style="float:right"></span>beliefs.pl</h1>
 
+<dl>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="get_donor_belief/6"><b class="pred">get_donor_belief</b><var class="arglist">(++CommunityID:int, ++GenerationID:int, ++AgentID:int, ++Timepoint:int, -Success:atom, -Value:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Get an agents beliefs on all the times that they have been a donor before the given timepoint
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>Timepoint</var></td><td class="argdescr">- The timepoint at which to check for donor beliefs before</td></tr>
+<tr><td><var>CommunityID</var></td><td class="argdescr">- The community the agent belongs to</td></tr>
+<tr><td><var>GenerationID</var></td><td class="argdescr">- The generation of the community the agent belongs to</td></tr>
+<tr><td><var>AgentID</var></td><td class="argdescr">- The id of the agent</td></tr>
+<tr><td><var>Success</var></td><td class="argdescr">- An output argument whether getting the belief was successful (becomes true) or not (becomes error message)</td></tr>
+<tr><td><var>Value</var></td><td class="argdescr">- An output list of the times this agent has been a donor, empty if the agent hasn't</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="get_recipient_belief/6"><b class="pred">get_recipient_belief</b><var class="arglist">(++CommunityID:int, ++GenerationID:int, ++AgentID:int, ++Timepoint:int, -Success:atom, -Value:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Get an agents beliefs on all the times that they have been a recipient before the given timepoint
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>Timepoint</var></td><td class="argdescr">- The timepoint at which to check for recipient beliefs before</td></tr>
+<tr><td><var>CommunityID</var></td><td class="argdescr">- The community the agent belongs to</td></tr>
+<tr><td><var>GenerationID</var></td><td class="argdescr">- The generation of the community the agent belongs to</td></tr>
+<tr><td><var>AgentID</var></td><td class="argdescr">- The id of the agent</td></tr>
+<tr><td><var>Success</var></td><td class="argdescr">- An output argument whether getting the belief was successful (becomes true) or not (becomes error message)</td></tr>
+<tr><td><var>Value</var></td><td class="argdescr">- An output list of the times this agent has been a recipient, empty if the agent hasn't</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="get_interaction_belief/7"><b class="pred">get_interaction_belief</b><var class="arglist">(++CommunityID:int, ++GenerationID:int, ++Timepoint:int, ++Agent1ID:int, ++Agent2ID:int, -Success:atom, -Value:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Get two agents beliefs on when they have been in interactions together.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>Timepoint</var></td><td class="argdescr">- The timepoint at which to check for interaction beliefs before</td></tr>
+<tr><td><var>CommunityID</var></td><td class="argdescr">- The community the agents belong to</td></tr>
+<tr><td><var>GenerationID</var></td><td class="argdescr">- The generation of the community the agents belong to</td></tr>
+<tr><td><var>Agent1ID</var></td><td class="argdescr">- The id of one of the agents</td></tr>
+<tr><td><var>Agent2ID</var></td><td class="argdescr">- The id of the other of the agents</td></tr>
+<tr><td><var>Success</var></td><td class="argdescr">- An output argument whether getting the belief was successful (becomes true) or not (becomes error message)</td></tr>
+<tr><td><var>Value</var></td><td class="argdescr">- An output list of the times these agents have been part of a donor-recipient pair, empty if they haven't</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="get_standing_belief/7"><b class="pred">get_standing_belief</b><var class="arglist">(++CommunityID:int, ++GenerationID:int, ++Timepoint:int, ++PerceiverID:int, ++AboutID:int, -Success:atom, -Value:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Get the agent with the id <var>PerceiverID</var>'s belief on the standing of the player with id <var>AboutID</var> (either good or bad),
+Is unsuccessful if <var>PerceiverID</var> is not using the standing strategy, or the specified community, generation or agents are incorrect.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>Timepoint</var></td><td class="argdescr">- The timepoint at which to check for standing beliefs before</td></tr>
+<tr><td><var>CommunityID</var></td><td class="argdescr">- The community the agents belong to</td></tr>
+<tr><td><var>GenerationID</var></td><td class="argdescr">- The generation of the community the agents belong to</td></tr>
+<tr><td><var>PerceiverID</var></td><td class="argdescr">- The id of the agent who holds the belief about the other</td></tr>
+<tr><td><var>AboutID</var></td><td class="argdescr">- The id of the agent who the belief holds about</td></tr>
+<tr><td><var>Success</var></td><td class="argdescr">- An output argument whether getting the belief was successful (becomes true) or not (becomes error message)</td></tr>
+<tr><td><var>Value</var></td><td class="argdescr">- An output argument which is either good or bad under normal circumstances, or false under error circumstances</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+</dl>
+
 </body>
 </html>

@@ -12,5 +12,55 @@
 
 <h1 class="file"><span style="float:right"></span>percepts.pl</h1>
 
+<dl>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="add_new_action_interaction_percept/2"><b class="pred">add_new_action_interaction_percept</b><var class="arglist">(++DictIn:dict, --Success:atom)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Add a new action interaction percept to the agent specified in the dictionary with the parameters specified in the dictionary,
+an action interaction percept is an observation of an interaction where a donor either defect or cooperated with a recipient,
+the api docs specify the layout of the dict.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>DictIn</var></td><td class="argdescr">- The dictionary containing agent and percept information</td></tr>
+<tr><td><var>Success</var></td><td class="argdescr">- Whether the input of a percept was successful (true) or not (error message)</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="add_new_action_gossip_percept/2"><b class="pred">add_new_action_gossip_percept</b><var class="arglist">(++DictIn:dict, --Success:atom)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Add a new action gossip percept to the agent specified in the dictionary with the parameters specified in the dictionary,
+an action gossip percept is an receiving of gossip by a perceiver from another agent (gossiper) about another agent,
+the api docs specify the layout of the dict.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>DictIn</var></td><td class="argdescr">- The dictionary containing agent and percept information</td></tr>
+<tr><td><var>Success</var></td><td class="argdescr">- Whether the input of a percept was successful (true) or not (error message)</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="add_new_interaction_percept/2"><b class="pred">add_new_interaction_percept</b><var class="arglist">(++DictIn:dict, --Success:atom)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Add a new percept that the specified donor and recipient agents are in an interaction together at the specified timepoint,
+the api docs specify the layout of the dict.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>DictIn</var></td><td class="argdescr">- The dictionary containing agent and percept information</td></tr>
+<tr><td><var>Success</var></td><td class="argdescr">- Whether the input of a percept was successful (true) or not (error message)</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+</dl>
+
 </body>
 </html>

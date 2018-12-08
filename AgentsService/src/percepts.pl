@@ -1,9 +1,7 @@
-/*--------------------------------------
-Author:		James King
-Title:		percepts.pl
-Created:	4th Nov 2018
-Desc:		Contains the logic related to adding percepts to an agents memory
---------------------------------------*/
+/** <module> This file handles the inputting of percepts to agents.
+ * @author James King
+ */
+
 ?- ['./strategies'].
 ?- ['./communities'].
 :- use_module(library(http/http_log)).
@@ -11,6 +9,17 @@ Desc:		Contains the logic related to adding percepts to an agents memory
 /*-------------------------------------
 ----- Action Interaction Percept ------
 -------------------------------------*/
+
+/**
+ * add_new_action_interaction_percept(++DictIn:dict, --Success:atom) is nondet
+ *
+ * Add a new action interaction percept to the agent specified in the dictionary with the parameters specified in the dictionary,
+ * an action interaction percept is an observation of an interaction where a donor either defect or cooperated with a recipient,
+ * the api docs specify the layout of the dict.
+ *
+ * @arg DictIn The dictionary containing agent and percept information
+ * @arg Success Whether the input of a percept was successful (true) or not (error message)
+ */
 
 % Add an action percepts to a recipient
 add_new_action_interaction_percept(DictIn, Success):-
@@ -131,6 +140,17 @@ add_new_action_interaction_percept(DictIn, Success):-
 ------- Gossip Percept ---------
 ------------------------------*/
 
+/**
+ * add_new_action_gossip_percept(++DictIn:dict, --Success:atom) is nondet
+ *
+ * Add a new action gossip percept to the agent specified in the dictionary with the parameters specified in the dictionary,
+ * an action gossip percept is an receiving of gossip by a perceiver from another agent (gossiper) about another agent,
+ * the api docs specify the layout of the dict.
+ *
+ * @arg DictIn The dictionary containing agent and percept information
+ * @arg Success Whether the input of a percept was successful (true) or not (error message)
+ */
+
 % Add a gossip percepts to a recipient
 add_new_action_gossip_percept(DictIn, Success):-
 	CommunityID = DictIn.community,
@@ -249,6 +269,16 @@ add_new_action_gossip_percept(DictIn, Success):-
 /*------------------------------
 ----- Interaction Percept ------
 ------------------------------*/
+
+/**
+ * add_new_interaction_percept(++DictIn:dict, --Success:atom) is nondet
+ *
+ * Add a new percept that the specified donor and recipient agents are in an interaction together at the specified timepoint,
+ * the api docs specify the layout of the dict.
+ *
+ * @arg DictIn The dictionary containing agent and percept information
+ * @arg Success Whether the input of a percept was successful (true) or not (error message)
+ */
 
 % Add an interaction percept
 add_new_interaction_percept(DictIn, Success):-

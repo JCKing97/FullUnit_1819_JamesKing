@@ -1,13 +1,20 @@
-/*--------------------------------------
-Author:		James King
-Title:		agents.pl
-Created:	Nov 2018
-Desc:		Contains the logic related to agents
---------------------------------------*/
+/** <module> This file handles the managing of agents in the service
+ * @author James King
+ */
 
 ?- ['./communities'].
 :- dynamic agents/4.
 :- use_module(library(http/http_log)).
+
+/**
+ * new_agent(++DictIn:dict, -Success:atom) is nondet
+ *
+ * Create a new agent in the service, fails if DictIn is not in the format specified in the API documentation,
+ * Success may be an atom if the strategy, community, generation or agent is incorrect in DictIn, Success becomes an error message in this case.
+ *
+ * @arg DictIn The dictionary containing details on the new agents strategy (+options), community id, generation id and agent id as specified in the api documentation
+ * @arg Success An output argument whether getting the action was successful (becomes true) or not (becomes error message) 
+ */
 
 % Create a new agent if there are no other agents with the same community, generation and agent id
 new_agent(DictIn, Success):-

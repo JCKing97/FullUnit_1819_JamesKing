@@ -1,11 +1,19 @@
-/*--------------------------------------
-Author:		James King
-Title:		strategies.pl
-Created:	4th Nov 2018
-Desc:		Contains the logic related to querying agents beliefs
---------------------------------------*/
+/** <module> This file handles querying the beliefs from agents at specific timepoints, and surrounding logic.
+ * @author James King
+ */
 
-% Get the value of a belief at a given timepoint
+/**
+ * get_donor_belief( ++CommunityID:int, ++GenerationID:int, ++AgentID:int, ++Timepoint:int, -Success:atom, -Value:list) is nondet
+ *
+ * Get an agents beliefs on all the times that they have been a donor before the given timepoint
+ *
+ * @arg Timepoint The timepoint at which to check for donor beliefs before
+ * @arg CommunityID The community the agent belongs to
+ * @arg GenerationID The generation of the community the agent belongs to
+ * @arg AgentID The id of the agent
+ * @arg Success An output argument whether getting the belief was successful (becomes true) or not (becomes error message) 
+ * @arg Value An output list of the times this agent has been a donor, empty if the agent hasn't
+ */
 
 /*-------------------------
 ------ Donor Beliefs ------
@@ -46,7 +54,18 @@ get_donor_belief(CommunityID, GenerationID, AgentID, _, Success, Value):-
 	Success = 'No such agent in this generation and community',
 	Value = [].
 
-
+/**
+ * get_recipient_belief( ++CommunityID:int, ++GenerationID:int, ++AgentID:int, ++Timepoint:int, -Success:atom, -Value:list) is nondet
+ *
+ * Get an agents beliefs on all the times that they have been a recipient before the given timepoint
+ *
+ * @arg Timepoint The timepoint at which to check for recipient beliefs before
+ * @arg CommunityID The community the agent belongs to
+ * @arg GenerationID The generation of the community the agent belongs to
+ * @arg AgentID The id of the agent
+ * @arg Success An output argument whether getting the belief was successful (becomes true) or not (becomes error message) 
+ * @arg Value An output list of the times this agent has been a recipient, empty if the agent hasn't
+ */
 
 /*-----------------------------
 ------ Recipient Beliefs ------
@@ -86,6 +105,20 @@ get_recipient_belief(CommunityID, GenerationID, AgentID, _, Success, Value):-
 	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	Success = 'No such agent in this generation and community',
 	Value = [].
+
+/**
+ * get_interaction_belief( ++CommunityID:int, ++GenerationID:int, ++Timepoint:int, ++Agent1ID:int, ++Agent2ID:int,-Success:atom, -Value:list) is nondet
+ *
+ * Get two agents beliefs on when they have been in interactions together.
+ *
+ * @arg Timepoint The timepoint at which to check for interaction beliefs before
+ * @arg CommunityID The community the agents belong to
+ * @arg GenerationID The generation of the community the agents belong to
+ * @arg Agent1ID The id of one of the agents
+ * @arg Agent2ID The id of the other of the agents
+ * @arg Success An output argument whether getting the belief was successful (becomes true) or not (becomes error message) 
+ * @arg Value An output list of the times these agents have been part of a donor-recipient pair, empty if they haven't
+ */
 
 /*-------------------------------
 ------ Interaction Beliefs ------
@@ -140,6 +173,21 @@ get_interaction_belief(CommunityID, GenerationID, _, _, Agent2ID, Success, Value
 	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), Agent2ID),
 	Success = 'No such agent for player2 for this generation and community',
 	Value = [].
+
+/**
+ * get_standing_belief( ++CommunityID:int, ++GenerationID:int, ++Timepoint:int, ++PerceiverID:int, ++AboutID:int,-Success:atom, -Value:list) is nondet
+ *
+ * Get the agent with the id PerceiverID's belief on the standing of the player with id AboutID (either good or bad),
+ * Is unsuccessful if PerceiverID is not using the standing strategy, or the specified community, generation or agents are incorrect.
+ *
+ * @arg Timepoint The timepoint at which to check for standing beliefs before
+ * @arg CommunityID The community the agents belong to
+ * @arg GenerationID The generation of the community the agents belong to
+ * @arg PerceiverID The id of the agent who holds the belief about the other
+ * @arg AboutID The id of the agent who the belief holds about
+ * @arg Success An output argument whether getting the belief was successful (becomes true) or not (becomes error message) 
+ * @arg Value An output argument which is either good or bad under normal circumstances, or false under error circumstances
+ */
 
 /*----------------------------
 ------ Standing Beliefs ------

@@ -1,9 +1,9 @@
-/** <module> This file handles getting commitments to actions from agents.
+/** <module> This file handles getting commitments to actions from agents, and surrounding logic.
  * @author James King
  */
 
 /**
- * agent_action(++Timepoint:int, ++CommunityID:int, ++GenerationID:int, ++AgentID:int, -Success:bool, -Action:dict) is nondet
+ * agent_action(++Timepoint:int, ++CommunityID:int, ++GenerationID:int, ++AgentID:int, -Success:atom, -Action:dict) is nondet
  *
  * Get an agents commitment to an action, responds unsuccessful if there is no such community, generation of the community or agent belonging to the generation of the community passed.
  *
@@ -11,7 +11,7 @@
  * @arg CommunityID The community the agent belongs to
  * @arg GenerationID The generation of the community the agent belongs to
  * @arg AgentID The id of the agent
- * @arg Success An output argument whether getting the action was successful or not
+ * @arg Success An output argument whether getting the action was successful (becomes true) or not (becomes error message) 
  * @arg Action An output argument which is a dictionary representing the action commitment made
  */
 

@@ -12,5 +12,26 @@
 
 <h1 class="file"><span style="float:right"></span>actions.pl</h1>
 
+<dl>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="agent_action/6"><b class="pred">agent_action</b><var class="arglist">(++Timepoint:int, ++CommunityID:int, ++GenerationID:int, ++AgentID:int, -Success:atom, -Action:dict)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Get an agents commitment to an action, responds unsuccessful if there is no such community, generation of the community or agent belonging to the generation of the community passed.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>Timepoint</var></td><td class="argdescr">- The timepoint at which to get the action commitment at</td></tr>
+<tr><td><var>CommunityID</var></td><td class="argdescr">- The community the agent belongs to</td></tr>
+<tr><td><var>GenerationID</var></td><td class="argdescr">- The generation of the community the agent belongs to</td></tr>
+<tr><td><var>AgentID</var></td><td class="argdescr">- The id of the agent</td></tr>
+<tr><td><var>Success</var></td><td class="argdescr">- An output argument whether getting the action was successful (becomes true) or not (becomes error message)</td></tr>
+<tr><td><var>Action</var></td><td class="argdescr">- An output argument which is a dictionary representing the action commitment made</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+</dl>
+
 </body>
 </html>

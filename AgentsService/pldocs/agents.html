@@ -12,5 +12,23 @@
 
 <h1 class="file"><span style="float:right"></span>agents.pl</h1>
 
+<dl>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="new_agent/2"><b class="pred">new_agent</b><var class="arglist">(++DictIn:dict, -Success:atom)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Create a new agent in the service, fails if <var>DictIn</var> is not in the format specified in the API documentation,
+<var>Success</var> may be an atom if the strategy, community, generation or agent is incorrect in <var>DictIn</var>, <var>Success</var> becomes an error message in this case.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>DictIn</var></td><td class="argdescr">- The dictionary containing details on the new agents strategy (+options), community id, generation id and agent id as specified in the api documentation</td></tr>
+<tr><td><var>Success</var></td><td class="argdescr">- An output argument whether getting the action was successful (becomes true) or not (becomes error message)</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+</dl>
+
 </body>
 </html>
