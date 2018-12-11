@@ -1,3 +1,6 @@
+"""A module containing the functionality for handling routes in the main blueprint (IPD, home and about pages).
+This includes processing of the data sent to them, and processing of the data returned by them"""
+
 from app import db
 from app.main import bp
 from app.models import Match, Tournament
@@ -12,14 +15,15 @@ from sqlalchemy import desc, asc
 @bp.route('/')
 @bp.route('/index')
 def index():
-    """The template to render for the home page"""
+    """The home page route"""
     return render_template('index.html', title='Home')
 
 
 @bp.route('/match/<level>', methods=['POST', 'GET'])
 def match(level):
     """Handles rendering the template with the form to select
-    and start a match and also the logic when this form is posted"""
+    and start a match and also the logic when this form is posted
+    :param level: The level of strategies which the user has selected"""
     if level == "Advanced":
         strategies = [{'id': axl.strategies.index(s), 'name': s.name} for s in axl.strategies]
     else:
@@ -42,7 +46,8 @@ def edit_players(form, strategies):
 
 @bp.route('/match_run/<match_id>')
 def match_run(match_id):
-    """Displays the information of a finished match with the match_id provided"""
+    """Displays the information of a finished match with the match_id provided
+    :param match_id: The id of the match to display the information of"""
     interaction_history = Match.query.filter_by(id=match_id).first_or_404().get_interaction_history()
     player_points = get_match_points(interaction_history)
     players = Match.query.filter_by(id=match_id).first().players
@@ -60,7 +65,8 @@ def match_run(match_id):
 @bp.route('/tournament/<level>', methods=['GET', 'POST'])
 def tournament(level):
     """Handles rendering the template with the form to select
-        and start a tournament and also the logic when this form is posted"""
+        and start a tournament and also the logic when this form is posted
+        :param level: The level of strategies the user wishes to received (basic or advanced)"""
     if level == "Advanced":
         strategies = [{'id': axl.strategies.index(s), 'name': s.name} for s in axl.strategies]
     else:
@@ -86,7 +92,10 @@ def tournament(level):
 
 @bp.route('/tournament_run/<tournament_id>/<job_id>')
 def tournament_run(tournament_id, job_id):
-    """Displays the information of a running or finished tournament with the tournament_id provided"""
+    """The functionality for when a tournament is running (rendering a template that pings the server to check)
+    and also when the tournament has finished the logic for displaying an analysis of the tournament
+    :param tournament_id: The id of the tournament that is being run or has finished
+    :param job_id: The id of the redis job that this tournament used or is using"""
     this_tournament = Tournament.query.filter_by(id=tournament_id).first_or_404()
     players = this_tournament.players
     strat_dict = {s().name: s() for s in axl.strategies}
@@ -111,6 +120,7 @@ def tournament_run(tournament_id, job_id):
 
 @bp.route('/is_tournament_finished/<tournament_id>/<job_id>')
 def is_tournament_finished(tournament_id, job_id):
+    """The route to ping to check whether a tournament has been finished or not"""
     this_tournament = Tournament.query.filter_by(id=tournament_id).first_or_404()
     print(get_current_job())
     print("Job id {}".format(job_id))
@@ -120,4 +130,5 @@ def is_tournament_finished(tournament_id, job_id):
 
 @bp.route('/about')
 def about():
+    """The route for information about the website and the surrounding project"""
     return render_template('about.html', title='About')

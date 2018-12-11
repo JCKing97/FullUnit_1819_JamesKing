@@ -1,3 +1,6 @@
+"""The formas that are used in selecting players for various matches and tournaments (not including the ones set up with
+React.js"""
+
 from flask_wtf import FlaskForm
 from wtforms import SelectField, SubmitField, IntegerField
 from wtforms.validators import number_range

@@ -1,3 +1,5 @@
+"""A module for which contains functionality for converting tournaments and matched for storage in the database"""
+
 from app import db, create_app
 from app.models import Match, Round, Player, Action, Tournament, TournamentPlayer
 import axelrod as axl
@@ -7,6 +9,7 @@ app.app_context().push()
 
 
 def match_result_to_database(results, players):
+    """Store the data for a match that has run in the database"""
     m = Match()
     db.session.add(m)
     db.session.flush()
@@ -27,6 +30,7 @@ def match_result_to_database(results, players):
 
 
 def tournament_run(players, tournament_id):
+    """Store the data of a tournament that has run in the database, can be run in a Redis queue"""
     tournament = Tournament.query.filter_by(id=tournament_id).first()
     try:
         results = axl.Tournament(players).play()

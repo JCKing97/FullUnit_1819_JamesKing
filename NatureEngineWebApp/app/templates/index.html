@@ -1,23 +1,48 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <div class="container" width="100%" style="padding: 20px">
+    <div class="container" style="padding: 20px">
         <div class="row" style="background-color: #004400">
             <div class="col-md-5" style="padding: 10px" >
-                <img src="/static/images/buds.jpg" alt="buds of spring" width="100%">
+                <img src="/static/images/james-carol-lee-642040-unsplash.jpg" alt="Fish in corals" width="100%">
             </div>
             <div class="col-md-7">
                 <div class="page-header"><h1 style="color: white">Welcome to the Nature Engine</h1></div>
-                <p style="color: white">In these sections we shall introduce the iterated prisoners dilemma along with context on the motivation surrounding it</p>
-                <p style="color: white">Give a background of the dilemma</p>
-                <p style="color: white">Go back through papers for inspiration</p>
-                <p style="color: white">Provide links to my reports for the course</p>
-                <p style="color: white">Mention the key papers surrounding the dilemma</p>
+                <p style="color: white">
+                    In the early days of evolutionary theory there was an issue surrounding the idea of the "survival of the fittest".
+                    We have a natural instinct to survive, so this statement seems to suggest that we will always naturally compete with others to survive.
+                    However, there are many examples of cooperation between animals in nature,
+                    so how did this cooperation evolve? how did this cooperation pass down the generations and become "evolutionarily stable"?
+                    There are a number of theories put forward to explain the phenomena of cooperation, some you can simulate on this website.
+                    Below there is a description of some.
+                </p>
             </div>
         </div>
         <div class="row" style="background-color: #003333">
             <div class="col-md-7">
-                <div class="page-header"><h1 style="color: white">Explain the biology</h1></div>
+                <div class="page-header"><h1 style="color: white">The Iterated Prisoner's Dilemma</h1></div>
+                <p style="color: white">
+                    In a match of the Iterated Prisoner's Dilemma there are two players and a number of rounds.
+                    In each round both players choose simultaneously whether they want to cooperate or defect.
+                    If both players defect then they get a payoff of 1 each. If both cooperate they both get a payoff of 3.
+                    However there is always a temptation to defect as if one player defects the cooperates, the defecting player
+                    gets a payoff of 5 and the cooperating player gets a payoff of 0.
+                    Players can use a number of different strategies to decide whether to defect or cooperate based on the previous interactions
+                    between the two players in the match.
+                    You can simulate a match of this by selecting "Match" in the navbar, if you select the basic version you will be
+                    limited to the most popular strategies, if you select the advanced option you will be able to use the wide array of strategies
+                    available in the Axelrod-Python library used to run the matches.
+                </p>
+                <div class="page-header"><h1 style="color: white">Tournaments and Beyond</h1></div>
+                <p style="color: white">
+                    A popular way of using the Iterated Prisoner's Dilemma is to select a number of players and run a "round-robin"
+                    tournament between them. In this tournament each player plays a match with every other player.
+                    The players accrue points throughout the tournament.
+                    You can simulate one of these tournaments by selecting "Tournament" in the navbar and then selecting what range of strategies you wish to have available.<br />
+                    Further applications of the Iterated Prisoner's Dilemma have used evolutionary algorithms to simulate how players in a society
+                    may evolve in regards to their strategy of how they cooperate or defect. You cannot run the Iterated Prisoner's Dilemma
+                    here with an evolutionary algorithm, however you can run indirect reciprocity with evolution (more details below).
+                </p>
             </div>
             <div class="col-md-5" style="padding: 10px">
                 <img src="/static/images/jared-poledna-465006-unsplash.jpg" alt="jellyfish" width="100%">
@@ -25,19 +50,49 @@
         </div>
         <div class="row" style="background-color: #354F00">
             <div class="col-md-5" style="padding: 10px" >
-                <img src="/static/images/squirrel.jpg" alt="squirrel" width="100%">
+                <img src="/static/images/ryoji-iwata-485375-unsplash.jpg" alt="society" width="100%">
             </div>
             <div class="col-md-7">
-                <div class="page-header"><h1 style="color: white">Describe strategies</h1></div>
+                <div class="page-header"><h1 style="color: white">Reputation</h1></div>
+                <p style="color: white">
+                    The Iterated Prisoner's Dilemma uses direct reciprocity to aid in the evolution of cooperation, this is the idea: "I'll scratch your back, if you scratch mine".
+                    Indirect reciprocity is less intuitive, but is still applicable to many domains. The idea is: "If I scratch your back, someone else with scratch mine later on".
+                    Indirect reciprocity relies on the idea of reputation: a group mechanic in which if someone acts well their reputation is enhanced,
+                    if they act badly it is diminished. This mechanism means that we don't need many interactions between any two individuals for them to know
+                    how to act towards each other.<br/>
+                    Indirect reciprocity is also different from the Iterated Prisoner's dilemma in that interactions
+                    consist of a donor-recipient pair, only the donor acts in this interaction pair, not the both of them. If the
+                    donor chooses to cooperate the recipient gets a payoff of 2, but this is at a cost of 1 to the donor. If the
+                    donor defects neither receive any payoff.<br />
+                    Indirect reciprocity suits societies with more advanced capabilities in terms of social ability and brain-power. Two such
+                    societies are human societies and multi-agent systems (more details below).<br />
+                    In my version of indirect reciprocity there is a community, and in each community there are generations of players.
+                    Each generation has a number of timepoints over which events happen, in each timepoint there is one donor-recipient pair.
+                    Any members of the generation that are not part of this pair may choose to either be idle for a turn or to gossip to
+                    other agents (either positive or negative information about another agent).<br />
+                    For each interaction pair a number of agents are "onlookers" and observe the interaction, then being able to
+                    revise their beliefs about the donor. Agents that receive gossip will also be able to revise their beliefs about the agent the gossip is about.
+                    At the end of each generation another generation is built depending on how well each strategy does in the previous generation.<br />
+                    You are able to simulate a community of indirect reciprocity by selecting "Reputation" in the navbar.
+                </p>
             </div>
         </div>
         <div class="row" style="background-color: #061539">
             <div class="col-md-7">
-                <div class="page-header"><h1 style="color: white">Explain tournaments and communities</h1></div>
-                <p style="color: white">Relate to players and AI</p>
+                <div class="page-header"><h1 style="color: white">Intelligent Agents and Multi-Agent Systems</h1></div>
+                <p style="color: white">
+                    Artificial Intelligence is pushing our computing and problem solving abilities to the next level. One idea in AI
+                    is agents, these are autonomous systems that have the capability to decide on actions based on what they perceive of their environment.
+                    The combination of a number of agents and their environment is known as a multi-agent system.<br />
+                    The problem is how to get these agents to cooperate when each agent cannot know for sure the intentions of another? The agent
+                    cannot know whether the other agent will cooperate back or not.<br />
+                    The mechanisms (direct and indirect reciprocity) highlighted above can be applied to multi-agent systems
+                    to encourage cooperation and hopefully prevent cooperating agents from being taken advantage of by defecting agents.
+                    My project is to study indirect reciprocity and how effective this is in multi-agent systems.
+                </p>
             </div>
             <div class="col-md-5" style="padding: 10px" >
-                <img src="/static/images/james-carol-lee-642040-unsplash.jpg" alt="coral and fish" width="100%">
+                <img src="/static/images/brian-kostiuk-252865-unsplash.jpg" alt="computer chip" width="100%">
             </div>
         </div>
     </div>

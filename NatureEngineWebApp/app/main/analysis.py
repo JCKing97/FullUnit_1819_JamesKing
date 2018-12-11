@@ -6,7 +6,8 @@ __author__ = "James King"
 def get_match_points(interaction_history):
     """Gets the points for the 2 players in a single match
     :rtype: a dictionary
-    :return: if there is no interaction history an empty dictionary, else a dictionary containing the keys of the players and their respective points earned"""
+    :return: if there is no interaction history an empty dictionary, else a dictionary containing
+     the keys of the players and their respective points earned"""
     player_points = {}
     round_history = {}
     for action in interaction_history:

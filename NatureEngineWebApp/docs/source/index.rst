@@ -10,7 +10,7 @@ Welcome to The Nature Engine's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   modules
 
 Indices and tables
 ==================

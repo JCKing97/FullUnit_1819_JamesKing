@@ -20,6 +20,12 @@ migrate = Migrate()
 
 
 def create_app(config_class=Config):
+    """
+    Create an instance of the flask application with the details of logging, database, redis, migrations and bootstrap
+    set up. Set the app up based on the config passed.
+    :param config_class: The configuration class that the application should use
+    :return: The instance of a flask app
+    """
     app = Flask(__name__)
     app.config.from_object(Config)
 

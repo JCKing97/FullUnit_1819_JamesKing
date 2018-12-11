@@ -7,6 +7,7 @@ from datetime import datetime
 
 
 class Match(db.Model):
+    """The database model of an IPD match"""
     id = db.Column(db.Integer, primary_key=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow())
     rounds = db.relationship('Round', backref='match', lazy='dynamic')
@@ -17,11 +18,13 @@ class Match(db.Model):
         return "<Match {}>".format(self.id)
 
     def get_interaction_history(self):
+        """Get the interaction history of the match"""
         interaction_history = Action.query.filter(Action.match_id == self.id)
         return interaction_history.order_by(Action.round_num.asc()).all()
 
 
 class Round(db.Model):
+    """A database representation of a round of the Iterated Prisoner's Dilemma"""
     num = db.Column(db.Integer, primary_key=True)
     match_id = db.Column(db.Integer, db.ForeignKey('match.id'), primary_key=True)
     actions = db.relationship('Action', backref='round', lazy='dynamic')
@@ -31,6 +34,7 @@ class Round(db.Model):
 
 
 class Player(db.Model):
+    """The database representation of an Iterated Prisoner's Dilemma player for a match"""
     id = db.Column(db.Integer, primary_key=True)
     match_id = db.Column(db.Integer, db.ForeignKey('match.id'), primary_key=True)
     strategy = db.Column(db.String(120))
@@ -41,6 +45,8 @@ class Player(db.Model):
 
 
 class Action(db.Model):
+    """The database representation of ann action by a player in a specific round towards another player
+     (cooperate or defect)"""
     round_num = db.Column(db.Integer, db.ForeignKey('round.num'), primary_key=True)
     match_id = db.Column(db.Integer, db.ForeignKey('match.id'), primary_key=True)
     player_id = db.Column(db.Integer, db.ForeignKey('player.id'), primary_key=True)
@@ -51,6 +57,7 @@ class Action(db.Model):
 
 
 class Tournament(db.Model):
+    """The database representation of an IPD tournament"""
     id = db.Column(db.Integer, primary_key=True)
     completed = db.Column(db.Boolean, default=False)
     error = db.Column(db.Boolean, default=False)
@@ -61,6 +68,7 @@ class Tournament(db.Model):
 
 
 class TournamentPlayer(db.Model):
+    """The database representation of a  player that has been part of a tournament"""
     id = db.Column(db.Integer, primary_key=True)
     tournament_id = db.Column(db.Integer, db.ForeignKey('tournament.id'), primary_key=True)
     strategy = db.Column(db.String(120))
