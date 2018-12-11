@@ -1,0 +1,74 @@
+\begin{thebibliography}{10}
+
+\bibitem{evolution_of_cooperation}
+Robert Axelrod and William~D. Hamilton.
+\newblock The evolution of cooperation.
+\newblock {\em Science}, 211:1390--1396, 1981.
+
+\bibitem{selfish_gene}
+Richard Dawkins.
+\newblock {\em The Selfish Gene}.
+\newblock Oxford University Press, 2016.
+
+\bibitem{axelrodproject}
+Vince Knight; Owen Campbell;~Marc; eric-s-s; VSN Reddy Janga; James Campbell;
+  Karol M. Langner; T.J. Gaffney; Sourav Singh; Nikoleta; Julie Rymer; Thomas
+  Campbell; Jason Young; MHakem; Geraint Palmer; Kristian Glass;
+  edouardArgenson; Daniel Mancia; Martin Jones; Cameron
+  Davidson-Pilon;~alajara; Ranjini Das; Marios Zoulias; Aaron Kratz; Timothy
+  Standen; Paul Slavin; Adam Pohl; Jochen Müller; Georgios Koutsovoulos;
+  Areeb~Ahmed.
+\newblock Axelrod: 4.3.0.
+\newblock \url{http://dx.doi.org/10.5281/zenodo.1405868}, September 2018.
+
+\bibitem{kinhamilton}
+W.~D. Hamilton.
+\newblock The genetical evolution of social behaviour.
+\newblock {\em Journal of Theoretical Biology}, 7:1--16, July 1964.
+
+\bibitem{kropotkin1902mutual}
+Peter Kropotkin.
+\newblock {\em Mutual aid: A Factor of Evolution}.
+\newblock 1902.
+
+\bibitem{leimarhammer}
+Olof Leimar and Peter Hammerstein.
+\newblock Evolution of cooperation through indirect reciprocity.
+\newblock {\em Proceedings of The Royal Society}, 268:745--753, May 2001.
+
+\bibitem{Mui:2002:NRM:544741.544807}
+Lik Mui, Mojdeh Mohtashemi, and Ari Halberstadt.
+\newblock Notions of reputation in multi-agents systems: A review.
+\newblock In {\em Proceedings of the First International Joint Conference on
+  Autonomous Agents and Multiagent Systems: Part 1}, AAMAS '02, pages 280--287,
+  New York, NY, USA, 2002. ACM.
+
+\bibitem{five_rules_coop}
+Martin~A. Nowak.
+\newblock Five rules for the evolution of cooperation.
+\newblock {\em Science}, 314, 2006.
+
+\bibitem{evol_indirect_image}
+Martin~A. Nowak and Karl Sigmund.
+\newblock Evolution of indirect reciprocity by image scoring.
+\newblock {\em Nature}, 393:573--577, 1998.
+
+\bibitem{russell2016artificial}
+Stuart~J Russell and Peter Norvig.
+\newblock {\em Artificial intelligence: a modern approach}.
+\newblock Malaysia; Pearson Education Limited,, 2016.
+
+\bibitem{gossip_alt}
+Ralf~D. Sommerfeld, Hans-J{\"u}rgen Krambeck, Dirk Semmann, and Manfred
+  Milinski.
+\newblock Gossip as an alternative for direct observation in games of indirect
+  reciprocity.
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, 104:17435--17440, 2007.
+
+\bibitem{wooldridge_jennings_1995}
+Michael Wooldridge and Nicholas~R. Jennings.
+\newblock Intelligent agents: theory and practice.
+\newblock {\em The Knowledge Engineering Review}, 10(2):115--152, 1995.
+
+\end{thebibliography}

@@ -6,7 +6,6 @@
             <tr>
                 <th>Player ID</th>
                 <th>Strategy</th>
-                <th>Description</th>
             </tr>
         </thead>
         <tbody>
@@ -14,7 +13,6 @@
                 <tr>
                     <td>{{ player.id }}</td>
                     <td>{{ player.strategy }}</td>
-                    <td>{{ strat_dict[player.strategy].__doc__ }}</td>
                 </tr>
             {% endfor %}
         </tbody>

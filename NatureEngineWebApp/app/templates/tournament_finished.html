@@ -3,8 +3,52 @@
 {% block app_content %}
     <div class="jumbotron" style="padding: 20px">
         <h1>Tournament Finished</h1>
-        <p>
-            How did the points stack up?
-        </p>
+        <p>Your tournament completed! How did the players do and did cooperation win?</p>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                {% include "_player_strategy_description.html" %}
+            </div>
+            <div class="col-md-10">
+                <h2>The top 3 players:</h2>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 panel" style="border-width: 2px; border-color: {% if top3_players[1].score == top3_players[0].score %}gold{% else %}silver{% endif %}">
+                            Id: {{ top3_players[1].id }}<br />Strategy: {{ top3_players[1].strategy }}<br/>Points: {{ top3_players[1].score }}</div>
+                        <div class="col-md-4 panel" style="border-width: 2px; border-color: gold">
+                            Id: {{ top3_players[0].id }}<br />Strategy: {{ top3_players[0].strategy }}<br/>Points: {{ top3_players[0].score }}</div>
+                        <div class="col-md-4 panel" style="border-width: 2px; border-color: {% if top3_players[2].score == top3_players[0].score %}gold{% elif top3_players[2].score == top3_players[1].score %}silver{% else %}#cd7f32{% endif %}">
+                            Id: {{ top3_players[2].id }}<br />Strategy: {{ top3_players[2].strategy }}<br/>Points: {{ top3_players[2].score }}</div>
+                    </div>
+                </div>
+                <h2>How did the points stack up?</h2>
+                {% for player in players %}
+                    <label>Player {{ player.id }}: {{ player.score }} points</label>
+                    <div class="progress">
+                        <div class="progress-bar {% if player.score==max_points %}progress-bar-success{% else %}progress-bar-warning{% endif %}"
+                             role="progressbar" aria-valuenow="{{ player.score }}" aria-valuemin="0" aria-valuemax="{{ "{}".format(max_points) }}"
+                             style="{{ "width: {}%".format(100 * (player.score / max_points)) }}"></div>
+                    </div>
+                {% endfor %}
+                <h2>The 3 most cooperative players:</h2>
+                <div class="container">
+                    <div class="row">
+                        {% for player in top3_cooperative_players %}
+                            <div class="col-md-4 panel panel-success">Id: {{ top3_cooperative_players[1].id }}<br />Strategy: {{ top3_cooperative_players[1].strategy }}<br/>Points: {{ top3_cooperative_players[1].score }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <h2>The 3 least cooperative players:</h2>
+                <div class="container">
+                    <div class="row">
+                        {% for player in top3_defective_players %}
+                            <div class="col-md-4 panel panel-danger">Id: {{ top3_defective_players[1].id }}<br />Strategy: {{ top3_defective_players[1].strategy }}<br/>Points: {{ top3_defective_players[1].score }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% include "_strategies_description.html" %}
+            </div>
+        </div>
     </div>
 {% endblock %}

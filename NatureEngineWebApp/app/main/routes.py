@@ -7,6 +7,7 @@ import axelrod as axl
 from app.main.axelrod_database_conversion import match_result_to_database
 from app.main.analysis import get_match_points
 from rq import get_current_job
+from sqlalchemy import desc, asc
 
 @bp.route('/')
 @bp.route('/index')
@@ -46,9 +47,14 @@ def match_run(match_id):
     player_points = get_match_points(interaction_history)
     players = Match.query.filter_by(id=match_id).first().players
     strat_dict = {s().name: s() for s in axl.strategies}
-    return render_template('match_run.html', title='Match Finished', match_id=match_id,
+    strategies = []
+    for player in players:
+        if {'name': player.strategy} not in strategies:
+            strategies.append({'name': player.strategy})
+    print(strategies)
+    return render_template('match_finished.html', title='Match Finished', match_id=match_id,
                            interaction_history=interaction_history, player_points=player_points,
-                           strat_dict=strat_dict, players=players)
+                           strat_dict=strat_dict, players=players, strategies=strategies)
 
 
 @bp.route('/tournament/<level>', methods=['GET', 'POST'])
@@ -82,8 +88,23 @@ def tournament(level):
 def tournament_run(tournament_id, job_id):
     """Displays the information of a running or finished tournament with the tournament_id provided"""
     this_tournament = Tournament.query.filter_by(id=tournament_id).first_or_404()
+    players = this_tournament.players
+    strat_dict = {s().name: s() for s in axl.strategies}
+    strategies = []
+    max_points = 0
+    for player in players:
+        if player.score > max_points:
+            max_points = player.score
+        if {'name': player.strategy} not in strategies:
+            strategies.append({'name': player.strategy})
+    top3_players = players.order_by(desc('score')).limit(3).all()
+    top3_cooperative_players = players.order_by(desc('cooperation_rating')).limit(3).all()
+    top3_defective_players = players.order_by(asc('cooperation_rating')).limit(3).all()
     if this_tournament.is_finished():
-        return render_template('tournament_finished.html', title='Tournament')
+        return render_template('tournament_finished.html', title='Tournament', tournament_id=tournament_id,
+                               players=players, strat_dict=strat_dict, max_points=max_points, top3_players=top3_players,
+                               strategies=strategies, top3_cooperative_players=top3_cooperative_players,
+                               top3_defective_players=top3_defective_players)
     else:
         return render_template('tournament_running.html', title='Tournament', tournament_id=tournament_id, job_id=job_id)
 
@@ -95,7 +116,6 @@ def is_tournament_finished(tournament_id, job_id):
     print("Job id {}".format(job_id))
     return jsonify({'finished': this_tournament.is_finished(),
                     'url': url_for('main.tournament_run', tournament_id=tournament_id, job_id=job_id)})
-
 
 
 @bp.route('/about')
