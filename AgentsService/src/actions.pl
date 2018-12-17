@@ -2,6 +2,16 @@
  * @author James King
  */
 
+?- ['./agents'].
+?- ['./communities'].
+% Compile and set up mvfcec
+?-['./mvfcec/src/lib/utilities'].
+?-['./mvfcec/src/compiler/basic_V1.0'].
+?-['./mvfcec/src/lib/activity_recognition_lifecycles'].
+dialect(swi).
+:- (dynamic observed_at/2).
+input_format(observed_at(E, T), E, T).
+
 /**
  * agent_action(++Timepoint:int, ++CommunityID:int, ++GenerationID:int, ++AgentID:int, -Success:atom, -Action:dict) is nondet
  *

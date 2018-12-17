@@ -10,12 +10,32 @@
  * @arg ID The ID of the new created community
  */
 
-:- dynamic community/1, generation/2.
+:- dynamic community/1, generation/2, id_gap/1, id/1.
+:- multifile community/1, generation/2.
+?- ['./agents'].
 
-% Create a new community and return the ID
 new_community(ID):-
 	get_new_id(ID),
 	assert(community(ID)).
+
+/**
+ * retract_community(++DictIn:dict, -Success:atom) is semidet
+ *
+ * Retracts a community and all it's agents and generations from the system, the community id is stored in the dict.
+ *
+ * @arg DictIn Contains the id of the community to delete.
+ */
+
+retract_community(DictIn, Success):-
+	ID = DictIn.community,
+	community(ID),
+	retract_agents(ID),
+	retract_generations(ID),
+	retract(community(ID)),
+	assert(id_gap(ID)),
+	Success = true.
+retract_community(_, Success):-
+	Success = "No community with this ID to retract".
 
 /**
  * get_new_id(--NewID:int) is det
@@ -25,7 +45,11 @@ new_community(ID):-
  * @arg ID The ID for the community
  */
 
-% Get a new community id
+% Get a community id for an unfilled gap
+get_new_id(ID):-
+	id_gap(ID), !,
+	retract(id_gap(ID)).
+% Get a new community id as there is no unfilled gaps
 get_new_id(NewID):-
 	current_predicate(id/1),
 	id(ID), !,
@@ -71,3 +95,14 @@ new_generation(DictIn, Success):-
 	CommunityID = DictIn.community,
 	\+community(CommunityID),
 	Success = 'No such community', !.
+
+
+/**
+ * retract_generations(++ID:int) is nondet
+ *
+ * Delete all generations related to the community ID given.
+ *
+ * @arg ID The id of the community related to these generations we are deleting
+ */
+retract_generations(ID):-
+	retractall(generation(community(ID), _)).

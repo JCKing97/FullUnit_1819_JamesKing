@@ -2,9 +2,10 @@
  * @author James King
  */
 
-?- ['./communities'].
-:- dynamic agents/4.
+:- dynamic agent/4, community/1, generation/2.
+:- multifile agent/4, community/1, generation/2.
 :- use_module(library(http/http_log)).
+?- ['./strategies'].
 
 /**
  * new_agent(++DictIn:dict, -Success:atom) is nondet
@@ -13,7 +14,7 @@
  * Success may be an atom if the strategy, community, generation or agent is incorrect in DictIn, Success becomes an error message in this case.
  *
  * @arg DictIn The dictionary containing details on the new agents strategy (+options), community id, generation id and agent id as specified in the api documentation
- * @arg Success An output argument whether getting the action was successful (becomes true) or not (becomes error message) 
+ * @arg Success An output argument whether creating the agent was successful (becomes true) or not (becomes error message)
  */
 
 % Create a new agent if there are no other agents with the same community, generation and agent id
@@ -75,3 +76,13 @@ new_agent(_, Success):-
 	current_predicate(community/1),
 	\+current_predicate(generation/2),
 	Success = 'No such generation for this community', !.
+
+/**
+ * retract_agents(++ID:int) is nondet
+ *
+ * Delete all the agents in the service related to the community ID passed in.
+ *
+ * @arg ID The ID of the community all the agents you wish to retract belongs to
+ */
+ retract_agents(ID):-
+ 	retractall(agent(_, community(ID), _, _)).

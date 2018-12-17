@@ -5,6 +5,12 @@
 ?- ['./strategies'].
 ?- ['./communities'].
 :- use_module(library(http/http_log)).
+% Compile and set up mvfcec
+?- ['./mvfcec/src/lib/utilities'].
+?- ['./mvfcec/src/compiler/basic_V1.0'].
+?- ['./mvfcec/src/lib/activity_recognition_lifecycles'].
+:- dynamic observed_at/2.
+input_format(observed_at(E, T), E, T).
 
 /*-------------------------------------
 ----- Action Interaction Percept ------

@@ -2,6 +2,16 @@
  * @author James King
  */
 
+?- ['./communities'].
+?- ['./agents'].
+?- ['./strategies'].
+% Compile and set up mvfcec
+?- ['./mvfcec/src/lib/utilities'].
+?- ['./mvfcec/src/compiler/basic_V1.0'].
+?- ['./mvfcec/src/lib/activity_recognition_lifecycles'].
+:- dynamic observed_at/2.
+input_format(observed_at(E, T), E, T).
+
 /**
  * get_donor_belief( ++CommunityID:int, ++GenerationID:int, ++AgentID:int, ++Timepoint:int, -Success:atom, -Value:list) is nondet
  *
@@ -19,7 +29,7 @@
 ------ Donor Beliefs ------
 -------------------------*/
 
-% When did this agent last believe they were a donor?
+% When did this agent last believe they were a donor
 get_donor_belief(CommunityID, GenerationID, AgentID, Timepoint, Success, Value):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),

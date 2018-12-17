@@ -3,11 +3,11 @@
 */
 
 % Compile and set up mvfcec
-?- ['./mvfcec/src/lib/utilities'].
-?- ['./mvfcec/src/compiler/basic_V1.0'].
-?- ['./mvfcec/src/lib/activity_recognition_lifecycles'].
+?-['./mvfcec/src/lib/utilities'].
+?-['./mvfcec/src/compiler/basic_V1.0'].
+?-['./mvfcec/src/lib/activity_recognition_lifecycles'].
 dialect(swi).
-:- dynamic observed_at/2.
+:- (dynamic observed_at/2).
 input_format(observed_at(E, T), E, T).
 
 % The libraries required for a server
@@ -20,19 +20,19 @@ input_format(observed_at(E, T), E, T).
 :- use_module(library(doc_files)).
 
 % The agents system logic
-?- ['./strategies'].
-?- ['./communities'].
-?- ['./percepts'].
-?- ['./agents'].
-?- ['./beliefs'].
-?- ['./revise'].
-?- ['./actions'].
+?-['./strategies'].
+?-['./communities'].
+?-['./percepts'].
+?-['./agents'].
+?-['./beliefs'].
+?-['./revise'].
+?-['./actions'].
 
 
 % Set correct handling of JSON
 :- use_module(library(http/http_json)).
 :- use_module(library(http/json_convert)).
-:- multifile http_json/1.
+:- (multifile http_json/1).
 
 http_json:json_type('application/x-javascript').
 http_json:json_type('text/javascript').
@@ -40,8 +40,8 @@ http_json:json_type('text/x-javascript').
 http_json:json_type('text/x-json').
 
 % Divide the paths up into sections
-:- multifile http:location/3.
-:- dynamic   http:location/3.
+:- (multifile http:location/3).
+:- (dynamic http:location/3).
 http:location(community, root(community), []).
 http:location(strategies, root(strategies), []).
 http:location(generation, root(generation), []).
@@ -53,7 +53,7 @@ http:location(belief, root(belief), []).
 
 
 % The handlers for different routes
-:- http_handler(root(.), strategy, []).
+:- http_handler(root('.'), strategy, []).
 :- http_handler(root(strategy), strategy, []).
 :- http_handler(root(community), community, []).
 :- http_handler(root(generation), generation, []).
@@ -74,8 +74,8 @@ http:location(belief, root(belief), []).
  * Run this predicate with the port you wish to use it on as the Port.
  * @arg Port The port you wish the server to run on
  */
-server(Port):-
-	http_server(http_dispatch, [port(Port)]).
+server(Port) :-
+    http_server(http_dispatch, [port(Port)]).
 
 /**
  * strategies(++Request:list) is semidet
@@ -83,10 +83,10 @@ server(Port):-
  * The handler for the strategy route to reply with a list of strategies and some metadata.
  * @arg Request The request object passed from the HTTP request
  */
-strategy(Request):-
-	member(method(get), Request), !,
-	find_strategies(Strategies),
-	reply_json_dict(strategies{success: true, status: 200, strategies: Strategies}).
+strategy(Request) :-
+    member(method(get), Request), !,
+    find_strategies(Strategies),
+    reply_json_dict(strategies{status:200, strategies:Strategies, success:true}).
 
 /**
  * community(++Request:list) is semidet
@@ -94,10 +94,22 @@ strategy(Request):-
  * The handler to create a new community in the service.
  * @arg Request The request object passed from the HTTP request
  */
-community(Request):-
-	member(method(post), Request), !,
-	new_community(ID),
-	reply_json(return{success: true, status: 200, id: ID}).
+community(Request) :-
+    member(method(post), Request), !,
+    new_community(ID),
+    reply_json(return{id:ID, status:200, success:true}).
+community(Request) :-
+    member(method(delete), Request), !,
+    http_read_json_dict(Request, DictIn),
+    retract_community(DictIn, Success),
+    (   Success==true
+    ->  reply_json(return{data:DictIn, status:200, success:Success})
+    ;   reply_json(return{ data:DictIn,
+                           message:Success,
+                           status:200,
+                           success:false
+                         })
+    ).
 
 /**
  * generation(++Request:list) is nondet
@@ -107,14 +119,18 @@ community(Request):-
  * responds unsuccessful to the client if the passed community doesn't exist or the generation for this community already exists.
  * @arg Request The request object passed from the HTTP request
  */
-generation(Request):-
-	member(method(post), Request), !,
-	http_read_json_dict(Request, DictIn),
-	new_generation(DictIn, Success),
-	http_log('Success: ~w~n', [Success]),
-	( Success == true -> 
-		reply_json(return{data: DictIn, success: Success, status: 200}) ; 	
-		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
+generation(Request) :-
+    member(method(post), Request), !,
+    http_read_json_dict(Request, DictIn),
+    new_generation(DictIn, Success),
+    (   Success==true
+    ->  reply_json(return{data:DictIn, status:200, success:Success})
+    ;   reply_json(return{ data:DictIn,
+                           message:Success,
+                           status:200,
+                           success:false
+                         })
+    ).
 
 /**
  * agent(++Request:list) is nondet
@@ -124,13 +140,18 @@ generation(Request):-
  * responds unsuccessful to the client if the passed community or generation for this community exists, or the agent id is already taken.
  * @arg Request The request object passed from the HTTP request
  */
-agent(Request):-
-	member(method(post), Request), !,
-	http_read_json_dict(Request, DictIn),
-	new_agent(DictIn, Success),
-	(Success == true ->
-		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
-		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
+agent(Request) :-
+    member(method(post), Request), !,
+    http_read_json_dict(Request, DictIn),
+    new_agent(DictIn, Success),
+    (   Success==true
+    ->  reply_json(return{data:DictIn, status:200, success:Success})
+    ;   reply_json(return{ data:DictIn,
+                           message:Success,
+                           status:200,
+                           success:false
+                         })
+    ).
 
 /**
  * percept_interaction(++Request:list) is nondet
@@ -140,13 +161,18 @@ agent(Request):-
  * responds unsuccessful to the client if the passed community, generation or agents do not exist.
  * @arg Request The request object passed from the HTTP request
  */
-percept_interaction(Request):-
-	member(method(post), Request), !,
-	http_read_json_dict(Request, DictIn),
-	add_new_interaction_percept(DictIn, Success),
-	(Success == true ->
-		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
-		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
+percept_interaction(Request) :-
+    member(method(post), Request), !,
+    http_read_json_dict(Request, DictIn),
+    add_new_interaction_percept(DictIn, Success),
+    (   Success==true
+    ->  reply_json(return{data:DictIn, status:200, success:Success})
+    ;   reply_json(return{ data:DictIn,
+                           message:Success,
+                           status:200,
+                           success:false
+                         })
+    ).
 
 /**
  * percept_action_interaction(++Request:list) is nondet
@@ -156,13 +182,18 @@ percept_interaction(Request):-
  * responds unsuccessful to the client if the passed community, generation or agents do not exist.
  * @arg Request The request object passed from the HTTP request
  */
-percept_action_interaction(Request):-
-	member(method(post), Request), !,
-	http_read_json_dict(Request, DictIn),
-	add_new_action_interaction_percept(DictIn, Success),
-	(Success == true ->
-		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
-		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
+percept_action_interaction(Request) :-
+    member(method(post), Request), !,
+    http_read_json_dict(Request, DictIn),
+    add_new_action_interaction_percept(DictIn, Success),
+    (   Success==true
+    ->  reply_json(return{data:DictIn, status:200, success:Success})
+    ;   reply_json(return{ data:DictIn,
+                           message:Success,
+                           status:200,
+                           success:false
+                         })
+    ).
 
 
 /**
@@ -173,13 +204,18 @@ percept_action_interaction(Request):-
  * responds unsuccessful to the client if the passed community, generation or agents do not exist.
  * @arg Request The request object passed from the HTTP request
  */
-percept_action_gossip(Request):-
-	member(method(post), Request), !,
-	http_read_json_dict(Request, DictIn),
-	add_new_action_gossip_percept(DictIn, Success),
-	(Success == true ->
-		reply_json(return{data: DictIn, success: Success, status: 200}) ; 
-		reply_json(return{data: DictIn, success: false, message: Success, status: 200})).
+percept_action_gossip(Request) :-
+    member(method(post), Request), !,
+    http_read_json_dict(Request, DictIn),
+    add_new_action_gossip_percept(DictIn, Success),
+    (   Success==true
+    ->  reply_json(return{data:DictIn, status:200, success:Success})
+    ;   reply_json(return{ data:DictIn,
+                           message:Success,
+                           status:200,
+                           success:false
+                         })
+    ).
 
 /**
  * belief_donor(++Request:list) is nondet
@@ -189,26 +225,41 @@ percept_action_gossip(Request):-
  * responds unsuccessful to the client if the passed community, generation or agents do not exist.
  * @arg Request The request object passed from the HTTP request
  */
-belief_donor(Request):-
-	member(method(get), Request), !,
-	http_parameters(
-		Request,
-		[
-			timepoint(Timepoint, [integer]),
-			community(Community, [integer]),
-			generation(Generation, [integer]),
-			player(AgentID, [integer])
-		]
-	),
-	get_donor_belief(Community, Generation, AgentID, Timepoint, Success, Value),
-	(Success == true ->
-		reply_json(return{data:
-			data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
-			success: true, status: 200, interactions: Value}) ;
-		reply_json(return{data: 
-						data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
-			success: false, status: 200, message: Success})
-	).
+belief_donor(Request) :-
+    member(method(get), Request), !,
+    http_parameters(Request,
+                    
+                    [ timepoint(Timepoint, [integer]),
+                      community(Community, [integer]),
+                      generation(Generation, [integer]),
+                      player(AgentID, [integer])
+                    ]),
+    get_donor_belief(Community,
+                     Generation,
+                     AgentID,
+                     Timepoint,
+                     Success,
+                     Value),
+    (   Success==true
+    ->  reply_json(return{ data:data{ community:Community,
+                                      generation:Generation,
+                                      player:AgentID,
+                                      timepoint:Timepoint
+                                    },
+                           interactions:Value,
+                           status:200,
+                           success:true
+                         })
+    ;   reply_json(return{ data:data{ community:Community,
+                                      generation:Generation,
+                                      player:AgentID,
+                                      timepoint:Timepoint
+                                    },
+                           message:Success,
+                           status:200,
+                           success:false
+                         })
+    ).
 
 /**
  * belief_recipient(++Request:list) is nondet
@@ -218,26 +269,41 @@ belief_donor(Request):-
  * responds unsuccessful to the client if the passed community, generation or agents do not exist.
  * @arg Request The request object passed from the HTTP request
  */
-belief_recipient(Request):-
-	member(method(get), Request), !,
-	http_parameters(
-		Request,
-		[
-			timepoint(Timepoint, [integer]),
-			community(Community, [integer]),
-			generation(Generation, [integer]),
-			player(AgentID, [integer])
-		]
-	),
-	get_recipient_belief(Community, Generation, AgentID, Timepoint, Success, Value),
-	(Success == true ->
-		reply_json(return{data:
-			data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
-			success: true, status: 200, interactions: Value}) ;
-		reply_json(return{data: 
-						data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
-			success: false, status: 200, message: Success})
-	).
+belief_recipient(Request) :-
+    member(method(get), Request), !,
+    http_parameters(Request,
+                    
+                    [ timepoint(Timepoint, [integer]),
+                      community(Community, [integer]),
+                      generation(Generation, [integer]),
+                      player(AgentID, [integer])
+                    ]),
+    get_recipient_belief(Community,
+                         Generation,
+                         AgentID,
+                         Timepoint,
+                         Success,
+                         Value),
+    (   Success==true
+    ->  reply_json(return{ data:data{ community:Community,
+                                      generation:Generation,
+                                      player:AgentID,
+                                      timepoint:Timepoint
+                                    },
+                           interactions:Value,
+                           status:200,
+                           success:true
+                         })
+    ;   reply_json(return{ data:data{ community:Community,
+                                      generation:Generation,
+                                      player:AgentID,
+                                      timepoint:Timepoint
+                                    },
+                           message:Success,
+                           status:200,
+                           success:false
+                         })
+    ).
 
 /**
  * belief_interaction(++Request:list) is nondet
@@ -247,27 +313,45 @@ belief_recipient(Request):-
  * responds unsuccessful to the client if the passed community, generation or agents do not exist.
  * @arg Request The request object passed from the HTTP request
  */
-belief_interaction(Request):-
-	member(method(get), Request), !,
-	http_parameters(
-		Request,
-		[
-			timepoint(Timepoint, [integer]),
-			community(Community, [integer]),
-			generation(Generation, [integer]),
-			player1(Agent1ID, [integer]),
-			player2(Agent2ID, [integer])
-		]
-	),
-	get_interaction_belief(Community, Generation, Timepoint, Agent1ID, Agent2ID, Success, Value),
-	(Success == true ->
-		reply_json(return{data:
-						data{community: Community, generation: Generation, player1: Agent1ID, player2: Agent2ID, timepoint: Timepoint},
-					success: true, status: 200, interactions: Value}) ;
-		reply_json(return{data: 
-						data{community: Community, generation: Generation,  player1: Agent1ID, player2: Agent2ID, timepoint: Timepoint},
-					success: false, status: 200, message: Success})
-	).
+belief_interaction(Request) :-
+    member(method(get), Request), !,
+    http_parameters(Request,
+                    
+                    [ timepoint(Timepoint, [integer]),
+                      community(Community, [integer]),
+                      generation(Generation, [integer]),
+                      player1(Agent1ID, [integer]),
+                      player2(Agent2ID, [integer])
+                    ]),
+    get_interaction_belief(Community,
+                           Generation,
+                           Timepoint,
+                           Agent1ID,
+                           Agent2ID,
+                           Success,
+                           Value),
+    (   Success==true
+    ->  reply_json(return{ data:data{ community:Community,
+                                      generation:Generation,
+                                      player1:Agent1ID,
+                                      player2:Agent2ID,
+                                      timepoint:Timepoint
+                                    },
+                           interactions:Value,
+                           status:200,
+                           success:true
+                         })
+    ;   reply_json(return{ data:data{ community:Community,
+                                      generation:Generation,
+                                      player1:Agent1ID,
+                                      player2:Agent2ID,
+                                      timepoint:Timepoint
+                                    },
+                           message:Success,
+                           status:200,
+                           success:false
+                         })
+    ).
 
 /**
  * belief_standing(++Request:list) is nondet
@@ -277,27 +361,45 @@ belief_interaction(Request):-
  * responds unsuccessful to the client if the passed community, generation, agents do not exist or believer doesn't use the standing strategy.
  * @arg Request The request object passed from the HTTP request
  */
-belief_standing(Request):-
-	member(method(get), Request), !,
-	http_parameters(
-		Request,
-		[
-			timepoint(Timepoint, [integer]),
-			community(Community, [integer]),
-			generation(Generation, [integer]),
-			perceiver(PerceiverID, [integer]),
-			about(AboutID, [integer])
-		]
-	),
-	get_standing_belief(Community, Generation, Timepoint, PerceiverID, AboutID, Success, Standing),
-	(Success == true ->
-		reply_json(return{data: 
-						data{community: Community, generation: Generation, perceiver: PerceiverID, about: AboutID, timepoint: Timepoint},
-					success: true, status: 200, standing: Standing}) ;
-		reply_json(return{data: 
-						data{community: Community, generation: Generation, perceiver: PerceiverID, about: AboutID, timepoint: Timepoint},
-					success: false, status: 200, message: Success})
-	).
+belief_standing(Request) :-
+    member(method(get), Request), !,
+    http_parameters(Request,
+                    
+                    [ timepoint(Timepoint, [integer]),
+                      community(Community, [integer]),
+                      generation(Generation, [integer]),
+                      perceiver(PerceiverID, [integer]),
+                      about(AboutID, [integer])
+                    ]),
+    get_standing_belief(Community,
+                        Generation,
+                        Timepoint,
+                        PerceiverID,
+                        AboutID,
+                        Success,
+                        Standing),
+    (   Success==true
+    ->  reply_json(return{ data:data{ about:AboutID,
+                                      community:Community,
+                                      generation:Generation,
+                                      perceiver:PerceiverID,
+                                      timepoint:Timepoint
+                                    },
+                           standing:Standing,
+                           status:200,
+                           success:true
+                         })
+    ;   reply_json(return{ data:data{ about:AboutID,
+                                      community:Community,
+                                      generation:Generation,
+                                      perceiver:PerceiverID,
+                                      timepoint:Timepoint
+                                    },
+                           message:Success,
+                           status:200,
+                           success:false
+                         })
+    ).
 
 /**
  * action(++Request:list) is nondet
@@ -307,23 +409,33 @@ belief_standing(Request):-
  * responds unsuccessful to the client if the passed community, generation or the agent doesn't exist
  * @arg Request The request object passed from the HTTP request
  */
-action(Request):-
-	member(method(get), Request), !,
-	http_parameters(
-		Request,
-		[
-			timepoint(Timepoint, [integer]),
-			community(Community, [integer]),
-			generation(Generation, [integer]),
-			player(AgentID, [integer])
-		]
-	),
-	agent_action(Timepoint, Community, Generation, AgentID, Success, Action),
-	(Success == true ->
-		reply_json(return{data:
-			data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
-			success: true, status: 200, action: Action}) ;
-		reply_json(return{data:
-			data{community: Community, generation: Generation, player: AgentID, timepoint: Timepoint},
-			success: false, status: 200, message: Success})
-	).
+action(Request) :-
+    member(method(get), Request), !,
+    http_parameters(Request,
+                    
+                    [ timepoint(Timepoint, [integer]),
+                      community(Community, [integer]),
+                      generation(Generation, [integer]),
+                      player(AgentID, [integer])
+                    ]),
+    agent_action(Timepoint, Community, Generation, AgentID, Success, Action),
+    (   Success==true
+    ->  reply_json(return{ action:Action,
+                           data:data{ community:Community,
+                                      generation:Generation,
+                                      player:AgentID,
+                                      timepoint:Timepoint
+                                    },
+                           status:200,
+                           success:true
+                         })
+    ;   reply_json(return{ data:data{ community:Community,
+                                      generation:Generation,
+                                      player:AgentID,
+                                      timepoint:Timepoint
+                                    },
+                           message:Success,
+                           status:200,
+                           success:false
+                         })
+    ).
