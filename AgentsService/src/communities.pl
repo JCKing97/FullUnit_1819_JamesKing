@@ -13,6 +13,8 @@
 :- dynamic community/1, generation/2, id_gap/1, id/1.
 :- multifile community/1, generation/2.
 ?- ['./agents'].
+:- use_module(library(error), [existence_error/2]).
+
 
 new_community(ID):-
 	get_new_id(ID),
@@ -28,7 +30,7 @@ new_community(ID):-
 
 retract_community(DictIn, Success):-
 	ID = DictIn.community,
-	community(ID),
+	community(ID), !,
 	retract_agents(ID),
 	retract_generations(ID),
 	retract(community(ID)),
@@ -72,16 +74,20 @@ get_new_id(ID):-
 
 % Create a new generation, if one with the same community and generation ID doesn't already exist
 new_generation(DictIn, Success):-
+	% Check if the dictionary is of the correct form
+	_{community: _, generation: _} :< DictIn,
 	current_predicate(generation/2),
 	current_predicate(community/1),
 	CommunityID = DictIn.community,
 	community(CommunityID),
 	GenerationID = DictIn.generation,
-	(generation(community(CommunityID), GenerationID) -> Success = 'This community already has a generation with this id', ! ;
+	(generation(community(CommunityID), GenerationID) -> Success = "This community already has a generation with this id", !, true ;
 	assert(generation(community(CommunityID), GenerationID)),
 	Success = true), !.
 % Create the first generation in the system
 new_generation(DictIn, Success):-
+	% Check if the dictionary is of the correct form
+	_{community: _, generation: _} :< DictIn,
     \+current_predicate(generation/2),
 	current_predicate(community/1),
 	CommunityID = DictIn.community,
@@ -91,10 +97,25 @@ new_generation(DictIn, Success):-
 	Success = true, !.
 % Fail nicely when there is no such community
 new_generation(DictIn, Success):-
+	% Check if the dictionary is of the correct form
+	_{community: _, generation: _} :< DictIn,
 	current_predicate(community/1),
 	CommunityID = DictIn.community,
 	\+community(CommunityID),
-	Success = 'No such community', !.
+	Success = "No such community", !.
+% If the input doesn't contain a community or generation entry
+new_generation(DictIn, Success):-
+	\+ _{community: _} :< DictIn,
+	\+ _{generation: _} :< DictIn,
+	Success = "Incorrect input, no community or generation fields", !.
+% If the input doesn't contain a community entry
+new_generation(DictIn, Success):-
+	\+ _{community: _} :< DictIn,
+	Success = "Incorrect input, no community field", !.
+% If the input doesn't contain a generation entry
+new_generation(DictIn, Success):-
+	\+ _{generation: _} :< DictIn,
+	Success = "Incorrect input, no generation field", !.
 
 
 /**
@@ -105,4 +126,4 @@ new_generation(DictIn, Success):-
  * @arg ID The id of the community related to these generations we are deleting
  */
 retract_generations(ID):-
-	retractall(generation(community(ID), _)).
+	forall(generation(community(ID), GenID), (retract(generation(community(ID), GenID)))).

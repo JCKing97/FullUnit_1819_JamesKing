@@ -85,4 +85,4 @@ new_agent(_, Success):-
  * @arg ID The ID of the community all the agents you wish to retract belongs to
  */
  retract_agents(ID):-
- 	retractall(agent(_, community(ID), _, _)).
+	retractall(agent(_, community(ID), _, _)).
