@@ -6,13 +6,14 @@ Contains the rules for adding percepts to an agent
 
 :- use_module(library(lists)).
 
-% Some logic
+% Get the strategy from an agent
 get_strategy(Strategy, Options, agent(strategy(Strategy, _, Options), _, _, _)).
 
 /*-----------------------------
 ----------- General -----------
 -----------------------------*/
 
+% Add to the interaction timepoints for when interactions occurred between two agents
 initiates_at(interaction(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient)), [],
   interaction_timepoints(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient))=Timepoints, T):-
 	happens_at(interaction(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient)), T),
@@ -25,7 +26,6 @@ initiates_at(interaction(agent(strategy(_, _, _), Community, Generation, Donor),
 	CheckTimepoint is T - 1,
 	\+holds_at(interaction_timepoints(agent(strategy(_, _, _), Community, Generation, Donor), agent(strategy(_, _, _), Community, Generation, Recipient))=_, CheckTimepoint).
 
-% Is nothing ok?
 causes_at(said(_, _,_,_), nothing, _).
 causes_at(did(_, _,_,_), nothing, _).
 causes_at(interaction(_, _), nothing, _).

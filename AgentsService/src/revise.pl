@@ -63,7 +63,7 @@ initiates_at(did(Donor, Perceiver, Recipient, Action), [], standing(Perceiver, D
 	\+holds_at(standing(Perceiver, Recipient)=bad, T).
 
 % If a donor cooperates with anyone, give donor a good standing to the perceiver
-initiates_at(did(Donor, Perceiver, Recipient, Action), [], standing(Perceiver, Donor)=good, T):-
+terminates_at(did(Donor, Perceiver, Recipient, Action), [], standing(Perceiver, Donor)=bad, T):-
 	happens_at(did(Donor, Perceiver, Recipient, Action), T),
 	get_strategy(Strategy, _, Perceiver),
 	Strategy=="Standing Discriminator",
@@ -82,7 +82,7 @@ initiates_at(said(Gossiper, Perceiver, About, Gossip), [], standing(Perceiver, A
 
 % If Gossiper is trusted and Gossip is positive
 % Perceiver gives About good standing
-initiates_at(said(Gossiper, Perceiver, About, Gossip), [], standing(Perceiver, About)=good, T):-
+terminates_at(said(Gossiper, Perceiver, About, Gossip), [], standing(Perceiver, About)=bad, T):-
 	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
 	get_strategy(Strategy, Options, Perceiver),
 	Strategy=="Standing Discriminator",

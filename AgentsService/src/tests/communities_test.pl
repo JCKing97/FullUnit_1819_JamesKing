@@ -3,7 +3,6 @@
  */
 
 ?- ['../communities'].
-?- ['../agents'].
 :- use_module(library(debug)).
 
 :- begin_tests(communities).

@@ -10,7 +10,6 @@
 ?- ['./mvfcec/src/compiler/basic_V1.0'].
 ?- ['./mvfcec/src/lib/activity_recognition_lifecycles'].
 :- dynamic observed_at/2.
-input_format(observed_at(E, T), E, T).
 
 /**
  * get_donor_belief( ++CommunityID:int, ++GenerationID:int, ++AgentID:int, ++Timepoint:int, -Success:atom, -Value:list) is nondet
