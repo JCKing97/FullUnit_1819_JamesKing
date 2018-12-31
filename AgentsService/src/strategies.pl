@@ -13,9 +13,11 @@
  */
 
 strategy( "Cooperator" , "Cooperates every time, does not bother to actively gossip", ["lazy"]).
-strategy( "Cooperator" , "Cooperates every time, actively gossips and shares information", ["proactive"]).
+strategy( "Cooperator" , "Cooperates every time, actively gossips and shares information", ["promote_self"]).
+strategy( "Defector" , "Defects every time, actively gossips and shares information", ["spread_positive"]).
 strategy( "Defector" , "Defects every time, does not bother to actively gossip", ["lazy"]).
-strategy( "Defector" , "Defects every time, actively gossips and shares information", ["proactive"]).
+strategy( "Defector" , "Defects every time, actively gossips and shares information", ["promote_self"]).
+strategy( "Defector" , "Defects every time, actively gossips and shares information", ["spread_negative"]).
 strategy( "Standing Discriminator", "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts other agents gossip, does not actively gossip", ["trusting", "lazy"]).
 strategy( "Standing Discriminator", "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts other agents gossip, actively shares gossip with other agents", ["trusting", "proactive"]).
 strategy( "Standing Discriminator", "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn't trust other agents gossip, does not actively gossip", ["distrusting", "lazy"]).

@@ -300,4 +300,97 @@ set_up(ID):-
 		assertion(get_interaction_belief(ID, 0, 9, 0, 1, true, [_{timepoints: [3, 5, 7], donor: 0, recipient: 1},
 		 _{timepoints: [9], donor: 1, recipient: 0}])).
 
+	test(no_such_community):-
+		set_up(ID),
+		retract_community(data{community: ID}, true),
+		assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: 0, recipient: 1, timepoint: 3}, "No such community")),
+		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 0), 0),
+		 agent(_, community(ID), generation(community(ID), 0), 1)), 3)),
+		assertion(\+get_donor_belief(ID, 0, 0, 3, true, [_{timepoints: [3], recipient: 1}])),
+		assertion(\+get_recipient_belief(ID, 0, 1, 3, true,  [_{timepoints: [3], donor: 0}])),
+		assertion(\+get_interaction_belief(ID, 0, 3, 0, 1, true, [_{timepoints: [3], donor: 0, recipient: 1}])).
+
+	test(no_such_generation):-
+		set_up(ID),
+		assertion(add_new_interaction_percept(data{community: ID, generation: 1, donor: 0, recipient: 1, timepoint: 3}, "No such generation for this community")),
+		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 1), 0),
+		 agent(_, community(ID), generation(community(ID), 1), 1)), 3)),
+		assertion(\+get_donor_belief(ID, 1, 0, 3, true, [_{timepoints: [3], recipient: 1}])),
+		assertion(\+get_recipient_belief(ID, 1, 1, 3, true,  [_{timepoints: [3], donor: 0}])),
+		assertion(\+get_interaction_belief(ID, 1, 3, 0, 1, true, [_{timepoints: [3], donor: 0, recipient: 1}])).
+
+	test(incorrect_ids):-
+		set_up(ID),
+		assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: 3, recipient: 4, timepoint: 3},
+		 "No such recipient or donor for this community and generation")),
+		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 3), 3),
+		 agent(_, community(ID), generation(community(ID), 0), 4)), 3)),
+		assertion(\+get_donor_belief(ID, 0, 3, 3, true, [_{timepoints: [3], recipient: 4}])),
+		assertion(\+get_recipient_belief(ID, 0, 4, 3, true,  [_{timepoints: [3], donor: 3}])),
+		assertion(\+get_interaction_belief(ID, 0, 3, 3, 4, true, [_{timepoints: [3], donor: 3, recipient: 4}])),
+		assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: 0, recipient: 4, timepoint: 3},
+		 "No such recipient for this community and generation")),
+		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 0), 0),
+		 agent(_, community(ID), generation(community(ID), 0), 4)), 3)),
+		assertion(\+get_donor_belief(ID, 0, 0, 3, true, [_{timepoints: [3], recipient: 4}])),
+		assertion(\+get_recipient_belief(ID, 0, 4, 3, true,  [_{timepoints: [3], donor: 0}])),
+		assertion(\+get_interaction_belief(ID, 0, 3, 0, 4, true, [_{timepoints: [3], donor: 0, recipient: 4}])),
+		assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: 3, recipient: 1, timepoint: 3},
+		 "No such donor for this community and generation")),
+		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 0), 3),
+		 agent(_, community(ID), generation(community(ID), 0), 1)), 3)),
+		assertion(\+get_donor_belief(ID, 0, 3, 3, true, [_{timepoints: [3], recipient: 1}])),
+		assertion(\+get_recipient_belief(ID, 0, 1, 3, true,  [_{timepoints: [3], donor: 3}])),
+		assertion(\+get_interaction_belief(ID, 0, 3, 3, 1, true, [_{timepoints: [3], donor: 3, recipient: 1}])).
+
+	test(incorrect_input):-
+		set_up(ID),
+		assertion(add_new_interaction_percept(data{generation: 0, donor: 0, recipient: 1, timepoint: 3},
+		 "Incorrect input, must contain: community, generation, donor, recipient, timepoint")),
+		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 0), 3),
+		 agent(_, community(ID), generation(community(ID), 0), 1)), 3)),
+		assertion(\+get_donor_belief(ID, 0, 0, 3, true, [_{timepoints: [3], recipient: 1}])),
+		assertion(\+get_recipient_belief(ID, 0, 1, 3, true,  [_{timepoints: [3], donor: 0}])),
+		assertion(\+get_interaction_belief(ID, 0, 3, 0, 1, true, [_{timepoints: [3], donor: 0, recipient: 1}])),
+		assertion(add_new_interaction_percept(data{community: ID, recipient: 1, timepoint: 3},
+		 "Incorrect input, must contain: community, generation, donor, recipient, timepoint")),
+		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 0), 3),
+		 agent(_, community(ID), generation(community(ID), 0), 1)), 3)),
+		assertion(\+get_donor_belief(ID, 0, 0, 3, true, [_{timepoints: [3], recipient: 1}])),
+		assertion(\+get_recipient_belief(ID, 0, 1, 3, true,  [_{timepoints: [3], donor: 0}])),
+		assertion(\+get_interaction_belief(ID, 0, 3, 0, 1, true, [_{timepoints: [3], donor: 0, recipient: 1}])),
+		assertion(add_new_interaction_percept(data{community: ID, generation: 0},
+		 "Incorrect input, must contain: community, generation, donor, recipient, timepoint")),
+		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 0), 3),
+		 agent(_, community(ID), generation(community(ID), 0), 1)), 3)),
+		assertion(\+get_donor_belief(ID, 0, 0, 3, true, [_{timepoints: [3], recipient: 1}])),
+		assertion(\+get_recipient_belief(ID, 0, 1, 3, true,  [_{timepoints: [3], donor: 0}])),
+		assertion(\+get_interaction_belief(ID, 0, 3, 0, 1, true, [_{timepoints: [3], donor: 0, recipient: 1}])),
+		assertion(add_new_interaction_percept(data{community: ID, timepoint: 3},
+		 "Incorrect input, must contain: community, generation, donor, recipient, timepoint")),
+		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 0), 3),
+		 agent(_, community(ID), generation(community(ID), 0), 1)), 3)),
+		assertion(\+get_donor_belief(ID, 0, 0, 3, true, [_{timepoints: [3], recipient: 1}])),
+		assertion(\+get_recipient_belief(ID, 0, 1, 3, true,  [_{timepoints: [3], donor: 0}])),
+		assertion(\+get_interaction_belief(ID, 0, 3, 0, 1, true, [_{timepoints: [3], donor: 0, recipient: 1}])),
+		assertion(add_new_interaction_percept(data{},
+		 "Incorrect input, must contain: community, generation, donor, recipient, timepoint")),
+		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 0), 3),
+		 agent(_, community(ID), generation(community(ID), 0), 1)), 3)),
+		assertion(\+get_donor_belief(ID, 0, 0, 3, true, [_{timepoints: [3], recipient: 1}])),
+		assertion(\+get_recipient_belief(ID, 0, 1, 3, true,  [_{timepoints: [3], donor: 0}])),
+		assertion(\+get_interaction_belief(ID, 0, 3, 0, 1, true, [_{timepoints: [3], donor: 0, recipient: 1}])).
+
+	test(matching_donor_recipient):-
+		set_up(ID),
+		assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: 0, recipient: 0, timepoint: 3},
+		 "Donor should not be the same as the recipient")),
+		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 0), 3),
+		 agent(_, community(ID), generation(community(ID), 0), 0)), 3)),
+		assertion(\+get_donor_belief(ID, 0, 0, 3, true, [_{timepoints: [3], recipient: 0}])),
+		assertion(\+get_recipient_belief(ID, 0, 0, 3, true,  [_{timepoints: [3], donor: 0}])),
+		assertion(\+get_interaction_belief(ID, 0, 3, 0, 0, true, [_{timepoints: [3], donor: 0, recipient: 0}])).
+
+
+
 :- end_tests(interaction_tests).

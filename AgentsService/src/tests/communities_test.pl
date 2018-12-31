@@ -8,7 +8,6 @@
 :- begin_tests(communities).
 
 	test(new_community, []):-
-		writeln("new_community"),
 		new_community(ID0),
 		new_community(ID1),
 		new_community(ID2),
@@ -17,7 +16,6 @@
 		assertion(community(ID2)).
 
 	test(create_then_retract_then_retract_communities, []):-
-		writeln("create_then_retract_then_retract_communities"),	
 		new_community(ID11),
 		new_community(ID12),
 		new_community(ID13),
@@ -30,7 +28,6 @@
 		assertion(\+community(ID11)),
 		assertion(\+community(ID12)),
 		assertion(\+community(ID13)),
-		forall(\+community(ID), writeln(ID)),
 		assertion(retract_community(data{community: ID11}, "No community with this ID to retract")),
 		assertion(retract_community(data{community: ID12}, "No community with this ID to retract")),
 		assertion(retract_community(data{community: ID13}, "No community with this ID to retract")),
@@ -39,29 +36,23 @@
 		assertion(\+community(ID13)).
 
 	test(retract_existing_community, []):-
-		writeln("retract_existing_community"),
 		new_community(ID3),
-		writeln(ID3),
 		assertion(retract_community(data{community: ID3}, true)).
 
 	test(retract_all_communities, []):-
-		writeln("retract_all_communities"),
 		new_community(ID4),
 		new_community(ID5),
 		new_community(ID6),
 		assertion(community(ID4)),
 		assertion(community(ID5)),
 		assertion(community(ID6)),
-		forall(community(ID), (writeln(ID))),
 		forall(community(ID), (assertion(retract_community(data{community: ID}, true)))),
 		forall(community(ID), (assertion(\+retract_community(data{community: ID}, "No community with this ID to retract")))),
 		findall(community(ID), community(ID), Communities1),
-		writeln(Communities1),
 		new_community(ID7),
 		assertion(community(ID7)).
 
 	test(fill_gaps, []):-
-		writeln("fill_gaps"),
 		new_community(ID8),
 		assertion(community(ID8)),
 		new_community(ID9),
