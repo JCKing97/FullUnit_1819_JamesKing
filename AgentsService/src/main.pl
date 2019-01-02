@@ -418,7 +418,7 @@ action(Request) :-
                       generation(Generation, [integer]),
                       player(AgentID, [integer])
                     ]),
-    agent_action(Timepoint, Community, Generation, AgentID, Success, Action),
+    get_action(Timepoint, Community, Generation, AgentID, Success, Action),
     (   Success==true
     ->  reply_json(return{ action:Action,
                            data:data{ community:Community,
