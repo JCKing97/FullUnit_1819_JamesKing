@@ -46,7 +46,7 @@ check_correct_action_timepoints([Timepoint|OtherTimepoints], CommunityID, Genera
 		get_new_player_id(DefectID),
 		new_agent(data{community: ID, generation: 0, player: DefectID, strategy: "Defector", options: ["lazy"]}, true),
 		forall(strategy("Standing Discriminator", _, Options),
-			 (get_new_player_id(PlayerID),
+			(get_new_player_id(PlayerID),
 		     new_agent(data{strategy: "Standing Discriminator", options: Options, community: ID, generation: 0, player: PlayerID}, true),
 		     % Initially all players are not of bad standing
 		     assertion(\+holds_at(standing(agent(strategy("Standing Discriminator", _, Options), community(ID), generation(community(ID), 0), PlayerID),
@@ -66,6 +66,12 @@ check_correct_action_timepoints([Timepoint|OtherTimepoints], CommunityID, Genera
 		     assertion(\+holds_at(standing(agent(strategy("Standing Discriminator", _, Options), community(ID), generation(community(ID), 0), PlayerID),
 			  agent(_, community(ID), generation(community(ID), 0), CoopID))=bad, 2)),
 		     assertion(get_standing_belief(ID, 0, 2, PlayerID, CoopID, true, good)),
+		     assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: PlayerID, recipient: DefectID, timepoint: 2}, true)),
+		     assertion(agent_action(2, ID, 0, PlayerID, true, action{type:action, value:defect, recipient: DefectID})),
+		     assertion(get_action(2, ID, 0, PlayerID, true, action{type:action, value:defect, recipient: DefectID})),
+		     assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: PlayerID, recipient: CoopID, timepoint: 3}, true)),
+		     assertion(agent_action(3, ID, 0, PlayerID, true, action{type:action, value: cooperate, recipient: CoopID})),
+		     assertion(get_action(3, ID, 0, PlayerID, true, action{type:action, value:cooperate, recipient: CoopID})),
 		     % CoopID can defect against DefectID without loss of standing as DefectID is bad
 		     assertion(add_new_action_interaction_percept(data{community: ID, generation: 0,
 			  perceiver: PlayerID, donor: CoopID, recipient: DefectID, timepoint: 3, action: "defect"},
@@ -79,6 +85,12 @@ check_correct_action_timepoints([Timepoint|OtherTimepoints], CommunityID, Genera
 		     assertion(\+holds_at(standing(agent(strategy("Standing Discriminator", _, Options), community(ID), generation(community(ID), 0), PlayerID),
 			  agent(_, community(ID), generation(community(ID), 0), CoopID))=bad, 4)),
 		     assertion(get_standing_belief(ID, 0, 4, PlayerID, CoopID, true, good)),
+		     assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: PlayerID, recipient: DefectID, timepoint: 4}, true)),
+		     assertion(agent_action(4, ID, 0, PlayerID, true, action{type:action, value:defect, recipient: DefectID})),
+		     assertion(get_action(4, ID, 0, PlayerID, true, action{type:action, value:defect, recipient: DefectID})),
+		     assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: PlayerID, recipient: CoopID, timepoint: 5}, true)),
+		     assertion(agent_action(5, ID, 0, PlayerID, true, action{type:action, value: cooperate, recipient: CoopID})),
+		     assertion(get_action(5, ID, 0, PlayerID, true, action{type:action, value:cooperate, recipient: CoopID})),
 		     % Cooperation restores the status of DefectID
 		     assertion(add_new_action_interaction_percept(data{community: ID, generation: 0,
 			  perceiver: PlayerID, donor: DefectID, recipient: CoopID, timepoint: 5, action: "cooperate"},
@@ -92,6 +104,12 @@ check_correct_action_timepoints([Timepoint|OtherTimepoints], CommunityID, Genera
 		     assertion(\+holds_at(standing(agent(strategy("Standing Discriminator", _, Options), community(ID), generation(community(ID), 0), PlayerID),
 			  agent(_, community(ID), generation(community(ID), 0), CoopID))=bad, 6)),
 		     assertion(get_standing_belief(ID, 0, 6, PlayerID, CoopID, true, good)),
+		     assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: PlayerID, recipient: DefectID, timepoint: 6}, true)),
+		     assertion(agent_action(6, ID, 0, PlayerID, true, action{type:action, value:cooperate, recipient: DefectID})),
+		     assertion(get_action(6, ID, 0, PlayerID, true, action{type:action, value:cooperate, recipient: DefectID})),
+		     assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: PlayerID, recipient: CoopID, timepoint: 7}, true)),
+		     assertion(agent_action(7, ID, 0, PlayerID, true, action{type:action, value: cooperate, recipient: CoopID})),
+		     assertion(get_action(7, ID, 0, PlayerID, true, action{type:action, value:cooperate, recipient: CoopID})),
 		     % CoopID defects against DefectID, PlayerID observes it and gives CoopID a bad standing
 		     assertion(add_new_action_interaction_percept(data{community: ID, generation: 0,
 			  perceiver: PlayerID, donor: CoopID, recipient: DefectID, timepoint: 7, action: "defect"},
@@ -104,8 +122,14 @@ check_correct_action_timepoints([Timepoint|OtherTimepoints], CommunityID, Genera
 		     assertion(get_standing_belief(ID, 0, 8, PlayerID, DefectID, true, good)),
 		     assertion(holds_at(standing(agent(strategy("Standing Discriminator", _, Options), community(ID), generation(community(ID), 0), PlayerID),
 			  agent(_, community(ID), generation(community(ID), 0), CoopID))=bad, 8)),
-		     assertion(get_standing_belief(ID, 0, 8, PlayerID, CoopID, true, bad)))
-		).
+		     assertion(get_standing_belief(ID, 0, 8, PlayerID, CoopID, true, bad)),
+			 assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: PlayerID, recipient: DefectID, timepoint: 8}, true)),
+		     assertion(agent_action(8, ID, 0, PlayerID, true, action{type:action, value:cooperate, recipient: DefectID})),
+		     assertion(get_action(8, ID, 0, PlayerID, true, action{type:action, value:cooperate, recipient: DefectID})),
+		     assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: PlayerID, recipient: CoopID, timepoint: 9}, true)),
+		     assertion(agent_action(9, ID, 0, PlayerID, true, action{type:action, value: defect, recipient: CoopID})),
+		     assertion(get_action(9, ID, 0, PlayerID, true, action{type:action, value:defect, recipient: CoopID}))
+		)).
 
 	test(trusting_standing):-
 		new_community(ID),
@@ -211,7 +235,7 @@ check_correct_action_timepoints([Timepoint|OtherTimepoints], CommunityID, Genera
 
 	test(lazy_trusting_standing):-
 		new_community(ID),
-		new_generation(data{community: ID, generation: 0}, true), 
+		new_generation(data{community: ID, generation: 0}, true),
 		new_agent(data{community: ID, generation: 0, player: 0, strategy: "Standing Discriminator", options: ["trusting", "lazy"]}, true),
 		check_correct_action_timepoints([0, 1, 2, 7, 9, 10, 11, 120], ID, 0, 0, action{type: idle}).
 
@@ -266,3 +290,4 @@ check_correct_action_timepoints([Timepoint|OtherTimepoints], CommunityID, Genera
 
 
 :- end_tests(standing_tests).
+ 
