@@ -111,8 +111,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="51" column="69" selection-start-line="51" selection-start-column="69" selection-end-line="51" selection-end-column="69" />
+            <state relative-caret-position="435">
+              <caret line="32" column="121" selection-start-line="32" selection-start-column="121" selection-end-line="32" selection-end-column="121" />
               <folding>
                 <element signature="e#480#514#0#HTML" expanded="true" />
                 <element signature="e#600#657#0#HTML" expanded="true" />
@@ -531,7 +531,7 @@
       <workItem from="1544355096487" duration="80000" />
       <workItem from="1544543292674" duration="13499000" />
       <workItem from="1546523612494" duration="3238000" />
-      <workItem from="1546612351518" duration="20530000" />
+      <workItem from="1546612351518" duration="21074000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of components">
       <created>1535647227999</created>
@@ -744,11 +744,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="167978000" />
+    <option name="totallyTimeSpent" value="168522000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.11792956" />
@@ -761,7 +760,7 @@
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.3286026" />
-      <window_info active="true" anchor="bottom" id="Run" order="8" sideWeight="0.49839914" visible="true" weight="0.3133188" />
+      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.49839914" weight="0.3133188" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.39847162" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
@@ -1175,8 +1174,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="51" column="69" selection-start-line="51" selection-start-column="69" selection-end-line="51" selection-end-column="69" />
+        <state relative-caret-position="435">
+          <caret line="32" column="121" selection-start-line="32" selection-start-column="121" selection-end-line="32" selection-end-column="121" />
           <folding>
             <element signature="e#480#514#0#HTML" expanded="true" />
             <element signature="e#600#657#0#HTML" expanded="true" />
