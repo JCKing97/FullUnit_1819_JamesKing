@@ -14,7 +14,7 @@
 ?-['../mvfcec/src/compiler/basic_V1.0'].
 ?-['../mvfcec/src/lib/activity_recognition_lifecycles'].
 :- dynamic observed_at/2.
-
+dialect(swi).
 :- dynamic player_id/1.
 
 get_new_player_id(NewID):-

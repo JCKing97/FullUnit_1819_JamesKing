@@ -12,7 +12,6 @@
 ?-['./mvfcec/src/lib/utilities'].
 ?-['./mvfcec/src/compiler/basic_V1.0'].
 ?-['./mvfcec/src/lib/activity_recognition_lifecycles'].
-dialect(swi).
 :- (dynamic observed_at/2, action_commitment/5).
 
 /**
@@ -36,7 +35,6 @@ get_capabilities(Timepoint, CommunityID, GenerationID, AgentID, Capabilities):-
 
 /**
  * capable(++Timepoint:int, ++CommunityID:int, ++GenerationID:int, ++AgentID:int, -Action:term) is nondet
- * capable(++Timepoint:int, ++CommunityID:int, ++GenerationID:int, ++AgentID:int, ++Action:term) is nondet
  *
  * Unifies with an action the given agent is capable of at the given timepoint.
  *

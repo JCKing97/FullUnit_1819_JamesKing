@@ -15,6 +15,7 @@
 ?-['../mvfcec/src/lib/activity_recognition_lifecycles'].
 :- dynamic observed_at/2.
 :- multifile strategy/3, agent_action/6.
+dialect(swi).
 
 % Define a strategy that goes against capability rules
 strategy( "Capability" , "Ignores capabilities", []).

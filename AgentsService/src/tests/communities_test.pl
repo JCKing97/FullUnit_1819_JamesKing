@@ -48,7 +48,6 @@
 		assertion(community(ID6)),
 		forall(community(ID), (assertion(retract_community(data{community: ID}, true)))),
 		forall(community(ID), (assertion(\+retract_community(data{community: ID}, "No community with this ID to retract")))),
-		findall(community(ID), community(ID), Communities1),
 		new_community(ID7),
 		assertion(community(ID7)).
 

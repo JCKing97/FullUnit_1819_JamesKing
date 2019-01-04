@@ -12,7 +12,6 @@
 ?- ['./mvfcec/src/compiler/basic_V1.0'].
 ?- ['./mvfcec/src/lib/activity_recognition_lifecycles'].
 :- dynamic observed_at/2.
-input_format(observed_at(E, T), E, T).
 
 % Get the strategy from an agent
 get_strategy(Strategy, Options, agent(strategy(Strategy, _, Options), _, _, _)).
