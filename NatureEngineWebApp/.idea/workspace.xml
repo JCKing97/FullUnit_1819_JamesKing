@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/community_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/community_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/generation_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/generation_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/generation_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/generation_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/player_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/player_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/player_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/player_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/routes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.tex" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +45,7 @@
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_action_tests_ActionTesting.coverage" NAME="pytest for action_tests.ActionTesting Coverage Results" MODIFIED="1543428271262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$sphinx_task_in_.coverage" NAME="sphinx task Coverage Results" MODIFIED="1544199372357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_indir_rec_community_tests_CommunityTest_test_simulate.coverage" NAME="pytest for indir_rec.community_tests.CommunityTest.test_simulate Coverage Results" MODIFIED="1544115093376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
-    <SUITE FILE_PATH="coverage/NatureEngineWebApp$NatureEngineWebApp.coverage" NAME="NatureEngineWebApp Coverage Results" MODIFIED="1546628976775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$NatureEngineWebApp.coverage" NAME="NatureEngineWebApp Coverage Results" MODIFIED="1546635583683" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_indir_rec_indir_rec_test_PerceptTest.coverage" NAME="pytest for indir_rec.indir_rec_test.PerceptTest Coverage Results" MODIFIED="1543423443743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$PopulateDB.coverage" NAME="PopulateDB Coverage Results" MODIFIED="1536080686131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_GameModelCase_test_get_interaction_history.coverage" NAME="pytest for model_tests.GameModelCase.test_get_interaction_history Coverage Results" MODIFIED="1535545404289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -106,11 +99,31 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/reputation.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="225" column="131" selection-start-line="225" selection-start-column="131" selection-end-line="225" selection-end-column="131" />
+            <state relative-caret-position="405">
+              <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="51" column="69" selection-start-line="51" selection-start-column="69" selection-end-line="51" selection-end-column="69" />
+              <folding>
+                <element signature="e#480#514#0#HTML" expanded="true" />
+                <element signature="e#600#657#0#HTML" expanded="true" />
+                <element signature="e#1742#1789#0#HTML" expanded="true" />
+                <element signature="e#4352#4399#0#HTML" expanded="true" />
+                <element signature="e#7410#7457#0#HTML" expanded="true" />
+                <element signature="e#8736#8767#0#HTML" expanded="true" />
+                <element signature="e#8823#8854#0#HTML" expanded="true" />
+                <element signature="e#8979#9010#0#HTML" expanded="true" />
+                <element signature="e#9112#9150#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -196,7 +209,6 @@
         <option value="$PROJECT_DIR$/app/templates/match_run.html" />
         <option value="$PROJECT_DIR$/app/templates/tournament_finished.html" />
         <option value="$PROJECT_DIR$/app/templates/about.html" />
-        <option value="$PROJECT_DIR$/app/templates/index.html" />
         <option value="$PROJECT_DIR$/app/templates/match.html" />
         <option value="$PROJECT_DIR$/app/templates/tournament.html" />
         <option value="$PROJECT_DIR$/app/indir_rec/__init__.py" />
@@ -218,6 +230,7 @@
         <option value="$PROJECT_DIR$/app/__init__.py" />
         <option value="$PROJECT_DIR$/app/errors/handlers.py" />
         <option value="$PROJECT_DIR$/app/templates/reputation.html" />
+        <option value="$PROJECT_DIR$/app/templates/index.html" />
       </list>
     </option>
   </component>
@@ -518,7 +531,7 @@
       <workItem from="1544355096487" duration="80000" />
       <workItem from="1544543292674" duration="13499000" />
       <workItem from="1546523612494" duration="3238000" />
-      <workItem from="1546612351518" duration="14142000" />
+      <workItem from="1546612351518" duration="20530000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of components">
       <created>1535647227999</created>
@@ -731,10 +744,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="161590000" />
+    <option name="totallyTimeSpent" value="167978000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.11792956" />
@@ -870,16 +884,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="122" selection-start-line="6" selection-start-column="122" selection-end-line="6" selection-end-column="122" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="97" selection-start-line="6" selection-start-column="97" selection-end-line="6" selection-end-column="97" />
-          <folding>
-            <element signature="e#84#105#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1164,8 +1168,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/reputation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="225" column="131" selection-start-line="225" selection-start-column="131" selection-end-line="225" selection-end-column="131" />
+        <state relative-caret-position="405">
+          <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="51" column="69" selection-start-line="51" selection-start-column="69" selection-end-line="51" selection-end-column="69" />
+          <folding>
+            <element signature="e#480#514#0#HTML" expanded="true" />
+            <element signature="e#600#657#0#HTML" expanded="true" />
+            <element signature="e#1742#1789#0#HTML" expanded="true" />
+            <element signature="e#4352#4399#0#HTML" expanded="true" />
+            <element signature="e#7410#7457#0#HTML" expanded="true" />
+            <element signature="e#8736#8767#0#HTML" expanded="true" />
+            <element signature="e#8823#8854#0#HTML" expanded="true" />
+            <element signature="e#8979#9010#0#HTML" expanded="true" />
+            <element signature="e#9112#9150#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
