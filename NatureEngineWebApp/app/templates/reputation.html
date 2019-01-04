@@ -32,7 +32,7 @@
                 next_player_id: 0
             };
 
-            add = (player) => {
+            add = (name, options) => {
                 const { players } = this.state;
                 // Check the count of the players added so far
                 let player_count = 0;
@@ -44,7 +44,7 @@
                     // Find if their is already an instance of this strategy in the players list
                     let index = -1;
                     for (let i = 0; i < players.length; i++){
-                        if(players[i].name === player){
+                        if(players[i].name === name && players[i].options === options){
                             index = i;
                             break;
                         }
@@ -55,18 +55,18 @@
                         this.setState({players:players});
                     } else {
                          // If their is not an instance create one
-                        players.push({name: player, id:this.state.next_player_id, count:1});
+                        players.push({name: name, options: options, id:this.state.next_player_id, count:1});
                         this.setState({players:players, next_player_id: this.state.next_player_id + 1});
                     }
                 }
             };
 
-            remove = (player) => {
+            remove = (name, options) => {
                 const { players } = this.state;
                 // Find if their is an instance of this strategy in the list
                 let index = -1;
                 for (let i = 0; i < players.length; i++){
-                    if(players[i].name === player){
+                    if(players[i].name === name && players[i].options === options){
                         index = i;
                         break;
                     }
@@ -108,15 +108,23 @@
             };
 
             render(){
+                let styles1 = {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '10px',
+                };
                 return(
                     <div>
                         <div className="container">
                             <div className="row">
-                                <Strategies strategies={this.state.strategies} add={this.add} remove={this.remove} />
-                                <SelectedPlayersList selected={this.state.players} />
+                                <Strategies strategies={this.state.strategies} add={this.add}/>
+                                <SelectedPlayersList selected={this.state.players} remove={this.remove}/>
                             </div>
                         </div>
-                        <button onClick={ this.handleSubmit } className="btn btn-success btn-lg">Submit</button>
+                        <div style={styles1}>
+                            <button onClick={ this.handleSubmit } className="btn btn-success btn-lg">Submit</button>
+                        </div>
                     </div>
                 )
             }
@@ -128,18 +136,48 @@
             render(){
                 return(
                     <div className="col-md-6">
-                        { this.props.selected.map(player => <SelectedPlayer key={player.id} count={player.count} name={player.name}/>) }
+                        <div className="container-fluid">
+                            <h3>Selected Players</h3>
+                            <div className="row border-box-sizing">
+                                <div className="col-md-2"><h4>Count</h4></div>
+                                <div className="col-md-4 center-block"><h4>Name</h4></div>
+                                <div className="col-md-4 center-block"><h4>Options</h4></div>
+                                <div className="col-md-2"> </div>
+                            </div>
+                            { this.props.selected.map(player => <SelectedPlayer key={player.id} count={player.count} name={player.name} options={player.options} remove={this.props.remove}/>) }
+                        </div>
                     </div>
                 )
             }
         }
 
         class SelectedPlayer extends React.Component {
-            state = {};
+            state = {
+                name: this.props.name,
+                options: this.props.options
+            };
 
             render(){
+                let styles = {
+                    border: '2px solid #ccc',
+                    padding: '0.01em 16px',
+                    borderRadius: '16px',
+                };
                 return(
-                    <div><span className="badge bg-info">{this.props.count}</span><span className="badge badge-primary m-2">{this.props.name}</span></div>
+                    <div className="row border-box-sizing" style={styles}>
+                        <div className="col-md-2">
+                            { this.props.count }
+                        </div>
+                        <div className="col-md-4 center-block">
+                            { this.state.name }
+                        </div>
+                        <div className="col-md-4 center-block">
+                            {this.state.options.map(option => <span className="badge m-2">{ option }</span>)}
+                        </div>
+                        <div className="col-md-2">
+                            <button onClick={() => this.props.remove(this.state.name, this.state.options) } className="btn btn-danger btn-sm">Remove</button>
+                        </div>
+                    </div>
                 )
             }
         }
@@ -151,7 +189,13 @@
                 return(
                     <div className="col-md-6">
                         <div className="container-fluid">
-                            { this.props.strategies.map(strategy => <Strategy key={strategy.id} name={strategy.name} add={this.props.add} remove={this.props.remove}/>) }
+                            <h3>Strategies</h3>
+                            <div className="row border-box-sizing">
+                                <div className="col-md-5 center-block"><h4>Name</h4></div>
+                                <div className="col-md-5 center-block"><h4>Options</h4></div>
+                                <div className="col-md-2"> </div>
+                            </div>
+                            { this.props.strategies.map(strategy => <Strategy key={strategy.id} name={strategy.name} options={strategy.options} add={this.props.add}/>) }
                         </div>
                     </div>
                 )
@@ -160,20 +204,26 @@
 
         class Strategy extends React.Component {
             state = {
-                name: this.props.name
+                name: this.props.name,
+                options: this.props.options
             };
 
             render(){
+                let styles = {
+                    border: '2px solid #ccc',
+                    padding: '0.01em 16px',
+                    borderRadius: '16px',
+                };
                 return (
-                    <div className="row border-box-sizing">
-                        <div className="col-md-4 center-block">
-                            <span className="badge badge-primary m-2">{ this.state.name }</span>
+                    <div className="row border-box-sizing" style={styles}>
+                        <div className="col-md-5 center-block">
+                            { this.state.name }
                         </div>
-                        <div className="col-md-4">
-                            <button onClick={() => this.props.add(this.state.name) } className="btn btn-secondary btn-sm">Add</button>
+                        <div className="col-md-5 center-block">
+                            {this.state.options.map(option => <span className="badge m-2">{ option }</span>)}
                         </div>
-                        <div className="col-md-4">
-                            <button onClick={() => this.props.remove(this.state.name) } className="btn btn-danger btn-sm">Remove</button>
+                        <div className="col-md-2">
+                            <button onClick={() => this.props.add(this.state.name, this.state.options) } className="btn btn-primary btn-sm">Add</button>
                         </div>
                     </div>
                 )

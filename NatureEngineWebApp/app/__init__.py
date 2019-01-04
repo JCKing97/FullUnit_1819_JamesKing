@@ -67,5 +67,5 @@ def create_app(config_class=Config):
     return app
 
 
-from app import errors, models
-from app.main import routes
+from app import models
+

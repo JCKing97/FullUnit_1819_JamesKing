@@ -7,7 +7,7 @@ import requests
 
 @bp.route('/reputation', methods=['GET', 'POST'])
 def reputation():
-    response = requests.get(current_app.config['AGENTS_URL'] + "strategies")
+    response = requests.get(current_app.config['AGENTS_URL'] + "strategy")
     strategies = response.json()['strategies']
     if request.method == 'GET':
         return render_template('reputation.html', title='Reputation', strategies=strategies)
@@ -24,6 +24,6 @@ def reputation():
 
 @bp.route('/reputation_finished')
 def reputation_finished():
-    response = requests.get(current_app.config['AGENTS_URL'] + "get_strategies")
+    response = requests.get(current_app.config['AGENTS_URL'] + "strategy")
     strategies = response.json()['strategies']
     return render_template('reputation_finished.html', title='Reputation Finished', strategies=strategies)

@@ -4,7 +4,7 @@ managing actions, percepts and players"""
 import requests
 from flask import current_app
 from typing import Dict, List
-from .player_logic import Player, PlayerCreationException, DecisionException
+from .player_logic import Player, PlayerCreationException, DecisionException, PerceptionException
 import copy
 import random
 
@@ -59,7 +59,6 @@ class Generation:
         self._end_point: int = end_point
         self._num_of_onlookers = num_of_onlookers
         self._actions: Dict = {}
-        self._percepts: Dict = {}
         creation_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'generation',
                                              json={"community": community_id, "generation": generation_id})
         if creation_response.status_code != 200:
@@ -118,13 +117,17 @@ class Generation:
 
     def simulate(self):
         """
-        Run the cycle steps: perceive, decide execute between the start and end points of this generation
+        Run the cycle steps: perceive, decide, execute between the start and end points of this generation
         :return: void
         """
         for timepoint in range(self._start_point, self._end_point):
-            self._perceive(timepoint)
-            self._actions[timepoint] = self._decide(timepoint)
-            self._percepts[timepoint] = self._execute(timepoint)
+            try:
+
+                self._perceive(timepoint)
+                self._actions[timepoint] = self._decide(timepoint)
+                self._execute(timepoint)
+            except SimulationException as e:
+                raise e
 
     def _perceive(self, timepoint):
         """
@@ -134,6 +137,7 @@ class Generation:
         :type timepoint: int
         :return: void
         """
+        # Generate the donor-recipient pair for this timepoint and send the perception to the pair
         players = copy.deepcopy(self._players)
         donor: Player = random.choice(players)
         players.remove(donor)
@@ -147,19 +151,12 @@ class Generation:
                                       interaction_response.status_code)
         if not interaction_response.json()['success']:
             raise SimulationException(interaction_response.json()['message'])
-        # Send percepts produced from actions
-        if timepoint > 0:
-            for percept in self._percepts[timepoint-1]:
-                if percept['type'] == "action":
-                    percept['type'] = "action/interaction"
-                elif percept['type'] == "gossip":
-                    percept['type'] = "action/gossip"
-                percept_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'percept/'
-                                                    + percept['type'], json=percept)
-                if percept_response.status_code != 200:
-                    raise SimulationException("Failed to send percept bad status code: " + str(percept_response.status_code))
-                if not percept_response.json()['success']:
-                    raise SimulationException(percept_response.json()['message'])
+        # Send percepts that have been set into the players perception bank for the given timepoint
+        for player in self._players:
+            try:
+                player.perceive(timepoint)
+            except PerceptionException as e:
+                raise SimulationException("Error in player perception: " + str(e))
 
     def _decide(self, timepoint) -> List[Dict]:
         """
@@ -169,6 +166,7 @@ class Generation:
         :return: A list of the data for player actions produced at this time
         :rtype: List[Dict]
         """
+        # Get the actions
         new_actions = []
         for player in self._players:
             try:
@@ -177,23 +175,20 @@ class Generation:
                 raise SimulationException("Failed to get a decision: " + str(e))
             if decision['type'] == "gossip":
                 decision['gossiper'] = player.get_id()
-                print("decision: " + str(decision))
             elif decision['type'] == "action":
                 decision['donor'] = player.get_id()
-                print("decision: " + str(decision))
+            # Store the action
             new_actions.append(decision)
         return new_actions
 
-    def _execute(self, timepoint) -> List[Dict]:
+    def _execute(self, timepoint):
         """
-        Execute the actions at this given timepoint, creating percepts where necessary and updating players fitness
+        Execute the actions at this given timepoint, setting percepts for the players where necessary
+        and updating players fitness
         :param timepoint: The timepoint of actions to execute
         :type timepoint: int
-        :return: A list of percepts (processed datato send to the agent mind service) produced from the executed actions
-        :rtype: List[Dict]
         """
-        # Process actions to get percepts and update players
-        new_percepts = []
+        # Process actions to set percepts and update players
         for action in self._actions[timepoint]:
             # Process gossip action into a percept
             if action['type'] == "gossip":
@@ -206,8 +201,7 @@ class Generation:
                 gossip_percept['community'] = self._community_id
                 gossip_percept['generation'] = self._generation_id
                 gossip_percept['timepoint'] = timepoint
-                new_percepts.append(gossip_percept)
-                print("percept : " + str(gossip_percept))
+                self._id_player_map[gossip_percept['perceiver']].set_perception(gossip_percept)
             # Process interaction action into percepts
             elif action['type'] == "action":
                 # Alter players fitness when cooperation has been chosen
@@ -226,10 +220,7 @@ class Generation:
                     action_percept['community'] = self._community_id
                     action_percept['generation'] = self._generation_id
                     action_percept['timepoint'] = timepoint
-                    action_percepts.append(action_percept)
-                    print("percept : " + str(action_percept))
-                new_percepts.extend(action_percepts)
-        return new_percepts
+                    self._id_player_map[action_percept['perceiver']].set_perception(action_percept)
 
     def _generate_onlookers(self, action: Dict) -> List[Player]:
         """
@@ -244,13 +235,15 @@ class Generation:
         players.remove(self._find_deepcopy_player(action['recipient'], players))
         players.remove(self._find_deepcopy_player(action['donor'], players))
         for i in range(self._num_of_onlookers):
-            if len(players) <= 0:
+            if len(players) >= 0:
                 onlooker = random.choice(players)
                 try:
                     onlookers.append(self._id_player_map[onlooker.get_id()])
                 except PlayerNotFoundException as e:
                     raise e
                 players.remove(onlooker)
+            else:
+                break
         return onlookers
 
     def _find_deepcopy_player(self, player_id, deep_players) -> Player:

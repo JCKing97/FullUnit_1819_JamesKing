@@ -16,6 +16,12 @@ class DecisionException(Exception):
         super().__init__("Error getting decision from player: " + message)
 
 
+class PerceptionException(Exception):
+
+    def __init__(self, message):
+        super().__init__("Error perceiving: " + message)
+
+
 class Player:
 
     def __init__(self, player_id: int, strategy: Dict, community_id: int, generation_id: int):
@@ -35,6 +41,7 @@ class Player:
         self._strategy: Dict = strategy
         self._community_id: int = community_id
         self._generation_id: int = generation_id
+        self._percepts: Dict = {}
         try:
             creation_payload: Dict = {"strategy": strategy['name'], "options": strategy['options'],
                                       "community": community_id, "generation": generation_id, "player": player_id}
@@ -102,3 +109,28 @@ class Player:
                 action_representation['type'] != "action":
             raise DecisionException("Action did not match idle, gossip or action")
         return action_representation
+
+    def set_perception(self, perception):
+        """
+        Set a perception into the player's perception bank, ready to be perceived
+        :param perception: The perception to set into the player's perception bank
+        """
+        if perception['timepoint'] not in self._percepts.keys():
+            self._percepts[perception['timepoint']] = [perception]
+        else:
+            self._percepts[perception['timepoint']].append(perception)
+
+    def perceive(self, timepoint):
+        if timepoint > 0 and timepoint-1 in self._percepts:
+            for percept in self._percepts[timepoint-1]:
+                if percept['type'] == "action":
+                    percept['type'] = "action/interaction"
+                elif percept['type'] == "gossip":
+                    percept['type'] = "action/gossip"
+                percept_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'percept/'
+                                                    + percept['type'], json=percept)
+                if percept_response.status_code != 200:
+                    raise PerceptionException("Failed to send percept bad status code: " +
+                                              str(percept_response.status_code))
+                if not percept_response.json()['success']:
+                    raise PerceptionException(percept_response.json()['message'])

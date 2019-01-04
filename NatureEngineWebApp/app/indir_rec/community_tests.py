@@ -7,9 +7,20 @@ from .community_logic import Community
 import requests
 from flask import current_app
 import random
+import pprint
 
 
 class CommunityTest(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        response = requests.get(current_app.config['AGENTS_URL'] + "strategy")
+        received_strategies = response.json()['strategies']
+        cls.strategies = [{'strategy': strategy, 'count': random.randint(0, 5)} for strategy in received_strategies]
+        cls.pp = pprint.PrettyPrinter()
+        cls.num_of_onlookers = random.randint(1, 20)
+        cls.num_of_generations = random.randint(2, 8)
+        cls.length_of_generations = random.randint(6, 20)
 
     def setUp(self):
         self.app = create_app(TestConfig)
@@ -21,58 +32,24 @@ class CommunityTest(unittest.TestCase):
 
     def test_get_id(self):
         new_community_id = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
-        strategies = [
-            {'strategy': {'name': 'Defector', 'options': [], 'description': 'Always defect'},
-             'count': random.randint(0, 20)},
-            {'strategy': {'name': 'Cooperator', 'options': [], 'description': 'Always cooperate'},
-             'count': random.randint(0, 20)},
-            {'strategy': {'name': 'Standing Discriminator', 'options': ['trusting'],
-                          'description': 'Trust gossip from trusted agents, use the standing strat'},
-             'count': random.randint(0, 20)},
-            {'strategy': {'name': 'Standing Discriminator', 'options': ['distrusting'],
-                          'description': 'Don\'t trust, use the standing strat'}, 'count': random.randint(0, 20)}
-        ]
-        num_of_onlookers = random.randint(6, 100)
-        num_of_generations = random.randint(3, 20)
-        length_of_generations = random.randint(6, 50)
-        community = Community(strategies, num_of_onlookers, num_of_generations, length_of_generations)
+        community = Community(self.strategies, self.num_of_onlookers, self.num_of_generations,
+                              self.length_of_generations)
         self.assertEqual(new_community_id+1, community.get_id())
 
     def test_get_onlookers(self):
-        strategies = [
-            {'strategy': {'name': 'Defector', 'options': [], 'description': 'Always defect'},
-             'count': random.randint(0, 20)},
-            {'strategy': {'name': 'Cooperator', 'options': [], 'description': 'Always cooperate'},
-             'count': random.randint(0, 20)},
-            {'strategy': {'name': 'Standing Discriminator', 'options': ['trusting'],
-                          'description': 'Trust gossip from trusted agents, use the standing strat'},
-             'count': random.randint(0, 20)},
-            {'strategy': {'name': 'Standing Discriminator', 'options': ['distrusting'],
-                          'description': 'Don\'t trust, use the standing strat'}, 'count': random.randint(0, 20)}
-        ]
-        num_of_onlookers = random.randint(6, 100)
-        num_of_generations = random.randint(3, 20)
-        length_of_generations = random.randint(6, 50)
-        community = Community(strategies, num_of_onlookers, num_of_generations, length_of_generations)
-        self.assertEqual(num_of_onlookers, community.get_num_of_onlookers())
+        community = Community(self.strategies, self.num_of_onlookers, self.num_of_generations,
+                              self.length_of_generations)
+        self.assertEqual(self.num_of_onlookers, community.get_num_of_onlookers())
 
     def test_simulate(self):
-        strategies = [
-            {'strategy': {'name': 'Defector', 'options': [], 'description': 'Always defect'},
-             'count': random.randint(0, 20)},
-            {'strategy': {'name': 'Cooperator', 'options': [], 'description': 'Always cooperate'},
-             'count': random.randint(0, 20)},
-            {'strategy': {'name': 'Standing Discriminator', 'options': ['trusting'],
-                          'description': 'Trust gossip from trusted agents, use the standing strat'},
-             'count': random.randint(0, 20)},
-            {'strategy': {'name': 'Standing Discriminator', 'options': ['distrusting'],
-                          'description': 'Don\'t trust, use the standing strat'}, 'count': random.randint(0, 20)}
-        ]
-        num_of_onlookers = random.randint(6, 100)
-        num_of_generations = random.randint(3, 20)
-        length_of_generations = random.randint(6, 50)
-        community = Community(strategies, num_of_onlookers, num_of_generations, length_of_generations)
+        community = Community(self.strategies, self.num_of_onlookers, self.num_of_generations,
+                              self.length_of_generations)
         community.simulate()
+        self.assertEqual(self.num_of_generations, len(community.get_generations()))
+        for generation in community.get_generations():
+            self.assertEqual(self.length_of_generations, len(generation._actions))
+            self.assertEqual(self.length_of_generations, generation.get_end_point()-generation.get_start_point())
+
 
 
 

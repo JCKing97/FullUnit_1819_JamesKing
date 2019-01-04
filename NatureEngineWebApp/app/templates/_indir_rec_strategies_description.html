@@ -11,7 +11,7 @@
             <tbody>
                 {% for strategy in strategies %}
                     <tr>
-                        <td>{{ strategy['name'] }}</td>
+                        <td>{{ strategy['name'] }} {{ strategy['options'] }}</td>
                         <td>{{ strategy['description'] }}</td>
                     </tr>
                 {% endfor %}
