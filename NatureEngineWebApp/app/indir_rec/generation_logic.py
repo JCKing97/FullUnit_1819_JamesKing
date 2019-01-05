@@ -34,7 +34,7 @@ class Generation:
     """A generation encompasses a number of timepoints in which members of the generation perceive percepts and act"""
 
     def __init__(self, strategies: List[Dict], generation_id: int, community_id: int, start_point: int, end_point: int,
-                 num_of_onlookers: int):
+                 num_of_onlookers: int, initial_generation: bool):
         """
         Set up a generation and the players that are part of it in the environment and agent mind service
         :param strategies: A list of strategies (name, description and options) and the amount of them that have been
@@ -68,20 +68,31 @@ class Generation:
         self._players: List[Player] = []
         self._id_player_map: Dict[int, Player] = {}
         player_id = 0
-        try:
+        if initial_generation:
+            try:
+                for strategy in strategies:
+                    if strategy['count'] > 0:
+                        for i in range(strategy['count']):
+                            try:
+                                player = Player(player_id, strategy['strategy'], self._community_id,
+                                                self._generation_id)
+                                self._players.append(player)
+                                self._id_player_map[player.get_id()] = player
+                                player_id += 1
+                            except PlayerCreationException as e:
+                                raise GenerationCreationException(str(e))
+            except KeyError:
+                raise GenerationCreationException("Incorrect strategies dictionary keys")
+        else:
             for strategy in strategies:
-                if strategy['count'] > 0:
-                    for i in range(strategy['count']):
-                        try:
-                            player = Player(player_id, strategy['strategy'], self._community_id,
-                                            self._generation_id)
-                            self._players.append(player)
-                            self._id_player_map[player.get_id()] = player
-                            player_id += 1
-                        except PlayerCreationException as e:
-                            raise GenerationCreationException(str(e))
-        except KeyError:
-            raise GenerationCreationException("Incorrect strategies dictionary keys")
+                try:
+                    player = Player(player_id, strategy, self._community_id, self._generation_id)
+                    self._players.append(player)
+                    self._id_player_map[player.get_id()] = player
+                    player_id += 1
+                except PlayerCreationException as e:
+                    raise GenerationCreationException(str(e))
+
 
     def get_id(self):
         """

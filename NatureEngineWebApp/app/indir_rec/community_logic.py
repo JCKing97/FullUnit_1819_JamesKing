@@ -20,7 +20,7 @@ class Community:
     generations are then created using a reproduction algorithm"""
 
     def __init__(self, strategies: List[Dict], num_of_onlookers: int = 5, num_of_generations: int = 10,
-                 length_of_generations: int = 30):
+                 length_of_generations: int = 30, mutation_chance: float = 0):
         """
         Set the parameters for the community and the initial set of players to simulate the community with
         :param strategies: The initial set of players to simulate the community
@@ -39,12 +39,18 @@ class Community:
             raise CommunityCreationException("length of generations <= 5")
         if num_of_generations <= 2:
             raise CommunityCreationException("number of generations <= 2")
+        if mutation_chance > 1 or mutation_chance < 0:
+            raise CommunityCreationException("mutation chance should be a probability between 0 and 1")
+        self._mutation_chance = mutation_chance
         self._num_of_onlookers: int = num_of_onlookers
         self._num_of_generations: int = num_of_generations
         self._length_of_generations: int = length_of_generations
         self._first_strategies = strategies
         self._generations: List[Generation] = []
         self._current_time = 0
+        self._generation_size = 0
+        for strategy in strategies:
+            self._generation_size += strategy['count']
 
     def get_id(self) -> int:
         """
@@ -98,51 +104,37 @@ class Community:
         """
         if len(self._generations) <= 0:
             return Generation(self._first_strategies, len(self._generations), self._community_id, 0,
-                              self._length_of_generations, self._num_of_onlookers)
+                              self._length_of_generations, self._num_of_onlookers, True)
         else:
             return self._reproduce()
 
     def _reproduce(self) -> Generation:
         """
         Use the last generation of players to build a new generation of players
-        The higher the fitness of an overall strategy in the last generation the more likely that strategy will
-        reproduce into the next generation
+        Uses the roulette wheel selection via stochastic acceptance outline by Lipowski et al. referenced in my report
         :return: The new generation
         :rtype: Generation
         """
-        # Gather data on the fitness of strategies
+        # Find last generation of players details
         last_gen_players = self._generations[-1].get_players()
-        strategy_fitness: List = []
-        overall_fitness = 0
+        maximal_fitness = 0
         for player in last_gen_players:
-            found_strategy = False
-            for strategy in strategy_fitness:
-                if strategy['strategy'] == player.get_strategy():
-                    found_strategy = True
-                    strategy['count'] += player.get_fitness()
-            if not found_strategy:
-                strategy_fitness.append({'strategy': player.get_strategy(), 'count': player.get_fitness()})
-            overall_fitness += player.get_fitness()
-        # Build choice intervals to get probability of a new player being a certain strategy
-        choice_intervals: List[Dict] = []
-        current_interval = 0
-        for strategy in strategy_fitness:
-            j = current_interval + strategy['count']
-            while current_interval <= j:
-                choice_intervals.append(strategy['strategy'])
-                current_interval += 1
-        # Create strategies for players in next generation
-        strategies: List[Dict] = []
-        for i in range(len(last_gen_players)):
-            # Select a strategy for this player
-            selected_index = random.randint(0, overall_fitness)
-            player_choice: Dict = choice_intervals[selected_index]
-            found_strategy = False
-            for strategy in strategies:
-                if strategy['strategy'] == player_choice:
-                    strategy['count'] += 1
-                    found_strategy = True
-            if not found_strategy:
-                strategies.append({'strategy': player_choice, 'count': 1})
-        return Generation(strategies, len(self._generations), self._community_id, self._current_time,
-                          self._current_time+self._length_of_generations, self._num_of_onlookers)
+            if player.get_fitness() > maximal_fitness:
+                maximal_fitness = player.get_fitness()
+        # Form new generation
+        new_gen_strategies: List = []
+        new_gen_size = 0
+        while new_gen_size < self._generation_size:
+            # Mutate to randomly selected strategy with probability selected in __init__
+            if random.random() < self._mutation_chance:
+                selected_strategy = random.choice(self._first_strategies)
+                new_gen_strategies.append(selected_strategy['strategy'])
+                new_gen_size += 1
+            else:
+                # If no mutation use stochastic acceptance
+                selected_player = random.choice(last_gen_players)
+                if random.random() <= maximal_fitness:
+                    new_gen_strategies.append(selected_player.get_strategy())
+                    new_gen_size += 1
+        return Generation(new_gen_strategies, len(self._generations), self._community_id, self._current_time,
+                          self._current_time+self._length_of_generations, self._num_of_onlookers, False)

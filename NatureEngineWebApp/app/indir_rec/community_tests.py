@@ -14,7 +14,7 @@ class CommunityTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        response = requests.get(current_app.config['AGENTS_URL'] + "strategy")
+        response = requests.get('http://127.0.0.1:8080/strategy')
         received_strategies = response.json()['strategies']
         cls.strategies = [{'strategy': strategy, 'count': random.randint(0, 5)} for strategy in received_strategies]
         cls.pp = pprint.PrettyPrinter()

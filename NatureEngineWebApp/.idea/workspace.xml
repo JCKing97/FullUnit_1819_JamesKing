@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="" />
+    <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/indir_rec/community_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/community_logic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/indir_rec/community_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/community_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/indir_rec/generation_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/generation_logic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/indir_rec/generation_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/generation_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.tex" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +36,7 @@
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_indir_rec_indir_rec_test_PlayerTest.coverage" NAME="pytest for indir_rec.indir_rec_test.PlayerTest Coverage Results" MODIFIED="1543503241268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_CommunityTestStart.coverage" NAME="pytest for creation_tests.CommunityTestStart Coverage Results" MODIFIED="1543228038732" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_axelrod_database_conversion_test_TestConversion.coverage" NAME="pytest for axelrod_database_conversion_test.TestConversion Coverage Results" MODIFIED="1544114558293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_in_player_tests_py.coverage" NAME="pytest in player_tests.py Coverage Results" MODIFIED="1546527913770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_in_player_tests_py.coverage" NAME="pytest in player_tests.py Coverage Results" MODIFIED="1546707283880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_indir_rec_player_tests_PlayerTest.coverage" NAME="pytest for indir_rec.player_tests.PlayerTest Coverage Results" MODIFIED="1543521933936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_StrategyTest.coverage" NAME="pytest for creation_tests.StrategyTest Coverage Results" MODIFIED="1543226750792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_percepts_beliefs_actions_testing_BeliefsStandingTrustingTest.coverage" NAME="pytest for percepts_beliefs_actions_testing.BeliefsStandingTrustingTest Coverage Results" MODIFIED="1543349047162" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
@@ -37,7 +46,7 @@
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_percepts_beliefs_actions_testing_PerceptInteractionTests.coverage" NAME="pytest for percepts_beliefs_actions_testing.PerceptInteractionTests Coverage Results" MODIFIED="1543275728410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase_test_get_tournaments_points_normal.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase.test_get_tournaments_points_normal Coverage Results" MODIFIED="1536229571594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_model_tests_UserModelCase.coverage" NAME="pytest for model_tests.UserModelCase Coverage Results" MODIFIED="1535545105823" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_in_community_tests_py.coverage" NAME="pytest in community_tests.py Coverage Results" MODIFIED="1546618202489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_in_community_tests_py.coverage" NAME="pytest in community_tests.py Coverage Results" MODIFIED="1546707519781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_GameAnalysisCase.coverage" NAME="pytest for analysis_tests.GameAnalysisCase Coverage Results" MODIFIED="1536228077916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_indir_rec_indir_rec_test_CreationTest.coverage" NAME="pytest for indir_rec.indir_rec_test.CreationTest Coverage Results" MODIFIED="1542299114075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_action_tests_ActionTesting.coverage" NAME="pytest for action_tests.ActionTesting Coverage Results" MODIFIED="1543428271262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
@@ -50,7 +59,7 @@
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_indir_rec_indir_rec_test_PlayerFactoryTest.coverage" NAME="pytest for indir_rec.indir_rec_test.PlayerFactoryTest Coverage Results" MODIFIED="1543424604687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_GenerationIncorrectCommunityTest.coverage" NAME="pytest for creation_tests.GenerationIncorrectCommunityTest Coverage Results" MODIFIED="1543235480110" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_indir_rec_test_CreationTest.coverage" NAME="pytest for indir_rec_test.CreationTest Coverage Results" MODIFIED="1542305117082" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/indir_rec" />
-    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_in_generation_tests_py.coverage" NAME="pytest in generation_tests.py Coverage Results" MODIFIED="1546618090922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_in_generation_tests_py.coverage" NAME="pytest in generation_tests.py Coverage Results" MODIFIED="1546707459784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_creation_tests_StrategyTest_test_get_strategies.coverage" NAME="pytest for creation_tests.StrategyTest.test_get_strategies Coverage Results" MODIFIED="1543226692137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/agents_service_testing" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_analysis_tests_TournamentAnalysisCase.coverage" NAME="pytest for analysis_tests.TournamentAnalysisCase Coverage Results" MODIFIED="1536233221336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/NatureEngineWebApp$pytest_for_indir_rec_indir_rec_test_InteractionTest.coverage" NAME="pytest for indir_rec.indir_rec_test.InteractionTest Coverage Results" MODIFIED="1543502036367" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
@@ -89,28 +98,85 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/_indir_rec_strategies_description.html">
+        <entry file="file://$PROJECT_DIR$/app/indir_rec/generation_logic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="47" selection-start-line="13" selection-start-column="47" selection-end-line="13" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/reputation.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2025">
-              <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
+            <state relative-caret-position="159">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+              <folding>
+                <element signature="e#133#148#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/templates/index.html">
+        <entry file="file://$PROJECT_DIR$/app/indir_rec/generation_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="32" column="121" selection-start-line="32" selection-start-column="121" selection-end-line="32" selection-end-column="121" />
+            <state relative-caret-position="327">
+              <caret line="144" column="31" lean-forward="true" selection-start-line="144" selection-start-column="31" selection-end-line="144" selection-end-column="31" />
+              <folding>
+                <element signature="e#90#116#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/indir_rec/player_tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="32" column="52" lean-forward="true" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
+              <folding>
+                <element signature="e#77#153#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/indir_rec/community_tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-22">
+              <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+              <folding>
+                <element signature="e#84#110#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="73" lean-forward="true" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="73" />
+              <folding>
+                <element signature="e#189#219#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/indir_rec/community_logic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="714">
+              <caret line="136" column="77" lean-forward="true" selection-start-line="136" selection-start-column="77" selection-end-line="136" selection-end-column="77" />
+              <folding>
+                <element signature="e#155#170#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/indir_rec/player_logic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1414">
+              <caret line="135" column="81" lean-forward="true" selection-start-line="135" selection-start-column="81" selection-end-line="135" selection-end-column="81" />
+              <folding>
+                <element signature="e#1#24#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -129,11 +195,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>recipient_payload</find>
-      <find>(percept_payload</find>
-      <find>percept_response</find>
-      <find>(percept_response</find>
-      <find>=percept_payload</find>
       <find>donor_payload</find>
       <find>=donor_payload</find>
       <find>self.percept_payload</find>
@@ -159,6 +220,11 @@
       <find>strategies</find>
       <find>(strategies</find>
       <find>print</find>
+      <find>.strategies</find>
+      <find>onlookers)</find>
+      <find>mutation_chance</find>
+      <find>AGENTS_URL</find>
+      <find>current_app.config['AGENTS_URL']</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -190,7 +256,6 @@
         <option value="$PROJECT_DIR$/tests/agents_service_testing/beliefs_standing_tests.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/tests/axelrod_database_conversion_test.py" />
-        <option value="$PROJECT_DIR$/app/indir_rec/community_logic.py" />
         <option value="$PROJECT_DIR$/app/templates/base.html" />
         <option value="$PROJECT_DIR$/app/templates/_player_strategy_description.html" />
         <option value="$PROJECT_DIR$/app/templates/match_run.html" />
@@ -207,17 +272,18 @@
         <option value="$PROJECT_DIR$/app/main/routes.py" />
         <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/natureengine.py" />
-        <option value="$PROJECT_DIR$/app/indir_rec/player_tests.py" />
         <option value="$PROJECT_DIR$/app/indir_rec/player_logic.py" />
         <option value="$PROJECT_DIR$/app/indir_rec/routes.py" />
-        <option value="$PROJECT_DIR$/app/indir_rec/generation_tests.py" />
-        <option value="$PROJECT_DIR$/app/indir_rec/generation_logic.py" />
-        <option value="$PROJECT_DIR$/app/indir_rec/community_tests.py" />
         <option value="$PROJECT_DIR$/app/templates/_indir_rec_strategies_description.html" />
         <option value="$PROJECT_DIR$/app/__init__.py" />
         <option value="$PROJECT_DIR$/app/errors/handlers.py" />
         <option value="$PROJECT_DIR$/app/templates/reputation.html" />
         <option value="$PROJECT_DIR$/app/templates/index.html" />
+        <option value="$PROJECT_DIR$/app/indir_rec/generation_logic.py" />
+        <option value="$PROJECT_DIR$/app/indir_rec/community_logic.py" />
+        <option value="$PROJECT_DIR$/app/indir_rec/player_tests.py" />
+        <option value="$PROJECT_DIR$/app/indir_rec/community_tests.py" />
+        <option value="$PROJECT_DIR$/app/indir_rec/generation_tests.py" />
       </list>
     </option>
   </component>
@@ -232,7 +298,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -249,42 +314,18 @@
               <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="errors" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="errors" type="462c0819:PsiDirectoryNode" />
+              <item name="indir_rec" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
               <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="NatureEngineWebApp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="NatureEngineWebApp" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="agents_service_testing" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -316,7 +357,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Flask server.NatureEngineWebApp">
+  <component name="RunManager" selected="Python tests.pytest in community_tests.py">
     <configuration name="NatureEngineWebApp" type="Python.FlaskServer" factoryName="Flask server">
       <option name="flaskDebug" value="true" />
       <module name="NatureEngineWebApp" />
@@ -415,7 +456,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in community_tests.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest in community_tests.py" type="tests" factoryName="py.test" nameIsGenerated="true">
       <module name="NatureEngineWebApp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -431,7 +472,7 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in generation_tests.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest in generation_tests.py" type="tests" factoryName="py.test" nameIsGenerated="true">
       <module name="NatureEngineWebApp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -447,7 +488,7 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="pytest in player_tests.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest in player_tests.py" type="tests" factoryName="py.test" nameIsGenerated="true">
       <module name="NatureEngineWebApp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -467,17 +508,14 @@
       <item itemvalue="Flask server.NatureEngineWebApp" />
       <item itemvalue="Python docs.sphinx task" />
       <item itemvalue="Python tests.pytest for indir_rec.community_tests.CommunityTest.test_simulate" />
-      <item itemvalue="Python tests.pytest for axelrod_database_conversion_test.TestConversion" />
-      <item itemvalue="Python tests.pytest for indir_rec.community_tests.CommunityTest" />
       <item itemvalue="Python tests.pytest in player_tests.py" />
       <item itemvalue="Python tests.pytest in generation_tests.py" />
       <item itemvalue="Python tests.pytest in community_tests.py" />
+      <item itemvalue="Python tests.pytest for axelrod_database_conversion_test.TestConversion" />
+      <item itemvalue="Python tests.pytest for indir_rec.community_tests.CommunityTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.pytest in community_tests.py" />
-        <item itemvalue="Python tests.pytest in generation_tests.py" />
-        <item itemvalue="Python tests.pytest in player_tests.py" />
         <item itemvalue="Python tests.pytest for indir_rec.community_tests.CommunityTest" />
         <item itemvalue="Python tests.pytest for axelrod_database_conversion_test.TestConversion" />
       </list>
@@ -520,6 +558,7 @@
       <workItem from="1546523612494" duration="3238000" />
       <workItem from="1546612351518" duration="21074000" />
       <workItem from="1546694715866" duration="13000" />
+      <workItem from="1546703961287" duration="3207000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of components">
       <created>1535647227999</created>
@@ -700,45 +739,46 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_in_generation_tests_py - 2019.01.04 at 15h 41m 21s.xml">
+    <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 46m 56s.xml">
       <configuration name="pytest in generation_tests.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_generation_tests_py - 2019.01.04 at 15h 43m 23s.xml">
+    <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 47m 15s.xml">
       <configuration name="pytest in generation_tests.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_generation_tests_py - 2019.01.04 at 15h 45m 31s.xml">
+    <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 48m 15s.xml">
       <configuration name="pytest in generation_tests.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_generation_tests_py - 2019.01.04 at 15h 47m 32s.xml">
+    <history-entry file="pytest_in_player_tests_py - 2019.01.05 at 16h 52m 24s.xml">
+      <configuration name="pytest in player_tests.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 52m 29s.xml">
       <configuration name="pytest in generation_tests.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_generation_tests_py - 2019.01.04 at 15h 49m 50s.xml">
+    <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 53m 25s.xml">
       <configuration name="pytest in generation_tests.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_generation_tests_py - 2019.01.04 at 15h 51m 46s.xml">
+    <history-entry file="pytest_in_player_tests_py - 2019.01.05 at 16h 53m 36s.xml">
+      <configuration name="pytest in player_tests.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_player_tests_py - 2019.01.05 at 16h 54m 47s.xml">
+      <configuration name="pytest in player_tests.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 54m 51s.xml">
       <configuration name="pytest in generation_tests.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_generation_tests_py - 2019.01.04 at 15h 53m 46s.xml">
+    <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 56m 27s.xml">
       <configuration name="pytest in generation_tests.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_in_generation_tests_py - 2019.01.04 at 16h 07m 36s.xml">
-      <configuration name="pytest in generation_tests.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_in_generation_tests_py - 2019.01.04 at 16h 08m 20s.xml">
-      <configuration name="pytest in generation_tests.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_in_community_tests_py - 2019.01.04 at 16h 15m 44s.xml">
-      <configuration name="pytest in community_tests.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="168535000" />
+    <option name="totallyTimeSpent" value="171742000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.1189968" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.120064035" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" weight="0.32896176" />
       <window_info anchor="bottom" id="Terminal" order="1" sideWeight="0.49839914" weight="0.1419214" />
@@ -748,7 +788,7 @@
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.3286026" />
-      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.49839914" weight="0.3133188" />
+      <window_info active="true" anchor="bottom" id="Run" order="8" sideWeight="0.49839914" visible="true" weight="0.3133188" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.39847162" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
@@ -1017,70 +1057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/indir_rec/player_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="669">
-          <caret line="94" column="99" lean-forward="true" selection-start-line="94" selection-start-column="29" selection-end-line="94" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/indir_rec/community_logic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-525">
-          <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
-          <folding>
-            <element signature="e#155#170#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/indir_rec/generation_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="113" column="30" lean-forward="true" selection-start-line="113" selection-start-column="30" selection-end-line="113" selection-end-column="30" />
-          <folding>
-            <element signature="e#90#116#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/indir_rec/generation_logic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1927">
-          <caret line="139" column="98" selection-start-line="139" selection-start-column="98" selection-end-line="139" selection-end-column="98" />
-          <folding>
-            <element signature="e#133#148#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/indir_rec/player_logic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="135" column="81" lean-forward="true" selection-start-line="135" selection-start-column="81" selection-end-line="135" selection-end-column="81" />
-          <folding>
-            <element signature="e#1#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/indir_rec/community_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="78" lean-forward="true" selection-start-line="18" selection-start-column="78" selection-end-line="18" selection-end-column="78" />
-          <folding>
-            <element signature="e#84#110#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/main/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1146,13 +1122,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/_indir_rec_strategies_description.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="47" selection-start-line="13" selection-start-column="47" selection-end-line="13" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/reputation.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2025">
@@ -1164,16 +1133,82 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="32" column="121" selection-start-line="32" selection-start-column="121" selection-end-line="32" selection-end-column="121" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/indir_rec/player_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1414">
+          <caret line="135" column="81" lean-forward="true" selection-start-line="135" selection-start-column="81" selection-end-line="135" selection-end-column="81" />
           <folding>
-            <element signature="e#480#514#0#HTML" expanded="true" />
-            <element signature="e#600#657#0#HTML" expanded="true" />
-            <element signature="e#1742#1789#0#HTML" expanded="true" />
-            <element signature="e#4352#4399#0#HTML" expanded="true" />
-            <element signature="e#7410#7457#0#HTML" expanded="true" />
-            <element signature="e#8736#8767#0#HTML" expanded="true" />
-            <element signature="e#8823#8854#0#HTML" expanded="true" />
-            <element signature="e#8979#9010#0#HTML" expanded="true" />
-            <element signature="e#9112#9150#0#HTML" expanded="true" />
+            <element signature="e#1#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/_indir_rec_strategies_description.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="47" selection-start-line="13" selection-start-column="47" selection-end-line="13" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/indir_rec/community_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="136" column="77" lean-forward="true" selection-start-line="136" selection-start-column="77" selection-end-line="136" selection-end-column="77" />
+          <folding>
+            <element signature="e#155#170#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/indir_rec/generation_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#133#148#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/indir_rec/player_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="32" column="52" lean-forward="true" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
+          <folding>
+            <element signature="e#77#153#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="73" lean-forward="true" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="73" />
+          <folding>
+            <element signature="e#189#219#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/indir_rec/community_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-22">
+          <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+          <folding>
+            <element signature="e#84#110#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/indir_rec/generation_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="144" column="31" lean-forward="true" selection-start-line="144" selection-start-column="31" selection-end-line="144" selection-end-column="31" />
+          <folding>
+            <element signature="e#90#116#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -214,7 +214,7 @@ Tournament selection could be translated in the following way. Have an empty lis
 \end{framed}
 Fitness proportionate selection seems to translate best to my system as there is an obvious and simple way to select each agents strategy for the new generation using the roulette wheel, unlike the tournament selection process which requires the crossover step. The crossover step requires a chromosome represented as a bit array to produce an offspring from two parents. This is analogous to sexual reproduction, but not the bulding of new agents.\\
 Lipowski \textit{et al.}~\cite{lipowski2012roulette} presented an efficient version of roulette wheel selection using stochastic acceptance rather than the searching method used by Francq~\cite{genetic_algorithms}. The stochastic acceptance algorithm works like this: select randomly one of the individuals from the last generations population, with fitness of the individual as $w_i$ and $w_{max}$ the maximal fitness of the generation use the probability $w_i / w_{max}$ to select whether or not to use this agents strategy for a new generation agent, if not repeat. Lipowski \textit{et al.} proved mathematically that the probability distribution of this method and general roulette wheel selection are the same, and that the stochastic acceptance algorithm is more efficient as well.\\
-Due to these factors I have decided to use the roulette wheel-selection via stochastic acceptance algorithm proposed by Lipowski \textit{et al.}
+Due to these factors I have decided to use the roulette wheel-selection via stochastic acceptance algorithm proposed by Lipowski \textit{et al.} with a user-selectable chance of random mutation for each new agent.
 
 
 \subsection{Web Application and Interface}
