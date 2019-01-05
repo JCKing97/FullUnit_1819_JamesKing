@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="86f01bc4-8280-4420-8851-60aa3d2fc3cb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/community_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/community_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/community_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/community_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/generation_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/generation_logic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/indir_rec/generation_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/indir_rec/generation_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.synctex.gz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../ProjectReports/Final Report/final/report_template.tex" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +105,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/indir_rec/generation_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
+            <state relative-caret-position="2160">
               <caret line="144" column="31" lean-forward="true" selection-start-line="144" selection-start-column="31" selection-end-line="144" selection-end-column="31" />
               <folding>
                 <element signature="e#90#116#0" expanded="true" />
@@ -334,7 +327,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -507,12 +500,12 @@
     <list>
       <item itemvalue="Flask server.NatureEngineWebApp" />
       <item itemvalue="Python docs.sphinx task" />
-      <item itemvalue="Python tests.pytest for indir_rec.community_tests.CommunityTest.test_simulate" />
-      <item itemvalue="Python tests.pytest in player_tests.py" />
-      <item itemvalue="Python tests.pytest in generation_tests.py" />
-      <item itemvalue="Python tests.pytest in community_tests.py" />
       <item itemvalue="Python tests.pytest for axelrod_database_conversion_test.TestConversion" />
       <item itemvalue="Python tests.pytest for indir_rec.community_tests.CommunityTest" />
+      <item itemvalue="Python tests.pytest for indir_rec.community_tests.CommunityTest.test_simulate" />
+      <item itemvalue="Python tests.pytest in community_tests.py" />
+      <item itemvalue="Python tests.pytest in generation_tests.py" />
+      <item itemvalue="Python tests.pytest in player_tests.py" />
     </list>
     <recent_temporary>
       <list>
@@ -558,7 +551,7 @@
       <workItem from="1546523612494" duration="3238000" />
       <workItem from="1546612351518" duration="21074000" />
       <workItem from="1546694715866" duration="13000" />
-      <workItem from="1546703961287" duration="3207000" />
+      <workItem from="1546703961287" duration="3423000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of components">
       <created>1535647227999</created>
@@ -739,12 +732,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 46m 56s.xml">
-      <configuration name="pytest in generation_tests.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 47m 15s.xml">
-      <configuration name="pytest in generation_tests.py" configurationId="tests" />
-    </history-entry>
     <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 48m 15s.xml">
       <configuration name="pytest in generation_tests.py" configurationId="tests" />
     </history-entry>
@@ -769,13 +756,18 @@
     <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 56m 27s.xml">
       <configuration name="pytest in generation_tests.py" configurationId="tests" />
     </history-entry>
+    <history-entry file="pytest_in_generation_tests_py - 2019.01.05 at 16h 57m 52s.xml">
+      <configuration name="pytest in generation_tests.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="pytest_in_community_tests_py - 2019.01.05 at 16h 59m 23s.xml">
+      <configuration name="pytest in community_tests.py" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="171742000" />
+    <option name="totallyTimeSpent" value="171958000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.120064035" />
@@ -805,6 +797,9 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
     <MESSAGE value="Initial commit of components" />
     <MESSAGE value="Connecting backend with frontend" />
     <MESSAGE value="Changed the database to make it more logical to use, updated the front end adding reports links and a structure and design to the home page." />
@@ -1205,7 +1200,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/indir_rec/generation_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
+        <state relative-caret-position="2160">
           <caret line="144" column="31" lean-forward="true" selection-start-line="144" selection-start-column="31" selection-end-line="144" selection-end-column="31" />
           <folding>
             <element signature="e#90#116#0" expanded="true" />
