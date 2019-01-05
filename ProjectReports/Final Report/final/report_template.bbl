@@ -14,6 +14,20 @@ Richard Dawkins.
 \newblock {\em The Selfish Gene}.
 \newblock Oxford University Press, 2016.
 
+\bibitem{genetic_algorithms}
+Pascal Francq.
+\newblock Genetic algorithms.
+\newblock \url{http://www.otlet-institute.org/wikics/Genetic_Algorithms.html},
+  2011.
+\newblock Accessed: 04/01/2018.
+
+\bibitem{optimisation_problems}
+Pascal Francq.
+\newblock Optimisation problems.
+\newblock
+  \url{http://www.otlet-institute.org/wikics/Optimization_Problems.html}, 2011.
+\newblock Accessed: 04/01/2018.
+
 \bibitem{kinhamilton}
 W.~D. Hamilton.
 \newblock The genetical evolution of social behaviour.
@@ -28,6 +42,12 @@ Peter Kropotkin.
 Olof Leimar and Peter Hammerstein.
 \newblock Evolution of cooperation through indirect reciprocity.
 \newblock {\em Proceedings of The Royal Society}, 268:745--753, May 2001.
+
+\bibitem{lipowski2012roulette}
+Adam Lipowski and Dorota Lipowska.
+\newblock Roulette-wheel selection via stochastic acceptance.
+\newblock {\em Physica A: Statistical Mechanics and its Applications},
+  391(6):2193--2196, 2012.
 
 \bibitem{Mui:2002:NRM:544741.544807}
 Lik Mui, Mojdeh Mohtashemi, and Ari Halberstadt.

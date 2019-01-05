@@ -182,7 +182,39 @@ Relate the design to agent systems and evolution of cooperation.
 Commitments, capabilities, no contradictory beliefs, etc.\\
 
 \subsection{Environment}
-Genetic algorithm: Roulette Wheel Selection.\\
+At the end of each generation a new generation of agents is generated. Newly designed agents that are part of a multi-agent system will likely follow strategies that are successful in the previous generation. As such the strategies with higher success should have a higher likelihood of being selected in the new generation.\\
+The engineers looking at the strategies to implement these new agents with, are looking at a form of optimisation problem. Optimisation problems are defined by Pascal Francq~\cite{optimisation_problems} as the aim to find the best solution among all possible ones. The solution we are looking for is the best strategy to use in a given population (and hopefully any population).\\
+Francq~\cite{optimisation_problems} puts forward that genetic algorithms (a type of meta-heuristic) are superior to most traditional heuristics. Natural selection is the basis for genetic algorithms and contains 5 steps: reproduction, crossover, mutation, inversion and evaluation. Due to the nature of our agents we are only specifically interested in reproduction and mutation.\\
+Francq~\cite{genetic_algorithms} puts forward two types of reproduction: proportional selection and tournament selection. The algorithms noted in this section do not fit my multi-agent system, but can be translated for it.\\
+Proportional selection translated to my system and simplified would look something like the following. Take a roulette with p (number of players) slots and divide the p slots into n (number of strategies) sections. The size of each section is directly proportionate to the average fitness of all players of a certain strategy. For example strategy A has 2 agents with fitness 4 and 6 respectively, strategy B has 4 agents with fitness 3, 8, 9 and 4 fitness respectively and strategy C has 1 agent with fitness 7. The average fitness of A is 5, B is 6 and C is 7, so A would receive 5 slots of the roulette wheel, B 6 slots and C 7 slots. The resulting roulette whell displayed in~\ref{fig:roulette_wheel} is spun and ball dropped and whichever slot the ball landed on the corresponding strategy is selected for the new player.\\
+\begin{figure}
+	\begin{center}
+	\includegraphics[width=0.5\textwidth]{chart.png}
+	\caption{The roulette wheel from my proportional selection example}
+	\label{fig:roulette_wheel}
+	\end{center}
+\end{figure}
+Tournament selection could be translated in the following way. Have an empty list which will contain an ordered list of agents. In a loop (until population is of size 1): select two agents from the population, remove the lowest fitness one and insert it into the list. After the loop insert the last agent into the top of the list. The top of the list always contains the highest fitness agent. Using the same population of agents in the proportional selection algorithm we can give an example of this in table~\ref{tab:tournament_selection}.
+\begin{framed}
+	\begin{center}
+		\begin{tabular}{c|c|c|c}
+		Set & Test & Put in List & List\\
+		\hline
+		${A_1, A_2, B_1, B_2, B_3, B_4, C_1}$ & $(A_1, B_3)$ & $A_1$ & ${A_1}$ \\
+		${A_2, B_2, B_3, B_4, C_1}$ & $(B_1, C_1)$ & $B_1$ & ${A_1, B_1}$\\
+		${B_2, B_3, B_4, C_1}$ & $(A_2, C_1)$ & $A_2$ & ${A_1, B_1, A_2}$\\
+		${B_2, B_3, C_1}$ & $(B_4, C_1)$ & $B_4$ & ${A_1, B_1, A_2, B_4}$\\
+		${B_3, C_1}$ & $(B_2, B_3)$ & $B_2$ & ${A_1, B_1, A_2, B_4, B_2}$\\
+		${B_3}$ & $(B_3, C_1)$ & $C_1$ & ${A_1, B_1, A_2, B_4, B_2, C_1}$\\
+		$\emptyset$	& & $B_3$ & ${A_1, B_1, A_2, B_4, B_2, C_1, B_3}$
+		\end{tabular}
+		\captionof{table}{The payoff for my indirect reciprocity model}
+		\label{tab:tournament_selection}
+	\end{center}	
+\end{framed}
+Fitness proportionate selection seems to translate best to my system as there is an obvious and simple way to select each agents strategy for the new generation using the roulette wheel, unlike the tournament selection process which requires the crossover step. The crossover step requires a chromosome represented as a bit array to produce an offspring from two parents. This is analogous to sexual reproduction, but not the bulding of new agents.\\
+Lipowski \textit{et al.}~\cite{lipowski2012roulette} presented an efficient version of roulette wheel selection using stochastic acceptance rather than the searching method used by Francq~\cite{genetic_algorithms}. The stochastic acceptance algorithm works like this: select randomly one of the individuals from the last generations population, with fitness of the individual as $w_i$ and $w_{max}$ the maximal fitness of the generation use the probability $w_i / w_{max}$ to select whether or not to use this agents strategy for a new generation agent, if not repeat. Lipowski \textit{et al.} proved mathematically that the probability distribution of this method and general roulette wheel selection are the same, and that the stochastic acceptance algorithm is more efficient as well.\\
+Due to these factors I have decided to use the roulette wheel-selection via stochastic acceptance algorithm proposed by Lipowski \textit{et al.}
 
 
 \subsection{Web Application and Interface}

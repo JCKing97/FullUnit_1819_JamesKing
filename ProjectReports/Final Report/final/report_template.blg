@@ -5,45 +5,45 @@ The style file: plain.bst
 Database file #1: ../../refs.bib.bib
 Warning--to sort, need author or key in bbcafrica
 Warning--empty publisher in kropotkin1902mutual
-You've used 14 entries,
+You've used 17 entries,
             2118 wiz_defined-function locations,
-            582 strings with 5953 characters,
-and the built_in function-call counts, 3953 in all, are:
-= -- 384
-> -- 149
+            600 strings with 6389 characters,
+and the built_in function-call counts, 4738 in all, are:
+= -- 465
+> -- 176
 < -- 1
-+ -- 64
-- -- 46
-* -- 242
-:= -- 663
-add.period$ -- 41
-call.type$ -- 14
-change.case$ -- 62
++ -- 75
+- -- 54
+* -- 282
+:= -- 794
+add.period$ -- 52
+call.type$ -- 17
+change.case$ -- 75
 chr.to.int$ -- 0
-cite$ -- 16
-duplicate$ -- 159
-empty$ -- 345
-format.name$ -- 46
-if$ -- 839
+cite$ -- 19
+duplicate$ -- 184
+empty$ -- 418
+format.name$ -- 54
+if$ -- 1007
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 15
-newline$ -- 71
-num.names$ -- 26
-pop$ -- 75
+int.to.str$ -- 17
+missing$ -- 16
+newline$ -- 88
+num.names$ -- 32
+pop$ -- 94
 preamble$ -- 1
-purify$ -- 51
+purify$ -- 61
 quote$ -- 0
-skip$ -- 113
+skip$ -- 133
 stack$ -- 0
-substring$ -- 241
-swap$ -- 23
+substring$ -- 287
+swap$ -- 26
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 50
+type$ -- 62
 warning$ -- 2
-while$ -- 35
-width$ -- 16
-write$ -- 148
+while$ -- 43
+width$ -- 19
+write$ -- 183
 (There were 2 warnings)
