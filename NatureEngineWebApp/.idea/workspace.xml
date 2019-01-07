@@ -551,7 +551,7 @@
       <workItem from="1546523612494" duration="3238000" />
       <workItem from="1546612351518" duration="21074000" />
       <workItem from="1546694715866" duration="13000" />
-      <workItem from="1546703961287" duration="3423000" />
+      <workItem from="1546703961287" duration="4162000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit of components">
       <created>1535647227999</created>
@@ -764,7 +764,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="171958000" />
+    <option name="totallyTimeSpent" value="172697000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1044" extended-state="6" />
@@ -780,7 +780,7 @@
       <window_info anchor="bottom" id="Docker" order="5" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="bottom" id="Find" order="7" weight="0.3286026" />
-      <window_info active="true" anchor="bottom" id="Run" order="8" sideWeight="0.49839914" visible="true" weight="0.3133188" />
+      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.49839914" weight="0.3133188" />
       <window_info anchor="bottom" id="Debug" order="9" weight="0.39847162" />
       <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />

@@ -4,6 +4,36 @@
 Africa, 2013.
 \newblock BBC television series created by the BBC Natural History Unit.
 
+\bibitem{selenium}
+Selenium - web browser automation.
+\newblock \url{https://www.seleniumhq.org/}, 2018.
+\newblock Accessed: 04/01/2019.
+
+\bibitem{tutorials_point_testing}
+Web application testing.
+\newblock
+  \url{http://www.tutorialspoint.com/software_testing_dictionary/web_application_testing.html},
+  2018.
+\newblock Accessed: 04/01/2019.
+
+\bibitem{guru99_testing}
+Web application testing: 8 step guide to website testing.
+\newblock \url{https://www.guru99.com/web-application-testing.html}, 2018.
+\newblock Accessed: 04/01/2019.
+
+\bibitem{software_testing_help}
+Web application testing complete guide (how to test a website).
+\newblock \url{https://www.softwaretestinghelp.com/web-application-testing/},
+  2018.
+\newblock Accessed: 04/01/2019.
+
+\bibitem{uft}
+Unified functional testing.
+\newblock
+  \url{https://www.microfocus.com/en-us/products/unified-functional-automated-testing/overview},
+  2019.
+\newblock Accessed: 04/01/2019.
+
 \bibitem{evolution_of_cooperation}
 Robert Axelrod and William~D. Hamilton.
 \newblock The evolution of cooperation.
@@ -14,19 +44,27 @@ Richard Dawkins.
 \newblock {\em The Selfish Gene}.
 \newblock Oxford University Press, 2016.
 
+\bibitem{web_app_performance_testing}
+Erik Dietrich.
+\newblock Web application performance testing: Processes and tips.
+\newblock
+  \url{https://stackify.com/fundamentals-web-application-performance-testing/},
+  2017.
+\newblock Accessed: 05/01/2019.
+
 \bibitem{genetic_algorithms}
 Pascal Francq.
 \newblock Genetic algorithms.
 \newblock \url{http://www.otlet-institute.org/wikics/Genetic_Algorithms.html},
   2011.
-\newblock Accessed: 04/01/2018.
+\newblock Accessed: 04/01/2019.
 
 \bibitem{optimisation_problems}
 Pascal Francq.
 \newblock Optimisation problems.
 \newblock
   \url{http://www.otlet-institute.org/wikics/Optimization_Problems.html}, 2011.
-\newblock Accessed: 04/01/2018.
+\newblock Accessed: 04/01/2019.
 
 \bibitem{kinhamilton}
 W.~D. Hamilton.

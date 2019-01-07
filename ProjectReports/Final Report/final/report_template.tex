@@ -230,10 +230,24 @@ API Testing, Unit Testing.\\
 \subsection{Environment Testing}
 Unit testing, Integration testing, Regression testing.\\
 
-\subsection{Web App Testing}
-\url{https://www.softwaretestinghelp.com/web-application-testing/}
+\subsection{Web Application Testing}
+\textbf{ENSURE THIS SOUNDS LIKE I HAVE DEVISED THE STRATEGY AND DONE IT.}\\
+The aim of my web application is to be an educational tool for both individuals that are new to modelling interactions using game-theoretic mechanisms and individuals interested in the impact of this modelling on multi-agent systems.\\
+To meet this aim testing of the website is imperative. I will devise a testing plan with a strategy and a checklist to follow. Web application testing does have some aspects that can be automated using tools such as UFT~\cite{uft} and Selenium~\cite{selenium} but some of the testing must be user-oriented as users are the people you are trying to satisfy and educate.\\
+A number of websites ~\cite{software_testing_help,guru99_testing,tutorials_point_testing} provide guides no testing. These 3 guides split testing up into sections including functional testing, usability testing, interface testing, compatibility testing, performance testing, security testing, database testing and crowd testing. I shall be specialising these sections and ideas from the guides to define my testing strategy.\\
+Functionality testing is a section that is important to include, as it works to ensure that the web application meets the specification set out in development and design without error. The following will form parts of functionality testing: link testing, form testing (including incorrect inputs), HTML/CSS validation and workflow testing (of the 3 workflows: direct reciprocity match and tournament, and indirect reciprocity tournament).\\
+Usability testing is important to ensure that the web application is nice and easy to use, and so is capable of becoming a good educational tool. This section includes reviewing and testing the navigation and flow of the site, checking the content, the intuitiveness of the site and the consistency.\\
+My system has 3 main components to interface between: the web application, database and agents service. Interface testing will be devised to test the connection between these 3 to ensure a seamless effect for the user of the web application. It should also be tested when each of the components are down and cannot connect, so the application handles this downtime properly.\\
+Database testing needs to be carried out in the backend using by unit testing the functions and classes that interact with the database, but also it needs to be ensured that this data is also displaying correctly in the user interface. This will be tested for as part of the web application testing.\\
+I will be testing the compatibility of the application across a number of web browsers and operating systems. These shall be Firefox on Linux, Google Chrome on Windows 10 and Android, Microsoft Edge on Windows 10, and Firefox on Android.\\
+Performance testing requires a different kind of test environment to the ones I will be using in other tests. It requires the developer to simulate a production set up~\cite{web_app_performance_testing}. \textbf{How do I deal with this?}\\
+Security testing is not too important in my website as I do not hold sensitive data, nor have any sort of user account system. However, I will be carrying out the following parts of security testing to ensure my web application fulfils its aims. \textbf{What IS THE TESTING STRATEGY HERE.}\\
+The last part of testing is similar to the crowd testing outlined in the guru99 guide~\cite{guru99_testing} which I will simply name as user testing. I will ask a number of people to use my website and answer a short questionnaire on certain aspects of the site including questions on usability and how close the application comes to fulfilling its goal.\\
+Further details on the testing plan, results and actions upon the results are included in the appendix~\ref{appendix:web_app_testing}1.
+
 
 \section{Documentation}
+Software documentation, user guide.
 
 \section{Method}
 For discovering evolution of cooperation constraints.
@@ -271,6 +285,11 @@ Describe the contents of my appendix.
 \includepdf[pages=-]{../../IndirRec/IndirRec.pdf}
 
 \includepdf[pages=-]{../../SysDesign/SysDesign.pdf}
+
+\begin{figure}
+	\includepdf[pages=-,link=true,linkname=web_app_testing]{../../TestingStrategy/TestingStrategy.pdf}
+	\caption{\label{appendix:web_app_testing}}
+\end{figure}
 
 
 \end{document}
