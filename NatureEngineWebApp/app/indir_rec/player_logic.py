@@ -1,5 +1,5 @@
 
-from typing import Dict
+from typing import Dict, List
 from flask import current_app
 import requests
 
@@ -42,6 +42,13 @@ class Player:
         self._community_id: int = community_id
         self._generation_id: int = generation_id
         self._percepts: Dict = {}
+        self._non_donor_action_count = 0
+        self._social_action_count = 0
+        self._idle_action_count = 0
+        self._cooperation_count = 0
+        self._defection_count = 0
+        self._actions: Dict[int] = {}
+        self._donor_actions: List[Dict] = []
         try:
             creation_payload: Dict = {"strategy": strategy['name'], "options": strategy['options'],
                                       "community": community_id, "generation": generation_id, "player": player_id}
@@ -88,6 +95,46 @@ class Player:
         """
         return self._strategy
 
+    def get_social_activeness(self) -> int:
+        """
+        Get a social activeness rating out of 100 for this player
+        :return: Social activeness rating out of 100
+        :rtype: int
+        """
+        return int(round(100*(self._social_action_count/self._non_donor_action_count)))
+
+    def get_idleness(self) -> int:
+        """
+        Get idleness rating out of 100
+        :return: Idleness rating out of 100
+        :rtype: int
+        """
+        return int(round(100*(self._idle_action_count/self._non_donor_action_count)))
+
+    def get_cooperation_rate(self) -> int:
+        """
+        Get the cooperation percentage of this player as a donor out of 100
+        :return: Cooperation percentage of player
+        :rtype: int
+        """
+        return int(round(100*(self._cooperation_count/(self._cooperation_count+self._defection_count))))
+
+    def get_actions(self) -> Dict[int]:
+        """
+        Get the actions of the player with the timepoints as index
+        :return: The players actions
+        :rtype: Dict[int]
+        """
+        return self._actions
+
+    def get_donor_actions(self) -> List[Dict]:
+        """
+        Get the actions this player has committed to as a donor
+        :return: The actions this player has committed to as a donor
+        :rtype: List[Dict]
+        """
+        return self._donor_actions
+
     def decide(self, timepoint: int) -> Dict:
         """
         Get the agents decision on an action to commit to in a certain turn.
@@ -97,7 +144,7 @@ class Player:
         :rtype: Dict
         """
         action_payload: Dict = {"timepoint": timepoint, "community": self._community_id,
-                          "generation": self._generation_id, "player": self._player_id}
+                                "generation": self._generation_id, "player": self._player_id}
         action_response = requests.request("GET", current_app.config['AGENTS_URL'] + 'action',
                                            params=action_payload)
         if action_response.status_code != 200:
@@ -108,6 +155,14 @@ class Player:
         if action_representation['type'] != "idle" and action_representation['type'] != "gossip" and \
                 action_representation['type'] != "action":
             raise DecisionException("Action did not match idle, gossip or action")
+        if action_representation['type'] == "gossip":
+            action_representation['gossiper'] = self.get_id()
+        elif action_representation['type'] == "action":
+            action_representation['donor'] = self.get_id()
+            self._donor_actions.append(action_representation)
+        elif action_representation['type'] == 'idle':
+            action_representation['player'] = self.get_id()
+        self._actions[action_representation['timepoint']] = action_representation
         return action_representation
 
     def set_perception(self, perception):
@@ -121,16 +176,18 @@ class Player:
             self._percepts[perception['timepoint']].append(perception)
 
     def perceive(self, timepoint):
+        """
+        Tell the agent to perceive the percepts set for the previous timepoint from this one
+        :param timepoint: The timepoint we are currently at so is one in front of the percepts to perceive
+        :return: void
+        """
         if timepoint > 0 and timepoint-1 in self._percepts:
-            for percept in self._percepts[timepoint-1]:
-                if percept['type'] == "action":
-                    percept['type'] = "action/interaction"
-                elif percept['type'] == "gossip":
-                    percept['type'] = "action/gossip"
-                percept_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'percept/'
-                                                    + percept['type'], json=percept)
-                if percept_response.status_code != 200:
-                    raise PerceptionException("Failed to send percept bad status code: " +
-                                              str(percept_response.status_code))
-                if not percept_response.json()['success']:
-                    raise PerceptionException(percept_response.json()['message'])
+            percept_dict = {'percepts': self._percepts[timepoint-1]}
+            percept_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'percept/action/group',
+                                                json=percept_dict)
+            if percept_response.status_code != 200:
+                raise PerceptionException("Failed to send percept bad status code: " +
+                                          str(percept_response.status_code))
+            for success_response in percept_response.json()['success']:
+                if not success_response['success']:
+                    raise PerceptionException(success_response['success'])

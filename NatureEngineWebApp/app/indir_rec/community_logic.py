@@ -41,16 +41,29 @@ class Community:
             raise CommunityCreationException("number of generations <= 2")
         if mutation_chance > 1 or mutation_chance < 0:
             raise CommunityCreationException("mutation chance should be a probability between 0 and 1")
-        self._mutation_chance = mutation_chance
+        self._mutation_chance: float = mutation_chance
         self._num_of_onlookers: int = num_of_onlookers
         self._num_of_generations: int = num_of_generations
         self._length_of_generations: int = length_of_generations
         self._first_strategies = strategies
         self._generations: List[Generation] = []
-        self._current_time = 0
-        self._generation_size = 0
+        self._current_time: int = 0
+        self._generation_size: int = 0
         for strategy in strategies:
             self._generation_size += strategy['count']
+        self._cooperation_count: int = 0
+        self._interaction_count: int = 0
+        self._cooperation_rate_by_generation: List[int] = []
+        self._actions: List[List[Dict]] = []
+        self._interactions: List[Dict] = []
+        self._interactions_by_generation: List[List[Dict[str]]] = []
+        self._social_welfare: int = 0
+        self._social_welfare_by_generation: List[int] = []
+        self._social_action_count: int = 0
+        self._idle_action_count: int = 0
+        self._non_donor_action_count: int = 0
+        self._fitness: int = 0
+        self._strategy_count_by_generation: List[List[Dict[str]]] = []
 
     def get_id(self) -> int:
         """
@@ -84,6 +97,94 @@ class Community:
         """
         return self._generations
 
+    def get_interactions(self) -> List[Dict]:
+        """
+        Get the interactions that occurred through the whole community
+        :return: The interactions through the whole community
+        :rtype: List[Dict]
+        """
+        return self._interactions
+
+    def get_interactions_by_generation(self) -> List[List[Dict]]:
+        """
+        Get the interactions that occurred through the whole community ordered by generation
+        :return: The interactions through the whole community
+        :rtype: List[Dict]
+        """
+        return self._interactions_by_generation
+
+    def get_strategy_count_by_generation(self) -> List[List[Dict[str]]]:
+        """
+        Get the count of each strategy by generation
+        :return: The strategy count for each generation
+        :rtype: List[List[Dict[str]]]
+        """
+        return self._strategy_count_by_generation
+
+    def get_actions(self) -> List[List[Dict]]:
+        """
+        Get the actions taken in this generation, indexed by timepoint
+        :return: The actions in this generation, indexed by timepoint
+        :rtype: Dict[int]
+        """
+        return self._actions
+
+    def get_social_welfare(self) -> int:
+        """
+        Get the total social welfare produced by interactions in the whole community
+        :return: The social welfare
+        :rtype: int
+        """
+        return self._social_welfare
+
+    def get_social_welfare_by_generation(self) -> List[int]:
+        """
+        Get the social welfare for each generation
+        :return: The social welfare for each generation
+        :rtype: int
+        """
+        return self._social_welfare_by_generation
+
+    def get_cooperation_rate(self) -> int:
+        """
+        Get the rate of cooperation of the whole community
+        :return: The rate of cooperation of the whole community as a percentage
+        :rtype: int
+        """
+        return int(round(100*(self._cooperation_count/self._interaction_count)))
+
+    def get_cooperation_rate_by_generation(self) -> List[int]:
+        """
+        Get the cooperation rate for each generation, the index is the generation id
+        :return: The cooperation rate for each generation
+        :rtype: List[int]
+        """
+        return self._cooperation_rate_by_generation
+
+    def get_idleness_percentage(self) -> int:
+        """
+        Get the percentage of idleness of the whole community
+        :return: The percentage of idleness of the whole community
+        :rtype: int
+        """
+        return int(round(100*(self._idle_action_count/self._non_donor_action_count)))
+
+    def get_social_activeness_percentage(self) -> int:
+        """
+        Get the percentage of actions where the players of the whole community were socially active
+        :return: the social activeness of the players of the whole community
+        :rtype: int
+        """
+        return int(round(100*(self._social_action_count/self._non_donor_action_count)))
+
+    def get_fitness(self) -> int:
+        """
+        Get the fitness of the whole community.
+        :return: The fitness of the community
+        :rtype: int
+        """
+        return self._fitness
+
     def simulate(self):
         """
         Simulate the community, building an initial generation simulating that generation and then for the specified
@@ -93,6 +194,20 @@ class Community:
         for i in range(self._num_of_generations):
             generation = self._build_generation()
             generation.simulate()
+            self._cooperation_count += generation.get_cooperation_count()
+            self._interaction_count += generation.get_interaction_count()
+            self._cooperation_rate_by_generation.append(generation.get_cooperation_rate())
+            for timepoint in range(generation.get_start_point(), generation.get_end_point()):
+                self._actions.append(generation.get_actions()[timepoint])
+            self._interactions.extend(generation.get_interactions())
+            self._interactions_by_generation.append(generation.get_interactions())
+            self._strategy_count_by_generation.append(generation.get_strategy_count())
+            self._social_welfare += generation.get_social_welfare()
+            self._social_welfare_by_generation.append(generation.get_social_welfare())
+            self._idle_action_count += generation.get_idle_action_count()
+            self._social_action_count += generation.get_social_action_count()
+            self._non_donor_action_count += generation.get_non_donor_action_count()
+            self._fitness += generation.get_fitness()
             self._generations.append(generation)
 
     def _build_generation(self) -> Generation:

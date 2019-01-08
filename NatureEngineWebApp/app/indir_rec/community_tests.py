@@ -19,7 +19,7 @@ class CommunityTest(unittest.TestCase):
         cls.strategies = [{'strategy': strategy, 'count': random.randint(0, 5)} for strategy in received_strategies]
         cls.pp = pprint.PrettyPrinter()
         cls.num_of_onlookers = random.randint(1, 20)
-        cls.num_of_generations = random.randint(2, 8)
+        cls.num_of_generations = random.randint(3, 8)
         cls.length_of_generations = random.randint(6, 20)
 
     def setUp(self):

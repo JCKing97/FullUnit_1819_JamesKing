@@ -58,7 +58,16 @@ class Generation:
         self._start_point: int = start_point
         self._end_point: int = end_point
         self._num_of_onlookers = num_of_onlookers
-        self._actions: Dict = {}
+        self._actions: Dict[int] = {}
+        self._interactions: List[Dict] = []
+        self._social_welfare: int = 0
+        self._idleness_count: int = 0
+        self._social_action_count: int = 0
+        self._non_donor_action_count: int = 0
+        self._donor_action_count: int = 0
+        self._cooperation_count: int = 0
+        self._initial_generation: bool = initial_generation
+        self._strategies: List[Dict] = []
         creation_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'generation',
                                              json={"community": community_id, "generation": generation_id})
         if creation_response.status_code != 200:
@@ -69,6 +78,7 @@ class Generation:
         self._id_player_map: Dict[int, Player] = {}
         player_id = 0
         if initial_generation:
+            self._strategies = strategies
             try:
                 for strategy in strategies:
                     if strategy['count'] > 0:
@@ -85,6 +95,13 @@ class Generation:
                 raise GenerationCreationException("Incorrect strategies dictionary keys")
         else:
             for strategy in strategies:
+                found_strategy = False
+                for self_strategy in self._strategies:
+                    if self_strategy['strategy'] ==  strategy:
+                        found_strategy = True
+                        self_strategy['count'] += 1
+                if not found_strategy:
+                    self._strategies.append({'strategy': strategy, 'count': 1})
                 try:
                     player = Player(player_id, strategy, self._community_id, self._generation_id)
                     self._players.append(player)
@@ -92,7 +109,6 @@ class Generation:
                     player_id += 1
                 except PlayerCreationException as e:
                     raise GenerationCreationException(str(e))
-
 
     def get_id(self):
         """
@@ -126,6 +142,113 @@ class Generation:
         """
         return self._players
 
+    def get_actions(self) -> Dict[int]:
+        """
+        Get the actions taken in this generation, indexed by timepoint
+        :return: The actions in this generation, indexed by timepoint
+        :rtype: Dict[int]
+        """
+        return self._actions
+
+    def get_interactions(self) -> List[Dict]:
+        """
+        Get the interactions that occurred in this generation
+        :return: The interactions from this generation
+        :rtype: List[Dict]
+        """
+        return self._interactions
+
+    def get_fitness(self) -> int:
+        """
+        Get the overall fitness of the generation
+        :return: The summation of all players fitness from generation
+        :rtype: int
+        """
+        fitness = 0
+        for player in self._players:
+            fitness += player.get_fitness()
+        return fitness
+
+    def get_social_welfare(self) -> int:
+        """
+        Get the total social welfare produced by interactions in this generation
+        :return: The social welfare
+        :rtype: int
+        """
+        return self._social_welfare
+
+    def get_idleness_percentage(self) -> int:
+        """
+        Get the percentage of idleness in this generation
+        :return: The percentage of idleness in this generation
+        :rtype: int
+        """
+        return int(round(100*(self._idleness_count/self._non_donor_action_count)))
+
+    def get_social_activeness_percentage(self) -> int:
+        """
+        Get the percentage of actions where the players in the generation were socially active
+        :return: the social activeness of the players in the generation
+        :rtype: int
+        """
+        return int(round(100*(self._social_action_count/self._non_donor_action_count)))
+
+    def get_social_action_count(self) -> int:
+        """
+        Get the count of social actions in this generation
+        :return: social action count
+        :rtype: int
+        """
+        return self._social_action_count
+
+    def get_idle_action_count(self) -> int:
+        """
+        Get the count of idle actions in this generation
+        :return: The idle action count
+        :rtype: int
+        """
+        return self._idleness_count
+
+    def get_non_donor_action_count(self) -> int:
+        """
+        Get the count of actions taken not as a donor
+        :return: the count of actions taken by non donors
+        :rtype: int
+        """
+        return self._non_donor_action_count
+
+    def get_cooperation_rate(self) -> int:
+        """
+        Get the rate of cooperation in this generation
+        :return: The rate of cooperation in this generation as a percentage
+        :rtype: int
+        """
+        return int(round(100*(self._cooperation_count/self._donor_action_count)))
+
+    def get_cooperation_count(self) -> int:
+        """
+        Get the number of times players have cooperated in this generation
+        :return: The count of cooperation actions in this generation
+        :rtype: int
+        """
+        return self._cooperation_count
+
+    def get_interaction_count(self) -> int:
+        """
+        Get the number of interactions occurred in this generation
+        :return: the interaction count
+        :rtype: int
+        """
+        return self._donor_action_count
+
+    def get_strategy_count(self) -> List[Dict[str]]:
+        """
+        Get the count of each strategy in the generation
+        :return: the count of each strategy in the generation
+        :rtype: List[Dict[str]]
+        """
+        return self._strategies
+
     def simulate(self):
         """
         Run the cycle steps: perceive, decide, execute between the start and end points of this generation
@@ -133,22 +256,31 @@ class Generation:
         """
         for timepoint in range(self._start_point, self._end_point):
             try:
-
-                self._perceive(timepoint)
-                self._actions[timepoint] = self._decide(timepoint)
-                self._execute(timepoint)
+                self._set_and_send_donor_recipient_pair(timepoint)
             except SimulationException as e:
                 raise e
+            for player in self._players:
+                try:
+                    player.perceive(timepoint)
+                except PerceptionException as e:
+                    raise SimulationException("Error in player perception: " + str(e))
+                try:
+                    decision = player.decide(timepoint)
+                    if timepoint in self._actions:
+                        self._actions[timepoint].append(decision)
+                    else:
+                        self._actions[timepoint] = [decision]
+                    self._execute(decision, timepoint)
+                except DecisionException as e:
+                    raise SimulationException("Error in player decision: " + str(e))
 
-    def _perceive(self, timepoint):
+    def _set_and_send_donor_recipient_pair(self, timepoint: int):
         """
-        Send percepts produced at the last timepoint to players and the perception of for
-        the donor-recipient pair this turn
-        :param timepoint: The timepoint we are currently at
+        Decides on a donor-recipient pair for this timepoint and sends the percept to the agents service
+        :param timepoint: The timepoint to set the pair for
         :type timepoint: int
         :return: void
         """
-        # Generate the donor-recipient pair for this timepoint and send the perception to the pair
         players = copy.deepcopy(self._players)
         donor: Player = random.choice(players)
         players.remove(donor)
@@ -162,76 +294,52 @@ class Generation:
                                       interaction_response.status_code)
         if not interaction_response.json()['success']:
             raise SimulationException(interaction_response.json()['message'])
-        # Send percepts that have been set into the players perception bank for the given timepoint
-        for player in self._players:
-            try:
-                player.perceive(timepoint)
-            except PerceptionException as e:
-                raise SimulationException("Error in player perception: " + str(e))
 
-    def _decide(self, timepoint) -> List[Dict]:
-        """
-        Call all players to decide on an action at the given timepoint, then processing the data to represent an action
-        :param timepoint: The timepoint for the players to decide at
-        :type timepoint: int
-        :return: A list of the data for player actions produced at this time
-        :rtype: List[Dict]
-        """
-        # Get the actions
-        new_actions = []
-        for player in self._players:
-            try:
-                decision = player.decide(timepoint)
-            except DecisionException as e:
-                raise SimulationException("Failed to get a decision: " + str(e))
-            if decision['type'] == "gossip":
-                decision['gossiper'] = player.get_id()
-            elif decision['type'] == "action":
-                decision['donor'] = player.get_id()
-            # Store the action
-            new_actions.append(decision)
-        return new_actions
-
-    def _execute(self, timepoint):
+    def _execute(self, action: Dict, timepoint: int):
         """
         Execute the actions at this given timepoint, setting percepts for the players where necessary
         and updating players fitness
-        :param timepoint: The timepoint of actions to execute
-        :type timepoint: int
+        :param action: The action to process
+        :type action: Dict
         """
-        # Process actions to set percepts and update players
-        for action in self._actions[timepoint]:
-            # Process gossip action into a percept
-            if action['type'] == "gossip":
-                gossip_percept = copy.deepcopy(action)
-                gossip_percept['type'] = "action/gossip"
-                del gossip_percept['value']
-                gossip_percept['gossip'] = action['value']
-                del gossip_percept['recipient']
-                gossip_percept['perceiver'] = action['recipient']
-                gossip_percept['community'] = self._community_id
-                gossip_percept['generation'] = self._generation_id
-                gossip_percept['timepoint'] = timepoint
-                self._id_player_map[gossip_percept['perceiver']].set_perception(gossip_percept)
-            # Process interaction action into percepts
-            elif action['type'] == "action":
-                # Alter players fitness when cooperation has been chosen
-                if action['value'] == "cooperate":
-                    self._id_player_map[action['donor']].update_fitness(-1)
-                    self._id_player_map[action['recipient']].update_fitness(2)
-                action_percepts = []
-                onlookers = self._generate_onlookers(action)
-                for onlooker in onlookers:
-                    action_percept = copy.deepcopy(action)
-                    del action_percept['type']
-                    action_percept['type'] = "action/interaction"
-                    del action_percept['value']
-                    action_percept['action'] = action['value']
-                    action_percept['perceiver'] = onlooker.get_id()
-                    action_percept['community'] = self._community_id
-                    action_percept['generation'] = self._generation_id
-                    action_percept['timepoint'] = timepoint
-                    self._id_player_map[action_percept['perceiver']].set_perception(action_percept)
+        if action['type'] == 'idle':
+            self._idleness_count += 1
+        # Process gossip action into a percept
+        if action['type'] == "gossip":
+            gossip_percept = copy.deepcopy(action)
+            gossip_percept['type'] = "action/gossip"
+            del gossip_percept['value']
+            gossip_percept['gossip'] = action['value']
+            del gossip_percept['recipient']
+            gossip_percept['perceiver'] = action['recipient']
+            gossip_percept['community'] = self._community_id
+            gossip_percept['generation'] = self._generation_id
+            gossip_percept['timepoint'] = timepoint
+            self._id_player_map[gossip_percept['perceiver']].set_perception(gossip_percept)
+            self._social_action_count += 1
+        # Process interaction action into percepts
+        if action['type'] == "action":
+            # Alter players fitness when cooperation has been chosen
+            if action['value'] == "cooperate":
+                self._cooperation_count += 1
+                self._id_player_map[action['donor']].update_fitness(-1)
+                self._id_player_map[action['recipient']].update_fitness(2)
+                self._social_welfare += 1
+            onlookers = self._generate_onlookers(action)
+            for onlooker in onlookers:
+                action_percept = copy.deepcopy(action)
+                del action_percept['type']
+                action_percept['type'] = "action/interaction"
+                del action_percept['value']
+                action_percept['action'] = action['value']
+                action_percept['perceiver'] = onlooker.get_id()
+                action_percept['community'] = self._community_id
+                action_percept['generation'] = self._generation_id
+                action_percept['timepoint'] = timepoint
+                self._id_player_map[action_percept['perceiver']].set_perception(action_percept)
+            self._donor_action_count += 1
+        else:
+            self._non_donor_action_count += 1
 
     def _generate_onlookers(self, action: Dict) -> List[Player]:
         """
