@@ -60,6 +60,7 @@ http:location(belief, root(belief), []).
 :- http_handler(root(agent), agent, []).
 :- http_handler(percept_action(interaction), percept_action_interaction, []).
 :- http_handler(percept_action(gossip), percept_action_gossip, []).
+:- http_handler(percept_action(group), percept_action_group, []).
 :- http_handler(percept(interaction), percept_interaction, []).
 :- http_handler(root(action), action, []).
 :- http_handler(belief(donor), belief_donor, []).
@@ -173,6 +174,21 @@ percept_interaction(Request) :-
                            success:false
                          })
     ).
+
+
+/**
+ * percept_action_group(++Request:list) is nondet
+ *
+ * The handler to give a group of action and/or gossip percepts to (a group of viewings of other interactions or gossip) to an onlooker,
+ * fails if not passed the correct parameters as stipulated in the api docs,
+ * responds unsuccessful to the client if the passed community, generation or agents do not exist.
+ * @arg Request The request object passed from the HTTP request
+ */
+percept_action_group(Request):-
+    member(method(post), Request), !,
+    http_read_json_dict(Request, DictIn),
+    add_percepts(DictIn.percepts, SuccessList),
+    reply_json(return{data:DictIn, status:200, success: SuccessList}).
 
 /**
  * percept_action_interaction(++Request:list) is nondet

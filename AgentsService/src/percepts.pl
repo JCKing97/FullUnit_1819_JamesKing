@@ -13,6 +13,44 @@
 :- dynamic observed_at/2.
 
 /*-------------------------------------
+--------- Groups of Percepts ----------
+-------------------------------------*/
+
+/**
+ * add_percepts(++Percepts:list, --SuccessList:list) is nondet
+ *
+ * Add a list of action and gossip percepts.
+ *
+ * @arg DictIn The dictionary containing percept information
+ * @arg SuccessList A list of whether the adding of each percept was successful or not
+ */
+
+add_percepts([Percept], SuccessList):-
+	Type = Percept.type,
+	( Type == "action/interaction" -> 
+		add_new_action_interaction_percept(Percept, Success) ; 
+		( Type == "action/gossip" -> 
+			add_new_action_gossip_percept(Percept, Success) ;
+			Success = "Percept type incorrect, should be either action/interaction or action/gossip"
+		)
+	),
+	PerceptSuccess = perceptsuccess{percept: Percept, success: Success},
+	SuccessList = [PerceptSuccess], !.
+add_percepts([Percept|OtherPercepts], NewSuccessList):-
+	Type = Percept.type,
+	( Type == "action/interaction" -> 
+		add_new_action_interaction_percept(Percept, Success) ; 
+		( Type == "action/gossip" -> 
+			add_new_action_gossip_percept(Percept, Success) ;
+			Success = "Percept type incorrect, should be either action/interaction or action/gossip"
+		)
+	),
+	PerceptSuccess = perceptsuccess{percept: Percept, success: Success},
+	add_percepts(OtherPercepts, OldSuccessList),
+	append(OldSuccessList, [PerceptSuccess], NewSuccessList).
+
+
+/*-------------------------------------
 ----- Action Interaction Percept ------
 -------------------------------------*/
 

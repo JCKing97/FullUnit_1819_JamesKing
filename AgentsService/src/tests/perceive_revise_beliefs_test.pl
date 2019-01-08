@@ -394,3 +394,74 @@ set_up(ID):-
 
 
 :- end_tests(interaction_tests).
+
+check_all_correct([Response]):-
+	Percept = Response.percept,
+	Success = Response.success,
+	Type = Percept.type,
+	( (Type == "action/gossip" ; Type == "action/interaction") ->
+		(add_new_action_gossip_percept(Percept, true) -> 
+			assertion(Success == true);
+			(add_new_action_interaction_percept(Percept, true) -> 
+				assertion(Success == true);
+				assertion(Success \== true)
+			)
+		) ;
+		assertion(Success == "Percept type incorrect, should be either action/interaction or action/gossip")
+	), !.
+check_all_correct([Response|OtherResponses]):-
+	Percept = Response.percept,
+	Success = Response.success,
+	Type = Percept.type,
+	( (Type == "action/gossip" ; Type == "action/interaction") ->
+		(add_new_action_gossip_percept(Percept, true) -> 
+			assertion(Success == true);
+			(add_new_action_interaction_percept(Percept, true) -> 
+				assertion(Success == true);
+				assertion(Success \== true)
+			)
+		) ;
+		assertion(Success == "Percept type incorrect, should be either action/interaction or action/gossip")
+	),
+	check_all_correct(OtherResponses).
+
+:- begin_tests(group_tests).
+
+	test(simple):-
+		set_up(ID),
+		Percepts = [
+			data{type: "action/interaction", community: ID, generation: 0, perceiver: 0, donor: 1, recipient: 2, timepoint: 0, action: "cooperate"},
+			data{type: "action/interaction", community: ID, generation: 0, perceiver: 2, donor: 1, recipient: 0, timepoint: 7, action: "defect"},
+			data{type: "action/gossip", community: ID, generation: 0, perceiver: 0, about: 1, gossiper: 2, gossip: "positive", timepoint: 0},
+			data{type: "action/gossip", community: ID, generation: 0, perceiver: 1, about: 0, gossiper: 2, gossip: "negative", timepoint: 0}
+			],
+		add_percepts(Percepts, SuccessList),
+		check_all_correct(SuccessList).
+
+	test(some_incorrect_percepts):-
+		set_up(ID),
+		Percepts = [
+			data{type: "action/interaction", community: ID, generation: 0, perceiver: 0, donor: 1, recipient: 2, timepoint: 0, action: "cooperate"},
+			data{type: "action/interaction", community: ID, generation: 0, perceiver: 2, donor: 1, recipient: 0, timepoint: 7, action: "defect"},
+			data{type: "action/interaction", community: ID, generation: 0, perceiver: 2, donor: 1, recipient: 0, timepoint: 7, action: "hello"},
+			data{type: "action/gossip", community: ID, generation: 0, perceiver: 0, about: 1, gossiper: 2, gossip: "positive", timepoint: 0},
+			data{type: "action/gossip", community: ID, generation: 0, perceiver: 1, about: 0, gossiper: 2, gossip: "negative", timepoint: 0},
+			data{type: "action/gossip", community: ID, generation: 0, perceiver: 0, donor: 2, recipient: 1, action: "defect"}
+		],
+		add_percepts(Percepts, SuccessList),
+		check_all_correct(SuccessList).
+
+	test(incorrect_types):-
+		set_up(ID),
+		Percepts = [
+			data{type: "action/interaction", community: ID, generation: 0, perceiver: 0, donor: 1, recipient: 2, timepoint: 0, action: "cooperate"},
+			data{type: "incorrect/interaction", community: ID, generation: 0, perceiver: 2, donor: 1, recipient: 0, timepoint: 7, action: "defect"},
+			data{type: "action/interaction", community: ID, generation: 0, perceiver: 2, donor: 1, recipient: 0, timepoint: 7, action: "hello"},
+			data{type: "action/incorrect", community: ID, generation: 0, perceiver: 0, about: 1, gossiper: 2, gossip: "positive", timepoint: 0},
+			data{type: "action/gossip", community: ID, generation: 0, perceiver: 1, about: 0, gossiper: 2, gossip: "negative", timepoint: 0},
+			data{type: "action/gossip", community: ID, generation: 0, perceiver: 0, donor: 2, recipient: 1, action: "defect"}
+			],
+		add_percepts(Percepts, SuccessList),
+		check_all_correct(SuccessList).
+
+:- end_tests(group_tests).
