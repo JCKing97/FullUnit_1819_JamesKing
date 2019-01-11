@@ -3,8 +3,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>960</x>
-      <y>60</y>
+      <x>1030</x>
+      <y>20</y>
       <w>370</w>
       <h>320</h>
     </coordinates>
@@ -33,8 +33,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1290</x>
-      <y>370</y>
+      <x>1360</x>
+      <y>330</y>
       <w>120</w>
       <h>230</h>
     </coordinates>
@@ -45,8 +45,8 @@ generation of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1130</x>
-      <y>580</y>
+      <x>1200</x>
+      <y>540</y>
       <w>400</w>
       <h>300</h>
     </coordinates>
@@ -75,8 +75,8 @@ generation of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>680</x>
-      <y>720</y>
+      <x>750</x>
+      <y>680</y>
       <w>310</w>
       <h>230</h>
     </coordinates>
@@ -88,11 +88,12 @@ generation of</panel_attributes>
 --
 +Player(id: int, strategy: Dict,
          community_id: int, generation_id: int)
++
 +get_id(): int
 +update_fitness(update_value: int)
 +get_fitness(): int
 +get_strategy(): Dict
-+decide(timepoint: int): Dict
++decide(timepoint: int): Action
 +set_perception(percept: Dict)
 +perceive(timepoint: int)</panel_attributes>
     <additional_attributes/>
@@ -100,8 +101,8 @@ generation of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
-      <y>40</y>
+      <x>560</x>
+      <y>0</y>
       <w>380</w>
       <h>100</h>
     </coordinates>
@@ -116,50 +117,22 @@ generation of</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>240</x>
-      <y>300</y>
-      <w>400</w>
-      <h>240</h>
-    </coordinates>
-    <panel_attributes>IndirRec::Results
---
--community: Community
---
-+Results(c: Community)
-// Community stats
-+get_community_stats(): Dict
-+get_community_social_welfare(): int
-+get_community_cooperation_rate(): int
-+get_ranked_strategies(): List[Dict]
-// By generation strats
-+get_by_generation_stats(): Dict
-+get_interactions_by_generation(): List[List[Dict]]
-+get_social_welfare_by_generation(): List[int]
-+get_cooperation_rate_by_generation(): List[int]
-+get_strategy_count_by_generation(): List[List[Dict]]
-+get_player_stats_by_generation(): List[List[Dict]]
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
-      <x>270</x>
-      <y>130</y>
+      <x>340</x>
+      <y>90</y>
       <w>360</w>
-      <h>190</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; returns</panel_attributes>
-    <additional_attributes>10.0;170.0;10.0;110.0;340.0;110.0;340.0;10.0</additional_attributes>
+    <additional_attributes>10.0;60.0;10.0;50.0;340.0;50.0;340.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>130</y>
+      <x>740</x>
+      <y>90</y>
       <w>310</w>
       <h>130</h>
     </coordinates>
@@ -170,149 +143,333 @@ simulates &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>980</x>
-      <y>810</y>
+      <x>1050</x>
+      <y>770</y>
       <w>170</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+player of</panel_attributes>
+    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>180</x>
+      <y>150</y>
+      <w>400</w>
+      <h>560</h>
+    </coordinates>
+    <panel_attributes>IndirRec::ActionObserver
+--
+-community: int
+-generations: List[int]
+--
++ActionObserver(community: int,
+      generations: List[int])
++add_generation(generation: int): void
++add_player(player_id: int, generation: int): void
++update(action: Action): void
++get_actions(): List[Action]
++get_actions_by_generation(): 
+      Dict[int:List[Action]]
++get_actions_by_generation_and_by_player(): 
+      Dict[int:Dict[int:List[Action]]]
++get_interactions(): List[InteractionAction]
++get_interactions_by_generation(): 
+      Dict[int:List[InteractionAction]]
++get_interactions_by_generation_and_by_player(): 
+      Dict[int:Dict[int:List[InteractionAction]]]
++get_community_cooperation_rate(): int
++get_cooperation_rate_by_generation(): Dict[int:int]
++get_cooperation_rate_by_generation_and_by_player():
+      Dict[int:Dict[int:int]]
++get_community_fitness(): int
++get_fitness_by_generation(): Dict[int:int]
++get_fitness_by_generation_and_by_player():
+      Dict[int:Dict[int:int]]
++get_community_social_activeness(): int
++get_social_activeness_by_generation(): Dict[int:int]
++get_social_activeness_by_generation_and_player():
+      Dict[int:Dict[int:int]]
++get_community_idleness(): int
++get_idleness_by_generation(): Dict[int:int]
++get_idleness_by_generation_and_player(): 
+      Dict[int:Dict[int:int]]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>820</y>
+      <w>200</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Indir_Rec::Action
+--
+-actor_id: int
+-type: ActionType
+-timepoint: int
+--
++get_actor_id():int
++get_type(): ActionType
++get_timepoint(): int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>820</y>
+      <w>190</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+Indir_Rec::ActionType
+--
+Interaction
+Gossip
+Idle
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>1050</y>
+      <w>340</w>
+      <h>390</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::InteractionAction
+--
+-actor_id: int
+-type: ActionType
+-timepoint: int
+-donor_id: int
+-recipient_id: int
+-action: InteractionActionType
+-onlooker_ids: List[int]
+--
++InteractionAction(timepoint: int,
+     donor_id: int, receipient_id: int,
+     action: InteractionActionType)
++InteractionAction(timepoint: int,
+     donor_id: int, receipient_id: int,
+     action: InteractionActionType, 
+     onlooker_ids: List[int])
++get_actor_id():int
++get_type(): ActionType
++get_timepoint(): int
++get_donor_id(): int
++get_recipient_id(): int
++get_action(): InteractionActionType
++set_onlooker_ids(onlooker_ids: List[int]): void
++get_onlooker_ids(): List[int]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>1480</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+Indir_Rec::InteractionActionType
+--
+Cooperate
+Defect
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>1410</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+Indir_Rec::GossipContent
+--
+Positive
+Negative
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>1050</y>
+      <w>340</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::GossipAction
+--
+-actor_id: int
+-type: ActionType
+-timepoint: int
+-gossiper_id: int
+-about_id: int
+-gossip: GossipContent
+-recipient_id: int
+--
++InteractionAction(timepoint: int,
+     gossiper_id: int, about_id: int,
+     recipient_id: int,
+     gossip: GossipContent)
++get_actor_id():int
++get_type(): ActionType
++get_timepoint(): int
++get_gossiper_id(): int
++get_about_id(): int
++get_gossip(): GossipContent</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>810</x>
+      <y>1050</y>
+      <w>340</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Indir_Rec::IdleAction
+--
+-actor_id: int
+-type: ActionType
+-timepoint: int
+--
++InteractionAction(timepoint: int,
+     actor_id: int)
++get_actor_id():int
++get_type(): ActionType
++get_timepoint(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>210</x>
+      <y>960</y>
+      <w>290</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>270.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>960</y>
+      <w>30</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>960</y>
+      <w>380</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;360.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>470</x>
+      <y>1360</y>
+      <w>180</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;40.0;160.0;40.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>1430</y>
+      <w>190</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;30.0;170.0;30.0;170.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>880</y>
+      <w>110</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; uses</panel_attributes>
-    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>310</y>
-      <w>350</w>
+      <x>610</x>
+      <y>870</y>
+      <w>160</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>gather data on &gt;</panel_attributes>
-    <additional_attributes>330.0;20.0;10.0;20.0</additional_attributes>
+    <panel_attributes>lt=-
+&lt; decides on</panel_attributes>
+    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
   </element>
   <element>
-    <id>UMLClass</id>
+    <id>Relation</id>
     <coordinates>
-      <x>740</x>
-      <y>390</y>
-      <w>390</w>
+      <x>610</x>
+      <y>830</y>
+      <w>660</w>
       <h>150</h>
     </coordinates>
-    <panel_attributes>IndirRec::CommunityAnalysis
---
-_+get_actions(community: Community): List[Dict]_
-_+get_interactions(community: Community): List[Dict]_
-_+get_cooperation_rate(community: Community): int_
-_+get_fitness(community: Community): int_
-_+get_social_activeness(community: Community): int_
-_+get_idleness(community: Community): int_
-_+get_social_welfare(community: Community): int_</panel_attributes>
-    <additional_attributes/>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>10.0;130.0;640.0;130.0;640.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>UMLClass</id>
+    <id>Relation</id>
     <coordinates>
-      <x>760</x>
-      <y>560</y>
-      <w>330</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes>IndirRec::GenerationAnalysis
---
-_+get_actions(gen: Generation): List[Dict]_
-_+get_interactions(gen:Generation): List[Dict]_
-_+get_cooperation_rate(gen: Generation): int_
-_+get_fitness(gen: Generation): int_
-_+get_social_activeness(gen: Generation): int_
-_+get_idleness(gen: Generation): int_
-_+get_social_welfare(gen: Generation): int_
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>260</x>
-      <y>670</y>
-      <w>330</w>
+      <x>460</x>
+      <y>700</y>
+      <w>160</w>
       <h>140</h>
     </coordinates>
-    <panel_attributes>IndirRec::PlayerAnalysis
---
-_+get_actions(player: Player): List[Dict]_
-_+get_interactions(player: Player): List[Dict]_
-_+get_cooperation_rate(player: Player): int_
-_+get_fitness(player: Player): int_
-_+get_social_activeness(player: Player): int_
-_+get_idleness(player: Player): int_
-
-</panel_attributes>
-    <additional_attributes/>
+    <panel_attributes>lt=-
+uses &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0;140.0;80.0;140.0;120.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>390</y>
-      <w>130</w>
+      <x>570</x>
+      <y>680</y>
+      <w>200</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>use &gt;</panel_attributes>
-    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>630</x>
-      <y>530</y>
-      <w>150</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>use &gt;</panel_attributes>
-    <additional_attributes>130.0;40.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1120</x>
-      <y>370</y>
-      <w>130</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes>analyse &gt;</panel_attributes>
-    <additional_attributes>100.0;10.0;100.0;90.0;60.0;90.0;60.0;130.0;10.0;130.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1000</x>
-      <y>700</y>
-      <w>150</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>analyse &gt;</panel_attributes>
-    <additional_attributes>130.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>310</x>
-      <y>530</y>
-      <w>280</w>
-      <h>160</h>
-    </coordinates>
-    <panel_attributes>use &gt;</panel_attributes>
-    <additional_attributes>260.0;140.0;260.0;110.0;10.0;110.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>580</x>
-      <y>740</y>
-      <w>120</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>analyse &gt;</panel_attributes>
-    <additional_attributes>100.0;20.0;10.0;20.0</additional_attributes>
+    <panel_attributes>lt=-
+observes &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
   </element>
 </diagram>
