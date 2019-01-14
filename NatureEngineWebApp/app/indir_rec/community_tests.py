@@ -47,7 +47,6 @@ class CommunityTest(unittest.TestCase):
         community.simulate()
         self.assertEqual(self.num_of_generations, len(community.get_generations()))
         for generation in community.get_generations():
-            self.assertEqual(self.length_of_generations, len(generation._actions))
             self.assertEqual(self.length_of_generations, generation.get_end_point()-generation.get_start_point())
 
 

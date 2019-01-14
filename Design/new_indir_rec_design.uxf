@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
-  <zoom_level>10</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1030</x>
-      <y>20</y>
-      <w>370</w>
-      <h>320</h>
+      <x>700</x>
+      <y>336</y>
+      <w>259</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>IndirRec::Community
 --
@@ -23,8 +23,7 @@
 +get_onlooker_number(): int
 +get_id():int
 +get_length_of_generations(): int
-+get_generations(): List[Generation]
-+simulate(): Results
++simulate(): ActionObserver
 -build_generation(generation_id: int):
             Generation
 -reproduce(): Generation</panel_attributes>
@@ -33,10 +32,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1360</x>
-      <y>330</y>
-      <w>120</w>
-      <h>230</h>
+      <x>931</x>
+      <y>539</y>
+      <w>84</w>
+      <h>161</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 generation of</panel_attributes>
@@ -45,10 +44,10 @@ generation of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1200</x>
-      <y>540</y>
-      <w>400</w>
-      <h>300</h>
+      <x>819</x>
+      <y>686</y>
+      <w>280</w>
+      <h>210</h>
     </coordinates>
     <panel_attributes>IndirRec::Generation
 --
@@ -60,25 +59,25 @@ generation of</panel_attributes>
 --
 +Generation(strategies: List[Dict], generation_id: int,
       community_id: int, start_point: int, end_point: int,
-            num_of_onlookers: int)
+      num_of_onlookers: int)
 +get_id(): int
 +get_start_point(): int
 +get_end_point():int
 +get_players():List[Player]
-+simulate()
++simulate(): void
 -set_and_send_donor_recipient_pair(timepoint: int)
--execute(action: Dict, timepoint: int)
--generate_onlookers(action: Dict): List[Player]
+-execute(action: Action, timepoint: int): void
+-generate_onlookers(action: Action): List[Player]
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>750</x>
-      <y>680</y>
-      <w>310</w>
-      <h>230</h>
+      <x>511</x>
+      <y>756</y>
+      <w>217</w>
+      <h>196</h>
     </coordinates>
     <panel_attributes>Indir_Rec::Player
 --
@@ -88,23 +87,25 @@ generation of</panel_attributes>
 --
 +Player(id: int, strategy: Dict,
          community_id: int, generation_id: int)
-+
++attach(observer: ActionObserver): void
++detach(observer: ActionObserver): void 
+notify(action: Action): void
 +get_id(): int
 +update_fitness(update_value: int)
 +get_fitness(): int
 +get_strategy(): Dict
 +decide(timepoint: int): Action
-+set_perception(percept: Dict)
-+perceive(timepoint: int)</panel_attributes>
++set_perception(percept: Dict): void
++perceive(timepoint: int): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>560</x>
-      <y>0</y>
-      <w>380</w>
-      <h>100</h>
+      <x>658</x>
+      <y>140</y>
+      <w>266</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>IndirRec::ReputationGame
 --
@@ -112,58 +113,59 @@ generation of</panel_attributes>
 --
 +ReputationGame(strategies: List[Dict], 
       num_of_onlookers: int, num_of_generation: int)
-+run(): Results
++run(): ActionObserver
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>340</x>
-      <y>90</y>
-      <w>360</w>
-      <h>80</h>
+      <x>728</x>
+      <y>21</y>
+      <w>161</w>
+      <h>133</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; returns</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;50.0;340.0;50.0;340.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0;210.0;130.0;210.0;170.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>740</x>
-      <y>90</y>
-      <w>310</w>
-      <h>130</h>
+      <x>784</x>
+      <y>203</y>
+      <w>175</w>
+      <h>147</h>
     </coordinates>
-    <panel_attributes>lt=-
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
 simulates &gt;</panel_attributes>
-    <additional_attributes>290.0;110.0;10.0;110.0;10.0;10.0</additional_attributes>
+    <additional_attributes>230.0;190.0;230.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1050</x>
-      <y>770</y>
-      <w>170</w>
-      <h>40</h>
+      <x>721</x>
+      <y>847</y>
+      <w>112</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
 player of</panel_attributes>
-    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>140.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>180</x>
-      <y>150</y>
-      <w>400</w>
-      <h>560</h>
+      <x>105</x>
+      <y>490</y>
+      <w>280</w>
+      <h>322</h>
     </coordinates>
     <panel_attributes>IndirRec::ActionObserver
 --
 -community: int
 -generations: List[int]
+-players: Dict[int:List[int]]
 --
 +ActionObserver(community: int,
       generations: List[int])
@@ -184,17 +186,9 @@ player of</panel_attributes>
 +get_cooperation_rate_by_generation(): Dict[int:int]
 +get_cooperation_rate_by_generation_and_by_player():
       Dict[int:Dict[int:int]]
-+get_community_fitness(): int
-+get_fitness_by_generation(): Dict[int:int]
-+get_fitness_by_generation_and_by_player():
-      Dict[int:Dict[int:int]]
 +get_community_social_activeness(): int
 +get_social_activeness_by_generation(): Dict[int:int]
 +get_social_activeness_by_generation_and_player():
-      Dict[int:Dict[int:int]]
-+get_community_idleness(): int
-+get_idleness_by_generation(): Dict[int:int]
-+get_idleness_by_generation_and_player(): 
       Dict[int:Dict[int:int]]
 </panel_attributes>
     <additional_attributes/>
@@ -202,10 +196,10 @@ player of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>420</x>
-      <y>820</y>
-      <w>200</w>
-      <h>150</h>
+      <x>273</x>
+      <y>882</y>
+      <w>140</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 Indir_Rec::Action
@@ -223,10 +217,10 @@ Indir_Rec::Action
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>820</y>
-      <w>190</w>
-      <h>100</h>
+      <x>84</x>
+      <y>882</y>
+      <w>133</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
 Indir_Rec::ActionType
@@ -240,10 +234,10 @@ Idle
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>1050</y>
-      <w>340</w>
-      <h>390</h>
+      <x>0</x>
+      <y>1043</y>
+      <w>238</w>
+      <h>273</h>
     </coordinates>
     <panel_attributes>Indir_Rec::InteractionAction
 --
@@ -275,10 +269,10 @@ Idle
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>1480</y>
-      <w>240</w>
-      <h>80</h>
+      <x>28</x>
+      <y>1344</y>
+      <w>168</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
 Indir_Rec::InteractionActionType
@@ -291,10 +285,10 @@ Defect
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>460</x>
-      <y>1410</y>
-      <w>240</w>
-      <h>80</h>
+      <x>301</x>
+      <y>1295</y>
+      <w>168</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
 Indir_Rec::GossipContent
@@ -307,10 +301,10 @@ Negative
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>410</x>
-      <y>1050</y>
-      <w>340</w>
-      <h>320</h>
+      <x>266</x>
+      <y>1043</y>
+      <w>238</w>
+      <h>224</h>
     </coordinates>
     <panel_attributes>Indir_Rec::GossipAction
 --
@@ -337,10 +331,10 @@ Negative
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>810</x>
-      <y>1050</y>
-      <w>340</w>
-      <h>170</h>
+      <x>546</x>
+      <y>1043</y>
+      <w>238</w>
+      <h>119</h>
     </coordinates>
     <panel_attributes>Indir_Rec::IdleAction
 --
@@ -358,10 +352,10 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>210</x>
-      <y>960</y>
-      <w>290</w>
-      <h>110</h>
+      <x>126</x>
+      <y>980</y>
+      <w>203</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>270.0;10.0;10.0;90.0</additional_attributes>
@@ -369,10 +363,10 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
-      <y>960</y>
-      <w>30</w>
-      <h>110</h>
+      <x>336</x>
+      <y>980</y>
+      <w>21</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
@@ -380,10 +374,10 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>960</y>
-      <w>380</w>
-      <h>110</h>
+      <x>357</x>
+      <y>980</y>
+      <w>266</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;360.0;90.0</additional_attributes>
@@ -391,10 +385,10 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>470</x>
-      <y>1360</y>
-      <w>180</w>
-      <h>70</h>
+      <x>308</x>
+      <y>1260</y>
+      <w>126</w>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; uses</panel_attributes>
@@ -403,10 +397,10 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>1430</y>
-      <w>190</w>
-      <h>70</h>
+      <x>63</x>
+      <y>1309</y>
+      <w>133</w>
+      <h>49</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; uses</panel_attributes>
@@ -415,10 +409,10 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>330</x>
-      <y>880</y>
-      <w>110</w>
-      <h>40</h>
+      <x>210</x>
+      <y>924</y>
+      <w>77</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; uses</panel_attributes>
@@ -427,22 +421,22 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>610</x>
-      <y>870</y>
-      <w>160</w>
-      <h>40</h>
+      <x>406</x>
+      <y>917</y>
+      <w>119</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; decides on</panel_attributes>
-    <additional_attributes>10.0;20.0;140.0;20.0</additional_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>610</x>
-      <y>830</y>
-      <w>660</w>
-      <h>150</h>
+      <x>406</x>
+      <y>889</y>
+      <w>462</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>lt=-
 &lt; uses</panel_attributes>
@@ -451,25 +445,142 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>460</x>
-      <y>700</y>
-      <w>160</w>
-      <h>140</h>
+      <x>301</x>
+      <y>805</y>
+      <w>112</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>lt=-
 uses &gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;80.0;140.0;80.0;140.0;120.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;140.0;70.0;140.0;110.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>570</x>
-      <y>680</y>
-      <w>200</w>
-      <h>40</h>
+      <x>378</x>
+      <y>763</y>
+      <w>147</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=-
-observes &gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;180.0;20.0</additional_attributes>
+&lt; notifies of updates</panel_attributes>
+    <additional_attributes>10.0;20.0;190.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>378</x>
+      <y>504</y>
+      <w>336</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; gives to generations to attach</panel_attributes>
+    <additional_attributes>10.0;20.0;460.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>378</x>
+      <y>686</y>
+      <w>455</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; attaches to players</panel_attributes>
+    <additional_attributes>10.0;20.0;630.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1232</x>
+      <y>483</y>
+      <w>287</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>IndirRec::FitnessChecker
+--
+-community: Community
+--
++FitnessChecker(community: Community)
++get_all_fitness(): community_fitness: int,
+  fitness_by_generation: Dict[int:int],
+  fitness_by_generation_and_player: Dict[int:Dict[int:int]]
++get_community_fitness(): int
++get_fitness_by_generation(): Dict[int:int]
++get_fitness_by_generation_and_by_player():
+      Dict[int:Dict[int:int]]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>658</x>
+      <y>7</y>
+      <w>266</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>IndirRec::Results</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>329</x>
+      <y>0</y>
+      <w>343</w>
+      <h>504</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>470.0;20.0;10.0;20.0;10.0;700.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>917</x>
+      <y>0</y>
+      <w>385</w>
+      <h>497</h>
+    </coordinates>
+    <panel_attributes>lt=-
+uses &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;530.0;20.0;530.0;690.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>952</x>
+      <y>497</y>
+      <w>294</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>10.0;20.0;400.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1092</x>
+      <y>602</y>
+      <w>203</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>10.0;160.0;270.0;160.0;270.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>721</x>
+      <y>602</y>
+      <w>588</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>10.0;480.0;820.0;480.0;820.0;10.0</additional_attributes>
   </element>
 </diagram>

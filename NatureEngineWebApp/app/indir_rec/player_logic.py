@@ -2,6 +2,8 @@
 from typing import Dict, List
 from flask import current_app
 import requests
+from .action_logic import Action, InteractionAction, GossipAction, IdleAction, GossipContent, InteractionContent
+from .results_logic import Observer
 
 
 class PlayerCreationException(Exception):
@@ -22,9 +24,56 @@ class PerceptionException(Exception):
         super().__init__("Error perceiving: " + message)
 
 
+class PlayerState:
+
+    def __init__(self, generation: int, player: int, observers: List[Observer] = None):
+        self._generation = generation
+        self._player = player
+        self._new_action: Action = []
+        self._fitness_update = 0
+        self._observers = observers if observers is not None else []
+
+    def attach(self, observer: Observer):
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer):
+        self._observers.remove(observer)
+
+    def _notify(self):
+        for observer in self._observers:
+            observer.update(self)
+
+    @property
+    def generation(self) -> int:
+        return self._generation
+
+    @property
+    def player(self) -> int:
+        return self._player
+
+    @property
+    def new_action(self) -> Action:
+        return self._new_action
+
+    @new_action.setter
+    def new_action(self, action: Action) -> None:
+        self._new_action = action
+        self._notify()
+
+    @property
+    def fitness_update(self) -> int:
+        return self._fitness_update
+
+    @fitness_update.setter
+    def fitness_update(self, fitness: int):
+        self._fitness_update = fitness
+        self._notify()
+
+
 class Player:
 
-    def __init__(self, player_id: int, strategy: Dict, community_id: int, generation_id: int):
+    def __init__(self, player_id: int, strategy: Dict, community_id: int, generation_id: int,
+                 observers: List[Observer] = None):
         """
         Create a player in the environment and their mind in the agent mind service.
         :param player_id: The player's id
@@ -42,13 +91,7 @@ class Player:
         self._community_id: int = community_id
         self._generation_id: int = generation_id
         self._percepts: Dict = {}
-        self._non_donor_action_count = 0
-        self._social_action_count = 0
-        self._idle_action_count = 0
-        self._cooperation_count = 0
-        self._defection_count = 0
-        self._actions: Dict[int] = {}
-        self._donor_actions: List[Dict] = []
+        self._player_state = PlayerState(generation_id, player_id, observers)
         try:
             creation_payload: Dict = {"strategy": strategy['name'], "options": strategy['options'],
                                       "community": community_id, "generation": generation_id, "player": player_id}
@@ -61,7 +104,8 @@ class Player:
         except KeyError:
             raise PlayerCreationException("Incorrect strategy keys")
 
-    def get_id(self) -> int:
+    @property
+    def id(self) -> int:
         """
         Get the id of the player.
         :return: The id of this player
@@ -69,7 +113,8 @@ class Player:
         """
         return self._player_id
 
-    def get_fitness(self) -> int:
+    @property
+    def fitness(self) -> int:
         """
         Get the fitness of the player.
         :return: The fitness of the player
@@ -86,8 +131,11 @@ class Player:
         self._fitness += change
         if self._fitness < 0:
             self._fitness = 0
+            change = 0
+        self._player_state.fitness_update = change
 
-    def get_strategy(self) -> Dict:
+    @property
+    def strategy(self) -> Dict:
         """
         Get the strategy (name, description and options) of this player
         :return: the strategy of this player
@@ -95,47 +143,7 @@ class Player:
         """
         return self._strategy
 
-    def get_social_activeness(self) -> int:
-        """
-        Get a social activeness rating out of 100 for this player
-        :return: Social activeness rating out of 100
-        :rtype: int
-        """
-        return int(round(100*(self._social_action_count/self._non_donor_action_count)))
-
-    def get_idleness(self) -> int:
-        """
-        Get idleness rating out of 100
-        :return: Idleness rating out of 100
-        :rtype: int
-        """
-        return int(round(100*(self._idle_action_count/self._non_donor_action_count)))
-
-    def get_cooperation_rate(self) -> int:
-        """
-        Get the cooperation percentage of this player as a donor out of 100
-        :return: Cooperation percentage of player
-        :rtype: int
-        """
-        return int(round(100*(self._cooperation_count/(self._cooperation_count+self._defection_count))))
-
-    def get_actions(self) -> Dict[int]:
-        """
-        Get the actions of the player with the timepoints as index
-        :return: The players actions
-        :rtype: Dict[int]
-        """
-        return self._actions
-
-    def get_donor_actions(self) -> List[Dict]:
-        """
-        Get the actions this player has committed to as a donor
-        :return: The actions this player has committed to as a donor
-        :rtype: List[Dict]
-        """
-        return self._donor_actions
-
-    def decide(self, timepoint: int) -> Dict:
+    def decide(self, timepoint: int) -> Action:
         """
         Get the agents decision on an action to commit to in a certain turn.
         :param timepoint: The timepoint at which the agent is deciding
@@ -152,18 +160,22 @@ class Player:
         if not action_response.json()['success']:
             raise DecisionException(action_response.json()['message'])
         action_representation = action_response.json()['action']
-        if action_representation['type'] != "idle" and action_representation['type'] != "gossip" and \
-                action_representation['type'] != "action":
-            raise DecisionException("Action did not match idle, gossip or action")
         if action_representation['type'] == "gossip":
-            action_representation['gossiper'] = self.get_id()
+            gossip: GossipContent = GossipContent.POSITIVE if action_representation['gossip'] == 'positive'\
+                else GossipContent.NEGATIVE
+            action: GossipAction = GossipAction(timepoint, self.id, self._generation_id, action_representation['about'],
+                                                action_representation['recipient'], gossip)
         elif action_representation['type'] == "action":
-            action_representation['donor'] = self.get_id()
-            self._donor_actions.append(action_representation)
+            action_content: InteractionContent = InteractionContent.COOPERATE if \
+                action_representation['value'] == 'cooperate' else InteractionContent.DEFECT
+            action: InteractionAction = InteractionAction(timepoint, self.id, self._generation_id, action_representation['recipient'],
+                                                          action_content)
         elif action_representation['type'] == 'idle':
-            action_representation['player'] = self.get_id()
-        self._actions[action_representation['timepoint']] = action_representation
-        return action_representation
+            action: IdleAction = IdleAction(timepoint, self.id, self._generation_id)
+        else:
+            raise DecisionException("Action did not match idle, gossip or action")
+        self._player_state.new_action = action
+        return action
 
     def set_perception(self, perception):
         """

@@ -14,8 +14,8 @@ class ActionType(Enum):
 
 
 class InteractionContent(Enum):
-    COOPERATE = {'donor_cost': -1, 'recipient_gain':  2}
-    DEFECT = {'donor_cost': 0, 'recipient_gain':  0}
+    COOPERATE = {'donor_cost': -1, 'recipient_gain':  2, 'string': 'cooperate'}
+    DEFECT = {'donor_cost': 0, 'recipient_gain':  0, 'string': 'negative'}
 
 
 class GossipContent(Enum):
@@ -65,7 +65,7 @@ class GossipAction(Action):
         self._gossiper = gossiper
         self._about: int = about
         self._recipient: int = recipient
-        self._gossip: int = gossip
+        self._gossip: GossipContent = gossip
 
     @property
     def type(self) -> ActionType:
@@ -84,7 +84,7 @@ class GossipAction(Action):
         return self._recipient
 
     @property
-    def gossip(self) -> int:
+    def gossip(self) -> GossipContent:
         return self._gossip
 
 

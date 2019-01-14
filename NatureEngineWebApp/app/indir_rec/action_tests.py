@@ -107,7 +107,8 @@ class InteractionTests(unittest.TestCase):
         onlookers = []
         for i in range(0, 15):
             onlookers.append(random.randint(0, 100))
-        new_action = InteractionAction(self.timepoint, self.donor, self.recipient, self.interaction_content, onlookers)
+        new_action = InteractionAction(self.timepoint, self.donor, self.generation, self.recipient,
+                                       self.interaction_content, onlookers)
         self.assertEqual(onlookers, new_action.onlookers, "onlookers should have been set to the array built")
 
 
