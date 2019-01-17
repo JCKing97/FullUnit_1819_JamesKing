@@ -3,7 +3,6 @@ from typing import Dict, List
 from flask import current_app
 import requests
 from .action_logic import Action, InteractionAction, GossipAction, IdleAction, GossipContent, InteractionContent
-from .results_logic import Observer
 
 
 class PlayerCreationException(Exception):
@@ -26,17 +25,17 @@ class PerceptionException(Exception):
 
 class PlayerState:
 
-    def __init__(self, generation: int, player: int, observers: List[Observer] = None):
+    def __init__(self, generation: int, player: int, observers: List = None):
         self._generation = generation
         self._player = player
-        self._new_action: Action = []
+        self._new_action: Action = None
         self._fitness_update = 0
-        self._observers = observers if observers is not None else []
+        self._observers: List = observers if observers is not None else []
 
-    def attach(self, observer: Observer):
+    def attach(self, observer):
         self._observers.append(observer)
 
-    def detach(self, observer: Observer):
+    def detach(self, observer):
         self._observers.remove(observer)
 
     def _notify(self):
@@ -59,6 +58,7 @@ class PlayerState:
     def new_action(self, action: Action) -> None:
         self._new_action = action
         self._notify()
+        self._new_action = None
 
     @property
     def fitness_update(self) -> int:
@@ -68,12 +68,13 @@ class PlayerState:
     def fitness_update(self, fitness: int):
         self._fitness_update = fitness
         self._notify()
+        self._fitness_update = 0
 
 
 class Player:
 
     def __init__(self, player_id: int, strategy: Dict, community_id: int, generation_id: int,
-                 observers: List[Observer] = None):
+                 observers: List = None):
         """
         Create a player in the environment and their mind in the agent mind service.
         :param player_id: The player's id
@@ -91,7 +92,7 @@ class Player:
         self._community_id: int = community_id
         self._generation_id: int = generation_id
         self._percepts: Dict = {}
-        self._player_state = PlayerState(generation_id, player_id, observers)
+        self.player_state = PlayerState(generation_id, player_id, observers)
         try:
             creation_payload: Dict = {"strategy": strategy['name'], "options": strategy['options'],
                                       "community": community_id, "generation": generation_id, "player": player_id}
@@ -132,7 +133,7 @@ class Player:
         if self._fitness < 0:
             self._fitness = 0
             change = 0
-        self._player_state.fitness_update = change
+        self.player_state.fitness_update = change
 
     @property
     def strategy(self) -> Dict:
@@ -174,7 +175,7 @@ class Player:
             action: IdleAction = IdleAction(timepoint, self.id, self._generation_id)
         else:
             raise DecisionException("Action did not match idle, gossip or action")
-        self._player_state.new_action = action
+        self.player_state.new_action = action
         return action
 
     def set_perception(self, perception):
@@ -195,6 +196,7 @@ class Player:
         """
         if timepoint > 0 and timepoint-1 in self._percepts:
             percept_dict = {'percepts': self._percepts[timepoint-1]}
+            print(percept_dict)
             percept_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'percept/action/group',
                                                 json=percept_dict)
             if percept_response.status_code != 200:

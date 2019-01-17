@@ -6,7 +6,7 @@ from flask import current_app
 from typing import List, Dict
 from .generation_logic import Generation
 import random
-from .results_logic import Observer
+from .observation_logic import Observer
 
 
 class CommunityCreationException(Exception):
@@ -52,9 +52,6 @@ class Community:
         self._generation_size: int = 0
         for strategy in strategies:
             self._generation_size += strategy['count']
-        self._social_welfare: int = 0
-        self._social_welfare_by_generation: List[int] = []
-        self._fitness: int = 0
         self._strategy_count_by_generation: List[List[Dict[str]]] = []
         self._observers: List[Observer] = observers if observers is not None else []
 
@@ -98,30 +95,6 @@ class Community:
         """
         return self._strategy_count_by_generation
 
-    def get_social_welfare(self) -> int:
-        """
-        Get the total social welfare produced by interactions in the whole community
-        :return: The social welfare
-        :rtype: int
-        """
-        return self._social_welfare
-
-    def get_social_welfare_by_generation(self) -> List[int]:
-        """
-        Get the social welfare for each generation
-        :return: The social welfare for each generation
-        :rtype: int
-        """
-        return self._social_welfare_by_generation
-
-    def get_fitness(self) -> int:
-        """
-        Get the fitness of the whole community.
-        :return: The fitness of the community
-        :rtype: int
-        """
-        return self._fitness
-
     def extend_observers(self, observers: List[Observer]) -> None:
         """
         Extend the current observers of the community with the list provided
@@ -140,9 +113,6 @@ class Community:
             generation = self._build_generation()
             generation.simulate()
             self._strategy_count_by_generation.append(generation.get_strategy_count())
-            self._social_welfare += generation.get_social_welfare()
-            self._social_welfare_by_generation.append(generation.get_social_welfare())
-            self._fitness += generation.get_fitness()
             self._generations.append(generation)
 
     def _build_generation(self) -> Generation:

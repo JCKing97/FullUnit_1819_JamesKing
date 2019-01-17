@@ -6,7 +6,7 @@ from flask import current_app
 from typing import Dict, List
 from .player_logic import Player, PlayerCreationException, DecisionException, PerceptionException
 from .action_logic import Action, ActionType, GossipAction, InteractionAction
-from .results_logic import Observer
+from .observation_logic import Observer
 import copy
 import random
 
@@ -60,7 +60,6 @@ class Generation:
         self._start_point: int = start_point
         self._end_point: int = end_point
         self._num_of_onlookers = num_of_onlookers
-        self._social_welfare: int = 0
         self._initial_generation: bool = initial_generation
         self._strategies: List[Dict] = []
         creation_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'generation',
@@ -106,7 +105,8 @@ class Generation:
                 except PlayerCreationException as e:
                     raise GenerationCreationException(str(e))
 
-    def get_id(self):
+    @property
+    def id(self):
         """
         Get the id of this generation
         :return: The id of this generation
@@ -138,30 +138,11 @@ class Generation:
         """
         return self._players
 
-    def get_fitness(self) -> int:
-        """
-        Get the overall fitness of the generation
-        :return: The summation of all players fitness from generation
-        :rtype: int
-        """
-        fitness = 0
-        for player in self._players:
-            fitness += player.fitness
-        return fitness
-
-    def get_social_welfare(self) -> int:
-        """
-        Get the total social welfare produced by interactions in this generation
-        :return: The social welfare
-        :rtype: int
-        """
-        return self._social_welfare
-
-    def get_strategy_count(self) -> List[Dict[str]]:
+    def get_strategy_count(self) -> List[Dict]:
         """
         Get the count of each strategy in the generation
         :return: the count of each strategy in the generation
-        :rtype: List[Dict[str]]
+        :rtype: List[Dict]
         """
         return self._strategies
 
@@ -226,7 +207,6 @@ class Generation:
             interaction_action: InteractionAction = action
             self._id_player_map[interaction_action.donor].update_fitness(interaction_action.action.value['donor_cost'])
             self._id_player_map[interaction_action.recipient].update_fitness(interaction_action.action.value['recipient_gain'])
-            self._social_welfare += 1
             onlookers = self._generate_onlookers(interaction_action)
             for onlooker in onlookers:
                 action_percept = {'type': interaction_action.type.value['percept_link'],
@@ -251,7 +231,7 @@ class Generation:
             if len(players) >= 0:
                 onlooker = random.choice(players)
                 try:
-                    onlookers.append(self._id_player_map[onlooker.get_id()])
+                    onlookers.append(self._id_player_map[onlooker.id])
                 except PlayerNotFoundException as e:
                     raise e
                 players.remove(onlooker)
@@ -271,7 +251,7 @@ class Generation:
         :rtype: Player
         """
         for player in deep_players:
-            if player_id == player.get_id():
+            if player_id == player.id:
                 return player
         raise PlayerNotFoundException("Couldn't find player from ID")
 

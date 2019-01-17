@@ -1,10 +1,9 @@
-"""results_logic.py: Contains the logic to record the results and statistics on a community simulation"""
+"""observation_logic.py: Contains the logic to record the results and statistics on a community simulation"""
 
 __author__ = "James King"
 
-from .action_logic import Action, ActionType, InteractionContent, GossipContent
+from .action_logic import Action, ActionType, InteractionContent, GossipContent, InteractionAction
 from typing import List, Dict
-from .community_logic import Community
 from .player_logic import PlayerState
 from abc import ABC, abstractmethod
 
@@ -22,13 +21,13 @@ class Observer(ABC):
     def update(self, player_state: PlayerState) -> None:
         raise NotImplementedError
 
-    @abstractmethod
     @property
+    @abstractmethod
     def community(self) -> int:
         raise NotImplementedError
 
-    @abstractmethod
     @property
+    @abstractmethod
     def generations(self) -> List[int]:
         raise NotImplementedError
 
@@ -40,8 +39,8 @@ class Observer(ABC):
     def add_player(self, generation: int, player: int) -> None:
         raise NotImplementedError
 
-    @abstractmethod
     @property
+    @abstractmethod
     def corrupted_observations(self) -> bool:
         raise NotImplementedError
 
@@ -65,46 +64,46 @@ class ActionObserver(Observer):
                     if generations[i] == generations[j]:
                         self._corrupted_observations = True
                         raise RecordingError("Identical generation ids in constructor")
-            self._players: Dict[int] = {generation: [] for generation in generations}
+            self._players: Dict[int, List[int]] = {generation: [] for generation in generations}
             self._generations: List[int] = generations
-            self._actions_by_generation: Dict[int] = {generation: [] for generation in generations}
-            self._actions_by_generation_and_player: Dict[int] = {generation: {} for generation in generations}
-            self._interactions_by_generation: Dict[int] = {generation: [] for generation in generations}
-            self._interactions_by_generation_and_player: Dict[int] = {generation: {} for generation in generations}
-            self._cooperation_count_by_generation: Dict[int] = {generation: 0 for generation in generations}
-            self._defection_count_by_generation: Dict[int] = {generation: 0 for generation in generations}
-            self._cooperation_count_by_generation_and_player: Dict[int] = {generation: {} for generation in generations}
-            self._defection_count_by_generation_and_player: Dict[int] = {generation: {} for generation in generations}
-            self._positive_social_action_count_by_generation: Dict[int] = {generation: 0 for generation in generations}
-            self._negative_social_action_count_by_generation: Dict[int] = {generation: 0 for generation in generations}
-            self._idle_action_count_by_generation: Dict[int] = {generation: 0 for generation in generations}
-            self._positive_social_action_count_by_generation_and_player: Dict[int] = \
+            self._actions_by_generation: Dict[int, List[Action]] = {generation: [] for generation in generations}
+            self._actions_by_generation_and_player: Dict[int, Dict[int, List[Action]]] = {generation: {} for generation in generations}
+            self._interactions_by_generation: Dict[int, List[InteractionAction]] = {generation: [] for generation in generations}
+            self._interactions_by_generation_and_player: Dict[int, Dict[int, List[InteractionAction]]] = {generation: {} for generation in generations}
+            self._cooperation_count_by_generation: Dict[int, int] = {generation: 0 for generation in generations}
+            self._defection_count_by_generation: Dict[int, int] = {generation: 0 for generation in generations}
+            self._cooperation_count_by_generation_and_player: Dict[int, Dict[int, int]] = {generation: {} for generation in generations}
+            self._defection_count_by_generation_and_player: Dict[int, Dict[int, int]] = {generation: {} for generation in generations}
+            self._positive_social_action_count_by_generation: Dict[int, int] = {generation: 0 for generation in generations}
+            self._negative_social_action_count_by_generation: Dict[int, int] = {generation: 0 for generation in generations}
+            self._idle_action_count_by_generation: Dict[int, int] = {generation: 0 for generation in generations}
+            self._positive_social_action_count_by_generation_and_player: Dict[int, Dict[int, int]] = \
                 {generation: {} for generation in generations}
-            self._negative_social_action_count_by_generation_and_player: Dict[int] = \
+            self._negative_social_action_count_by_generation_and_player: Dict[int, Dict[int, int]] = \
                 {generation: {} for generation in generations}
-            self._idle_action_count_by_generation_and_player: Dict[int] = {generation: {} for generation in generations}
-            self._non_donor_action_count_by_generation: Dict[int] = {generation: 0 for generation in generations}
-            self._non_donor_action_count_by_generation_and_player: Dict[int] = \
+            self._idle_action_count_by_generation_and_player: Dict[int, Dict[int, int]] = {generation: {} for generation in generations}
+            self._non_donor_action_count_by_generation: Dict[int, int] = {generation: 0 for generation in generations}
+            self._non_donor_action_count_by_generation_and_player: Dict[int, Dict[int, int]] = \
                 {generation: {} for generation in generations}
         else:
             self._generations: List[int] = []
-            self._players: Dict[int] = {}
-            self._actions_by_generation: Dict[int] = {}
-            self._actions_by_generation_and_player: Dict[int] = {}
-            self._interactions_by_generation: Dict[int] = {}
-            self._interactions_by_generation_and_player: Dict[int] = {}
-            self._cooperation_count_by_generation: Dict[int] = {}
-            self._defection_count_by_generation: Dict[int] = {}
-            self._cooperation_count_by_generation_and_player: Dict[int] = {}
-            self._defection_count_by_generation_and_player: Dict[int] = {}
-            self._positive_social_action_count_by_generation: Dict[int] = {}
-            self._negative_social_action_count_by_generation: Dict[int] = {}
-            self._idle_action_count_by_generation: Dict[int] = {}
-            self._positive_social_action_count_by_generation_and_player: Dict[int] = {}
-            self._negative_social_action_count_by_generation_and_player: Dict[int] = {}
-            self._idle_action_count_by_generation_and_player: Dict[int] = {}
-            self._non_donor_action_count_by_generation: Dict[int] = {}
-            self._non_donor_action_count_by_generation_and_player: Dict[int] = {}
+            self._players: Dict[int, List[int]] = {}
+            self._actions_by_generation: Dict[int, List[Action]] = {}
+            self._actions_by_generation_and_player: Dict[int, Dict[int, List[Action]]] = {}
+            self._interactions_by_generation: Dict[int, List[InteractionAction]] = {}
+            self._interactions_by_generation_and_player: Dict[int, Dict[int, List[InteractionAction]]] = {}
+            self._cooperation_count_by_generation: Dict[int, int] = {}
+            self._defection_count_by_generation: Dict[int, int] = {}
+            self._cooperation_count_by_generation_and_player: Dict[int, Dict[int, int]] = {}
+            self._defection_count_by_generation_and_player: Dict[int, Dict[int, int]] = {}
+            self._positive_social_action_count_by_generation: Dict[int, int] = {}
+            self._negative_social_action_count_by_generation: Dict[int, int] = {}
+            self._idle_action_count_by_generation: Dict[int, int] = {}
+            self._positive_social_action_count_by_generation_and_player: Dict[int, Dict[int, int]] = {}
+            self._negative_social_action_count_by_generation_and_player: Dict[int, Dict[int, int]] = {}
+            self._idle_action_count_by_generation_and_player: Dict[int, Dict[int, int]] = {}
+            self._non_donor_action_count_by_generation: Dict[int, int] = {}
+            self._non_donor_action_count_by_generation_and_player: Dict[int, Dict[int, int]] = {}
 
     @property
     def corrupted_observations(self) -> bool:
@@ -135,18 +134,19 @@ class ActionObserver(Observer):
         self._positive_social_action_count_by_generation[generation] = 0
         self._negative_social_action_count_by_generation[generation] = 0
         self._idle_action_count_by_generation[generation] = 0
-        self._positive_social_action_count_by_generation[generation] = {}
-        self._negative_social_action_count_by_generation[generation] = {}
+        self._positive_social_action_count_by_generation_and_player[generation] = {}
+        self._negative_social_action_count_by_generation_and_player[generation] = {}
         self._idle_action_count_by_generation_and_player[generation] = {}
         self._non_donor_action_count_by_generation[generation] = 0
         self._non_donor_action_count_by_generation_and_player[generation] = {}
 
     @property
-    def players(self) -> Dict[int]:
+    def players(self) -> Dict[int, List[int]]:
         return self._players
 
     def add_player(self, generation: int, player: int) -> None:
-        if generation not in self._generations or generation not in self._players:
+        if generation not in self._generations or generation not in self._players or \
+                (generation in self._players and player in self.players[generation]):
             self._corrupted_observations = True
             raise RecordingError("Attempted to add a player to a non-existent generation")
         self._players[generation].append(player)
@@ -188,10 +188,13 @@ class ActionObserver(Observer):
 
     def _update_actions(self, action):
         if Action not in action.__class__.__mro__:
+            self._corrupted_observations = True
             raise RecordingError("Attempted to add an action that does not subclass from the Action subclass")
         if action.generation not in self._generations:
+            self._corrupted_observations = True
             raise RecordingError("Attempted to add an action that cannot be attributed to a generation, or player")
         if action.actor not in self._players[action.generation]:
+            self._corrupted_observations = True
             raise RecordingError("Attempted to add an action that cannot be attributed to an existing player")
         self._actions.append(action)
         self._actions_by_generation[action.generation].append(action)
@@ -225,8 +228,8 @@ class ActionObserver(Observer):
         return 0
 
     @property
-    def cooperation_rate_by_generation(self) -> Dict[int]:
-        cooperation_rate_by_generation: Dict[int] = {}
+    def cooperation_rate_by_generation(self) -> Dict[int, int]:
+        cooperation_rate_by_generation: Dict[int, int] = {}
         for generation in self._generations:
             if self._cooperation_count_by_generation[generation] + self._defection_count_by_generation[generation] != 0:
                 cooperation_rate_by_generation[generation] = int(round(100*(
@@ -238,8 +241,8 @@ class ActionObserver(Observer):
         return cooperation_rate_by_generation
 
     @property
-    def cooperation_rate_by_generation_and_player(self) -> Dict[int]:
-        cooperation_rate_by_generation_and_player: Dict[int] = {}
+    def cooperation_rate_by_generation_and_player(self) -> Dict[int, Dict[int, int]]:
+        cooperation_rate_by_generation_and_player: Dict[int, Dict[int, int]] = {}
         for generation in self._generations:
             cooperation_rate_by_generation_and_player[generation] = {}
             for player in self._players[generation]:
@@ -261,8 +264,8 @@ class ActionObserver(Observer):
         return 0
 
     @property
-    def social_activeness_by_generation(self) -> Dict[int]:
-        social_activeness_by_generation: Dict[int] = {}
+    def social_activeness_by_generation(self) -> Dict[int, int]:
+        social_activeness_by_generation: Dict[int, int] = {}
         for generation in self._generations:
             if self._non_donor_action_count_by_generation[generation] != 0:
                 social_activeness_by_generation[generation] = int(round(100*(
@@ -274,8 +277,8 @@ class ActionObserver(Observer):
         return social_activeness_by_generation
 
     @property
-    def social_activeness_by_generation_and_player(self) -> Dict[int]:
-        social_activeness_by_generation_and_player: Dict[int] = {}
+    def social_activeness_by_generation_and_player(self) -> Dict[int, Dict[int, int]]:
+        social_activeness_by_generation_and_player: Dict[int, Dict[int, int]] = {}
         for generation in self._generations:
             social_activeness_by_generation_and_player[generation] = {}
             for player in self._players[generation]:
@@ -296,8 +299,8 @@ class ActionObserver(Observer):
         return 0
 
     @property
-    def positivity_of_gossip_percentage_by_generation(self) -> Dict[int]:
-        positivity_of_gossip_percentage_by_generation: Dict[int] = {}
+    def positivity_of_gossip_percentage_by_generation(self) -> Dict[int, int]:
+        positivity_of_gossip_percentage_by_generation: Dict[int, int] = {}
         for generation in self._generations:
             if (self._positive_social_action_count_by_generation[generation] +
             self._negative_social_action_count_by_generation[generation]) != 0:
@@ -310,8 +313,8 @@ class ActionObserver(Observer):
         return positivity_of_gossip_percentage_by_generation
 
     @property
-    def positivity_of_gossip_percentage_by_generation_and_player(self) -> Dict[int]:
-        positivity_of_gossip_percentage_by_generation_and_player: Dict[int] = {}
+    def positivity_of_gossip_percentage_by_generation_and_player(self) -> Dict[int, Dict[int, int]]:
+        positivity_of_gossip_percentage_by_generation_and_player: Dict[int, Dict[int, int]] = {}
         for generation in self._generations:
             positivity_of_gossip_percentage_by_generation_and_player[generation] = {}
             for player in self._players[generation]:
@@ -339,14 +342,14 @@ class PlayerObserver(Observer):
                     if generations[i] == generations[j]:
                         self._corrupted_observations = True
                         raise RecordingError("Identical generation ids in constructor")
-            self._players: Dict[int] = {generation: [] for generation in generations}
+            self._players: Dict[int, List[int]] = {generation: [] for generation in generations}
             self._generations: List[int] = generations
             self._fitness_by_generation: Dict[int, int] = {generation: 0 for generation in generations}
             self._fitness_by_generation_and_player: Dict[int, Dict[int, int]] = {generation: {} for generation in
                                                                                  generations}
         else:
             self._generations: List[int] = []
-            self._players: Dict[int] = {}
+            self._players: Dict[int, List[int]] = {}
             self._fitness_by_generation: Dict[int, int] = {}
             self._fitness_by_generation_and_player: Dict[int, Dict[int, int]] = {}
 
@@ -397,103 +400,3 @@ class PlayerObserver(Observer):
     @property
     def fitness_by_generation_and_player(self) -> Dict[int, Dict[int, int]]:
         return self._fitness_by_generation_and_player
-
-
-class Results:
-
-    def __init__(self, community: Community):
-        self._action_observer = ActionObserver(community.get_id())
-        self._player_observer = PlayerObserver(community.get_id())
-        self._observers: List[Observer] = [self._action_observer, self._player_observer]
-        self._community = community
-
-    @property
-    def community(self) -> Community:
-        return self._community
-
-    @property
-    def generations(self) -> List[int]:
-        return self._action_observer.generations
-
-    @property
-    def observers(self) -> List[Observer]:
-        return self._observers
-
-    @property
-    def actions(self):
-        return self._action_observer.actions
-
-    @property
-    def actions_by_generation(self):
-        return self._action_observer.actions_by_generation
-
-    @property
-    def actions_by_generation_and_player(self):
-        return self._action_observer.actions_by_generation_and_player
-
-    @property
-    def interactions(self):
-        return self._action_observer.interactions
-
-    @property
-    def interactions_by_generation(self):
-        return self._action_observer.interactions_by_generation
-
-    @property
-    def interactions_by_generation_and_player(self):
-        return self._action_observer.interactions_by_generation_and_player
-
-    @property
-    def cooperation_rate(self) -> int:
-        return self._action_observer.cooperation_rate
-
-    @property
-    def cooperation_rate_by_generation(self) -> Dict[int]:
-        return self._action_observer.cooperation_rate_by_generation
-
-    @property
-    def cooperation_rate_by_generation_and_player(self) -> Dict[int]:
-        return self._action_observer.cooperation_rate_by_generation_and_player
-
-    @property
-    def social_activeness(self):
-        return self._action_observer.social_activeness
-
-    @property
-    def social_activeness_by_generation(self) -> Dict[int]:
-        return self._action_observer.social_activeness_by_generation
-
-    @property
-    def social_activeness_by_generation_and_player(self) -> Dict[int]:
-        return self._action_observer.social_activeness_by_generation_and_player
-
-    @property
-    def positivity_of_gossip_percentage(self) -> int:
-        return self._action_observer.positivity_of_gossip_percentage
-
-    @property
-    def positivity_of_gossip_percentage_by_generation(self) -> Dict[int]:
-        return self._action_observer.positivity_of_gossip_percentage_by_generation
-
-    @property
-    def positivity_of_gossip_percentage_by_generation_and_player(self) -> Dict[int]:
-        return self._action_observer.positivity_of_gossip_percentage_by_generation_and_player
-
-    @property
-    def corrupted_observations(self) -> bool:
-        for observer in self._observers:
-            if observer.corrupted_observations:
-                return True
-        return False
-
-    @property
-    def community_fitness(self) -> int:
-        return self._player_observer.community_fitness
-
-    @property
-    def fitness_by_generation(self) -> Dict[int, int]:
-        return self._player_observer.fitness_by_generation
-
-    @property
-    def fitness_by_generation_and_player(self) -> Dict[int, Dict[int, int]]:
-        return self._player_observer.fitness_by_generation_and_player
