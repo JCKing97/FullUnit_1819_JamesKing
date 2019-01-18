@@ -5,7 +5,7 @@ __author__ = "James King"
 import unittest
 import random
 from .observation_logic import ActionObserver, RecordingError
-from .action_logic import IdleAction, Action
+from .action_logic import IdleAction, Action, InteractionAction, InteractionContent, GossipAction, GossipContent
 from typing import List
 from .player_logic import PlayerState
 
@@ -139,8 +139,100 @@ class ActionObserverTest(unittest.TestCase):
                                                                      "may be corrupted")
         self.assertEqual([], self.action_observer.actions, "Should contain no actions as non-existent generation")
 
+    def test_initial_actions(self):
+        self.assertEqual([], self.action_observer.actions)
+        self.assertEqual({}, self.action_observer.actions_by_generation)
+        self.assertEqual({}, self.action_observer.actions_by_generation_and_player)
+        self.action_observer.add_generation(2)
+        self.action_observer.add_generation(6)
+        self.action_observer.add_player(2, 8)
+        self.action_observer.add_player(2, 9)
+        self.action_observer.add_player(2, 12)
+        self.action_observer.add_player(6, 8)
+        self.action_observer.add_player(6, 34)
+        self.assertEqual({2: [], 6: []}, self.action_observer.actions_by_generation)
+        self.assertEqual({2: {8: [], 9: [], 12: []}, 6: {8: [], 34: []}},
+                         self.action_observer.actions_by_generation_and_player)
+
+    def test_add_actions(self):
+        self.action_observer.add_generation(7)
+        self.action_observer.add_generation(8)
+        self.action_observer.add_player(7, 8)
+        self.action_observer.add_player(7, 9)
+        self.action_observer.add_player(7, 12)
+        self.action_observer.add_player(8, 1)
+        self.action_observer.add_player(8, 2)
+        self.action_observer.add_player(8, 42)
+        player_states = [MockPlayerState(7, 8, [self.action_observer]), MockPlayerState(7, 9, [self.action_observer]),
+                         MockPlayerState(7, 12, [self.action_observer]), MockPlayerState(8, 1, [self.action_observer]),
+                         MockPlayerState(8, 2, [self.action_observer]), MockPlayerState(8, 42, [self.action_observer])]
+        actions = [IdleAction(3, 8, 7), IdleAction(7, 8, 7), IdleAction(5, 12, 7), IdleAction(4, 2, 8),
+                   IdleAction(3, 2, 8), IdleAction(6, 2, 8)]
+        for action in actions:
+            for player_state in player_states:
+                if player_state.player == action.actor and action.generation == player_state.generation:
+                    player_state.new_action = action
+                    print(action)
+                    self.action_observer.update(player_state)
+        self.assertEqual(actions, self.action_observer.actions, "Should be the same as the actions received "
+                                                                "from updates")
+        self.assertEqual({7: actions[0:3], 8: actions[3:6]}, self.action_observer.actions_by_generation,
+                         "Should have formatted correctly into generations")
+        self.assertEqual({7: {8: actions[0:2], 9: [], 12: [actions[2]]},
+                          8: {1: [], 2: actions[3:6], 42: []}},
+                         self.action_observer.actions_by_generation_and_player, "Should have formatted correctly into "
+                                                                                "generation and players")
+
+    def test_initial_interactions(self):
+        self.assertEqual([], self.action_observer.interactions)
+        self.assertEqual({}, self.action_observer.interactions_by_generation)
+        self.assertEqual({}, self.action_observer.interactions_by_generation_and_player)
+        self.action_observer.add_generation(2)
+        self.action_observer.add_generation(6)
+        self.action_observer.add_player(2, 8)
+        self.action_observer.add_player(2, 9)
+        self.action_observer.add_player(2, 12)
+        self.action_observer.add_player(6, 8)
+        self.action_observer.add_player(6, 34)
+        self.assertEqual({2: [], 6: []}, self.action_observer.interactions_by_generation)
+        self.assertEqual({2: {8: [], 9: [], 12: []}, 6: {8: [], 34: []}},
+                         self.action_observer.interactions_by_generation_and_player)
+
+    def test_add_interactions(self):
+        self.action_observer.add_generation(7)
+        self.action_observer.add_generation(8)
+        self.action_observer.add_player(7, 8)
+        self.action_observer.add_player(7, 9)
+        self.action_observer.add_player(7, 12)
+        self.action_observer.add_player(8, 1)
+        self.action_observer.add_player(8, 2)
+        self.action_observer.add_player(8, 42)
+        player_states = [MockPlayerState(7, 8, [self.action_observer]), MockPlayerState(7, 9, [self.action_observer]),
+                         MockPlayerState(7, 12, [self.action_observer]), MockPlayerState(8, 1, [self.action_observer]),
+                         MockPlayerState(8, 2, [self.action_observer]), MockPlayerState(8, 42, [self.action_observer])]
+        actions = [InteractionAction(4, 8, 7, 9, InteractionContent.COOPERATE),
+                   InteractionAction(35, 8, 7, 12, InteractionContent.DEFECT),
+                   InteractionAction(6, 9, 7, 8, InteractionContent.COOPERATE),
+                   InteractionAction(10, 9, 7, 8, InteractionContent.DEFECT),
+                   InteractionAction(1, 1, 8, 2, InteractionContent.COOPERATE),
+                   InteractionAction(4, 2, 8, 1, InteractionContent.COOPERATE),
+                   InteractionAction(6, 2, 8, 1, InteractionContent.COOPERATE),
+                   InteractionAction(9, 42, 8, 2, InteractionContent.DEFECT)]
+        for action in actions:
+            for player_state in player_states:
+                if player_state.player == action.actor and action.generation == player_state.generation:
+                    player_state.new_action = action
+                    self.action_observer.update(player_state)
+        self.assertEqual(actions, self.action_observer.interactions)
+        self.assertEqual({7: actions[0:4], 8: actions[4:8]}, self.action_observer.interactions_by_generation,
+                         "Should have formatted correctly into generations")
+        self.assertEqual({7: {8: actions[0:2], 9: actions[2:4], 12: []},
+                          8: {1: [actions[4]], 2: actions[5:7], 42: [actions[7]]}},
+                         self.action_observer.interactions_by_generation_and_player,
+                         "Should have formatted correctly into generations and players")
+
     def test_initial_cooperation_rate(self):
-        self.assertEqual(0, self.action_observer.cooperation_rate)
+        self.assertEqual(None, self.action_observer.cooperation_rate)
         self.assertEqual({}, self.action_observer.cooperation_rate_by_generation)
         self.assertEqual({}, self.action_observer.cooperation_rate_by_generation_and_player)
         self.action_observer.add_generation(2)
@@ -150,8 +242,210 @@ class ActionObserverTest(unittest.TestCase):
         self.action_observer.add_player(2, 12)
         self.action_observer.add_player(6, 8)
         self.action_observer.add_player(6, 34)
-        self.assertEqual({2: 0, 6: 0},self.action_observer.cooperation_rate_by_generation)
-        self.assertEqual({2: {8: 0, 9: 0, 12: 0}, 6: {8: 0, 34: 0}}, self.action_observer.cooperation_rate_by_generation_and_player)
+        self.assertEqual({2: None, 6: None}, self.action_observer.cooperation_rate_by_generation)
+        self.assertEqual({2: {8: None, 9: None, 12: None}, 6: {8: None, 34: None}},
+                         self.action_observer.cooperation_rate_by_generation_and_player)
+
+    def test_add_actions_coop_defect_rate(self):
+        self.action_observer.add_generation(7)
+        self.action_observer.add_generation(8)
+        self.action_observer.add_player(7, 8)
+        self.action_observer.add_player(7, 9)
+        self.action_observer.add_player(7, 12)
+        self.action_observer.add_player(8, 1)
+        self.action_observer.add_player(8, 2)
+        self.action_observer.add_player(8, 42)
+        player_states = [MockPlayerState(7, 8, [self.action_observer]), MockPlayerState(7, 9, [self.action_observer]),
+                         MockPlayerState(7, 12, [self.action_observer]), MockPlayerState(8, 1, [self.action_observer]),
+                         MockPlayerState(8, 2, [self.action_observer]), MockPlayerState(8, 42, [self.action_observer])]
+        actions = [InteractionAction(4, 8, 7, 9, InteractionContent.COOPERATE),
+                   InteractionAction(35, 8, 7, 12, InteractionContent.DEFECT),
+                   InteractionAction(6, 9, 7, 8, InteractionContent.COOPERATE),
+                   InteractionAction(10, 9, 7, 8, InteractionContent.DEFECT),
+                   InteractionAction(1, 1, 8, 2, InteractionContent.COOPERATE),
+                   InteractionAction(4, 2, 8, 1, InteractionContent.COOPERATE),
+                   InteractionAction(6, 2, 8, 1, InteractionContent.COOPERATE),
+                   InteractionAction(9, 42, 8, 2, InteractionContent.DEFECT)]
+        for action in actions:
+            for player_state in player_states:
+                if player_state.player == action.actor and action.generation == player_state.generation:
+                    player_state.new_action = action
+                    self.action_observer.update(player_state)
+        self.assertEqual(int(round(100*(5/8))), self.action_observer.cooperation_rate)
+        self.assertEqual({7: 50, 8: 75}, self.action_observer.cooperation_rate_by_generation)
+        self.assertEqual({7: {8: 50, 9: 50, 12: None}, 8: {1: 100, 2: 100, 42: 0}},
+                         self.action_observer.cooperation_rate_by_generation_and_player)
+
+    def test_initial_social_activeness(self):
+        self.assertEqual(None, self.action_observer.social_activeness)
+        self.assertEqual({}, self.action_observer.social_activeness_by_generation)
+        self.assertEqual({}, self.action_observer.social_activeness_by_generation_and_player)
+        self.action_observer.add_generation(2)
+        self.action_observer.add_generation(6)
+        self.action_observer.add_player(2, 8)
+        self.action_observer.add_player(2, 9)
+        self.action_observer.add_player(2, 12)
+        self.action_observer.add_player(6, 8)
+        self.action_observer.add_player(6, 34)
+        self.assertEqual({2: None, 6: None}, self.action_observer.social_activeness_by_generation)
+        self.assertEqual({2: {8: None, 9: None, 12: None}, 6: {8: None, 34: None}},
+                         self.action_observer.social_activeness_by_generation_and_player)
+
+    def test_add_social_idle_actions(self):
+        self.action_observer.add_generation(7)
+        self.action_observer.add_generation(8)
+        self.action_observer.add_player(7, 8)
+        self.action_observer.add_player(7, 9)
+        self.action_observer.add_player(7, 12)
+        self.action_observer.add_player(8, 1)
+        self.action_observer.add_player(8, 2)
+        self.action_observer.add_player(8, 42)
+        player_states = [MockPlayerState(7, 8, [self.action_observer]),
+                         MockPlayerState(7, 9, [self.action_observer]),
+                         MockPlayerState(7, 12, [self.action_observer]),
+                         MockPlayerState(8, 1, [self.action_observer]),
+                         MockPlayerState(8, 2, [self.action_observer]),
+                         MockPlayerState(8, 42, [self.action_observer])]
+        actions = [IdleAction(4, 8, 7), IdleAction(5, 8, 7), GossipAction(6, 8, 7, 9, 12, GossipContent.POSITIVE),
+                   GossipAction(7, 9, 7, 12, 8, GossipContent.NEGATIVE),
+                   IdleAction(1, 1, 8), GossipAction(2, 1, 8, 2, 42, GossipContent.NEGATIVE),
+                   IdleAction(3, 42, 8)]
+        for action in actions:
+            for player_state in player_states:
+                if player_state.player == action.actor and action.generation == player_state.generation:
+                    player_state.new_action = action
+                    self.action_observer.update(player_state)
+        self.assertEqual(int(round(100 * (3 / 7))), self.action_observer.social_activeness)
+        self.assertEqual({7: 50, 8: int(round(100*(1/3)))}, self.action_observer.social_activeness_by_generation)
+        self.assertEqual({7: {8: int(round(100*(1/3))), 9: 100, 12: None}, 8: {1: 50, 2: None, 42: 0}},
+                         self.action_observer.social_activeness_by_generation_and_player)
+
+    def test_initial_positivity_of_gossip(self):
+        self.assertEqual(None, self.action_observer.positivity_of_gossip_percentage)
+        self.assertEqual({}, self.action_observer.positivity_of_gossip_percentage_by_generation)
+        self.assertEqual({}, self.action_observer.positivity_of_gossip_percentage_by_generation_and_player)
+        self.action_observer.add_generation(2)
+        self.action_observer.add_generation(6)
+        self.action_observer.add_player(2, 8)
+        self.action_observer.add_player(2, 9)
+        self.action_observer.add_player(2, 12)
+        self.action_observer.add_player(6, 8)
+        self.action_observer.add_player(6, 34)
+        self.assertEqual({2: None, 6: None}, self.action_observer.positivity_of_gossip_percentage_by_generation)
+        self.assertEqual({2: {8: None, 9: None, 12: None}, 6: {8: None, 34: None}},
+                         self.action_observer.positivity_of_gossip_percentage_by_generation_and_player)
+
+    def test_add_social_negative_positive_actions(self):
+        self.action_observer.add_generation(7)
+        self.action_observer.add_generation(8)
+        self.action_observer.add_player(7, 8)
+        self.action_observer.add_player(7, 9)
+        self.action_observer.add_player(7, 12)
+        self.action_observer.add_player(8, 1)
+        self.action_observer.add_player(8, 2)
+        self.action_observer.add_player(8, 42)
+        player_states = [MockPlayerState(7, 8, [self.action_observer]),
+                         MockPlayerState(7, 9, [self.action_observer]),
+                         MockPlayerState(7, 12, [self.action_observer]),
+                         MockPlayerState(8, 1, [self.action_observer]),
+                         MockPlayerState(8, 2, [self.action_observer]),
+                         MockPlayerState(8, 42, [self.action_observer])]
+        actions = [GossipAction(4, 8, 7, 12, 9, GossipContent.POSITIVE),
+                   GossipAction(5, 8, 7, 9, 12, GossipContent.NEGATIVE),
+                   GossipAction(6, 8, 7, 9, 12, GossipContent.POSITIVE),
+                   GossipAction(7, 9, 7, 12, 8, GossipContent.NEGATIVE),
+                   GossipAction(1, 1, 8, 2, 42, GossipContent.POSITIVE),
+                   GossipAction(2, 1, 8, 2, 42, GossipContent.NEGATIVE),
+                   GossipAction(3, 42, 8, 1, 2, GossipContent.POSITIVE)]
+        for action in actions:
+            for player_state in player_states:
+                if player_state.player == action.actor and action.generation == player_state.generation:
+                    player_state.new_action = action
+                    self.action_observer.update(player_state)
+        self.assertEqual(int(round(100 * (4 / 7))), self.action_observer.positivity_of_gossip_percentage)
+        self.assertEqual({7: 50, 8: 67}, self.action_observer.positivity_of_gossip_percentage_by_generation)
+        self.assertEqual({7: {8: 67, 9: 0, 12: None}, 8: {1: 50, 2: None, 42: 100}},
+                         self.action_observer.positivity_of_gossip_percentage_by_generation_and_player)
+
+    def test_add_all_actions_at_the_same_time(self):
+        self.action_observer.add_generation(7)
+        self.action_observer.add_generation(8)
+        self.action_observer.add_player(7, 8)
+        self.action_observer.add_player(7, 9)
+        self.action_observer.add_player(7, 12)
+        self.action_observer.add_player(8, 1)
+        self.action_observer.add_player(8, 2)
+        self.action_observer.add_player(8, 42)
+        player_states = [MockPlayerState(7, 8, [self.action_observer]),
+                         MockPlayerState(7, 9, [self.action_observer]),
+                         MockPlayerState(7, 12, [self.action_observer]),
+                         MockPlayerState(8, 1, [self.action_observer]),
+                         MockPlayerState(8, 2, [self.action_observer]),
+                         MockPlayerState(8, 42, [self.action_observer])]
+        actions = [GossipAction(4, 8, 7, 12, 9, GossipContent.POSITIVE),
+                   GossipAction(5, 8, 7, 9, 12, GossipContent.NEGATIVE),
+                   GossipAction(6, 8, 7, 9, 12, GossipContent.POSITIVE),
+                   IdleAction(4, 8, 7), IdleAction(5, 8, 7), GossipAction(6, 8, 7, 9, 12, GossipContent.POSITIVE),
+                   InteractionAction(4, 8, 7, 9, InteractionContent.COOPERATE),
+                   InteractionAction(35, 8, 7, 12, InteractionContent.DEFECT),
+                   GossipAction(7, 9, 7, 12, 8, GossipContent.NEGATIVE),
+                   InteractionAction(6, 9, 7, 8, InteractionContent.COOPERATE),
+                   InteractionAction(10, 9, 7, 8, InteractionContent.DEFECT),
+                   GossipAction(1, 1, 8, 2, 42, GossipContent.POSITIVE),
+                   IdleAction(1, 1, 8), GossipAction(2, 1, 8, 2, 42, GossipContent.NEGATIVE),
+                   InteractionAction(1, 1, 8, 2, InteractionContent.COOPERATE),
+                   GossipAction(2, 1, 8, 2, 42, GossipContent.NEGATIVE),
+                   InteractionAction(4, 2, 8, 1, InteractionContent.COOPERATE),
+                   InteractionAction(6, 2, 8, 1, InteractionContent.COOPERATE),
+                   GossipAction(3, 42, 8, 1, 2, GossipContent.POSITIVE), IdleAction(3, 42, 8),
+                   InteractionAction(9, 42, 8, 2, InteractionContent.DEFECT)]
+        interactions = [action for action in actions if type(action) is InteractionAction]
+        for action in actions:
+            for player_state in player_states:
+                if player_state.player == action.actor and action.generation == player_state.generation:
+                    player_state.new_action = action
+                    self.action_observer.update(player_state)
+        # Test actions
+        self.assertEqual(actions, self.action_observer.actions, "Should be the same as the actions received "
+                                                                "from updates")
+        self.assertEqual({7: actions[0:11], 8: actions[11:21]}, self.action_observer.actions_by_generation,
+                         "Should have formatted actions correctly into generations")
+        self.assertEqual({7: {8: actions[0:8], 9: actions[8:11], 12: []},
+                          8: {1: actions[11:16], 2: actions[16:18], 42: actions[18:21]}},
+                         self.action_observer.actions_by_generation_and_player, "Should have formattedactions correctly"
+                                                                                " into generation and players")
+        # Test interactions
+        self.assertEqual(interactions, self.action_observer.interactions)
+        self.assertEqual({7: interactions[0:4], 8: interactions[4:8]}, self.action_observer.interactions_by_generation,
+                         "Should have formatted interactions correctly into generations")
+        self.assertEqual({7: {8: interactions[0:2], 9: interactions[2:4], 12: []},
+                          8: {1: [interactions[4]], 2: interactions[5:7], 42: [interactions[7]]}},
+                         self.action_observer.interactions_by_generation_and_player,
+                         "Should have formatted interactions correctly into generations and players")
+        # Test cooperation rate
+        self.assertEqual(int(round(100 * (5 / 8))), self.action_observer.cooperation_rate, "Community coop rate")
+        self.assertEqual({7: 50, 8: 75}, self.action_observer.cooperation_rate_by_generation, "Coop rate by gen")
+        self.assertEqual({7: {8: 50, 9: 50, 12: None}, 8: {1: 100, 2: 100, 42: 0}},
+                         self.action_observer.cooperation_rate_by_generation_and_player, "Coop rate by gen and player")
+        # Test social activeness
+        self.assertEqual(int(round(100 * (9 / 13))), self.action_observer.social_activeness, "Community social "
+                                                                                             "activeness")
+        self.assertEqual({7: int(round(100 * (5 / 7))), 8: int(round(100 * (4 / 6)))},
+                         self.action_observer.social_activeness_by_generation, "Social activeness by gen")
+        self.assertEqual({7: {8: int(round(100 * (4 / 6))), 9: 100, 12: None}, 8: {1: 75, 2: None, 42: 50}},
+                         self.action_observer.social_activeness_by_generation_and_player, "Social activeness by gen "
+                                                                                          "and player")
+        # Test positivity of gossip
+        self.assertEqual(int(round(100 * (5 / 9))), self.action_observer.positivity_of_gossip_percentage, "Positivity"
+                                                                                                          " of gossip")
+        self.assertEqual({7: int(round(100 * (3 / 5))), 8: 50},
+                         self.action_observer.positivity_of_gossip_percentage_by_generation, "Positivity of gossip"
+                                                                                             " by gen")
+        self.assertEqual({7: {8: 75, 9: 0, 12: None}, 8: {1: 33, 2: None, 42: 100}},
+                         self.action_observer.positivity_of_gossip_percentage_by_generation_and_player, "Positivity of"
+                                                                                                        "gossip by gen"
+                                                                                                        " and player")
+
 
 
 

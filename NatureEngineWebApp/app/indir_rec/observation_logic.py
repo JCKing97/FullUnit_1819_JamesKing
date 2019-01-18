@@ -212,6 +212,9 @@ class ActionObserver(Observer):
                 self._defection_count_by_generation[action.generation] += 1
                 self._defection_count_by_generation_and_player[action.generation][action.actor] += 1
         elif action.type is ActionType.GOSSIP:
+            self._non_donor_action_count += 1
+            self._non_donor_action_count_by_generation[action.generation] += 1
+            self._non_donor_action_count_by_generation_and_player[action.generation][action.actor] += 1
             if action.gossip is GossipContent.POSITIVE:
                 self._positive_social_action_count += 1
                 self._positive_social_action_count_by_generation[action.generation] += 1
@@ -220,12 +223,16 @@ class ActionObserver(Observer):
                 self._negative_social_action_count += 1
                 self._negative_social_action_count_by_generation[action.generation] += 1
                 self._negative_social_action_count_by_generation_and_player[action.generation][action.actor] += 1
+        else:
+            self._non_donor_action_count += 1
+            self._non_donor_action_count_by_generation[action.generation] += 1
+            self._non_donor_action_count_by_generation_and_player[action.generation][action.actor] += 1
 
     @property
-    def cooperation_rate(self) -> int:
+    def cooperation_rate(self):
         if self._cooperation_count + self._defection_count != 0:
             return int(round(100*(self._cooperation_count / (self._cooperation_count + self._defection_count))))
-        return 0
+        return None
 
     @property
     def cooperation_rate_by_generation(self) -> Dict[int, int]:
@@ -237,7 +244,7 @@ class ActionObserver(Observer):
                         (self._cooperation_count_by_generation[generation] +
                          self._defection_count_by_generation[generation]))))
             else:
-                cooperation_rate_by_generation[generation] = 0
+                cooperation_rate_by_generation[generation] = None
         return cooperation_rate_by_generation
 
     @property
@@ -253,7 +260,7 @@ class ActionObserver(Observer):
                             (self._cooperation_count_by_generation_and_player[generation][player] +
                              self._defection_count_by_generation_and_player[generation][player]))))
                 else:
-                    cooperation_rate_by_generation_and_player[generation][player] = 0
+                    cooperation_rate_by_generation_and_player[generation][player] = None
         return cooperation_rate_by_generation_and_player
 
     @property
@@ -261,7 +268,7 @@ class ActionObserver(Observer):
         if self._non_donor_action_count != 0:
             return int(round(100*((self._positive_social_action_count + self._negative_social_action_count)/
                                   self._non_donor_action_count)))
-        return 0
+        return None
 
     @property
     def social_activeness_by_generation(self) -> Dict[int, int]:
@@ -273,7 +280,7 @@ class ActionObserver(Observer):
                          self._negative_social_action_count_by_generation[generation]) /
                         self._non_donor_action_count_by_generation[generation])))
             else:
-                social_activeness_by_generation[generation] = 0
+                social_activeness_by_generation[generation] = None
         return social_activeness_by_generation
 
     @property
@@ -288,15 +295,15 @@ class ActionObserver(Observer):
                              self._negative_social_action_count_by_generation_and_player[generation][player]) /
                             (self._non_donor_action_count_by_generation_and_player[generation][player]))))
                 else:
-                    social_activeness_by_generation_and_player[generation][player] = 0
+                    social_activeness_by_generation_and_player[generation][player] = None
         return social_activeness_by_generation_and_player
 
     @property
-    def positivity_of_gossip_percentage(self) -> int:
+    def positivity_of_gossip_percentage(self):
         if self._positive_social_action_count + self._negative_social_action_count != 0:
             return int(round(100*(self._positive_social_action_count /
                                   (self._positive_social_action_count + self._negative_social_action_count))))
-        return 0
+        return None
 
     @property
     def positivity_of_gossip_percentage_by_generation(self) -> Dict[int, int]:
@@ -309,7 +316,7 @@ class ActionObserver(Observer):
                         (self._positive_social_action_count_by_generation[generation] +
                          self._negative_social_action_count_by_generation[generation]))))
             else:
-                positivity_of_gossip_percentage_by_generation[generation] = 0
+                positivity_of_gossip_percentage_by_generation[generation] = None
         return positivity_of_gossip_percentage_by_generation
 
     @property
@@ -326,7 +333,7 @@ class ActionObserver(Observer):
                          self._negative_social_action_count_by_generation_and_player[generation][player])
                     )))
                 else:
-                    positivity_of_gossip_percentage_by_generation_and_player[generation][player] = 0
+                    positivity_of_gossip_percentage_by_generation_and_player[generation][player] = None
         return positivity_of_gossip_percentage_by_generation_and_player
 
 

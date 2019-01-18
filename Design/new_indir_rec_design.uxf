@@ -3,7 +3,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>868</x>
+      <x>854</x>
       <y>315</y>
       <w>259</w>
       <h>210</h>
@@ -32,7 +32,7 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1099</x>
+      <x>1085</x>
       <y>518</y>
       <w>84</w>
       <h>161</h>
@@ -44,7 +44,7 @@ generation of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>987</x>
+      <x>973</x>
       <y>665</y>
       <w>280</w>
       <h>210</h>
@@ -74,7 +74,7 @@ generation of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>679</x>
+      <x>665</x>
       <y>735</y>
       <w>217</w>
       <h>196</h>
@@ -102,7 +102,7 @@ notify(action: Action): void
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>826</x>
+      <x>812</x>
       <y>119</y>
       <w>266</w>
       <h>70</h>
@@ -120,7 +120,7 @@ notify(action: Action): void
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>714</x>
+      <x>700</x>
       <y>147</y>
       <w>126</w>
       <h>28</h>
@@ -132,7 +132,7 @@ notify(action: Action): void
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>952</x>
+      <x>938</x>
       <y>182</y>
       <w>175</w>
       <h>147</h>
@@ -144,7 +144,7 @@ simulates &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>889</x>
+      <x>875</x>
       <y>826</y>
       <w>112</w>
       <h>28</h>
@@ -156,7 +156,7 @@ player of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>161</x>
+      <x>147</x>
       <y>504</y>
       <w>280</w>
       <h>287</h>
@@ -193,7 +193,7 @@ player of</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>441</x>
+      <x>427</x>
       <y>861</y>
       <w>140</w>
       <h>105</h>
@@ -214,7 +214,7 @@ Indir_Rec::Action
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>252</x>
+      <x>238</x>
       <y>861</y>
       <w>133</w>
       <h>70</h>
@@ -231,7 +231,7 @@ Idle
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>168</x>
+      <x>154</x>
       <y>1022</y>
       <w>238</w>
       <h>273</h>
@@ -266,7 +266,7 @@ Idle
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>196</x>
+      <x>182</x>
       <y>1323</y>
       <w>168</w>
       <h>56</h>
@@ -282,7 +282,7 @@ Defect
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>469</x>
+      <x>455</x>
       <y>1274</y>
       <w>168</w>
       <h>56</h>
@@ -298,7 +298,7 @@ Negative
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>434</x>
+      <x>420</x>
       <y>1022</y>
       <w>238</w>
       <h>224</h>
@@ -328,7 +328,7 @@ Negative
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>714</x>
+      <x>700</x>
       <y>1022</y>
       <w>238</w>
       <h>119</h>
@@ -349,7 +349,7 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>294</x>
+      <x>280</x>
       <y>959</y>
       <w>203</w>
       <h>77</h>
@@ -361,7 +361,7 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>504</x>
+      <x>490</x>
       <y>959</y>
       <w>91</w>
       <h>77</h>
@@ -373,7 +373,7 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>525</x>
+      <x>511</x>
       <y>959</y>
       <w>266</w>
       <h>77</h>
@@ -385,7 +385,7 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>476</x>
+      <x>462</x>
       <y>1239</y>
       <w>126</w>
       <h>49</h>
@@ -397,7 +397,7 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>231</x>
+      <x>217</x>
       <y>1288</y>
       <w>133</w>
       <h>49</h>
@@ -409,7 +409,7 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>378</x>
+      <x>364</x>
       <y>903</y>
       <w>77</w>
       <h>28</h>
@@ -421,7 +421,7 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>574</x>
+      <x>560</x>
       <y>896</y>
       <w>119</w>
       <h>28</h>
@@ -433,7 +433,7 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>574</x>
+      <x>560</x>
       <y>868</y>
       <w>462</w>
       <h>105</h>
@@ -445,7 +445,7 @@ Negative
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>357</x>
+      <x>343</x>
       <y>784</y>
       <w>224</w>
       <h>91</h>
@@ -457,7 +457,7 @@ uses &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>623</x>
+      <x>609</x>
       <y>616</y>
       <w>161</w>
       <h>133</h>
@@ -469,7 +469,7 @@ uses &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>784</x>
+      <x>770</x>
       <y>518</y>
       <w>224</w>
       <h>70</h>
@@ -481,7 +481,7 @@ uses &gt;</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>777</x>
+      <x>763</x>
       <y>616</y>
       <w>224</w>
       <h>77</h>
@@ -493,7 +493,7 @@ uses &gt;</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>455</x>
+      <x>441</x>
       <y>0</y>
       <w>266</w>
       <h>357</h>
@@ -536,7 +536,7 @@ Dict[int:Dict[int:int]]
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>385</x>
+      <x>371</x>
       <y>266</y>
       <w>84</w>
       <h>252</h>
@@ -548,7 +548,7 @@ Dict[int:Dict[int:int]]
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>434</x>
+      <x>420</x>
       <y>574</y>
       <w>119</w>
       <h>28</h>
@@ -560,7 +560,7 @@ Dict[int:Dict[int:int]]
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>539</x>
+      <x>525</x>
       <y>553</y>
       <w>252</w>
       <h>70</h>
@@ -576,7 +576,7 @@ IndirRec::Observer
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>490</x>
+      <x>476</x>
       <y>413</y>
       <w>217</w>
       <h>70</h>
@@ -592,7 +592,7 @@ IndirRec::Observer
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>567</x>
+      <x>553</x>
       <y>476</y>
       <w>91</w>
       <h>91</h>
@@ -604,7 +604,7 @@ IndirRec::Observer
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>518</x>
+      <x>504</x>
       <y>350</y>
       <w>98</w>
       <h>77</h>
@@ -616,7 +616,7 @@ IndirRec::Observer
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>679</x>
+      <x>665</x>
       <y>350</y>
       <w>203</w>
       <h>42</h>
