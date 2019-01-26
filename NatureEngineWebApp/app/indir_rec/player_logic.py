@@ -129,10 +129,11 @@ class Player:
         :param change: The change in fitness to be applied
         :return: void
         """
+        start_fitness = self._fitness
         self._fitness += change
         if self._fitness < 0:
             self._fitness = 0
-            change = 0
+        change = self._fitness - start_fitness
         self.player_state.fitness_update = change
 
     @property
@@ -162,7 +163,7 @@ class Player:
             raise DecisionException(action_response.json()['message'])
         action_representation = action_response.json()['action']
         if action_representation['type'] == "gossip":
-            gossip: GossipContent = GossipContent.POSITIVE if action_representation['gossip'] == 'positive'\
+            gossip: GossipContent = GossipContent.POSITIVE if action_representation['value'] == 'positive'\
                 else GossipContent.NEGATIVE
             action: GossipAction = GossipAction(timepoint, self.id, self._generation_id, action_representation['about'],
                                                 action_representation['recipient'], gossip)
@@ -196,7 +197,6 @@ class Player:
         """
         if timepoint > 0 and timepoint-1 in self._percepts:
             percept_dict = {'percepts': self._percepts[timepoint-1]}
-            print(percept_dict)
             percept_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'percept/action/group',
                                                 json=percept_dict)
             if percept_response.status_code != 200:

@@ -7,6 +7,7 @@ from typing import List, Dict
 from .generation_logic import Generation
 import random
 from .observation_logic import Observer
+from .player_logic import Player
 
 
 class CommunityCreationException(Exception):
@@ -20,8 +21,8 @@ class Community:
     """A community encompasses a number of generations, a first generation is selected on construction, the next
     generations are then created using a reproduction algorithm"""
 
-    def __init__(self, strategies: List[Dict], observers: List[Observer] = None, num_of_onlookers: int = 5,
-                 num_of_generations: int = 10, length_of_generations: int = 30, mutation_chance: float = 0):
+    def __init__(self, strategies: List[Dict], num_of_onlookers: int = 5, num_of_generations: int = 10,
+                 length_of_generations: int = 30, mutation_chance: float = 0, observers: List[Observer] = None):
         """
         Set the parameters for the community and the initial set of players to simulate the community with
         :param strategies: The initial set of players to simulate the community
@@ -52,7 +53,7 @@ class Community:
         self._generation_size: int = 0
         for strategy in strategies:
             self._generation_size += strategy['count']
-        self._strategy_count_by_generation: List[List[Dict[str]]] = []
+        self._strategy_count_by_generation: List[List[Dict]] = []
         self._observers: List[Observer] = observers if observers is not None else []
 
     def get_id(self) -> int:
@@ -87,11 +88,11 @@ class Community:
         """
         return self._generations
 
-    def get_strategy_count_by_generation(self) -> List[List[Dict[str]]]:
+    def get_strategy_count_by_generation(self) -> List[List[Dict]]:
         """
         Get the count of each strategy by generation
         :return: The strategy count for each generation
-        :rtype: List[List[Dict[str]]]
+        :rtype: List[List[Dict]]]
         """
         return self._strategy_count_by_generation
 
@@ -110,12 +111,15 @@ class Community:
         :return: void
         """
         for i in range(self._num_of_generations):
-            generation = self._build_generation()
+            for observer in self._observers:
+                observer.add_generation(i)
+            generation = self._build_generation(i)
             generation.simulate()
+            self._current_time += self._length_of_generations
             self._strategy_count_by_generation.append(generation.get_strategy_count())
             self._generations.append(generation)
 
-    def _build_generation(self) -> Generation:
+    def _build_generation(self, gen_id: int) -> Generation:
         """
         Build a generation, if is is the first generation use the initial strategies, else reproduce from the old
          generation
@@ -123,12 +127,12 @@ class Community:
         :rtype: Generation
         """
         if len(self._generations) <= 0:
-            return Generation(self._first_strategies, len(self._generations), self._community_id, 0,
+            return Generation(self._first_strategies, gen_id, self._community_id, 0,
                               self._length_of_generations, self._num_of_onlookers, True, self._observers)
         else:
-            return self._reproduce()
+            return self._reproduce(gen_id)
 
-    def _reproduce(self) -> Generation:
+    def _reproduce(self, gen_id: int) -> Generation:
         """
         Use the last generation of players to build a new generation of players
         Uses the roulette wheel selection via stochastic acceptance outline by Lipowski et al. referenced in my report
@@ -152,9 +156,9 @@ class Community:
                 new_gen_size += 1
             else:
                 # If no mutation use stochastic acceptance
-                selected_player = random.choice(last_gen_players)
+                selected_player: Player = random.choice(last_gen_players)
                 if random.random() <= maximal_fitness:
-                    new_gen_strategies.append(selected_player.get_strategy())
+                    new_gen_strategies.append(selected_player.strategy)
                     new_gen_size += 1
-        return Generation(new_gen_strategies, len(self._generations), self._community_id, self._current_time,
+        return Generation(new_gen_strategies, gen_id, self._community_id, self._current_time,
                           self._current_time+self._length_of_generations, self._num_of_onlookers, False, self._observers)

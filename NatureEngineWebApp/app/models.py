@@ -4,6 +4,7 @@ __author__ = "James King adapted from Miguel Grinberg"
 
 from app import db
 from datetime import datetime
+from .indir_rec.action_logic import ActionType, GossipContent, InteractionContent
 
 
 class Match(db.Model):
@@ -76,3 +77,69 @@ class TournamentPlayer(db.Model):
     rank = db.Column(db.Integer)
     cooperation_rating = db.Column(db.Float)
     wins = db.Column(db.Integer)
+
+
+class ReputationCommunity(db.Model):
+    """The community which a game of indirect reciprocity is run on"""
+    id = db.Column(db.Integer, primary_key=True)
+    corrupted_observations = db.Column(db.Boolean, nullable=False)
+    number_of_onlookers = db.Column(db.Integer)
+    length_of_generations = db.Column(db.Integer)
+    mutation_chance = db.Column(db.Float)
+    cooperation_rate = db.Column(db.Integer)
+    social_activeness = db.Column(db.Integer)
+    positivity_of_gossip = db.Column(db.Integer)
+    fitness = db.Column(db.Integer)
+    generations = db.relationship('ReputationGeneration', backref='community', lazy='dynamic')
+    players = db.relationship('ReputationPlayer', backref='generation', lazy='dynamic')
+
+
+class ReputationGeneration(db.Model):
+    """A generation of players which interact with each others"""
+    community_id = db.Column(db.Integer, db.ForeignKey('reputationcommunity.id'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    start_point = db.Column(db.Integer)
+    end_point = db.Column(db.Integer)
+    cooperation_rate = db.Column(db.Integer)
+    social_activeness = db.Column(db.Integer)
+    positivity_of_gossip = db.Column(db.Integer)
+    fitness = db.Column(db.Integer)
+    players = db.relationship('ReputationPlayer', backref='generation', lazy='dynamic')
+
+
+class ReputationPlayer(db.Model):
+    """A player that has committed to actions based on their strategy and perception of the world"""
+    generation_id = db.Column(db.Integer, db.ForeignKey('reputationgeneration.id'), primary_key=True)
+    community_id = db.Column(db.Integer, db.ForeignKey('reputationcommunity.id'), primary_key=True)
+    id = db.Column(db.Integer)
+    cooperation_rate = db.Column(db.Integer)
+    social_activeness = db.Column(db.Integer)
+    positivity_of_gossip = db.Column(db.Integer)
+    fitness = db.Column(db.Integer)
+    strategy_name = db.Column(db.String, db.ForeignKey('reputationstrategy.name'))
+    strategy_options = db.Column(db.ARRAY(db.String), db.ForeignKey('reputationstrategy.options'))
+    actions = db.relationship('ReputationAction', backref='player', lazy='dynamic')
+
+
+class ReputationStrategy(db.Model):
+    """A possible strategy of a reputation game player"""
+    strategy_name = db.Column(db.String, primary_key=True)
+    strategy_options = db.Column(db.ARRAY(db.String), primary_key=True)
+
+
+class ReputationAction(db.Model):
+    """An action taken by a player in a reputation game"""
+    generation_id = db.Column(db.Integer, db.ForeignKey('reputationgeneration.id'), primary_key=True)
+    community_id = db.Column(db.Integer, db.ForeignKey('reputationcommunity.id'), primary_key=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('reputationplayer.id'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    timepoint = db.Column(db.Integer, nullable=False)
+    type = db.Column(db.Enum(ActionType), nullable=False)
+    gossiper = db.Column(db.Integer, db.ForeignKey('reputationplayer.id'), nullable=True)
+    about = db.Column(db.Integer, db.ForeignKey('reputationplayer.id'), nullable=True)
+    recipient = db.Column(db.Integer, db.ForeignKey('reputationplayer.id'), nullable=True)
+    gossip = db.Column(db.Enum(GossipContent), nullable=True)
+    donor = db.Column(db.Integer, db.ForeignKey('reputationplayer.id'), nullable=True)
+    onlookers = db.Column(db.ARRAY(db.Integer, db.ForeignKey('reputationplayer.id')), nullable=True)
+    action = db.Column(db.Enum(InteractionContent), nullable=True)
+

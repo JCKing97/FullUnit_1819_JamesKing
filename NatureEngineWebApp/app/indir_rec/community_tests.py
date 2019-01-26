@@ -16,7 +16,12 @@ class CommunityTest(unittest.TestCase):
     def setUpClass(cls):
         response = requests.get('http://127.0.0.1:8080/strategy')
         received_strategies = response.json()['strategies']
-        cls.strategies = [{'strategy': strategy, 'count': random.randint(0, 5)} for strategy in received_strategies]
+        cls.strat_count = 0
+        cls.strategies = []
+        for strategy in received_strategies:
+            count = random.randint(0, 5)
+            cls.strategies.append({'strategy': strategy, 'count': count})
+            cls.strat_count += count
         cls.pp = pprint.PrettyPrinter()
         cls.num_of_onlookers = random.randint(1, 20)
         cls.num_of_generations = random.randint(3, 8)
@@ -48,6 +53,9 @@ class CommunityTest(unittest.TestCase):
         self.assertEqual(self.num_of_generations, len(community.get_generations()))
         for generation in community.get_generations():
             self.assertEqual(self.length_of_generations, generation.get_end_point()-generation.get_start_point())
+            self.assertEqual(self.strat_count, len(generation.get_players()))
+
+
 
 
 

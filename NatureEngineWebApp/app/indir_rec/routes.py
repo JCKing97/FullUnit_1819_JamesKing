@@ -13,11 +13,10 @@ def reputation():
         return render_template('reputation.html', title='Reputation', strategies=strategies)
     if request.method == 'POST':
         strategy_counts = request.get_json()['strategy_counts']
-        players = []
+        player_count = 0
         for strategy in strategy_counts:
-            for i in range(0, strategy['count']):
-                players.append(strategy['name'])
-        if 2 < len(players) < 50:
+            player_count += strategy['count']
+        if 2 < player_count < 50:
             return jsonify({'url': url_for('indir_rec.reputation_finished')})
         return render_template('reputation.html', title='Reputation', strategies=strategies)
 

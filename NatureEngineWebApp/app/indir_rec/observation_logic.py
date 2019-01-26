@@ -50,8 +50,8 @@ class ActionObserver(Observer):
     def __init__(self, community: int, generations: List[int] = None):
         self._community: int = community
         self._corrupted_observations: bool = False
-        self._actions = []
-        self._interactions = []
+        self._actions: Dict[int, List[Action]] = {}
+        self._interactions: Dict[int, List[Action]] = {}
         self._cooperation_count = 0
         self._defection_count = 0
         self._positive_social_action_count = 0
@@ -66,10 +66,10 @@ class ActionObserver(Observer):
                         raise RecordingError("Identical generation ids in constructor")
             self._players: Dict[int, List[int]] = {generation: [] for generation in generations}
             self._generations: List[int] = generations
-            self._actions_by_generation: Dict[int, List[Action]] = {generation: [] for generation in generations}
-            self._actions_by_generation_and_player: Dict[int, Dict[int, List[Action]]] = {generation: {} for generation in generations}
-            self._interactions_by_generation: Dict[int, List[InteractionAction]] = {generation: [] for generation in generations}
-            self._interactions_by_generation_and_player: Dict[int, Dict[int, List[InteractionAction]]] = {generation: {} for generation in generations}
+            self._actions_by_generation: Dict[int, Dict[int, List[Action]]] = {generation: {} for generation in generations}
+            self._actions_by_generation_and_player: Dict[int, Dict[int, Dict[int, List[Action]]]] = {generation: {} for generation in generations}
+            self._interactions_by_generation: Dict[int, Dict[int, List[InteractionAction]]] = {generation: {} for generation in generations}
+            self._interactions_by_generation_and_player: Dict[int, Dict[int, Dict[int, List[InteractionAction]]]] = {generation: {} for generation in generations}
             self._cooperation_count_by_generation: Dict[int, int] = {generation: 0 for generation in generations}
             self._defection_count_by_generation: Dict[int, int] = {generation: 0 for generation in generations}
             self._cooperation_count_by_generation_and_player: Dict[int, Dict[int, int]] = {generation: {} for generation in generations}
@@ -88,10 +88,10 @@ class ActionObserver(Observer):
         else:
             self._generations: List[int] = []
             self._players: Dict[int, List[int]] = {}
-            self._actions_by_generation: Dict[int, List[Action]] = {}
-            self._actions_by_generation_and_player: Dict[int, Dict[int, List[Action]]] = {}
-            self._interactions_by_generation: Dict[int, List[InteractionAction]] = {}
-            self._interactions_by_generation_and_player: Dict[int, Dict[int, List[InteractionAction]]] = {}
+            self._actions_by_generation: Dict[int, Dict[int, List[Action]]] = {}
+            self._actions_by_generation_and_player: Dict[int, Dict[int, Dict[int, List[Action]]]] = {}
+            self._interactions_by_generation: Dict[int, Dict[int, List[InteractionAction]]] = {}
+            self._interactions_by_generation_and_player: Dict[int, Dict[int, Dict[int, List[InteractionAction]]]] = {}
             self._cooperation_count_by_generation: Dict[int, int] = {}
             self._defection_count_by_generation: Dict[int, int] = {}
             self._cooperation_count_by_generation_and_player: Dict[int, Dict[int, int]] = {}
@@ -123,9 +123,9 @@ class ActionObserver(Observer):
             raise RecordingError("Attempted to add identical generation id in append")
         self._generations.append(generation)
         self._players[generation] = []
-        self._actions_by_generation[generation] = []
+        self._actions_by_generation[generation] = {}
         self._actions_by_generation_and_player[generation] = {}
-        self._interactions_by_generation[generation] = []
+        self._interactions_by_generation[generation] = {}
         self._interactions_by_generation_and_player[generation] = {}
         self._cooperation_count_by_generation[generation] = 0
         self._defection_count_by_generation[generation] = 0
@@ -150,8 +150,8 @@ class ActionObserver(Observer):
             self._corrupted_observations = True
             raise RecordingError("Attempted to add a player to a non-existent generation")
         self._players[generation].append(player)
-        self._actions_by_generation_and_player[generation][player] = []
-        self._interactions_by_generation_and_player[generation][player] = []
+        self._actions_by_generation_and_player[generation][player] = {}
+        self._interactions_by_generation_and_player[generation][player] = {}
         self._cooperation_count_by_generation_and_player[generation][player] = 0
         self._defection_count_by_generation_and_player[generation][player] = 0
         self._idle_action_count_by_generation_and_player[generation][player] = 0
@@ -184,7 +184,8 @@ class ActionObserver(Observer):
         return self._interactions_by_generation_and_player
 
     def update(self, player_state: PlayerState) -> None:
-        self._update_actions(player_state.new_action)
+        if player_state.new_action is not None:
+            self._update_actions(player_state.new_action)
 
     def _update_actions(self, action):
         if Action not in action.__class__.__mro__:
@@ -196,13 +197,9 @@ class ActionObserver(Observer):
         if action.actor not in self._players[action.generation]:
             self._corrupted_observations = True
             raise RecordingError("Attempted to add an action that cannot be attributed to an existing player")
-        self._actions.append(action)
-        self._actions_by_generation[action.generation].append(action)
-        self._actions_by_generation_and_player[action.generation][action.actor].append(action)
+        self._add_action(action)
         if action.type is ActionType.INTERACTION:
-            self._interactions.append(action)
-            self._interactions_by_generation[action.generation].append(action)
-            self._interactions_by_generation_and_player[action.generation][action.actor].append(action)
+            self._add_interaction(action)
             if action.action == InteractionContent.COOPERATE:
                 self._cooperation_count += 1
                 self._cooperation_count_by_generation[action.generation] += 1
@@ -227,6 +224,36 @@ class ActionObserver(Observer):
             self._non_donor_action_count += 1
             self._non_donor_action_count_by_generation[action.generation] += 1
             self._non_donor_action_count_by_generation_and_player[action.generation][action.actor] += 1
+
+    def _add_action(self, action):
+        if action.timepoint in self._actions:
+            self._actions[action.timepoint].append(action)
+        else:
+            self._actions[action.timepoint] = [action]
+        if action.timepoint in self._actions_by_generation[action.generation]:
+            self._actions_by_generation[action.generation][action.timepoint].append(action)
+        else:
+            self._actions_by_generation[action.generation][action.timepoint] = [action]
+        if action.timepoint in self._actions_by_generation_and_player[action.generation][action.actor]:
+            self._actions_by_generation_and_player[action.generation][action.actor][action.timepoint].append(action)
+        else:
+            self._actions_by_generation_and_player[action.generation][action.actor][action.timepoint] = [action]
+
+    def _add_interaction(self, action):
+        if action.timepoint in self._interactions:
+            self._interactions[action.timepoint].append(action)
+        else:
+            self._interactions[action.timepoint] = [action]
+        if action.timepoint in self._interactions_by_generation[action.generation]:
+            self._interactions_by_generation[action.generation][action.timepoint].append(action)
+        else:
+            self._interactions_by_generation[action.generation][action.timepoint] = [action]
+        if action.timepoint in self._interactions_by_generation_and_player[action.generation][action.actor]:
+            self._interactions_by_generation_and_player[action.generation][action.actor][action.timepoint]. \
+                append(action)
+        else:
+            self._interactions_by_generation_and_player[action.generation][action.actor][action.timepoint] = \
+                [action]
 
     @property
     def cooperation_rate(self):
@@ -381,17 +408,27 @@ class PlayerObserver(Observer):
         self._fitness_by_generation[generation] = 0
         self._fitness_by_generation_and_player[generation] = {}
 
+    @property
+    def players(self) -> Dict[int, List[int]]:
+        return self._players
+
     def add_player(self, generation: int, player: int) -> None:
-        if generation not in self._generations or generation not in self._players:
+        if generation not in self._generations or generation not in self._players or \
+                (generation in self._players and player in self.players[generation]):
             self._corrupted_observations = True
             raise RecordingError("Attempted to add a player to a non-existent generation")
         self._players[generation].append(player)
         self._fitness_by_generation_and_player[generation][player] = 0
 
     def update(self, player_state: PlayerState) -> None:
+        if player_state.generation not in self._generations or player_state.generation not in self.players or (
+                player_state.generation in self._players and player_state.player
+                not in self._players[player_state.generation]):
+            self._corrupted_observations = True
+            raise RecordingError("Tried to update a player state of a player not added to the observer")
         self._update_fitness(player_state.fitness_update, player_state.generation, player_state.player)
 
-    def _update_fitness(self, fitness_update: int, generation: int, player:int):
+    def _update_fitness(self, fitness_update: int, generation: int, player: int) -> None:
         self._community_fitness += fitness_update
         self._fitness_by_generation[generation] += fitness_update
         self._fitness_by_generation_and_player[generation][player] += fitness_update

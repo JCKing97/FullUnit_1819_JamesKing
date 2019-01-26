@@ -9,6 +9,7 @@ from .action_logic import Action, ActionType, GossipAction, InteractionAction
 from .observation_logic import Observer
 import copy
 import random
+import csv
 
 
 class GenerationCreationException(Exception):
@@ -81,6 +82,8 @@ class Generation:
                             try:
                                 player = Player(player_id, strategy['strategy'], self._community_id,
                                                 self._generation_id, self._observers)
+                                for observer in self._observers:
+                                    observer.add_player(self._generation_id, player_id)
                                 self._players.append(player)
                                 self._id_player_map[player.id] = player
                                 player_id += 1
@@ -99,6 +102,8 @@ class Generation:
                     self._strategies.append({'strategy': strategy, 'count': 1})
                 try:
                     player = Player(player_id, strategy, self._community_id, self._generation_id, self._observers)
+                    for observer in self._observers:
+                        observer.add_player(self._generation_id, player_id)
                     self._players.append(player)
                     self._id_player_map[player.id] = player
                     player_id += 1

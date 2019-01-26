@@ -6,7 +6,8 @@ import unittest
 import requests
 from flask import current_app
 from .generation_logic import Generation, GenerationCreationException, SimulationException
-from .action_logic import InteractionAction, InteractionContent
+from .action_logic import InteractionAction, InteractionContent, ActionType
+from .observation_logic import ActionObserver
 import random
 import pprint
 
@@ -27,6 +28,7 @@ class GenerationTest(unittest.TestCase):
         cls.start_point = random.randint(0, 10)
         cls.end_point = random.randint(15, 25)
         cls.initial_gen = True
+        cls.pp = pprint.PrettyPrinter()
 
     def setUp(self):
         self.app = create_app(TestConfig)
@@ -91,84 +93,92 @@ class GenerationTest(unittest.TestCase):
         except GenerationCreationException:
             self.fail("Should not have failed to create generation")
 
-    # def test_simulate(self):
-    #     try:
-    #         generation = Generation(self.initial_strategies, 0, self.community, self.start_point, self.end_point,
-    #                                 self.num_of_onlookers, self.initial_gen)
-    #         generation.simulate()
-    #         num_of_players = 0
-    #         for strategy in self.initial_strategies:
-    #             num_of_players += strategy['count']
-    #         actions = generation._actions
-    #         timepoints = 0
-    #         for timepoint in actions:
-    #             timepoints += 1
-    #             self.assertEqual(num_of_players, len(actions[timepoint]))
-    #         self.assertEqual(timepoints, self.end_point - self.start_point)
-    #         percepts = {}
-    #         for player in generation.get_players():
-    #             for timepoint in player._percepts:
-    #                 if timepoint in percepts:
-    #                     for percept in player._percepts[timepoint]:
-    #                         percepts[timepoint].append(percept)
-    #                 else:
-    #                     percepts[timepoint] = player._percepts[timepoint]
-    #         self.assertEqual(self.end_point-self.start_point, len(percepts))
-    #         for timepoint in percepts:
-    #             # Calculate number of percepts there should be
-    #             num_of_expected_percepts = 0
-    #             if timepoint in actions:
-    #                 num_of_expected_percepts += 2 + self.num_of_onlookers
-    #                 for action in actions[timepoint]:
-    #                     if action['type'] == 'gossip':
-    #                         num_of_expected_percepts += 1
-    #             self.assertEqual(num_of_expected_percepts, len(percepts[timepoint]))
-    #         print("Actions: ")
-    #         self.pp.pprint(actions)
-    #         print("Percepts: ")
-    #         self.pp.pprint(percepts)
-    #     except GenerationCreationException:
-    #         self.fail("Should not have failed to create generation")
-    #     except SimulationException:
-    #         self.fail("Should not fail to simulate")
-    #
-    # def test_simulate_non_initial(self):
-    #     try:
-    #         generation = Generation(self.non_initial_strategies, 0, self.community, self.start_point, self.end_point,
-    #                                 self.num_of_onlookers, False)
-    #         generation.simulate()
-    #         num_of_players = len(self.non_initial_strategies)
-    #         actions = generation._actions
-    #         timepoints = 0
-    #         for timepoint in actions:
-    #             timepoints += 1
-    #             self.assertEqual(num_of_players, len(actions[timepoint]))
-    #         self.assertEqual(timepoints, self.end_point - self.start_point)
-    #         percepts = {}
-    #         for player in generation.get_players():
-    #             for timepoint in player._percepts:
-    #                 if timepoint in percepts:
-    #                     for percept in player._percepts[timepoint]:
-    #                         percepts[timepoint].append(percept)
-    #                 else:
-    #                     percepts[timepoint] = player._percepts[timepoint]
-    #         self.assertEqual(self.end_point-self.start_point, len(percepts))
-    #         for timepoint in percepts:
-    #             # Calculate number of percepts there should be
-    #             num_of_expected_percepts = 0
-    #             if timepoint in actions:
-    #                 num_of_expected_percepts += 2 + self.num_of_onlookers
-    #                 for action in actions[timepoint]:
-    #                     if action['type'] == 'gossip':
-    #                         num_of_expected_percepts += 1
-    #             self.assertEqual(num_of_expected_percepts, len(percepts[timepoint]))
-    #         print("Actions: ")
-    #         self.pp.pprint(actions)
-    #         print("Percepts: ")
-    #         self.pp.pprint(percepts)
-    #     except GenerationCreationException:
-    #         self.fail("Should not have failed to create generation")
-    #     except SimulationException:
-    #         self.fail("Should not fail to simulate")
-    #
-    #
+    def test_simulate(self):
+        try:
+            action_observer = ActionObserver(self.community, [0])
+            generation = Generation(self.initial_strategies, 0, self.community, self.start_point, self.end_point,
+                                    self.num_of_onlookers, self.initial_gen, [action_observer])
+            generation.simulate()
+            num_of_players = 0
+            for strategy in self.initial_strategies:
+                num_of_players += strategy['count']
+            actions = action_observer.actions
+            timepoints = 0
+            for timepoint in actions:
+                timepoints += 1
+                self.assertEqual(num_of_players, len(actions[timepoint]))
+            self.assertEqual(timepoints, self.end_point - self.start_point)
+            percepts = {}
+            for player in generation.get_players():
+                for timepoint in player._percepts:
+                    if timepoint in percepts:
+                        for percept in player._percepts[timepoint]:
+                            percepts[timepoint].append(percept)
+                    else:
+                        percepts[timepoint] = player._percepts[timepoint]
+            self.assertEqual(self.end_point-self.start_point, len(percepts))
+            for timepoint in percepts:
+                # Calculate number of percepts there should be
+                num_of_expected_percepts = 0
+                if timepoint in actions:
+                    num_of_expected_percepts += 2 + self.num_of_onlookers
+                    for action in actions[timepoint]:
+                        if action.type is ActionType.GOSSIP:
+                            num_of_expected_percepts += 1
+                        elif action.type is ActionType.INTERACTION:
+                            interaction: InteractionAction = action
+                            num_of_expected_percepts += len(interaction.onlookers)
+                self.assertEqual(num_of_expected_percepts, len(percepts[timepoint]))
+            print("Actions: ")
+            self.pp.pprint(actions)
+            print("Percepts: ")
+            self.pp.pprint(percepts)
+        except GenerationCreationException:
+            self.fail("Should not have failed to create generation")
+        except SimulationException:
+            self.fail("Should not fail to simulate")
+
+    def test_simulate_non_initial(self):
+        try:
+            action_observer = ActionObserver(self.community, [0])
+            generation = Generation(self.non_initial_strategies, 0, self.community, self.start_point, self.end_point,
+                                    self.num_of_onlookers, False, [action_observer])
+            generation.simulate()
+            num_of_players = len(self.non_initial_strategies)
+            actions = action_observer.actions
+            timepoints = 0
+            for timepoint in actions:
+                timepoints += 1
+                self.assertEqual(num_of_players, len(actions[timepoint]))
+            self.assertEqual(timepoints, self.end_point - self.start_point)
+            percepts = {}
+            for player in generation.get_players():
+                for timepoint in player._percepts:
+                    if timepoint in percepts:
+                        for percept in player._percepts[timepoint]:
+                            percepts[timepoint].append(percept)
+                    else:
+                        percepts[timepoint] = player._percepts[timepoint]
+            self.assertEqual(self.end_point-self.start_point, len(percepts))
+            for timepoint in percepts:
+                # Calculate number of percepts there should be
+                num_of_expected_percepts = 0
+                if timepoint in actions:
+                    num_of_expected_percepts += 2 + self.num_of_onlookers
+                    for action in actions[timepoint]:
+                        if action.type is ActionType.GOSSIP:
+                            num_of_expected_percepts += 1
+                        elif action.type is ActionType.INTERACTION:
+                            interaction: InteractionAction = action
+                            num_of_expected_percepts += len(interaction.onlookers)
+                self.assertEqual(num_of_expected_percepts, len(percepts[timepoint]))
+            print("Actions: ")
+            self.pp.pprint(actions)
+            print("Percepts: ")
+            self.pp.pprint(percepts)
+        except GenerationCreationException:
+            self.fail("Should not have failed to create generation")
+        except SimulationException:
+            self.fail("Should not fail to simulate")
+
+

@@ -25,6 +25,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/babel">
 
+
         class SelectAgents extends React.Component{
             state = {
                 strategies: {{ strategies|tojson|safe }},
@@ -140,14 +141,22 @@
                             <h3>Selected Players</h3>
                             <div className="row border-box-sizing">
                                 <div className="col-md-2"><h4>Count</h4></div>
-                                <div className="col-md-4 center-block"><h4>Name</h4></div>
-                                <div className="col-md-4 center-block"><h4>Options</h4></div>
+                                <div className="col-md-8 center-block"><h4>Strategy</h4></div>
                                 <div className="col-md-2"> </div>
                             </div>
                             { this.props.selected.map(player => <SelectedPlayer key={player.id} count={player.count} name={player.name} options={player.options} remove={this.props.remove}/>) }
                         </div>
                     </div>
                 )
+            }
+        }
+
+        function displayProperty(value, propertyIndex, propertyArray){
+            if (propertyIndex >= propertyArray.length-1) {
+                return value;
+            }
+            else {
+               return value + ", "
             }
         }
 
@@ -168,11 +177,8 @@
                         <div className="col-md-2">
                             { this.props.count }
                         </div>
-                        <div className="col-md-4 center-block">
-                            { this.state.name }
-                        </div>
-                        <div className="col-md-4 center-block">
-                            {this.state.options.map(option => <span className="badge m-2">{ option }</span>)}
+                        <div className="col-md-8 center-block">
+                            <b>{ this.state.name }</b><br/>properties: {this.state.options.map(displayProperty)}
                         </div>
                         <div className="col-md-2">
                             <button onClick={() => this.props.remove(this.state.name, this.state.options) } className="btn btn-danger btn-sm">Remove</button>
@@ -191,8 +197,7 @@
                         <div className="container-fluid">
                             <h3>Strategies</h3>
                             <div className="row border-box-sizing">
-                                <div className="col-md-5 center-block"><h4>Name</h4></div>
-                                <div className="col-md-5 center-block"><h4>Options</h4></div>
+                                <div className="col-md-10 center-block"><h4>Strategy</h4></div>
                                 <div className="col-md-2"> </div>
                             </div>
                             { this.props.strategies.map(strategy => <Strategy key={strategy.id} name={strategy.name} options={strategy.options} add={this.props.add}/>) }
@@ -216,11 +221,8 @@
                 };
                 return (
                     <div className="row border-box-sizing" style={styles}>
-                        <div className="col-md-5 center-block">
-                            { this.state.name }
-                        </div>
-                        <div className="col-md-5 center-block">
-                            {this.state.options.map(option => <span className="badge m-2">{ option }</span>)}
+                        <div className="col-md-10 center-block">
+                            <b>{ this.state.name }</b><br/>properties: {this.state.options.map(displayProperty)}
                         </div>
                         <div className="col-md-2">
                             <button onClick={() => this.props.add(this.state.name, this.state.options) } className="btn btn-primary btn-sm">Add</button>
