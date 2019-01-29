@@ -30,7 +30,7 @@ def create_app(config_class=Config):
     app.config.from_object(Config)
 
     app.redis = Redis.from_url(app.config['REDIS_URL'])
-    app.task_queue = rq.Queue('nature_engine_tasks', connection=app.redis)
+    app.task_queue = rq.Queue('nature_engine_tasks', connection=app.redis, default_timeout=400)
 
     db.init_app(app)
     migrate.init_app(app, db)

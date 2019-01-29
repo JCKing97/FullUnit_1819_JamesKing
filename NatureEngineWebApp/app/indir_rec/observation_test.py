@@ -11,7 +11,8 @@ from .player_logic import PlayerState, Player
 from app import create_app
 from tests.test_config import TestConfig
 import requests
-from flask import current_app
+from .indir_rec_config import Config
+from typing import Dict, List
 
 
 class MockPlayerState(PlayerState):
@@ -113,7 +114,7 @@ class ActionObserverTest(unittest.TestCase):
                                                                      "observations")
 
     def test_get_actions(self):
-        self.assertEqual([], self.action_observer.actions, "Should contain no actions at the start")
+        self.assertEqual({}, self.action_observer.actions, "Should contain no actions at the start")
 
     def test_update_action(self):
         self.action_observer.add_generation(self.generation)
@@ -122,7 +123,7 @@ class ActionObserverTest(unittest.TestCase):
         self.player_state.attach(self.action_observer)
         self.player_state.new_action = action
         self.action_observer.update(self.player_state)
-        self.assertEqual([action], self.action_observer.actions, "Should contain the one action that has been added")
+        self.assertEqual({action.timepoint: [action]}, self.action_observer.actions, "Should contain the one action that has been added")
 
     def test_update_action_non_existent_player(self):
         self.action_observer.add_generation(5)
@@ -132,7 +133,7 @@ class ActionObserverTest(unittest.TestCase):
             self.action_observer.update(self.player_state)
         self.assertTrue(self.action_observer.corrupted_observations, "Should have recorded that observations"
                                                                      "may be corrupted")
-        self.assertEqual([], self.action_observer.actions, "Should contain no actions as non-existent player")
+        self.assertEqual({}, self.action_observer.actions, "Should contain no actions as non-existent player")
 
     def test_update_action_non_existent_generation(self):
         action = IdleAction(3, 5, 7)
@@ -141,10 +142,10 @@ class ActionObserverTest(unittest.TestCase):
             self.action_observer.update(self.player_state)
         self.assertTrue(self.action_observer.corrupted_observations, "Should have recorded that observations"
                                                                      "may be corrupted")
-        self.assertEqual([], self.action_observer.actions, "Should contain no actions as non-existent generation")
+        self.assertEqual({}, self.action_observer.actions, "Should contain no actions as non-existent generation")
 
     def test_initial_actions(self):
-        self.assertEqual([], self.action_observer.actions)
+        self.assertEqual({}, self.action_observer.actions)
         self.assertEqual({}, self.action_observer.actions_by_generation)
         self.assertEqual({}, self.action_observer.actions_by_generation_and_player)
         self.action_observer.add_generation(2)
@@ -154,8 +155,8 @@ class ActionObserverTest(unittest.TestCase):
         self.action_observer.add_player(2, 12)
         self.action_observer.add_player(6, 8)
         self.action_observer.add_player(6, 34)
-        self.assertEqual({2: [], 6: []}, self.action_observer.actions_by_generation)
-        self.assertEqual({2: {8: [], 9: [], 12: []}, 6: {8: [], 34: []}},
+        self.assertEqual({2: {}, 6: {}}, self.action_observer.actions_by_generation)
+        self.assertEqual({2: {8: {}, 9: {}, 12: {}}, 6: {8: {}, 34: {}}},
                          self.action_observer.actions_by_generation_and_player)
 
     def test_add_actions(self):
@@ -172,22 +173,40 @@ class ActionObserverTest(unittest.TestCase):
                          MockPlayerState(8, 2, [self.action_observer]), MockPlayerState(8, 42, [self.action_observer])]
         actions = [IdleAction(3, 8, 7), IdleAction(7, 8, 7), IdleAction(5, 12, 7), IdleAction(4, 2, 8),
                    IdleAction(3, 2, 8), IdleAction(6, 2, 8)]
+        actions_by_timepoint: Dict[int, List[Action]] = {}
+        actions_by_gen_and_timepoint: Dict[int, Dict[int, List[Action]]] = {}
+        actions_by_gen_player_and_timepoint: Dict[int, Dict[int, Dict[int, Action]]] = {}
+        for player_state in player_states:
+            if player_state.generation not in actions_by_gen_and_timepoint:
+                actions_by_gen_and_timepoint[player_state.generation] = {}
+            if player_state.generation not in actions_by_gen_player_and_timepoint:
+                actions_by_gen_player_and_timepoint[player_state.generation] = {}
+            if player_state.player not in actions_by_gen_player_and_timepoint[player_state.generation]:
+                actions_by_gen_player_and_timepoint[player_state.generation][player_state.player] = {}
         for action in actions:
+            if action.timepoint in actions_by_timepoint:
+                actions_by_timepoint[action.timepoint].append(action)
+            else:
+                actions_by_timepoint[action.timepoint] = [action]
+            if action.timepoint in actions_by_gen_and_timepoint[action.generation]:
+                actions_by_gen_and_timepoint[action.generation][action.timepoint].append(action)
+            else:
+                actions_by_gen_and_timepoint[action.generation][action.timepoint] = [action]
+            actions_by_gen_player_and_timepoint[action.generation][action.actor][action.timepoint] = action
             for player_state in player_states:
                 if player_state.player == action.actor and action.generation == player_state.generation:
                     player_state.new_action = action
                     self.action_observer.update(player_state)
-        self.assertEqual(actions, self.action_observer.actions, "Should be the same as the actions received "
-                                                                "from updates")
-        self.assertEqual({7: actions[0:3], 8: actions[3:6]}, self.action_observer.actions_by_generation,
+        self.assertEqual(actions_by_timepoint, self.action_observer.actions,
+                         "Should be the same as the actions received from updates")
+        self.assertEqual(actions_by_gen_and_timepoint, self.action_observer.actions_by_generation,
                          "Should have formatted correctly into generations")
-        self.assertEqual({7: {8: actions[0:2], 9: [], 12: [actions[2]]},
-                          8: {1: [], 2: actions[3:6], 42: []}},
+        self.assertEqual(actions_by_gen_player_and_timepoint,
                          self.action_observer.actions_by_generation_and_player, "Should have formatted correctly into "
                                                                                 "generation and players")
 
     def test_initial_interactions(self):
-        self.assertEqual([], self.action_observer.interactions)
+        self.assertEqual({}, self.action_observer.interactions)
         self.assertEqual({}, self.action_observer.interactions_by_generation)
         self.assertEqual({}, self.action_observer.interactions_by_generation_and_player)
         self.action_observer.add_generation(2)
@@ -197,8 +216,8 @@ class ActionObserverTest(unittest.TestCase):
         self.action_observer.add_player(2, 12)
         self.action_observer.add_player(6, 8)
         self.action_observer.add_player(6, 34)
-        self.assertEqual({2: [], 6: []}, self.action_observer.interactions_by_generation)
-        self.assertEqual({2: {8: [], 9: [], 12: []}, 6: {8: [], 34: []}},
+        self.assertEqual({2: {}, 6: {}}, self.action_observer.interactions_by_generation)
+        self.assertEqual({2: {8: {}, 9: {}, 12: {}}, 6: {8: {}, 34: {}}},
                          self.action_observer.interactions_by_generation_and_player)
 
     def test_add_interactions(self):
@@ -221,18 +240,31 @@ class ActionObserverTest(unittest.TestCase):
                    InteractionAction(4, 2, 8, 1, InteractionContent.COOPERATE),
                    InteractionAction(6, 2, 8, 1, InteractionContent.COOPERATE),
                    InteractionAction(9, 42, 8, 2, InteractionContent.DEFECT)]
+        actions_by_timepoint: Dict[int, Action] = {}
+        actions_by_gen_and_timepoint: Dict[int, Dict[int, Action]] = {}
+        actions_by_gen_player_and_timepoint: Dict[int, Dict[int, Dict[int, Action]]] = {}
+        for player_state in player_states:
+            if player_state.generation not in actions_by_gen_and_timepoint:
+                actions_by_gen_and_timepoint[player_state.generation] = {}
+            if player_state.generation not in actions_by_gen_player_and_timepoint:
+                actions_by_gen_player_and_timepoint[player_state.generation] = {}
+            if player_state.player not in actions_by_gen_player_and_timepoint[player_state.generation]:
+                actions_by_gen_player_and_timepoint[player_state.generation][player_state.player] = {}
         for action in actions:
+            actions_by_timepoint[action.timepoint] = action
+            actions_by_gen_and_timepoint[action.generation][action.timepoint] = action
+            actions_by_gen_player_and_timepoint[action.generation][action.actor][action.timepoint] = action
             for player_state in player_states:
                 if player_state.player == action.actor and action.generation == player_state.generation:
                     player_state.new_action = action
                     self.action_observer.update(player_state)
-        self.assertEqual(actions, self.action_observer.interactions)
-        self.assertEqual({7: actions[0:4], 8: actions[4:8]}, self.action_observer.interactions_by_generation,
+        self.assertEqual(actions_by_timepoint, self.action_observer.interactions,
+                         "Should be the same as the actions received from updates")
+        self.assertEqual(actions_by_gen_and_timepoint, self.action_observer.interactions_by_generation,
                          "Should have formatted correctly into generations")
-        self.assertEqual({7: {8: actions[0:2], 9: actions[2:4], 12: []},
-                          8: {1: [actions[4]], 2: actions[5:7], 42: [actions[7]]}},
+        self.assertEqual(actions_by_gen_player_and_timepoint,
                          self.action_observer.interactions_by_generation_and_player,
-                         "Should have formatted correctly into generations and players")
+                         "Should have formatted correctly into generation and players")
 
     def test_initial_cooperation_rate(self):
         self.assertEqual(None, self.action_observer.cooperation_rate)
@@ -402,27 +434,53 @@ class ActionObserverTest(unittest.TestCase):
                    InteractionAction(6, 2, 8, 1, InteractionContent.COOPERATE),
                    GossipAction(3, 42, 8, 1, 2, GossipContent.POSITIVE), IdleAction(3, 42, 8),
                    InteractionAction(9, 42, 8, 2, InteractionContent.DEFECT)]
-        interactions = [action for action in actions if type(action) is InteractionAction]
+        actions_by_timepoint: Dict[int, List[Action]] = {}
+        interactions: Dict[int, InteractionAction] = {}
+        actions_by_gen_and_timepoint: Dict[int, Dict[int, List[Action]]] = {}
+        interactions_by_gen: Dict[int, Dict[int, InteractionAction]] ={}
+        actions_by_gen_player_and_timepoint: Dict[int, Dict[int, Dict[int, Action]]] = {}
+        interactions_by_gen_and_player: Dict[int, Dict[int, Dict[int, InteractionAction]]] = {}
+        for player_state in player_states:
+            if player_state.generation not in actions_by_gen_and_timepoint:
+                actions_by_gen_and_timepoint[player_state.generation] = {}
+                interactions_by_gen[player_state.generation] = {}
+            if player_state.generation not in actions_by_gen_player_and_timepoint:
+                actions_by_gen_player_and_timepoint[player_state.generation] = {}
+                interactions_by_gen_and_player[player_state.generation] = {}
+            if player_state.player not in actions_by_gen_player_and_timepoint[player_state.generation]:
+                actions_by_gen_player_and_timepoint[player_state.generation][player_state.player] = {}
+                interactions_by_gen_and_player[player_state.generation][player_state.player] = {}
         for action in actions:
+            if action.type == ActionType.INTERACTION:
+                interactions[action.timepoint] = action
+                interactions_by_gen[action.generation][action.timepoint] = action
+                interactions_by_gen_and_player[action.generation][action.actor][action.timepoint] = action
+            if action.timepoint in actions_by_timepoint:
+                actions_by_timepoint[action.timepoint].append(action)
+            else:
+                actions_by_timepoint[action.timepoint] = [action]
+            if action.timepoint in actions_by_gen_and_timepoint[action.generation]:
+                actions_by_gen_and_timepoint[action.generation][action.timepoint].append(action)
+            else:
+                actions_by_gen_and_timepoint[action.generation][action.timepoint] = [action]
+            actions_by_gen_player_and_timepoint[action.generation][action.actor][action.timepoint] = action
             for player_state in player_states:
                 if player_state.player == action.actor and action.generation == player_state.generation:
                     player_state.new_action = action
                     self.action_observer.update(player_state)
         # Test actions
-        self.assertEqual(actions, self.action_observer.actions, "Should be the same as the actions received "
+        self.assertEqual(actions_by_timepoint, self.action_observer.actions, "Should be the same as the actions received "
                                                                 "from updates")
-        self.assertEqual({7: actions[0:11], 8: actions[11:21]}, self.action_observer.actions_by_generation,
+        self.assertEqual(actions_by_gen_and_timepoint, self.action_observer.actions_by_generation,
                          "Should have formatted actions correctly into generations")
-        self.assertEqual({7: {8: actions[0:8], 9: actions[8:11], 12: []},
-                          8: {1: actions[11:16], 2: actions[16:18], 42: actions[18:21]}},
+        self.assertEqual(actions_by_gen_player_and_timepoint,
                          self.action_observer.actions_by_generation_and_player, "Should have formattedactions correctly"
                                                                                 " into generation and players")
         # Test interactions
         self.assertEqual(interactions, self.action_observer.interactions)
-        self.assertEqual({7: interactions[0:4], 8: interactions[4:8]}, self.action_observer.interactions_by_generation,
+        self.assertEqual(interactions_by_gen, self.action_observer.interactions_by_generation,
                          "Should have formatted interactions correctly into generations")
-        self.assertEqual({7: {8: interactions[0:2], 9: interactions[2:4], 12: []},
-                          8: {1: [interactions[4]], 2: interactions[5:7], 42: [interactions[7]]}},
+        self.assertEqual(interactions_by_gen_and_player,
                          self.action_observer.interactions_by_generation_and_player,
                          "Should have formatted interactions correctly into generations and players")
         # Test cooperation rate
@@ -589,10 +647,10 @@ class PlayerActionObserverIntegrationTests(unittest.TestCase):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
-        self.community = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        self.community = requests.request("POST", Config.AGENTS_URL + 'community').json()['id']
         self.generation = 1
         generation_payload = {"community": self.community, "generation": self.generation}
-        requests.request("POST", current_app.config['AGENTS_URL'] + 'generation', json=generation_payload)
+        requests.request("POST", Config.AGENTS_URL + 'generation', json=generation_payload)
         self.action_observer = ActionObserver(self.community)
         self.player = Player(1, {'name': 'Random', 'options': []}, self.community, 1, [self.action_observer])
         self.action_observer.add_generation(1)
@@ -638,10 +696,10 @@ class PlayerPlayerObserverIntegrationTests(unittest.TestCase):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
-        self.community = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        self.community = requests.request("POST", Config.AGENTS_URL + 'community').json()['id']
         self.generation = 1
         generation_payload = {"community": self.community, "generation": self.generation}
-        requests.request("POST", current_app.config['AGENTS_URL'] + 'generation', json=generation_payload)
+        requests.request("POST", Config.AGENTS_URL + 'generation', json=generation_payload)
         self.player_observer = PlayerObserver(self.community)
         self.player = Player(1, {'name': 'Random', 'options': []}, self.community, 1, [self.player_observer])
         self.player_observer.add_generation(1)

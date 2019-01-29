@@ -9,6 +9,8 @@ import random
 import pprint
 from .facade_logic import Results, ReputationGame
 from .observation_logic import ActionObserver, PlayerObserver
+from .action_logic import Action
+from .strategy_logic import Strategy
 
 
 class FacadeTests(unittest.TestCase):
@@ -19,15 +21,18 @@ class FacadeTests(unittest.TestCase):
         cls.received_strategies = response.json()['strategies']
         cls.strat_count = 0
         cls.strategies = []
+        cls.type_strategies = []
         for strategy in cls.received_strategies:
             count = random.randint(0, 5)
-            cls.strategies.append({'strategy': strategy, 'count': count})
+            cls.strategies.append({'name': strategy['name'], 'options': strategy['options'], 'count': count})
+            cls.type_strategies.append(Strategy(strategy['name'], strategy['options']))
             cls.strat_count += count
         cls.pp = pprint.PrettyPrinter()
         cls.num_of_onlookers = random.randint(1, 20)
         cls.num_of_generations = random.randint(3, 8)
         cls.length_of_generations = random.randint(6, 20)
         cls.mutation_chance = random.random()
+        print(cls.strategies)
         cls.reputation_game: ReputationGame = ReputationGame(cls.strategies, cls.num_of_onlookers,
                                                              cls.num_of_generations, cls.length_of_generations,
                                                              cls.mutation_chance)
@@ -72,6 +77,12 @@ class FacadeTests(unittest.TestCase):
         self.pp.pprint(actions)
         print(self.num_of_generations)
         print(self.length_of_generations)
+        action_count = 0
+        for timepoint in actions:
+            action_count += len(actions[timepoint])
+        self.assertEqual(self.num_of_generations*self.length_of_generations*self.strat_count, action_count,
+                         "There should be as many actions as number of generations*length of generations* amount of "
+                         "players in each generation")
         self.assertEqual(self.num_of_generations*self.length_of_generations, len(actions),
                          "There should be as many timepoints as the length of a generation multiplied "
                          "by the number of generations")
@@ -86,7 +97,8 @@ class FacadeTests(unittest.TestCase):
         self.assertEqual(self.num_of_generations*self.length_of_generations, len(interactions),
                          "There should be as many interactions as there are timepoints")
         for timepoint in interactions:
-            self.assertEqual(1, len(interactions[timepoint]), "There should be one interaction for each timepoint")
+            self.assertTrue(Action in interactions[timepoint].__class__.__bases__,
+                            "There should be one interaction for each timepoint")
 
     def test_actions_by_generation(self):
         actions_by_generation = self.results.actions_by_generation
@@ -112,8 +124,8 @@ class FacadeTests(unittest.TestCase):
                 self.assertEqual(self.length_of_generations, len(actions_by_generation_and_player[generation][player]),
                                  "An agent should carry out an action for each timepoint in their generation")
                 for timepoint in actions_by_generation_and_player[generation][player]:
-                    self.assertEqual(1, len(actions_by_generation_and_player[generation][player][timepoint]),
-                                     "An agent should carry out one action for each timepoint in their generation")
+                    self.assertTrue(Action in actions_by_generation_and_player[generation][player][timepoint].__class__.__bases__,
+                                    "An agent should carry out one action for each timepoint in their generation")
 
     def test_interactions_by_generation(self):
         interactions_by_generation = self.results.interactions_by_generation
@@ -123,8 +135,8 @@ class FacadeTests(unittest.TestCase):
                              "There should be as many timepoints for interactions in a generations as the length "
                              "of the generation")
             for timepoint in interactions_by_generation[generation]:
-                self.assertEqual(1, len(interactions_by_generation[generation][timepoint]),
-                                 "There should be 1 interaction per timepoint")
+                self.assertTrue(Action in interactions_by_generation[generation][timepoint].__class__.__bases__,
+                                "There should be 1 interaction per timepoint")
 
     def test_cooperation_rate(self):
         self.assertLessEqual(self.results.cooperation_rate, 100, "Should be a percentage therefore le 100")
@@ -241,17 +253,19 @@ class FacadeTests(unittest.TestCase):
     def test_populations(self):
         generations = self.results.generations
         populations = self.results.populations
+        print(populations)
         self.assertEqual(self.num_of_generations, len(populations))
         self.pp.pprint(self.strategies)
-        strategies = [entry['strategy'] for entry in self.strategies]
+        strategies = [strategy for strategy in self.strategies]
         for generation in generations:
             strat_count = 0
             for strategy in populations[generation]:
-                self.pp.pprint(strategy)
-                self.assertGreaterEqual(strategy['count'], 0, "Should be greater than 1 of each strategy")
-                strat_count += strategy['count']
-                self.assertTrue(strategy['strategy'] in strategies, "Should correspond to a strategy in the "
-                                                                    "agents service")
+                print(strategy.__str__())
+                this_strat_count = populations[generation][strategy]
+                print(this_strat_count)
+                self.assertGreaterEqual(this_strat_count, 0, "Should be greater than 1 of each strategy")
+                strat_count += this_strat_count
+                self.assertTrue(strategy in self.type_strategies, "Should correspond to a strategy in the agents service")
             self.assertEqual(self.strat_count, strat_count, "Should be the same amount of players for each generation")
 
     def test_id_to_strat_map(self):

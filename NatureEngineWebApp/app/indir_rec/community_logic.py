@@ -2,12 +2,13 @@
 simulation of a whole tournament,setup of a tournament etc."""
 
 import requests
-from flask import current_app
 from typing import List, Dict
 from .generation_logic import Generation
 import random
 from .observation_logic import Observer
 from .player_logic import Player
+from .indir_rec_config import Config
+from .strategy_logic import Strategy
 
 
 class CommunityCreationException(Exception):
@@ -21,12 +22,12 @@ class Community:
     """A community encompasses a number of generations, a first generation is selected on construction, the next
     generations are then created using a reproduction algorithm"""
 
-    def __init__(self, strategies: List[Dict], num_of_onlookers: int = 5, num_of_generations: int = 10,
+    def __init__(self, strategies: Dict[Strategy, int], num_of_onlookers: int = 5, num_of_generations: int = 10,
                  length_of_generations: int = 30, mutation_chance: float = 0, observers: List[Observer] = None):
         """
         Set the parameters for the community and the initial set of players to simulate the community with
         :param strategies: The initial set of players to simulate the community
-        :type strategies: List[Dict]
+        :type strategies: Dict[Strategy, int]
         :param num_of_onlookers: The number of onlookers for each interaction
         :type num_of_onlookers: int
         :param num_of_generations: The number of generations the simulation will run
@@ -34,7 +35,7 @@ class Community:
         :param length_of_generations: The number of rounds each generation will run for
         :type length_of_generations: int
         """
-        self._community_id = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        self._community_id = requests.request("POST", Config.AGENTS_URL + 'community').json()['id']
         if num_of_onlookers <= 0:
             raise CommunityCreationException("number of onlookers <= 0")
         if length_of_generations <= 5:
@@ -47,13 +48,13 @@ class Community:
         self._num_of_onlookers: int = num_of_onlookers
         self._num_of_generations: int = num_of_generations
         self._length_of_generations: int = length_of_generations
-        self._first_strategies = strategies
+        self._first_strategies: Dict[Strategy, int] = strategies
         self._generations: List[Generation] = []
         self._current_time: int = 0
         self._generation_size: int = 0
-        for strategy in strategies:
-            self._generation_size += strategy['count']
-        self._strategy_count_by_generation: List[List[Dict]] = []
+        for _, count in strategies.items():
+            self._generation_size += count
+        self._strategy_count_by_generation: List[Dict[Strategy, int]] = []
         self._observers: List[Observer] = observers if observers is not None else []
 
     def get_id(self) -> int:
@@ -88,7 +89,7 @@ class Community:
         """
         return self._generations
 
-    def get_strategy_count_by_generation(self) -> List[List[Dict]]:
+    def get_strategy_count_by_generation(self) -> List[Dict[Strategy, int]]:
         """
         Get the count of each strategy by generation
         :return: The strategy count for each generation
@@ -128,7 +129,7 @@ class Community:
         """
         if len(self._generations) <= 0:
             return Generation(self._first_strategies, gen_id, self._community_id, 0,
-                              self._length_of_generations, self._num_of_onlookers, True, self._observers)
+                              self._length_of_generations, self._num_of_onlookers, self._observers)
         else:
             return self._reproduce(gen_id)
 
@@ -146,19 +147,23 @@ class Community:
             if player.fitness > maximal_fitness:
                 maximal_fitness = player.fitness
         # Form new generation
-        new_gen_strategies: List = []
+        new_gen_strategies: Dict[Strategy, int] = {}
         new_gen_size = 0
+        mutation_strategies = [strategy for strategy in self._first_strategies]
         while new_gen_size < self._generation_size:
-            # Mutate to randomly selected strategy with probability selected in __init__
-            if random.random() < self._mutation_chance:
-                selected_strategy = random.choice(self._first_strategies)
-                new_gen_strategies.append(selected_strategy['strategy'])
+            # If no mutation use stochastic acceptance
+            selected_player: Player = random.choice(last_gen_players)
+            if random.random() <= maximal_fitness:
+                if random.random() < self._mutation_chance:
+                    selected_strategy = random.choice(mutation_strategies)
+                else:
+                    selected_strategy = selected_player.strategy
+                if selected_strategy in new_gen_strategies:
+                    new_gen_strategies[selected_strategy] += 1
+                else:
+                    new_gen_strategies[selected_strategy] = 1
                 new_gen_size += 1
-            else:
-                # If no mutation use stochastic acceptance
-                selected_player: Player = random.choice(last_gen_players)
-                if random.random() <= maximal_fitness:
-                    new_gen_strategies.append(selected_player.strategy)
-                    new_gen_size += 1
+        print("gen_size="+str(self._generation_size))
+        print("new_gen_size="+str(new_gen_size))
         return Generation(new_gen_strategies, gen_id, self._community_id, self._current_time,
-                          self._current_time+self._length_of_generations, self._num_of_onlookers, False, self._observers)
+                          self._current_time+self._length_of_generations, self._num_of_onlookers, self._observers)

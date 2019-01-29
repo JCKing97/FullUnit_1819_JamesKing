@@ -1,8 +1,9 @@
 
 from typing import Dict, List
-from flask import current_app
 import requests
 from .action_logic import Action, InteractionAction, GossipAction, IdleAction, GossipContent, InteractionContent
+from .indir_rec_config import Config
+from .strategy_logic import Strategy
 
 
 class PlayerCreationException(Exception):
@@ -73,7 +74,7 @@ class PlayerState:
 
 class Player:
 
-    def __init__(self, player_id: int, strategy: Dict, community_id: int, generation_id: int,
+    def __init__(self, player_id: int, strategy: Strategy, community_id: int, generation_id: int,
                  observers: List = None):
         """
         Create a player in the environment and their mind in the agent mind service.
@@ -88,15 +89,15 @@ class Player:
         """
         self._player_id: int = player_id
         self._fitness: int = 0
-        self._strategy: Dict = strategy
+        self._strategy: Strategy = strategy
         self._community_id: int = community_id
         self._generation_id: int = generation_id
         self._percepts: Dict = {}
         self.player_state = PlayerState(generation_id, player_id, observers)
         try:
-            creation_payload: Dict = {"strategy": strategy['name'], "options": strategy['options'],
+            creation_payload: Dict = {"strategy": strategy.name, "options": strategy.options,
                                       "community": community_id, "generation": generation_id, "player": player_id}
-            creation_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'agent',
+            creation_response = requests.request("POST", Config.AGENTS_URL + 'agent',
                                                  json=creation_payload)
             if creation_response.status_code != 200:
                 raise PlayerCreationException("bad status code " + creation_response.status_code)
@@ -137,11 +138,11 @@ class Player:
         self.player_state.fitness_update = change
 
     @property
-    def strategy(self) -> Dict:
+    def strategy(self) -> Strategy:
         """
         Get the strategy (name, description and options) of this player
         :return: the strategy of this player
-        :rtype: Dict
+        :rtype: Strategy
         """
         return self._strategy
 
@@ -155,7 +156,7 @@ class Player:
         """
         action_payload: Dict = {"timepoint": timepoint, "community": self._community_id,
                                 "generation": self._generation_id, "player": self._player_id}
-        action_response = requests.request("GET", current_app.config['AGENTS_URL'] + 'action',
+        action_response = requests.request("GET", Config.AGENTS_URL + 'action',
                                            params=action_payload)
         if action_response.status_code != 200:
             raise DecisionException("bad status code " + action_response.status_code)
@@ -197,7 +198,7 @@ class Player:
         """
         if timepoint > 0 and timepoint-1 in self._percepts:
             percept_dict = {'percepts': self._percepts[timepoint-1]}
-            percept_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'percept/action/group',
+            percept_response = requests.request("POST", Config.AGENTS_URL + 'percept/action/group',
                                                 json=percept_dict)
             if percept_response.status_code != 200:
                 raise PerceptionException("Failed to send percept bad status code: " +

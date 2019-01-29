@@ -2,14 +2,14 @@
 managing actions, percepts and players"""
 
 import requests
-from flask import current_app
 from typing import Dict, List
 from .player_logic import Player, PlayerCreationException, DecisionException, PerceptionException
 from .action_logic import Action, ActionType, GossipAction, InteractionAction
 from .observation_logic import Observer
 import copy
 import random
-import csv
+from .indir_rec_config import Config
+from .strategy_logic import Strategy
 
 
 class GenerationCreationException(Exception):
@@ -36,8 +36,8 @@ class PlayerNotFoundException(Exception):
 class Generation:
     """A generation encompasses a number of timepoints in which members of the generation perceive percepts and act"""
 
-    def __init__(self, strategies: List[Dict], generation_id: int, community_id: int, start_point: int, end_point: int,
-                 num_of_onlookers: int, initial_generation: bool, observers: List[Observer]):
+    def __init__(self, strategies: Dict[Strategy, int], generation_id: int, community_id: int, start_point: int,
+                 end_point: int, num_of_onlookers: int, observers: List[Observer]):
         """
         Set up a generation and the players that are part of it in the environment and agent mind service
         :param strategies: A list of strategies (name, description and options) and the amount of them that have been
@@ -61,9 +61,8 @@ class Generation:
         self._start_point: int = start_point
         self._end_point: int = end_point
         self._num_of_onlookers = num_of_onlookers
-        self._initial_generation: bool = initial_generation
-        self._strategies: List[Dict] = []
-        creation_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'generation',
+        self._strategies: Dict[Strategy, int] = {}
+        creation_response = requests.request("POST", Config.AGENTS_URL + 'generation',
                                              json={"community": community_id, "generation": generation_id})
         if creation_response.status_code != 200:
             raise GenerationCreationException("bad status code: " + str(creation_response.status_code))
@@ -73,42 +72,24 @@ class Generation:
         self._id_player_map: Dict[int, Player] = {}
         player_id = 0
         self._observers = observers
-        if initial_generation:
-            self._strategies = strategies
-            try:
-                for strategy in strategies:
-                    if strategy['count'] > 0:
-                        for i in range(strategy['count']):
-                            try:
-                                player = Player(player_id, strategy['strategy'], self._community_id,
-                                                self._generation_id, self._observers)
-                                for observer in self._observers:
-                                    observer.add_player(self._generation_id, player_id)
-                                self._players.append(player)
-                                self._id_player_map[player.id] = player
-                                player_id += 1
-                            except PlayerCreationException as e:
-                                raise GenerationCreationException(str(e))
-            except KeyError:
-                raise GenerationCreationException("Incorrect strategies dictionary keys")
-        else:
+        self._strategies = strategies
+        try:
             for strategy in strategies:
-                found_strategy = False
-                for self_strategy in self._strategies:
-                    if self_strategy['strategy'] == strategy:
-                        found_strategy = True
-                        self_strategy['count'] += 1
-                if not found_strategy:
-                    self._strategies.append({'strategy': strategy, 'count': 1})
-                try:
-                    player = Player(player_id, strategy, self._community_id, self._generation_id, self._observers)
-                    for observer in self._observers:
-                        observer.add_player(self._generation_id, player_id)
-                    self._players.append(player)
-                    self._id_player_map[player.id] = player
-                    player_id += 1
-                except PlayerCreationException as e:
-                    raise GenerationCreationException(str(e))
+                strat_count = strategies[strategy]
+                if strat_count > 0:
+                    for i in range(strat_count):
+                        try:
+                            player = Player(player_id, strategy, self._community_id,
+                                            self._generation_id, self._observers)
+                            for observer in self._observers:
+                                observer.add_player(self._generation_id, player_id)
+                            self._players.append(player)
+                            self._id_player_map[player.id] = player
+                            player_id += 1
+                        except PlayerCreationException as e:
+                            raise GenerationCreationException(str(e))
+        except KeyError:
+            raise GenerationCreationException("Incorrect strategies dictionary keys")
 
     @property
     def id(self):
@@ -143,11 +124,11 @@ class Generation:
         """
         return self._players
 
-    def get_strategy_count(self) -> List[Dict]:
+    def get_strategy_count(self) -> Dict[Strategy, int]:
         """
         Get the count of each strategy in the generation
         :return: the count of each strategy in the generation
-        :rtype: List[Dict]
+        :rtype: Dict[Strategy, int]
         """
         return self._strategies
 
@@ -185,7 +166,7 @@ class Generation:
         recipient: Player = random.choice(players)
         interaction_payload = {'donor': donor.id, 'recipient': recipient.id, 'timepoint': timepoint,
                                'community': self._community_id, 'generation': self._generation_id}
-        interaction_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'percept/interaction',
+        interaction_response = requests.request("POST", Config.AGENTS_URL + 'percept/interaction',
                                                 json=interaction_payload)
         if interaction_response.status_code != 200:
             raise SimulationException("Failed to create interaction pair bad status code: " +
@@ -213,6 +194,7 @@ class Generation:
             self._id_player_map[interaction_action.donor].update_fitness(interaction_action.action.value['donor_cost'])
             self._id_player_map[interaction_action.recipient].update_fitness(interaction_action.action.value['recipient_gain'])
             onlookers = self._generate_onlookers(interaction_action)
+            print(onlookers)
             for onlooker in onlookers:
                 action_percept = {'type': interaction_action.type.value['percept_link'],
                                   'action': interaction_action.action.value['string'], 'perceiver': onlooker.id,
@@ -228,35 +210,15 @@ class Generation:
         :return: A list of onlookers including the donor and recipient
         :rtype: List[Player]
         """
-        players = copy.deepcopy(self._players)
-        onlookers = [self._id_player_map[action.donor], self._id_player_map[action.recipient]]
-        players.remove(self._find_deepcopy_player(action.recipient, players))
-        players.remove(self._find_deepcopy_player(action.donor, players))
-        for i in range(self._num_of_onlookers):
-            if len(players) >= 0:
-                onlooker = random.choice(players)
-                try:
-                    onlookers.append(self._id_player_map[onlooker.id])
-                except PlayerNotFoundException as e:
-                    raise e
-                players.remove(onlooker)
-            else:
-                break
+        onlookers: List[Player] = []
+        possible_onlookers = copy.deepcopy(self._players)
+        onlookers.extend([self._id_player_map[action.donor], self._id_player_map[action.recipient]])
+        for onlooker_choice in possible_onlookers:
+            if onlooker_choice.id == action.donor or onlooker_choice.id == action.recipient:
+                possible_onlookers.remove(onlooker_choice)
+        if self._num_of_onlookers <= len(possible_onlookers):
+            onlookers.extend(random.sample(possible_onlookers, self._num_of_onlookers))
+        else:
+            onlookers.extend(random.sample(possible_onlookers, len(possible_onlookers)))
         return onlookers
-
-    @staticmethod
-    def _find_deepcopy_player(player_id, deep_players) -> Player:
-        """
-        Find a player in a list given the player list and the player id, for when _id_player_map won't
-         work with a deepcopy
-        :param player_id: The id of the player we are searching for
-        :type player_id: int
-        :param deep_players: The players we are searching through to find the id
-        :return: The player object from the given list
-        :rtype: Player
-        """
-        for player in deep_players:
-            if player_id == player.id:
-                return player
-        raise PlayerNotFoundException("Couldn't find player from ID")
 

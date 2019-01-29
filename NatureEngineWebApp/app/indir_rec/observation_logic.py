@@ -51,7 +51,7 @@ class ActionObserver(Observer):
         self._community: int = community
         self._corrupted_observations: bool = False
         self._actions: Dict[int, List[Action]] = {}
-        self._interactions: Dict[int, List[Action]] = {}
+        self._interactions: Dict[int, InteractionAction] = {}
         self._cooperation_count = 0
         self._defection_count = 0
         self._positive_social_action_count = 0
@@ -67,9 +67,9 @@ class ActionObserver(Observer):
             self._players: Dict[int, List[int]] = {generation: [] for generation in generations}
             self._generations: List[int] = generations
             self._actions_by_generation: Dict[int, Dict[int, List[Action]]] = {generation: {} for generation in generations}
-            self._actions_by_generation_and_player: Dict[int, Dict[int, Dict[int, List[Action]]]] = {generation: {} for generation in generations}
-            self._interactions_by_generation: Dict[int, Dict[int, List[InteractionAction]]] = {generation: {} for generation in generations}
-            self._interactions_by_generation_and_player: Dict[int, Dict[int, Dict[int, List[InteractionAction]]]] = {generation: {} for generation in generations}
+            self._actions_by_generation_and_player: Dict[int, Dict[int, Dict[int, Action]]] = {generation: {} for generation in generations}
+            self._interactions_by_generation: Dict[int, Dict[int, InteractionAction]] = {generation: {} for generation in generations}
+            self._interactions_by_generation_and_player: Dict[int, Dict[int, Dict[int, InteractionAction]]] = {generation: {} for generation in generations}
             self._cooperation_count_by_generation: Dict[int, int] = {generation: 0 for generation in generations}
             self._defection_count_by_generation: Dict[int, int] = {generation: 0 for generation in generations}
             self._cooperation_count_by_generation_and_player: Dict[int, Dict[int, int]] = {generation: {} for generation in generations}
@@ -89,9 +89,9 @@ class ActionObserver(Observer):
             self._generations: List[int] = []
             self._players: Dict[int, List[int]] = {}
             self._actions_by_generation: Dict[int, Dict[int, List[Action]]] = {}
-            self._actions_by_generation_and_player: Dict[int, Dict[int, Dict[int, List[Action]]]] = {}
-            self._interactions_by_generation: Dict[int, Dict[int, List[InteractionAction]]] = {}
-            self._interactions_by_generation_and_player: Dict[int, Dict[int, Dict[int, List[InteractionAction]]]] = {}
+            self._actions_by_generation_and_player: Dict[int, Dict[int, Dict[int, Action]]] = {}
+            self._interactions_by_generation: Dict[int, Dict[int, InteractionAction]] = {}
+            self._interactions_by_generation_and_player: Dict[int, Dict[int, Dict[int, InteractionAction]]] = {}
             self._cooperation_count_by_generation: Dict[int, int] = {}
             self._defection_count_by_generation: Dict[int, int] = {}
             self._cooperation_count_by_generation_and_player: Dict[int, Dict[int, int]] = {}
@@ -160,19 +160,19 @@ class ActionObserver(Observer):
         self._non_donor_action_count_by_generation_and_player[generation][player] = 0
 
     @property
-    def actions(self):
+    def actions(self) -> Dict[int, List[Action]]:
         return self._actions
 
     @property
-    def actions_by_generation(self):
+    def actions_by_generation(self) -> Dict[int, Dict[int, List[Action]]]:
         return self._actions_by_generation
 
     @property
-    def actions_by_generation_and_player(self):
+    def actions_by_generation_and_player(self) -> Dict[int, Dict[int, Dict[int, Action]]]:
         return self._actions_by_generation_and_player
 
     @property
-    def interactions(self):
+    def interactions(self) -> Dict[int, InteractionAction]:
         return self._interactions
 
     @property
@@ -234,26 +234,12 @@ class ActionObserver(Observer):
             self._actions_by_generation[action.generation][action.timepoint].append(action)
         else:
             self._actions_by_generation[action.generation][action.timepoint] = [action]
-        if action.timepoint in self._actions_by_generation_and_player[action.generation][action.actor]:
-            self._actions_by_generation_and_player[action.generation][action.actor][action.timepoint].append(action)
-        else:
-            self._actions_by_generation_and_player[action.generation][action.actor][action.timepoint] = [action]
+        self._actions_by_generation_and_player[action.generation][action.actor][action.timepoint] = action
 
     def _add_interaction(self, action):
-        if action.timepoint in self._interactions:
-            self._interactions[action.timepoint].append(action)
-        else:
-            self._interactions[action.timepoint] = [action]
-        if action.timepoint in self._interactions_by_generation[action.generation]:
-            self._interactions_by_generation[action.generation][action.timepoint].append(action)
-        else:
-            self._interactions_by_generation[action.generation][action.timepoint] = [action]
-        if action.timepoint in self._interactions_by_generation_and_player[action.generation][action.actor]:
-            self._interactions_by_generation_and_player[action.generation][action.actor][action.timepoint]. \
-                append(action)
-        else:
-            self._interactions_by_generation_and_player[action.generation][action.actor][action.timepoint] = \
-                [action]
+        self._interactions[action.timepoint] = action
+        self._interactions_by_generation[action.generation][action.timepoint] = action
+        self._interactions_by_generation_and_player[action.generation][action.actor][action.timepoint] = action
 
     @property
     def cooperation_rate(self):

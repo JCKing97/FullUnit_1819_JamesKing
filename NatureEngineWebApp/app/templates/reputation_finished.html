@@ -1,11 +1,104 @@
 {% extends "base.html" %}
 
+
 {% block app_content %}
     <div class="jumbotron" style="padding: 20px">
         <h1>Reputation Finished</h1>
         <p>
             Your reputation is over
         </p>
+    </div>
+
+    <div>
+        <h2>Community summary</h2>
+        <p>Number of onlookers per interaction: {{ community.number_of_onlookers }}</p>
+        <p>Length of generations: {{ community.length_of_generations }}</p>
+        <p>Chance of mutation when reproducing: {{ community.mutation_chance }}</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if community.cooperation_rate >= 80 %}green{% elif community.cooperation_rate >= 40 %}orange{% else %}red{% endif %}">Cooperation rate: {{ community.cooperation_rate }}</div>
+                <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if community.social_activeness >= 80 %}green{% elif community.social_activeness >= 40 %}orange{% else %}red{% endif %}">Social activeness: {{ community.social_activeness }}</div>
+                <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if community.positivity_of_gossip >= 80 %}green{% elif community.positivity_of_gossip >= 40 %}orange{% else %}red{% endif %}">Positivity of gossip: {{ community.positivity_of_gossip }}</div>
+                <div class="col-md-3 panel" style="border-width: 2px; border-color: black;">Fitness: {{ community.fitness }}</div>
+            </div>
+        </div>
+
+        <h2>Population Tracker</h2>
+        <p>
+            When you selected the strategies you wished to used you chose the population of the first generation.
+            This population fluctuates over the following generations according to the fitness of the
+        </p>
+        <div class="container">
+            <canvas id="populationChart"></canvas>
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+            <script>
+                var PopulationChartData = {{ population_chart_data|tojson }};
+                var populationChartDoc = document.getElementById("populationChart").getContext("2d");
+                new Chart(populationChartDoc, PopulationChartData);
+            </script>
+        </div>
+
+        <h2>Action by action:</h2>
+        {% for generation in community.generations %}
+            <h3>Generation: {{ generation.id }}</h3>
+            <div class="container">
+                <div class="row">
+                    {% if generation.cooperation_rate != None %}
+                        <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if generation.cooperation_rate >= 80 %}green{% elif generation.cooperation_rate >= 40 %}orange{% else %}red{% endif %}">Cooperation rate: {{ generation.cooperation_rate }}</div>
+                    {% endif %}
+                    {% if generation.social_activeness != None %}
+                        <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if generation.social_activeness >= 80 %}green{% elif generation.social_activeness >= 40 %}orange{% else %}red{% endif %}">Social activeness: {{ generation.social_activeness }}</div>
+                    {% endif %}
+                    {% if generation.positivity_of_gossip != None %}
+                        <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if generation.positivity_of_gossip >= 80 %}green{% elif generation.positivity_of_gossip >= 40 %}orange{% else %}red{% endif %}">Positivity of gossip: {{ generation.positivity_of_gossip }}</div>
+                    {% endif %}
+                    <div class="col-md-3 panel" style="border-width: 2px; border-color: black;">Fitness: {{ generation.fitness }}</div>
+                </div>
+            </div>
+            {% for player in generation.players %}
+                <h4>Player: {{ player.id }}</h4>
+                <p>Strategy: {{ player.strategy_name }} {{ player.strategy_options }}</p>
+                <div class="container">
+                    <div class="row">
+                        {% if player.cooperation_rate != None %}
+                            <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if player.cooperation_rate >= 80 %}green{% elif player.cooperation_rate >= 40 %}orange{% else %}red{% endif %}">Cooperation rate: {{ player.cooperation_rate }}</div>
+                        {% endif %}
+                        {% if player.social_activeness != None %}
+                            <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if player.social_activeness >= 80 %}green{% elif player.social_activeness >= 40 %}orange{% else %}red{% endif %}">Social activeness: {{ player.social_activeness }}</div>
+                        {% endif %}
+                        {% if player.positivity_of_gossip != None %}
+                            <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if player.positivity_of_gossip >= 80 %}green{% elif player.positivity_of_gossip >= 40 %}orange{% else %}red{% endif %}">Positivity of gossip: {{ player.positivity_of_gossip }}</div>
+                        {% endif %}
+                        <div class="col-md-3 panel" style="border-width: 2px; border-color: black;">Fitness: {{ player.fitness }}</div>
+                    </div>
+                </div>
+                {% for action in player.actions %}
+                    {% set closed = False %}
+                    {% if loop.index0 % 12 == 0 %}
+                        <div class="row">
+                    {% endif %}
+                    <div class="col-md-1" style="border: 2px solid black; margin: 1px;">
+                        <h5>{{ action.type.value['type'] }}</h5>
+                        <p>Timepoint: {{ action.timepoint }}</p>
+                        {% if action.type == action_type.INTERACTION %}
+                            <p>Recipient: {{ action.recipient }}</p>
+                            <p>Action: {{ action.action.value['string'] }}</p>
+                        {% elif action.type == action_type.GOSSIP %}
+                            <p>Recipient: {{ action.recipient }}</p>
+                            <p>About: {{ action.about }}</p>
+                            <p>Gossip: {{ action.gossip.value }}</p>
+                        {% endif %}
+                    </div>
+                    {% if loop.index % 12 == 0 %}
+                        </div>
+                        {% set closed = True %}
+                    {% endif %}
+                {% endfor %}
+                {% if not closed %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
     </div>
 
     <div class="container">

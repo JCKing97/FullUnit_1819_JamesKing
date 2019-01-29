@@ -8,7 +8,8 @@ from app import create_app
 from tests.test_config import TestConfig
 import unittest
 import requests
-from flask import current_app
+from .indir_rec_config import Config
+from .strategy_logic import Strategy
 
 
 class PlayerTest(unittest.TestCase):
@@ -18,10 +19,10 @@ class PlayerTest(unittest.TestCase):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
-        self.community = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        self.community = requests.request("POST", Config.AGENTS_URL + 'community').json()['id']
         self.generation = 0
         generation_payload = {"community": self.community, "generation": self.generation}
-        requests.request("POST", current_app.config['AGENTS_URL'] + 'generation', json=generation_payload)
+        requests.request("POST", Config.AGENTS_URL + 'generation', json=generation_payload)
 
     def tearDown(self):
         self.app_context.pop()
@@ -29,37 +30,37 @@ class PlayerTest(unittest.TestCase):
     def test_create_player(self):
         """Test creating a player"""
         try:
-            Player(0, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
+            Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
 
     def test_incorrect_strategy_create_player(self):
         """Test creating a player with a strategy not in the system"""
         with self.assertRaises(PlayerCreationException):
-            Player(0, {'name': "Incorrect", 'options': []}, self.community, self.generation)
+            Player(0, Strategy("Incorrect", []), self.community, self.generation)
 
     def test_multiple_players_same_id(self):
-        Player(0, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
+        Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
         with self.assertRaises(PlayerCreationException):
-            Player(0, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
+            Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
 
     def test_player_get_id(self):
         """Test the id method of the Player class"""
         try:
-            player = Player(0, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
+            player = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
         self.assertEqual(0, player.id)
 
     def test_get_strategy(self):
-        strategy = {'name': "Defector", 'options': ["lazy"]}
+        strategy = Strategy("Defector", ["lazy"])
         player = Player(0, strategy, self.community, self.generation)
         self.assertEqual(strategy, player.strategy)
 
     def test_player_get_fitness_start(self):
         """Test the get_fitness method of the player at the start of it's life"""
         try:
-            player = Player(0, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
+            player = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
         self.assertEqual(0, player.fitness)
@@ -67,7 +68,7 @@ class PlayerTest(unittest.TestCase):
     def test_player_update_get_fitness(self):
         """Test the update_fitness() and get_fitness methods of a player together"""
         try:
-            player = Player(0, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
+            player = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
         player.update_fitness(-4)
@@ -78,7 +79,7 @@ class PlayerTest(unittest.TestCase):
     def test_player_decide(self):
         """Test the decision making of the player"""
         try:
-            player = Player(0, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
+            player = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
         try:
@@ -89,13 +90,13 @@ class PlayerTest(unittest.TestCase):
     def test_send_donor_percept_decide(self):
         """Test sending a percept to a player that they are a donor, and getting a decision to defect back"""
         try:
-            donor = Player(0, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
-            recipient = Player(1, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
+            donor = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
+            recipient = Player(1, Strategy("Defector", ["lazy"]), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
         interaction_payload = {'donor': donor.id, 'recipient': recipient.id, 'timepoint': 2,
                                'community': self.community, 'generation': self.generation}
-        interaction_response = requests.request("POST", current_app.config['AGENTS_URL'] + 'percept/interaction',
+        interaction_response = requests.request("POST", Config.AGENTS_URL + 'percept/interaction',
                                                 json=interaction_payload)
         self.assertEqual(interaction_response.status_code, 200)
         self.assertTrue(interaction_response.json()['success'], msg="Should have been successful sending this percept")
@@ -109,19 +110,19 @@ class PlayerTest(unittest.TestCase):
             self.fail("Shouldn't have failed to make a decision")
 
     def test_set_percept(self):
-        perceiver = Player(0, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
-        gossiper = Player(1, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
-        about = Player(2, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
+        perceiver = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
+        gossiper = Player(1, Strategy("Defector", ["lazy"]), self.community, self.generation)
+        about = Player(2, Strategy("Defector", ["lazy"]), self.community, self.generation)
         percept = {'community': self.community, 'generation': self.generation, 'perceiver': perceiver.id,
                    'gossip': 'negative', 'about': about.id, 'gossiper': gossiper.id, 'timepoint': 3}
         perceiver.set_perception(percept)
         self.assertEqual(perceiver._percepts[3], [percept])
 
     def test_perceive(self):
-        perceiver = Player(0, {'name': "Standing Discriminator", 'options': ["trusting", "lazy"]}, self.community,
+        perceiver = Player(0, Strategy("Standing Discriminator", ["trusting", "lazy"]), self.community,
                            self.generation)
-        gossiper = Player(1, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
-        about = Player(2, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
+        gossiper = Player(1, Strategy("Defector", ["lazy"]), self.community, self.generation)
+        about = Player(2, Strategy("Defector", ["lazy"]), self.community, self.generation)
         percept = {'community': self.community, 'generation': self.generation, 'perceiver': perceiver.id,
                    'gossip': 'negative', 'about': about.id, 'gossiper': gossiper.id, 'timepoint': 3,
                    'type': 'action/gossip'}
@@ -130,7 +131,7 @@ class PlayerTest(unittest.TestCase):
         perceiver.perceive(4)
         belief_payload = {'timepoint': 4, 'community': self.community, 'generation': self.generation,
                           'perceiver': perceiver.id, 'about': about.id}
-        belief_response = requests.request("GET", current_app.config['AGENTS_URL'] + 'belief/standing',
+        belief_response = requests.request("GET", Config.AGENTS_URL + 'belief/standing',
                                            params=belief_payload).json()
         self.assertEqual(belief_response['standing'], "bad", "Should have sent the percept changing the belief"
                                                              " of the player")
@@ -177,11 +178,11 @@ class PlayerStateTests(unittest.TestCase):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
-        self.community = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        self.community = requests.request("POST", Config.AGENTS_URL + 'community').json()['id']
         self.generation = 0
         self.player = 0
         generation_payload = {"community": self.community, "generation": self.generation}
-        requests.request("POST", current_app.config['AGENTS_URL'] + 'generation', json=generation_payload)
+        requests.request("POST", Config.AGENTS_URL + 'generation', json=generation_payload)
         self.player_state = PlayerState(self.generation, self.player)
         self.observer = TestObserver(self.community, [self.generation])
         self.player_state.attach(self.observer)
@@ -255,12 +256,12 @@ class PlayerAndStateIntegrationTests(unittest.TestCase):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
-        self.community = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        self.community = requests.request("POST", Config.AGENTS_URL + 'community').json()['id']
         self.generation = 0
         self.player = 0
         generation_payload = {"community": self.community, "generation": self.generation}
-        requests.request("POST", current_app.config['AGENTS_URL'] + 'generation', json=generation_payload)
-        self.player = Player(0, {'name': "Defector", 'options': ["lazy"]}, self.community, self.generation)
+        requests.request("POST", Config.AGENTS_URL + 'generation', json=generation_payload)
+        self.player = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
         self.observer = TestObserver(self.community, [self.generation])
         self.player.player_state.attach(self.observer)
 

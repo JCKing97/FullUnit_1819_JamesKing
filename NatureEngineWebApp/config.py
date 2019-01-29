@@ -18,8 +18,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'
     AGENTS_URL = os.environ.get('AGENTS_URL') or 'http://127.0.0.1:8080/'
-    # Assigned when the app is spun up
-    INDIRECT_RECIPROCITY_STRATEGIES = None
+
 
 
 

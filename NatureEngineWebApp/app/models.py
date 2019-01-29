@@ -4,7 +4,6 @@ __author__ = "James King adapted from Miguel Grinberg"
 
 from app import db
 from datetime import datetime
-from .indir_rec.action_logic import ActionType, GossipContent, InteractionContent
 
 
 class Match(db.Model):
@@ -82,7 +81,8 @@ class TournamentPlayer(db.Model):
 class ReputationCommunity(db.Model):
     """The community which a game of indirect reciprocity is run on"""
     id = db.Column(db.Integer, primary_key=True)
-    corrupted_observations = db.Column(db.Boolean, nullable=False)
+    corrupted_observations = db.Column(db.Boolean)
+    simulated = db.Column(db.Boolean)
     number_of_onlookers = db.Column(db.Integer)
     length_of_generations = db.Column(db.Integer)
     mutation_chance = db.Column(db.Float)
@@ -90,8 +90,26 @@ class ReputationCommunity(db.Model):
     social_activeness = db.Column(db.Integer)
     positivity_of_gossip = db.Column(db.Integer)
     fitness = db.Column(db.Integer)
-    generations = db.relationship('ReputationGeneration', backref='community', lazy='dynamic')
-    players = db.relationship('ReputationPlayer', backref='generation', lazy='dynamic')
+    generations = db.relationship('ReputationGeneration', backref='generation_reputation_community', lazy='dynamic')
+
+    def set_corrupted(self):
+        self.corrupted_observations = True
+        db.session.commit()
+
+    def set_not_corrupted(self, number_of_onlookers, length_of_generations, mutation_chance, cooperation_rate,
+                          social_activeness, positivity_of_gossip, fitness):
+        self.corrupted_observations = False
+        self.number_of_onlookers = number_of_onlookers
+        self.length_of_generations = length_of_generations
+        self.mutation_chance = mutation_chance
+        self.cooperation_rate = cooperation_rate
+        self.social_activeness = social_activeness
+        self.positivity_of_gossip = positivity_of_gossip
+        self.fitness = fitness
+        db.session.commit()
+
+    def is_finished(self):
+        return self.simulated
 
 
 class ReputationGeneration(db.Model):
@@ -104,37 +122,43 @@ class ReputationGeneration(db.Model):
     social_activeness = db.Column(db.Integer)
     positivity_of_gossip = db.Column(db.Integer)
     fitness = db.Column(db.Integer)
-    players = db.relationship('ReputationPlayer', backref='generation', lazy='dynamic')
+    players = db.relationship('ReputationPlayer', backref='reputation_generation', lazy='dynamic',
+                              primaryjoin="and_(ReputationGeneration.id==ReputationPlayer.generation_id,"
+                                          "ReputationGeneration.community_id==ReputationPlayer.community_id)")
 
 
-reputation_action_onlookers = db.Table('reputation_action_onlookers', db.metadata,
-                                       db.Column('community_id', db.Integer, db.ForeignKey('reputation_community.id')),
-                                       db.Column('generation_id', db.Integer, db.ForeignKey('reputation_generation.id')),
-                                       db.Column('actor_id', db.Integer, db.ForeignKey('reputation_player.id')),
-                                       db.Column('onlooker_id', db.Integer, db.ForeignKey('reputation_player.id')),
-                                       db.Column('action_id', db.Integer, db.ForeignKey('reputation_action.id')))
+class ReputationActionOnlookers(db.Model):
+    community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'), primary_key=True)
+    generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'), primary_key=True)
+    actor_id = db.Column(db.Integer, db.ForeignKey('reputation_player.id'), primary_key=True)
+    onlooker_id = db.Column(db.Integer, db.ForeignKey('reputation_player.id'), primary_key=True)
+    action_id = db.Column(db.Integer, db.ForeignKey('reputation_action.id'), primary_key=True)
 
 
 class ReputationPlayer(db.Model):
     """A player that has committed to actions based on their strategy and perception of the world"""
     generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'), primary_key=True)
-    community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'), primary_key=True)
-    id = db.Column(db.Integer)
+    community_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.community_id'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     cooperation_rate = db.Column(db.Integer)
     social_activeness = db.Column(db.Integer)
     positivity_of_gossip = db.Column(db.Integer)
     fitness = db.Column(db.Integer)
     strategy_name = db.Column(db.String, db.ForeignKey('reputation_strategy.strategy_name'))
     strategy_options = db.Column(db.String, db.ForeignKey('reputation_strategy.strategy_options'))
-    actions = db.relationship('ReputationAction', backref='player', lazy='dynamic')
-    viewed_actions = db.relationship("ReputationAction", secondary=reputation_action_onlookers,
-                                     back_populates='onlookers')
+    actions = db.relationship("ReputationAction", backref='actor', lazy='dynamic',
+                              primaryjoin="and_(ReputationPlayer.id==ReputationAction.player_id,"
+                                          "ReputationPlayer.community_id==ReputationAction.community_id,"
+                                          "ReputationPlayer.generation_id==ReputationAction.generation_id)")
 
 
 class ReputationStrategy(db.Model):
     """A possible strategy of a reputation game player"""
     strategy_name = db.Column(db.String, primary_key=True)
     strategy_options = db.Column(db.String, primary_key=True)
+
+
+from .indir_rec.action_logic import ActionType, GossipContent, InteractionContent
 
 
 class ReputationAction(db.Model):
@@ -150,7 +174,5 @@ class ReputationAction(db.Model):
     recipient = db.Column(db.Integer, db.ForeignKey('reputation_player.id'), nullable=True)
     gossip = db.Column(db.Enum(GossipContent), nullable=True)
     donor = db.Column(db.Integer, db.ForeignKey('reputation_player.id'), nullable=True)
-    onlookers = db.relationship("ReputationPlayer", secondary=reputation_action_onlookers,
-                                back_populates='viewed_actions')
     action = db.Column(db.Enum(InteractionContent), nullable=True)
 

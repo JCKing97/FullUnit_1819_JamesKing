@@ -122,8 +122,6 @@ def tournament_run(tournament_id, job_id):
 def is_tournament_finished(tournament_id, job_id):
     """The route to ping to check whether a tournament has been finished or not"""
     this_tournament = Tournament.query.filter_by(id=tournament_id).first_or_404()
-    print(get_current_job())
-    print("Job id {}".format(job_id))
     return jsonify({'finished': this_tournament.is_finished(),
                     'url': url_for('main.tournament_run', tournament_id=tournament_id, job_id=job_id)})
 

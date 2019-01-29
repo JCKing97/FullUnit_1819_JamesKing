@@ -8,6 +8,8 @@ import requests
 from flask import current_app
 import random
 import pprint
+from .indir_rec_config import Config
+from .strategy_logic import Strategy
 
 
 class CommunityTest(unittest.TestCase):
@@ -17,10 +19,10 @@ class CommunityTest(unittest.TestCase):
         response = requests.get('http://127.0.0.1:8080/strategy')
         received_strategies = response.json()['strategies']
         cls.strat_count = 0
-        cls.strategies = []
+        cls.strategies = {}
         for strategy in received_strategies:
             count = random.randint(0, 5)
-            cls.strategies.append({'strategy': strategy, 'count': count})
+            cls.strategies[Strategy(strategy['name'], strategy['options'])] = count
             cls.strat_count += count
         cls.pp = pprint.PrettyPrinter()
         cls.num_of_onlookers = random.randint(1, 20)
@@ -36,7 +38,7 @@ class CommunityTest(unittest.TestCase):
         self.app_context.pop()
 
     def test_get_id(self):
-        new_community_id = requests.request("POST", current_app.config['AGENTS_URL'] + 'community').json()['id']
+        new_community_id = requests.request("POST", Config.AGENTS_URL + 'community').json()['id']
         community = Community(self.strategies, self.num_of_onlookers, self.num_of_generations,
                               self.length_of_generations)
         self.assertEqual(new_community_id+1, community.get_id())

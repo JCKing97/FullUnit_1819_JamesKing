@@ -6,6 +6,7 @@ from .community_logic import Community
 from .observation_logic import ActionObserver, PlayerObserver, Observer
 from .action_logic import Action, InteractionAction
 from typing import List, Dict
+from .strategy_logic import Strategy
 
 
 class Results:
@@ -42,7 +43,7 @@ class Results:
         return self._action_observer.actions_by_generation_and_player
 
     @property
-    def interactions(self) -> Dict[int, List[InteractionAction]]:
+    def interactions(self) -> Dict[int, InteractionAction]:
         return self._action_observer.interactions
 
     @property
@@ -109,14 +110,11 @@ class Results:
         return self._player_observer.fitness_by_generation_and_player
 
     @property
-    def populations(self) -> Dict[int, List]:
-        populations = {}
-        for generation in self._community.get_generations():
-            populations[generation.id] = generation.get_strategy_count()
-        return populations
+    def populations(self) -> List[Dict[Strategy, int]]:
+        return self._community.get_strategy_count_by_generation()
 
     @property
-    def id_to_strategy_map(self) -> Dict[int, Dict[int, Dict]]:
+    def id_to_strategy_map(self) -> Dict[int, Dict[int, Strategy]]:
         map: Dict = {}
         for gen in self._community.get_generations():
             map[gen.id] = {}
@@ -130,6 +128,7 @@ class ReputationGame:
     def __init__(self, initial_strategies: List[Dict], num_of_onlookers: int = 5, num_of_generations: int = 10,
                  length_of_generations: int = 30, mutation_chance: float = 0):
         self._initial_strategies = initial_strategies
+        print(initial_strategies)
         self._num_of_onlookers = num_of_onlookers
         self._num_of_generations = num_of_generations
         self._length_of_generations = length_of_generations
@@ -156,7 +155,14 @@ class ReputationGame:
         return self._mutation_chance
 
     def run(self) -> Results:
-        community = Community(self._initial_strategies, num_of_onlookers=self._num_of_onlookers,
+        community_strategies: Dict[Strategy, int] = {}
+        for strategy in self._initial_strategies:
+            generated_strategy: Strategy = Strategy(strategy['name'], strategy['options'])
+            if generated_strategy in community_strategies:
+                community_strategies[generated_strategy] += strategy['count']
+            else:
+                community_strategies[generated_strategy] = strategy['count']
+        community = Community(community_strategies, num_of_onlookers=self._num_of_onlookers,
                               num_of_generations=self._num_of_generations,
                               length_of_generations=self._length_of_generations,
                               mutation_chance=self._mutation_chance)
