@@ -31,7 +31,7 @@ strategy( "Standing Discriminator", "Considers every other agent to start on a g
 strategy( "Standing Discriminator", "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn't trust other agents gossip, actively promotes negative image of bad agents", ["distrusting", "spread_accurate_negative"]).
 strategy( "Random", "Randomly selects from actions it is capable of at each timepoint", []).
 strategy( "Image Scoring Discriminator", Description, [K|OtherOptions] ):-
-	between(-5, 5, K),
+	between(-3, 3, K),
 	image_score_possible_options(OtherOptions, OptionsDescription),
 	format(string(Description), "Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=~d for the recipient they cooperate, else they defect. ~w", [K, OptionsDescription]).
 
