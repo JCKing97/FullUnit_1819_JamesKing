@@ -23,14 +23,14 @@ class FacadeTests(unittest.TestCase):
         cls.strategies = []
         cls.type_strategies = []
         for strategy in cls.received_strategies:
-            count = random.randint(0, 5)
+            count = random.randint(0, 1)
             cls.strategies.append({'name': strategy['name'], 'options': strategy['options'], 'count': count})
             cls.type_strategies.append(Strategy(strategy['name'], strategy['options']))
             cls.strat_count += count
         cls.pp = pprint.PrettyPrinter()
-        cls.num_of_onlookers = random.randint(1, 20)
-        cls.num_of_generations = random.randint(3, 8)
-        cls.length_of_generations = random.randint(6, 20)
+        cls.num_of_onlookers = random.randint(1, 10)
+        cls.num_of_generations = random.randint(3, 5)
+        cls.length_of_generations = random.randint(6, 10)
         cls.mutation_chance = random.random()
         print(cls.strategies)
         cls.reputation_game: ReputationGame = ReputationGame(cls.strategies, cls.num_of_onlookers,

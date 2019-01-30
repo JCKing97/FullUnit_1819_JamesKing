@@ -5,22 +5,22 @@ from typing import List
 
 class Strategy:
 
-    def __init__(self, name: str, options: List[str]):
+    def __init__(self, name: str, options: List):
         self._name: str = name
-        self._options: List[str] = options
+        self._options: List = options
 
     @property
     def name(self) -> str:
         return self._name
 
     @property
-    def options(self) -> List[str]:
+    def options(self) -> List:
         return self._options
 
     def __str__(self):
         to_string = self.name + ", options:"
         for option in self.options:
-            to_string += " " + option + ","
+            to_string += " " + str(option) + ","
         return to_string
 
     def __eq__(self, other):
@@ -32,5 +32,5 @@ class Strategy:
     def __hash__(self):
         hash_string = self.name
         for option in self._options:
-            hash_string += option
+            hash_string += str(option)
         return hash_string.__hash__()

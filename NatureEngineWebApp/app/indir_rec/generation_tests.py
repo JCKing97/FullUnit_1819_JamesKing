@@ -23,12 +23,12 @@ class GenerationTest(unittest.TestCase):
         cls.strategies = {}
         cls.strat_count = 0
         for strategy in received_strategies:
-            count = random.randint(0, 5)
+            count = random.randint(0, 1)
             cls.strategies[Strategy(strategy['name'], strategy['options'])] = count
             cls.strat_count += count
-        cls.num_of_onlookers = random.randint(1, 20)
-        cls.start_point = random.randint(0, 10)
-        cls.end_point = random.randint(15, 25)
+        cls.num_of_onlookers = random.randint(1, 10)
+        cls.start_point = random.randint(5, 10)
+        cls.end_point = random.randint(15, 20)
         cls.initial_gen = True
         cls.pp = pprint.PrettyPrinter()
 

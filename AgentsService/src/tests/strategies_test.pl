@@ -22,4 +22,11 @@ test_strategies([strategy{name: Name, description: Desc, options: Options}|T], F
  		find_strategies(Strategies),
  		assertion(test_strategies(Strategies, [])).
 
+ 	test(find_image_discriminator_strategies):-
+ 		assertion(strategy("Image Scoring Discriminator", _, [0|_])),
+ 		assertion(strategy("Image Scoring Discriminator", _, [5|_])),
+ 		assertion(strategy("Image Scoring Discriminator", _, [-5|_])),
+ 		assertion(\+strategy("Image Scoring Discriminator", _, [6|_])),
+ 		assertion(\+strategy("Image Scoring Discriminator", _, [-6|_])).
+
 :- end_tests(strategies).

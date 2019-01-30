@@ -93,3 +93,53 @@ terminates_at(said(Gossiper, Perceiver, About, Gossip), [], standing(Perceiver, 
 /*-----------------------------
 -------- Image Scoring --------
 -----------------------------*/
+
+% If an image scoring agent perceives a defection, remove 1 from that agents image score, limited by -5
+initiates_at(did(Donor, Perceiver, Recipient, Action), [], image_score(Perceiver, Donor)=NewImageScore, T):-
+	happens_at(did(Donor, Perceiver, Recipient, Action), T),
+	get_strategy(Strategy, _, Perceiver),
+	Strategy=="Image Scoring Discriminator",
+	Action=="defect",
+	( 
+		holds_at(image_score(Perceiver, Donor)=OldImageScore, T) -> 
+			(OldImageScore =< -5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore-1) ;
+			NewImageScore is -1
+	).
+
+% If an image scoring agent perceives a cooperation, add 1 to their image score, limited by 5
+initiates_at(did(Donor, Perceiver, Recipient, Action), [], image_score(Perceiver, Donor)=NewImageScore, T):-
+	happens_at(did(Donor, Perceiver, Recipient, Action), T),
+	get_strategy(Strategy, _, Perceiver),
+	Strategy=="Image Scoring Discriminator",
+	Action=="cooperate",
+	(
+		holds_at(image_score(Perceiver, Donor)=OldImageScore, T) -> 
+			(OldImageScore >= 5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore+1) ;
+			NewImageScore is 1
+	).
+
+% If a trusting image scoring agent perceives negative gossip about an agent, remove 1 from the image score of the agent the gossip is about, bound by -5
+initiates_at(said(Gossiper, Perceiver, About, Gossip), [], image_score(Perceiver, About)=NewImageScore, T):-
+	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
+	get_strategy(Strategy, Options, Perceiver),
+	Strategy=="Image Scoring Discriminator",
+	member("trusting", Options),
+	Gossip=="negative",
+	( 
+		holds_at(image_score(Perceiver, About)=OldImageScore, T) -> 
+			(OldImageScore =< -5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore-1) ;
+			NewImageScore is -1
+	).
+
+% If a trusting image scoring agent perceives positive gossip about an agent, add 1 to the image score of the agent the gossip is about, bound by 5
+initiates_at(said(Gossiper, Perceiver, About, Gossip), [], image_score(Perceiver, About)=NewImageScore, T):-
+	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
+	get_strategy(Strategy, Options, Perceiver),
+	Strategy=="Image Scoring Discriminator",
+	member("trusting", Options),
+	Gossip=="positive",
+	(
+		holds_at(image_score(Perceiver, About)=OldImageScore, T) -> 
+			(OldImageScore >= 5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore+1) ;
+			NewImageScore is 1
+	).

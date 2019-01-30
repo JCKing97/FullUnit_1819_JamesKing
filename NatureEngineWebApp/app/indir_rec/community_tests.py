@@ -21,13 +21,13 @@ class CommunityTest(unittest.TestCase):
         cls.strat_count = 0
         cls.strategies = {}
         for strategy in received_strategies:
-            count = random.randint(0, 5)
+            count = random.randint(0, 1)
             cls.strategies[Strategy(strategy['name'], strategy['options'])] = count
             cls.strat_count += count
         cls.pp = pprint.PrettyPrinter()
-        cls.num_of_onlookers = random.randint(1, 20)
-        cls.num_of_generations = random.randint(3, 8)
-        cls.length_of_generations = random.randint(6, 20)
+        cls.num_of_onlookers = random.randint(1, 10)
+        cls.num_of_generations = random.randint(3, 5)
+        cls.length_of_generations = random.randint(6, 10)
 
     def setUp(self):
         self.app = create_app(TestConfig)

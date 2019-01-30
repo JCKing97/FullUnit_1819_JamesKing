@@ -320,6 +320,123 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	random_element(Capabilities, Action),
 	Success = true, !.
 
+/*-------------------------------------
+------ Image Score Discriminator ------
+-------------------------------------*/
+
+% If the agent is a donor 
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
+	community(CommunityID),
+	generation(community(CommunityID), GenerationID),
+	agent(strategy("Image Scoring Discriminator", _, [K|_]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: RecipientID}),
+	(
+		holds_at(image_score(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+							 agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=ImageScore, Timepoint) ->
+			(
+				K > ImageScore -> (Action = action{type: action, value: defect, recipient: RecipientID}, !) ; 
+								  (Action = action{type: action, value: cooperate, recipient: RecipientID}, !)
+			) ;
+			(
+				K > 0 -> (Action = action{type: action, value: defect, recipient: RecipientID}, !) ; 
+						 (Action = action{type: action, value: cooperate, recipient: RecipientID}, !)
+			)
+	), Success = true, !.
+
+% If the agent is not a donor and uses the lazy strategy
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
+	community(CommunityID),
+	generation(community(CommunityID), GenerationID),
+	agent(strategy("Image Scoring Discriminator", _, [_|OtherOptions]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	member("lazy", OtherOptions),
+	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: idle}),
+	Action = action{type: idle},
+	Success = true, !.
+
+% If the agent is not a donor and uses the promote_self strategy
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
+	community(CommunityID),
+	generation(community(CommunityID), GenerationID),
+	agent(strategy("Image Scoring Discriminator", _, [_|OtherOptions]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	member("promote_self", OtherOptions),
+	findall(action{type: gossip, value: positive, about: AgentID, recipient: RecipientID},
+	 capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: gossip, value: positive, about: AgentID, recipient: RecipientID}),
+	  SelfPromotionCapabilities),
+	random_element(SelfPromotionCapabilities, Action),
+	Success = true, !.
+
+% If the agent is not a donor and uses the spread_accurate_positive strategy
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
+	community(CommunityID),
+	generation(community(CommunityID), GenerationID),
+	agent(strategy("Image Scoring Discriminator", _, [K|OtherOptions]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	member("spread_accurate_positive", OtherOptions),
+	findall(GoodAgentID,
+		(
+			agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), GoodAgentID),
+			(
+				holds_at(image_score(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+					agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), GoodAgentID))=ImageScore, Timepoint+1) ->
+					ImageScore >= K ;
+					0 >= K
+			),
+			GoodAgentID \== AgentID
+		),
+		GoodAgents
+	),
+	(
+		is_empty(GoodAgents, true) -> 
+			Action = action{type: idle} ;
+			(
+				random_element(GoodAgents, GoodAgent),
+				findall(ID, 
+					(
+						agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), ID),
+						ID \== GoodAgent,
+						ID \== AgentID
+					),
+				Agents),
+				random_element(Agents, RecipientID),
+				Action = action{type: gossip, value: positive, about: GoodAgent, recipient: RecipientID}
+			)
+	), Success = true, !.
+
+% If the agent is not a donor and uses the spread_accurate_negative strategy
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
+	community(CommunityID),
+	generation(community(CommunityID), GenerationID),
+	agent(strategy("Image Scoring Discriminator", _, [K|OtherOptions]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	member("spread_accurate_negative", OtherOptions),
+	findall(BadAgentID,
+		(
+			agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), BadAgentID),
+			( 
+				holds_at(image_score(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+					agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), BadAgentID))=ImageScore, Timepoint+1) ->
+						ImageScore < K ;
+						0 < K
+			),
+			BadAgentID \== AgentID
+		),
+		BadAgents
+	),
+	(
+		is_empty(BadAgents, true) -> 
+			Action = action{type: idle} ;
+			(
+				random_element(BadAgents, BadAgent),
+				findall(ID, 
+					(
+						agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), ID),
+						ID \== BadAgent,
+						ID \== AgentID
+					),
+				Agents),
+				random_element(Agents, RecipientID),
+				Action = action{type: gossip, value: negative, about: BadAgent, recipient: RecipientID}
+			)
+	), Success = true, !.
+
 /*-----------------------------
 ----------- Failure -----------
 -----------------------------*/
