@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <div class="jumbotron" style="padding: 20px">
+        <h1 style="">Reputation Games Historical Data</h1>
+        <p>
+            View analysis of all the past reputation games.
+        </p>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-info" style="margin: 10px">
+                    <div class="panel-heading">Measurements Definition. Unsure of what the measurements mean? Read these descriptions!</div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Measurement</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cooperation rate</td>
+                                    <td>The percentage of interactions in which the donor has cooperated.</td>
+                                </tr>
+                                <tr>
+                                    <td>Social activeness</td>
+                                    <td>The percentage of actions when the actor is not a donor that the actor gossips and is not idle (thus socially active).</td>
+                                </tr>
+                                <tr>
+                                    <td>Positivity of gossip</td>
+                                    <td>The percentage of gossip actions that are positive rather than negative towards the player the gossip is about.</td>
+                                </tr>
+                                <tr>
+                                    <td>Fitness</td>
+                                    <td>
+                                        A player accrues fitness through interactions, if they are the recipient of a cooperation action they get a boost of 2 to their fitness.
+                                        If a player cooperates with another player as a donor it is at a cost of 1 fitness to them.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h3>Social Actions vs. Cooperation Rate</h3>
+                <p>
+                    One possible factor to increased cooperation between players could be the social interaction between each other.
+                    If this is true you are likely to see a positive correlation in this scatter graph datasets.
+                    The cooperation rate, social activeness and positivity of gossip data is for each community.
+                </p>
+                <div class="container">
+                    <canvas id="socialVsCoopChart"></canvas>
+                    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+                    <script>
+                        var socialVsCoopChartData = {{ social_vs_cooperation_rate_chart_data|tojson }};
+                        var socialVsCoopChartDoc = document.getElementById("socialVsCoopChart").getContext("2d");
+                        new Chart(socialVsCoopChartDoc, socialVsCoopChartData);
+                    </script>
+                </div>
+                <hr/>
+
+                <h3>Generation Length vs. Cooperation Rate</h3>
+                <p>
+                    Another suggested factor in increased cooperation is the length of generations in a community.
+                    If this is true you are likely to see a positive correlation in the scatter graph's datasets.
+                </p>
+                <div class="container">
+                    <canvas id="genLengthVsCoopChart"></canvas>
+                    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+                    <script>
+                        var genLengthVsCoopChartData = {{ gen_length_vs_cooperation_rate_chart_data|tojson }};
+                        var genLengthVsCoopChartDoc = document.getElementById("genLengthVsCoopChart").getContext("2d");
+                        new Chart(genLengthVsCoopChartDoc, genLengthVsCoopChartData);
+                    </script>
+                </div>
+                <hr/>
+
+                <h3>Cooperation Rate vs. Social Welfare</h3>
+                <p>
+                    Social welfare is the overall fitness accrued by all players of a community or generation.
+                    For each cooperation the donor receives a cost of 1 to their fitness, but the recipient gains 2 to their fitness.
+                    Naturall there should be a positive correlation with cooperation rate and social welfare.
+                </p>
+                <div class="container">
+                    <canvas id="coopVsSocialWelfareChart"></canvas>
+                    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+                    <script>
+                        var coopVsSocialWelfareChartData = {{ cooperation_rate_vs_social_welfare_chart_data|tojson }};
+                        var coopVsSocialWelfareChartDoc = document.getElementById("coopVsSocialWelfareChart").getContext("2d");
+                        new Chart(coopVsSocialWelfareChartDoc, coopVsSocialWelfareChartData);
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% include "_indir_rec_strategies_description.html" %}
+        </div>
+    </div>
+{% endblock %}

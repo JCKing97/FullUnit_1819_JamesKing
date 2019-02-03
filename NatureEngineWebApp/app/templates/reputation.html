@@ -2,9 +2,12 @@
 
 {% block app_content %}
     <div class="jumbotron" style="padding: 20px">
-        <h1>Reputation</h1>
+        <h1>Reputation Game</h1>
         <p>
-            Select the amount of each strategy you want for the first generation of players in this game (reproduction will alter
+            Select the population of the first generation using the form below and set the parameters as you wish for the game.
+            After each generation the population will be altered based on the fitness of each player.
+            Games with more and longer generations and with more players will take longer to run and may timeout if they take too long.
+            The first property of the image scoring discriminator is the value K that the player will use to decide whether to cooperate or not (the higher the less likely they are to cooperate).
         </p>
     </div>
 
@@ -141,18 +144,18 @@
             render(){
                 return(
                     <div>
+                        <form>
+                            <label>Number of onlookers for each interaction: <input onChange={this.handleOnlookerChange} value={this.state.num_of_onlookers} type="number" min="0"/></label><br/>
+                            <label>Number of generations: <input onChange={this.handleNumOfGenChange} value={ this.state.num_of_generations } type="number" min="3" max="20"/></label><br/>
+                            <label>Length of generation (timepoints): <input onChange={this.handleLenOfGenChange} value={this.state.length_of_generations} type="number" min="6" max="200"/></label><br/>
+                            <label>Chance of mutation in offspring (between 0 and 1): <input onChange={this.handleMutationChange} value={this.state.mutation_chance} type="number" min="0" max="1" step="0.01"/></label><br/>
+                        </form>
                         <div className="container">
                             <div className="row">
                                 <Strategies strategies={this.state.strategies} add={this.add}/>
                                 <SelectedPlayersList selected={this.state.players} remove={this.remove}/>
                             </div>
                         </div>
-                        <form>
-                            <label>Number of onlookers for each interaction: <input onChange={this.handleOnlookerChange} value={this.state.num_of_onlookers} type="number" min="0"/></label><br/>
-                            <label>Number of generations: <input onChange={this.handleNumOfGenChange} value={ this.state.num_of_generations } type="number" min="2" max="20"/></label><br/>
-                            <label>Length of generation (timepoints): <input onChange={this.handleLenOfGenChange} value={this.state.length_of_generations} type="number" min="5" max="200"/></label><br/>
-                            <label>Mutation chance (between 0 and 1): <input onChange={this.handleMutationChange} value={this.state.mutation_chance} type="number" min="0" max="1" step="0.01"/></label><br/>
-                        </form>
                         <button onClick={ this.handleSubmit } className="btn btn-success btn-lg">Submit</button>
                     </div>
                 )

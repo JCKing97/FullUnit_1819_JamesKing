@@ -3,102 +3,203 @@
 
 {% block app_content %}
     <div class="jumbotron" style="padding: 20px">
-        <h1>Reputation Finished</h1>
+        <h1>Reputation Game Finished</h1>
         <p>
-            Your reputation is over
+            Your reputation game is over, below are the statistics of the game.
+            How did the community fare?
+            How did the population of strategies fluctuate in each generations population?
+            How did the cooperation rate, social activeness and positivity of gossip change over the generations?
+            Is there a connection between the population fluctuation and these measurements?
+            See an action by action view of the game.
+            If you are unsure what an agents strategy means see the descriptions at the bottom of the page.
         </p>
     </div>
 
-    <div>
-        <h2>Community summary</h2>
-        <p>Number of onlookers per interaction: {{ community.number_of_onlookers }}</p>
-        <p>Length of generations: {{ community.length_of_generations }}</p>
-        <p>Chance of mutation when reproducing: {{ community.mutation_chance }}</p>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if community.cooperation_rate >= 80 %}green{% elif community.cooperation_rate >= 40 %}orange{% else %}red{% endif %}">Cooperation rate: {{ community.cooperation_rate }}</div>
-                <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if community.social_activeness >= 80 %}green{% elif community.social_activeness >= 40 %}orange{% else %}red{% endif %}">Social activeness: {{ community.social_activeness }}</div>
-                <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if community.positivity_of_gossip >= 80 %}green{% elif community.positivity_of_gossip >= 40 %}orange{% else %}red{% endif %}">Positivity of gossip: {{ community.positivity_of_gossip }}</div>
-                <div class="col-md-3 panel" style="border-width: 2px; border-color: black;">Fitness: {{ community.fitness }}</div>
-            </div>
-        </div>
+    <div class="container-fluid">
 
-        <h2>Population Tracker</h2>
-        <p>
-            When you selected the strategies you wished to used you chose the population of the first generation.
-            This population fluctuates over the following generations according to the fitness of the
-        </p>
-        <div class="container">
-            <canvas id="populationChart"></canvas>
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
-            <script>
-                var PopulationChartData = {{ population_chart_data|tojson }};
-                var populationChartDoc = document.getElementById("populationChart").getContext("2d");
-                new Chart(populationChartDoc, PopulationChartData);
-            </script>
-        </div>
-
-        <h2>Action by action:</h2>
-        {% for generation in community.generations %}
-            <h3>Generation: {{ generation.id }}</h3>
-            <div class="container">
-                <div class="row">
-                    {% if generation.cooperation_rate != None %}
-                        <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if generation.cooperation_rate >= 80 %}green{% elif generation.cooperation_rate >= 40 %}orange{% else %}red{% endif %}">Cooperation rate: {{ generation.cooperation_rate }}</div>
-                    {% endif %}
-                    {% if generation.social_activeness != None %}
-                        <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if generation.social_activeness >= 80 %}green{% elif generation.social_activeness >= 40 %}orange{% else %}red{% endif %}">Social activeness: {{ generation.social_activeness }}</div>
-                    {% endif %}
-                    {% if generation.positivity_of_gossip != None %}
-                        <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if generation.positivity_of_gossip >= 80 %}green{% elif generation.positivity_of_gossip >= 40 %}orange{% else %}red{% endif %}">Positivity of gossip: {{ generation.positivity_of_gossip }}</div>
-                    {% endif %}
-                    <div class="col-md-3 panel" style="border-width: 2px; border-color: black;">Fitness: {{ generation.fitness }}</div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-info" style="margin: 10px">
+                    <div class="panel-heading">Measurements Definition. Unsure of what the measurements mean? Read these descriptions!</div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Measurement</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cooperation rate</td>
+                                    <td>The percentage of interactions in which the donor has cooperated.</td>
+                                </tr>
+                                <tr>
+                                    <td>Social activeness</td>
+                                    <td>The percentage of actions when the actor is not a donor that the actor gossips and is not idle (thus socially active).</td>
+                                </tr>
+                                <tr>
+                                    <td>Positivity of gossip</td>
+                                    <td>The percentage of gossip actions that are positive rather than negative towards the player the gossip is about.</td>
+                                </tr>
+                                <tr>
+                                    <td>Fitness</td>
+                                    <td>
+                                        A player accrues fitness through interactions, if they are the recipient of a cooperation action they get a boost of 2 to their fitness.
+                                        If a player cooperates with another player as a donor it is at a cost of 1 fitness to them.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            {% for player in generation.players %}
-                <h4>Player: {{ player.id }}</h4>
-                <p>Strategy: {{ player.strategy_name }} {{ player.strategy_options }}</p>
+            <div class="col-md-9">
+                <h2>Community {{ community.id }} Summary</h2>
+                <h3>Parameters</h3>
+                <p>These are the parameters that you set for the community at the beginning.</p>
+                <p>Number of onlookers per interaction: {{ community.number_of_onlookers }}</p>
+                <p>Length of generations: {{ community.length_of_generations }}</p>
+                <p>Chance of mutation when reproducing: {{ community.mutation_chance }}</p>
+                <h3>Measurements</h3>
                 <div class="container">
                     <div class="row">
-                        {% if player.cooperation_rate != None %}
-                            <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if player.cooperation_rate >= 80 %}green{% elif player.cooperation_rate >= 40 %}orange{% else %}red{% endif %}">Cooperation rate: {{ player.cooperation_rate }}</div>
-                        {% endif %}
-                        {% if player.social_activeness != None %}
-                            <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if player.social_activeness >= 80 %}green{% elif player.social_activeness >= 40 %}orange{% else %}red{% endif %}">Social activeness: {{ player.social_activeness }}</div>
-                        {% endif %}
-                        {% if player.positivity_of_gossip != None %}
-                            <div class="col-md-3 panel" style="border-width: 2px; border-color: {% if player.positivity_of_gossip >= 80 %}green{% elif player.positivity_of_gossip >= 40 %}orange{% else %}red{% endif %}">Positivity of gossip: {{ player.positivity_of_gossip }}</div>
-                        {% endif %}
-                        <div class="col-md-3 panel" style="border-width: 2px; border-color: black;">Fitness: {{ player.fitness }}</div>
+                        <label>Cooperation rate: {{ community.cooperation_rate }}</label>
+                        <div class="progress">
+                            <div class="progress-bar {% if community.cooperation_rate >= 80 %}progress-bar-success{% elif community.cooperation_rate >= 40 %}progress-bar-warning{% else %}progress-bar-danger{% endif %}"
+                                 role="progressbar" aria-valuenow="{{ community.cooperation_rate }}" aria-valuemin="0" aria-valuemax="100"
+                                 style="width: {{ community.cooperation_rate }}%"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>Social activeness: {{ community.social_activeness }}</label>
+                        <div class="progress">
+                            <div class="progress-bar {% if community.social_activeness >= 80 %}progress-bar-success{% elif community.social_activeness >= 40 %}progress-bar-warning{% else %}progress-bar-danger{% endif %}"
+                                 role="progressbar" aria-valuenow="{{ community.social_activeness }}" aria-valuemin="0" aria-valuemax="100"
+                                 style="width: {{ community.social_activeness }}%"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>Positivity of gossip: {{ community.positivity_of_gossip }}</label>
+                        <div class="progress">
+                            <div class="progress-bar {% if community.positivity_of_gossip >= 80 %}progress-bar-success{% elif community.positivity_of_gossip >= 40 %}progress-bar-warning{% else %}progress-bar-danger{% endif %}"
+                                 role="progressbar" aria-valuenow="{{ community.positivity_of_gossip }}" aria-valuemin="0" aria-valuemax="100"
+                                 style="width: {{ community.positivity_of_gossip }}%"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 panel" style="display:flex; justify-content:center; align-items:center; border-width: 2px; border-color: black;"><label>Lowest recorded community fitness: {{ lowest_fitness }}</label></div>
+                        <div class="col-md-4 panel" style="display:flex; justify-content:center; align-items:center; border-width: 2px; border-color: black;"><label>Average recorded community fitness: {{ average_fitness }}</label></div>
+                        <div class="col-md-4 panel" style="display:flex; justify-content:center; align-items:center; border-width: 2px; border-color: black;"><label>Highest recorded community fitness: {{ highest_fitness }}</label></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 panel" style="display:flex; justify-content:center; align-items:center; border-width: 2px; border-color: black;"><label>This community's fitness: {{ community.fitness }}</label></div>
                     </div>
                 </div>
-                {% for action in player.actions %}
-                    {% set closed = False %}
-                    {% if loop.index0 % 12 == 0 %}
-                        <div class="row">
-                    {% endif %}
-                    <div class="col-md-1" style="border: 2px solid black; margin: 1px;">
-                        <h5>{{ action.type.value['type'] }}</h5>
-                        <p>Timepoint: {{ action.timepoint }}</p>
-                        {% if action.type == action_type.INTERACTION %}
-                            <p>Recipient: {{ action.recipient }}</p>
-                            <p>Action: {{ action.action.value['string'] }}</p>
-                        {% elif action.type == action_type.GOSSIP %}
-                            <p>Recipient: {{ action.recipient }}</p>
-                            <p>About: {{ action.about }}</p>
-                            <p>Gossip: {{ action.gossip.value }}</p>
-                        {% endif %}
+                <hr>
+
+                <h2>Generations Summary</h2>
+
+                <h3>Population Tracker</h3>
+                <p>
+                    When you selected the strategies in the form you chose the population of the first generation.
+                    This population fluctuates over the following generations according to the fitness earned by these players.
+                    Let's see how the population has changed over the changes over the generations.
+                    Are there more or less successful strategies?
+                    How may this be affected by the original population choice?
+                    Does the population fluctuation map to the changes in the measurements below?
+                </p>
+                <div class="container">
+                    <canvas id="populationChart"></canvas>
+                    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+                    <script>
+                        var PopulationChartData = {{ population_chart_data|tojson }};
+                        var populationChartDoc = document.getElementById("populationChart").getContext("2d");
+                        new Chart(populationChartDoc, PopulationChartData);
+                    </script>
+                </div>
+            `
+                <h3>Measurements By Generation</h3>
+                <p>
+                    These measurements track the cooperation rate, social activeness and positivity of gossip generation by generation.
+                </p>
+                <div class="container">
+                    <canvas id="measurementChart"></canvas>
+                    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+                    <script>
+                        var measurementChartData = {{ measurement_chart_data|tojson }};
+                        var measurementChartDoc = document.getElementById("measurementChart").getContext("2d");
+                        new Chart(measurementChartDoc, measurementChartData);
+                    </script>
+                </div>
+
+                <h3>Fitness By Generation</h3>
+                <p>
+                    The sum of players fitness for each generation of players.
+                </p>
+                <div class="container">
+                    <canvas id="fitnessChart"></canvas>
+                    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+                    <script>
+                        var fitnessChartData = {{ fitness_chart_data|tojson }};
+                        var fitnessChartDoc = document.getElementById("fitnessChart").getContext("2d");
+                        new Chart(fitnessChartDoc, fitnessChartData);
+                    </script>
+                </div>
+                <hr>
+
+                <h2>Action By Action, Player By Player</h2>
+                <p>
+                    This is a by player and action breakdown of the happenings in this community.
+                    Each row corresponds to a player in the generation.
+                    The first {{ timepoints|length }} columns are the timepoints in which entries for the rows in those columns are actions by that player at that timepoint.
+                    The last 4 are the measurements cooperation rate, social activeness, positivity of gossip and fitness for that player.
+                </p>
+
+                {% for generation in community.generations %}
+                    <div class="panel panel-default">
+                        <!-- Default panel contents -->
+                        <div class="panel-heading">Generation: {{ generation.id }}</div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="border-right: #CCC 2px solid;">Player's ids and strategies</th>
+                                    <th colspan="{{ timepoints|length }}" style="border-right: #CCC 2px solid;">Timepoints</th>
+                                    <th colspan="4">Measurements</th>
+                                </tr>
+                                <tr>
+                                    {% for timepoint in timepoints %}
+                                        <th>{{ timepoint }}</th>
+                                    {% endfor %}
+                                    <th style="border-left: #CCC 2px solid;">Cooperation rate</th>
+                                    <th>Social activeness</th>
+                                    <th>Positivity of gossip</th>
+                                    <th>Fitness</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for player in generation.players %}
+                                    <tr>
+                                        <th style="border-right: #CCC 2px solid;">{{ player.id }}<br/>{{ player.strategy_name }}<br/>{{ player.strategy_options }}</th>
+                                        {% for action in player.actions %}
+                                            <td>
+                                                {% for line in action.to_table_representation() %}
+                                                    {{ line }}<br/>
+                                                {% endfor %}
+                                            </td>
+                                        {% endfor %}
+                                        <td style="border-left: #CCC 2px solid;">{{ player.cooperation_rate }}</td>
+                                        <td>{{ player.social_activeness }}</td>
+                                        <td>{{ player.positivity_of_gossip }}</td>
+                                        <td>{{ player.fitness }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-                    {% if loop.index % 12 == 0 %}
-                        </div>
-                        {% set closed = True %}
-                    {% endif %}
                 {% endfor %}
-                {% if not closed %}
-                    </div>
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
+            </div>
+        </div>
     </div>
 
     <div class="container">

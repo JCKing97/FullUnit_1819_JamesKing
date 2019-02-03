@@ -4,6 +4,7 @@ __author__ = "James King adapted from Miguel Grinberg"
 
 from app import db
 from datetime import datetime
+from typing import List
 
 
 class Match(db.Model):
@@ -126,6 +127,9 @@ class ReputationGeneration(db.Model):
                               primaryjoin="and_(ReputationGeneration.id==ReputationPlayer.generation_id,"
                                           "ReputationGeneration.community_id==ReputationPlayer.community_id)")
 
+    def get_length(self):
+        return self.end_point - self.start_point
+
 
 class ReputationActionOnlookers(db.Model):
     community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'), primary_key=True)
@@ -175,4 +179,14 @@ class ReputationAction(db.Model):
     gossip = db.Column(db.Enum(GossipContent), nullable=True)
     donor = db.Column(db.Integer, db.ForeignKey('reputation_player.id'), nullable=True)
     action = db.Column(db.Enum(InteractionContent), nullable=True)
+
+    def to_table_representation(self) -> List[str]:
+        if self.type is ActionType.INTERACTION:
+            return ["type: " + self.type.value['type'], "recipient: " + str(self.recipient), "action: " +
+                    self.action.value['string']]
+        elif self.type is ActionType.GOSSIP:
+            return ["type: " + self.type.value['type'], "recipient: " + str(self.recipient), "about: " + str(self.about),
+                    "gossip: " + self.gossip.value]
+        else:
+            return ["type: " + self.type.value['type']]
 
