@@ -1,7 +1,8 @@
 """run_game.py: contains the logic to throw a reputation game into a redis queue"""
 
 from .facade_logic import ReputationGame, Results
-from ..models import ReputationAction, ReputationCommunity, ReputationGeneration, ReputationPlayer, ReputationStrategy, ReputationActionOnlookers
+from ..models import ReputationAction, ReputationCommunity, ReputationGeneration, ReputationPlayer, ReputationStrategy,\
+    ReputationActionOnlookers, Experiment
 from app import db, create_app
 from .action_logic import ActionType, InteractionAction, GossipAction
 import json
@@ -11,17 +12,21 @@ app.app_context().push()
 
 
 def reputation_run(strategies, num_of_onlookers, num_of_generations, length_of_generations, mutation_chance,
-                   database_community_id):
+                   database_community_id, user_id=None, label=None):
     """Run a reputation game and store the results in a database"""
     game: ReputationGame = ReputationGame(strategies, num_of_onlookers, num_of_generations,
                                           length_of_generations, mutation_chance)
     game_results: Results = game.run()
-    commit_results_game_to_database(game, game_results, database_community_id)
+    commit_results_game_to_database(game, game_results, database_community_id, user_id, label)
 
 
-def commit_results_game_to_database(game: ReputationGame, game_results: Results, database_community_id):
+def commit_results_game_to_database(game: ReputationGame, game_results: Results, database_community_id, user_id, label):
     """Store the results of a reputation game in the database"""
     community: ReputationCommunity = ReputationCommunity.query.filter_by(id=database_community_id).first()
+    if user_id is not None and label is not None:
+        experiment: Experiment = Experiment(community_id=database_community_id, user_id=user_id, label=label)
+        db.session.add(experiment)
+        db.session.commit()
     if game_results.corrupted_observations:
         # If the results are corrupted don't add them to the database, just note that the observations were corrupted
         community.set_corrupted()

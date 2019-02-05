@@ -39,12 +39,14 @@
                     length_of_generations: 0,
                     mutation_chance: 0,
                     players: [],
-                    next_player_id: 0
+                    next_player_id: 0,
+                    label: null
                 };
                 this.handleLenOfGenChange = this.handleLenOfGenChange.bind(this);
                 this.handleNumOfGenChange = this.handleNumOfGenChange.bind(this);
                 this.handleOnlookerChange = this.handleOnlookerChange.bind(this);
                 this.handleMutationChange = this.handleMutationChange.bind(this);
+                this.handleLabelChange = this.handleLabelChange.bind(this);
             }
 
             add = (name, options) => {
@@ -116,7 +118,7 @@
                         data: JSON.stringify({ strategy_counts: players, num_of_onlookers: this.state.num_of_onlookers,
                             num_of_generations: this.state.num_of_generations,
                             length_of_generations: this.state.length_of_generations,
-                            mutation_chance: this.state.mutation_chance})
+                            mutation_chance: this.state.mutation_chance, label:this.state.label})
                     }).done(function(data) {
                         window.location = data['url'];
                     });
@@ -141,6 +143,14 @@
                 this.setState({mutation_chance:event.target.value})
             };
 
+            handleLabelChange(event){
+                {% if current_user.is_authenticated %}
+                    this.setState({label:event.target.value});
+                {% else %}
+                    this.setState({label:null});
+                {% endif %}
+            };
+
             render(){
                 return(
                     <div>
@@ -149,6 +159,11 @@
                             <label>Number of generations: <input onChange={this.handleNumOfGenChange} value={ this.state.num_of_generations } type="number" min="3" max="20"/></label><br/>
                             <label>Length of generation (timepoints): <input onChange={this.handleLenOfGenChange} value={this.state.length_of_generations} type="number" min="6" max="200"/></label><br/>
                             <label>Chance of mutation in offspring (between 0 and 1): <input onChange={this.handleMutationChange} value={this.state.mutation_chance} type="number" min="0" max="1" step="0.01"/></label><br/>
+                            {% if current_user.is_authenticated %}
+                                <label>Label to attach to the experiment: <input onChange={this.handleLabelChange} value={this.state.label} type="text"/></label><br/>
+                            {% else %}
+                                <label>Label to attach to the experiment (Only available when logged in): <input onChange={this.handleLabelChange} value="Log in to access this feature" type="text"/></label><br/>
+                            {% endif %}
                         </form>
                         <div className="container">
                             <div className="row">

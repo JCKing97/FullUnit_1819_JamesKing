@@ -95,6 +95,22 @@
                         new Chart(coopVsSocialWelfareChartDoc, coopVsSocialWelfareChartData);
                     </script>
                 </div>
+                <hr/>
+
+                <h3>Generation Strategy Count vs. Generation Cooperation Rate</h3>
+                <p>
+                    The count of each strategy in each generation vs the cooperation rate
+                </p>
+                <div class="container">
+                    <canvas id="genStratCountVsCoopChart"></canvas>
+                    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js'></script>
+                    <script>
+                        var genStratCountVsCoopChartData = {{ strategies_vs_cooperation_rate_chart_data|tojson }};
+                        var genStratCountVsCoopChartDoc = document.getElementById("genStratCountVsCoopChart").getContext("2d");
+                        new Chart(genStratCountVsCoopChartDoc, genStratCountVsCoopChartData);
+                    </script>
+                </div>
+                <hr/>
             </div>
         </div>
     </div>

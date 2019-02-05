@@ -1,16 +1,24 @@
 """A module containing the functionality for handling routes in the main blueprint (IPD, home and about pages).
-This includes processing of the data sent to them, and processing of the data returned by them"""
+This includes processing of the data sent to them, and processing of the data returned by them. The login logic
+was created by Miguel Grinberg in the flask mega tutorial"""
+
+__authors__ = "James King adapted from Miguel Grinberg"
 
 from app import db
 from app.main import bp
-from app.models import Match, Tournament
+from app.models import Match, Tournament, Experiment
 from app.main.forms import MatchSelectPlayersForm
-from flask import render_template, redirect, url_for, request, jsonify, current_app
+from flask import render_template, redirect, url_for, request, jsonify, current_app, flash, g
 import axelrod as axl
 from app.main.axelrod_database_conversion import match_result_to_database
 from app.main.analysis import get_match_points
-from rq import get_current_job
+from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy import desc, asc
+from app.models import User
+from app.forms import LoginForm, RegistrationForm
+from werkzeug.urls import url_parse
+from app.forms import SearchForm
+
 
 @bp.route('/')
 @bp.route('/index')
@@ -37,6 +45,7 @@ def match(level):
         match_id = match_result_to_database(results=result, players=players)
         return redirect(url_for('main.match_run', match_id=match_id))
     return render_template('match.html', title='Match', form=form, strategies=strategies, strat_dict=strat_dict)
+
 
 def edit_players(form, strategies):
     """Creates the choices for the strategy selection fields for a player"""
@@ -130,3 +139,78 @@ def is_tournament_finished(tournament_id, job_id):
 def about():
     """The route for information about the website and the surrounding project"""
     return render_template('about.html', title='About')
+
+
+@bp.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('main.login'))
+        login_user(user, remember=form.remember_me.data)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('main.index')
+        return redirect(next_page)
+    return render_template('login.html', title='Sign In', form=form)
+
+
+@bp.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('main.index'))
+
+
+@bp.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulations, you are now a registered user!')
+        return redirect(url_for('main.login'))
+    return render_template('register.html', title='Register', form=form)
+
+
+@bp.route('/my_experiments')
+def my_experiments():
+    if not current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    page = request.args.get('page', 1, type=int)
+    experiments = current_user.experiments.paginate(page, current_app.config['EXPERIMENTS_PER_PAGE'], False)
+    next_url = url_for('main.my_experiments', page=experiments.next_num) if experiments.has_next else None
+    prev_url = url_for('main.my_experiments', page=experiments.prev_num) if experiments.has_prev else None
+    return render_template('my_experiments.html', title="My Experiments", username=current_user.username,
+                           experiments=experiments.items, next_url=next_url, prev_url=prev_url)
+
+
+@bp.before_app_request
+def before_request():
+    if current_user.is_authenticated:
+        db.session.commit()
+        g.search_form = SearchForm()
+
+
+@bp.route('/experiments_search')
+@login_required
+def experiments_search():
+    if not g.search_form.validate():
+        return redirect(url_for('main.my_experiments'))
+    page = request.args.get('page', 1, type=int)
+    experiments, total = Experiment.search(g.search_form.q.data, page, current_app.config['EXPERIMENTS_PER_PAGE'])
+    next_url = url_for('main.experiments_search', q=g.search_form.q.data, page=page + 1) \
+        if total > page * current_app.config['EXPERIMENTS_PER_PAGE'] else None
+    prev_url = url_for('main.experiments_search', q=g.search_form.q.data, page=page - 1) \
+        if page > 1 else None
+    experiments = experiments.filter_by(user_id=current_user.id).all()
+    print(Experiment.query.all())
+    return render_template('experiment_search.html', title='Experiments Search', experiments=experiments,
+                           next_url=next_url, prev_url=prev_url)
