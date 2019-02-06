@@ -1,8 +1,8 @@
-"""Prepping for mysql
+"""prepping for mysql
 
-Revision ID: f7d41f956e9b
+Revision ID: 7fe79159f3da
 Revises: 
-Create Date: 2019-02-06 13:55:09.506843
+Create Date: 2019-02-06 14:55:38.634773
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f7d41f956e9b'
+revision = '7fe79159f3da'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,7 +25,7 @@ def upgrade():
     )
     op.create_index(op.f('ix_match_timestamp'), 'match', ['timestamp'], unique=False)
     op.create_table('reputation_community',
-    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('corrupted_observations', sa.Boolean(), nullable=True),
     sa.Column('simulated', sa.Boolean(), nullable=True),
     sa.Column('number_of_onlookers', sa.Integer(), nullable=True),
@@ -38,7 +38,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reputation_strategy',
-    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('strategy_name', sa.String(length=128), nullable=True),
     sa.Column('strategy_options', sa.String(length=300), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -50,7 +50,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user',
-    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('username', sa.String(length=64), nullable=True),
     sa.Column('email', sa.String(length=120), nullable=True),
     sa.Column('password_hash', sa.String(length=128), nullable=True),
@@ -59,7 +59,7 @@ def upgrade():
     op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
     op.create_index(op.f('ix_user_username'), 'user', ['username'], unique=True)
     op.create_table('experiment',
-    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('community_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('label', sa.String(length=128), nullable=True),
@@ -76,7 +76,7 @@ def upgrade():
     )
     op.create_table('reputation_generation',
     sa.Column('community_id', sa.Integer(), nullable=True),
-    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('generation_id', sa.Integer(), nullable=True),
     sa.Column('start_point', sa.Integer(), nullable=True),
     sa.Column('end_point', sa.Integer(), nullable=True),
@@ -115,9 +115,9 @@ def upgrade():
     sa.PrimaryKeyConstraint('round_num', 'match_id', 'player_id')
     )
     op.create_table('reputation_player',
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('generation_id', sa.Integer(), nullable=True),
     sa.Column('community_id', sa.Integer(), nullable=True),
-    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('player_id', sa.Integer(), nullable=True),
     sa.Column('cooperation_rate', sa.Integer(), nullable=True),
     sa.Column('social_activeness', sa.Integer(), nullable=True),
@@ -130,10 +130,10 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reputation_action',
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('generation_id', sa.Integer(), nullable=True),
     sa.Column('community_id', sa.Integer(), nullable=True),
     sa.Column('player_id', sa.Integer(), nullable=True),
-    sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('timepoint', sa.Integer(), nullable=False),
     sa.Column('type', sa.Enum('INTERACTION', 'GOSSIP', 'IDLE', name='actiontype'), nullable=False),
     sa.Column('gossiper', sa.Integer(), nullable=True),
@@ -152,7 +152,7 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reputation_action_onlookers',
-    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('community_id', sa.Integer(), nullable=True),
     sa.Column('generation_id', sa.Integer(), nullable=True),
     sa.Column('actor_id', sa.Integer(), nullable=True),

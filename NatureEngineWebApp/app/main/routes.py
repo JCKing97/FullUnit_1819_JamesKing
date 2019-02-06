@@ -6,7 +6,7 @@ __authors__ = "James King adapted from Miguel Grinberg"
 
 from app import db
 from app.main import bp
-from app.models import Match, Tournament, Experiment
+from app.models import Match, Tournament, Experiment, User
 from app.main.forms import MatchSelectPlayersForm
 from flask import render_template, redirect, url_for, request, jsonify, current_app, flash, g
 import axelrod as axl
@@ -14,7 +14,6 @@ from app.main.axelrod_database_conversion import match_result_to_database
 from app.main.analysis import get_match_points
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy import desc, asc
-from app.models import User
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
 from app.forms import SearchForm

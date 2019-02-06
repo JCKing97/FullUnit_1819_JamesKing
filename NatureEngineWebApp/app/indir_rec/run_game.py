@@ -55,7 +55,7 @@ def commit_results_game_to_database(game: ReputationGame, game_results: Results,
         players = game_results.players
         for generation in generations:
             # Add each generation from the community to the database with all the gens stats
-            new_gen = ReputationGeneration(community_id=community.id, id=generation,
+            new_gen = ReputationGeneration(community_id=community.id, generation_id=generation,
                                            start_point=min(actions_by_generation[generation]),
                                            end_point=max(actions_by_generation[generation]),
                                            cooperation_rate=cooperation_by_gen[generation],
@@ -76,14 +76,15 @@ def commit_results_game_to_database(game: ReputationGame, game_results: Results,
                                                    strategy_options=strategy_options_string)
                     db.session.add(new_strat)
                     db.session.flush()
-                new_player = ReputationPlayer(generation_id=new_gen.id, community_id=community.id, id=player,
+                player_strategy = ReputationStrategy.query.filter_by(strategy_name=player_strat.name,
+                                                                     strategy_options=strategy_options_string).first()
+                new_player = ReputationPlayer(generation_id=new_gen.id, community_id=community.id, player_id=player,
                                               cooperation_rate=cooperation_by_gen_and_player[generation][player],
                                               social_activeness=social_activeness_by_gen_and_player[generation][player],
                                               positivity_of_gossip=
                                               positivity_of_gossip_by_gen_and_player[generation][player],
                                               fitness=fitness_by_gen_and_player[generation][player],
-                                              strategy_name=player_strat.name,
-                                              strategy_options=strategy_options_string)
+                                              strategy=player_strategy.id)
                 db.session.add(new_player)
                 db.session.flush()
                 # Add all the actions the player committed to and their details to the database
@@ -91,7 +92,7 @@ def commit_results_game_to_database(game: ReputationGame, game_results: Results,
                     if actions_by_generation_and_player[generation][player][timepoint].type is ActionType.INTERACTION:
                         interaction: InteractionAction = actions_by_generation_and_player[generation][player][timepoint]
                         new_action = ReputationAction(generation_id=new_gen.id, community_id=community.id,
-                                                      player_id=new_player.id, id=timepoint, timepoint=timepoint,
+                                                      player_id=new_player.id, timepoint=timepoint,
                                                       type=ActionType.INTERACTION, donor=interaction.donor,
                                                       recipient=interaction.recipient, action=interaction.action)
                         db.session.add(new_action)
@@ -107,7 +108,7 @@ def commit_results_game_to_database(game: ReputationGame, game_results: Results,
                     elif actions_by_generation_and_player[generation][player][timepoint].type is ActionType.GOSSIP:
                         gossip: GossipAction = actions_by_generation_and_player[generation][player][timepoint]
                         new_action = ReputationAction(generation_id=new_gen.id, community_id=community.id,
-                                                      player_id=new_player.id, id=timepoint, timepoint=timepoint,
+                                                      player_id=new_player.id, timepoint=timepoint,
                                                       type=ActionType.GOSSIP, gossiper=gossip.gossiper,
                                                       about=gossip.about, recipient=gossip.recipient,
                                                       gossip=gossip.gossip)
@@ -115,7 +116,7 @@ def commit_results_game_to_database(game: ReputationGame, game_results: Results,
                         db.session.flush()
                     else:
                         new_action = ReputationAction(generation_id=new_gen.id, community_id=community.id,
-                                                      player_id=new_player.id, id=timepoint, timepoint=timepoint,
+                                                      player_id=new_player.id, timepoint=timepoint,
                                                       type=ActionType.IDLE)
                         db.session.add(new_action)
                         db.session.flush()

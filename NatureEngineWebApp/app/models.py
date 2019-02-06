@@ -11,7 +11,7 @@ from app.search import add_to_index, remove_from_index, query_index
 
 
 class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
@@ -79,7 +79,7 @@ db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
 
 class Experiment(SearchableMixin, db.Model):
     __searchable__ = ['label']
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     label = db.Column(db.String(128))
@@ -159,7 +159,7 @@ class TournamentPlayer(db.Model):
 
 class ReputationCommunity(db.Model):
     """The community which a game of indirect reciprocity is run on"""
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     corrupted_observations = db.Column(db.Boolean)
     simulated = db.Column(db.Boolean)
     number_of_onlookers = db.Column(db.Integer)
@@ -194,7 +194,7 @@ class ReputationCommunity(db.Model):
 class ReputationGeneration(db.Model):
     """A generation of players which interact with each others"""
     community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     generation_id = db.Column(db.Integer)
     start_point = db.Column(db.Integer)
     end_point = db.Column(db.Integer)
@@ -211,7 +211,7 @@ class ReputationGeneration(db.Model):
 
 
 class ReputationActionOnlookers(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
     generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'))
     actor_id = db.Column(db.Integer, db.ForeignKey('reputation_player.id'))
@@ -219,11 +219,18 @@ class ReputationActionOnlookers(db.Model):
     action_id = db.Column(db.Integer, db.ForeignKey('reputation_action.id'))
 
 
+class ReputationStrategy(db.Model):
+    """A possible strategy of a reputation game player"""
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    strategy_name = db.Column(db.String(128))
+    strategy_options = db.Column(db.String(300))
+
+
 class ReputationPlayer(db.Model):
     """A player that has committed to actions based on their strategy and perception of the world"""
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'))
     community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
-    id = db.Column(db.Integer, primary_key=True)
     player_id = db.Column(db.Integer)
     cooperation_rate = db.Column(db.Integer)
     social_activeness = db.Column(db.Integer)
@@ -236,22 +243,15 @@ class ReputationPlayer(db.Model):
                                           "ReputationPlayer.generation_id==ReputationAction.generation_id)")
 
 
-class ReputationStrategy(db.Model):
-    """A possible strategy of a reputation game player"""
-    id = db.Column(db.Integer, primary_key=True)
-    strategy_name = db.Column(db.String(128))
-    strategy_options = db.Column(db.String(300))
-
-
 from .indir_rec.action_logic import ActionType, GossipContent, InteractionContent
 
 
 class ReputationAction(db.Model):
     """An action taken by a player in a reputation game"""
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'))
     community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
     player_id = db.Column(db.Integer, db.ForeignKey('reputation_player.id'))
-    id = db.Column(db.Integer, primary_key=True)
     timepoint = db.Column(db.Integer, nullable=False)
     type = db.Column(db.Enum(ActionType), nullable=False)
     gossiper = db.Column(db.Integer, db.ForeignKey('reputation_player.id'), nullable=True)

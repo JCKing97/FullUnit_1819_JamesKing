@@ -159,7 +159,7 @@
                 {% for generation in community.generations %}
                     <div class="panel panel-default">
                         <!-- Default panel contents -->
-                        <div class="panel-heading">Generation: {{ generation.id }}</div>
+                        <div class="panel-heading">Generation: {{ generation.generation_id }}</div>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -180,7 +180,7 @@
                             <tbody>
                                 {% for player in generation.players %}
                                     <tr>
-                                        <th style="border-right: #CCC 2px solid;">{{ player.id }}<br/>{{ player.strategy_name }}<br/>{{ player.strategy_options }}</th>
+                                        <th style="border-right: #CCC 2px solid;">{{ player.player_id }}<br/>{{ player.strategy.strategy_name }}<br/>{{ player.strategy.strategy_options }}</th>
                                         {% for action in player.actions %}
                                             <td>
                                                 {% for line in action.to_table_representation() %}

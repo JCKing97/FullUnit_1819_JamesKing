@@ -3,12 +3,13 @@
 from flask import render_template, url_for, request, jsonify, current_app
 from app.indir_rec import bp
 import requests
-from ..models import ReputationCommunity, ReputationGeneration, ReputationPlayer
+from ..models import ReputationCommunity, ReputationGeneration, ReputationPlayer, ReputationStrategy
 from app import db
 from .action_logic import ActionType
 import random
 from sqlalchemy.sql import func
 from flask_login import current_user
+
 
 @bp.route('/reputation', methods=['GET', 'POST'])
 def reputation():
@@ -84,20 +85,21 @@ def get_population_chart_data(community: ReputationCommunity):
     hex_digits = list("0123456789ABCDEF")
     for generation in community.generations:
         gen: ReputationGeneration = generation
-        chart_data['data']['labels'].append(gen.id)
+        chart_data['data']['labels'].append(gen.generation_id)
         for player in generation.players:
-            if player.strategy_name + " " + player.strategy_options not in created_datasets:
-                created_datasets.append(player.strategy_name + " " + player.strategy_options)
+            strategy = ReputationStrategy.query.filter_by(id=player.strategy).first()
+            if strategy.strategy_name + " " + strategy.strategy_options not in created_datasets:
+                created_datasets.append(strategy.strategy_name + " " + strategy.strategy_options)
                 hex_colour = "#" + ''.join([hex_digits[random.randint(0, len(hex_digits) - 1)] for _ in range(6)])
                 chart_data['data']['datasets']. \
-                    append({'label': player.strategy_name + " " + player.strategy_options,
+                    append({'label': strategy.strategy_name + " " + strategy.strategy_options,
                             'data': [0 for _ in range(len(community.generations.all()))], 'fill': False,
                             'borderColor': hex_colour, 'backgroundColor': hex_colour})
-                chart_data['data']['datasets'][-1]['data'][gen.id] += 1
+                chart_data['data']['datasets'][-1]['data'][gen.generation_id] += 1
             else:
                 for dataset in chart_data['data']['datasets']:
-                    if dataset['label'] == player.strategy_name + " " + player.strategy_options:
-                        dataset['data'][gen.id] += 1
+                    if dataset['label'] == strategy.strategy_name + " " + strategy.strategy_options:
+                        dataset['data'][gen.generation_id] += 1
                         break
     return chart_data
 
@@ -123,19 +125,19 @@ def get_measurements_chart_data(community: ReputationCommunity):
                                                                    'labelString': "Generation"}}]}}}
     for generation in community.generations:
         gen: ReputationGeneration = generation
-        chart_data['data']['labels'].append(gen.id)
+        chart_data['data']['labels'].append(gen.generation_id)
         for dataset in chart_data['data']['datasets']:
             if dataset['label'] == "Cooperation rate":
-                dataset['data'][gen.id] = gen.cooperation_rate
+                dataset['data'][gen.generation_id] = gen.cooperation_rate
             elif dataset['label'] == "Social activeness":
-                dataset['data'][gen.id] = gen.social_activeness
+                dataset['data'][gen.generation_id] = gen.social_activeness
             elif dataset['label'] == "Positivity of gossip":
-                dataset['data'][gen.id] = gen.positivity_of_gossip
+                dataset['data'][gen.generation_id] = gen.positivity_of_gossip
     return chart_data
 
 
 def get_fitness_chart_data(community: ReputationCommunity):
-    return {'type': 'bar', 'data': {'labels': [gen.id for gen in community.generations],
+    return {'type': 'bar', 'data': {'labels': [gen.generation_id for gen in community.generations],
                                     'datasets': [{'label': "Fitness",
                                                   'data': [gen.fitness for gen in community.generations],
                                                   'backgroundColor': "#85144b"}],
@@ -315,24 +317,24 @@ def get_strategies_vs_cooperation_rate_chart_data():
     max_strat_count = 0
     for community in communities:
         for generation in community.generations:
-            strategy_counts = db.session.query(ReputationPlayer.strategy_name, ReputationPlayer.strategy_options,
-                                               func.count('*')).\
+            strategy_counts = db.session.query(ReputationPlayer.strategy, func.count('*')).\
                 filter_by(community_id=community.id, generation_id=generation.id).\
-                group_by(ReputationPlayer.strategy_name, ReputationPlayer.strategy_options).all()
-            for strategy in strategy_counts:
-                if strategy[2] > max_strat_count:
-                    max_strat_count = strategy[2]
-                if strategy[0] + " " + strategy[1] in created_datasets:
-                    if strategy[2] in created_datasets[strategy[0] + " " + strategy[1]]:
-                        created_datasets[strategy[0] + " " + strategy[1]][strategy[2]]['coop_rate_sum'] += \
+                group_by(ReputationPlayer.strategy).all()
+            for player_strat in strategy_counts:
+                strategy = ReputationStrategy.query.filter_by(id=player_strat[0]).first()
+                if player_strat[1] > max_strat_count:
+                    max_strat_count = player_strat[1]
+                if strategy.strategy_name + " " + strategy.strategy_options in created_datasets:
+                    if player_strat[1] in created_datasets[strategy.strategy_name + " " + strategy.strategy_options]:
+                        created_datasets[strategy.strategy_name + " " + strategy.strategy_options][player_strat[1]]['coop_rate_sum'] += \
                             generation.cooperation_rate
-                        created_datasets[strategy[0] + " " + strategy[1]][strategy[2]]['gen_count'] += 1
+                        created_datasets[strategy.strategy_name + " " + strategy.strategy_options][player_strat[1]]['gen_count'] += 1
                     else:
-                        created_datasets[strategy[0] + " " + strategy[1]][strategy[2]] =\
+                        created_datasets[strategy.strategy_name + " " + strategy.strategy_options][player_strat[1]] =\
                             {'coop_rate_sum': generation.cooperation_rate, 'gen_count': 1}
                 else:
-                    created_datasets[strategy[0] + " " + strategy[1]] = \
-                        {strategy[2]: {'coop_rate_sum': generation.cooperation_rate, 'gen_count': 1}}
+                    created_datasets[strategy.strategy_name + " " + strategy.strategy_options] = \
+                        {player_strat[1]: {'coop_rate_sum': generation.cooperation_rate, 'gen_count': 1}}
     chart_data['data']['labels'] = [i for i in range(max_strat_count)]
     for dataset in created_datasets:
         hex_colour = "#" + ''.join([hex_digits[random.randint(0, len(hex_digits) - 1)] for _ in range(6)])
