@@ -64,6 +64,7 @@ def commit_results_game_to_database(game: ReputationGame, game_results: Results,
                                            fitness=fitness_by_gen[generation])
             db.session.add(new_gen)
             db.session.flush()
+            db_players = {}
             for player in players[generation]:
                 # Add each player from the generation to database with all their stats
                 player_strat = id_to_strat_map[generation][player]
@@ -87,37 +88,41 @@ def commit_results_game_to_database(game: ReputationGame, game_results: Results,
                                               strategy=player_strategy.id)
                 db.session.add(new_player)
                 db.session.flush()
+                db_players[player] = new_player
             for player in players[generation]:
                 # Add all the actions the player committed to and their details to the database
                 for timepoint in actions_by_generation_and_player[generation][player]:
                     if actions_by_generation_and_player[generation][player][timepoint].type is ActionType.INTERACTION:
                         interaction: InteractionAction = actions_by_generation_and_player[generation][player][timepoint]
                         new_action = ReputationAction(generation_id=new_gen.id, community_id=community.id,
-                                                      player_id=new_player.id, timepoint=timepoint,
-                                                      type=ActionType.INTERACTION, donor=interaction.donor,
-                                                      recipient=interaction.recipient, action=interaction.action)
+                                                      player_id=db_players[player].id, timepoint=timepoint,
+                                                      type=ActionType.INTERACTION,
+                                                      donor=db_players[interaction.donor].id,
+                                                      recipient=db_players[interaction.recipient].id,
+                                                      action=interaction.action)
                         db.session.add(new_action)
                         db.session.flush()
                         for onlooker in interaction.onlookers:
                             reputation_action_onlooker = ReputationActionOnlookers(community_id=community.id,
                                                                                    generation_id=new_gen.id,
-                                                                                   actor_id=new_player.id,
-                                                                                   onlooker_id=onlooker,
+                                                                                   actor_id=db_players[player].id,
+                                                                                   onlooker_id=db_players[onlooker].id,
                                                                                    action_id=timepoint)
                             db.session.add(reputation_action_onlooker)
                             db.session.flush()
                     elif actions_by_generation_and_player[generation][player][timepoint].type is ActionType.GOSSIP:
                         gossip: GossipAction = actions_by_generation_and_player[generation][player][timepoint]
                         new_action = ReputationAction(generation_id=new_gen.id, community_id=community.id,
-                                                      player_id=new_player.id, timepoint=timepoint,
-                                                      type=ActionType.GOSSIP, gossiper=gossip.gossiper,
-                                                      about=gossip.about, recipient=gossip.recipient,
+                                                      player_id=db_players[player].id, timepoint=timepoint,
+                                                      type=ActionType.GOSSIP, gossiper=db_players[gossip.gossiper].id,
+                                                      about=db_players[gossip.about].id,
+                                                      recipient=db_players[gossip.recipient].id,
                                                       gossip=gossip.gossip)
                         db.session.add(new_action)
                         db.session.flush()
                     else:
                         new_action = ReputationAction(generation_id=new_gen.id, community_id=community.id,
-                                                      player_id=new_player.id, timepoint=timepoint,
+                                                      player_id=db_players[player].id, timepoint=timepoint,
                                                       type=ActionType.IDLE)
                         db.session.add(new_action)
                         db.session.flush()
