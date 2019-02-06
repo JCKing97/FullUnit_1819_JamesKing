@@ -87,6 +87,7 @@ def commit_results_game_to_database(game: ReputationGame, game_results: Results,
                                               strategy=player_strategy.id)
                 db.session.add(new_player)
                 db.session.flush()
+            for player in players[generation]:
                 # Add all the actions the player committed to and their details to the database
                 for timepoint in actions_by_generation_and_player[generation][player]:
                     if actions_by_generation_and_player[generation][player][timepoint].type is ActionType.INTERACTION:
