@@ -1,8 +1,8 @@
-"""Formatting for mysql
+"""Prepping for mysql
 
-Revision ID: 2ce067f3a3f2
+Revision ID: f7d41f956e9b
 Revises: 
-Create Date: 2019-02-06 12:13:20.660447
+Create Date: 2019-02-06 13:55:09.506843
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2ce067f3a3f2'
+revision = 'f7d41f956e9b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -38,9 +38,10 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reputation_strategy',
-    sa.Column('strategy_name', sa.String(length=128), nullable=False),
-    sa.Column('strategy_options', sa.String(length=300), nullable=False),
-    sa.PrimaryKeyConstraint('strategy_name', 'strategy_options')
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('strategy_name', sa.String(length=128), nullable=True),
+    sa.Column('strategy_options', sa.String(length=300), nullable=True),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('tournament',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -74,8 +75,9 @@ def upgrade():
     sa.PrimaryKeyConstraint('id', 'match_id')
     )
     op.create_table('reputation_generation',
-    sa.Column('community_id', sa.Integer(), nullable=False),
+    sa.Column('community_id', sa.Integer(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('generation_id', sa.Integer(), nullable=True),
     sa.Column('start_point', sa.Integer(), nullable=True),
     sa.Column('end_point', sa.Integer(), nullable=True),
     sa.Column('cooperation_rate', sa.Integer(), nullable=True),
@@ -83,7 +85,7 @@ def upgrade():
     sa.Column('positivity_of_gossip', sa.Integer(), nullable=True),
     sa.Column('fitness', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['community_id'], ['reputation_community.id'], ),
-    sa.PrimaryKeyConstraint('community_id', 'id')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('round',
     sa.Column('num', sa.Integer(), nullable=False),
@@ -113,25 +115,24 @@ def upgrade():
     sa.PrimaryKeyConstraint('round_num', 'match_id', 'player_id')
     )
     op.create_table('reputation_player',
-    sa.Column('generation_id', sa.Integer(), nullable=False),
-    sa.Column('community_id', sa.Integer(), nullable=False),
+    sa.Column('generation_id', sa.Integer(), nullable=True),
+    sa.Column('community_id', sa.Integer(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('player_id', sa.Integer(), nullable=True),
     sa.Column('cooperation_rate', sa.Integer(), nullable=True),
     sa.Column('social_activeness', sa.Integer(), nullable=True),
     sa.Column('positivity_of_gossip', sa.Integer(), nullable=True),
     sa.Column('fitness', sa.Integer(), nullable=True),
-    sa.Column('strategy_name', sa.String(length=128), nullable=True),
-    sa.Column('strategy_options', sa.String(length=300), nullable=True),
-    sa.ForeignKeyConstraint(['community_id'], ['reputation_generation.community_id'], ),
+    sa.Column('strategy', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['community_id'], ['reputation_community.id'], ),
     sa.ForeignKeyConstraint(['generation_id'], ['reputation_generation.id'], ),
-    sa.ForeignKeyConstraint(['strategy_name'], ['reputation_strategy.strategy_name'], ),
-    sa.ForeignKeyConstraint(['strategy_options'], ['reputation_strategy.strategy_options'], ),
-    sa.PrimaryKeyConstraint('generation_id', 'community_id', 'id')
+    sa.ForeignKeyConstraint(['strategy'], ['reputation_strategy.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reputation_action',
-    sa.Column('generation_id', sa.Integer(), nullable=False),
-    sa.Column('community_id', sa.Integer(), nullable=False),
-    sa.Column('player_id', sa.Integer(), nullable=False),
+    sa.Column('generation_id', sa.Integer(), nullable=True),
+    sa.Column('community_id', sa.Integer(), nullable=True),
+    sa.Column('player_id', sa.Integer(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('timepoint', sa.Integer(), nullable=False),
     sa.Column('type', sa.Enum('INTERACTION', 'GOSSIP', 'IDLE', name='actiontype'), nullable=False),
@@ -148,20 +149,21 @@ def upgrade():
     sa.ForeignKeyConstraint(['gossiper'], ['reputation_player.id'], ),
     sa.ForeignKeyConstraint(['player_id'], ['reputation_player.id'], ),
     sa.ForeignKeyConstraint(['recipient'], ['reputation_player.id'], ),
-    sa.PrimaryKeyConstraint('generation_id', 'community_id', 'player_id', 'id')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reputation_action_onlookers',
-    sa.Column('community_id', sa.Integer(), nullable=False),
-    sa.Column('generation_id', sa.Integer(), nullable=False),
-    sa.Column('actor_id', sa.Integer(), nullable=False),
-    sa.Column('onlooker_id', sa.Integer(), nullable=False),
-    sa.Column('action_id', sa.Integer(), nullable=False),
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('community_id', sa.Integer(), nullable=True),
+    sa.Column('generation_id', sa.Integer(), nullable=True),
+    sa.Column('actor_id', sa.Integer(), nullable=True),
+    sa.Column('onlooker_id', sa.Integer(), nullable=True),
+    sa.Column('action_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['action_id'], ['reputation_action.id'], ),
     sa.ForeignKeyConstraint(['actor_id'], ['reputation_player.id'], ),
     sa.ForeignKeyConstraint(['community_id'], ['reputation_community.id'], ),
     sa.ForeignKeyConstraint(['generation_id'], ['reputation_generation.id'], ),
     sa.ForeignKeyConstraint(['onlooker_id'], ['reputation_player.id'], ),
-    sa.PrimaryKeyConstraint('community_id', 'generation_id', 'actor_id', 'onlooker_id', 'action_id')
+    sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
 

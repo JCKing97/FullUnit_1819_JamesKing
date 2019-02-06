@@ -193,8 +193,9 @@ class ReputationCommunity(db.Model):
 
 class ReputationGeneration(db.Model):
     """A generation of players which interact with each others"""
-    community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'), primary_key=True)
+    community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
     id = db.Column(db.Integer, primary_key=True)
+    generation_id = db.Column(db.Integer)
     start_point = db.Column(db.Integer)
     end_point = db.Column(db.Integer)
     cooperation_rate = db.Column(db.Integer)
@@ -210,24 +211,25 @@ class ReputationGeneration(db.Model):
 
 
 class ReputationActionOnlookers(db.Model):
-    community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'), primary_key=True)
-    generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'), primary_key=True)
-    actor_id = db.Column(db.Integer, db.ForeignKey('reputation_player.id'), primary_key=True)
-    onlooker_id = db.Column(db.Integer, db.ForeignKey('reputation_player.id'), primary_key=True)
-    action_id = db.Column(db.Integer, db.ForeignKey('reputation_action.id'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
+    generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'))
+    actor_id = db.Column(db.Integer, db.ForeignKey('reputation_player.id'))
+    onlooker_id = db.Column(db.Integer, db.ForeignKey('reputation_player.id'))
+    action_id = db.Column(db.Integer, db.ForeignKey('reputation_action.id'))
 
 
 class ReputationPlayer(db.Model):
     """A player that has committed to actions based on their strategy and perception of the world"""
-    generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'), primary_key=True)
-    community_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.community_id'), primary_key=True)
+    generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'))
+    community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
     id = db.Column(db.Integer, primary_key=True)
+    player_id = db.Column(db.Integer)
     cooperation_rate = db.Column(db.Integer)
     social_activeness = db.Column(db.Integer)
     positivity_of_gossip = db.Column(db.Integer)
     fitness = db.Column(db.Integer)
-    strategy_name = db.Column(db.String(128), db.ForeignKey('reputation_strategy.strategy_name'))
-    strategy_options = db.Column(db.String(300), db.ForeignKey('reputation_strategy.strategy_options'))
+    strategy = db.Column(db.Integer, db.ForeignKey('reputation_strategy.id'))
     actions = db.relationship("ReputationAction", backref='actor', lazy='dynamic',
                               primaryjoin="and_(ReputationPlayer.id==ReputationAction.player_id,"
                                           "ReputationPlayer.community_id==ReputationAction.community_id,"
@@ -236,8 +238,9 @@ class ReputationPlayer(db.Model):
 
 class ReputationStrategy(db.Model):
     """A possible strategy of a reputation game player"""
-    strategy_name = db.Column(db.String(128), primary_key=True)
-    strategy_options = db.Column(db.String(300), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    strategy_name = db.Column(db.String(128))
+    strategy_options = db.Column(db.String(300))
 
 
 from .indir_rec.action_logic import ActionType, GossipContent, InteractionContent
@@ -245,9 +248,9 @@ from .indir_rec.action_logic import ActionType, GossipContent, InteractionConten
 
 class ReputationAction(db.Model):
     """An action taken by a player in a reputation game"""
-    generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'), primary_key=True)
-    community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'), primary_key=True)
-    player_id = db.Column(db.Integer, db.ForeignKey('reputation_player.id'), primary_key=True)
+    generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'))
+    community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
+    player_id = db.Column(db.Integer, db.ForeignKey('reputation_player.id'))
     id = db.Column(db.Integer, primary_key=True)
     timepoint = db.Column(db.Integer, nullable=False)
     type = db.Column(db.Enum(ActionType), nullable=False)
