@@ -16,7 +16,6 @@ from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy import desc, asc
 from app.forms import LoginForm, RegistrationForm
 from werkzeug.urls import url_parse
-from app.forms import SearchForm
 
 
 @bp.route('/')
@@ -189,27 +188,3 @@ def my_experiments():
     prev_url = url_for('main.my_experiments', page=experiments.prev_num) if experiments.has_prev else None
     return render_template('my_experiments.html', title="My Experiments", username=current_user.username,
                            experiments=experiments.items, next_url=next_url, prev_url=prev_url)
-
-
-@bp.before_app_request
-def before_request():
-    if current_user.is_authenticated:
-        db.session.commit()
-        g.search_form = SearchForm()
-
-
-@bp.route('/experiments_search')
-@login_required
-def experiments_search():
-    if not g.search_form.validate():
-        return redirect(url_for('main.my_experiments'))
-    page = request.args.get('page', 1, type=int)
-    experiments, total = Experiment.search(g.search_form.q.data, page, current_app.config['EXPERIMENTS_PER_PAGE'])
-    next_url = url_for('main.experiments_search', q=g.search_form.q.data, page=page + 1) \
-        if total > page * current_app.config['EXPERIMENTS_PER_PAGE'] else None
-    prev_url = url_for('main.experiments_search', q=g.search_form.q.data, page=page - 1) \
-        if page > 1 else None
-    experiments = experiments.filter_by(user_id=current_user.id).all()
-    print(Experiment.query.all())
-    return render_template('experiment_search.html', title='Experiments Search', experiments=experiments,
-                           next_url=next_url, prev_url=prev_url)

@@ -6,20 +6,8 @@
         <p>
             To create a new experiment create a new reputation game, select your strategies and variables and
             add a label for the game. Once I have implemented this part of the system, the game will then be associated
-            with your user and the label (which you will be able to search here).
+            with the label you have given it.
         </p>
-        {% if g.search_form %}
-            <h2>Search for an experiment label</h2>
-            <form class="navbar-form navbar-left" method="get"
-                    action="{{ url_for('main.experiments_search') }}">
-                <div class="form-group">
-                    {{ g.search_form.q(size=20, class='form-control',
-                        placeholder=g.search_form.q.label.text) }}
-                    {{ g.search_form.submit() }}
-                </div>
-            </form>
-            <br/><br/>
-        {% endif %}
         <h2>My experiments</h2>
         <table class="table table-hover">
             <thead>
