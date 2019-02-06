@@ -54,6 +54,7 @@ snowballstemmer==1.2.1
 Sphinx==1.8.2
 sphinxcontrib-websupport==1.1.0
 SQLAlchemy==1.2.12
+SQLAlchemy-FullText-Search==0.2.5
 toolz==0.9.0
 tqdm==4.26.0
 typed-ast==1.1.0
@@ -64,5 +65,4 @@ Werkzeug==0.14.1
 wrapt==1.10.11
 WTForms==2.2.1
 
-#For heroku
 gunicorn==19.7.1

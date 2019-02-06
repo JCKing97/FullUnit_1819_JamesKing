@@ -7,6 +7,7 @@ from datetime import datetime
 from typing import List
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from sqlalchemy_fulltext import FullText
 
 
 class User(UserMixin, db.Model):
@@ -31,7 +32,8 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-class Experiment(db.Model):
+class Experiment(FullText, db.Model):
+    __fulltext_columns__ = 'label'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

@@ -14,8 +14,9 @@ from app.main.axelrod_database_conversion import match_result_to_database
 from app.main.analysis import get_match_points
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy import desc, asc
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, SearchForm
 from werkzeug.urls import url_parse
+from sqlalchemy_fulltext import FullTextSearch
 
 
 @bp.route('/')
@@ -178,7 +179,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
-@bp.route('/my_experiments')
+@bp.route('/my_experiments', methods=['GET', 'POST'])
 def my_experiments():
     if not current_user.is_authenticated:
         return redirect(url_for('main.index'))
@@ -186,5 +187,29 @@ def my_experiments():
     experiments = current_user.experiments.paginate(page, current_app.config['EXPERIMENTS_PER_PAGE'], False)
     next_url = url_for('main.my_experiments', page=experiments.next_num) if experiments.has_next else None
     prev_url = url_for('main.my_experiments', page=experiments.prev_num) if experiments.has_prev else None
+    form = SearchForm()
+    if form.validate_on_submit():
+        return redirect(url_for('main.experiment_search', search_query=form.search_query.data))
+    deployed = current_app.config['DEPLOYED']
     return render_template('my_experiments.html', title="My Experiments", username=current_user.username,
-                           experiments=experiments.items, next_url=next_url, prev_url=prev_url)
+                           experiments=experiments.items, next_url=next_url, prev_url=prev_url, form=form,
+                           deployed=deployed)
+
+
+@bp.route('/experiment_search/<search_query>')
+def experiment_search(search_query):
+    if not current_app.config['DEPLOYED']:
+        return redirect(url_for('main.my_experiments'))
+    if not current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    page = request.args.get('page', 1, type=int)
+    experiments = current_user.experiments.filter(FullTextSearch(search_query, Experiment)).paginate(page, current_app.config['EXPERIMENTS_PER_PAGE'], False)
+    next_url = url_for('main.experiment_search', search_query=search_query,
+                       page=experiments.next_num) if experiments.has_next else None
+    prev_url = url_for('main.experiment_search', search_query=search_query,
+                       page=experiments.prev_num) if experiments.has_prev else None
+    form = SearchForm()
+    if form.validate_on_submit():
+        return redirect(url_for('main.experiment_search', search_query=form.search_query.data))
+    return render_template('my_experiments.html', title="My Experiments", username=current_user.username,
+                           experiments=experiments.items, next_url=next_url, prev_url=prev_url, form=form)

@@ -19,6 +19,6 @@ class Config(object):
     REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'
     AGENTS_URL = os.environ.get('AGENTS_URL') or 'http://127.0.0.1:8080/'
     EXPERIMENTS_PER_PAGE = 50
-
+    DEPLOYED = os.environ.get('DEPLOYED') or False
 
 
