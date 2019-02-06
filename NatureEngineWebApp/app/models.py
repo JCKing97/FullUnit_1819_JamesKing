@@ -82,7 +82,7 @@ class Experiment(SearchableMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    label = db.Column(db.String)
+    label = db.Column(db.String(128))
 
 
 class Match(db.Model):
@@ -226,8 +226,8 @@ class ReputationPlayer(db.Model):
     social_activeness = db.Column(db.Integer)
     positivity_of_gossip = db.Column(db.Integer)
     fitness = db.Column(db.Integer)
-    strategy_name = db.Column(db.String, db.ForeignKey('reputation_strategy.strategy_name'))
-    strategy_options = db.Column(db.String, db.ForeignKey('reputation_strategy.strategy_options'))
+    strategy_name = db.Column(db.String(128), db.ForeignKey('reputation_strategy.strategy_name'))
+    strategy_options = db.Column(db.String(300), db.ForeignKey('reputation_strategy.strategy_options'))
     actions = db.relationship("ReputationAction", backref='actor', lazy='dynamic',
                               primaryjoin="and_(ReputationPlayer.id==ReputationAction.player_id,"
                                           "ReputationPlayer.community_id==ReputationAction.community_id,"
@@ -236,8 +236,8 @@ class ReputationPlayer(db.Model):
 
 class ReputationStrategy(db.Model):
     """A possible strategy of a reputation game player"""
-    strategy_name = db.Column(db.String, primary_key=True)
-    strategy_options = db.Column(db.String, primary_key=True)
+    strategy_name = db.Column(db.String(128), primary_key=True)
+    strategy_options = db.Column(db.String(300), primary_key=True)
 
 
 from .indir_rec.action_logic import ActionType, GossipContent, InteractionContent
