@@ -1,8 +1,8 @@
-"""Creating database
+"""Formatting for mysql
 
-Revision ID: 5f3d12058fb0
+Revision ID: 2ce067f3a3f2
 Revises: 
-Create Date: 2019-02-04 21:47:55.346194
+Create Date: 2019-02-06 12:13:20.660447
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5f3d12058fb0'
+revision = '2ce067f3a3f2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -38,8 +38,8 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reputation_strategy',
-    sa.Column('strategy_name', sa.String(), nullable=False),
-    sa.Column('strategy_options', sa.String(), nullable=False),
+    sa.Column('strategy_name', sa.String(length=128), nullable=False),
+    sa.Column('strategy_options', sa.String(length=300), nullable=False),
     sa.PrimaryKeyConstraint('strategy_name', 'strategy_options')
     )
     op.create_table('tournament',
@@ -61,7 +61,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('community_id', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
-    sa.Column('label', sa.String(), nullable=True),
+    sa.Column('label', sa.String(length=128), nullable=True),
     sa.ForeignKeyConstraint(['community_id'], ['reputation_community.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -120,8 +120,8 @@ def upgrade():
     sa.Column('social_activeness', sa.Integer(), nullable=True),
     sa.Column('positivity_of_gossip', sa.Integer(), nullable=True),
     sa.Column('fitness', sa.Integer(), nullable=True),
-    sa.Column('strategy_name', sa.String(), nullable=True),
-    sa.Column('strategy_options', sa.String(), nullable=True),
+    sa.Column('strategy_name', sa.String(length=128), nullable=True),
+    sa.Column('strategy_options', sa.String(length=300), nullable=True),
     sa.ForeignKeyConstraint(['community_id'], ['reputation_generation.community_id'], ),
     sa.ForeignKeyConstraint(['generation_id'], ['reputation_generation.id'], ),
     sa.ForeignKeyConstraint(['strategy_name'], ['reputation_strategy.strategy_name'], ),
