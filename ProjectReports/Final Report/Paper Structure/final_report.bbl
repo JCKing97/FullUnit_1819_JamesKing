@@ -1,3 +1,142 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{10}
+
+\bibitem{alexander1987biology}
+Richard Alexander.
+\newblock The biology of moral systems (foundations of human behavior).
+\newblock 1987.
+
+\bibitem{evolution_of_cooperation}
+Robert Axelrod and William~D. Hamilton.
+\newblock The evolution of cooperation.
+\newblock {\em Science}, 211:1390--1396, 1981.
+
+\bibitem{baumeister2004gossip}
+Roy~F Baumeister, Liqing Zhang, and Kathleen~D Vohs.
+\newblock Gossip as cultural learning.
+\newblock {\em Review of general psychology}, 8(2):111, 2004.
+
+\bibitem{evol_trust}
+Nicky Case.
+\newblock The evolution of trust.
+\newblock \url{https://ncase.me/trust/}, 2017.
+\newblock Accessed: 11/2/2019.
+
+\bibitem{selfish_gene}
+Richard Dawkins.
+\newblock {\em The Selfish Gene}.
+\newblock Oxford University Press, 2016.
+
+\bibitem{axelrodproject}
+Vince Knight; Owen Campbell;~Marc; eric-s-s; VSN Reddy Janga; James Campbell;
+  Karol M. Langner; T.J. Gaffney; Sourav Singh; Nikoleta; Julie Rymer; Thomas
+  Campbell; Jason Young; MHakem; Geraint Palmer; Kristian Glass;
+  edouardArgenson; Daniel Mancia; Martin Jones; Cameron
+  Davidson-Pilon;~alajara; Ranjini Das; Marios Zoulias; Aaron Kratz; Timothy
+  Standen; Paul Slavin; Adam Pohl; Jochen Müller; Georgios Koutsovoulos;
+  Areeb~Ahmed.
+\newblock Axelrod: 4.3.0.
+\newblock \url{http://dx.doi.org/10.5281/zenodo.1405868}, September 2018.
+
+\bibitem{kinhamilton}
+W.~D. Hamilton.
+\newblock The genetical evolution of social behaviour.
+\newblock {\em Journal of Theoretical Biology}, 7:1--16, July 1964.
+
+\bibitem{kropotkin1902mutual}
+Peter Kropotkin.
+\newblock {\em Mutual aid: A Factor of Evolution}.
+\newblock 1902.
+
+\bibitem{leimarhammer}
+Olof Leimar and Peter Hammerstein.
+\newblock Evolution of cooperation through indirect reciprocity.
+\newblock {\em Proceedings of The Royal Society}, 268:745--753, May 2001.
+
+\bibitem{machinery1950computing}
+Computing Machinery.
+\newblock Computing machinery and intelligence-am turing.
+\newblock {\em Mind}, 59(236):433, 1950.
+
+\bibitem{imagevsstanding}
+Theo C. M.~Bakker Manfred~Milinski, Dirk~Semmann and Hans-J{\"u}rgen Krambeck.
+\newblock Cooperation through indirect reciprocity: image scoring or standing
+  strategy?
+\newblock {\em Proceedings of The Royal Society}, 268:2495--2501, May 2001.
+
+\bibitem{mui2002computational}
+Lik Mui.
+\newblock {\em Computational models of trust and reputation: Agents,
+  evolutionary games, and social networks}.
+\newblock PhD thesis, Massachusetts Institute of Technology, 2002.
+
+\bibitem{nowak-1993a}
+Martin Nowak and Karl Sigmund.
+\newblock A strategy of win-stay, lose-shift that outperforms tit-for-tat in
+  the prisoner's dilemma game.
+\newblock {\em Nature}, 364:56--58, July 1993.
+
+\bibitem{nowak2006evolutionary}
+Martin~A Nowak.
+\newblock {\em Evolutionary dynamics}.
+\newblock Harvard University Press, 2006.
+
+\bibitem{five_rules_coop}
+Martin~A. Nowak.
+\newblock Five rules for the evolution of cooperation.
+\newblock {\em Science}, 314, 2006.
+
+\bibitem{spatial}
+Martin~A. Nowak and Robert~M. May.
+\newblock Evolutionary games and spatial chaos.
+\newblock {\em Nature}, 359:826--829, 1992.
+
+\bibitem{evol_indirect_image}
+Martin~A. Nowak and Karl Sigmund.
+\newblock Evolution of indirect reciprocity by image scoring.
+\newblock {\em Nature}, 393:573--577, 1998.
+
+\bibitem{phelps_game_theoretic_analysis}
+Steve Phelps.
+\newblock An empirical game-theoretic analysis of the dynamics of cooperation
+  in small groups.
+\newblock {\em Journal of Artificial Societies and Social Simulation}, 2016.
+
+\bibitem{evoldirindir}
+Gilbert Roberts.
+\newblock Evolution of direct and indirect reciprocity.
+\newblock {\em Proceedings of The Royal Society}, 275:173--179, September 2008.
+
+\bibitem{russell2016artificial}
+Stuart~J Russell and Peter Norvig.
+\newblock {\em Artificial intelligence: a modern approach}.
+\newblock Malaysia; Pearson Education Limited,, 2016.
+
+\bibitem{gossip_alt}
+Ralf~D. Sommerfeld, Hans-J{\"u}rgen Krambeck, Dirk Semmann, and Manfred
+  Milinski.
+\newblock Gossip as an alternative for direct observation in games of indirect
+  reciprocity.
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, 104:17435--17440, 2007.
+
+\bibitem{spencer1864principles}
+Herbert Spencer.
+\newblock The principles of biology (2 vols) london: Williams and norgate.
+\newblock {\em Google Scholar}, 1864.
+
+\bibitem{sugden2004economics}
+Robert Sugden et~al.
+\newblock {\em The economics of rights, co-operation and welfare}.
+\newblock Springer.
+
+\bibitem{trivers1971evolution}
+Robert~L Trivers.
+\newblock The evolution of reciprocal altruism.
+\newblock {\em The Quarterly review of biology}, 46(1):35--57, 1971.
+
+\bibitem{wooldridge_jennings_1995}
+Michael Wooldridge and Nicholas~R. Jennings.
+\newblock Intelligent agents: theory and practice.
+\newblock {\em The Knowledge Engineering Review}, 10(2):115--152, 1995.
 
 \end{thebibliography}
