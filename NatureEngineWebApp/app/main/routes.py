@@ -6,7 +6,7 @@ __authors__ = "James King adapted from Miguel Grinberg"
 
 from app import db
 from app.main import bp
-from app.models import Match, Tournament, Experiment, User
+from app.models import Match, Tournament, Experiment, User, Action
 from app.main.forms import MatchSelectPlayersForm
 from flask import render_template, redirect, url_for, request, jsonify, current_app, flash, g
 import axelrod as axl
@@ -17,6 +17,7 @@ from sqlalchemy import desc, asc
 from app.forms import LoginForm, RegistrationForm, SearchForm
 from werkzeug.urls import url_parse
 from sqlalchemy_fulltext import FullTextSearch
+import random
 
 
 @bp.route('/')
@@ -57,17 +58,34 @@ def match_run(match_id):
     """Displays the information of a finished match with the match_id provided
     :param match_id: The id of the match to display the information of"""
     interaction_history = Match.query.filter_by(id=match_id).first_or_404().get_interaction_history()
+    round_count = len(interaction_history)/2
     player_points = get_match_points(interaction_history)
     players = Match.query.filter_by(id=match_id).first().players
     strat_dict = {s().name: s() for s in axl.strategies}
     strategies = []
+    hex_digits = list("0123456789ABCDEF")
+    player_colours = {'Defector': '#e60000', 'Cooperator': '#3366ff'}
+    player_strats = []
+    actions = []
     for player in players:
         if {'name': player.strategy} not in strategies:
             strategies.append({'name': player.strategy})
-    print(strategies)
+        if player.strategy not in player_colours:
+            player_colours[player.strategy] = "#" + ''.join([hex_digits[random.randint(0, len(hex_digits) - 1)]
+                                                             for _ in range(6)])
+        player_strats.append(player.strategy)
+        player_actions = []
+        player_actions_db = Action.query.filter_by(player_id=player.id, match_id=match_id).all()
+        for action in player_actions_db:
+            if action.cooperate is True:
+                player_actions.append("Cooperate")
+            else:
+                player_actions.append("Defect")
+        actions.append(player_actions)
     return render_template('match_finished.html', title='Match Finished', match_id=match_id,
                            interaction_history=interaction_history, player_points=player_points,
-                           strat_dict=strat_dict, players=players, strategies=strategies)
+                           strat_dict=strat_dict, players=players, strategies=strategies, player_colours=player_colours,
+                           player_strats=player_strats, round_count=round_count, actions=actions)
 
 
 @bp.route('/tournament/<level>', methods=['GET', 'POST'])

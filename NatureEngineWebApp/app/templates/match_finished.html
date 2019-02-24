@@ -13,6 +13,110 @@
             {% include "_player_strategy_description.html" %}
         </div>
         <div class="col-md-10">
+            <h2>An animation of what happened</h2>
+            <p>
+                See here an animation of the actions that happened in the game, stepping through each timepoint in order,
+                press restart to go back to the beginning.
+            </p>
+            <canvas id="anim_canvas" style="border:1px solid #d3d3d3; margin: auto; display: block;">
+                Your browser does not support the HTML5 canvas tag.
+            </canvas>
+            <script type="application/javascript">
+                const player_colours = {{ player_colours|tojson }};
+                const player_strats = {{ player_strats|tojson }};
+                const actions = {{ actions|tojson }}
+                const canvas = document.getElementById('anim_canvas');
+                canvas.width = 1.5*(window.innerWidth/2);
+                canvas.height = 1.5*(window.innerHeight/3);
+                radius = Math.min(canvas.width/10, canvas.height/3);
+                const ctx = canvas.getContext('2d');
+                let font_size = (0.05*canvas.width);
+                if (font_size > 30) {
+                    font_size = 30;
+                } else if (font_size<5) {
+                    font_size = 5;
+                }
+                ctx.font = font_size.toString()+"px Arial";
+                ctx.textBaseline = "top";
+                let interactions = [];
+                let interaction_count = 0;
+                function drawMatchPlayer(center_x, center_y, strategy, action) {
+                    colour = player_colours[strategy];
+                    // Draw player circle
+                    ctx.beginPath();
+                    ctx.fillStyle = colour;
+                    ctx.arc(center_x,center_y,radius,0,2*Math.PI, false);
+                    ctx.fill();
+                    ctx.strokeStyle = 'black';
+                    ctx.lineWidth = 5;
+                    ctx.stroke();
+                    ctx.closePath();
+                    // Draw the players strategy below
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "top";
+                    ctx.fillText(strategy, center_x, center_y+(radius*1.1));
+                    // Draw the action text and the arrow
+                    ctx.textBaseline = "middle";
+                    let action_text_size = ctx.measureText(action).width;
+                    let scale_factor = canvas.width*0.0005;
+                    // Draw it on the right side (on the side closest to the other player)
+                    if(center_x>canvas.width/2){
+                        // Draw action text
+                        ctx.textAlign = "right";
+                        ctx.fillText(action, center_x-(radius*1.1), center_y);
+                        // Draw the arrow to point to the other player
+                        ctx.fillStyle = 'black';
+                        ctx.beginPath();
+                        ctx.moveTo(center_x-(radius*1.1)-action_text_size-(75*scale_factor), center_y);
+                        ctx.lineTo(center_x-(radius*1.1)-action_text_size-(25*scale_factor), (center_y-(25*scale_factor)));
+                        ctx.lineTo(center_x-(radius*1.1)-action_text_size-(25*scale_factor), (center_y+(25*scale_factor)));
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.stroke();
+                    } else{
+                        // Draw action text
+                        ctx.textAlign = "left";
+                        ctx.fillText(action, center_x+(radius*1.1), center_y);
+                        // Draw the arrow to point to the other player
+                        ctx.fillStyle = 'black';
+                        ctx.beginPath();
+                        ctx.moveTo(center_x+(radius*1.1)+action_text_size+(75*scale_factor), center_y);
+                        ctx.lineTo(center_x+(radius*1.1)+action_text_size+(25*scale_factor), (center_y-(25*scale_factor)));
+                        ctx.lineTo(center_x+(radius*1.1)+action_text_size+(25*scale_factor), (center_y+(25*scale_factor)));
+                        ctx.closePath();
+                        ctx.fill();
+                        ctx.stroke();
+                    }
+                }
+                function drawMatch() {
+                    let circle_center = [[canvas.width/6, canvas.height/2],[5*(canvas.width/6), canvas.height/2]];
+                    for (player in player_strats) {
+                        drawMatchPlayer(circle_center[player][0], circle_center[player][1], player_strats[player],
+                            actions[player][interaction_count]);
+                    }
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = "left";
+                    ctx.textBaseline = "top";
+                    ctx.fillText("Timepoint: " + (interaction_count+1).toString(), 0, 0,);
+                    setTimeout(function(){}, 2000); // wait 2 seconds before next interaction
+                    interaction_count += 1;
+                    interaction_count = interaction_count % {{ round_count }};
+                }
+                function renderMatch(){
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    drawMatch();
+                }
+                function restart(){
+                    interaction_count = 0;
+                    renderMatch();
+                    window.clearInterval(interval);
+                    interval = setInterval(renderMatch, 1000);
+                }
+                renderMatch();
+                let interval = setInterval(renderMatch, 1000);
+            </script>
+            <button type="button" class="btn btn-primary" onclick="restart()">Restart</button>
             <h2>How did the players points stack up?</h2>
             {% for players_name, points in player_points.items() %}
                 <label>Player {{ players_name }}: {{ points }} points</label>

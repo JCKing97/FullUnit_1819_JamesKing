@@ -151,7 +151,7 @@ class Community:
         new_gen_size = 0
         mutation_strategies = [strategy for strategy in self._first_strategies]
         while new_gen_size < self._generation_size:
-            # If no mutation use stochastic acceptance
+            # use stochastic acceptance
             selected_player: Player = random.choice(last_gen_players)
             if random.random() <= maximal_fitness:
                 if random.random() < self._mutation_chance:

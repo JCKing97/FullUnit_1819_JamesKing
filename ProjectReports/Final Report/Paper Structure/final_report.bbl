@@ -37,10 +37,49 @@ Vince Knight; Owen Campbell;~Marc; eric-s-s; VSN Reddy Janga; James Campbell;
 \newblock Axelrod: 4.3.0.
 \newblock \url{http://dx.doi.org/10.5281/zenodo.1405868}, September 2018.
 
+\bibitem{finin1994kqml}
+Tim Finin, Richard Fritzson, Don McKay, and Robin McEntire.
+\newblock Kqml as an agent communication language.
+\newblock In {\em Proceedings of the third international conference on
+  Information and knowledge management}, pages 456--463. ACM, 1994.
+
+\bibitem{genetic_algorithms}
+Pascal Francq.
+\newblock Genetic algorithms.
+\newblock \url{http://www.otlet-institute.org/wikics/Genetic_Algorithms.html},
+  2011.
+\newblock Accessed: 04/01/2019.
+
+\bibitem{optimisation_problems}
+Pascal Francq.
+\newblock Optimisation problems.
+\newblock
+  \url{http://www.otlet-institute.org/wikics/Optimization_Problems.html}, 2011.
+\newblock Accessed: 04/01/2019.
+
+\bibitem{franklin1996agent}
+Stan Franklin and Art Graesser.
+\newblock Is it an agent, or just a program?: A taxonomy for autonomous agents.
+\newblock In {\em International Workshop on Agent Theories, Architectures, and
+  Languages}, pages 21--35. Springer, 1996.
+
+\bibitem{hoopoe}
+The~Photographers from Mpala Live~\url{http://mpalalive.org/sponsors}.
+\newblock Green wood hoopoe.
+\newblock \url{http://mpalalive.org/field_guide/green_woodhoopoe}, January
+  2019.
+
 \bibitem{kinhamilton}
 W.~D. Hamilton.
 \newblock The genetical evolution of social behaviour.
 \newblock {\em Journal of Theoretical Biology}, 7:1--16, July 1964.
+
+\bibitem{harper2017reinforcement}
+Marc Harper, Vincent Knight, Martin Jones, Georgios Koutsovoulos, Nikoleta~E
+  Glynatsi, and Owen Campbell.
+\newblock Reinforcement learning produces dominant strategies for the iterated
+  prisoner’s dilemma.
+\newblock {\em PloS one}, 12(12):e0188046, 2017.
 
 \bibitem{kropotkin1902mutual}
 Peter Kropotkin.
@@ -52,6 +91,12 @@ Olof Leimar and Peter Hammerstein.
 \newblock Evolution of cooperation through indirect reciprocity.
 \newblock {\em Proceedings of The Royal Society}, 268:745--753, May 2001.
 
+\bibitem{lipowski2012roulette}
+Adam Lipowski and Dorota Lipowska.
+\newblock Roulette-wheel selection via stochastic acceptance.
+\newblock {\em Physica A: Statistical Mechanics and its Applications},
+  391(6):2193--2196, 2012.
+
 \bibitem{machinery1950computing}
 Computing Machinery.
 \newblock Computing machinery and intelligence-am turing.
@@ -62,6 +107,19 @@ Theo C. M.~Bakker Manfred~Milinski, Dirk~Semmann and Hans-J{\"u}rgen Krambeck.
 \newblock Cooperation through indirect reciprocity: image scoring or standing
   strategy?
 \newblock {\em Proceedings of The Royal Society}, 268:2495--2501, May 2001.
+
+\bibitem{laymansipd}
+Arjun Mani.
+\newblock What is the prisoner's dilemma in layman's terms? what are its
+  applications? what are it's applications?
+\newblock
+  \url{https://www.quora.com/What-is-the-prisoners-dilemma-in-laymans-terms-What-are-its-applications},
+  September 2013.
+
+\bibitem{mitchell1998introduction}
+Melanie Mitchell.
+\newblock {\em An introduction to genetic algorithms}.
+\newblock MIT press, 1998.
 
 \bibitem{mui2002computational}
 Lik Mui.
@@ -95,11 +153,21 @@ Martin~A. Nowak and Karl Sigmund.
 \newblock Evolution of indirect reciprocity by image scoring.
 \newblock {\em Nature}, 393:573--577, 1998.
 
+\bibitem{o1998fipa}
+Paul~D O'Brien and Richard~C Nicol.
+\newblock Fipa—towards a standard for software agents.
+\newblock {\em BT Technology Journal}, 16(3):51--59, 1998.
+
 \bibitem{phelps_game_theoretic_analysis}
 Steve Phelps.
 \newblock An empirical game-theoretic analysis of the dynamics of cooperation
   in small groups.
 \newblock {\em Journal of Artificial Societies and Social Simulation}, 2016.
+
+\bibitem{rao1995bdi}
+Anand~S Rao, Michael~P Georgeff, et~al.
+\newblock Bdi agents: from theory to practice.
+\newblock In {\em ICMAS}, volume~95, pages 312--319, 1995.
 
 \bibitem{evoldirindir}
 Gilbert Roberts.
@@ -110,6 +178,21 @@ Gilbert Roberts.
 Stuart~J Russell and Peter Norvig.
 \newblock {\em Artificial intelligence: a modern approach}.
 \newblock Malaysia; Pearson Education Limited,, 2016.
+
+\bibitem{shoham1991agent0}
+Yoav Shoham.
+\newblock Agent0: A simple agent language and its interpreter.
+\newblock In {\em AAAI}, volume~91, page 704, 1991.
+
+\bibitem{shoham1993agent}
+Yoav Shoham.
+\newblock Agent-oriented programming.
+\newblock {\em Artificial intelligence}, 60(1):51--92, 1993.
+
+\bibitem{singh1998agent}
+Munindar~P Singh.
+\newblock Agent communication languages: Rethinking the principles.
+\newblock {\em Computer}, 31(12):40--47, 1998.
 
 \bibitem{gossip_alt}
 Ralf~D. Sommerfeld, Hans-J{\"u}rgen Krambeck, Dirk Semmann, and Manfred
@@ -124,19 +207,53 @@ Herbert Spencer.
 \newblock The principles of biology (2 vols) london: Williams and norgate.
 \newblock {\em Google Scholar}, 1864.
 
+\bibitem{prosocs}
+Kostas Stathis, {Antonis C.} Kakas, Wenjin Lu, Neophytos Demetriou, Ulle
+  Endriss, and Andrea Bracciali.
+\newblock {\em PROSOCS: a platform for programming software agents in
+  computational logic}, pages 523--528.
+\newblock 4 2004.
+
 \bibitem{sugden2004economics}
 Robert Sugden et~al.
 \newblock {\em The economics of rights, co-operation and welfare}.
 \newblock Springer.
+
+\bibitem{thomas1993placa}
+Sarah~Rebecca Thomas.
+\newblock Placa, an agent oriented programming language.
+\newblock 1993.
+
+\bibitem{multilevel_nowak}
+Arne Traulsen and Martin~A. Nowak.
+\newblock Evolution of cooperation by multilevel selection.
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, 103:10952--10955, 2006.
 
 \bibitem{trivers1971evolution}
 Robert~L Trivers.
 \newblock The evolution of reciprocal altruism.
 \newblock {\em The Quarterly review of biology}, 46(1):35--57, 1971.
 
+\bibitem{wooldridge2009introduction}
+Michael Wooldridge.
+\newblock {\em An introduction to multiagent systems}.
+\newblock John Wiley \& Sons, 2009.
+
 \bibitem{wooldridge_jennings_1995}
 Michael Wooldridge and Nicholas~R. Jennings.
 \newblock Intelligent agents: theory and practice.
 \newblock {\em The Knowledge Engineering Review}, 10(2):115--152, 1995.
+
+\bibitem{wooldridge2000gaia}
+Michael Wooldridge, Nicholas~R Jennings, and David Kinny.
+\newblock The gaia methodology for agent-oriented analysis and design.
+\newblock {\em Autonomous Agents and multi-agent systems}, 3(3):285--312, 2000.
+
+\bibitem{turtle}
+Sea~Turtle World.
+\newblock Green sea turtle cleaning station.
+\newblock
+  \url{https://www.seaturtle-world.com/green_sea_turtle_cleaning_station/green_sea_turtle_cleaning_station_600/}.
 
 \end{thebibliography}
