@@ -5,6 +5,11 @@ Richard Alexander.
 \newblock The biology of moral systems (foundations of human behavior).
 \newblock 1987.
 
+\bibitem{artikis2009specifying}
+Alexander Artikis, Marek Sergot, and Jeremy Pitt.
+\newblock Specifying norm-governed computational societies.
+\newblock {\em ACM Transactions on Computational Logic (TOCL)}, 10(1):1, 2009.
+
 \bibitem{evolution_of_cooperation}
 Robert Axelrod and William~D. Hamilton.
 \newblock The evolution of cooperation.
@@ -14,6 +19,11 @@ Robert Axelrod and William~D. Hamilton.
 Roy~F Baumeister, Liqing Zhang, and Kathleen~D Vohs.
 \newblock Gossip as cultural learning.
 \newblock {\em Review of general psychology}, 8(2):111, 2004.
+
+\bibitem{bratman1987intention}
+Michael Bratman.
+\newblock {\em Intention, plans, and practical reason}, volume~10.
+\newblock Harvard University Press Cambridge, MA, 1987.
 
 \bibitem{evol_trust}
 Nicky Case.
@@ -81,6 +91,17 @@ Marc Harper, Vincent Knight, Martin Jones, Georgios Koutsovoulos, Nikoleta~E
   prisoner’s dilemma.
 \newblock {\em PloS one}, 12(12):e0188046, 2017.
 
+\bibitem{hassabis2017alphago}
+Demis Hassabis and David Silver.
+\newblock Alphago zero: Learning from scratch.
+\newblock {\em deepMind official website}, 18, 2017.
+
+\bibitem{mvfcec}
+{\"O}zg{\"u}r Kafali, Alfonso~E. Romero, and Kostas Stathis.
+\newblock Agent-oriented activity recognition in the event calculus: an
+  application for diabetic patients.
+\newblock {\em Computational Intelligence}, 33:899--925, August 2017.
+
 \bibitem{kropotkin1902mutual}
 Peter Kropotkin.
 \newblock {\em Mutual aid: A Factor of Evolution}.
@@ -126,6 +147,11 @@ Lik Mui.
 \newblock {\em Computational models of trust and reputation: Agents,
   evolutionary games, and social networks}.
 \newblock PhD thesis, Massachusetts Institute of Technology, 2002.
+
+\bibitem{nilsson1993teleo}
+Nils Nilsson.
+\newblock Teleo-reactive programs for agent control.
+\newblock {\em Journal of artificial intelligence research}, 1:139--158, 1993.
 
 \bibitem{nowak-1993a}
 Martin Nowak and Karl Sigmund.
@@ -207,12 +233,10 @@ Herbert Spencer.
 \newblock The principles of biology (2 vols) london: Williams and norgate.
 \newblock {\em Google Scholar}, 1864.
 
-\bibitem{prosocs}
-Kostas Stathis, {Antonis C.} Kakas, Wenjin Lu, Neophytos Demetriou, Ulle
-  Endriss, and Andrea Bracciali.
-\newblock {\em PROSOCS: a platform for programming software agents in
-  computational logic}, pages 523--528.
-\newblock 4 2004.
+\bibitem{kostas_deductive}
+Professor~Kostas Stathis.
+\newblock Lecture notes in intelligent agents and multi-agent systems, November
+  2018.
 
 \bibitem{sugden2004economics}
 Robert Sugden et~al.

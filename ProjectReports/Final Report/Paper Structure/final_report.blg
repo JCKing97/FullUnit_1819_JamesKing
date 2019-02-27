@@ -3,55 +3,49 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: final_report.aux
 The style file: plain.bst
 Database file #1: ../../refs.bib.bib
-Name 4 in "Kostas Stathis and Kakas, {Antonis C.} and Wenjin Lu and Neophytos Demetriou, and Ulle Endriss and Andrea Bracciali" has a comma at the end for entry prosocs
-while executing---line 1049 of file plain.bst
 Warning--empty journal in alexander1987biology
 Warning--empty publisher in kropotkin1902mutual
-Name 4 in "Kostas Stathis and Kakas, {Antonis C.} and Wenjin Lu and Neophytos Demetriou, and Ulle Endriss and Andrea Bracciali" has a comma at the end for entry prosocs
-while executing---line 1090 of file plain.bst
-Warning--can't use both author and editor fields in prosocs
-Warning--empty publisher in prosocs
 Warning--empty year in sugden2004economics
 Warning--empty journal in thomas1993placa
-You've used 45 entries,
+You've used 50 entries,
             2118 wiz_defined-function locations,
-            755 strings with 10711 characters,
-and the built_in function-call counts, 13129 in all, are:
-= -- 1289
-> -- 510
+            777 strings with 11201 characters,
+and the built_in function-call counts, 14167 in all, are:
+= -- 1390
+> -- 547
 < -- 7
-+ -- 218
-- -- 160
-* -- 809
-:= -- 2199
-add.period$ -- 140
-call.type$ -- 45
-change.case$ -- 204
++ -- 233
+- -- 170
+* -- 866
+:= -- 2395
+add.period$ -- 154
+call.type$ -- 50
+change.case$ -- 224
 chr.to.int$ -- 0
-cite$ -- 51
-duplicate$ -- 522
-empty$ -- 1122
-format.name$ -- 160
-if$ -- 2769
+cite$ -- 54
+duplicate$ -- 562
+empty$ -- 1218
+format.name$ -- 170
+if$ -- 2978
 int.to.chr$ -- 0
-int.to.str$ -- 45
-missing$ -- 45
-newline$ -- 231
-num.names$ -- 90
-pop$ -- 249
+int.to.str$ -- 50
+missing$ -- 49
+newline$ -- 255
+num.names$ -- 100
+pop$ -- 264
 preamble$ -- 1
-purify$ -- 168
+purify$ -- 183
 quote$ -- 0
-skip$ -- 373
+skip$ -- 400
 stack$ -- 0
-substring$ -- 794
-swap$ -- 91
+substring$ -- 836
+swap$ -- 87
 text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 164
-warning$ -- 6
-while$ -- 130
-width$ -- 47
-write$ -- 483
-(There were 2 error messages)
+type$ -- 184
+warning$ -- 4
+while$ -- 141
+width$ -- 52
+write$ -- 536
+(There were 4 warnings)

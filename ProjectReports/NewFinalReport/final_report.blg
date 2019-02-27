@@ -1,0 +1,59 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: final_report.aux
+The style file: plain.bst
+Database file #1: refs.bib.bib
+Too many commas in name 1 of "Su-Dong Lee, Ji-Hyung Lee, Young-Geun Choi, Hee-Cheon You, Ja-Heon Kang, Chi-Hyuck Jun" for entry glaucoma
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Su-Dong Lee, Ji-Hyung Lee, Young-Geun Choi, Hee-Cheon You, Ja-Heon Kang, Chi-Hyuck Jun" for entry glaucoma
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Su-Dong Lee, Ji-Hyung Lee, Young-Geun Choi, Hee-Cheon You, Ja-Heon Kang, Chi-Hyuck Jun" for entry glaucoma
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Su-Dong Lee, Ji-Hyung Lee, Young-Geun Choi, Hee-Cheon You, Ja-Heon Kang, Chi-Hyuck Jun" for entry glaucoma
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Su-Dong Lee, Ji-Hyung Lee, Young-Geun Choi, Hee-Cheon You, Ja-Heon Kang, Chi-Hyuck Jun" for entry glaucoma
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Su-Dong Lee, Ji-Hyung Lee, Young-Geun Choi, Hee-Cheon You, Ja-Heon Kang, Chi-Hyuck Jun" for entry glaucoma
+while executing---line 1090 of file plain.bst
+You've used 10 entries,
+            2118 wiz_defined-function locations,
+            558 strings with 5768 characters,
+and the built_in function-call counts, 3111 in all, are:
+= -- 294
+> -- 167
+< -- 0
++ -- 68
+- -- 56
+* -- 220
+:= -- 556
+add.period$ -- 30
+call.type$ -- 10
+change.case$ -- 56
+chr.to.int$ -- 0
+cite$ -- 10
+duplicate$ -- 109
+empty$ -- 228
+format.name$ -- 56
+if$ -- 624
+int.to.chr$ -- 0
+int.to.str$ -- 10
+missing$ -- 12
+newline$ -- 53
+num.names$ -- 20
+pop$ -- 52
+preamble$ -- 1
+purify$ -- 48
+quote$ -- 0
+skip$ -- 72
+stack$ -- 0
+substring$ -- 165
+swap$ -- 10
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 36
+warning$ -- 0
+while$ -- 27
+width$ -- 12
+write$ -- 109
+(There were 6 error messages)

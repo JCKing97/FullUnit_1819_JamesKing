@@ -204,20 +204,20 @@ get_interaction_belief(CommunityID, GenerationID, _, _, Agent2ID, Success, Value
 
 % What did the perceiver believe about the standing of this other agent?
 get_standing_belief(CommunityID, GenerationID, Timepoint, PerceiverID, AboutID, Success, Value):-
-	agent(strategy("Standing Discriminator", StratDesc, StratOptions), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
+	agent(strategy("Standing Discriminator", _, _, StratDesc, StratOptions), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 	agent(Strat, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
 	CheckTimepoint is Timepoint + 1,
-	holds_at(standing(agent(strategy("Standing Discriminator", StratDesc, StratOptions), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
+	holds_at(standing(agent(strategy("Standing Discriminator", _, _, StratDesc, StratOptions), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 		agent(Strat, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID))=Value, CheckTimepoint),
 	Success = true, !.
 % If there is no holds_at value but the perceiver uses the standing strategy they will autobelieve them to be of a good standing
 get_standing_belief(CommunityID, GenerationID, _, PerceiverID, AboutID, Success, Value):-
-	agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
+	agent(strategy("Standing Discriminator", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
 	Success = true, Value=good, !.
 % Fail nicely if the perceiver is not using the standing strategy
 get_standing_belief(CommunityID, GenerationID, _, PerceiverID, AboutID, Success, Value):-
-	agent(strategy(StrategyName, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
+	agent(strategy(StrategyName, _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), PerceiverID),
 	agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
 	StrategyName \== "Standing Discriminator",
 	Success = 'The perceiver is not using the standing strategy so has no beliefs on other players standings', Value=false, !.

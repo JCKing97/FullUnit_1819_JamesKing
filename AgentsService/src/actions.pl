@@ -119,15 +119,14 @@ get_action(_, _, _, _, Success, Action):-
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Defector", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	agent(strategy("Defector", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: defect, recipient: RecipientID}),
 	Success = true, Action = action{type: action, value: defect, recipient: RecipientID}, !.	
 % Auto to idle if not a donor and using the lazy strategy
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Defector", _, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("lazy", Options),
+	agent(strategy("Defector", "Lazy", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: idle}),
 	Success = true, Action = action{type: idle}, !.	
@@ -135,8 +134,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Defector", _, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("spread_negative", Options),
+	agent(strategy("Defector", "Spread Negative", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	findall(action{type: gossip, value: negative, about: AboutID, recipient: RecipientID},
 	 (capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: gossip, value: negative, about: AboutID, recipient: RecipientID}),
@@ -147,8 +145,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Defector", _, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("promote_self", Options),
+	agent(strategy("Defector", "Promote Self", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	findall(action{type: gossip, value: positive, about: AgentID, recipient: RecipientID},
 	 capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: gossip, value: positive, about: AgentID, recipient: RecipientID}),
@@ -164,15 +161,14 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Cooperator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	agent(strategy("Cooperator", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: cooperate, recipient: RecipientID}),
 	Success = true, Action = action{type:action, value: cooperate, recipient: RecipientID}, !.
 % Auto to idle if not a donor and lazy
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Cooperator", _, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("lazy", Options),
+	agent(strategy("Cooperator", "Lazy", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: idle}),
 	Success = true, Action = action{type: idle}, !.	
@@ -180,8 +176,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Cooperator", _, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("promote_self", Options),
+	agent(strategy("Cooperator", "Promote Self", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	findall(action{type: gossip, value: positive, about: AgentID, recipient: RecipientID},
 	 capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: gossip, value: positive, about: AgentID, recipient: RecipientID}),
@@ -192,8 +187,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Cooperator", _, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("spread_positive", Options),
+	agent(strategy("Cooperator", "Spread Positive", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	findall(action{type: gossip, value: positive, about: AboutID, recipient: RecipientID},
 	 (capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: gossip, value: positive, about: AboutID, recipient: RecipientID}),
@@ -209,12 +203,12 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	agent(strategy("Standing Discriminator", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: cooperate, recipient: RecipientID}),
 	( 
-		\+holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+		\+holds_at(standing(agent(strategy("Standing Discriminator", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
 			agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=bad, Timepoint+1) ;
-	  	holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+	  	holds_at(standing(agent(strategy("Standing Discriminator", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
 			agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=good, Timepoint+1)
 	),
 	Success = true, Action = action{type: action, value: cooperate, recipient: RecipientID}, !.
@@ -222,17 +216,16 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	agent(strategy("Standing Discriminator", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: cooperate, recipient: RecipientID}),
-	holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+	holds_at(standing(agent(strategy("Standing Discriminator", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
 		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=bad, Timepoint+1),
 	Success = true, Action = action{type: action, value: defect, recipient: RecipientID}, !.
 % If the agent is not a donor in this turn and follows the lazy strategy be idle
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Standing Discriminator", _, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("lazy", Options),
+	agent(strategy("Standing Discriminator", "Lazy", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: idle}),
 	Success = true, Action = action{type: idle}, !.
@@ -240,8 +233,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Standing Discriminator", _, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("promote_self", Options),
+	agent(strategy("Standing Discriminator", "Promote Self", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	findall(action{type: gossip, value: positive, about: AgentID, recipient: RecipientID},
 	 capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: gossip, value: positive, about: AgentID, recipient: RecipientID}),
@@ -249,16 +241,15 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	random_element(SelfPromotionCapabilities, Action),
 	Success = true, !.
 % If the agent is not a donor and follows the spread_accurate_positive strategy, spread positive gossip about good agents or default to idle
-agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Standing Discriminator", _, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("spread_accurate_positive", Options),
+	agent(strategy("Standing Discriminator", "Spread Accurate Positive", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	findall(ID, 
 		(
 			agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), ID),
-			\+holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+			\+holds_at(standing(agent(strategy("Standing Discriminator", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
 				agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), ID))=bad, Timepoint+1),
 			ID \== AgentID
 		),
@@ -277,17 +268,15 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 			random_element(Agents, RecipientID),
 			Action = action{type: gossip, value: positive, about: GoodAgent, recipient: RecipientID}, !
 		)
-	),
-	Success = true, !.
+	), !.
 % If the agent is not a donor and follows the spread_accurate_negative strategy, spread negative gossip about bad agents or default to idle
-agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Standing Discriminator", _, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("spread_accurate_negative", Options),
+	agent(strategy("Standing Discriminator", "Spread Accurate Negative", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	findall(BadAgentID,
-		holds_at(standing(agent(strategy("Standing Discriminator", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+		holds_at(standing(agent(strategy("Standing Discriminator", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
 			agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), BadAgentID))=bad, Timepoint+1),
 		BadAgents
 	),
@@ -305,20 +294,18 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 			random_element(Agents, RecipientID),
 			Action = action{type: gossip, value: negative, about: BadAgent, recipient: RecipientID}, !
 		)
-	),
-	Success = true, !.
+	), !.
 
 /*-----------------------------
 ----------- Random ------------
 -----------------------------*/
 
-agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Random", _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	agent(strategy("Random", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	get_capabilities(Timepoint, CommunityID, GenerationID, AgentID, Capabilities),
-	random_element(Capabilities, Action),
-	Success = true, !.
+	random_element(Capabilities, Action), !.
 
 /*-------------------------------------
 ------ Image Score Discriminator ------
@@ -328,8 +315,8 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Image Scoring Discriminator", _, [K|_]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: RecipientID}),
+	agent(strategy("Image Scoring Discriminator", _, _, _, [K|_]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: cooperate, recipient: RecipientID}),
 	(
 		holds_at(image_score(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 							 agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=ImageScore, Timepoint) ->
@@ -347,30 +334,27 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Image Scoring Discriminator", _, [_|OtherOptions]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("lazy", OtherOptions),
+	agent(strategy("Image Scoring Discriminator", "Lazy", _,  _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: idle}),
 	Action = action{type: idle},
 	Success = true, !.
 
 % If the agent is not a donor and uses the promote_self strategy
-agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Image Scoring Discriminator", _, [_|OtherOptions]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("promote_self", OtherOptions),
+	agent(strategy("Image Scoring Discriminator", "Promote Self", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	findall(action{type: gossip, value: positive, about: AgentID, recipient: RecipientID},
 	 capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: gossip, value: positive, about: AgentID, recipient: RecipientID}),
 	  SelfPromotionCapabilities),
-	random_element(SelfPromotionCapabilities, Action),
-	Success = true, !.
+	random_element(SelfPromotionCapabilities, Action), !.
 
-% If the agent is not a donor and uses the spread_accurate_positive strategy
-agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: gossip, value: positive, about: GoodAgent, recipient: RecipientID}):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Image Scoring Discriminator", _, [K|OtherOptions]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("spread_accurate_positive", OtherOptions),
+	agent(strategy("Image Scoring Discriminator", "Spread Accurate Positive", _, _, [K|_]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	findall(GoodAgentID,
 		(
 			agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), GoodAgentID),
@@ -384,29 +368,22 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 		),
 		GoodAgents
 	),
-	(
-		is_empty(GoodAgents, true) -> 
-			Action = action{type: idle} ;
-			(
-				random_element(GoodAgents, GoodAgent),
-				findall(ID, 
-					(
-						agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), ID),
-						ID \== GoodAgent,
-						ID \== AgentID
-					),
-				Agents),
-				random_element(Agents, RecipientID),
-				Action = action{type: gossip, value: positive, about: GoodAgent, recipient: RecipientID}
-			)
-	), Success = true, !.
+	length(GoodAgents, Len), Len >= 2, !,
+	random_element(GoodAgents, GoodAgent),
+	delete(GoodAgents, GoodAgent, OtherGoodAgents),
+	random_element(OtherGoodAgents, RecipientID).
 
-% If the agent is not a donor and uses the spread_accurate_negative strategy
-agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type:idle}):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	agent(strategy("Image Scoring Discriminator", _, [K|OtherOptions]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
-	member("spread_accurate_negative", OtherOptions),
+	agent(strategy("Image Scoring Discriminator", "Spread Accurate Positive", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}), !.
+
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: gossip, value: negative, about: BadAgent, recipient: RecipientID}):-
+	community(CommunityID),
+	generation(community(CommunityID), GenerationID),
+	agent(strategy("Image Scoring Discriminator", "Spread Accurate Negative", _, _, [K|_]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}),
 	findall(BadAgentID,
 		(
 			agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), BadAgentID),
@@ -420,22 +397,28 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, Success, Action):-
 		),
 		BadAgents
 	),
-	(
-		is_empty(BadAgents, true) -> 
-			Action = action{type: idle} ;
+	findall(GoodAgentID,
+		(
+			agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), GoodAgentID),
 			(
-				random_element(BadAgents, BadAgent),
-				findall(ID, 
-					(
-						agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), ID),
-						ID \== BadAgent,
-						ID \== AgentID
-					),
-				Agents),
-				random_element(Agents, RecipientID),
-				Action = action{type: gossip, value: negative, about: BadAgent, recipient: RecipientID}
-			)
-	), Success = true, !.
+				holds_at(image_score(agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), 
+					agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), GoodAgentID))=ImageScore, Timepoint+1) ->
+					ImageScore >= K ;
+					0 >= K
+			),
+			GoodAgentID \== AgentID
+		),
+		GoodAgents
+	),
+	is_empty(BadAgents, false), is_empty(GoodAgents, false),
+	random_element(BadAgents, BadAgent),random_element(GoodAgents, RecipientID), !.
+
+agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type:idle}):-
+	community(CommunityID),
+	generation(community(CommunityID), GenerationID),
+	agent(strategy("Image Scoring Discriminator", "Spread Accurate Negative", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
+	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _}), !.
+
 
 /*-----------------------------
 ----------- Failure -----------

@@ -18,9 +18,9 @@ dialect(swi).
 set_up(ID):-
 	new_community(ID),
 	new_generation(data{community: ID, generation: 0}, true),
-	new_agent(data{community: ID, generation: 0, player: 0, strategy: "Defector", options: ["lazy"]}, true),
-	new_agent(data{community: ID, generation: 0, player: 1, strategy: "Defector", options: ["lazy"]}, true),
-	new_agent(data{community: ID, generation: 0, player: 2, strategy: "Defector", options: ["lazy"]}, true).
+	new_agent(data{donor_strategy: "Defector", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: 0}, true),
+	new_agent(data{donor_strategy: "Defector", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: 1}, true),
+	new_agent(data{donor_strategy: "Defector", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: 2}, true).
 
 :- begin_tests(action_interaction_tests).
 

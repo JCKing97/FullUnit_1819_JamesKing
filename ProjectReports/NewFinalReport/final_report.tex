@@ -1,0 +1,101 @@
+\documentclass[]{final_report}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[final]{pdfpages}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{framed}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usetikzlibrary{timeline}
+\usepackage{dirtree}
+\setlength\parindent{24pt}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Input project details
+\def\studentname{James King}
+\def\reportyear{2018}
+\def\projecttitle{Cooperative Strategies in Multi-Agent Systems}
+\def\supervisorname{Kostas Stathis}
+\def\degree{BSc (Hons) in Computer Science}
+\def\fullOrHalfUnit{Full Unit} % indicate if you are doing the project as a Full Unit or Half Unit
+\def\finalOrInterim{Final Report} % indicate if this document is your Final Report or Interim Report
+
+\begin{document}
+
+\chapter*{Declaration}
+
+This report has been prepared on the basis of my own work. Where other published and unpublished source materials have been used, these have been acknowledged.
+
+\vskip3em
+
+Word Count: 1,587 \textit{2,000} intro + n \textit{3,000} lit review + n \textit{4,000} framework + n \textit{4,000} experiment evaluation + n \textit{1,000} conclusions + n \textit{1,000} professional issues
+
+\vskip3em
+
+Student Name: \studentname
+
+\vskip3em
+
+Date of Submission: \today
+
+\vskip3em
+
+Signature: \par
+\includegraphics[scale=0.05]{Signature.png}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Table of Contents
+\tableofcontents\pdfbookmark[0]{Table of Contents}{toc}\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% Your Abstract here
+
+\begin{abstract}
+\end{abstract}
+\newpage
+
+\chapter{Introduction}
+
+\section{Motivation}
+Artificial intelligence (AI) has been an idea present in the consciousness of humanity for millennia. From Hephaestus' mighty Talos to Edgar Allan Poe's commentary on `Maelzel's Chess-Player' the idea has inspired both awe and confusion. As we move away from the mythical and the false, AI embeds itself deeper into our lives and societies. AI techniques are being used for many novel applications in areas such as medicine~\cite{glaucoma} and game playing~\cite{alphago}.\par
+Many of these applications are specifically using agent techniques~\cite{silverman2015systems, mvfcec, brockman2016openai}. Intelligent agents (IAs) have many definitions but one popular definition is that agents are anything that perceives and acts upon its environment~\cite{russell2016artificial}. These agents are situated in an environment, multiple of these agents can be combined in one environment to form a multi-agent system (MAS).\par
+Within MASs it is generally possible for the agents to interact and/or communicate with each other. Communication generally occurs through agent communication languages (ACLs). The interactions that occur between agents are actions by one or all of the agents in the interaction. There is a possibility that agents can act out of pure altruism and always cooperate with other agents, however, often agents will work to protect their interests i.e. they are selfish.\par
+It is desirable for agents in a MAS to work together to complete tasks and fulfil goals. So we want to facilitate cooperation between agents which may be selfish. There are analytical tools that we can use in game theory to understand what happens when decision-making individuals interact~\cite{myerson2013game}. Some of these tools are used to explain how cooperation occurs between selfish individuals.\par
+Many of these tools rely on the idea of reciprocal altruism~\cite{trivers1971evolution}, which stipulates that cooperation can occur between selfish individuals if they expect that cooperation to be reciprocated. Two such mechanisms are direct and indirect reciprocity. Indirect reciprocity works by an agent cooperating with another agent with the expectation that this will increase their chances of receiving cooperation from others later. Whereas direct reciprocity is expecting reciprocation of cooperation from the agent who received the cooperation in the first place.\par
+There are many factors to consider surrounding the mechanism. One key factor is the level of visibility of the interactions within the MAS. Nowak and Sigmund~\cite{evol_indirect_image} limit this visibility to a randomly selected group of individuals in the population (onlookers). Anothe factor is how information about the interactions can be conveyed. Sommerfeld \textit{et al.} suggested the use of gossip~\cite{gossip_alt}.\par 
+So how can we use these mechanisms to facilitate cooperation between IAs? What options can we use and how can we make use of them to encourage cooperation between these agents?
+
+\section{Aims and Objectives}
+\label{sec:aao}
+The high level aim of this project is to study how game-theoretic techniques can be leveraged in MASs to create cooperative societies of agents. To do this I have developed a theoretical framework/model using game-theoretic and MAS techniques inspired by past work in both fields. I have implemented this framework in a MAS that allows transparent decision making by agents, by which I mean agents are able to give reasons for their decisions. This implementation is on a distributable platform that allows users to set up games of the model, specify certain variables and view an analysis of the game in order to study how the mechanism and variables affect cooperation in the system.\par
+Users are also able to create an account and refer back to games they have previously run. I have used the system to run my own experiments to study the effectiveness of the techniques I have employed and how the system needs to be set up in terms of the variables present. I have presented these experiments and then discussed the results with a conclusion on my findings and suggestions of future work as a result of these findings.
+
+\section{Contribution}
+Much of the work I have reviewed in relation to game-theoretic mechanisms has come from the field of game theory. This means the implementation of the models the authors have devised has generally not been using MAS techniques. My implementation is not only a MAS using a game-theoretic model, but it supports transparent agent decisions due to the use of the logic programming language Prolog for the implementation of agents decision making components. This implementation is also a web based system, allowing users across the world to experiment with the model I have devised.\par
+Furthermore, the theoretical framework I have designed uses inspiration from past work on game-theoretic mechanisms but also builds upon these approaches. One way in which I build upon these is by combining the many aspects of the past approaches such as using MAS techniques to create a mixed reciprocity model (combining direct and indirect reciprocity) and using gossip as an action to convey reputation information in a mixed reciprocity model.\par
+Lastly, in my system users associate agents with specific strategies which I have included in the system. These strategies come from past work in the topic of game theory, but are implemented using an agent architecture I have purpose designed for my theoretical framework. This included developing upon the strategies with strategy components for whatever roles agents may have at a particular timepoint in a society (such as when an agent is not in an interaction). Another development upon the current strategies are the trust models I have created for the strategies for interpreting the events in the environment.
+
+\section{Structure}
+In the next chapter of this report I have explored and described the past work that has been a central inspiration to the theoretical framework I have devised. I have included other interesting information and possible mechanisms from past work that could be used to encourage cooperation in MASs in the appendix. This background reading then leads into the next chapter in which I have defined the theoretical framework for my system.\par
+Following on from the theoretical framework in the same chapter I have described the implementation of this theoretical framework in a web application. This application is available for users across the internet to set up games and view the happenings and analysis of their games. In the next chapter I use this platform to experiment in order to review how effective the mechanism, strategies and variables in the game are in encouraging cooperation between selfish agents.\par
+The final two main chapters of this report is a discussion on my findings from the experiments and on the rest of the project, and then a conclusion and evoluation of the project. The appendix is at the end and contains further information referenced in the report but is not necessarily central to the project.
+
+%%%% ADD YOUR BIBLIOGRAPHY HERE
+\newpage
+\bibliography{refs.bib}{}
+\bibliographystyle{plain}
+\addcontentsline{toc}{chapter}{Bibliography}
+\label{endpage}
+
+\chapter{Appendix}
+\label{appendix}
+\textcolor{red}{Describe the contents of my appendix.}
+\section{Strategies}
+\label{appendix:strats}
+\textcolor{red}{include list of strategy components and trust models, all associated together}.
+
+\end{document}

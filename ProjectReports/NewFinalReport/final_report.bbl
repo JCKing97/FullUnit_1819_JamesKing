@@ -1,0 +1,61 @@
+\begin{thebibliography}{10}
+
+\bibitem{brockman2016openai}
+Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman,
+  Jie Tang, and Wojciech Zaremba.
+\newblock Openai gym.
+\newblock {\em arXiv preprint arXiv:1606.01540}, 2016.
+
+\bibitem{alphago}
+Demis Hassabis and Silver David.
+\newblock Alphago zero: Learning from scratch.
+\newblock {\em deepMind official website}, 18, 2017.
+
+\bibitem{mvfcec}
+{\"O}zg{\"u}r Kafali, Alfonso~E. Romero, and Kostas Stathis.
+\newblock Agent-oriented activity recognition in the event calculus: an
+  application for diabetic patients.
+\newblock {\em Computational Intelligence}, 33:899--925, August 2017.
+
+\bibitem{myerson2013game}
+Roger~B Myerson.
+\newblock {\em Game theory}.
+\newblock Harvard university press, 2013.
+
+\bibitem{evol_indirect_image}
+Martin~A. Nowak and Karl Sigmund.
+\newblock Evolution of indirect reciprocity by image scoring.
+\newblock {\em Nature}, 393:573--577, 1998.
+
+\bibitem{russell2016artificial}
+Stuart~J Russell and Peter Norvig.
+\newblock {\em Artificial intelligence: a modern approach}.
+\newblock Malaysia; Pearson Education Limited,, 2016.
+
+\bibitem{silverman2015systems}
+Barry~G Silverman, Nancy Hanrahan, Gnana Bharathy, Kim Gordon, and Dan Johnson.
+\newblock A systems approach to healthcare: agent-based modeling, community
+  mental health, and population well-being.
+\newblock {\em Artificial intelligence in medicine}, 63(2):61--71, 2015.
+
+\bibitem{gossip_alt}
+Ralf~D. Sommerfeld, Hans-J{\"u}rgen Krambeck, Dirk Semmann, and Manfred
+  Milinski.
+\newblock Gossip as an alternative for direct observation in games of indirect
+  reciprocity.
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, 104:17435--17440, 2007.
+
+\bibitem{glaucoma}
+Young-Geun Choi Hee-Cheon You Ja-Heon Kang Chi-Hyuck~Jun Su-Dong~Lee,
+  Ji-Hyung~Lee.
+\newblock Machine learning models based on the dimensionality reduction of
+  standard automated perimetry data for glaucoma diagnosis.
+\newblock {\em Artificial Intelligence in Medicine}, 18, 2019.
+
+\bibitem{trivers1971evolution}
+Robert~L Trivers.
+\newblock The evolution of reciprocal altruism.
+\newblock {\em The Quarterly review of biology}, 46(1):35--57, 1971.
+
+\end{thebibliography}

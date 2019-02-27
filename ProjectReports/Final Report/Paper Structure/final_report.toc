@@ -4,63 +4,64 @@
 \contentsline {section}{\numberline {1.2}Aims and Objectives}{6}{section.1.2}
 \contentsline {section}{\numberline {1.3}Contribution}{7}{section.1.3}
 \contentsline {section}{\numberline {1.4}Structure}{7}{section.1.4}
-\contentsline {chapter}{\numberline {2}Background}{8}{chapter.2}
-\contentsline {section}{\numberline {2.1}Introduction}{8}{section.2.1}
-\contentsline {section}{\numberline {2.2}Cooperative Phenomena}{8}{section.2.2}
-\contentsline {section}{\numberline {2.3}Kinship Theory}{9}{section.2.3}
-\contentsline {section}{\numberline {2.4}Reciprocal Altruism}{10}{section.2.4}
-\contentsline {section}{\numberline {2.5}Axelrod, Hamilton and The Iterated Prisoner's\\ Dilemma}{11}{section.2.5}
-\contentsline {section}{\numberline {2.6}Network Reciprocity}{12}{section.2.6}
-\contentsline {section}{\numberline {2.7}Group Selection}{14}{section.2.7}
-\contentsline {section}{\numberline {2.8}Indirect Reciprocity}{14}{section.2.8}
-\contentsline {section}{\numberline {2.9}Nowak and Sigmund}{15}{section.2.9}
-\contentsline {section}{\numberline {2.10}The Standing Strategy and Further Limitations of Nowak And Sigmund}{17}{section.2.10}
-\contentsline {section}{\numberline {2.11}Mixed Reciprocity Models}{19}{section.2.11}
-\contentsline {section}{\numberline {2.12}Gossip}{20}{section.2.12}
-\contentsline {section}{\numberline {2.13}Mui's Computational Models of Trust and Reputation}{21}{section.2.13}
-\contentsline {section}{\numberline {2.14}Summary}{21}{section.2.14}
-\contentsline {chapter}{\numberline {3}Framework}{23}{chapter.3}
-\contentsline {section}{\numberline {3.1}Introduction}{23}{section.3.1}
-\contentsline {section}{\numberline {3.2}Theoretical}{23}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Introduction}{23}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Environment}{23}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Percepts}{25}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Actions}{25}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}Action Execution}{26}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {3.2.6}Gossip}{26}{subsection.3.2.6}
-\contentsline {subsection}{\numberline {3.2.7}Reproduction}{27}{subsection.3.2.7}
-\contentsline {subsection}{\numberline {3.2.8}Agents}{28}{subsection.3.2.8}
-\contentsline {subsection}{\numberline {3.2.9}Strategies}{29}{subsection.3.2.9}
-\contentsline {subsection}{\numberline {3.2.10}Trust Models}{29}{subsection.3.2.10}
-\contentsline {subsection}{\numberline {3.2.11}Summary}{29}{subsection.3.2.11}
-\contentsline {section}{\numberline {3.3}Implementation}{29}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Agent Mind as a Service}{30}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Environment}{30}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Web Application and Interface}{30}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Conclusion}{30}{subsection.3.3.4}
-\contentsline {section}{\numberline {3.4}Technical Preparation}{30}{section.3.4}
-\contentsline {section}{\numberline {3.5}Design}{31}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Agent Mind as a Service}{31}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Environment}{31}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}Web Application and Interface}{31}{subsection.3.5.3}
-\contentsline {section}{\numberline {3.6}Development}{31}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Agent Mind as a Service}{31}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}Environment}{31}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}Web Application and Interface}{31}{subsection.3.6.3}
-\contentsline {section}{\numberline {3.7}Testing}{31}{section.3.7}
-\contentsline {subsection}{\numberline {3.7.1}Agents Service Testing}{31}{subsection.3.7.1}
-\contentsline {subsection}{\numberline {3.7.2}Environment Testing}{31}{subsection.3.7.2}
-\contentsline {subsection}{\numberline {3.7.3}Web Application Testing}{31}{subsection.3.7.3}
-\contentsline {section}{\numberline {3.8}Software Engineering}{31}{section.3.8}
-\contentsline {section}{\numberline {3.9}Documentation}{31}{section.3.9}
-\contentsline {chapter}{\numberline {4}Experiment Evaluation}{32}{chapter.4}
-\contentsline {section}{\numberline {4.1}Introduction}{32}{section.4.1}
-\contentsline {section}{\numberline {4.2}Experiment 1}{32}{section.4.2}
-\contentsline {section}{\numberline {4.3}Experiment 2}{32}{section.4.3}
-\contentsline {section}{\numberline {4.4}Experiment n}{32}{section.4.4}
-\contentsline {section}{\numberline {4.5}Discussion}{32}{section.4.5}
-\contentsline {chapter}{\numberline {5}Critical Analysis and Discussion}{34}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusions}{35}{chapter.6}
-\contentsline {chapter}{Bibliography}{38}{chapter*.16}
-\contentsline {chapter}{\numberline {7}Professional Issues}{39}{chapter.7}
-\contentsline {chapter}{\numberline {8}Appendix}{40}{chapter.8}
+\contentsline {chapter}{\numberline {2}Background}{9}{chapter.2}
+\contentsline {section}{\numberline {2.1}Introduction}{9}{section.2.1}
+\contentsline {section}{\numberline {2.2}Cooperative Phenomena}{9}{section.2.2}
+\contentsline {section}{\numberline {2.3}Kinship Theory}{10}{section.2.3}
+\contentsline {section}{\numberline {2.4}Reciprocal Altruism}{11}{section.2.4}
+\contentsline {section}{\numberline {2.5}Axelrod, Hamilton and The Iterated Prisoner's\\ Dilemma}{12}{section.2.5}
+\contentsline {section}{\numberline {2.6}Network Reciprocity}{13}{section.2.6}
+\contentsline {section}{\numberline {2.7}Group Selection}{15}{section.2.7}
+\contentsline {section}{\numberline {2.8}Indirect Reciprocity}{16}{section.2.8}
+\contentsline {section}{\numberline {2.9}Nowak and Sigmund}{17}{section.2.9}
+\contentsline {section}{\numberline {2.10}The Standing Strategy and Further Limitations of Nowak and Sigmund}{20}{section.2.10}
+\contentsline {section}{\numberline {2.11}Mixed Reciprocity Models}{20}{section.2.11}
+\contentsline {section}{\numberline {2.12}Gossip}{21}{section.2.12}
+\contentsline {section}{\numberline {2.13}Mui's Computational Models of Trust and Reputation}{22}{section.2.13}
+\contentsline {section}{\numberline {2.14}Summary}{23}{section.2.14}
+\contentsline {chapter}{\numberline {3}Framework}{24}{chapter.3}
+\contentsline {section}{\numberline {3.1}Introduction}{24}{section.3.1}
+\contentsline {section}{\numberline {3.2}Theoretical}{24}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Introduction}{24}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Environment}{24}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Percepts}{26}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Actions}{27}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Action Execution}{27}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}Gossip}{28}{subsection.3.2.6}
+\contentsline {subsection}{\numberline {3.2.7}Reproduction}{29}{subsection.3.2.7}
+\contentsline {subsection}{\numberline {3.2.8}Agents}{30}{subsection.3.2.8}
+\contentsline {subsection}{\numberline {3.2.9}Strategies}{32}{subsection.3.2.9}
+\contentsline {subsection}{\numberline {3.2.10}Trust Models}{34}{subsection.3.2.10}
+\contentsline {subsection}{\numberline {3.2.11}Summary}{35}{subsection.3.2.11}
+\contentsline {section}{\numberline {3.3}Implementation}{35}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Agent Mind as a Service}{36}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Environment}{36}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Web Application and Interface}{36}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Conclusion}{36}{subsection.3.3.4}
+\contentsline {section}{\numberline {3.4}Technical Preparation}{36}{section.3.4}
+\contentsline {section}{\numberline {3.5}Design}{37}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Agent Mind as a Service}{37}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Environment}{37}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3.5.3}Web Application and Interface}{37}{subsection.3.5.3}
+\contentsline {section}{\numberline {3.6}Development}{37}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Agent Mind as a Service}{37}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Environment}{37}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3.6.3}Web Application and Interface}{37}{subsection.3.6.3}
+\contentsline {section}{\numberline {3.7}Testing}{37}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}Agents Service Testing}{37}{subsection.3.7.1}
+\contentsline {subsection}{\numberline {3.7.2}Environment Testing}{37}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {3.7.3}Web Application Testing}{37}{subsection.3.7.3}
+\contentsline {section}{\numberline {3.8}Software Engineering}{37}{section.3.8}
+\contentsline {section}{\numberline {3.9}Documentation}{37}{section.3.9}
+\contentsline {chapter}{\numberline {4}Experiment Evaluation}{38}{chapter.4}
+\contentsline {section}{\numberline {4.1}Introduction}{38}{section.4.1}
+\contentsline {section}{\numberline {4.2}Experiment 1}{38}{section.4.2}
+\contentsline {section}{\numberline {4.3}Experiment 2}{38}{section.4.3}
+\contentsline {section}{\numberline {4.4}Experiment n}{38}{section.4.4}
+\contentsline {section}{\numberline {4.5}Discussion}{38}{section.4.5}
+\contentsline {chapter}{\numberline {5}Critical Analysis and Discussion}{40}{chapter.5}
+\contentsline {chapter}{\numberline {6}Conclusions}{41}{chapter.6}
+\contentsline {chapter}{Bibliography}{44}{chapter*.17}
+\contentsline {chapter}{\numberline {7}Professional Issues}{45}{chapter.7}
+\contentsline {chapter}{\numberline {8}Appendix}{46}{chapter.8}
+\contentsline {section}{\numberline {8.1}Strategies}{46}{section.8.1}
