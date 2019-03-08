@@ -22,7 +22,8 @@ class CommunityTest(unittest.TestCase):
         cls.strategies = {}
         for strategy in received_strategies:
             count = random.randint(0, 1)
-            cls.strategies[Strategy(strategy['name'], strategy['options'])] = count
+            cls.strategies[Strategy(strategy['donor_strategy'], strategy['non_donor_strategy'],
+                                    strategy['trust_model'], strategy['options'])] = count
             cls.strat_count += count
         cls.pp = pprint.PrettyPrinter()
         cls.num_of_onlookers = random.randint(1, 10)

@@ -1,8 +1,8 @@
-"""prepping for mysql
+"""empty message
 
-Revision ID: 7fe79159f3da
+Revision ID: 5cb980996c19
 Revises: 
-Create Date: 2019-02-06 14:55:38.634773
+Create Date: 2019-03-04 15:18:57.498586
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '7fe79159f3da'
+revision = '5cb980996c19'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,12 +35,15 @@ def upgrade():
     sa.Column('social_activeness', sa.Integer(), nullable=True),
     sa.Column('positivity_of_gossip', sa.Integer(), nullable=True),
     sa.Column('fitness', sa.Integer(), nullable=True),
+    sa.Column('timed_out', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reputation_strategy',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
-    sa.Column('strategy_name', sa.String(length=128), nullable=True),
-    sa.Column('strategy_options', sa.String(length=300), nullable=True),
+    sa.Column('donor_strategy', sa.String(length=128), nullable=True),
+    sa.Column('non_donor_strategy', sa.String(length=128), nullable=True),
+    sa.Column('trust_model', sa.String(length=128), nullable=True),
+    sa.Column('options', sa.String(length=300), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('tournament',

@@ -30,37 +30,37 @@ class PlayerTest(unittest.TestCase):
     def test_create_player(self):
         """Test creating a player"""
         try:
-            Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
+            Player(0, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
 
     def test_incorrect_strategy_create_player(self):
         """Test creating a player with a strategy not in the system"""
         with self.assertRaises(PlayerCreationException):
-            Player(0, Strategy("Incorrect", []), self.community, self.generation)
+            Player(0, Strategy("Incorrect", "Void", "Void", []), self.community, self.generation)
 
     def test_multiple_players_same_id(self):
-        Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
+        Player(0, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         with self.assertRaises(PlayerCreationException):
-            Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
+            Player(0, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
 
     def test_player_get_id(self):
         """Test the id method of the Player class"""
         try:
-            player = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
+            player = Player(0, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
         self.assertEqual(0, player.id)
 
     def test_get_strategy(self):
-        strategy = Strategy("Defector", ["lazy"])
+        strategy = Strategy("Defector", "Lazy", "Void", [])
         player = Player(0, strategy, self.community, self.generation)
         self.assertEqual(strategy, player.strategy)
 
     def test_player_get_fitness_start(self):
         """Test the get_fitness method of the player at the start of it's life"""
         try:
-            player = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
+            player = Player(0, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
         self.assertEqual(0, player.fitness)
@@ -68,7 +68,7 @@ class PlayerTest(unittest.TestCase):
     def test_player_update_get_fitness(self):
         """Test the update_fitness() and get_fitness methods of a player together"""
         try:
-            player = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
+            player = Player(0, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
         player.update_fitness(-4)
@@ -79,7 +79,7 @@ class PlayerTest(unittest.TestCase):
     def test_player_decide(self):
         """Test the decision making of the player"""
         try:
-            player = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
+            player = Player(0, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
         try:
@@ -90,8 +90,8 @@ class PlayerTest(unittest.TestCase):
     def test_send_donor_percept_decide(self):
         """Test sending a percept to a player that they are a donor, and getting a decision to defect back"""
         try:
-            donor = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
-            recipient = Player(1, Strategy("Defector", ["lazy"]), self.community, self.generation)
+            donor = Player(0, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
+            recipient = Player(1, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         except PlayerCreationException:
             self.fail("Shouldn't have failed to create player")
         interaction_payload = {'donor': donor.id, 'recipient': recipient.id, 'timepoint': 2,
@@ -110,19 +110,19 @@ class PlayerTest(unittest.TestCase):
             self.fail("Shouldn't have failed to make a decision")
 
     def test_set_percept(self):
-        perceiver = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
-        gossiper = Player(1, Strategy("Defector", ["lazy"]), self.community, self.generation)
-        about = Player(2, Strategy("Defector", ["lazy"]), self.community, self.generation)
+        perceiver = Player(0, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
+        gossiper = Player(1, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
+        about = Player(2, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         percept = {'community': self.community, 'generation': self.generation, 'perceiver': perceiver.id,
                    'gossip': 'negative', 'about': about.id, 'gossiper': gossiper.id, 'timepoint': 3}
         perceiver.set_perception(percept)
         self.assertEqual(perceiver._percepts[3], [percept])
 
     def test_perceive(self):
-        perceiver = Player(0, Strategy("Standing Discriminator", ["trusting", "lazy"]), self.community,
+        perceiver = Player(0, Strategy("Standing Discriminator", "Lazy", "Trusting", []), self.community,
                            self.generation)
-        gossiper = Player(1, Strategy("Defector", ["lazy"]), self.community, self.generation)
-        about = Player(2, Strategy("Defector", ["lazy"]), self.community, self.generation)
+        gossiper = Player(1, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
+        about = Player(2, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         percept = {'community': self.community, 'generation': self.generation, 'perceiver': perceiver.id,
                    'gossip': 'negative', 'about': about.id, 'gossiper': gossiper.id, 'timepoint': 3,
                    'type': 'action/gossip'}
@@ -261,7 +261,7 @@ class PlayerAndStateIntegrationTests(unittest.TestCase):
         self.player = 0
         generation_payload = {"community": self.community, "generation": self.generation}
         requests.request("POST", Config.AGENTS_URL + 'generation', json=generation_payload)
-        self.player = Player(0, Strategy("Defector", ["lazy"]), self.community, self.generation)
+        self.player = Player(0, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         self.observer = TestObserver(self.community, [self.generation])
         self.player.player_state.attach(self.observer)
 

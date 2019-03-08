@@ -24,8 +24,11 @@ class FacadeTests(unittest.TestCase):
         cls.type_strategies = []
         for strategy in cls.received_strategies:
             count = random.randint(0, 1)
-            cls.strategies.append({'name': strategy['name'], 'options': strategy['options'], 'count': count})
-            cls.type_strategies.append(Strategy(strategy['name'], strategy['options']))
+            cls.strategies.append({'donor_strategy': strategy['donor_strategy'], 'non_donor_strategy':
+                                    strategy['non_donor_strategy'], 'trust_model': strategy['trust_model'],
+                                   'options': strategy['options'], 'count': count})
+            cls.type_strategies.append(Strategy(strategy['donor_strategy'], strategy['non_donor_strategy'],
+                                                    strategy['trust_model'], strategy['options']))
             cls.strat_count += count
         cls.pp = pprint.PrettyPrinter()
         cls.num_of_onlookers = random.randint(1, 10)

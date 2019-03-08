@@ -32,7 +32,7 @@ new_agent(DictIn, Success):-
 	assert(agent(strategy(StrategyName, NonDonorStrategy, TrustModel, Desc, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID)),
 	Success = true), !.
 % Create the first agent in the system
-new_agent(DictIn, Success):-
+new_agent(DictIn, trust):-
 	% Check input fields
 	_{donor_strategy: StrategyName, non_donor_strategy: NonDonorStrategy, trust_model: TrustModel, options: Options, community: CommunityID, generation: GenerationID, player: AgentID} :< DictIn,
 	\+current_predicate(agent/4),
@@ -41,45 +41,38 @@ new_agent(DictIn, Success):-
 	strategy(StrategyName, NonDonorStrategy, TrustModel, Desc, Options),
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
-	assert(agent(strategy(StrategyName, NonDonorStrategy, TrustModel, Desc, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID)),
-	Success = true, !.
+	assert(agent(strategy(StrategyName, NonDonorStrategy, TrustModel, Desc, Options), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID)), !.
 % Nice fail when there is no such strategy
-new_agent(DictIn, Success):-
+new_agent(DictIn, "No such strategy"):-
 	% Check input fields
 	_{donor_strategy: StrategyName, non_donor_strategy: NonDonorStrategy, trust_model: TrustModel, options: Options, community: _, generation: _, player: _} :< DictIn,
-	\+strategy(StrategyName, NonDonorStrategy, TrustModel, _, Options),
-	Success = "No such strategy", !.
+	\+strategy(StrategyName, NonDonorStrategy, TrustModel, _, Options), !.
 % Nice fail when there is no such community
-new_agent(DictIn, Success):-
+new_agent(DictIn, "No such community"):-
 	% Check input fields
 	_{donor_strategy: _, non_donor_strategy: _, trust_model: _, options: _, community: CommunityID, generation: _, player: _} :< DictIn,
 	current_predicate(community/1),
-	\+community(CommunityID),
-	Success = "No such community", !.
-new_agent(DictIn, Success):-
+	\+community(CommunityID), !.
+new_agent(DictIn, "No such community"):-
 	% Check input fields
 	_{donor_strategy: _, non_donor_strategy: _, trust_model: _, options: _, community: _, generation: _, player: _} :< DictIn,
-	\+current_predicate(community/1),
-	Success = "No such community", !.
+	\+current_predicate(community/1),!.
 % Nice fail when here is no such generation for this community
-new_agent(DictIn, Success):-
+new_agent(DictIn, "No such generation for this community"):-
 	% Check input fields
 	_{donor_strategy: _, non_donor_strategy: _, trust_model: _, options: _, community: CommunityID, generation: GenerationID, player: _} :< DictIn,
 	current_predicate(community/1),
 	current_predicate(generation/2),
 	community(CommunityID),
-	\+generation(community(CommunityID), GenerationID),
-	Success = "No such generation for this community", !.
-new_agent(DictIn, Success):-
+	\+generation(community(CommunityID), GenerationID), !.
+new_agent(DictIn, "No such generation for this community"):-
 	% Check input fields
 	_{donor_strategy: _, non_donor_strategy: _, trust_model: _, options: _, community: _, generation: _, player: _} :< DictIn,
 	current_predicate(community/1),
-	\+current_predicate(generation/2),
-	Success = "No such generation for this community", !.
+	\+current_predicate(generation/2), !.
 % Nice failing for incorrect inputs
-new_agent(DictIn, Success):-
-	\+ _{donor_strategy: _, non_donor_strategy: _, trust_model: _, options: _, community: _, generation: _, player: _} :< DictIn,
-	Success = "Incorrect input, should contain the fields: strategy, options, community, generation and player".
+new_agent(DictIn, "Incorrect input, should contain the fields: donor_strategy, non_donor_strategy, trust_model, options, community, generation and player"):-
+	\+ _{donor_strategy: _, non_donor_strategy: _, trust_model: _, options: _, community: _, generation: _, player: _} :< DictIn, !.
 
 /**
  * retract_agents(++ID:int) is nondet

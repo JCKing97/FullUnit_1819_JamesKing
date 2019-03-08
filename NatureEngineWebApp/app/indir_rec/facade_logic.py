@@ -157,7 +157,8 @@ class ReputationGame:
     def run(self) -> Results:
         community_strategies: Dict[Strategy, int] = {}
         for strategy in self._initial_strategies:
-            generated_strategy: Strategy = Strategy(strategy['name'], strategy['options'])
+            generated_strategy: Strategy = Strategy(strategy['donor_strategy'], strategy['non_donor_strategy'],
+                                                    strategy['trust_model'], strategy['options'])
             if generated_strategy in community_strategies:
                 community_strategies[generated_strategy] += strategy['count']
             else:

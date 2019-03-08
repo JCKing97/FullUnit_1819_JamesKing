@@ -15,10 +15,9 @@
     <script type="text/javascript">
         setInterval(function() {
             $.ajax({
-                url: "{{ url_for('indir_rec.is_reputation_finished', reputation_id=reputation_id) }}",
+                url: "{{ url_for('indir_rec.is_reputation_finished', reputation_id=reputation_id, job_id=job_id) }}",
                 method: "GET"
             }).done(function(data) {
-                console.log(data);
                 if (data['finished']){
                     window.location = data['url'];
                 }

@@ -53,11 +53,11 @@ is_empty(List, IsIt):-
 
 /**
  * is_list_length_less_than(+List:list, +Val:int, -LessThan:bool)
+ *
  * Is the list length less than the value Val.
  * @arg List The list to check
  * @arg Val The value to check it's length is less than
  * @arg LessThan Whether the length is less than Val or not
- *
  */
 
 is_list_length_less_than(List, Val, LessThan):-

@@ -180,7 +180,10 @@
                             <tbody>
                                 {% for player in generation.players %}
                                     <tr>
-                                        <th style="border-right: #CCC 2px solid;">{{ player.player_id }}<br/>{{ player.strategy.strategy_name }}<br/>{{ player.strategy.strategy_options }}</th>
+                                        <th style="border-right: #CCC 2px solid;">{{ player.player_id }}<br/>
+                                            {{ player.strategy.donor_strategy }}<br/>
+                                            {{ player.strategy.non_donor_strategy }}<br/>
+                                            {{ player.strategy.trust_model }}<br/>{{ player.strategy.options }}</th>
                                         {% for action in player.actions %}
                                             <td>
                                                 {% for line in action.to_table_representation() %}

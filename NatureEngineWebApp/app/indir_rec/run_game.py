@@ -71,14 +71,20 @@ def commit_results_game_to_database(game: ReputationGame, game_results: Results,
                 # Having to use a string representation as sqlite doesn't support arrays
                 strategy_options_string = json.dumps(player_strat.options)
                 # If the strategy for the player doesn't already exist in the database add it
-                if ReputationStrategy.query.filter_by(strategy_name=player_strat.name,
-                                                      strategy_options=strategy_options_string).count() <= 0:
-                    new_strat = ReputationStrategy(strategy_name=player_strat.name,
-                                                   strategy_options=strategy_options_string)
+                if ReputationStrategy.query.filter_by(donor_strategy=player_strat.donor_strategy,
+                                                      non_donor_strategy=player_strat.non_donor_strategy,
+                                                      trust_model=player_strat.trust_model,
+                                                      options=strategy_options_string).count() <= 0:
+                    new_strat = ReputationStrategy(donor_strategy=player_strat.donor_strategy,
+                                                   non_donor_strategy=player_strat.non_donor_strategy,
+                                                   trust_model=player_strat.trust_model,
+                                                   options=strategy_options_string)
                     db.session.add(new_strat)
                     db.session.flush()
-                player_strategy = ReputationStrategy.query.filter_by(strategy_name=player_strat.name,
-                                                                     strategy_options=strategy_options_string).first()
+                player_strategy = ReputationStrategy.query.filter_by(donor_strategy=player_strat.donor_strategy,
+                                                                     non_donor_strategy=player_strat.non_donor_strategy,
+                                                                     trust_model=player_strat.trust_model,
+                                                                     options=strategy_options_string).first()
                 new_player = ReputationPlayer(generation_id=new_gen.id, community_id=community.id, player_id=player,
                                               cooperation_rate=cooperation_by_gen_and_player[generation][player],
                                               social_activeness=social_activeness_by_gen_and_player[generation][player],

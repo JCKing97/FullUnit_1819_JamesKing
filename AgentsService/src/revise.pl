@@ -85,7 +85,7 @@ terminates_at(said(Gossiper, Perceiver, About, Gossip), [], standing(Perceiver, 
 	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
 	get_strategy(DonorStrategy, _, TrustModel, _, Perceiver),
 	DonorStrategy=="Standing Discriminator",
-	TrustModel="Trusting",
+	TrustModel=="Trusting",
 	Gossip == "positive",
 	\+holds_at(standing(Perceiver, Gossiper)=bad, T).
 
@@ -142,4 +142,108 @@ initiates_at(said(Gossiper, Perceiver, About, Gossip), [], image_score(Perceiver
 		holds_at(image_score(Perceiver, About)=OldImageScore, T) -> 
 			(OldImageScore >= 5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore+1) ;
 			NewImageScore is 1
+	).
+
+/*--------------------------------------
+-------- Veritability Discerner --------
+--------------------------------------*/
+
+trusted(Perceiver, Subject, T):-
+	get_strategy(DonorStrategy, _, _, [K], Perceiver),
+	DonorStrategy=="Veritability Discerner",
+	holds_at(percept_count(Perceiver, Subject)=PerceptCount, T),
+	holds_at(veritability_rating(Perceiver, Subject)=Rating, T), !,
+	Mean is Rating/PerceptCount,
+	Mean >= K.
+trusted(Perceiver, _, _):-
+	get_strategy(DonorStrategy, _, _, [K], Perceiver),
+	DonorStrategy=="Veritability Discerner",
+	0 >= K.
+
+initiates_at(did(Donor, Perceiver, Recipient, Action), [], percept_count(Perceiver, Donor)=NewCount, T):-
+	happens_at(did(Donor, Perceiver, Recipient, Action), T),
+	get_strategy(DonorStrategy,_, _, _, Perceiver),
+	DonorStrategy=="Veritability Discerner",
+	(
+		holds_at(percept_count(Perceiver, Donor)=OldCount, T) ->
+			(NewCount is OldCount + 1) ; NewCount is 1
+	).
+
+initiates_at(said(Gossiper, Perceiver, About, Gossip), [], percept_count(Perceiver, About)=NewCount, T):-
+	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
+	get_strategy(DonorStrategy,_, _, _, Perceiver),
+	DonorStrategy=="Veritability Discerner",
+	(
+		holds_at(percept_count(Perceiver, About)=OldCount, T) ->
+			(NewCount is OldCount + 1) ; NewCount is 1
+	).
+
+
+initiates_at(did(Donor, Perceiver, Recipient, Action), [], veritability_rating(Perceiver, Donor)=NewRating, T):-
+	happens_at(did(Donor, Perceiver, Recipient, Action), T),
+	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),
+	DonorStrategy=="Veritability Discerner",
+	Action=="cooperate",
+	(TrustModel=="Forgiving Reactor" -> Weight is 2 ; Weight is 1),
+	(
+		holds_at(veritability_rating(Perceiver, Donor)=OldRating, T) -> 
+			NewRating is (Weight*20)+OldRating ; NewRating is Weight*20
+	).
+
+initiates_at(did(Donor, Perceiver, Recipient, Action), [], veritability_rating(Perceiver, Donor)=NewRating, T):-
+	happens_at(did(Donor, Perceiver, Recipient, Action), T),
+	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),
+	DonorStrategy=="Veritability Discerner",
+	Action=="defect",
+	trusted(Perceiver, Recipient, T),
+	(TrustModel=="Strong Reactor" -> Weight is 2 ; Weight is 1),
+	(
+		holds_at(veritability_rating(Perceiver, Donor)=OldRating, T) -> 
+			NewRating is (-20*Weight)+OldRating ; NewRating is -20*Weight
+	).
+
+initiates_at(said(Gossiper, Perceiver, About, Gossip), [], veritability_rating(Perceiver, About)=NewRating, T):-
+	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
+	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),
+	DonorStrategy=="Veritability Discerner",
+	Gossip=="positive",
+	trusted(Perceiver, Gossiper, T),
+	(TrustModel=="Forgiving Reactor" -> Weight is 2 ; Weight is 1),
+	(
+		holds_at(veritability_rating(Perceiver, About)=OldRating, T) -> 
+			NewRating is (Weight*10)+OldRating ; NewRating is Weight*10
+	).
+
+initiates_at(said(Gossiper, Perceiver, About, Gossip), [], veritability_rating(Perceiver, About)=NewRating, T):-
+	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
+	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),
+	DonorStrategy=="Veritability Discerner",
+	Gossip=="positive",
+	(TrustModel=="Forgiving Reactor" -> Weight is 2 ; Weight is 1),
+	(
+		holds_at(veritability_rating(Perceiver, About)=OldRating, T) -> 
+			NewRating is (Weight*1)+OldRating ; NewRating is Weight*1
+	).
+
+initiates_at(said(Gossiper, Perceiver, About, Gossip), [], veritability_rating(Perceiver, About)=NewRating, T):-
+	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
+	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),
+	DonorStrategy=="Veritability Discerner",
+	Gossip=="negative",
+	trusted(Perceiver, Gossiper, T),
+	(TrustModel=="Strong Reactor" -> Weight is 2 ; Weight is 1),
+	(
+		holds_at(veritability_rating(Perceiver, About)=OldRating, T) -> 
+			NewRating is (-10*Weight)+OldRating ; NewRating is -10*Weight
+	).
+
+initiates_at(said(Gossiper, Perceiver, About, Gossip), [], veritability_rating(Perceiver, About)=NewRating, T):-
+	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
+	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),
+	DonorStrategy=="Veritability Discerner",
+	Gossip=="negative",
+	(TrustModel=="Strong Reactor" -> Weight is 2 ; Weight is 1),
+	(
+		holds_at(veritability_rating(Perceiver, About)=OldRating, T) -> 
+			NewRating is (-1*Weight)+OldRating ; NewRating is -1*Weight
 	).

@@ -49,7 +49,7 @@
                 this.handleLabelChange = this.handleLabelChange.bind(this);
             }
 
-            add = (name, options) => {
+            add = (donor_strategy, non_donor_strategy, trust_model, options) => {
                 const { players } = this.state;
                 // Check the count of the players added so far
                 let player_count = 0;
@@ -61,7 +61,8 @@
                     // Find if their is already an instance of this strategy in the players list
                     let index = -1;
                     for (let i = 0; i < players.length; i++){
-                        if(players[i].name === name && players[i].options === options){
+                        if(players[i].donor_strategy === donor_strategy && players[i].non_donor_strategy === non_donor_strategy &&
+                           players[i].trust_model === trust_model && players[i].options === options){
                             index = i;
                             break;
                         }
@@ -72,18 +73,20 @@
                         this.setState({players:players});
                     } else {
                          // If their is not an instance create one
-                        players.push({name: name, options: options, id:this.state.next_player_id, count:1});
+                        players.push({donor_strategy: donor_strategy, non_donor_strategy: non_donor_strategy,
+                            trust_model: trust_model, options: options, id:this.state.next_player_id, count:1});
                         this.setState({players:players, next_player_id: this.state.next_player_id + 1});
                     }
                 }
             };
 
-            remove = (name, options) => {
+            remove = (donor_strategy, non_donor_strategy, trust_model, options) => {
                 const { players } = this.state;
                 // Find if their is an instance of this strategy in the list
                 let index = -1;
                 for (let i = 0; i < players.length; i++){
-                    if(players[i].name === name && players[i].options === options){
+                    if(players[i].donor_strategy === donor_strategy && players[i].non_donor_strategy === non_donor_strategy &&
+                        players[i].trust_model === trust_model && players[i].options === options){
                         index = i;
                         break;
                     }
@@ -162,7 +165,7 @@
                             {% if current_user.is_authenticated %}
                                 <label>Label to attach to the experiment: <input onChange={this.handleLabelChange} value={this.state.label} type="text"/></label><br/>
                             {% else %}
-                                <label>Label to attach to the experiment (Only available when logged in): <input onChange={this.handleLabelChange} value="Log in to access this feature" type="text"/></label><br/>
+                                <label>Label to attach to the experiment: <input onChange={this.handleLabelChange} value="Log in to access feature" type="text"/></label><br/>
                             {% endif %}
                         </form>
                         <div className="container">
@@ -190,7 +193,9 @@
                                 <div className="col-md-8 center-block"><h4>Strategy</h4></div>
                                 <div className="col-md-2"> </div>
                             </div>
-                            { this.props.selected.map(player => <SelectedPlayer key={player.id} count={player.count} name={player.name} options={player.options} remove={this.props.remove}/>) }
+                            { this.props.selected.map(player => <SelectedPlayer key={player.id} count={player.count} donor_strategy={player.donor_strategy}
+                                                                                non_donor_strategy={player.non_donor_strategy}
+                                                                                trust_model={player.trust_model} options={player.options} remove={this.props.remove}/>) }
                         </div>
                     </div>
                 )
@@ -208,7 +213,9 @@
 
         class SelectedPlayer extends React.Component {
             state = {
-                name: this.props.name,
+                donor_strategy: this.props.donor_strategy,
+                non_donor_strategy: this.props.non_donor_strategy,
+                trust_model: this.props.trust_model,
                 options: this.props.options
             };
 
@@ -224,10 +231,14 @@
                             { this.props.count }
                         </div>
                         <div className="col-md-8 center-block">
-                            <b>{ this.state.name }</b><br/>properties: {this.state.options.map(displayProperty)}
+                            <b>{ this.state.donor_strategy }</b><br/>
+                            Strategy component: { this.state.non_donor_strategy }<br/>
+                            Trust model: {this.state.trust_model}<br/>
+                            properties: {this.state.options.map(displayProperty)}
                         </div>
                         <div className="col-md-2">
-                            <button onClick={() => this.props.remove(this.state.name, this.state.options) } className="btn btn-danger btn-sm">Remove</button>
+                            <button onClick={() => this.props.remove(this.state.donor_strategy, this.state.non_donor_strategy,
+                                this.state.trust_model, this.state.options) } className="btn btn-danger btn-sm">Remove</button>
                         </div>
                     </div>
                 )
@@ -246,7 +257,9 @@
                                 <div className="col-md-10 center-block"><h4>Strategy</h4></div>
                                 <div className="col-md-2"> </div>
                             </div>
-                            { this.props.strategies.map(strategy => <Strategy key={strategy.id} name={strategy.name} options={strategy.options} add={this.props.add}/>) }
+                            { this.props.strategies.map(strategy => <Strategy key={strategy.id} donor_strategy={strategy.donor_strategy}
+                                                                                non_donor_strategy={strategy.non_donor_strategy}
+                                                                                trust_model={strategy.trust_model} options={strategy.options} add={this.props.add}/>) }
                         </div>
                     </div>
                 )
@@ -255,7 +268,9 @@
 
         class Strategy extends React.Component {
             state = {
-                name: this.props.name,
+                donor_strategy: this.props.donor_strategy,
+                non_donor_strategy: this.props.non_donor_strategy,
+                trust_model: this.props.trust_model,
                 options: this.props.options
             };
 
@@ -268,10 +283,14 @@
                 return (
                     <div className="row border-box-sizing" style={styles}>
                         <div className="col-md-10 center-block">
-                            <b>{ this.state.name }</b><br/>properties: {this.state.options.map(displayProperty)}
+                            <b>{ this.state.donor_strategy }</b><br/>
+                            Strategy component: { this.state.non_donor_strategy }<br/>
+                            Trust model: {this.state.trust_model}<br/>
+                            properties: {this.state.options.map(displayProperty)}
                         </div>
                         <div className="col-md-2">
-                            <button onClick={() => this.props.add(this.state.name, this.state.options) } className="btn btn-primary btn-sm">Add</button>
+                            <button onClick={() => this.props.add(this.state.donor_strategy, this.state.non_donor_strategy,
+                                this.state.trust_model, this.state.options) } className="btn btn-primary btn-sm">Add ></button>
                         </div>
                     </div>
                 )

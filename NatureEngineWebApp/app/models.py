@@ -124,6 +124,7 @@ class ReputationCommunity(db.Model):
     social_activeness = db.Column(db.Integer)
     positivity_of_gossip = db.Column(db.Integer)
     fitness = db.Column(db.Integer)
+    timed_out = db.Column(db.Boolean, default=False, nullable=False)
     generations = db.relationship('ReputationGeneration', backref='generation_reputation_community', lazy='dynamic')
 
     def set_corrupted(self):
@@ -143,7 +144,7 @@ class ReputationCommunity(db.Model):
         db.session.commit()
 
     def is_finished(self):
-        return self.simulated
+        return self.simulated or self.timed_out
 
 
 class ReputationGeneration(db.Model):
@@ -177,8 +178,10 @@ class ReputationActionOnlookers(db.Model):
 class ReputationStrategy(db.Model):
     """A possible strategy of a reputation game player"""
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    strategy_name = db.Column(db.String(128))
-    strategy_options = db.Column(db.String(300))
+    donor_strategy = db.Column(db.String(128))
+    non_donor_strategy = db.Column(db.String(128))
+    trust_model = db.Column(db.String(128))
+    options = db.Column(db.String(300))
 
 
 class ReputationPlayer(db.Model):

@@ -9,6 +9,7 @@ from .action_logic import ActionType
 import random
 from sqlalchemy.sql import func
 from flask_login import current_user
+from rq.job import Job
 
 
 @bp.route('/reputation', methods=['GET', 'POST'])
@@ -27,37 +28,47 @@ def reputation():
                 and 2 <= int(form_data['num_of_generations']) <= 20 \
                 and 5 <= int(form_data['length_of_generations']) <= 200 \
                 and 0 <= float(form_data['mutation_chance']) <= 1:
-            community = ReputationCommunity(simulated=False)
+            community = ReputationCommunity(simulated=False, timed_out=False)
             db.session.add(community)
             db.session.commit()
             if current_user.is_authenticated:
-                current_app.task_queue.enqueue('app.indir_rec.run_game.reputation_run', strategy_counts,
+                job = current_app.task_queue.enqueue('app.indir_rec.run_game.reputation_run', strategy_counts,
                                                int(form_data['num_of_onlookers']), int(form_data['num_of_generations']),
                                                int(form_data['length_of_generations']),
                                                float(form_data['mutation_chance']),
                                                community.id, user_id=current_user.id, label=form_data['label'])
             else:
-                current_app.task_queue.enqueue('app.indir_rec.run_game.reputation_run', strategy_counts,
+                job = current_app.task_queue.enqueue('app.indir_rec.run_game.reputation_run', strategy_counts,
                                                int(form_data['num_of_onlookers']), int(form_data['num_of_generations']),
                                                int(form_data['length_of_generations']),
                                                float(form_data['mutation_chance']), community.id)
-            return jsonify({'url': url_for('indir_rec.reputation_finished', reputation_id=community.id)})
+            return jsonify({'url': url_for('indir_rec.reputation_finished', reputation_id=community.id, job_id=job.id)})
         return render_template('reputation.html', title='Reputation', strategies=strategies)
 
 
-@bp.route('/is_reputation_finished/<reputation_id>')
-def is_reputation_finished(reputation_id):
+@bp.route('/is_reputation_finished/<reputation_id>/<job_id>')
+def is_reputation_finished(reputation_id, job_id):
     """The route to ping to check whether a reputation game has been finished or not"""
     community = ReputationCommunity.query.filter_by(id=reputation_id).first_or_404()
-    return jsonify({'finished': community.is_finished(),
-                    'url': url_for('indir_rec.reputation_finished', reputation_id=reputation_id)})
+    if community.is_finished():
+        finished = True
+    elif Job(job_id, current_app.redis).is_failed:
+        community.timed_out = True
+        db.session.commit()
+        finished = True
+    else:
+        finished = False
+    return jsonify({'finished': finished,
+                    'url': url_for('indir_rec.reputation_finished', reputation_id=reputation_id, job_id=job_id)})
 
 
-@bp.route('/reputation_finished/<reputation_id>')
-def reputation_finished(reputation_id):
+@bp.route('/reputation_finished/<reputation_id>/<job_id>')
+def reputation_finished(reputation_id, job_id):
     response = requests.get(current_app.config['AGENTS_URL'] + "strategy")
     strategies = response.json()['strategies']
     community: ReputationCommunity = ReputationCommunity.query.filter_by(id=reputation_id).first_or_404()
+    if community.timed_out:
+        return render_template('reputation_timed_out.html', title='Reputation Timed Out', reputation_id=reputation_id)
     if community.is_finished():
         population_chart_data = get_population_chart_data(community)
         measurement_chart_data = get_measurements_chart_data(community)
@@ -72,15 +83,21 @@ def reputation_finished(reputation_id):
                                lowest_fitness=community_fitness_stats.min_fit,
                                highest_fitness=community_fitness_stats.max_fit,
                                average_fitness=round(community_fitness_stats.avg_fit), timepoints=timepoints)
+    elif Job(job_id, current_app.redis).is_failed:
+        print("Failed")
+        community.timed_out = True
+        db.session.commit()
+        return render_template('reputation_timed_out.html', title='Reputation Timed Out', reputation_id=reputation_id)
     else:
-        return render_template('reputation_running.html', title='Reputation Running', reputation_id=reputation_id)
+        return render_template('reputation_running.html', title='Reputation Running', reputation_id=reputation_id,
+                               job_id=job_id)
 
 
 def get_population_chart_data(community: ReputationCommunity):
     chart_data = {'type': 'line', 'data': {'datasets': [], 'labels': []},
                   'options': {'title': {'display': True,'text': "Population fluctuation across the generations"},
-                              'scales': {'yAxes': [{'scaleLabel': {'display': True,'labelString': "Strategy Count"}}],
-                                         'xAxes': [{'scaleLabel': {'display': True,'labelString': "Generation"}}]}}}
+                              'scales': {'yAxes': [{'scaleLabel': {'display': True, 'labelString': "Strategy Count"}}],
+                                         'xAxes': [{'scaleLabel': {'display': True, 'labelString': "Generation"}}]}}}
     created_datasets = []
     hex_digits = list("0123456789ABCDEF")
     for generation in community.generations:
@@ -88,17 +105,21 @@ def get_population_chart_data(community: ReputationCommunity):
         chart_data['data']['labels'].append(gen.generation_id)
         for player in generation.players:
             strategy = ReputationStrategy.query.filter_by(id=player.strategy).first()
-            if strategy.strategy_name + " " + strategy.strategy_options not in created_datasets:
-                created_datasets.append(strategy.strategy_name + " " + strategy.strategy_options)
+            if strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +\
+                    strategy.trust_model + " " + strategy.options not in created_datasets:
+                created_datasets.append(strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +
+                    strategy.trust_model + " " + strategy.options)
                 hex_colour = "#" + ''.join([hex_digits[random.randint(0, len(hex_digits) - 1)] for _ in range(6)])
                 chart_data['data']['datasets']. \
-                    append({'label': strategy.strategy_name + " " + strategy.strategy_options,
+                    append({'label': strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +
+                                     strategy.trust_model + " " + strategy.options,
                             'data': [0 for _ in range(len(community.generations.all()))], 'fill': False,
                             'borderColor': hex_colour, 'backgroundColor': hex_colour})
                 chart_data['data']['datasets'][-1]['data'][gen.generation_id] += 1
             else:
                 for dataset in chart_data['data']['datasets']:
-                    if dataset['label'] == strategy.strategy_name + " " + strategy.strategy_options:
+                    if dataset['label'] == strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +\
+                            strategy.trust_model + " " + strategy.options:
                         dataset['data'][gen.generation_id] += 1
                         break
     return chart_data
@@ -324,16 +345,22 @@ def get_strategies_vs_cooperation_rate_chart_data():
                 strategy = ReputationStrategy.query.filter_by(id=player_strat[0]).first()
                 if player_strat[1] > max_strat_count:
                     max_strat_count = player_strat[1]
-                if strategy.strategy_name + " " + strategy.strategy_options in created_datasets:
-                    if player_strat[1] in created_datasets[strategy.strategy_name + " " + strategy.strategy_options]:
-                        created_datasets[strategy.strategy_name + " " + strategy.strategy_options][player_strat[1]]['coop_rate_sum'] += \
+                if strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +\
+                        strategy.trust_model + " " + strategy.options in created_datasets:
+                    if player_strat[1] in created_datasets[strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +
+                                                           strategy.trust_model + " " + strategy.options]:
+                        created_datasets[strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +
+                                         strategy.trust_model + " " + strategy.options][player_strat[1]]['coop_rate_sum'] += \
                             generation.cooperation_rate
-                        created_datasets[strategy.strategy_name + " " + strategy.strategy_options][player_strat[1]]['gen_count'] += 1
+                        created_datasets[strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +
+                                         strategy.trust_model + " " + strategy.options][player_strat[1]]['gen_count'] += 1
                     else:
-                        created_datasets[strategy.strategy_name + " " + strategy.strategy_options][player_strat[1]] =\
+                        created_datasets[strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +
+                                         strategy.trust_model + " " + strategy.options][player_strat[1]] =\
                             {'coop_rate_sum': generation.cooperation_rate, 'gen_count': 1}
                 else:
-                    created_datasets[strategy.strategy_name + " " + strategy.strategy_options] = \
+                    created_datasets[strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +
+                                     strategy.trust_model + " " + strategy.options] = \
                         {player_strat[1]: {'coop_rate_sum': generation.cooperation_rate, 'gen_count': 1}}
     chart_data['data']['labels'] = [i for i in range(max_strat_count)]
     for dataset in created_datasets:

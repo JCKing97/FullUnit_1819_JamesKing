@@ -16,11 +16,23 @@ test_strategies([strategy{donor_strategy: DonorStrategy, non_donor_strategy: Non
 	append(FoundStrategies, [strategy(DonorStrategy, NonDonorStrategy, TrustModel, Desc, Options)], NewFoundStrategies),
 	test_strategies(T, NewFoundStrategies).
 
+write_strategies([]).
+write_strategies([HeadStrat|OtherStrats]):-
+	writeln(HeadStrat),
+	write_strategies(OtherStrats).
+
 :- begin_tests(strategies).
 
 	test(find_all_strategies, []):-
  		find_strategies(Strategies),
+ 		write_strategies(Strategies),
  		assertion(test_strategies(Strategies, [])).
+
+ 	test(find_veritability_options) :-
+ 		forall(strategy("Veritability Discerner", _, _, _, [K]),
+ 			assertion(((K is -10) ; (K is -5) ; (K is 0) ; (K is 5) ; (K is 10)))
+ 		).
+
 
  	test(find_image_discriminator_strategies):-
  		assertion(strategy("Image Scoring Discriminator", _, _, _, [0|_])),

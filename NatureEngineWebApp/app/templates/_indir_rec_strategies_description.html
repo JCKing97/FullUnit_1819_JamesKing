@@ -4,14 +4,20 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Strategy</th>
+                    <th>Strategy Component</th>
+                    <th>Trust Model</th>
+                    <th>Option</th>
                     <th>Description</th>
                 </tr>
             </thead>
             <tbody>
                 {% for strategy in strategies %}
                     <tr>
-                        <td>{{ strategy['name'] }} {{ strategy['options'] }}</td>
+                        <td>{{ strategy['donor_strategy'] }}</td>
+                        <td>{{ strategy['non_donor_strategy'] }}</td>
+                        <td>{{ strategy['trust_model'] }}</td>
+                        <td>{{ strategy['options'] }}</td>
                         <td>{{ strategy['description'] }}</td>
                     </tr>
                 {% endfor %}

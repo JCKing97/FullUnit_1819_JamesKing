@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+  \PYG{n+nt}{\PYGZdq{}recipient\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{1}\PYG{p}{,}
+  \PYG{n+nt}{\PYGZdq{}about\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{3}\PYG{p}{,}
+  \PYG{n+nt}{\PYGZdq{}gossiper\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{4}\PYG{p}{,}
+  \PYG{n+nt}{\PYGZdq{}timepoint\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{7}\PYG{p}{,}
+  \PYG{n+nt}{\PYGZdq{}gossip\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}positive\PYGZdq{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

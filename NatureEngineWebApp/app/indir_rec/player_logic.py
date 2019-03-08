@@ -95,7 +95,9 @@ class Player:
         self._percepts: Dict = {}
         self.player_state = PlayerState(generation_id, player_id, observers)
         try:
-            creation_payload: Dict = {"strategy": strategy.name, "options": strategy.options,
+            creation_payload: Dict = {"donor_strategy": strategy.donor_strategy,
+                                      "non_donor_strategy": strategy.non_donor_strategy,
+                                      "trust_model": strategy.trust_model, "options": strategy.options,
                                       "community": community_id, "generation": generation_id, "player": player_id}
             creation_response = requests.request("POST", Config.AGENTS_URL + 'agent',
                                                  json=creation_payload)
