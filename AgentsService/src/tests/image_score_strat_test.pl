@@ -103,10 +103,12 @@ check_correct_action_timepoints([Timepoint|OtherTimepoints], CommunityID, Genera
 		new_agent(data{donor_strategy: "Cooperator", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: CoopID}, true),
 		get_new_player_id(DefectID),
 		new_agent(data{donor_strategy: "Defector", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: DefectID}, true),
-		forall(strategy("Image Scoring Discriminator", NonDonorStrategy, "Trusting", _, Options),
+		get_new_player_id(OtherID),
+		new_agent(data{donor_strategy: "Defector", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: OtherID}, true),
+		forall(strategy("Image Scoring Discriminator", NonDonorStrategy, "Trusting", _, [0|OtherOptions]),
 			(
 				get_new_player_id(PlayerID),
-				new_agent(data{donor_strategy: "Image Scoring Discriminator", non_donor_strategy: NonDonorStrategy, trust_model: "Trusting", options: Options, community: ID, generation: 0, player: PlayerID}, true),
+				new_agent(data{donor_strategy: "Image Scoring Discriminator", non_donor_strategy: NonDonorStrategy, trust_model: "Trusting", options: [0|OtherOptions], community: ID, generation: 0, player: PlayerID}, true),
 				% Decrease every time negative gossip is given about a player
 				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
 					about: DefectID, gossiper: CoopID, gossip: "negative", timepoint: 1}, true),
@@ -133,28 +135,75 @@ check_correct_action_timepoints([Timepoint|OtherTimepoints], CommunityID, Genera
 				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, DefectID))= -4, 8)),
 				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
 					about: CoopID, gossiper: DefectID, gossip: "positive", timepoint: 8}, true),
+				assertion(\+holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=1, 9)),
+				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: CoopID, gossiper: OtherID, gossip: "positive", timepoint: 8}, true),
 				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=1, 9)),
 				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
 					about: CoopID, gossiper: DefectID, gossip: "positive", timepoint: 9}, true),
+				assertion(\+holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=2, 10)),
+				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: CoopID, gossiper: OtherID, gossip: "positive", timepoint: 9}, true),
 				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=2, 10)),
 				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
 					about: CoopID, gossiper: DefectID, gossip: "positive", timepoint: 10}, true),
+				assertion(\+holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=3, 11)),
+				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: CoopID, gossiper: OtherID, gossip: "positive", timepoint: 10}, true),
 				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=3, 11)),
 				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
 					about: CoopID, gossiper: DefectID, gossip: "positive", timepoint: 11}, true),
+				assertion(\+holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=4, 12)),
+				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: CoopID, gossiper: OtherID, gossip: "positive", timepoint: 11}, true),
 				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=4, 12)),
 				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
 					about: CoopID, gossiper: DefectID, gossip: "positive", timepoint: 12}, true),
+				assertion(\+holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=5, 13)),
+				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: CoopID, gossiper: OtherID, gossip: "positive", timepoint: 12}, true),
 				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=5, 13)),
 				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
 					about: CoopID, gossiper: DefectID, gossip: "positive", timepoint: 13}, true),
+				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=5, 14)),
+				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: CoopID, gossiper: OtherID, gossip: "positive", timepoint: 13}, true),
 				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=5, 14)),
 				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
 					about: DefectID, gossiper: CoopID, gossip: "positive", timepoint: 14}, true),
 				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, DefectID))= -3, 15)),
 				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
 					about: CoopID, gossiper: DefectID, gossip: "negative", timepoint: 15}, true),
+				assertion(\+holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=4, 16)),
+				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: CoopID, gossiper: OtherID, gossip: "negative", timepoint: 15}, true),
 				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=4, 16))
+			)
+		).
+
+	test(image_score_naive_trusting):-
+		forall(strategy("Image Scoring Discriminator", NonDonorStrategy, "Naive Trusting", _, Options),
+			(
+				new_community(ID),
+				new_generation(data{community: ID, generation: 0}, true),
+				get_new_player_id(CoopID),
+				new_agent(data{donor_strategy: "Cooperator", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: CoopID}, true),
+				get_new_player_id(DefectID),
+				new_agent(data{donor_strategy: "Defector", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: DefectID}, true),
+				get_new_player_id(PlayerID),
+				new_agent(data{donor_strategy: "Image Scoring Discriminator", non_donor_strategy: NonDonorStrategy, trust_model: "Naive Trusting", options: Options, community: ID, generation: 0, player: PlayerID}, true),
+				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: DefectID, gossiper: CoopID, gossip: "negative", timepoint: 1}, true),
+				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, DefectID))= -1, 2)),
+				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: DefectID, gossiper: CoopID, gossip: "negative", timepoint: 2}, true),
+				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, DefectID))= -2, 3)),
+				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: DefectID, gossiper: CoopID, gossip: "positive", timepoint: 3}, true),
+				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, DefectID))= -1, 4)),
+				add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: CoopID, gossiper: DefectID, gossip: "positive", timepoint: 4}, true),
+				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, CoopID))=1, 5))
 			)
 		).
 
@@ -613,3 +662,34 @@ check_correct_action_timepoints([Timepoint|OtherTimepoints], CommunityID, Genera
 
 
 :- end_tests(discriminator).
+
+:- begin_tests(personal_grievance).
+
+
+	test(image_score_personal_grievance):-
+		forall(strategy("Image Scoring Discriminator", NonDonorStrategy, TrustModel, _, [K,"Personal Grievance"]),
+			(
+				new_community(ID),
+				new_generation(data{community: ID, generation: 0}, true),
+				get_new_player_id(CoopID),
+				new_agent(data{donor_strategy: "Cooperator", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: CoopID}, true),
+				get_new_player_id(DefectID),
+				new_agent(data{donor_strategy: "Defector", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: DefectID}, true),
+				get_new_player_id(PlayerID),
+				new_agent(data{donor_strategy: "Image Scoring Discriminator", non_donor_strategy: NonDonorStrategy, trust_model: TrustModel, options: [K,"Personal Grievance"], community: ID, generation: 0, player: PlayerID}, true),
+				add_new_action_interaction_percept(data{community: ID, generation: 0,
+					perceiver: PlayerID, donor: DefectID, recipient: CoopID, timepoint: 0, action: "defect"}, true),
+				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, DefectID))= -1, 1)),
+				add_new_action_interaction_percept(data{community: ID, generation: 0,
+					perceiver: PlayerID, donor: DefectID, recipient: PlayerID, timepoint: 2, action: "defect"}, true),
+				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, DefectID))= -3, 3)),
+				add_new_action_interaction_percept(data{community: ID, generation: 0,
+					perceiver: PlayerID, donor: DefectID, recipient: PlayerID, timepoint: 4, action: "cooperate"}, true),
+				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, DefectID))= -1, 5)),
+				add_new_action_interaction_percept(data{community: ID, generation: 0,
+					perceiver: PlayerID, donor: DefectID, recipient: CoopID, timepoint: 6, action: "cooperate"}, true),
+				assertion(holds_at(image_score(agent(_, community(ID), _, PlayerID), agent(_, community(ID), _, DefectID))= 0, 7))
+			)
+		).
+
+:- end_tests(personal_grievance).

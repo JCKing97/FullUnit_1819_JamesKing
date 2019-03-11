@@ -169,6 +169,32 @@ check_correct_action_timepoints([Timepoint|OtherTimepoints], CommunityID, Genera
 		assertion(holds_at(standing(agent(_, community(ID), generation(community(ID), 0), 2),
 			  agent(_, community(ID), generation(community(ID), 0), 0))=bad, 26)).
 
+	test(naive_trusting_standing):-
+		forall(strategy("Standing Discriminator", NonDonorStrategy, "Naive Trusting", _, Options),
+			(
+				new_community(ID),
+				new_generation(data{community: ID, generation: 0}, true),
+				get_new_player_id(CoopID),
+				new_agent(data{donor_strategy: "Cooperator", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: CoopID}, true),
+				get_new_player_id(DefectID),
+				new_agent(data{donor_strategy: "Defector", non_donor_strategy: "Lazy", trust_model: "Void", options: [], community: ID, generation: 0, player: DefectID}, true),
+				get_new_player_id(PlayerID),
+				new_agent(data{donor_strategy: "Standing Discriminator", non_donor_strategy: NonDonorStrategy, trust_model: "Naive Trusting", options: Options, community: ID, generation: 0, player: PlayerID}, true),
+				assertion(add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: CoopID, gossiper: DefectID, gossip: "negative", timepoint: 8}, true)),
+				assertion(holds_at(standing(agent(_, community(ID), generation(community(ID), 0), PlayerID),
+					agent(_, community(ID), generation(community(ID), 0), CoopID))=bad, 9)),
+				assertion(add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: DefectID, gossiper: CoopID, gossip: "negative", timepoint: 12}, true)),
+				assertion(holds_at(standing(agent(_, community(ID), generation(community(ID), 0), PlayerID),
+					agent(_, community(ID), generation(community(ID), 0), DefectID))=bad, 13)),
+				assertion(add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: PlayerID,
+					about: DefectID, gossiper: DefectID, gossip: "positive", timepoint: 18}, true)),
+				assertion(\+holds_at(standing(agent(_, community(ID), generation(community(ID), 0), PlayerID),
+					agent(_, community(ID), generation(community(ID), 0), DefectID))=bad, 19))
+			)
+		).
+
 	test(distrusting_standing):-
 		new_community(ID),
 		new_generation(data{community: ID, generation: 0}, true),

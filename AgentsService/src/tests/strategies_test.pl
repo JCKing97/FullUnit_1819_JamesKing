@@ -35,8 +35,9 @@ write_strategies([HeadStrat|OtherStrats]):-
 
 
  	test(find_image_discriminator_strategies):-
- 		assertion(strategy("Image Scoring Discriminator", _, _, _, [0|_])),
- 		assertion(strategy("Image Scoring Discriminator", _, _, _, [2|_])),
+ 		assertion(strategy("Image Scoring Discriminator", _, _, _, [0,"Personal Grievance"])),
+ 		assertion(strategy("Image Scoring Discriminator", _, _, _, [2])),
+ 		assertion(strategy("Image Scoring Discriminator", _, _, _, [2,"Personal Grievance"])),
  		assertion(strategy("Image Scoring Discriminator", _, _, _, [-2|_])),
  		assertion(\+strategy("Image Scoring Discriminator", _, _, _, [3|_])),
  		assertion(\+strategy("Image Scoring Discriminator", _, _, _, [-3|_])).

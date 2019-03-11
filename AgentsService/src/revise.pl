@@ -79,6 +79,13 @@ initiates_at(said(Gossiper, Perceiver, About, Gossip), [], standing(Perceiver, A
 	Gossip == "negative",
 	\+holds_at(standing(Perceiver, Gossiper)=bad, T).
 
+initiates_at(said(Gossiper, Perceiver, About, Gossip), [], standing(Perceiver, About)=bad, T):-
+	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
+	get_strategy(DonorStrategy, _, TrustModel, _, Perceiver),
+	DonorStrategy=="Standing Discriminator",
+	TrustModel=="Naive Trusting",
+	Gossip == "negative".
+
 % If Gossiper is trusted and Gossip is positive
 % Perceiver gives About good standing
 terminates_at(said(Gossiper, Perceiver, About, Gossip), [], standing(Perceiver, About)=bad, T):-
@@ -89,6 +96,13 @@ terminates_at(said(Gossiper, Perceiver, About, Gossip), [], standing(Perceiver, 
 	Gossip == "positive",
 	\+holds_at(standing(Perceiver, Gossiper)=bad, T).
 
+terminates_at(said(Gossiper, Perceiver, About, Gossip), [], standing(Perceiver, About)=bad, T):-
+	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
+	get_strategy(DonorStrategy, _, TrustModel, _, Perceiver),
+	DonorStrategy=="Standing Discriminator",
+	TrustModel=="Naive Trusting",
+	Gossip == "positive".
+
 
 /*-----------------------------
 -------- Image Scoring --------
@@ -97,25 +111,50 @@ terminates_at(said(Gossiper, Perceiver, About, Gossip), [], standing(Perceiver, 
 % If an image scoring agent perceives a defection, remove 1 from that agents image score, limited by -5
 initiates_at(did(Donor, Perceiver, Recipient, Action), [], image_score(Perceiver, Donor)=NewImageScore, T):-
 	happens_at(did(Donor, Perceiver, Recipient, Action), T),
-	get_strategy(DonorStrategy, _, _, _, Perceiver),
+	get_strategy(DonorStrategy, _, _, Options, Perceiver),
 	DonorStrategy=="Image Scoring Discriminator",
 	Action=="defect",
+	(
+		( Options = [_,"Personal Grievance"], Perceiver==Recipient ) ->
+			Change = 2 ; Change = 1
+	),
 	( 
 		holds_at(image_score(Perceiver, Donor)=OldImageScore, T) -> 
-			(OldImageScore =< -5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore-1) ;
-			NewImageScore is -1
+			(OldImageScore =< -5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore-Change) ;
+			NewImageScore is -Change
 	).
 
 % If an image scoring agent perceives a cooperation, add 1 to their image score, limited by 5
 initiates_at(did(Donor, Perceiver, Recipient, Action), [], image_score(Perceiver, Donor)=NewImageScore, T):-
 	happens_at(did(Donor, Perceiver, Recipient, Action), T),
-	get_strategy(DonorStrategy, _, _, _, Perceiver),
+	get_strategy(DonorStrategy, _, _, Options, Perceiver),
 	DonorStrategy=="Image Scoring Discriminator",
 	Action=="cooperate",
 	(
+		( Options = [_,"Personal Grievance"], Perceiver==Recipient ) ->
+			Change = 2 ; Change = 1
+	),
+	(
 		holds_at(image_score(Perceiver, Donor)=OldImageScore, T) -> 
-			(OldImageScore >= 5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore+1) ;
-			NewImageScore is 1
+			(OldImageScore >= 5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore+Change) ;
+			NewImageScore is Change
+	).
+
+% If a trusting image scoring agent perceives negative gossip about an agent, remove 1 from the image score of the agent the gossip is about, bound by -5
+initiates_at(said(Gossiper, Perceiver, About, Gossip), [], image_score(Perceiver, About)=NewImageScore, T):-
+	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
+	get_strategy(DonorStrategy, _, TrustModel, [K|_], Perceiver),
+	DonorStrategy=="Image Scoring Discriminator",
+	TrustModel=="Trusting",
+	Gossip=="negative",
+	(
+		holds_at(image_score(Perceiver, Gossiper)=GossiperImageScore, T) ->
+			GossiperImageScore 	>= K ; 0 >= K
+	),
+	( 
+		holds_at(image_score(Perceiver, About)=OldImageScore, T) -> 
+			(OldImageScore =< -5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore-1) ;
+			NewImageScore is -1
 	).
 
 % If a trusting image scoring agent perceives negative gossip about an agent, remove 1 from the image score of the agent the gossip is about, bound by -5
@@ -123,7 +162,7 @@ initiates_at(said(Gossiper, Perceiver, About, Gossip), [], image_score(Perceiver
 	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
 	get_strategy(DonorStrategy, _, TrustModel, _, Perceiver),
 	DonorStrategy=="Image Scoring Discriminator",
-	TrustModel=="Trusting",
+	TrustModel=="Naive Trusting",
 	Gossip=="negative",
 	( 
 		holds_at(image_score(Perceiver, About)=OldImageScore, T) -> 
@@ -134,11 +173,28 @@ initiates_at(said(Gossiper, Perceiver, About, Gossip), [], image_score(Perceiver
 % If a trusting image scoring agent perceives positive gossip about an agent, add 1 to the image score of the agent the gossip is about, bound by 5
 initiates_at(said(Gossiper, Perceiver, About, Gossip), [], image_score(Perceiver, About)=NewImageScore, T):-
 	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
-	get_strategy(DonorStrategy, _, TrustModel, _, Perceiver),
+	get_strategy(DonorStrategy, _, TrustModel, [K|_], Perceiver),
 	DonorStrategy=="Image Scoring Discriminator",
 	TrustModel=="Trusting",
 	Gossip=="positive",
 	(
+		holds_at(image_score(Perceiver, Gossiper)=GossiperImageScore, T) ->
+			GossiperImageScore 	>= K ; 0 >= K
+	),
+	(
+		holds_at(image_score(Perceiver, About)=OldImageScore, T) -> 
+			(OldImageScore >= 5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore+1) ;
+			NewImageScore is 1
+	).
+
+% If a trusting image scoring agent perceives negative gossip about an agent, remove 1 from the image score of the agent the gossip is about, bound by -5
+initiates_at(said(Gossiper, Perceiver, About, Gossip), [], image_score(Perceiver, About)=NewImageScore, T):-
+	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
+	get_strategy(DonorStrategy, _, TrustModel, _, Perceiver),
+	DonorStrategy=="Image Scoring Discriminator",
+	TrustModel=="Naive Trusting",
+	Gossip=="positive",
+	( 
 		holds_at(image_score(Perceiver, About)=OldImageScore, T) -> 
 			(OldImageScore >= 5 -> NewImageScore is OldImageScore ; NewImageScore is OldImageScore+1) ;
 			NewImageScore is 1
