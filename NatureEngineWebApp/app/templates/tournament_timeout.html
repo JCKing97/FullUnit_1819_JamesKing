@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block app_content %}
+    <div class="jumbotron" style="padding: 20px">
+        <h1 style="">Tournament Timed Out</h1>
+        <p>
+            Unfortunately your tournament ran for too long and timed out. Try running with less players.
+        </p>
+    </div>
+{% endblock %}

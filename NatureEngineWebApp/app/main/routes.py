@@ -18,6 +18,7 @@ from app.forms import LoginForm, RegistrationForm, SearchForm
 from werkzeug.urls import url_parse
 from sqlalchemy_fulltext import FullTextSearch
 import random
+from rq.job import Job
 
 
 @bp.route('/')
@@ -116,6 +117,7 @@ def tournament(level):
             return render_template('tournament.html', title='Tournament', level=level, strategies=strategies, strat_dict=strat_dict)
 
 
+@bp.route('/tournament_run/<tournament_id>/', defaults={'job_id': None})
 @bp.route('/tournament_run/<tournament_id>/<job_id>')
 def tournament_run(tournament_id, job_id):
     """The functionality for when a tournament is running (rendering a template that pings the server to check)
@@ -135,11 +137,21 @@ def tournament_run(tournament_id, job_id):
     top3_players = players.order_by(desc('score')).limit(3).all()
     top3_cooperative_players = players.order_by(desc('cooperation_rating')).limit(3).all()
     top3_defective_players = players.order_by(asc('cooperation_rating')).limit(3).all()
-    if this_tournament.is_finished():
+    if this_tournament.error:
+        return render_template('tournament_timeout.html', title='Tournament', tournament_id=tournament_id)
+    elif this_tournament.is_finished():
         return render_template('tournament_finished.html', title='Tournament', tournament_id=tournament_id,
                                players=players, strat_dict=strat_dict, max_points=max_points, top3_players=top3_players,
                                strategies=strategies, top3_cooperative_players=top3_cooperative_players,
                                top3_defective_players=top3_defective_players)
+    elif job_id is not None:
+        if Job(job_id, current_app.redis).is_failed:
+            this_tournament.error = True
+            db.session.commit()
+            return render_template('tournament_timeout.html', title='Tournament Timed Out', tournament_id=tournament_id)
+        else:
+            return render_template('tournament_running.html', title='Tournament', tournament_id=tournament_id,
+                                   job_id=job_id)
     else:
         return render_template('tournament_running.html', title='Tournament', tournament_id=tournament_id, job_id=job_id)
 
@@ -148,7 +160,15 @@ def tournament_run(tournament_id, job_id):
 def is_tournament_finished(tournament_id, job_id):
     """The route to ping to check whether a tournament has been finished or not"""
     this_tournament = Tournament.query.filter_by(id=tournament_id).first_or_404()
-    return jsonify({'finished': this_tournament.is_finished(),
+    if this_tournament.is_finished():
+        finished = True
+    elif Job(job_id, current_app.redis).is_failed:
+        this_tournament.timed_out = True
+        db.session.commit()
+        finished = True
+    else:
+        finished = False
+    return jsonify({'finished': finished,
                     'url': url_for('main.tournament_run', tournament_id=tournament_id, job_id=job_id)})
 
 

@@ -98,7 +98,7 @@ class Tournament(db.Model):
     players = db.relationship('TournamentPlayer', backref='tournament', lazy='dynamic')
 
     def is_finished(self):
-        return self.completed
+        return self.completed or self.error
 
 
 class TournamentPlayer(db.Model):

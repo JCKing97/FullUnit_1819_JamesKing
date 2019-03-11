@@ -42,7 +42,8 @@ def reputation():
                                                int(form_data['num_of_onlookers']), int(form_data['num_of_generations']),
                                                int(form_data['length_of_generations']),
                                                float(form_data['mutation_chance']), community.id)
-            return jsonify({'url': url_for('indir_rec.reputation_finished', reputation_id=community.id, job_id=job.id)})
+            return jsonify({'url': url_for('indir_rec.reputation_finished', reputation_id=community.id,
+                                           job_id=job.get_id())})
         return render_template('reputation.html', title='Reputation', strategies=strategies)
 
 
@@ -62,6 +63,7 @@ def is_reputation_finished(reputation_id, job_id):
                     'url': url_for('indir_rec.reputation_finished', reputation_id=reputation_id, job_id=job_id)})
 
 
+@bp.route('/reputation_finished/<reputation_id>/', defaults={'job_id': None})
 @bp.route('/reputation_finished/<reputation_id>/<job_id>')
 def reputation_finished(reputation_id, job_id):
     response = requests.get(current_app.config['AGENTS_URL'] + "strategy")
@@ -83,11 +85,14 @@ def reputation_finished(reputation_id, job_id):
                                lowest_fitness=community_fitness_stats.min_fit,
                                highest_fitness=community_fitness_stats.max_fit,
                                average_fitness=round(community_fitness_stats.avg_fit), timepoints=timepoints)
-    elif Job(job_id, current_app.redis).is_failed:
-        print("Failed")
-        community.timed_out = True
-        db.session.commit()
-        return render_template('reputation_timed_out.html', title='Reputation Timed Out', reputation_id=reputation_id)
+    elif job_id is not None:
+        if Job(job_id, current_app.redis).is_failed:
+            community.timed_out = True
+            db.session.commit()
+            return render_template('reputation_timed_out.html', title='Reputation Timed Out', reputation_id=reputation_id)
+        else:
+            return render_template('reputation_running.html', title='Reputation Running', reputation_id=reputation_id,
+                                   job_id=job_id)
     else:
         return render_template('reputation_running.html', title='Reputation Running', reputation_id=reputation_id,
                                job_id=job_id)
