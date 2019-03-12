@@ -1,0 +1,101 @@
+<h2>An animation of the interactions in the community</h2>
+<canvas id="anim_canvas" style="border:1px solid #d3d3d3; margin: auto; display: block;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+<script type="application/javascript">
+    const strat_colours = {{ strategy_colours|tojson }};
+    const num_of_players_per_gen = {{ num_of_players_per_gen }};
+    const players = {{ players|tojson }};
+    let timepoint = 0;
+    let generation = 0;
+    let firstRound = true;
+    let newGen = false;
+    const canvas = document.getElementById('anim_canvas');
+    canvas_side_length = 1.8*(Math.min(window.innerWidth, window.innerHeight)/2);
+    const player_radius = canvas_side_length/(10*num_of_players_per_gen);
+    canvas.width = canvas_side_length;
+    canvas.height = canvas_side_length;
+    const ctx = canvas.getContext('2d');
+    let font_size = (0.05*canvas.width);
+    if (font_size > 30) {
+        font_size = 30;
+    } else if (font_size<5) {
+        font_size = 5;
+    }
+    ctx.font = font_size.toString()+"px Arial";
+    ctx.textBaseline = "top";
+    function drawPlayer(center_x, center_y, player){
+        ctx.beginPath();
+        ctx.fillStyle = strat_colours[player['strategy']];
+        ctx.arc(center_x,center_y,player_radius,0,2*Math.PI, false);
+        ctx.fill();
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = player_radius/5;
+        ctx.stroke();
+        ctx.closePath();
+    }
+    function drawPlayers(){
+        let radius = (canvas_side_length/3);
+        for(let k = 0; k < num_of_players_per_gen; k++){
+            drawPlayer((canvas_side_length/2)+radius*Math.cos(k*((2*Math.PI)/num_of_players_per_gen)),
+                (canvas_side_length/2)+radius*Math.sin(k*((2*Math.PI)/num_of_players_per_gen)), players[generation][k]);
+        }
+    }
+    function drawTimepoint(){
+        ctx.fillStyle = 'black';
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        ctx.fillText("Generation: "+ generation.toString()+"  Timepoint: " + timepoint.toString(), 0, 0);
+        drawPlayers();
+    }
+    function drawReproduction(){
+        ctx.fillStyle = 'black';
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("Reproduce", canvas.width/2, canvas.height/2);
+    }
+    function drawFirstGen(){
+        ctx.fillStyle = 'black';
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("First Gen", canvas.width/2, canvas.height/2);
+    }
+    function draw(){
+        if(timepoint%{{ community.length_of_generations }} === 0 &&
+                generation%{{ community.generations.all()|length }} === 0 && !firstRound && !newGen){
+            timepoint=0;
+            generation=0;
+            firstRound = false;
+            newGen=false;
+        }
+        if(!firstRound && newGen) {
+            drawReproduction();
+            generation += 1;
+            newGen = false;
+        } else if(!firstRound && !newGen) {
+            drawTimepoint();
+            timepoint += 1;
+            if(timepoint%{{ community.length_of_generations }} === 0) {
+                newGen = true;
+                timepoint = 0;
+            }
+        }
+        if(firstRound){
+            drawFirstGen();
+            firstRound=false;
+        }
+    }
+    function render(){
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        draw();
+    }
+    function restart(){
+        firstRound = true;
+        timepoint = 0;
+        render();
+        window.clearInterval(interval);
+        interval = setInterval(render, 1000);
+    }
+    render();
+    let interval = setInterval(render, 1000);
+</script>

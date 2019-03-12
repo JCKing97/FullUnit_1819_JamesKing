@@ -201,9 +201,9 @@
                         </table>
                     </div>
                 {% endfor %}
-                {% for generation in community.generations %}
-
-                {% endfor %}
+                {% with community=community %}
+                    {% include "_generation_animation.html" %}
+                {% endwith %}
             </div>
         </div>
     </div>

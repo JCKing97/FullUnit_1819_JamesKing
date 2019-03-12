@@ -10,6 +10,7 @@ import random
 from sqlalchemy.sql import func
 from flask_login import current_user
 from rq.job import Job
+from typing import Dict, List
 
 
 @bp.route('/reputation', methods=['GET', 'POST'])
@@ -72,19 +73,24 @@ def reputation_finished(reputation_id, job_id):
     if community.timed_out:
         return render_template('reputation_timed_out.html', title='Reputation Timed Out', reputation_id=reputation_id)
     if community.is_finished():
-        population_chart_data = get_population_chart_data(community)
+        population_chart_data, strategy_colours = get_population_chart_data_and_strategy_colours(community)
         measurement_chart_data = get_measurements_chart_data(community)
         community_fitness_stats = db.session.query(func.max(ReputationCommunity.fitness).label("max_fit"),
                                                    func.min(ReputationCommunity.fitness).label("min_fit"),
                                                    func.avg(ReputationCommunity.fitness).label("avg_fit")).one()
         timepoints = [timepoint for timepoint in range(community.length_of_generations)]
+        players = get_players(community)
+        num_of_players_per_gen = len(players[0])
+        print(num_of_players_per_gen)
         return render_template('reputation_finished.html', title='Reputation Finished', strategies=strategies,
                                community=community, action_type=ActionType, population_chart_data=population_chart_data,
                                measurement_chart_data=measurement_chart_data,
                                fitness_chart_data=get_fitness_chart_data(community),
                                lowest_fitness=community_fitness_stats.min_fit,
                                highest_fitness=community_fitness_stats.max_fit,
-                               average_fitness=round(community_fitness_stats.avg_fit), timepoints=timepoints)
+                               average_fitness=round(community_fitness_stats.avg_fit), timepoints=timepoints,
+                               strategy_colours=strategy_colours, num_of_players_per_gen=num_of_players_per_gen,
+                               players=players)
     elif job_id is not None:
         if Job(job_id, current_app.redis).is_failed:
             community.timed_out = True
@@ -98,11 +104,25 @@ def reputation_finished(reputation_id, job_id):
                                job_id=job_id)
 
 
-def get_population_chart_data(community: ReputationCommunity):
+def get_players(community:ReputationCommunity):
+    players: Dict[int, Dict[int, Dict[str, int]]] = {}
+    for generation in community.generations:
+        gen_players: Dict[int, Dict[str, int]] = {}
+        for player in generation.players:
+            gen_players[player.player_id] = {'cooperation_rate': player.cooperation_rate,
+                                             'social_activeness': player.social_activeness,
+                                             'positivity_of_gossip': player.positivity_of_gossip,
+                                             'fitness': player.fitness, 'strategy': player.strategy}
+        players[generation.generation_id] = gen_players
+    return players
+
+
+def get_population_chart_data_and_strategy_colours(community: ReputationCommunity):
     chart_data = {'type': 'line', 'data': {'datasets': [], 'labels': []},
                   'options': {'title': {'display': True,'text': "Population fluctuation across the generations"},
                               'scales': {'yAxes': [{'scaleLabel': {'display': True, 'labelString': "Strategy Count"}}],
                                          'xAxes': [{'scaleLabel': {'display': True, 'labelString': "Generation"}}]}}}
+    strategy_colours: Dict[int, str] = {}
     created_datasets = []
     hex_digits = list("0123456789ABCDEF")
     for generation in community.generations:
@@ -121,13 +141,14 @@ def get_population_chart_data(community: ReputationCommunity):
                             'data': [0 for _ in range(len(community.generations.all()))], 'fill': False,
                             'borderColor': hex_colour, 'backgroundColor': hex_colour})
                 chart_data['data']['datasets'][-1]['data'][gen.generation_id] += 1
+                strategy_colours[player.strategy] = hex_colour
             else:
                 for dataset in chart_data['data']['datasets']:
                     if dataset['label'] == strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +\
                             strategy.trust_model + " " + strategy.options:
                         dataset['data'][gen.generation_id] += 1
                         break
-    return chart_data
+    return chart_data, strategy_colours
 
 
 def get_measurements_chart_data(community: ReputationCommunity):
