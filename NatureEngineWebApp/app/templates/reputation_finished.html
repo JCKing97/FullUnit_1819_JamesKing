@@ -155,7 +155,9 @@
                     The first {{ timepoints|length }} columns are the timepoints in which entries for the rows in those columns are actions by that player at that timepoint.
                     The last 4 are the measurements cooperation rate, social activeness, positivity of gossip and fitness for that player.
                 </p>
-
+                {% with community=community %}
+                    {% include "_generation_animation.html" %}
+                {% endwith %}
                 {% for generation in community.generations %}
                     <div class="panel panel-default">
                         <!-- Default panel contents -->
@@ -201,9 +203,6 @@
                         </table>
                     </div>
                 {% endfor %}
-                {% with community=community %}
-                    {% include "_generation_animation.html" %}
-                {% endwith %}
             </div>
         </div>
     </div>

@@ -228,3 +228,16 @@ class ReputationAction(db.Model):
                     "gossip: " + self.gossip.value]
         else:
             return ["type: " + self.type.value['type']]
+
+    def get_donor_player_id(self) -> int:
+        return ReputationPlayer.query.filter_by(id=self.donor).first().player_id
+
+    def get_recipient_player_id(self) -> int:
+        return ReputationPlayer.query.filter_by(id=self.recipient).first().player_id
+
+    def get_gossiper_player_id(self) -> int:
+        return ReputationPlayer.query.filter_by(id=self.gossiper).first().player_id
+
+    def get_about_player_id(self) -> int:
+        return ReputationPlayer.query.filter_by(id=self.about).first().player_id
+

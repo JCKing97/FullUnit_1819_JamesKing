@@ -6,13 +6,16 @@
     const strat_colours = {{ strategy_colours|tojson }};
     const num_of_players_per_gen = {{ num_of_players_per_gen }};
     const players = {{ players|tojson }};
+    console.log(players);
+    const actions = {{ actions|tojson }};
+    console.log(actions);
     let timepoint = 0;
     let generation = 0;
     let firstRound = true;
     let newGen = false;
     const canvas = document.getElementById('anim_canvas');
     canvas_side_length = 1.8*(Math.min(window.innerWidth, window.innerHeight)/2);
-    const player_radius = canvas_side_length/(10*num_of_players_per_gen);
+    const player_radius = canvas_side_length/(4*num_of_players_per_gen);
     canvas.width = canvas_side_length;
     canvas.height = canvas_side_length;
     const ctx = canvas.getContext('2d');
@@ -35,11 +38,19 @@
         ctx.closePath();
     }
     function drawPlayers(){
-        let radius = (canvas_side_length/3);
-        for(let k = 0; k < num_of_players_per_gen; k++){
-            drawPlayer((canvas_side_length/2)+radius*Math.cos(k*((2*Math.PI)/num_of_players_per_gen)),
-                (canvas_side_length/2)+radius*Math.sin(k*((2*Math.PI)/num_of_players_per_gen)), players[generation][k]);
+        for(let playerIndex = 0; playerIndex < num_of_players_per_gen; playerIndex++){
+            drawPlayer(players[generation][playerIndex]["coord_x"], players[generation][playerIndex]["coord_y"],
+                players[generation][playerIndex]);
         }
+    }
+    function drawAction(action, index, array){
+        ctx.fillStyle = 'black';
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(action['type'], canvas.width/2, canvas.height/2);
+    }
+    function drawActions(){
+        actions[generation][timepoint].forEach(drawAction);
     }
     function drawTimepoint(){
         ctx.fillStyle = 'black';
@@ -47,18 +58,30 @@
         ctx.textBaseline = "top";
         ctx.fillText("Generation: "+ generation.toString()+"  Timepoint: " + timepoint.toString(), 0, 0);
         drawPlayers();
+        drawActions();
+    }
+    function calculatePlayerCoords(){
+        let radius = (canvas_side_length/3);
+        for(let playerIndex = 0; playerIndex < num_of_players_per_gen; playerIndex++){
+            players[generation][playerIndex]["coord_x"] =
+                (canvas_side_length/2)+radius*Math.cos(playerIndex*((2*Math.PI)/num_of_players_per_gen));
+            players[generation][playerIndex]["coord_y"] =
+                (canvas_side_length/2)+radius*Math.sin(playerIndex*((2*Math.PI)/num_of_players_per_gen));
+        }
     }
     function drawReproduction(){
         ctx.fillStyle = 'black';
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText("Reproduce", canvas.width/2, canvas.height/2);
+        calculatePlayerCoords();
     }
     function drawFirstGen(){
         ctx.fillStyle = 'black';
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText("First Gen", canvas.width/2, canvas.height/2);
+        calculatePlayerCoords();
     }
     function draw(){
         if(timepoint%{{ community.length_of_generations }} === 0 &&
@@ -69,9 +92,9 @@
             newGen=false;
         }
         if(!firstRound && newGen) {
-            drawReproduction();
             generation += 1;
             newGen = false;
+            drawReproduction();
         } else if(!firstRound && !newGen) {
             drawTimepoint();
             timepoint += 1;
@@ -94,8 +117,8 @@
         timepoint = 0;
         render();
         window.clearInterval(interval);
-        interval = setInterval(render, 1000);
+        interval = setInterval(render, 800);
     }
     render();
-    let interval = setInterval(render, 1000);
+    let interval = setInterval(render, 800);
 </script>

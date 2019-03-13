@@ -5,12 +5,13 @@ from app.indir_rec import bp
 import requests
 from ..models import ReputationCommunity, ReputationGeneration, ReputationPlayer, ReputationStrategy
 from app import db
-from .action_logic import ActionType
 import random
 from sqlalchemy.sql import func
 from flask_login import current_user
 from rq.job import Job
 from typing import Dict, List
+from .action_logic import ActionType
+import pprint
 
 
 @bp.route('/reputation', methods=['GET', 'POST'])
@@ -81,7 +82,7 @@ def reputation_finished(reputation_id, job_id):
         timepoints = [timepoint for timepoint in range(community.length_of_generations)]
         players = get_players(community)
         num_of_players_per_gen = len(players[0])
-        print(num_of_players_per_gen)
+        actions = get_actions(community)
         return render_template('reputation_finished.html', title='Reputation Finished', strategies=strategies,
                                community=community, action_type=ActionType, population_chart_data=population_chart_data,
                                measurement_chart_data=measurement_chart_data,
@@ -90,7 +91,7 @@ def reputation_finished(reputation_id, job_id):
                                highest_fitness=community_fitness_stats.max_fit,
                                average_fitness=round(community_fitness_stats.avg_fit), timepoints=timepoints,
                                strategy_colours=strategy_colours, num_of_players_per_gen=num_of_players_per_gen,
-                               players=players)
+                               players=players, actions=actions)
     elif job_id is not None:
         if Job(job_id, current_app.redis).is_failed:
             community.timed_out = True
@@ -104,7 +105,7 @@ def reputation_finished(reputation_id, job_id):
                                job_id=job_id)
 
 
-def get_players(community:ReputationCommunity):
+def get_players(community: ReputationCommunity):
     players: Dict[int, Dict[int, Dict[str, int]]] = {}
     for generation in community.generations:
         gen_players: Dict[int, Dict[str, int]] = {}
@@ -115,6 +116,38 @@ def get_players(community:ReputationCommunity):
                                              'fitness': player.fitness, 'strategy': player.strategy}
         players[generation.generation_id] = gen_players
     return players
+
+
+def get_actions(community: ReputationCommunity):
+    actions: Dict[int, Dict[int, List[Dict]]] = {}
+    for generation in community.generations:
+        gen_actions: Dict[int, List[Dict]] = {}
+        for player in generation.players:
+            for action in player.actions:
+                if action.type is ActionType.INTERACTION:
+                    if action.timepoint % community.length_of_generations in gen_actions:
+                        gen_actions[action.timepoint % community.length_of_generations].append({'type': 'interaction',
+                                                              'donor': action.get_donor_player_id(),
+                                                              'recipient': action.get_recipient_player_id(),
+                                                              'action': str(action.action)})
+                    else:
+                        gen_actions[action.timepoint % community.length_of_generations] = [{'type': 'interaction', 'donor': action.get_donor_player_id(),
+                                                         'recipient': action.get_recipient_player_id(),
+                                                          'action': str(action.action)}]
+                elif action.type is ActionType.GOSSIP:
+                    if action.timepoint % community.length_of_generations in gen_actions:
+                        gen_actions[action.timepoint % community.length_of_generations].append({'type': 'gossip',
+                                                              'gossiper': action.get_gossiper_player_id(),
+                                                              'about': action.get_about_player_id(),
+                                                              'recipient': action.get_recipient_player_id(),
+                                                              'gossip': str(action.gossip)})
+                    else:
+                        gen_actions[action.timepoint % community.length_of_generations] = [{'type': 'gossip', 'gossiper': action.get_gossiper_player_id(),
+                                                          'about': action.get_about_player_id(),
+                                                          'recipient': action.get_recipient_player_id(),
+                                                          'gossip': str(action.gossip)}]
+        actions[generation.generation_id] = gen_actions
+    return actions
 
 
 def get_population_chart_data_and_strategy_colours(community: ReputationCommunity):
