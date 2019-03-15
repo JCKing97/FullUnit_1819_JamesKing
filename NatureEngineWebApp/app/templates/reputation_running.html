@@ -13,13 +13,14 @@
     {{ super() }}
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript">
-        setInterval(function() {
+        var check_finished = setInterval(function() {
             $.ajax({
                 url: "{{ url_for('indir_rec.is_reputation_finished', reputation_id=reputation_id, job_id=job_id) }}",
                 method: "GET"
             }).done(function(data) {
                 if (data['finished']){
                     window.location = data['url'];
+                    clearInterval(check_finished);
                 }
             });
         }, 2000);
