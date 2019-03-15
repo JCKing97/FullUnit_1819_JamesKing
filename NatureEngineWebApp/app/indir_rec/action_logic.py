@@ -25,10 +25,11 @@ class GossipContent(Enum):
 
 class Action(ABC):
 
-    def __init__(self, timepoint: int, actor: int, generation: int):
+    def __init__(self, timepoint: int, actor: int, generation: int, reason: str):
         self._timepoint: int = timepoint
         self._actor: int = actor
         self._generation = generation
+        self._reason: str = reason
 
     @property
     @abstractmethod
@@ -47,11 +48,15 @@ class Action(ABC):
     def actor(self) -> int:
         return self._actor
 
+    @property
+    def reason(self) -> str:
+        return self._reason
+
 
 class IdleAction(Action):
 
-    def __init__(self, timepoint: int, actor: int, generation: int):
-        super(IdleAction, self).__init__(timepoint, actor, generation)
+    def __init__(self, timepoint: int, actor: int, generation: int, reason: str):
+        super(IdleAction, self).__init__(timepoint, actor, generation, reason)
 
     @property
     def type(self) -> ActionType:
@@ -60,8 +65,8 @@ class IdleAction(Action):
 
 class GossipAction(Action):
 
-    def __init__(self, timepoint: int, gossiper: int, generation: int, about: int, recipient: int, gossip: GossipContent):
-        super(GossipAction, self).__init__(timepoint, gossiper, generation)
+    def __init__(self, timepoint: int, gossiper: int, generation: int, reason: str, about: int, recipient: int, gossip: GossipContent):
+        super(GossipAction, self).__init__(timepoint, gossiper, generation, reason)
         self._gossiper = gossiper
         self._about: int = about
         self._recipient: int = recipient
@@ -90,9 +95,9 @@ class GossipAction(Action):
 
 class InteractionAction(Action):
 
-    def __init__(self, timepoint: int, donor: int, generation: int, recipient: int, action: InteractionContent,
+    def __init__(self, timepoint: int, donor: int, generation: int, reason: str, recipient: int, action: InteractionContent,
                  onlookers: List[int] = None):
-        super(InteractionAction, self).__init__(timepoint, donor, generation)
+        super(InteractionAction, self).__init__(timepoint, donor, generation, reason)
         self._donor: int = donor
         self._recipient: int = recipient
         self._action: InteractionContent = action

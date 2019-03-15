@@ -1,20 +1,45 @@
 <h2>An animation of the interactions in the community</h2>
-<canvas id="anim_canvas" style="border:1px solid #d3d3d3; margin: auto; display: block;">
-    Your browser does not support the HTML5 canvas tag.
-</canvas>
+<p>
+    Blue lines indicate a cooperation and red indicates a defection, the arrowhead points to the recipient.
+    The black lines that accompany the interaction go from every onlooker to the donor.<br>
+    Green lines indicate positive gossip, purple indicate negative gossip. The arrowhead points towards the recipient.<br>
+    The black line that accompanies a gossip line points to what agent the gossip is about. If there is no black line
+    the gossip is about the agent that is gossiping.<br>
+    The colours of each strategy are the same as those in the population tracker above. If you are unsure of a players
+    strategy read the descriptions in the information box at the bottom of this page.
+</p>
+<div id="canvas-container" style="text-align: center; margin: 0 auto;">
+    <canvas id="anim_canvas" style="border:1px solid #d3d3d3; margin: auto; display: block;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    Skip to Generations:
+    {% for generation in community.generations %}
+        <button type="button" class="btn btn-primary" onclick="toGeneration({{ generation.generation_id }})">{{ generation.generation_id }}</button>
+    {% endfor %}
+    Speed Control:
+    <button type="button" class="btn btn-primary" onclick="increaseSpeed()">Increase Speed</button>
+    <button type="button" class="btn btn-primary" onclick="decreaseSpeed()">Decrease Speed</button><br>
+    <button type="button" class="btn btn-primary" onclick="back()"><< Reverse</button>
+    <button type="button" class="btn btn-primary" onclick="pause()">Pause ||</button>
+    <button type="button" class="btn btn-primary" onclick="resume()">Resume ></button>
+    <button type="button" class="btn btn-primary" onclick="forward()">Forward >></button>
+</div>
 <script type="application/javascript">
     const strat_colours = {{ strategy_colours|tojson }};
     const num_of_players_per_gen = {{ num_of_players_per_gen }};
     const players = {{ players|tojson }};
-    console.log(players);
     const actions = {{ actions|tojson }};
-    console.log(actions);
     let timepoint = 0;
     let generation = 0;
+    let actionIndex = 0;
     let firstRound = true;
     let newGen = false;
+    let nextTimepoint = false;
+    let interval_time = 800;
     const canvas = document.getElementById('anim_canvas');
     canvas_side_length = 1.8*(Math.min(window.innerWidth, window.innerHeight)/2);
+    let canvas_container = document.getElementById('canvas-container');
+    canvas_container.style.width = canvas_side_length+'px';
     const player_radius = canvas_side_length/(4*num_of_players_per_gen);
     canvas.width = canvas_side_length;
     canvas.height = canvas_side_length;
@@ -27,30 +52,178 @@
     }
     ctx.font = font_size.toString()+"px Arial";
     ctx.textBaseline = "top";
-    function drawPlayer(center_x, center_y, player){
-        ctx.beginPath();
-        ctx.fillStyle = strat_colours[player['strategy']];
-        ctx.arc(center_x,center_y,player_radius,0,2*Math.PI, false);
-        ctx.fill();
-        ctx.strokeStyle = 'black';
-        ctx.lineWidth = player_radius/5;
-        ctx.stroke();
-        ctx.closePath();
+    function drawPlayer(center_x, center_y, strat, canvas_context){
+        canvas_context.beginPath();
+        canvas_context.fillStyle = strat['colour'];
+        canvas_context.arc(center_x,center_y,player_radius,0,2*Math.PI, false);
+        canvas_context.fill();
+        canvas_context.strokeStyle = 'black';
+        canvas_context.lineWidth = player_radius/5;
+        canvas_context.stroke();
+        canvas_context.closePath();
     }
     function drawPlayers(){
         for(let playerIndex = 0; playerIndex < num_of_players_per_gen; playerIndex++){
             drawPlayer(players[generation][playerIndex]["coord_x"], players[generation][playerIndex]["coord_y"],
-                players[generation][playerIndex]);
+                strat_colours[players[generation][playerIndex]['strategy']], ctx);
         }
     }
-    function drawAction(action, index, array){
+    function euclideanDistance(v1, v2){
+        return Math.sqrt(((v2[0]-v1[0])*(v2[0]-v1[0]))+((v2[1]-v1[1])*(v2[1]-v1[1])))
+    }
+    function find_intersection_point(circle_center_x, circle_center_y, circle_radius, to_x, to_y, from_x, from_y){
+        let m = (to_y-from_y)/(to_x-from_x);
+        let c = from_y-(m*from_x);
+        let a = circle_center_x;
+        let b = circle_center_y;
+        let r = circle_radius;
+        let delta = (r*r)*(1+(m*m))-((b-(m*a)-c)*(b-(m*a)-c));
+        let possible_return_add = [(a + (b * m) - (c * m) + Math.sqrt(delta)) / (1 + (m * m)),
+            (c + (a * m) + (b * m * m) + (m * Math.sqrt(delta))) / (1 + (m * m))];
+        let possible_return_subtract = [(a + (b * m) - (c * m) - Math.sqrt(delta)) / (1 + (m * m)),
+            (c + (a * m) + (b * m * m) - (m * Math.sqrt(delta))) / (1 + (m * m))];
+        if(to_x===circle_center_x) {
+            if(euclideanDistance([from_x, from_y], possible_return_add) < euclideanDistance([from_x, from_y], possible_return_subtract)){
+                return possible_return_add;
+            } else {
+                return possible_return_subtract;
+            }
+        } else {
+            if(euclideanDistance([to_x, to_y], possible_return_add) < euclideanDistance([to_x, to_y], possible_return_subtract)){
+                return possible_return_add;
+            } else {
+                return possible_return_subtract;
+            }
+        }
+    }
+    function drawAction(){
+        action = actions[generation][timepoint][actionIndex];
+        if(action["type"]==="interaction"){
+            let donor_x = players[generation][action["donor"]]["coord_x"];
+            let donor_y = players[generation][action["donor"]]["coord_y"];
+            let recipient_x = players[generation][action["recipient"]]["coord_x"];
+            let recipient_y = players[generation][action["recipient"]]["coord_y"];
+            let from_points = find_intersection_point(donor_x, donor_y, player_radius,
+                recipient_x, recipient_y, donor_x, donor_y);
+            let to_points = find_intersection_point(recipient_x, recipient_y, player_radius,
+                recipient_x, recipient_y, donor_x, donor_y);
+            ctx.lineWidth = player_radius/5;
+            let length_of_arrow_head = player_radius;
+            let head_angle = Math.atan2(to_points[1]-from_points[1], to_points[0]-from_points[0]);
+            ctx.beginPath();
+            ctx.moveTo(from_points[0], from_points[1]);
+            ctx.lineTo(to_points[0], to_points[1]);
+            ctx.moveTo(to_points[0], to_points[1]);
+            ctx.lineTo(to_points[0]-length_of_arrow_head*Math.cos(head_angle-Math.PI/6),
+                to_points[1]-length_of_arrow_head*Math.sin(head_angle-Math.PI/6));
+            ctx.moveTo(to_points[0], to_points[1]);
+            ctx.lineTo(to_points[0]-length_of_arrow_head*Math.cos(head_angle+Math.PI/6),
+                to_points[1]-length_of_arrow_head*Math.sin(head_angle+Math.PI/6));
+            if(action["action"]==="InteractionContent.COOPERATE"){
+                ctx.strokeStyle = "#0000CE";
+            } else {
+                ctx.strokeStyle = "#CE0000";
+            }
+            ctx.stroke();
+            ctx.strokeStyle = "black";
+            console.log(action['onlookers']);
+            for(let i = 0; i < action['onlookers'].length; i++){
+                if(action['onlookers'][i] !== action["recipient"]) {
+                    ctx.beginPath();
+                    let player_coord_x = players[generation][action['onlookers'][i]]["coord_x"];
+                    let player_coord_y = players[generation][action['onlookers'][i]]["coord_y"];
+                    let onlooker_points = find_intersection_point(player_coord_x, player_coord_y, player_radius, donor_x,
+                        donor_y, player_coord_x, player_coord_y);
+                    let donor_points = find_intersection_point(donor_x, donor_y, player_radius, donor_x, donor_y,
+                        player_coord_x, player_coord_y);
+                    head_angle = Math.atan2(donor_points[1]-onlooker_points[1], donor_points[0]-onlooker_points[0]);
+                    ctx.moveTo(onlooker_points[0], onlooker_points[1]);
+                    ctx.lineTo(donor_points[0], donor_points[1]);
+                    ctx.moveTo(donor_points[0], donor_points[1]);
+                    ctx.lineTo(donor_points[0] - length_of_arrow_head * Math.cos(head_angle - Math.PI / 6),
+                        donor_points[1] - length_of_arrow_head * Math.sin(head_angle - Math.PI / 6));
+                    ctx.moveTo(donor_points[0], donor_points[1]);
+                    ctx.lineTo(donor_points[0] - length_of_arrow_head * Math.cos(head_angle + Math.PI / 6),
+                        donor_points[1] - length_of_arrow_head * Math.sin(head_angle + Math.PI / 6));
+                    ctx.stroke();
+                }
+            }
+        } else if(action["type"]==="gossip") {
+            let gossiper_x = players[generation][action["gossiper"]]["coord_x"];
+            let gossiper_y = players[generation][action["gossiper"]]["coord_y"];
+            let recipient_x = players[generation][action["recipient"]]["coord_x"];
+            let recipient_y = players[generation][action["recipient"]]["coord_y"];
+            let about_x = players[generation][action["about"]]["coord_x"];
+            let about_y = players[generation][action["about"]]["coord_y"];
+            let recipient_from_points = find_intersection_point(gossiper_x, gossiper_y, player_radius, gossiper_x, gossiper_y,
+                recipient_x, recipient_y);
+            let recipient_to_points = find_intersection_point(recipient_x, recipient_y, player_radius, gossiper_x, gossiper_y,
+                recipient_x, recipient_y);
+            ctx.lineWidth = player_radius / 5;
+            let length_of_arrow_head_gossip_recipient = player_radius;
+            let head_angle_gossip_recipient = Math.atan2(recipient_to_points[1] - recipient_from_points[1],
+                recipient_to_points[0] - recipient_from_points[0]);
+            ctx.beginPath();
+            ctx.moveTo(recipient_from_points[0], recipient_from_points[1]);
+            ctx.lineTo(recipient_to_points[0], recipient_to_points[1]);
+            ctx.moveTo(recipient_to_points[0], recipient_to_points[1]);
+            ctx.lineTo(recipient_to_points[0] - length_of_arrow_head_gossip_recipient * Math.cos(head_angle_gossip_recipient - Math.PI / 6),
+                recipient_to_points[1] - length_of_arrow_head_gossip_recipient * Math.sin(head_angle_gossip_recipient - Math.PI / 6));
+            ctx.moveTo(recipient_to_points[0], recipient_to_points[1]);
+            ctx.lineTo(recipient_to_points[0] - length_of_arrow_head_gossip_recipient * Math.cos(head_angle_gossip_recipient + Math.PI / 6),
+                recipient_to_points[1] - length_of_arrow_head_gossip_recipient * Math.sin(head_angle_gossip_recipient + Math.PI / 6));
+            if (action["gossip"] === "GossipContent.POSITIVE") {
+                ctx.strokeStyle = "#00CE00";
+            } else {
+                ctx.strokeStyle = "#ce00ce";
+            }
+            ctx.stroke();
+            if (action["about"] !== action["gossiper"]) {
+                let about_from_points = find_intersection_point(gossiper_x, gossiper_y, player_radius,
+                    about_x, about_y, gossiper_x, gossiper_y);
+                let about_to_points = find_intersection_point(about_x, about_y, player_radius,
+                    about_x, about_y, gossiper_x, gossiper_y);
+                ctx.lineWidth = player_radius / 5;
+                let length_of_arrow_head_gossip_about = player_radius;
+                let head_angle_gossip_about = Math.atan2(about_to_points[1] - about_from_points[1],
+                    about_to_points[0] - about_from_points[0]);
+                ctx.beginPath();
+                ctx.moveTo(about_from_points[0], about_from_points[1]);
+                ctx.lineTo(about_to_points[0], about_to_points[1]);
+                ctx.moveTo(about_to_points[0], about_to_points[1]);
+                ctx.lineTo(about_to_points[0] - length_of_arrow_head_gossip_about * Math.cos(head_angle_gossip_about - Math.PI / 6),
+                    about_to_points[1] - length_of_arrow_head_gossip_about * Math.sin(head_angle_gossip_about - Math.PI / 6));
+                ctx.moveTo(about_to_points[0], about_to_points[1]);
+                ctx.lineTo(about_to_points[0] - length_of_arrow_head_gossip_about * Math.cos(head_angle_gossip_about + Math.PI / 6),
+                    about_to_points[1] - length_of_arrow_head_gossip_about * Math.sin(head_angle_gossip_about + Math.PI / 6));
+                ctx.strokeStyle="black";
+                ctx.stroke();
+            }
+        }
         ctx.fillStyle = 'black';
         ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(action['type'], canvas.width/2, canvas.height/2);
-    }
-    function drawActions(){
-        actions[generation][timepoint].forEach(drawAction);
+        ctx.textBaseline = "bottom";
+        ctx.font = (font_size/1.8).toString()+"px Arial";
+        let reason_string = "Reason: " + action["reason"];
+        // Credit to https://stackoverflow.com/questions/2936112/text-wrap-in-a-canvas-element
+        let words = reason_string.split(" ");
+        let lines = [];
+        let currentLine = words[0];
+        for(let i = 1; i < words.length; i++){
+            let word = words[i];
+            let width = ctx.measureText(currentLine + " " + word).width;
+            if(width<canvas_side_length-(canvas_side_length/10)){
+                currentLine += " " + word;
+            } else {
+                lines.push(currentLine);
+                currentLine = word;
+            }
+        }
+        lines.push(currentLine);
+        for(let j = 0; j < lines.length; j++){
+            ctx.fillText(lines[j], canvas.width/2, canvas_side_length/2+canvas_side_length/3+canvas_side_length/10+(j*20));
+        }
+        ctx.font = font_size.toString()+"px Arial";
     }
     function drawTimepoint(){
         ctx.fillStyle = 'black';
@@ -58,7 +231,7 @@
         ctx.textBaseline = "top";
         ctx.fillText("Generation: "+ generation.toString()+"  Timepoint: " + timepoint.toString(), 0, 0);
         drawPlayers();
-        drawActions();
+        drawAction();
     }
     function calculatePlayerCoords(){
         let radius = (canvas_side_length/3);
@@ -83,7 +256,7 @@
         ctx.fillText("First Gen", canvas.width/2, canvas.height/2);
         calculatePlayerCoords();
     }
-    function draw(){
+    function draw(step){
         if(timepoint%{{ community.length_of_generations }} === 0 &&
                 generation%{{ community.generations.all()|length }} === 0 && !firstRound && !newGen){
             timepoint=0;
@@ -92,15 +265,23 @@
             newGen=false;
         }
         if(!firstRound && newGen) {
-            generation += 1;
+            generation += step;
             newGen = false;
-            drawReproduction();
+            if(generation <= Object.keys(players).length){
+                drawReproduction();
+            }
         } else if(!firstRound && !newGen) {
             drawTimepoint();
-            timepoint += 1;
-            if(timepoint%{{ community.length_of_generations }} === 0) {
-                newGen = true;
-                timepoint = 0;
+            if (!(actionIndex >= actions[generation][timepoint].length)) {
+                actionIndex += step;
+            }
+            if (actionIndex >= actions[generation][timepoint].length){
+                timepoint += step;
+                actionIndex = 0;
+                if(timepoint%{{ community.length_of_generations }} === 0){
+                    newGen = true;
+                    timepoint = 0;
+                }
             }
         }
         if(firstRound){
@@ -108,17 +289,80 @@
             firstRound=false;
         }
     }
-    function render(){
+    function render(step){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        draw();
+        draw(step);
     }
-    function restart(){
-        firstRound = true;
+    function toGeneration(gen_id){
         timepoint = 0;
-        render();
+        generation = gen_id-1;
+        actionIndex = 0;
+        newGen = true;
         window.clearInterval(interval);
-        interval = setInterval(render, 800);
+        interval = setInterval(function(){render(1)}, interval_time);
+    }
+    function increaseSpeed(){
+        if(interval_time>=200){
+            interval_time -= 100;
+        }
+        clearInterval(interval);
+        interval = setInterval(function(){render(1)}, interval_time);
+    }
+    function decreaseSpeed(){
+        if(interval_time<=1200){
+            interval_time += 100;
+        }
+        clearInterval(interval);
+        interval = setInterval(function(){render(1)}, interval_time);
+    }
+    function pause(){
+        clearInterval(interval);
+    }
+    function resume(){
+        clearInterval(interval);
+        interval = setInterval(function(){render(1)}, interval_time);
+    }
+    function back(){
+        if(actionIndex<=1){
+            if(timepoint<=0){
+                if(generation>0){
+                    generation-=1;
+                    timepoint=Object.keys(actions[generation]).length-1;
+                    actionIndex=actions[generation][timepoint].length-1;
+                    newGen=true;
+                }
+            } else {
+                timepoint-=1;
+                actionIndex=actions[generation][timepoint].length-1;
+            }
+        } else {
+            actionIndex-=1;
+            console.log(actionIndex);
+        }
+        console.log("actionIndex: " + actionIndex);
+        console.log("timepoint: " + timepoint);
+        console.log("generation: " + generation);
+        render(0);
+    }
+    function forward(){
+        if(actions[generation][timepoint].length<=actionIndex+1){
+            console.log(actionIndex);
+            console.log(actions[generation][timepoint]);
+            if(Object.keys(actions[generation]).length<=timepoint+1){
+                actionIndex=0;
+                timepoint=0;
+                newGen=true;
+                render(1);
+            } else {
+                timepoint+=1;
+                actionIndex=0;
+                render(1);
+            }
+        } else {
+           render(1);
+        }
     }
     render();
-    let interval = setInterval(render, 800);
+    let interval = setInterval(function(){render(1)}, interval_time);
 </script>
+

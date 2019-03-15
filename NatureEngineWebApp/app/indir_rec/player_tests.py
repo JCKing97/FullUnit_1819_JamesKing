@@ -200,7 +200,7 @@ class PlayerStateTests(unittest.TestCase):
         self.assertEqual(None, self.player_state.new_action, "Should be None to start with")
 
     def test_set_then_get_new_action_notify(self):
-        action = IdleAction(3, self.player, self.generation)
+        action = IdleAction(3, self.player, self.generation, "reason")
         self.player_state.new_action = action
         self.assertEqual(None, self.player_state.new_action, "Should be none as the state is clear after the notification to"
                                                    "observers")
@@ -218,7 +218,7 @@ class PlayerStateTests(unittest.TestCase):
                                                                                " of the fitness update")
 
     def test_detach(self):
-        action = IdleAction(3, self.player, self.generation)
+        action = IdleAction(3, self.player, self.generation, "reason")
         self.player_state.detach(self.observer)
         self.player_state.fitness_update = 2
         self.assertEqual(0, self.player_state.fitness_update, "Should be reset to zero as the observers would be"
@@ -240,7 +240,7 @@ class PlayerStateTests(unittest.TestCase):
     def test_observers_constructor(self):
         new_observer = TestObserver(self.community, [self.generation])
         new_player_state = PlayerState(self.generation, self.player, [new_observer])
-        action = IdleAction(3, self.player, self.generation)
+        action = IdleAction(3, self.player, self.generation, "reason")
         new_player_state.new_action = action
         self.assertEqual(action, new_observer.latest_observations['action'], "Should notify attached observer from"
                                                                              " constructor")

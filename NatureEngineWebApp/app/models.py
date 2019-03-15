@@ -218,6 +218,7 @@ class ReputationAction(db.Model):
     gossip = db.Column(db.Enum(GossipContent), nullable=True)
     donor = db.Column(db.Integer, db.ForeignKey('reputation_player.id'), nullable=True)
     action = db.Column(db.Enum(InteractionContent), nullable=True)
+    reason = db.Column(db.String(600), nullable=False)
 
     def to_table_representation(self) -> List[str]:
         if self.type is ActionType.INTERACTION:

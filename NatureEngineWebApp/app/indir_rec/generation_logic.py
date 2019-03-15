@@ -194,15 +194,16 @@ class Generation:
             self._id_player_map[interaction_action.donor].update_fitness(interaction_action.action.value['donor_cost'])
             self._id_player_map[interaction_action.recipient].update_fitness(interaction_action.action.value['recipient_gain'])
             onlookers = self._generate_onlookers(interaction_action)
-            print(onlookers)
+            action.onlookers = onlookers
+            print("onlookers: " + str(onlookers))
             for onlooker in onlookers:
                 action_percept = {'type': interaction_action.type.value['percept_link'],
-                                  'action': interaction_action.action.value['string'], 'perceiver': onlooker.id,
+                                  'action': interaction_action.action.value['string'], 'perceiver': onlooker,
                                   'community': self._community_id, 'generation': self._generation_id,
                                   'timepoint': timepoint}
                 self._id_player_map[action_percept['perceiver']].set_perception(action_percept)
 
-    def _generate_onlookers(self, action: InteractionAction) -> List[Player]:
+    def _generate_onlookers(self, action: InteractionAction) -> List[int]:
         """
         Generate onlookers for an action including the donor and recipient
         :param action: The action to generate onlookers for
@@ -210,15 +211,19 @@ class Generation:
         :return: A list of onlookers including the donor and recipient
         :rtype: List[Player]
         """
-        onlookers: List[Player] = []
+        onlookers: List[int] = []
         possible_onlookers = copy.deepcopy(self._players)
-        onlookers.extend([self._id_player_map[action.donor], self._id_player_map[action.recipient]])
+        onlookers.extend([action.donor, action.recipient])
         for onlooker_choice in possible_onlookers:
             if onlooker_choice.id == action.donor or onlooker_choice.id == action.recipient:
                 possible_onlookers.remove(onlooker_choice)
+        deep_copy_onlookers = []
         if self._num_of_onlookers <= len(possible_onlookers):
-            onlookers.extend(random.sample(possible_onlookers, self._num_of_onlookers))
+            deep_copy_onlookers.extend(random.sample(possible_onlookers, self._num_of_onlookers))
         else:
-            onlookers.extend(random.sample(possible_onlookers, len(possible_onlookers)))
+            deep_copy_onlookers.extend(random.sample(possible_onlookers, len(possible_onlookers)))
+        for onlooker in deep_copy_onlookers:
+            print(onlooker)
+            onlookers.append(onlooker.id)
         return onlookers
 

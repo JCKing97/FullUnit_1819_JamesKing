@@ -3,13 +3,13 @@
 from flask import render_template, url_for, request, jsonify, current_app
 from app.indir_rec import bp
 import requests
-from ..models import ReputationCommunity, ReputationGeneration, ReputationPlayer, ReputationStrategy
+from ..models import ReputationCommunity, ReputationGeneration, ReputationPlayer, ReputationStrategy, ReputationActionOnlookers
 from app import db
 import random
 from sqlalchemy.sql import func
 from flask_login import current_user
 from rq.job import Job
-from typing import Dict, List
+from typing import Dict, List, Any
 from .action_logic import ActionType
 import pprint
 
@@ -62,7 +62,7 @@ def is_reputation_finished(reputation_id, job_id):
     else:
         finished = False
     return jsonify({'finished': finished,
-                    'url': url_for('indir_rec.reputation_finished', reputation_id=reputation_id, job_id=job_id)})
+                    'url': url_for('indir_rec.reputation_finished', reputation_id=reputation_id)})
 
 
 @bp.route('/reputation_finished/<reputation_id>/', defaults={'job_id': None})
@@ -80,9 +80,8 @@ def reputation_finished(reputation_id, job_id):
                                                    func.min(ReputationCommunity.fitness).label("min_fit"),
                                                    func.avg(ReputationCommunity.fitness).label("avg_fit")).one()
         timepoints = [timepoint for timepoint in range(community.length_of_generations)]
-        players = get_players(community)
+        players, actions = get_players_and_actions(community)
         num_of_players_per_gen = len(players[0])
-        actions = get_actions(community)
         return render_template('reputation_finished.html', title='Reputation Finished', strategies=strategies,
                                community=community, action_type=ActionType, population_chart_data=population_chart_data,
                                measurement_chart_data=measurement_chart_data,
@@ -105,49 +104,50 @@ def reputation_finished(reputation_id, job_id):
                                job_id=job_id)
 
 
-def get_players(community: ReputationCommunity):
+def get_players_and_actions(community: ReputationCommunity):
     players: Dict[int, Dict[int, Dict[str, int]]] = {}
+    actions: Dict[int, Dict[int, List[Dict]]] = {}
     for generation in community.generations:
         gen_players: Dict[int, Dict[str, int]] = {}
+        gen_actions: Dict[int, List[Dict]] = {}
         for player in generation.players:
             gen_players[player.player_id] = {'cooperation_rate': player.cooperation_rate,
                                              'social_activeness': player.social_activeness,
                                              'positivity_of_gossip': player.positivity_of_gossip,
                                              'fitness': player.fitness, 'strategy': player.strategy}
-        players[generation.generation_id] = gen_players
-    return players
-
-
-def get_actions(community: ReputationCommunity):
-    actions: Dict[int, Dict[int, List[Dict]]] = {}
-    for generation in community.generations:
-        gen_actions: Dict[int, List[Dict]] = {}
-        for player in generation.players:
             for action in player.actions:
                 if action.type is ActionType.INTERACTION:
+                    onlookers = ReputationActionOnlookers.query.filter_by(action_id=action.id).all()
+                    onlooker_ids = []
+                    for onlooker in onlookers:
+                        onlooker_ids.append(ReputationPlayer.query.filter_by(id=onlooker.onlooker_id).first().player_id)
                     if action.timepoint % community.length_of_generations in gen_actions:
                         gen_actions[action.timepoint % community.length_of_generations].append({'type': 'interaction',
                                                               'donor': action.get_donor_player_id(),
                                                               'recipient': action.get_recipient_player_id(),
-                                                              'action': str(action.action)})
+                                                              'action': str(action.action), 'reason': action.reason,
+                                                              'onlookers': onlooker_ids})
                     else:
-                        gen_actions[action.timepoint % community.length_of_generations] = [{'type': 'interaction', 'donor': action.get_donor_player_id(),
+                        gen_actions[action.timepoint % community.length_of_generations] = [{'type': 'interaction',
+                                                         'donor': action.get_donor_player_id(),
                                                          'recipient': action.get_recipient_player_id(),
-                                                          'action': str(action.action)}]
+                                                         'action': str(action.action), 'reason': action.reason,
+                                                         'onlookers': onlooker_ids}]
                 elif action.type is ActionType.GOSSIP:
                     if action.timepoint % community.length_of_generations in gen_actions:
                         gen_actions[action.timepoint % community.length_of_generations].append({'type': 'gossip',
                                                               'gossiper': action.get_gossiper_player_id(),
                                                               'about': action.get_about_player_id(),
                                                               'recipient': action.get_recipient_player_id(),
-                                                              'gossip': str(action.gossip)})
+                                                              'gossip': str(action.gossip), 'reason': action.reason})
                     else:
                         gen_actions[action.timepoint % community.length_of_generations] = [{'type': 'gossip', 'gossiper': action.get_gossiper_player_id(),
                                                           'about': action.get_about_player_id(),
                                                           'recipient': action.get_recipient_player_id(),
-                                                          'gossip': str(action.gossip)}]
+                                                          'gossip': str(action.gossip), 'reason': action.reason}]
+        players[generation.generation_id] = gen_players
         actions[generation.generation_id] = gen_actions
-    return actions
+    return players, actions
 
 
 def get_population_chart_data_and_strategy_colours(community: ReputationCommunity):
@@ -155,7 +155,7 @@ def get_population_chart_data_and_strategy_colours(community: ReputationCommunit
                   'options': {'title': {'display': True,'text': "Population fluctuation across the generations"},
                               'scales': {'yAxes': [{'scaleLabel': {'display': True, 'labelString': "Strategy Count"}}],
                                          'xAxes': [{'scaleLabel': {'display': True, 'labelString': "Generation"}}]}}}
-    strategy_colours: Dict[int, str] = {}
+    strategy_colours: Dict[int, Dict[str, Any]] = {}
     created_datasets = []
     hex_digits = list("0123456789ABCDEF")
     for generation in community.generations:
@@ -174,7 +174,10 @@ def get_population_chart_data_and_strategy_colours(community: ReputationCommunit
                             'data': [0 for _ in range(len(community.generations.all()))], 'fill': False,
                             'borderColor': hex_colour, 'backgroundColor': hex_colour})
                 chart_data['data']['datasets'][-1]['data'][gen.generation_id] += 1
-                strategy_colours[player.strategy] = hex_colour
+                strategy_colours[player.strategy] = {'colour': hex_colour, 'strategy': strategy.donor_strategy,
+                                                     'non_donor_strategy': strategy.non_donor_strategy,
+                                                     'trust_model': strategy.trust_model,
+                                                     'options': strategy.options}
             else:
                 for dataset in chart_data['data']['datasets']:
                     if dataset['label'] == strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +\

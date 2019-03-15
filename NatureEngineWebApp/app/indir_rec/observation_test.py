@@ -119,7 +119,7 @@ class ActionObserverTest(unittest.TestCase):
     def test_update_action(self):
         self.action_observer.add_generation(self.generation)
         self.action_observer.add_player(self.generation, self.player)
-        action = IdleAction(3, self.generation, self.player)
+        action = IdleAction(3, self.generation, self.player, "reason")
         self.player_state.attach(self.action_observer)
         self.player_state.new_action = action
         self.action_observer.update(self.player_state)
@@ -127,7 +127,7 @@ class ActionObserverTest(unittest.TestCase):
 
     def test_update_action_non_existent_player(self):
         self.action_observer.add_generation(5)
-        action = IdleAction(3, 5, 7)
+        action = IdleAction(3, 5, 7, "reason")
         self.player_state.new_action = action
         with self.assertRaises(RecordingError):
             self.action_observer.update(self.player_state)
@@ -136,7 +136,7 @@ class ActionObserverTest(unittest.TestCase):
         self.assertEqual({}, self.action_observer.actions, "Should contain no actions as non-existent player")
 
     def test_update_action_non_existent_generation(self):
-        action = IdleAction(3, 5, 7)
+        action = IdleAction(3, 5, 7, "reason")
         self.player_state.new_action = action
         with self.assertRaises(RecordingError):
             self.action_observer.update(self.player_state)
@@ -171,8 +171,8 @@ class ActionObserverTest(unittest.TestCase):
         player_states = [MockPlayerState(7, 8, [self.action_observer]), MockPlayerState(7, 9, [self.action_observer]),
                          MockPlayerState(7, 12, [self.action_observer]), MockPlayerState(8, 1, [self.action_observer]),
                          MockPlayerState(8, 2, [self.action_observer]), MockPlayerState(8, 42, [self.action_observer])]
-        actions = [IdleAction(3, 8, 7), IdleAction(7, 8, 7), IdleAction(5, 12, 7), IdleAction(4, 2, 8),
-                   IdleAction(3, 2, 8), IdleAction(6, 2, 8)]
+        actions = [IdleAction(3, 8, 7, "reason"), IdleAction(7, 8, 7, "reason"), IdleAction(5, 12, 7, "reason"), IdleAction(4, 2, 8, "reason"),
+                   IdleAction(3, 2, 8, "reason"), IdleAction(6, 2, 8, "reason")]
         actions_by_timepoint: Dict[int, List[Action]] = {}
         actions_by_gen_and_timepoint: Dict[int, Dict[int, List[Action]]] = {}
         actions_by_gen_player_and_timepoint: Dict[int, Dict[int, Dict[int, Action]]] = {}
@@ -341,10 +341,10 @@ class ActionObserverTest(unittest.TestCase):
                          MockPlayerState(8, 1, [self.action_observer]),
                          MockPlayerState(8, 2, [self.action_observer]),
                          MockPlayerState(8, 42, [self.action_observer])]
-        actions = [IdleAction(4, 8, 7), IdleAction(5, 8, 7), GossipAction(6, 8, 7, 9, 12, GossipContent.POSITIVE),
-                   GossipAction(7, 9, 7, 12, 8, GossipContent.NEGATIVE),
-                   IdleAction(1, 1, 8), GossipAction(2, 1, 8, 2, 42, GossipContent.NEGATIVE),
-                   IdleAction(3, 42, 8)]
+        actions = [IdleAction(4, 8, 7, "reason"), IdleAction(5, 8, 7, "reason"), GossipAction(6, 8, 7, "reason", 9, 12, GossipContent.POSITIVE),
+                   GossipAction(7, 9, 7, "reason", 12, 8, GossipContent.NEGATIVE),
+                   IdleAction(1, 1, 8, "reason"), GossipAction(2, 1, 8, "reason", 2, 42, GossipContent.NEGATIVE),
+                   IdleAction(3, 42, 8, "reason")]
         for action in actions:
             for player_state in player_states:
                 if player_state.player == action.actor and action.generation == player_state.generation:
@@ -385,13 +385,13 @@ class ActionObserverTest(unittest.TestCase):
                          MockPlayerState(8, 1, [self.action_observer]),
                          MockPlayerState(8, 2, [self.action_observer]),
                          MockPlayerState(8, 42, [self.action_observer])]
-        actions = [GossipAction(4, 8, 7, 12, 9, GossipContent.POSITIVE),
-                   GossipAction(5, 8, 7, 9, 12, GossipContent.NEGATIVE),
-                   GossipAction(6, 8, 7, 9, 12, GossipContent.POSITIVE),
-                   GossipAction(7, 9, 7, 12, 8, GossipContent.NEGATIVE),
-                   GossipAction(1, 1, 8, 2, 42, GossipContent.POSITIVE),
-                   GossipAction(2, 1, 8, 2, 42, GossipContent.NEGATIVE),
-                   GossipAction(3, 42, 8, 1, 2, GossipContent.POSITIVE)]
+        actions = [GossipAction(4, 8, 7, "reason", 12, 9, GossipContent.POSITIVE),
+                   GossipAction(5, 8, 7, "reason", 9, 12, GossipContent.NEGATIVE),
+                   GossipAction(6, 8, 7, "reason", 9, 12, GossipContent.POSITIVE),
+                   GossipAction(7, 9, 7, "reason", 12, 8, GossipContent.NEGATIVE),
+                   GossipAction(1, 1, 8, "reason", 2, 42, GossipContent.POSITIVE),
+                   GossipAction(2, 1, 8, "reason", 2, 42, GossipContent.NEGATIVE),
+                   GossipAction(3, 42, 8, "reason", 1, 2, GossipContent.POSITIVE)]
         for action in actions:
             for player_state in player_states:
                 if player_state.player == action.actor and action.generation == player_state.generation:
@@ -417,23 +417,23 @@ class ActionObserverTest(unittest.TestCase):
                          MockPlayerState(8, 1, [self.action_observer]),
                          MockPlayerState(8, 2, [self.action_observer]),
                          MockPlayerState(8, 42, [self.action_observer])]
-        actions = [GossipAction(4, 8, 7, 12, 9, GossipContent.POSITIVE),
-                   GossipAction(5, 8, 7, 9, 12, GossipContent.NEGATIVE),
-                   GossipAction(6, 8, 7, 9, 12, GossipContent.POSITIVE),
-                   IdleAction(4, 8, 7), IdleAction(5, 8, 7), GossipAction(6, 8, 7, 9, 12, GossipContent.POSITIVE),
-                   InteractionAction(4, 8, 7, 9, InteractionContent.COOPERATE),
-                   InteractionAction(35, 8, 7, 12, InteractionContent.DEFECT),
-                   GossipAction(7, 9, 7, 12, 8, GossipContent.NEGATIVE),
-                   InteractionAction(6, 9, 7, 8, InteractionContent.COOPERATE),
-                   InteractionAction(10, 9, 7, 8, InteractionContent.DEFECT),
-                   GossipAction(1, 1, 8, 2, 42, GossipContent.POSITIVE),
-                   IdleAction(1, 1, 8), GossipAction(2, 1, 8, 2, 42, GossipContent.NEGATIVE),
-                   InteractionAction(1, 1, 8, 2, InteractionContent.COOPERATE),
-                   GossipAction(2, 1, 8, 2, 42, GossipContent.NEGATIVE),
-                   InteractionAction(4, 2, 8, 1, InteractionContent.COOPERATE),
-                   InteractionAction(6, 2, 8, 1, InteractionContent.COOPERATE),
-                   GossipAction(3, 42, 8, 1, 2, GossipContent.POSITIVE), IdleAction(3, 42, 8),
-                   InteractionAction(9, 42, 8, 2, InteractionContent.DEFECT)]
+        actions = [GossipAction(4, 8, 7, "reason", 12, 9, GossipContent.POSITIVE),
+                   GossipAction(5, 8, 7, "reason", 9, 12, GossipContent.NEGATIVE),
+                   GossipAction(6, 8, 7, "reason", 9, 12, GossipContent.POSITIVE),
+                   IdleAction(4, 8, 7, "reason"), IdleAction(5, 8, 7, "reason"), GossipAction(6, 8, 7, "reason", 9, 12, GossipContent.POSITIVE),
+                   InteractionAction(4, 8, 7, "reason", 9, InteractionContent.COOPERATE),
+                   InteractionAction(35, 8, 7, "reason", 12, InteractionContent.DEFECT),
+                   GossipAction(7, 9, 7, "reason", 12, 8, GossipContent.NEGATIVE),
+                   InteractionAction(6, 9, 7, "reason", 8, InteractionContent.COOPERATE),
+                   InteractionAction(10, 9, 7, "reason", 8, InteractionContent.DEFECT),
+                   GossipAction(1, 1, 8, "reason", 2, 42, GossipContent.POSITIVE),
+                   IdleAction(1, 1, 8, "reason"), GossipAction(2, 1, 8, "reason", 2, 42, GossipContent.NEGATIVE),
+                   InteractionAction(1, 1, 8, "reason", 2, InteractionContent.COOPERATE),
+                   GossipAction(2, 1, 8, "reason", 2, 42, GossipContent.NEGATIVE),
+                   InteractionAction(4, 2, 8, "reason", 1, InteractionContent.COOPERATE),
+                   InteractionAction(6, 2, 8, "reason", 1, InteractionContent.COOPERATE),
+                   GossipAction(3, 42, 8, "reason", 1, 2, GossipContent.POSITIVE), IdleAction(3, 42, 8, "reason"),
+                   InteractionAction(9, 42, 8, "reason", 2, InteractionContent.DEFECT)]
         actions_by_timepoint: Dict[int, List[Action]] = {}
         interactions: Dict[int, InteractionAction] = {}
         actions_by_gen_and_timepoint: Dict[int, Dict[int, List[Action]]] = {}

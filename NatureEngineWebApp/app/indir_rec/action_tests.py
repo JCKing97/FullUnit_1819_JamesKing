@@ -11,7 +11,7 @@ class IdleTests(unittest.TestCase):
         self.actor = random.randint(0, 100)
         self.timepoint = random.randint(0, 100)
         self.generation = random.randint(0, 100)
-        self.action = IdleAction(self.timepoint, self.actor, self.generation)
+        self.action = IdleAction(self.timepoint, self.actor, self.generation, "reason")
 
     def test_get_generation(self):
         self.assertEqual(self.generation, self.action.generation, "Should have been the same as set")
@@ -35,7 +35,7 @@ class GossipTests(unittest.TestCase):
         self.timepoint = random.randint(0, 100)
         self.generation = random.randint(0, 100)
         self.gossip = random.choice(list(GossipContent))
-        self.action = GossipAction(self.timepoint, self.gossiper, self.generation, self.about, self.recipient,
+        self.action = GossipAction(self.timepoint, self.gossiper, self.generation, "reason", self.about, self.recipient,
                                    self.gossip)
 
     def test_get_generation(self):

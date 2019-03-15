@@ -168,15 +168,17 @@ class Player:
         if action_representation['type'] == "gossip":
             gossip: GossipContent = GossipContent.POSITIVE if action_representation['value'] == 'positive'\
                 else GossipContent.NEGATIVE
-            action: GossipAction = GossipAction(timepoint, self.id, self._generation_id, action_representation['about'],
+            action: GossipAction = GossipAction(timepoint, self.id, self._generation_id,
+                                                action_representation["reason"], action_representation['about'],
                                                 action_representation['recipient'], gossip)
         elif action_representation['type'] == "action":
             action_content: InteractionContent = InteractionContent.COOPERATE if \
                 action_representation['value'] == 'cooperate' else InteractionContent.DEFECT
-            action: InteractionAction = InteractionAction(timepoint, self.id, self._generation_id, action_representation['recipient'],
-                                                          action_content)
+            action: InteractionAction = InteractionAction(timepoint, self.id, self._generation_id,
+                                                          action_representation["reason"],
+                                                          action_representation['recipient'], action_content)
         elif action_representation['type'] == 'idle':
-            action: IdleAction = IdleAction(timepoint, self.id, self._generation_id)
+            action: IdleAction = IdleAction(timepoint, self.id, self._generation_id, action_representation["reason"])
         else:
             raise DecisionException("Action did not match idle, gossip or action")
         self.player_state.new_action = action
