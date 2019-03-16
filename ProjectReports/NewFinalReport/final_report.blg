@@ -3,48 +3,50 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: final_report.aux
 The style file: plain.bst
 Database file #1: refs.bib
+Warning--to sort, need author or key in flask_tut
+Warning--to sort, need author or key in swi_web_tut
 Warning--empty journal in alexander1987biology
 Warning--empty year in sugden2004economics
 Warning--empty journal in thomas1993placa
 You've used 59 entries,
             2118 wiz_defined-function locations,
-            827 strings with 12663 characters,
-and the built_in function-call counts, 17861 in all, are:
-= -- 1767
-> -- 712
-< -- 16
-+ -- 299
-- -- 226
-* -- 1112
-:= -- 2974
-add.period$ -- 184
+            823 strings with 12801 characters,
+and the built_in function-call counts, 17455 in all, are:
+= -- 1731
+> -- 689
+< -- 14
++ -- 290
+- -- 218
+* -- 1076
+:= -- 2899
+add.period$ -- 185
 call.type$ -- 59
-change.case$ -- 276
+change.case$ -- 274
 chr.to.int$ -- 0
-cite$ -- 62
-duplicate$ -- 732
-empty$ -- 1497
-format.name$ -- 226
-if$ -- 3785
+cite$ -- 64
+duplicate$ -- 707
+empty$ -- 1478
+format.name$ -- 218
+if$ -- 3703
 int.to.chr$ -- 0
 int.to.str$ -- 59
-missing$ -- 64
-newline$ -- 299
-num.names$ -- 118
-pop$ -- 324
+missing$ -- 60
+newline$ -- 300
+num.names$ -- 114
+pop$ -- 331
 preamble$ -- 1
-purify$ -- 229
+purify$ -- 226
 quote$ -- 0
-skip$ -- 522
+skip$ -- 505
 stack$ -- 0
-substring$ -- 1060
-swap$ -- 147
-text.length$ -- 16
+substring$ -- 1013
+swap$ -- 136
+text.length$ -- 14
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 214
-warning$ -- 3
-while$ -- 177
+type$ -- 216
+warning$ -- 5
+while$ -- 170
 width$ -- 61
-write$ -- 640
-(There were 3 warnings)
+write$ -- 639
+(There were 5 warnings)

@@ -1,63 +1,93 @@
-\contentsline {chapter}{Abstract}{3}{chapter*.2}
-\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}
-\contentsline {section}{\numberline {1.1}Motivation}{4}{section.1.1}
-\contentsline {section}{\numberline {1.2}Aims and Objectives}{5}{section.1.2}
-\contentsline {section}{\numberline {1.3}Contribution}{5}{section.1.3}
-\contentsline {section}{\numberline {1.4}Structure}{6}{section.1.4}
-\contentsline {chapter}{\numberline {2}Background}{7}{chapter.2}
-\contentsline {section}{\numberline {2.1}Introduction}{7}{section.2.1}
-\contentsline {section}{\numberline {2.2}Multi-Agent Systems and Intelligent Agents}{7}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Environments}{7}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}The Agent Model}{8}{subsection.2.2.2}
-\contentsline {subsubsection}{What is an agent?}{8}{section*.4}
-\contentsline {subsubsection}{Russell and Norvig's Agent Program Components}{9}{section*.5}
-\contentsline {subsubsection}{Learning Agents}{9}{section*.6}
-\contentsline {subsubsection}{Deductive Reasoning Agents}{9}{section*.7}
-\contentsline {subsubsection}{Practical Reasoning Agents}{10}{section*.8}
-\contentsline {subsubsection}{Reactive and Hybrid Architectures}{10}{section*.9}
-\contentsline {subsection}{\numberline {2.2.3}Multi-Valued Fluent Cached Events Calculus}{11}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Agent Communication}{11}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Multi-Agent Interactions}{12}{subsection.2.2.5}
-\contentsline {section}{\numberline {2.3}Game Theory}{13}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Introduction}{13}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Cooperative Phenomena}{13}{subsection.2.3.2}
-\contentsline {subsection}{\numberline {2.3.3}Reciprocal Altruism}{13}{subsection.2.3.3}
-\contentsline {subsection}{\numberline {2.3.4}Axelrod, Hamilton and The Iterated Prisoner's Dilemma}{14}{subsection.2.3.4}
-\contentsline {subsection}{\numberline {2.3.5}Indirect Reciprocity}{15}{subsection.2.3.5}
-\contentsline {subsection}{\numberline {2.3.6}Nowak and Sigmund}{16}{subsection.2.3.6}
-\contentsline {subsection}{\numberline {2.3.7}The Standing Strategy and Further Limitations of Nowak and Sigmund}{18}{subsection.2.3.7}
-\contentsline {subsection}{\numberline {2.3.8}Mixed Reciprocity Models}{19}{subsection.2.3.8}
-\contentsline {subsection}{\numberline {2.3.9}Gossip}{20}{subsection.2.3.9}
-\contentsline {subsection}{\numberline {2.3.10}Mui's Computational Models of Trust and Reputation}{20}{subsection.2.3.10}
-\contentsline {subsection}{\numberline {2.3.11}Reproduction and Genetic Algorithms}{21}{subsection.2.3.11}
-\contentsline {subsection}{\numberline {2.3.12}Summary}{23}{subsection.2.3.12}
-\contentsline {chapter}{\numberline {3}Framework}{24}{chapter.3}
-\contentsline {section}{\numberline {3.1}Introduction}{24}{section.3.1}
-\contentsline {section}{\numberline {3.2}Theoretical Framework}{24}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Introduction}{24}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}The Game and Environment}{24}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Percepts}{25}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Actions}{26}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}Gossip and Simple Agent Gossip Language}{26}{subsection.3.2.5}
-\contentsline {subsection}{\numberline {3.2.6}Agent Architecture}{27}{subsection.3.2.6}
-\contentsline {subsection}{\numberline {3.2.7}Strategies and Trust Models}{27}{subsection.3.2.7}
-\contentsline {subsubsection}{Defector and Cooperator}{27}{section*.24}
-\contentsline {subsubsection}{Image Scoring Discriminator}{28}{section*.25}
-\contentsline {subsubsection}{Standing Discriminator}{28}{section*.26}
-\contentsline {subsection}{\numberline {3.2.8}The Veritability Discerner}{29}{subsection.3.2.8}
-\contentsline {subsubsection}{Trust Models}{29}{section*.27}
-\contentsline {subsubsection}{Trustworthiness}{30}{section*.28}
-\contentsline {subsubsection}{Strategy Components}{30}{section*.29}
-\contentsline {subsubsection}{Summary}{31}{section*.30}
-\contentsline {subsection}{\numberline {3.2.9}Summary}{31}{subsection.3.2.9}
-\contentsline {chapter}{Bibliography}{35}{chapter*.31}
-\contentsline {chapter}{\numberline {4}Professional Issues}{36}{chapter.4}
-\contentsline {chapter}{\numberline {5}Appendix}{37}{chapter.5}
-\contentsline {section}{\numberline {5.1}Background}{37}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Kinship Theory}{37}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Network Reciprocity}{37}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Group Selection}{37}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}Alternate Agent Architectures}{37}{subsection.5.1.4}
-\contentsline {section}{\numberline {5.2}Theoretical Framework}{37}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Environment Properties}{37}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Strategies}{37}{subsection.5.2.2}
+\contentsline {chapter}{Abstract}{4}{chapter*.2}
+\contentsline {chapter}{\numberline {1}Introduction}{5}{chapter.1}
+\contentsline {section}{\numberline {1.1}Motivation}{5}{section.1.1}
+\contentsline {section}{\numberline {1.2}Aims and Objectives}{6}{section.1.2}
+\contentsline {section}{\numberline {1.3}Contribution}{6}{section.1.3}
+\contentsline {section}{\numberline {1.4}Structure}{7}{section.1.4}
+\contentsline {chapter}{\numberline {2}Background}{8}{chapter.2}
+\contentsline {section}{\numberline {2.1}Introduction}{8}{section.2.1}
+\contentsline {section}{\numberline {2.2}Multi-Agent Systems and Intelligent Agents}{8}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Environments}{8}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}The Agent Model}{9}{subsection.2.2.2}
+\contentsline {subsubsection}{What is an agent?}{9}{section*.4}
+\contentsline {subsubsection}{Russell and Norvig's Agent Program Components}{10}{section*.5}
+\contentsline {subsubsection}{Learning Agents}{10}{section*.6}
+\contentsline {subsubsection}{Deductive Reasoning Agents}{10}{section*.7}
+\contentsline {subsubsection}{Practical Reasoning Agents}{11}{section*.8}
+\contentsline {subsubsection}{Reactive and Hybrid Architectures}{11}{section*.9}
+\contentsline {subsection}{\numberline {2.2.3}Multi-Valued Fluent Cached Events Calculus}{12}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Agent Communication}{12}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Multi-Agent Interactions}{13}{subsection.2.2.5}
+\contentsline {section}{\numberline {2.3}Game Theory}{14}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Introduction}{14}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Cooperative Phenomena}{14}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3}Reciprocal Altruism}{14}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4}Axelrod, Hamilton and The Iterated Prisoner's Dilemma}{15}{subsection.2.3.4}
+\contentsline {subsection}{\numberline {2.3.5}Indirect Reciprocity}{16}{subsection.2.3.5}
+\contentsline {subsection}{\numberline {2.3.6}Nowak and Sigmund}{17}{subsection.2.3.6}
+\contentsline {subsection}{\numberline {2.3.7}The Standing Strategy and Further Limitations of Nowak and Sigmund}{19}{subsection.2.3.7}
+\contentsline {subsection}{\numberline {2.3.8}Mixed Reciprocity Models}{20}{subsection.2.3.8}
+\contentsline {subsection}{\numberline {2.3.9}Gossip}{21}{subsection.2.3.9}
+\contentsline {subsection}{\numberline {2.3.10}Mui's Computational Models of Trust and Reputation}{21}{subsection.2.3.10}
+\contentsline {subsection}{\numberline {2.3.11}Reproduction and Genetic Algorithms}{22}{subsection.2.3.11}
+\contentsline {subsection}{\numberline {2.3.12}Summary}{24}{subsection.2.3.12}
+\contentsline {chapter}{\numberline {3}Framework}{25}{chapter.3}
+\contentsline {section}{\numberline {3.1}Introduction}{25}{section.3.1}
+\contentsline {section}{\numberline {3.2}Theoretical Framework}{25}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Introduction}{25}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}The Game and Environment}{25}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Percepts}{26}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Actions}{27}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Gossip and Simple Agent Gossip Language}{27}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.6}Agent Architecture}{28}{subsection.3.2.6}
+\contentsline {subsection}{\numberline {3.2.7}Strategies and Trust Models}{28}{subsection.3.2.7}
+\contentsline {subsubsection}{Defector and Cooperator}{28}{section*.24}
+\contentsline {subsubsection}{Image Scoring Discriminator}{29}{section*.25}
+\contentsline {subsubsection}{Standing Discriminator}{29}{section*.26}
+\contentsline {subsection}{\numberline {3.2.8}The Veritability Discerner}{30}{subsection.3.2.8}
+\contentsline {subsubsection}{Trust Models}{30}{section*.27}
+\contentsline {subsubsection}{Trustworthiness}{31}{section*.28}
+\contentsline {subsubsection}{Strategy Components}{31}{section*.29}
+\contentsline {subsubsection}{Summary}{32}{section*.30}
+\contentsline {subsection}{\numberline {3.2.9}Summary}{32}{subsection.3.2.9}
+\contentsline {section}{\numberline {3.3}Implementation}{33}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Introduction}{33}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Development}{33}{subsection.3.3.2}
+\contentsline {subsubsection}{Introduction}{33}{section*.31}
+\contentsline {subsubsection}{Architecture}{33}{section*.32}
+\contentsline {subsubsection}{Proof of Concepts and Learning}{33}{section*.34}
+\contentsline {subsubsection}{The Nature Engine}{34}{section*.36}
+\contentsline {subsubsection}{Databases}{35}{section*.38}
+\contentsline {subsubsection}{Deployment}{35}{section*.39}
+\contentsline {subsection}{\numberline {3.3.3}Framework}{35}{subsection.3.3.3}
+\contentsline {subsubsection}{Environment and Agent's Bodies}{35}{section*.40}
+\contentsline {subsubsection}{Agent Mind as a Service (AMAAS)}{35}{section*.41}
+\contentsline {subsection}{\numberline {3.3.4}Software Engineering}{35}{subsection.3.3.4}
+\contentsline {subsubsection}{Introduction}{35}{section*.42}
+\contentsline {subsubsection}{Design}{35}{section*.43}
+\contentsline {subsubsection}{Testing}{35}{section*.44}
+\contentsline {subsubsection}{Process}{35}{section*.45}
+\contentsline {subsubsection}{Documentation}{35}{section*.46}
+\contentsline {subsubsection}{Tools}{35}{section*.47}
+\contentsline {subsubsection}{Version Control System}{35}{section*.48}
+\contentsline {chapter}{\numberline {4}Experiment Evaluation}{36}{chapter.4}
+\contentsline {section}{\numberline {4.1}Introduction}{36}{section.4.1}
+\contentsline {section}{\numberline {4.2}Strategies}{36}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Standing Strategy}{36}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Image Scoring Discriminator}{36}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Veritability Discerner}{36}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Strategy Comparison}{36}{subsection.4.2.4}
+\contentsline {section}{\numberline {4.3}Trust Models}{36}{section.4.3}
+\contentsline {section}{\numberline {4.4}Gossip}{36}{section.4.4}
+\contentsline {section}{\numberline {4.5}Discussion}{36}{section.4.5}
+\contentsline {chapter}{Bibliography}{40}{chapter*.49}
+\contentsline {chapter}{\numberline {5}Professional Issues}{41}{chapter.5}
+\contentsline {chapter}{\numberline {6}Appendix}{42}{chapter.6}
+\contentsline {section}{\numberline {6.1}Background}{42}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Kinship Theory}{42}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Network Reciprocity}{42}{subsection.6.1.2}
+\contentsline {subsection}{\numberline {6.1.3}Group Selection}{42}{subsection.6.1.3}
+\contentsline {subsection}{\numberline {6.1.4}Alternate Agent Architectures}{42}{subsection.6.1.4}
+\contentsline {section}{\numberline {6.2}Theoretical Framework}{42}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Environment Properties}{42}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Strategies}{42}{subsection.6.2.2}

@@ -6,6 +6,7 @@
 \usepackage{multirow}
 \usepackage{framed}
 \usepackage{caption}
+\usepackage{subcaption}
 \usepackage{tikz}
 \usepackage{xcolor}
 \usetikzlibrary{timeline}
@@ -596,6 +597,113 @@ I have presented a new strategy for use in indirect and direct reciprocity model
 \subsection{Summary}
 In summary, I have presented a MAS that uses a variant of a genetic algorithm to reproduce agents between instances of the environment. I have described the components of the environment and game, the percepts that can be received by agents, the actions available to agents and how these are constrained and the simple agent gossip language. I have also discussed the architecture that I am planning to use in the system and the strategies and trust models available to associate with the agents, including a new strategy that aims to be more suitable with a system in which deception and manipulation are possible.
 
+\section{Implementation}
+\subsection{Introduction}
+
+\subsection{Development}
+\textcolor{red}{Learning flask + Prolog web, Proof of concept applications, Talk about web dev practices, Architecture, Amaas, Web Application (+environment), Database (SQLAlchemy + SQLite + MySQL), Deployment}
+\subsubsection{Introduction}
+
+\subsubsection{Architecture}
+\begin{wrapfigure}{l}{0.5\textwidth}
+\vspace{-30pt}
+\begin{framed}
+	\begin{center}
+	\includegraphics[width=\textwidth]{PresSystem.png}
+	\caption{System architecture}
+	\label{fig:architecture}
+	\end{center}
+\end{framed}
+\vspace{-30pt}
+\end{wrapfigure}
+One of the objectives of my project is to create a system that is distributable, in order for it to be an experimentation and learning tool for those interested in studying multi-agent interactions. This distributability is reflected in the architecture I have used to develop my system. A web application acts as the `shop front' of the system and allows anyone with internet access to create, run and view analysis of the available games.\par 
+I named the web application `The Nature Engine' and it is of typical web architecture: the client-server model. Built into this web application is an implementation of my theoretical framework which runs the environment and the agent's bodies. Notably this part of the system doesn't include agent decision making components. These components are hosted in a separate web service, that has been named the Agent Mind as a Service (AMAAS). This web service exposes an API for the web application to interact with.\par 
+The final component of the system is a database for the long term storage of data about users of the site (to enable users to record and label experiments) and game data. This is a relational database that due to the use of and ORM (SQLAlchemy) I have been able to create as both SQLite for development and MySql for deployment. An illustration of this is in figure~\ref{fig:architecture}.
+
+
+\subsubsection{Proof of Concepts and Learning}
+At the very beginning of this project I had a good amount of software development experience, some experience with database development and logic programming, and less experience with web development. Before undertaking the development I decided I needed to learn more about some of these areas (especially web development).\par 
+I had decided that I wanted to extend my experience with Python due to it's nice language features, good library support and it's lack of use in the development of MASs (in comparison to Java and Prolog). As such I decided to use the Flask web development micro-framework and partake in Miguel Grinberg's course "The Flask Mega-Tutorial"~\cite{flask_tut}. Flask is a micro-framework as it only includes a minimal amount of functionality in comparison to frameworks such as Django. Nevertheless Flask is extensible and there are a lot of libraries a programmer can use to bring in required functionality.\par 
+Using inspiration and the techniques learnt in this course I developed an early prototype of The Nature Engine. This prototype provided a number of web pages and navigation between them including a home page, pages to set up and run two player iterated prisoner's dilemma games and pages to set up and run tournaments of the iterated prisoner's dilemma and the respective analysis of both game types. Both of these games are run using the Axelrod-Python library~\cite{axelrodproject}. This early prototype also included a database set up, a redis queue to run the tournaments and a front-end that used bootstrap for styling and React.js for a dynamic form to set up tournaments.\par
+\begin{figure}
+\begin{framed}
+\begin{subfigure}{.55\textwidth}
+	\begin{center}
+	\includegraphics[width=\linewidth]{PrologServiceProof1.png}
+	\end{center}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+	\begin{center}
+	\includegraphics[width=\linewidth]{PrologServiceProof2.png}
+	\end{center}
+\end{subfigure}
+\end{framed}
+\caption{Two screenshots of two pages of the Prolog web service proof of concept}
+\label{fig:prologproof}
+\end{figure}
+Prolog is a logic-language traditionally used for the development of symbolic AI systems. The language allows a programmer to elegantly lay out how an agent makes decisions and interprets percepts. There are limited libraries for interfacing between Prolog and Python, and creating a method for interfacing between them reliably would have taken a while. It was easier to create a web service to host agent minds and became a good opportunity to hone my skills in web development.\par 
+To develop these skills I used Anne Ogborn's `Creating Web Applications in SWI-Prolog' tutorial~\cite{swi_web_tut} and the swi-prolog documentation. Using this tutorial I created a basic web application that imitates managing the creation of strategies and agents within the system. This was far simpler than The Nature Engine prototype (figure~\ref{fig:prologproof}) as it did not build up to a final application (the development of AMAAS was separate to this proof of concept).
+
+\subsubsection{The Nature Engine}
+I built on top of the early prototype of The Nature Engine to develop the final web application. This included improving the front end content, adding a section to run the theoretical framework I have devised and adding a couple of extra features.\par 
+To improve the front end content I worked on improving the form that allows users to dynamically select and remove agents from a tournament. This also translated into the form that allows users to do the same for my game. Other improvements were the use of a bootstrap carousel for the homepage to prevent text overload on the screen, better text descriptions on the website and improved game and tournament analysis.\par 
+The main bulk of the development was implementing the theoretical framework. However, to run this game in the web application required a front-end, processing of user requests and storing of data in the database. 
+\begin{wrapfigure}{l}{0.7\textwidth}
+\vspace{-30pt}
+\begin{framed}
+	\begin{center}
+	\includegraphics[width=\textwidth]{UserExperiments.png}
+	\caption{The user experiment tracker}
+	\label{fig:user_experiments}
+	\end{center}
+\end{framed}
+\vspace{-30pt}
+\end{wrapfigure}
+In addition to this I created a feature that allows users to create accounts, login and associates games of my theoretical framework to their account. These games can be given a label so they can keep track of the experiments the have run (illustrated in figure~\ref{fig:user_experiments}. User data is recorded in the database and passwords are hashed to keep them secret. 
+
+\subsubsection{Databases}
+
+\subsubsection{Deployment}
+
+\subsection{Framework}
+\textcolor{red}{Agents based, Strategies, environment etc.}
+\subsubsection{Environment and Agent's Bodies}
+
+\subsubsection{Agent Mind as a Service (AMAAS)}
+
+\subsection{Software Engineering}
+\textcolor{red}{Unit testing (PLUnit + unittest), Web App Testing, API Testing, UML design, Design Patterns, GUI Design, Scrum (Sprints, Task Backlog), Documentation (sphinx and restructured text, pldoc) and commenting, API Documentation, Agent Oriented Programming, Git (VCS), Tools (Pycharm, UMLet, Linting, Syntax highlighting, packager)}
+\subsubsection{Introduction}
+
+\subsubsection{Design}
+
+\subsubsection{Testing}
+
+\subsubsection{Process}
+
+\subsubsection{Documentation}
+
+\subsubsection{Tools}
+
+\subsubsection{Version Control System}
+
+\chapter{Experiment Evaluation}
+\section{Introduction}
+
+\section{Strategies}
+\subsection{Standing Strategy}
+
+\subsection{Image Scoring Discriminator}
+
+\subsection{Veritability Discerner}
+
+\subsection{Strategy Comparison}
+
+\section{Trust Models}
+
+\section{Gossip}
+
+\section{Discussion}
 
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
