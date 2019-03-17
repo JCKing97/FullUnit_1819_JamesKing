@@ -8,7 +8,7 @@ description: Welcome to the documentation for the agent mind as a service API, t
 /strategy:
   description: The strategies an agent can be.
   get:
-    description: Retrieve a JSON object containing names, descriptions and options of the strategies an agent can be.
+    description: Retrieve a JSON object containing names, descriptions and options of the strategies an agent can be. The strategies listed here aren't an exhaustive list.
     responses:
       200:
         body:
@@ -19,28 +19,62 @@ description: Welcome to the documentation for the agent mind as a service API, t
                 "status" : 200,
                 "strategies": [
                   {
-                    "description": "Cooperates every time",
-                    "name": "Cooperator",
+                    "description": "Cooperates every time, does not bother to actively gossip",
+                    "donor_strategy": "Cooperator",
+                    "non_donor_strategy": "Lazy",
+                    "trust_model": "Void",
                     "options": []
                   },
                   {
-                    "description": "Defects every time",
-                    "name": "Defector",
+                    "description": "Cooperates every time, actively gossips and promotes positive information about self",
+                    "donor_strategy": "Cooperator",
+                    "non_donor_strategy": "Promote Self",
+                    "trust_model": "Void",
                     "options": []
                   },
                   {
-                   "description": "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts other agents gossip",
-                   "name": "Standing Discriminator",
+                    "description": "Defects every time, does not bother to actively gossip",
+                    "donor_strategy": "Defector",
+                    "non_donor_strategy": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                  },
+                  {
+                    "description": "Defects every time, actively gossips and promotes positive information about self",
+                    "donor_strategy": "Defector",
+                    "non_donor_strategy": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                  },
+                  {
+                   "description": "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts gossip from agents with a good standing, actively promotes positive image of good agents",
+                   "donor_strategy": "Standing Discriminator",
+                   "non_donor_strategy": "Spread Accurate Positive",
+                   "trust_model": "Trusting",
                    "options": [
                      "trusting"
                     ]
                   },
                   {
-                    "description": "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn't trust other agents gossip",
-                    "name": "Standing Discriminator",
-                    "options": [
-                      "distrusting"
-                    ]
+                    "description": "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn't trust other agents gossip, actively promotes own image with gossip",
+                    "donor_strategy": "Standing Discriminator",
+                    "non_donor_strategy": "Promote Self",
+                    "trust_model": "Distrusting",
+                    "options": []
+                  },
+                  {
+                    "description": "Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) and trusts other trusted agents gossip. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+                    "donor_strategy": "Image Scoring Discriminator",
+                    "non_donor_strategy": "Spread Negative Accurate",
+                    "trust_model": "Trusting",
+                    "options": [1, "Personal Grievance"]
+                  },
+                  {
+                    "description": "Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Weights for negative percepts are 2, no weight for positive percepts. Spreads positive gossip to trusted agents about trusted agents.",
+                    "donor_strategy": "Veritability Discerner",
+                    "non_donor_strategy": "Spread Positive Trusted",
+                    "trust_model": "Strong Reactor",
+                    "options": [5]
                   }
                 ]
               }
@@ -59,17 +93,64 @@ description: Welcome to the documentation for the agent mind as a service API, t
                 "status": 200,
                 "id": 322
               }
-/generation:
-  description: A generation belongs to a community and agents reside in a generation.
-  post:
+  delete:
+    description: Remove a community from the service
     queryParameters:
       community:
         type: integer
-        description: The id for the pre-existing community that the generation belongs to
-      generation:
-        type: integer
-        description: The id for the new generation to have
+        description: The ID of the community to delete
+    responses:
+       200:
+        body:
+          application/json:
+            example: |
+              {
+                "success": true,
+                "status": 200,
+                "data": {
+                  "community": 300
+                }
+              }
+       404:
+         body:
+           application/json:
+             example: |
+               {
+                 "success": false,
+                 "status": 404,
+                 "message": "No community with this id to retract",
+                 "data": {
+                   "community": 700
+                 }
+               }
+/generation:
+  description: A generation belongs to a community and agents reside in a generation.
+  post:
     description: Create a new generation for an existing community in the service. If the return value of success is false, an error message will be returned in the message field of the JSON object.
+    body:
+      application/json:
+        type: |
+          {
+            "type": "object",
+            "required": true,
+            "properties": {
+              "community": {
+                "type": "integer",
+                "required": true,
+                "description": "The id for the pre-existing community that the generation belongs to"
+              },
+              "generation": {
+              	"type": "integer",
+              	"required": true,
+              	"description": "The id for the new generation to have"
+              }
+            }
+          }
+        example: |
+          {
+            "community": 322,
+            "generation": 7
+          }
     responses:
       200:
         body:
@@ -87,23 +168,61 @@ description: Welcome to the documentation for the agent mind as a service API, t
 /agent:
   description: The individuals in the system that perceive events, can believe things about their world and act on them. They are part of a generation in a community.
   post:
-    queryParameters:
-      strategy:
-        type: string
-        description: The strategy for the new agent to have
-      options:
-        type: array
-        description: The options for the strategy that the new agent will have
-      community:
-        type: integer
-        description: The id for the pre-existing community the agent belongs to
-      generation:
-        type: integer
-        description: The id for the pre-existing generation the agent belongs to
-      player:
-        type: integer
-        description: The id for the new agent
     description: Create a new agent the belongs to an existing community and generation in the service. If the return value of success is false, an error message will be returned in the message field of the JSON object.
+    body:
+      application/json:
+        type: |
+          {
+            "type": "object",
+            "required": true,
+            "properties": {
+              "community": {
+                "type": "integer",
+                "required": true,
+                "description": "The id for the pre-existing community that the agent belongs to"
+              },
+              "generation": {
+              	"type": "integer",
+              	"required": true,
+              	"description": "The id the new agents belongs too"
+              },
+              "donor_strategy": {
+                "type": "string",
+                "required": true,
+                "description": "The donor strategy for the agent (see strategies)"
+              },
+              "non_donor_strategy": {
+                "type": "string",
+                "required": true,
+                "description": "The non donor strategy for the agent (see strategies)"
+              },
+              "trust_model": {
+                "type": "string",
+                "required": true,
+                "description": "The trust model for the agent (see strategies)"
+              },
+              "options": {
+                "type": "array",
+                "required": true,
+                "description": "The options for the agents strategy (see strategies)"
+              },
+              "player": {
+                "type": "integer",
+                "required": true,
+                "description": "The id for the new agent"
+              }
+            }
+          }
+        example: |
+          {
+            "community": 322,
+            "generation": 7,
+            "player": 9,
+            "donor_strategy": "Veritability Discerner",
+            "non_donor_strategy": "Promote Self",
+            "trust_model": "Strong Reactor",
+            "options": [5]
+          }
     responses:
       200:
         body:
@@ -113,12 +232,32 @@ description: Welcome to the documentation for the agent mind as a service API, t
                 "data": {
                   "community": 322,
                   "generation": 7,
-                  "player": 3,
-                  "strategy": "Standing Discriminator",
-                  "options": ["trusting"]
+                  "player": 9,
+                  "donor_strategy": "Veritability Discerner",
+                  "non_donor_strategy": "Promote Self",
+                  "trust_model": "Strong Reactor",
+                  "options": [5]
                 },
                 "success": true,
                 "status": 200
+              }
+      404:
+        body:
+          application/json:
+            example: |
+              {
+                "data": {
+                  "community": 322,
+                  "generation": 7,
+                  "player": 9,
+                  "donor_strategy": "V Discerner",
+                  "non_donor_strategy": "Promote Self",
+                  "trust_model": "Strong Reactor",
+                  "options": [5]
+                },
+                "success": false,
+                "message": "No such strategy",
+                "status": 404
               }
 
 

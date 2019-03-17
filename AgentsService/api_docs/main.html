@@ -166,42 +166,111 @@
       .resource-modal li > ul {
         margin-bottom: 1em;
       }
-    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>Agent Mind as a Service API documentation <small>version 0.1</small></h1><p>http://localhost:8080/api/</p><p>Welcome to the documentation for the agent mind as a service API, the service hosts agents minds for a game-theoretic model that uses mixed indirect and direct reciprocity mechanisms. These agents have their own memory of events (input as percepts) which the agent then uses to form beliefs about their world upon which they can act.</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="strategy" class="panel-title">/strategy</h3></div><div class="panel-body"><div class="top-resource-description"><p>The strategies an agent can be.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_strategy"><span class="parent"></span>/strategy</a> <span class="methods"><a href="#strategy_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_strategy" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#strategy_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Retrieve a JSON object containing names, descriptions and options of the strategies an agent can be.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="strategy_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/strategy</h4></div><div class="modal-body"><div class="alert alert-info"><p>Retrieve a JSON object containing names, descriptions and options of the strategies an agent can be.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#strategy_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="strategy_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>Agent Mind as a Service API documentation <small>version 0.1</small></h1><p>http://localhost:8080/api/</p><p>Welcome to the documentation for the agent mind as a service API, the service hosts agents minds for a game-theoretic model that uses mixed indirect and direct reciprocity mechanisms. These agents have their own memory of events (input as percepts) which the agent then uses to form beliefs about their world upon which they can act.</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="strategy" class="panel-title">/strategy</h3></div><div class="panel-body"><div class="top-resource-description"><p>The strategies an agent can be.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_strategy"><span class="parent"></span>/strategy</a> <span class="methods"><a href="#strategy_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_strategy" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#strategy_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Retrieve a JSON object containing names, descriptions and options of the strategies an agent can be. The strategies listed here aren&#39;t an exhaustive list.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="strategy_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/strategy</h4></div><div class="modal-body"><div class="alert alert-info"><p>Retrieve a JSON object containing names, descriptions and options of the strategies an agent can be. The strategies listed here aren&#39;t an exhaustive list.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#strategy_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="strategy_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "success": true,
   "status" : 200,
   "strategies": [
     {
-      "description": "Cooperates every time",
-      "name": "Cooperator",
+      "description": "Cooperates every time, does not bother to actively gossip",
+      "donor_strategy": "Cooperator",
+      "non_donor_strategy": "Lazy",
+      "trust_model": "Void",
       "options": []
     },
     {
-      "description": "Defects every time",
-      "name": "Defector",
+      "description": "Cooperates every time, actively gossips and promotes positive information about self",
+      "donor_strategy": "Cooperator",
+      "non_donor_strategy": "Promote Self",
+      "trust_model": "Void",
       "options": []
     },
     {
-     "description": "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts other agents gossip",
-     "name": "Standing Discriminator",
+      "description": "Defects every time, does not bother to actively gossip",
+      "donor_strategy": "Defector",
+      "non_donor_strategy": "Lazy",
+      "trust_model": "Void",
+      "options": []
+    },
+    {
+      "description": "Defects every time, actively gossips and promotes positive information about self",
+      "donor_strategy": "Defector",
+      "non_donor_strategy": "Promote Self",
+      "trust_model": "Void",
+      "options": []
+    },
+    {
+     "description": "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts gossip from agents with a good standing, actively promotes positive image of good agents",
+     "donor_strategy": "Standing Discriminator",
+     "non_donor_strategy": "Spread Accurate Positive",
+     "trust_model": "Trusting",
      "options": [
        "trusting"
       ]
     },
     {
-      "description": "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn&#39;t trust other agents gossip",
-      "name": "Standing Discriminator",
-      "options": [
-        "distrusting"
-      ]
+      "description": "Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn&#39;t trust other agents gossip, actively promotes own image with gossip",
+      "donor_strategy": "Standing Discriminator",
+      "non_donor_strategy": "Promote Self",
+      "trust_model": "Distrusting",
+      "options": []
+    },
+    {
+      "description": "Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value &lt; K) and trusts other trusted agents gossip. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+      "donor_strategy": "Image Scoring Discriminator",
+      "non_donor_strategy": "Spread Negative Accurate",
+      "trust_model": "Trusting",
+      "options": [1, "Personal Grievance"]
+    },
+    {
+      "description": "Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n&gt;5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Weights for negative percepts are 2, no weight for positive percepts. Spreads positive gossip to trusted agents about trusted agents.",
+      "donor_strategy": "Veritability Discerner",
+      "non_donor_strategy": "Spread Positive Trusted",
+      "trust_model": "Strong Reactor",
+      "options": [5]
     }
   ]
 }
-</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="community" class="panel-title">/community</h3></div><div class="panel-body"><div class="top-resource-description"><p>A community contains a group of generations which agents belong to.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_community"><span class="parent"></span>/community</a> <span class="methods"><a href="#community_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_community" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#community_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a new community in the service and get the id back.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="community_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/community</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a new community in the service and get the id back.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#community_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="community_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="community" class="panel-title">/community</h3></div><div class="panel-body"><div class="top-resource-description"><p>A community contains a group of generations which agents belong to.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_community"><span class="parent"></span>/community</a> <span class="methods"><a href="#community_post"><span class="badge badge_post">post</span></a> <a href="#community_delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_community" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#community_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a new community in the service and get the id back.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#community_delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>Remove a community from the service</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="community_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/community</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a new community in the service and get the id back.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#community_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="community_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "success": true,
   "status": 200,
   "id": 322
 }
-</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="generation" class="panel-title">/generation</h3></div><div class="panel-body"><div class="top-resource-description"><p>A generation belongs to a community and agents reside in a generation.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_generation"><span class="parent"></span>/generation</a> <span class="methods"><a href="#generation_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_generation" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#generation_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a new generation for an existing community in the service. If the return value of success is false, an error message will be returned in the message field of the JSON object.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="generation_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/generation</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a new generation for an existing community in the service. If the return value of success is false, an error message will be returned in the message field of the JSON object.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#generation_post_request" data-toggle="tab">Request</a></li><li><a href="#generation_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="generation_post_request"><h3>Query Parameters</h3><ul><li><strong>community</strong>: <em>required (integer)</em><p>The id for the pre-existing community that the generation belongs to</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for the new generation to have</p></li></ul></div><div class="tab-pane" id="generation_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="community_delete"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent"></span>/community</h4></div><div class="modal-body"><div class="alert alert-info"><p>Remove a community from the service</p></div><ul class="nav nav-tabs"><li class="active"><a href="#community_delete_request" data-toggle="tab">Request</a></li><li><a href="#community_delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="community_delete_request"><h3>Query Parameters</h3><ul><li><strong>community</strong>: <em>required (integer)</em><p>The ID of the community to delete</p></li></ul></div><div class="tab-pane" id="community_delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success": true,
+  "status": 200,
+  "data": {
+    "community": 300
+  }
+}
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "success": false,
+  "status": 404,
+  "message": "No community with this id to retract",
+  "data": {
+    "community": 700
+  }
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="generation" class="panel-title">/generation</h3></div><div class="panel-body"><div class="top-resource-description"><p>A generation belongs to a community and agents reside in a generation.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_generation"><span class="parent"></span>/generation</a> <span class="methods"><a href="#generation_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_generation" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#generation_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a new generation for an existing community in the service. If the return value of success is false, an error message will be returned in the message field of the JSON object.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="generation_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/generation</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a new generation for an existing community in the service. If the return value of success is false, an error message will be returned in the message field of the JSON object.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#generation_post_request" data-toggle="tab">Request</a></li><li><a href="#generation_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="generation_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>:</p><pre><code>{
+  "type": "object",
+  "required": true,
+  "properties": {
+    "community": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the pre-existing community that the generation belongs to"
+    },
+    "generation": {
+    	"type": "integer",
+    	"required": true,
+    	"description": "The id for the new generation to have"
+    }
+  }
+}
+</code></pre><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "community": 322,
+  "generation": 7
+}
+</code></pre></div></div><div class="tab-pane" id="generation_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "data": {
     "community": 322,
     "generation": 7
@@ -209,16 +278,82 @@
   "success": true,
   "status": 200
 }
-</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="agent" class="panel-title">/agent</h3></div><div class="panel-body"><div class="top-resource-description"><p>The individuals in the system that perceive events, can believe things about their world and act on them. They are part of a generation in a community.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_agent"><span class="parent"></span>/agent</a> <span class="methods"><a href="#agent_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_agent" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#agent_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a new agent the belongs to an existing community and generation in the service. If the return value of success is false, an error message will be returned in the message field of the JSON object.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="agent_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/agent</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a new agent the belongs to an existing community and generation in the service. If the return value of success is false, an error message will be returned in the message field of the JSON object.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#agent_post_request" data-toggle="tab">Request</a></li><li><a href="#agent_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="agent_post_request"><h3>Query Parameters</h3><ul><li><strong>strategy</strong>: <em>required (string)</em><p>The strategy for the new agent to have</p></li><li><strong>options</strong>: <em>required (array)</em><p>The options for the strategy that the new agent will have</p></li><li><strong>community</strong>: <em>required (integer)</em><p>The id for the pre-existing community the agent belongs to</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for the pre-existing generation the agent belongs to</p></li><li><strong>player</strong>: <em>required (integer)</em><p>The id for the new agent</p></li></ul></div><div class="tab-pane" id="agent_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="agent" class="panel-title">/agent</h3></div><div class="panel-body"><div class="top-resource-description"><p>The individuals in the system that perceive events, can believe things about their world and act on them. They are part of a generation in a community.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_agent"><span class="parent"></span>/agent</a> <span class="methods"><a href="#agent_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_agent" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#agent_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create a new agent the belongs to an existing community and generation in the service. If the return value of success is false, an error message will be returned in the message field of the JSON object.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="agent_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/agent</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create a new agent the belongs to an existing community and generation in the service. If the return value of success is false, an error message will be returned in the message field of the JSON object.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#agent_post_request" data-toggle="tab">Request</a></li><li><a href="#agent_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="agent_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>:</p><pre><code>{
+  "type": "object",
+  "required": true,
+  "properties": {
+    "community": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the pre-existing community that the agent belongs to"
+    },
+    "generation": {
+    	"type": "integer",
+    	"required": true,
+    	"description": "The id the new agents belongs too"
+    },
+    "donor_strategy": {
+      "type": "string",
+      "required": true,
+      "description": "The donor strategy for the agent (see strategies)"
+    },
+    "non_donor_strategy": {
+      "type": "string",
+      "required": true,
+      "description": "The non donor strategy for the agent (see strategies)"
+    },
+    "trust_model": {
+      "type": "string",
+      "required": true,
+      "description": "The trust model for the agent (see strategies)"
+    },
+    "options": {
+      "type": "array",
+      "required": true,
+      "description": "The options for the agents strategy (see strategies)"
+    },
+    "player": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the new agent"
+    }
+  }
+}
+</code></pre><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "community": 322,
+  "generation": 7,
+  "player": 9,
+  "donor_strategy": "Veritability Discerner",
+  "non_donor_strategy": "Promote Self",
+  "trust_model": "Strong Reactor",
+  "options": [5]
+}
+</code></pre></div></div><div class="tab-pane" id="agent_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "data": {
     "community": 322,
     "generation": 7,
-    "player": 3,
-    "strategy": "Standing Discriminator",
-    "options": ["trusting"]
+    "player": 9,
+    "donor_strategy": "Veritability Discerner",
+    "non_donor_strategy": "Promote Self",
+    "trust_model": "Strong Reactor",
+    "options": [5]
   },
   "success": true,
   "status": 200
+}
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": {
+    "community": 322,
+    "generation": 7,
+    "player": 9,
+    "donor_strategy": "V Discerner",
+    "non_donor_strategy": "Promote Self",
+    "trust_model": "Strong Reactor",
+    "options": [5]
+  },
+  "success": false,
+  "message": "No such strategy",
+  "status": 404
 }
 </code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="percept" class="panel-title">/percept</h3></div><div class="panel-body"><div class="top-resource-description"><p>Agents perceive events and happenings in an environment, input percepts to them.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_percept_action"><span class="parent">/percept</span>/action</a> <span class="methods"></span></h4></div><div id="panel_percept_action" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>A particular type of percept where an action has been taken and the agent has perceived it.</p></div><div class="list-group"></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_percept_action_interaction"><span class="parent">/percept/action</span>/interaction</a> <span class="methods"><a href="#percept_action_interaction_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_percept_action_interaction" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>An interaction between a donor-recipient pair where the donor has committed to an action.</p></div><div class="list-group"><div onclick="window.location.href = '#percept_action_interaction_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Give an agent a percept of an interaction between a donor-recipient pair of agents at a specific timepoint and the action (defect or cooperate) that the donor took.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="percept_action_interaction_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/percept/action</span>/interaction</h4></div><div class="modal-body"><div class="alert alert-info"><p>Give an agent a percept of an interaction between a donor-recipient pair of agents at a specific timepoint and the action (defect or cooperate) that the donor took.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#percept_action_interaction_post_request" data-toggle="tab">Request</a></li><li><a href="#percept_action_interaction_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="percept_action_interaction_post_request"><h3>Query Parameters</h3><ul><li><strong>community</strong>: <em>required (integer)</em><p>The id for the community that the perceiver belongs to</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for the generation that the perceiver belongs to</p></li><li><strong>perceiver</strong>: <em>required (integer)</em><p>The id for the perceiver</p></li><li><strong>action</strong>: <em>required (string)</em><p>The action (defect or cooperate) that the perceiver is perceiving</p></li><li><strong>donor</strong>: <em>required (integer)</em><p>The agent who has commited the action</p></li><li><strong>recipient</strong>: <em>required (integer)</em><p>The agent who is on the receiving end of the action</p></li><li><strong>timepoint</strong>: <em>required (integer)</em><p>The timepoint at which this interaction took place</p></li></ul></div><div class="tab-pane" id="percept_action_interaction_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "data": {

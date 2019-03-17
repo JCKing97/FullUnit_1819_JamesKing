@@ -9,6 +9,7 @@ from app import create_app, db
 from app.models import Match, Player, Round, Action
 from tests.test_config import TestConfig
 
+
 class TestConversion(unittest.TestCase):
 
     def setUp(self):

@@ -68,7 +68,6 @@ http:location(belief, root(belief), []).
 :- http_handler(belief(interaction), belief_interaction, []).
 :- http_handler(belief(standing), belief_standing, []).
 
-
 /**
  * server(++Post:int) is semidet
  * 
@@ -101,15 +100,16 @@ community(Request) :-
     reply_json(return{id:ID, status:200, success:true}).
 community(Request) :-
     member(method(delete), Request), !,
-    http_read_json_dict(Request, DictIn),
-    retract_community(DictIn, Success),
+    http_parameters(Request, [ community(Community, [ optional(false) ])]),
+    atom_number(Community, CommunityID),
+    retract_community(CommunityID, Success),
     (   Success==true
-    ->  reply_json(return{data:DictIn, status:200, success:Success})
-    ;   reply_json(return{ data:DictIn,
+    ->  reply_json(return{data: data{community: CommunityID}, status:200, success:Success})
+    ;   reply_json(return{ data: data{community: CommunityID},
                            message:Success,
-                           status:200,
+                           status:404,
                            success:false
-                         })
+                         }, [status(404)])
     ).
 
 /**
@@ -128,9 +128,9 @@ generation(Request) :-
     ->  reply_json(return{data:DictIn, status:200, success:Success})
     ;   reply_json(return{ data:DictIn,
                            message:Success,
-                           status:200,
+                           status:404,
                            success:false
-                         })
+                         }, [status(404)])
     ).
 
 /**
@@ -149,9 +149,9 @@ agent(Request) :-
     ->  reply_json(return{data:DictIn, status:200, success:Success})
     ;   reply_json(return{ data:DictIn,
                            message:Success,
-                           status:200,
+                           status:404,
                            success:false
-                         })
+                         }, [status(404)])
     ).
 
 /**

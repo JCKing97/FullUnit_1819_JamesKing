@@ -416,6 +416,7 @@ Lipowski \textit{et al.}~\cite{lipowski2012roulette} presented an efficient vers
 In the following sections of this chapter I will be discussing the theoretical side of my framework and the subsequent practical implementation of this framework.
 
 \section{Theoretical Framework}
+\label{sec:theo}
 
 \subsection{Introduction}
 In this section on the theoretical framework I will be presenting an overall design for my mixed reciprocity model and MAS. I have taken inspiration from past work on game theory (discussed in section~\ref{sec:backgroundgametheory}) and techniques for the development of MASs (from section~\ref{sec:backgroundmas}). Franklin and Graesser~\cite{franklin1996agent} stipulated that to describe an agent one must describe five aspects: the environment the agent resides in, the agent's sensing capabilities, the possible actions the agent can take, the drives or primative motivators for an agent's actions and the action selection architecture for the agent. I shall describe these five aspects in the following subsections here.
@@ -618,7 +619,7 @@ In summary, I have presented a MAS that uses a variant of a genetic algorithm to
 \end{wrapfigure}
 One of the objectives of my project is to create a system that is distributable, in order for it to be an experimentation and learning tool for those interested in studying multi-agent interactions. This distributability is reflected in the architecture I have used to develop my system. A web application acts as the `shop front' of the system and allows anyone with internet access to create, run and view analysis of the available games.\par 
 I named the web application `The Nature Engine' and it is of typical web architecture: the client-server model. Built into this web application is an implementation of my theoretical framework which runs the environment and the agent's bodies. Notably this part of the system doesn't include agent decision making components. These components are hosted in a separate web service, that has been named the Agent Mind as a Service (AMAAS). This web service exposes an API for the web application to interact with.\par 
-The final component of the system is a database for the long term storage of data about users of the site (to enable users to record and label experiments) and game data. This is a relational database that due to the use of and ORM (SQLAlchemy) I have been able to create as both SQLite for development and MySql for deployment. An illustration of this is in figure~\ref{fig:architecture}.
+The final component of the system is a database for the long term storage of data about users of the site (to enable users to record and label experiments) and game data. This is a relational database that due to the use of and ORM (SQLAlchemy) I have been able to create as both SQLite for development and MySql for deployment. An illustration of this is in figure~\ref{fig:architecture}. The system is deployed on an ubuntu server and the database is situated on another machine.
 
 
 \subsubsection{Proof of Concepts and Learning}
@@ -647,8 +648,31 @@ To develop these skills I used Anne Ogborn's `Creating Web Applications in SWI-P
 \subsubsection{The Nature Engine}
 I built on top of the early prototype of The Nature Engine to develop the final web application. This included improving the front end content, adding a section to run the theoretical framework I have devised and adding a couple of extra features.\par 
 To improve the front end content I worked on improving the form that allows users to dynamically select and remove agents from a tournament. This also translated into the form that allows users to do the same for my game. Other improvements were the use of a bootstrap carousel for the homepage to prevent text overload on the screen, better text descriptions on the website and improved game and tournament analysis.\par 
-The main bulk of the development was implementing the theoretical framework. However, to run this game in the web application required a front-end, processing of user requests and storing of data in the database. 
 \begin{wrapfigure}{l}{0.7\textwidth}
+\vspace{-30pt}
+\begin{framed}
+	\begin{center}
+	\includegraphics[width=\textwidth]{Animation.png}
+	\caption{The animation of a game.}
+	\label{fig:animation}
+	\end{center}
+\end{framed}
+\vspace{-30pt}
+\end{wrapfigure}
+The main bulk of the development was implementing the theoretical framework. However, to run this game in the web application required a front-end, processing of user requests and storing of data in the database. This development is a vertical slice of the web application. The process is as follows. A user sets up a game on the set up page using a React.js form (decisions are informed by strategy information in an information box), this form is submitted which sends a post request with the relevant information to the server.\par 
+\begin{wrapfigure}{l}{\textwidth}
+\vspace{-30pt}
+\begin{framed}
+	\begin{center}
+	\includegraphics[width=\textwidth]{PopulationTracker.png}
+	\caption{Tracking the population of strategies through each generation.}
+	\label{fig:population_tracker}
+	\end{center}
+\end{framed}
+\vspace{-30pt}
+\end{wrapfigure}
+The server then puts a method to create and run the game in a redis queue and then store the resulting data in the database. The user is redirected to a waiting page, which either notifies them of a timeout on their game or sends them through to the analysis page. The analysis page includes a run down of the statistics in terms of cooperation, gossip and the success of each strategy and agent. A visualisation of the game that has been run is also included in an animation on the analysis page.\par 
+\begin{wrapfigure}{l}{\textwidth}
 \vspace{-30pt}
 \begin{framed}
 	\begin{center}
@@ -659,20 +683,19 @@ The main bulk of the development was implementing the theoretical framework. How
 \end{framed}
 \vspace{-30pt}
 \end{wrapfigure}
-In addition to this I created a feature that allows users to create accounts, login and associates games of my theoretical framework to their account. These games can be given a label so they can keep track of the experiments the have run (illustrated in figure~\ref{fig:user_experiments}. User data is recorded in the database and passwords are hashed to keep them secret. 
-
-\subsubsection{Databases}
-
-\subsubsection{Deployment}
+In addition to this I have created a feature that allows users to create accounts, login and associates games of my theoretical framework to their account. These games can be given a label so they can keep track of the experiments the have run (illustrated in figure~\ref{fig:user_experiments}. User data is recorded in the database and passwords are hashed to keep them secret. 
 
 \subsection{Framework}
 \textcolor{red}{Agents based, Strategies, environment etc.}
 \subsubsection{Environment and Agent's Bodies}
+The environment and agent's bodies from the theoretical framework described in section~\ref{sec:theo} has been implemented within the nature engine. 
 
 \subsubsection{Agent Mind as a Service (AMAAS)}
 
+\subsubsection{Simple Agent Gossip Language}
+
 \subsection{Software Engineering}
-\textcolor{red}{Unit testing (PLUnit + unittest), Web App Testing, API Testing, UML design, Design Patterns, GUI Design, Scrum (Sprints, Task Backlog), Documentation (sphinx and restructured text, pldoc) and commenting, API Documentation, Agent Oriented Programming, Git (VCS), Tools (Pycharm, UMLet, Linting, Syntax highlighting, packager)}
+\textcolor{red}{Unit testing (PLUnit + unittest), Web App Testing, API Testing, UML design, Design Patterns (Observer of player state), GUI Design, Scrum (Sprints, Task Backlog), Documentation (sphinx and restructured text, pldoc) and commenting, API Documentation, Agent Oriented Programming, Git (VCS), Tools (Pycharm, UMLet, Linting, Syntax highlighting, packager)}
 \subsubsection{Introduction}
 
 \subsubsection{Design}
@@ -705,6 +728,27 @@ In addition to this I created a feature that allows users to create accounts, lo
 
 \section{Discussion}
 
+\chapter{Critical Analysis and Discussion}
+\textcolor{red}{Project achievements\\
+Reflection on project process (difficulties, success, failure)\\
+Successful?\\
+Future enhancements\\
+Focus on project\\
+Compare to deliverables at beginning\\
+Reflect on initial focus on game theory over MASs}
+
+\chapter{Conclusions}
+\textcolor{red}{Mechanism has to work with and without re-meeting.\\
+Mechanism has to encourage cooperation between unknown entities.\\
+Opportunity for extra work? Further exploration of network reciprocity as outline in background and background summary. Extend indirect reciprcoty so individuals can choose who they wish to interact with. Symbolic reinforcement learning strategies~\cite{harper2017reinforcement}.\\
+Move closer to using an agent model such as BDI?\\
+Using the GAIA methodology for development?~\cite{wooldridge2000gaia}.\\
+Reaching agreements\\
+Use an AOP language (GOAL or SARL?)}
+
+\chapter{Future Additions}
+\textcolor{red}{Things on to do list + in conclusions}
+
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
 \newpage
@@ -714,7 +758,13 @@ In addition to this I created a feature that allows users to create accounts, lo
 \label{endpage}
 
 \chapter{Professional Issues}
-\textcolor{red}{are current machine learning methods unethical? Deep symoblic reinforcement learning you can query actions, like I have done.}
+\textcolor{red}{are current machine learning methods unethical? Deep symoblic reinforcement learning you can query actions, like I have done.\\
+Replacement of people in jobs?\\
+AI issues and risks?\\
+Relate to project\\
+Moral philosophy of agent societies\\
+Refer to last chapter of russell and norvig}
+
 
 
 \chapter{Appendix}

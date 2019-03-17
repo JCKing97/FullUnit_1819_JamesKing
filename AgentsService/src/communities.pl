@@ -28,8 +28,7 @@ new_community(ID):-
  * @arg DictIn Contains the id of the community to delete.
  */
 
-retract_community(DictIn, Success):-
-	ID = DictIn.community,
+retract_community(ID, Success):-
 	community(ID), !,
 	retract_agents(ID),
 	retract_generations(ID),
