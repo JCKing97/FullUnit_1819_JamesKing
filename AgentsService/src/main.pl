@@ -24,9 +24,9 @@ input_format(observed_at(E, T), E, T).
 ?-['./communities'].
 ?-['./percepts'].
 ?-['./agents'].
-?-['./beliefs'].
 ?-['./revise'].
 ?-['./actions'].
+?-['./beliefs'].
 
 
 % Set correct handling of JSON
@@ -170,9 +170,9 @@ percept_interaction(Request) :-
     ->  reply_json(return{data:DictIn, status:200, success:Success})
     ;   reply_json(return{ data:DictIn,
                            message:Success,
-                           status:200,
+                           status:404,
                            success:false
-                         })
+                         }, [status(404)])
     ).
 
 
@@ -206,9 +206,9 @@ percept_action_interaction(Request) :-
     ->  reply_json(return{data:DictIn, status:200, success:Success})
     ;   reply_json(return{ data:DictIn,
                            message:Success,
-                           status:200,
+                           status:404,
                            success:false
-                         })
+                         }, [status(404)])
     ).
 
 
@@ -228,9 +228,9 @@ percept_action_gossip(Request) :-
     ->  reply_json(return{data:DictIn, status:200, success:Success})
     ;   reply_json(return{ data:DictIn,
                            message:Success,
-                           status:200,
+                           status:404,
                            success:false
-                         })
+                         }, [status(404)])
     ).
 
 /**
@@ -415,7 +415,7 @@ belief_standing(Request) :-
                            status:200,
                            success:false
                          })
-    ).
+).
 
 /**
  * action(++Request:list) is nondet
@@ -451,7 +451,7 @@ action(Request) :-
                                       timepoint:Timepoint
                                     },
                            message:Success,
-                           status:200,
+                           status:404,
                            success:false
-                         })
+                         }, [status(404)])
     ).

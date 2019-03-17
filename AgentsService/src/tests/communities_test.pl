@@ -22,22 +22,22 @@
 		assertion(community(ID11)),
 		assertion(community(ID12)),
 		assertion(community(ID13)),
-		assertion(\+retract_community(data{community: ID11}, "No community with this ID to retract")),
-		assertion(\+retract_community(data{community: ID12}, "No community with this ID to retract")),
-		assertion(\+retract_community(data{community: ID13}, "No community with this ID to retract")),
+		assertion(\+retract_community(ID11, "No community with this ID to retract")),
+		assertion(\+retract_community(ID12, "No community with this ID to retract")),
+		assertion(\+retract_community(ID13, "No community with this ID to retract")),
 		assertion(\+community(ID11)),
 		assertion(\+community(ID12)),
 		assertion(\+community(ID13)),
-		assertion(retract_community(data{community: ID11}, "No community with this ID to retract")),
-		assertion(retract_community(data{community: ID12}, "No community with this ID to retract")),
-		assertion(retract_community(data{community: ID13}, "No community with this ID to retract")),
+		assertion(retract_community(ID11, "No community with this ID to retract")),
+		assertion(retract_community(ID12, "No community with this ID to retract")),
+		assertion(retract_community(ID13, "No community with this ID to retract")),
 		assertion(\+community(ID11)),
 		assertion(\+community(ID12)),
 		assertion(\+community(ID13)).
 
 	test(retract_existing_community, []):-
 		new_community(ID3),
-		assertion(retract_community(data{community: ID3}, true)).
+		assertion(retract_community(ID3, true)).
 
 	test(retract_all_communities, []):-
 		new_community(ID4),
@@ -46,8 +46,8 @@
 		assertion(community(ID4)),
 		assertion(community(ID5)),
 		assertion(community(ID6)),
-		forall(community(ID), (assertion(retract_community(data{community: ID}, true)))),
-		forall(community(ID), (assertion(\+retract_community(data{community: ID}, "No community with this ID to retract")))),
+		forall(community(ID), (assertion(retract_community(ID, true)))),
+		forall(community(ID), (assertion(\+retract_community(ID, "No community with this ID to retract")))),
 		new_community(ID7),
 		assertion(community(ID7)).
 
@@ -58,8 +58,8 @@
 		assertion(community(ID9)),
 		new_community(ID10),
 		assertion(community(ID10)),
-		assertion(retract_community(data{community: ID9}, true)),
-		assertion(retract_community(data{community: ID8}, true)),
+		assertion(retract_community(ID9, true)),
+		assertion(retract_community(ID8, true)),
 		assertion(community(ID10)),
 		assertion(\+community(ID9)),
 		assertion(\+community(ID8)),
@@ -106,7 +106,7 @@
 		new_community(ID),
 		assertion(new_generation(data{community: ID, generation: 0}, true)),
 		assertion(new_generation(data{community: ID, generation: 0}, "This community already has a generation with this id")),
-		assertion(retract_community(data{community: ID}, true)),
+		assertion(retract_community(ID, true)),
 		assertion(new_generation(data{community: ID, generation: 0}, "No such community")),
 		new_community(ID),
 		assertion(new_generation(data{community: ID, generation: 0}, true)).
@@ -120,7 +120,7 @@
 
 	test(new_generation_incorrect_community):-
 		new_community(ID),
-		assertion(retract_community(data{community: ID}, true)),
+		assertion(retract_community(ID, true)),
 		assertion(new_generation(data{community: ID, generation: 0}, "No such community")).
 
 	test(retract_generations_from_community):-
@@ -131,7 +131,7 @@
 		assertion(generation(community(ID), 0)),
 		assertion(generation(community(ID), 1)),
 		assertion(generation(community(ID), 2)),
-		assertion(retract_community(data{community: ID}, true)),
+		assertion(retract_community(ID, true)),
 		assertion(\+generation(community(ID), 0)),
 		assertion(\+generation(community(ID), 1)),
 		assertion(\+generation(community(ID), 2)),

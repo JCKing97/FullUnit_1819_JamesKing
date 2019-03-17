@@ -603,8 +603,6 @@ In summary, I have presented a MAS that uses a variant of a genetic algorithm to
 
 \subsection{Development}
 \textcolor{red}{Learning flask + Prolog web, Proof of concept applications, Talk about web dev practices, Architecture, Amaas, Web Application (+environment), Database (SQLAlchemy + SQLite + MySQL), Deployment}
-\subsubsection{Introduction}
-
 \subsubsection{Architecture}
 \begin{wrapfigure}{l}{0.5\textwidth}
 \vspace{-30pt}
@@ -696,13 +694,16 @@ The environment and agent's bodies from the theoretical framework described in s
 
 \subsection{Software Engineering}
 \textcolor{red}{Unit testing (PLUnit + unittest), Web App Testing, API Testing, UML design, Design Patterns (Observer of player state), GUI Design, Scrum (Sprints, Task Backlog), Documentation (sphinx and restructured text, pldoc) and commenting, API Documentation, Agent Oriented Programming, Git (VCS), Tools (Pycharm, UMLet, Linting, Syntax highlighting, packager)}
-\subsubsection{Introduction}
+\subsubsection{Process}
 
 \subsubsection{Design}
 
 \subsubsection{Testing}
+The testing of my system can be broken down into five parts: AMAAS bottom up integration testing, environment bottom up integration testing, application programming interface (API) testing, web application testing and some extra early unit testing on other parts of the web application. The bulk of this testing comes from the first two, which were interleaved with the development of the system. The early unit testing was also interleaved with development. However API and web application testing was carried out after development.\par 
+As the AMAAS system has been developed in Prolog, the unit testing has been done with the PLUnit library. This focused on testing the functionality provided by the predicates I have created in the system. In depth testing has been undertaken for every strategy, in many different possible situations and timelines. I have also tested all predicates for managing agents, generations and strategies in the system as well as the predicates used for receiving percepts and getting actions.\par 
+Further to this the AMAAS system has been web API tested. The functionality that the API uses in the system has been thoroughly tested in the bottom up integration testing. As such, API testing focused on ensuring the API met the specification laid out in the documentation. I carried out this testing using the python unittest testing framework and the requests library. I had previously planned on using an API testing tool such as postman, but had found no free and easy way to put my tests into code to put on my github repository.\par 
+I also used this testing framework for bottom up integration testing of the environment for my game. This testing also requires the AMAAS system to be running and working correctly so acts as integration testing between the two systems. The testing was interleaved with development in a way that as I created each unit (class) or added functionality to that unit I added testing for the functionality added. I used the same framework for some earlier testing in the web app. This was mostly testing for converting produced game data for the database.\par  
 
-\subsubsection{Process}
 
 \subsubsection{Documentation}
 

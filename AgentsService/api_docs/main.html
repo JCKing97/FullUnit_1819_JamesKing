@@ -355,7 +355,57 @@
   "message": "No such strategy",
   "status": 404
 }
-</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="percept" class="panel-title">/percept</h3></div><div class="panel-body"><div class="top-resource-description"><p>Agents perceive events and happenings in an environment, input percepts to them.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_percept_action"><span class="parent">/percept</span>/action</a> <span class="methods"></span></h4></div><div id="panel_percept_action" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>A particular type of percept where an action has been taken and the agent has perceived it.</p></div><div class="list-group"></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_percept_action_interaction"><span class="parent">/percept/action</span>/interaction</a> <span class="methods"><a href="#percept_action_interaction_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_percept_action_interaction" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>An interaction between a donor-recipient pair where the donor has committed to an action.</p></div><div class="list-group"><div onclick="window.location.href = '#percept_action_interaction_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Give an agent a percept of an interaction between a donor-recipient pair of agents at a specific timepoint and the action (defect or cooperate) that the donor took.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="percept_action_interaction_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/percept/action</span>/interaction</h4></div><div class="modal-body"><div class="alert alert-info"><p>Give an agent a percept of an interaction between a donor-recipient pair of agents at a specific timepoint and the action (defect or cooperate) that the donor took.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#percept_action_interaction_post_request" data-toggle="tab">Request</a></li><li><a href="#percept_action_interaction_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="percept_action_interaction_post_request"><h3>Query Parameters</h3><ul><li><strong>community</strong>: <em>required (integer)</em><p>The id for the community that the perceiver belongs to</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for the generation that the perceiver belongs to</p></li><li><strong>perceiver</strong>: <em>required (integer)</em><p>The id for the perceiver</p></li><li><strong>action</strong>: <em>required (string)</em><p>The action (defect or cooperate) that the perceiver is perceiving</p></li><li><strong>donor</strong>: <em>required (integer)</em><p>The agent who has commited the action</p></li><li><strong>recipient</strong>: <em>required (integer)</em><p>The agent who is on the receiving end of the action</p></li><li><strong>timepoint</strong>: <em>required (integer)</em><p>The timepoint at which this interaction took place</p></li></ul></div><div class="tab-pane" id="percept_action_interaction_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="percept" class="panel-title">/percept</h3></div><div class="panel-body"><div class="top-resource-description"><p>Agents perceive events and happenings in an environment, input percepts to them.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_percept_action"><span class="parent">/percept</span>/action</a> <span class="methods"></span></h4></div><div id="panel_percept_action" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>A particular type of percept where an action has been taken and the agent has perceived it.</p></div><div class="list-group"></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_percept_action_interaction"><span class="parent">/percept/action</span>/interaction</a> <span class="methods"><a href="#percept_action_interaction_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_percept_action_interaction" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>An interaction between a donor-recipient pair where the donor has committed to an action.</p></div><div class="list-group"><div onclick="window.location.href = '#percept_action_interaction_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Give an agent a percept of an interaction between a donor-recipient pair of agents at a specific timepoint and the action (defect or cooperate) that the donor took.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="percept_action_interaction_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/percept/action</span>/interaction</h4></div><div class="modal-body"><div class="alert alert-info"><p>Give an agent a percept of an interaction between a donor-recipient pair of agents at a specific timepoint and the action (defect or cooperate) that the donor took.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#percept_action_interaction_post_request" data-toggle="tab">Request</a></li><li><a href="#percept_action_interaction_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="percept_action_interaction_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>:</p><pre><code>{
+  "type": "object",
+  "required": true,
+  "properties": {
+    "community": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the community the donor, recipent and perceiver belong to"
+    },
+    "generation": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the generation the donor, recipent and perceiver belong to"
+    },
+    "perceiver": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the agent to send the perception to"
+    },
+    "donor": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the agent the committed the action"
+    },
+    "recipient": {
+      "type": "integer",
+      "required": true,
+      "description": "The id of the agent that was on the receiving end of the action"
+    },
+    "action": {
+      "type": "string",
+      "required": true,
+      "description": "Either defect or cooperate, the action the donor committed"
+    },
+    "timepoint": {
+      "type": "integer",
+      "required": true,
+      "description": "The timepoint at which the action was committed to"
+    }
+  }
+}
+</code></pre><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "community": 45,
+  "generation": 3,
+  "perceiver": 1,
+  "action": "defect",
+  "donor": 3,
+  "recipient": 4,
+  "timepoint": 3
+}
+</code></pre></div></div><div class="tab-pane" id="percept_action_interaction_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "data": {
     "community": 45,
     "generation": 3,
@@ -368,7 +418,71 @@
   "success": true,
   "status": 200
 }
-</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_percept_action_gossip"><span class="parent">/percept/action</span>/gossip</a> <span class="methods"><a href="#percept_action_gossip_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_percept_action_gossip" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>A gossiper has gossiped to the perceiver either a positive or negative statement about an agent.</p></div><div class="list-group"><div onclick="window.location.href = '#percept_action_gossip_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Give an agent a percept of an agent gossiping to them about another agent at a particular timepoint, the gossip can either be "positive" or "negative".</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="percept_action_gossip_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/percept/action</span>/gossip</h4></div><div class="modal-body"><div class="alert alert-info"><p>Give an agent a percept of an agent gossiping to them about another agent at a particular timepoint, the gossip can either be "positive" or "negative".</p></div><ul class="nav nav-tabs"><li class="active"><a href="#percept_action_gossip_post_request" data-toggle="tab">Request</a></li><li><a href="#percept_action_gossip_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="percept_action_gossip_post_request"><h3>Query Parameters</h3><ul><li><strong>community</strong>: <em>required (integer)</em><p>The id for the community that the perceiver belongs to</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for the generation that the perceiver belongs to</p></li><li><strong>perceiver</strong>: <em>required (integer)</em><p>The id for the perceiver</p></li><li><strong>gossip</strong>: <em>required (string)</em><p>The content of the gossip ("positive" or "negative")</p></li><li><strong>about</strong>: <em>required (integer)</em><p>The id for the agent which the gossip is about</p></li><li><strong>gossiper</strong>: <em>required (integer)</em><p>The id for the agent who spread the gossip</p></li><li><strong>timepoint</strong>: <em>required (integer)</em><p>The timepoint at which the gossip occurred</p></li></ul></div><div class="tab-pane" id="percept_action_gossip_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": {
+    "community": 45,
+    "generation": 3,
+    "perceiver": 1,
+    "action": "incorrect",
+    "donor": 3,
+    "recipient": 4,
+    "timepoint": 3
+  },
+  "success": false,
+  "status": 404,
+  "message": "Incorrect action must either be defect or cooperate"
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_percept_action_gossip"><span class="parent">/percept/action</span>/gossip</a> <span class="methods"><a href="#percept_action_gossip_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_percept_action_gossip" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>A gossiper has gossiped to the perceiver either a positive or negative statement about an agent.</p></div><div class="list-group"><div onclick="window.location.href = '#percept_action_gossip_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Give an agent a percept of an agent gossiping to them about another agent at a particular timepoint, the gossip can either be "positive" or "negative".</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="percept_action_gossip_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/percept/action</span>/gossip</h4></div><div class="modal-body"><div class="alert alert-info"><p>Give an agent a percept of an agent gossiping to them about another agent at a particular timepoint, the gossip can either be "positive" or "negative".</p></div><ul class="nav nav-tabs"><li class="active"><a href="#percept_action_gossip_post_request" data-toggle="tab">Request</a></li><li><a href="#percept_action_gossip_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="percept_action_gossip_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>:</p><pre><code>{
+  "type": "object",
+  "required": true,
+  "properties": {
+    "community": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the community the gossiper, about and perceiver agents belong to"
+    },
+    "generation": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the generation the gossiper, about and perceiver agents belong to"
+    },
+    "perceiver": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the agent to send the perception to"
+    },
+    "gossiper": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the agent that is gossiping"
+    },
+    "about": {
+      "type": "integer",
+      "required": true,
+      "description": "The id of the agent that the gossip is about"
+    },
+    "gossip": {
+      "type": "string",
+      "required": true,
+      "description": "Either positive or negative, the piece of gossip the gossiper committed"
+    },
+    "timepoint": {
+      "type": "integer",
+      "required": true,
+      "description": "The timepoint at which the gossip was transmitted"
+    }
+  }
+}
+</code></pre><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "community": 45,
+  "generation": 3,
+  "perceiver": 1,
+  "gossip": "positive",
+  "gossiper": 3,
+  "about": 4,
+  "timepoint": 3
+}
+</code></pre></div></div><div class="tab-pane" id="percept_action_gossip_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "data": {
     "community": 45,
     "generation": 3,
@@ -381,73 +495,82 @@
   "success": true,
   "status": 200
 }
-</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_percept_interaction"><span class="parent">/percept</span>/interaction</a> <span class="methods"><a href="#percept_interaction_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_percept_interaction" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>A perception for a donor and recipient that they are members of a donor-recipient pair at this specific timepoint.</p></div><div class="list-group"><div onclick="window.location.href = '#percept_interaction_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Give a percept to both a donor and a recipient that they are part of a donor-recipient pair at a particular timepoint.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="percept_interaction_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/percept</span>/interaction</h4></div><div class="modal-body"><div class="alert alert-info"><p>Give a percept to both a donor and a recipient that they are part of a donor-recipient pair at a particular timepoint.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#percept_interaction_post_request" data-toggle="tab">Request</a></li><li><a href="#percept_interaction_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="percept_interaction_post_request"><h3>Query Parameters</h3><ul><li><strong>community</strong>: <em>required (integer)</em><p>The id for the community that the donor and recipient belong to</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for the generation that the donor and recipient belong to</p></li><li><strong>donor</strong>: <em>required (integer)</em><p>The id for the donor of the interaction</p></li><li><strong>recipient</strong>: <em>required (integer)</em><p>The id for the recipient of the interaction</p></li><li><strong>timepoint</strong>: <em>required (integer)</em><p>The timepoint at which the interaction takes place</p></li></ul></div><div class="tab-pane" id="percept_interaction_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": {
+    "community": 45,
+    "generation": 3,
+    "perceiver": 6,
+    "gossip": "incorrect",
+    "about": 3,
+    "gossiper": 5,
+    "timepoint": 7
+  },
+  "success": false,
+  "status": 404,
+  "message": "Incorrect gossip action should be either positive or negative"
+}
+</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_percept_interaction"><span class="parent">/percept</span>/interaction</a> <span class="methods"><a href="#percept_interaction_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_percept_interaction" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>A perception for a donor and recipient that they are members of a donor-recipient pair at this specific timepoint.</p></div><div class="list-group"><div onclick="window.location.href = '#percept_interaction_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Give a percept to both a donor and a recipient that they are part of a donor-recipient pair at a particular timepoint.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="percept_interaction_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/percept</span>/interaction</h4></div><div class="modal-body"><div class="alert alert-info"><p>Give a percept to both a donor and a recipient that they are part of a donor-recipient pair at a particular timepoint.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#percept_interaction_post_request" data-toggle="tab">Request</a></li><li><a href="#percept_interaction_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="percept_interaction_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>:</p><pre><code>{
+  "type": "object",
+  "required": true,
+  "properties": {
+    "community": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the community the donor, recipent and perceiver belong to"
+    },
+    "generation": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the generation the donor, recipent and perceiver belong to"
+    },
+    "donor": {
+      "type": "integer",
+      "required": true,
+      "description": "The id for the agent the committed the action"
+    },
+    "recipient": {
+      "type": "integer",
+      "required": true,
+      "description": "The id of the agent that was on the receiving end of the action"
+    },
+    "timepoint": {
+      "type": "integer",
+      "required": true,
+      "description": "The timepoint at which the action was committed to"
+    }
+  }
+}
+</code></pre><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "community": 45,
+  "generation": 3,
+  "donor": 3,
+  "recipient": 4,
+  "timepoint": 3
+}
+</code></pre></div></div><div class="tab-pane" id="percept_interaction_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "data": {
     "community": 45,
     "generation": 3,
     "donor": 3,
     "recipient": 4,
-    "timepoint": 8
+    "timepoint": 3
   },
-  "succes": true,
+  "success": true,
   "status": 200
 }
-</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="belief" class="panel-title">/belief</h3></div><div class="panel-body"><div class="top-resource-description"><p>Agents have beliefs derived from percepts which they use to judge how they should act.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_belief_donor"><span class="parent">/belief</span>/donor</a> <span class="methods"><a href="#belief_donor_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_belief_donor" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>A list of timepoints in which an agent is a donor and the recipients of those interactions</p></div><div class="list-group"><div onclick="window.location.href = '#belief_donor_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get a list of timepoints in which an agent believes it was a donor before the given timepoint and get the recipients of those interactions.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="belief_donor_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/belief</span>/donor</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get a list of timepoints in which an agent believes it was a donor before the given timepoint and get the recipients of those interactions.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#belief_donor_get_request" data-toggle="tab">Request</a></li><li><a href="#belief_donor_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="belief_donor_get_request"><h3>Query Parameters</h3><ul><li><strong>timepoint</strong>: <em>required (integer)</em><p>The timepoint at which you want to check the agent&#39;s belief</p></li><li><strong>community</strong>: <em>required (integer)</em><p>The id for the community to which the agent belongs</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for generation to which the agent belongs</p></li><li><strong>player</strong>: <em>required (integer)</em><p>The id for the player who&#39;s beliefs you wish to check</p></li></ul></div><div class="tab-pane" id="belief_donor_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "data": {
-    "timepoint": 7,
-    "community": 3,
-    "generation": 4,
-    "player": 2
+    "community": 45,
+    "generation": -20,
+    "donor": 3,
+    "recipient": 4,
+    "timepoint": 3
   },
-  "success": true,
-  "status": 200,
-  "interactions": [
-      {"recipient": 6, "timepoints": [4]},
-      {"recipient": 3, "timepoints": [7,8]}
-    ]
+  "success": false,
+  "status": 404,
+  "message": "No such generation for this community"
 }
-</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_belief_recipient"><span class="parent">/belief</span>/recipient</a> <span class="methods"><a href="#belief_recipient_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_belief_recipient" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>The last time the agent believed they were a recipient, before a particular timepoint.</p></div><div class="list-group"><div onclick="window.location.href = '#belief_recipient_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get the last timepoint before the given timepoint that a player believed they were a recipient in a donor-recipipent pair.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="belief_recipient_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/belief</span>/recipient</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get the last timepoint before the given timepoint that a player believed they were a recipient in a donor-recipipent pair.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#belief_recipient_get_request" data-toggle="tab">Request</a></li><li><a href="#belief_recipient_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="belief_recipient_get_request"><h3>Query Parameters</h3><ul><li><strong>timepoint</strong>: <em>required (integer)</em><p>The timepoint at which you want to check the agent&#39;s belief</p></li><li><strong>community</strong>: <em>required (integer)</em><p>The id for the community to which the agent belongs</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for generation to which the agent belongs</p></li><li><strong>player</strong>: <em>required (integer)</em><p>The id for the player who&#39;s beliefs you wish to check</p></li></ul></div><div class="tab-pane" id="belief_recipient_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
-  "data": {
-    "timepoint": 9,
-    "community": 3,
-    "generation": 4,
-    "player": 6
-  },
-  "success": true,
-  "status": 200,
-  "interactions": [
-      {"donor": 2, "timepoints": [4]},
-      {"donor": 8, "timepoints": [3,5,8]}
-    ]
-}
-</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_belief_interaction"><span class="parent">/belief</span>/interaction</a> <span class="methods"><a href="#belief_interaction_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_belief_interaction" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>The last time two agents believed they were in a donor-recipient pair interaction, before a particular timepoint.</p></div><div class="list-group"><div onclick="window.location.href = '#belief_interaction_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get the last timepoint these two players believe they were in a donor-recipient pair, and who was the donor and the recipient.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="belief_interaction_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/belief</span>/interaction</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get the last timepoint these two players believe they were in a donor-recipient pair, and who was the donor and the recipient.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#belief_interaction_get_request" data-toggle="tab">Request</a></li><li><a href="#belief_interaction_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="belief_interaction_get_request"><h3>Query Parameters</h3><ul><li><strong>timepoint</strong>: <em>required (integer)</em><p>The timepoint at which you want to check the agent&#39;s belief</p></li><li><strong>community</strong>: <em>required (integer)</em><p>The id for the community to which the agent belongs</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for generation to which the agents belongs</p></li><li><strong>player1</strong>: <em>required (integer)</em><p>The id for one of the player who&#39;s belief you wish to check</p></li><li><strong>player2</strong>: <em>required (integer)</em><p>The id for the other player who&#39;s belief you wish to check</p></li></ul></div><div class="tab-pane" id="belief_interaction_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
-  "data": {
-    "timepoint": 7,
-    "community": 3,
-    "generation": 4,
-    "player1": 2,
-    "player2": 6
-  },
-  "success": true,
-  "status": 200,
-  "timepoint": 4,
-  "interactions": [
-      {"donor": 2, "recipient": 6, "timepoints": [4]}
-    ]
-}
-</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_belief_standing"><span class="parent">/belief</span>/standing</a> <span class="methods"><a href="#belief_standing_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_belief_standing" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>The standing strategy judges other players based on their perceived "standing" which can either be good or bad.</p></div><div class="list-group"><div onclick="window.location.href = '#belief_standing_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>The player must be using the standing strategy. Get the belief of a standing strategy player about another agent on whether they have a "good" or "bad" standing.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="belief_standing_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/belief</span>/standing</h4></div><div class="modal-body"><div class="alert alert-info"><p>The player must be using the standing strategy. Get the belief of a standing strategy player about another agent on whether they have a "good" or "bad" standing.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#belief_standing_get_request" data-toggle="tab">Request</a></li><li><a href="#belief_standing_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="belief_standing_get_request"><h3>Query Parameters</h3><ul><li><strong>timepoint</strong>: <em>required (integer)</em><p>The timepoint at which you want to check the agent&#39;s belief</p></li><li><strong>community</strong>: <em>required (integer)</em><p>The id for the community to which both agents belong</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for generation to which both agents belong</p></li><li><strong>perceiver</strong>: <em>required (integer)</em><p>The id for the player who&#39;s beliefs you wish to check</p></li><li><strong>about</strong>: <em>required (integer)</em><p>The id for the other player whom the perceiver is believing about</p></li></ul></div><div class="tab-pane" id="belief_standing_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
-  "data": {
-    "timepoint": 11,
-    "community": 3,
-    "generation": 46,
-    "perceiver": 7,
-    "about": 9
-  },
-  "success": true,
-  "status": 200,
-  "standing": "good"
-}
-</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="action" class="panel-title">/action</h3></div><div class="panel-body"><div class="top-resource-description"><p>An action is taken by an agent at a specific timepoint, this can either be idle, gossip or action.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_action"><span class="parent"></span>/action</a> <span class="methods"><a href="#action_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_action" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#action_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get the action that an agent would choose to do at a particular timepoint with the beliefs that have been built from perceptions. The action can either be idle, gossip (positive or negative, with about and recipient parameters) or action (cooperate or defect, with recipient parameters)</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="action_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/action</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get the action that an agent would choose to do at a particular timepoint with the beliefs that have been built from perceptions. The action can either be idle, gossip (positive or negative, with about and recipient parameters) or action (cooperate or defect, with recipient parameters)</p></div><ul class="nav nav-tabs"><li class="active"><a href="#action_get_request" data-toggle="tab">Request</a></li><li><a href="#action_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="action_get_request"><h3>Query Parameters</h3><ul><li><strong>timepoint</strong>: <em>required (integer)</em><p>The timepoint at which the action is decided upon</p></li><li><strong>community</strong>: <em>required (integer)</em><p>The id for the community that the actor belongs to</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for the generation that the actor belongs to</p></li><li><strong>player</strong>: <em>required (integer)</em><p>The id for the actor</p></li></ul></div><div class="tab-pane" id="action_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="action" class="panel-title">/action</h3></div><div class="panel-body"><div class="top-resource-description"><p>An action is taken by an agent at a specific timepoint, this can either be idle, gossip or action.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_action"><span class="parent"></span>/action</a> <span class="methods"><a href="#action_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_action" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#action_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get the action that an agent commits to at a particular timepoint with the beliefs that have been built from perceptions. The action can either be idle, gossip (positive or negative, with about and recipient parameters) or action (cooperate or defect, with recipient parameters)</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="action_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/action</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get the action that an agent commits to at a particular timepoint with the beliefs that have been built from perceptions. The action can either be idle, gossip (positive or negative, with about and recipient parameters) or action (cooperate or defect, with recipient parameters)</p></div><ul class="nav nav-tabs"><li class="active"><a href="#action_get_request" data-toggle="tab">Request</a></li><li><a href="#action_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="action_get_request"><h3>Query Parameters</h3><ul><li><strong>timepoint</strong>: <em>required (integer)</em><p>The timepoint at which the action is decided upon</p></li><li><strong>community</strong>: <em>required (integer)</em><p>The id for the community that the actor belongs to</p></li><li><strong>generation</strong>: <em>required (integer)</em><p>The id for the generation that the actor belongs to</p></li><li><strong>player</strong>: <em>required (integer)</em><p>The id for the actor</p></li></ul></div><div class="tab-pane" id="action_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
   "data": {
     "timepoint": 8,
     "community": 45,
@@ -460,7 +583,19 @@
     "type": "gossip",
     "value": "positive",
     "about": 0,
-    "recipient": 3
+    "recipient": 3,
+    "reason": "I trust the recipient"
   }
 }
-</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#strategy">/strategy</a></li><li><a href="#community">/community</a></li><li><a href="#generation">/generation</a></li><li><a href="#agent">/agent</a></li><li><a href="#percept">/percept</a></li><li><a href="#belief">/belief</a></li><li><a href="#action">/action</a></li></ul></div></div></div></div></body></html>
+</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: any</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "data": {
+    "timepoint": 8,
+    "community": 45,
+    "generation": -20,
+    "player": 3
+  },
+  "success": false,
+  "status": 404,
+  "message": "No such generation for this community"
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#strategy">/strategy</a></li><li><a href="#community">/community</a></li><li><a href="#generation">/generation</a></li><li><a href="#agent">/agent</a></li><li><a href="#percept">/percept</a></li><li><a href="#action">/action</a></li></ul></div></div></div></div></body></html>

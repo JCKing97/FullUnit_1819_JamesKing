@@ -4,7 +4,6 @@ __author__ = "James King"
 
 import unittest
 import requests
-import urllib
 
 api_url = "http://127.0.0.1:8080/"
 
@@ -19,6 +18,12 @@ class ManagementAPITesting(unittest.TestCase):
         self.assertEqual(create_community_response.status_code, 200)
         self.assertEqual(create_community_response.json(), {"success": True, "status": 200, "id": id})
         self.community_id = id
+
+    def test_incorrect_url(self):
+        delete_community_response = requests.delete(api_url + "community/?community=" + str(self.community_id))
+        self.assertEqual(delete_community_response.status_code, 404)
+        self.assertEqual(delete_community_response.json(), {"location": "/community/", "code": 404,
+                                                            "message": "Path not found: /community/"})
 
     def test_delete_existing_community(self):
         delete_community_response = requests.delete(api_url+"community?community="+str(self.community_id))
@@ -75,6 +80,8 @@ class ManagementAPITesting(unittest.TestCase):
         self.assertEqual(create_player_response.status_code, 404)
         self.assertEqual(create_player_response.json(), {"data": body, "success": False, "status": 404,
                                                          "message": "No such strategy"})
+
+
 
 
 

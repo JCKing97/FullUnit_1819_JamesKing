@@ -232,14 +232,14 @@ class ActionObserverTest(unittest.TestCase):
         player_states = [MockPlayerState(7, 8, [self.action_observer]), MockPlayerState(7, 9, [self.action_observer]),
                          MockPlayerState(7, 12, [self.action_observer]), MockPlayerState(8, 1, [self.action_observer]),
                          MockPlayerState(8, 2, [self.action_observer]), MockPlayerState(8, 42, [self.action_observer])]
-        actions = [InteractionAction(4, 8, 7, 9, InteractionContent.COOPERATE),
-                   InteractionAction(35, 8, 7, 12, InteractionContent.DEFECT),
-                   InteractionAction(6, 9, 7, 8, InteractionContent.COOPERATE),
-                   InteractionAction(10, 9, 7, 8, InteractionContent.DEFECT),
-                   InteractionAction(1, 1, 8, 2, InteractionContent.COOPERATE),
-                   InteractionAction(4, 2, 8, 1, InteractionContent.COOPERATE),
-                   InteractionAction(6, 2, 8, 1, InteractionContent.COOPERATE),
-                   InteractionAction(9, 42, 8, 2, InteractionContent.DEFECT)]
+        actions = [InteractionAction(4, 8, 7, "reason", 9, InteractionContent.COOPERATE),
+                   InteractionAction(35, 8, 7, "reason", 12, InteractionContent.DEFECT),
+                   InteractionAction(6, 9, 7, "reason", 8, InteractionContent.COOPERATE),
+                   InteractionAction(10, 9, 7, "reason", 8, InteractionContent.DEFECT),
+                   InteractionAction(1, 1, 8, "reason", 2, InteractionContent.COOPERATE),
+                   InteractionAction(4, 2, 8, "reason", 1, InteractionContent.COOPERATE),
+                   InteractionAction(6, 2, 8, "reason", 1, InteractionContent.COOPERATE),
+                   InteractionAction(9, 42, 8, "reason", 2, InteractionContent.DEFECT)]
         actions_by_timepoint: Dict[int, Action] = {}
         actions_by_gen_and_timepoint: Dict[int, Dict[int, Action]] = {}
         actions_by_gen_player_and_timepoint: Dict[int, Dict[int, Dict[int, Action]]] = {}
@@ -293,14 +293,14 @@ class ActionObserverTest(unittest.TestCase):
         player_states = [MockPlayerState(7, 8, [self.action_observer]), MockPlayerState(7, 9, [self.action_observer]),
                          MockPlayerState(7, 12, [self.action_observer]), MockPlayerState(8, 1, [self.action_observer]),
                          MockPlayerState(8, 2, [self.action_observer]), MockPlayerState(8, 42, [self.action_observer])]
-        actions = [InteractionAction(4, 8, 7, 9, InteractionContent.COOPERATE),
-                   InteractionAction(35, 8, 7, 12, InteractionContent.DEFECT),
-                   InteractionAction(6, 9, 7, 8, InteractionContent.COOPERATE),
-                   InteractionAction(10, 9, 7, 8, InteractionContent.DEFECT),
-                   InteractionAction(1, 1, 8, 2, InteractionContent.COOPERATE),
-                   InteractionAction(4, 2, 8, 1, InteractionContent.COOPERATE),
-                   InteractionAction(6, 2, 8, 1, InteractionContent.COOPERATE),
-                   InteractionAction(9, 42, 8, 2, InteractionContent.DEFECT)]
+        actions = [InteractionAction(4, 8, 7, "reason", 9, InteractionContent.COOPERATE),
+                   InteractionAction(35, 8, 7, "reason", 12, InteractionContent.DEFECT),
+                   InteractionAction(6, 9, 7, "reason", 8, InteractionContent.COOPERATE),
+                   InteractionAction(10, 9, 7, "reason", 8, InteractionContent.DEFECT),
+                   InteractionAction(1, 1, 8, "reason", 2, InteractionContent.COOPERATE),
+                   InteractionAction(4, 2, 8, "reason", 1, InteractionContent.COOPERATE),
+                   InteractionAction(6, 2, 8, "reason", 1, InteractionContent.COOPERATE),
+                   InteractionAction(9, 42, 8, "reason", 2, InteractionContent.DEFECT)]
         for action in actions:
             for player_state in player_states:
                 if player_state.player == action.actor and action.generation == player_state.generation:

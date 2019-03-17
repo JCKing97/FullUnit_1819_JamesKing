@@ -253,4 +253,4 @@ get_standing_belief(CommunityID, GenerationID, _, _, AboutID, Success, Value):-
 	generation(community(CommunityID), GenerationID),
 	\+agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), AboutID),
 	Success = 'No such agent as about for this generation of this community',
-	Value=false.
+Value=false.

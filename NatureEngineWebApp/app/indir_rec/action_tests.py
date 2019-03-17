@@ -71,8 +71,8 @@ class InteractionTests(unittest.TestCase):
         self.timepoint = random.randint(0, 100)
         self.interaction_content = random.choice(list(InteractionContent))
         self.generation = random.randint(0, 100)
-        self.action = InteractionAction(self.timepoint, self.donor, self.generation, self.recipient,
-                                        self.interaction_content)
+        self.action = InteractionAction(self.timepoint, self.donor, self.generation, "reason",
+                                        self.recipient, self.interaction_content)
 
     def test_get_generation(self):
         self.assertEqual(self.generation, self.action.generation, "Should have been the same as set")
@@ -107,7 +107,7 @@ class InteractionTests(unittest.TestCase):
         onlookers = []
         for i in range(0, 15):
             onlookers.append(random.randint(0, 100))
-        new_action = InteractionAction(self.timepoint, self.donor, self.generation, self.recipient,
+        new_action = InteractionAction(self.timepoint, self.donor, self.generation, "reason", self.recipient,
                                        self.interaction_content, onlookers)
         self.assertEqual(onlookers, new_action.onlookers, "onlookers should have been set to the array built")
 

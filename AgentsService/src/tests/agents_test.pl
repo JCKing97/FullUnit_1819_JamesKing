@@ -28,7 +28,7 @@ get_new_player_id(ID):-
 
     test(new_agents_fail_on_retracted_community):-
         new_community(ID),
-        assertion(retract_community(data{community: ID}, true)),
+        assertion(retract_community(ID, true)),
         assertion(new_generation(data{community: ID, generation: 0}, "No such community")),
         forall(strategy(Name, NonDonorStrat, TrustModel, _, Options), (get_new_player_id(PlayerID),
          assertion(new_agent(data{donor_strategy: Name, non_donor_strategy: NonDonorStrat, trust_model: TrustModel, options: Options, community: ID, generation: 0, player: PlayerID}, "No such community")))).
@@ -36,10 +36,10 @@ get_new_player_id(ID):-
     test(new_agents_fail_on_retracted_community_post_new_generation):-
         new_community(ID),
         assertion(new_generation(data{community: ID, generation: 0}, true)),
-        assertion(retract_community(data{community: ID}, true)),
+        assertion(retract_community(ID, true)),
         assertion(\+generation(community(ID), 0)),
         forall(strategy(Name, NonDonorStrat, TrustModel, _, Options), (get_new_player_id(PlayerID),
-         assertion(new_agent(data{donor_strategy: Name, non_donor_strategy: NonDonorStrat, trust_model: TrustModel, options: Options, community: ID, generation: 0, player: PlayerID}, "No such community")))).
+         new_agent(data{donor_strategy: Name, non_donor_strategy: NonDonorStrat, trust_model: TrustModel, options: Options, community: ID, generation: 0, player: PlayerID}, "No such community"))).
 
     test(new_agents_repeated_id):-
         new_community(ID),

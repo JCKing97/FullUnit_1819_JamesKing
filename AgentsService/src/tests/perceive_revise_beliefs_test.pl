@@ -53,7 +53,7 @@ set_up(ID):-
 
 	test(no_such_community):-
 		set_up(ID),
-		retract_community(data{community: ID}, true),
+		retract_community(ID, true),
 		assertion(add_new_action_interaction_percept(data{community: ID, generation: 0,
 		 perceiver: 2, donor: 1, recipient: 0, timepoint: 7, action: "defect"},
 		 "No such community")),
@@ -175,7 +175,7 @@ set_up(ID):-
 
 	test(incorrect_community):-
 		set_up(ID),
-		retract_community(data{community: ID}, true),
+		retract_community(ID, true),
 		assertion(add_new_action_gossip_percept(data{community: ID, generation: 0, perceiver: 1,
 		 about: 0, gossiper: 2, gossip: "positive", timepoint: 0},
 		 "No such community")),
@@ -302,7 +302,7 @@ set_up(ID):-
 
 	test(no_such_community):-
 		set_up(ID),
-		retract_community(data{community: ID}, true),
+		retract_community(ID, true),
 		assertion(add_new_interaction_percept(data{community: ID, generation: 0, donor: 0, recipient: 1, timepoint: 3}, "No such community")),
 		assertion(\+observed_at(interaction(agent(_, community(ID), generation(community(ID), 0), 0),
 		 agent(_, community(ID), generation(community(ID), 0), 1)), 3)),

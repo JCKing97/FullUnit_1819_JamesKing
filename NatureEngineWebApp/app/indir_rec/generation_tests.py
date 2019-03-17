@@ -80,12 +80,12 @@ class GenerationTest(unittest.TestCase):
                                     self.num_of_onlookers, [])
             donor_id = random.randint(0, len(generation.get_players())-1)
             recipient_id = random.randint(0, len(generation.get_players())-1)
-            action = InteractionAction(0, donor_id, generation.id, recipient_id,
+            action = InteractionAction(0, donor_id, generation.id, "reason", recipient_id,
                                        InteractionContent.COOPERATE)
             onlookers = generation._generate_onlookers(action)
             self.assertEqual(self.num_of_onlookers+2, len(onlookers))
-            self.assertTrue(generation._id_player_map[donor_id] in onlookers, self.initial_gen)
-            self.assertTrue(generation._id_player_map[recipient_id] in onlookers, self.initial_gen)
+            self.assertTrue(donor_id in onlookers, self.initial_gen)
+            self.assertTrue(recipient_id in onlookers, self.initial_gen)
         except GenerationCreationException:
             self.fail("Should not have failed to create generation")
 
@@ -103,8 +103,10 @@ class GenerationTest(unittest.TestCase):
             timepoints = 0
             for timepoint in actions:
                 timepoints += 1
-                self.assertEqual(num_of_players, len(actions[timepoint]))
-            self.assertEqual(timepoints, self.end_point - self.start_point)
+                self.assertEqual(num_of_players, len(actions[timepoint]), "Should be the same number of players"
+                                                                          " as actions in each timepoint")
+            self.assertEqual(timepoints, self.end_point - self.start_point, "Should be an equal number of timepoints as"
+                                                                            " endpoint-startpoint")
             percepts = {}
             for player in generation.get_players():
                 for timepoint in player._percepts:
@@ -113,19 +115,22 @@ class GenerationTest(unittest.TestCase):
                             percepts[timepoint].append(percept)
                     else:
                         percepts[timepoint] = player._percepts[timepoint]
-            self.assertEqual(self.end_point-self.start_point, len(percepts))
+            self.assertEqual(self.end_point-self.start_point, len(percepts), "Should be a list of percepts for "
+                                                                             "each timepoint")
             for timepoint in percepts:
                 # Calculate number of percepts there should be
                 num_of_expected_percepts = 0
                 if timepoint in actions:
-                    num_of_expected_percepts += 2 + self.num_of_onlookers
                     for action in actions[timepoint]:
                         if action.type is ActionType.GOSSIP:
                             num_of_expected_percepts += 1
                         elif action.type is ActionType.INTERACTION:
                             interaction: InteractionAction = action
                             num_of_expected_percepts += len(interaction.onlookers)
-                self.assertEqual(num_of_expected_percepts, len(percepts[timepoint]))
+                self.assertEqual(num_of_expected_percepts, len(percepts[timepoint]), "Should be one percept for each"
+                                                                                     " gossip action, 2+num_of_onlooker"
+                                                                                     " percepts for each interaction"
+                                                                                     " action")
             print("Actions: ")
             self.pp.pprint(actions)
             print("Percepts: ")

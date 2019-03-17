@@ -102,7 +102,7 @@ class Player:
             creation_response = requests.request("POST", Config.AGENTS_URL + 'agent',
                                                  json=creation_payload)
             if creation_response.status_code != 200:
-                raise PlayerCreationException("bad status code " + creation_response.status_code)
+                raise PlayerCreationException("bad status code " + str(creation_response.status_code))
             if not creation_response.json()['success']:
                 raise PlayerCreationException(creation_response.json()['message'])
         except KeyError:
