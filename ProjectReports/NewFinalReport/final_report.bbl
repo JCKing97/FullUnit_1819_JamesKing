@@ -10,6 +10,17 @@ Tutorial - creating web applications in swi-prolog.
 \newblock \url{http://www.pathwayslms.com/swipltuts/html/index.html}, 2018.
 \newblock Accessed: 05/12/2018.
 
+\bibitem{guru99_testing}
+Web application testing: 8 step guide to website testing.
+\newblock \url{https://www.guru99.com/web-application-testing.html}, 2018.
+\newblock Accessed: 04/01/2019.
+
+\bibitem{software_testing_help}
+Web application testing complete guide (how to test a website).
+\newblock \url{https://www.softwaretestinghelp.com/web-application-testing/},
+  2018.
+\newblock Accessed: 04/01/2019.
+
 \bibitem{alexander1987biology}
 Richard Alexander.
 \newblock The biology of moral systems (foundations of human behavior).
@@ -110,6 +121,13 @@ Mr.~David Gunning.
   \url{https://www.darpa.mil/program/explainable-artificial-intelligence},
   2018.
 \newblock Accessed: 8/3/2019.
+
+\bibitem{harper2017reinforcement}
+Marc Harper, Vincent Knight, Martin Jones, Georgios Koutsovoulos, Nikoleta~E
+  Glynatsi, and Owen Campbell.
+\newblock Reinforcement learning produces dominant strategies for the iterated
+  prisoner’s dilemma.
+\newblock {\em PloS one}, 12(12):e0188046, 2017.
 
 \bibitem{alphago}
 Demis Hassabis and Silver David.
@@ -327,6 +345,11 @@ Michael Wooldridge.
 Michael Wooldridge and Nicholas~R. Jennings.
 \newblock Intelligent agents: theory and practice.
 \newblock {\em The Knowledge Engineering Review}, 10(2):115--152, 1995.
+
+\bibitem{wooldridge2000gaia}
+Michael Wooldridge, Nicholas~R Jennings, and David Kinny.
+\newblock The gaia methodology for agent-oriented analysis and design.
+\newblock {\em Autonomous Agents and multi-agent systems}, 3(3):285--312, 2000.
 
 \bibitem{turtle}
 Sea~Turtle World.
