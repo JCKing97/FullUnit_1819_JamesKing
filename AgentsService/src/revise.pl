@@ -204,6 +204,17 @@ initiates_at(said(Gossiper, Perceiver, About, Gossip), [], image_score(Perceiver
 -------- Veritability Discerner --------
 --------------------------------------*/
 
+/**
+ * trusted(++Perceiver:term, ++Subject:term, ++T:int) is det
+ *
+ * true if the perceiver is a veritability discerner and trusts the subject at timepoint T, else fails.
+ * an agent is trusted if their veritability_rating/percept_count >= K (set into the agents strategy)
+ *
+ * @arg Perceiver The agent that has beliefs about the Subject
+ * @arg Subject The agent that the Perceiver trusts or does not trust
+ * @arg T The timepoint at which the Perceiver either does or does not trust the Subject
+ */
+ % If the Perceiver has a veritability_rating for the Subject
 trusted(Perceiver, Subject, T):-
 	get_strategy(DonorStrategy, _, _, [K], Perceiver),
 	DonorStrategy=="Veritability Discerner",
@@ -211,11 +222,13 @@ trusted(Perceiver, Subject, T):-
 	holds_at(veritability_rating(Perceiver, Subject)=Rating, T), !,
 	Mean is Rating/PerceptCount,
 	Mean >= K.
+% If the Perceiver has no veritability_rating for the Subject
 trusted(Perceiver, _, _):-
 	get_strategy(DonorStrategy, _, _, [K], Perceiver),
 	DonorStrategy=="Veritability Discerner",
 	0 >= K.
 
+% If a veritability discerner sees an agent as a donor increment the amount of percepts they have seen of the donor's
 initiates_at(did(Donor, Perceiver, Recipient, Action), [], percept_count(Perceiver, Donor)=NewCount, T):-
 	happens_at(did(Donor, Perceiver, Recipient, Action), T),
 	get_strategy(DonorStrategy,_, _, _, Perceiver),
@@ -225,6 +238,7 @@ initiates_at(did(Donor, Perceiver, Recipient, Action), [], percept_count(Perceiv
 			(NewCount is OldCount + 1) ; NewCount is 1
 	).
 
+% If a veritability discerner perceives gossip increment the amount of percepts they have received of the agent the gossip is about
 initiates_at(said(Gossiper, Perceiver, About, Gossip), [], percept_count(Perceiver, About)=NewCount, T):-
 	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
 	get_strategy(DonorStrategy,_, _, _, Perceiver),
@@ -234,7 +248,7 @@ initiates_at(said(Gossiper, Perceiver, About, Gossip), [], percept_count(Perceiv
 			(NewCount is OldCount + 1) ; NewCount is 1
 	).
 
-
+% If a veritability discerner sees a cooperation increase the veritability rating of the donor with the weight given by the trust model
 initiates_at(did(Donor, Perceiver, Recipient, Action), [], veritability_rating(Perceiver, Donor)=NewRating, T):-
 	happens_at(did(Donor, Perceiver, Recipient, Action), T),
 	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),
@@ -246,6 +260,8 @@ initiates_at(did(Donor, Perceiver, Recipient, Action), [], veritability_rating(P
 			NewRating is (Weight*20)+OldRating ; NewRating is Weight*20
 	).
 
+% If a veritability discerner sees a defection and trusts the recipient, decrease the veritability rating of the donor by the weight
+% given in the tust model
 initiates_at(did(Donor, Perceiver, Recipient, Action), [], veritability_rating(Perceiver, Donor)=NewRating, T):-
 	happens_at(did(Donor, Perceiver, Recipient, Action), T),
 	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),
@@ -258,6 +274,8 @@ initiates_at(did(Donor, Perceiver, Recipient, Action), [], veritability_rating(P
 			NewRating is (-20*Weight)+OldRating ; NewRating is -20*Weight
 	).
 
+% If a veritability discerner receives positive gossip from a trusted source increase the veritability rating of the 
+% agent the gossip is about by the weight given
 initiates_at(said(Gossiper, Perceiver, About, Gossip), [], veritability_rating(Perceiver, About)=NewRating, T):-
 	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
 	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),
@@ -270,6 +288,8 @@ initiates_at(said(Gossiper, Perceiver, About, Gossip), [], veritability_rating(P
 			NewRating is (Weight*10)+OldRating ; NewRating is Weight*10
 	).
 
+% If a veritability discerner receive positive gossip from an untrusted source, increate the veritability rating
+% by a lesser amount than from a trusted source, but but still by the weight given by the trust model
 initiates_at(said(Gossiper, Perceiver, About, Gossip), [], veritability_rating(Perceiver, About)=NewRating, T):-
 	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
 	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),
@@ -281,6 +301,8 @@ initiates_at(said(Gossiper, Perceiver, About, Gossip), [], veritability_rating(P
 			NewRating is (Weight*1)+OldRating ; NewRating is Weight*1
 	).
 
+% If a veritability discerner perceives negative gossip from a trusted source decrease the veritability rating
+% by the given weight 
 initiates_at(said(Gossiper, Perceiver, About, Gossip), [], veritability_rating(Perceiver, About)=NewRating, T):-
 	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
 	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),
@@ -293,6 +315,8 @@ initiates_at(said(Gossiper, Perceiver, About, Gossip), [], veritability_rating(P
 			NewRating is (-10*Weight)+OldRating ; NewRating is -10*Weight
 	).
 
+% If a veritability discerner perceives negative gossip from an untrusted source decrease the veritability rating
+% less than it would with a trusted source, but by the weight given
 initiates_at(said(Gossiper, Perceiver, About, Gossip), [], veritability_rating(Perceiver, About)=NewRating, T):-
 	happens_at(said(Gossiper, Perceiver, About, Gossip), T),
 	get_strategy(DonorStrategy,_, TrustModel, _, Perceiver),

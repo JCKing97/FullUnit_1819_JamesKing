@@ -1,4 +1,5 @@
-"""axelrod_database_conversion_test.py: A set of test caases to test the conversion between my database and the axelrod library representation"""
+"""axelrod_database_conversion_test.py: A set of test caases to test the conversion
+between my database and the axelrod library representation"""
 
 __author__ = "James King adapted from Miguel Grinberg"
 

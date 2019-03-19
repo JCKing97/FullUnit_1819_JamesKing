@@ -26,10 +26,12 @@ class ActionsAPITesting(unittest.TestCase):
         requests.post(api_url + "agent", json=body)
 
     def test_get_action(self):
+        # Send a request to get a decision on an action by the player
         action_body = {"community": self.community_id, "generation": self.gen, "player": self.agent, "timepoint": 3}
         action_response = requests.get(api_url+"action?timepoint="+str(action_body["timepoint"])+"&community="+
                                        str(action_body["community"])+"&generation="+str(action_body["generation"])+
                                        "&player="+str(action_body["player"]))
+        # Request was fine so should be all ok on the return
         self.assertEqual(action_response.status_code, 200)
         self.assertEqual(action_response.json(), {"data": action_body, "success": True, "status": 200,
                                                   "action": {"type": "gossip", "value": "positive", "about": self.agent,
@@ -38,10 +40,12 @@ class ActionsAPITesting(unittest.TestCase):
                                                                        " to encourage others to cooperate with me"}})
 
     def test_get_action_incorrect(self):
+        # Send a request to get a decision on an action by the player
         action_body = {"community": self.community_id, "generation": -20, "player": self.agent, "timepoint": 3}
         action_response = requests.get(api_url + "action?timepoint=" + str(action_body["timepoint"]) + "&community=" +
                                        str(action_body["community"]) + "&generation=" + str(action_body["generation"]) +
                                        "&player=" + str(action_body["player"]))
+        # Request was not correctly formatted so should notify the application of an inability to get the action
         self.assertEqual(action_response.status_code, 404)
         self.assertEqual(action_response.json(), {"data": action_body, "success": False, "status": 404,
                                                   "message": "No such generation for this community"})

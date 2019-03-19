@@ -110,6 +110,7 @@ class PlayerTest(unittest.TestCase):
             self.fail("Shouldn't have failed to make a decision")
 
     def test_set_percept(self):
+        # Set a percept and test it has been added correctly
         perceiver = Player(0, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         gossiper = Player(1, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         about = Player(2, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
@@ -119,16 +120,20 @@ class PlayerTest(unittest.TestCase):
         self.assertEqual(perceiver._percepts[3], [percept])
 
     def test_perceive(self):
+        # Create relevant resource (perceiver, gossiper, about)
         perceiver = Player(0, Strategy("Standing Discriminator", "Lazy", "Trusting", []), self.community,
                            self.generation)
         gossiper = Player(1, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
         about = Player(2, Strategy("Defector", "Lazy", "Void", []), self.community, self.generation)
+        # Create and send the percept
         percept = {'community': self.community, 'generation': self.generation, 'perceiver': perceiver.id,
                    'gossip': 'negative', 'about': about.id, 'gossiper': gossiper.id, 'timepoint': 3,
                    'type': 'action/gossip'}
         perceiver.set_perception(percept)
+        # Check percept added to the percept bank
         self.assertEqual(perceiver._percepts[3], [percept])
         perceiver.perceive(4)
+        # Check belief has changed
         belief_payload = {'timepoint': 4, 'community': self.community, 'generation': self.generation,
                           'perceiver': perceiver.id, 'about': about.id}
         belief_response = requests.request("GET", Config.AGENTS_URL + 'belief/standing',
@@ -138,6 +143,7 @@ class PlayerTest(unittest.TestCase):
 
 
 class TestObserver(Observer):
+    """A Mock observer to test with"""
 
     def __init__(self, community: int, generations: List[int]):
         self._community = community
@@ -175,9 +181,11 @@ class TestObserver(Observer):
 class PlayerStateTests(unittest.TestCase):
 
     def setUp(self):
+        # Create app
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
+        # Create community, generation, player state and mock observer
         self.community = requests.request("POST", Config.AGENTS_URL + 'community').json()['id']
         self.generation = 0
         self.player = 0
@@ -185,46 +193,50 @@ class PlayerStateTests(unittest.TestCase):
         requests.request("POST", Config.AGENTS_URL + 'generation', json=generation_payload)
         self.player_state = PlayerState(self.generation, self.player)
         self.observer = TestObserver(self.community, [self.generation])
+        # attach observer to player state
         self.player_state.attach(self.observer)
 
     def tearDown(self):
         self.app_context.pop()
 
     def test_get_gen(self):
+        # Test generation is set and retrieve correctly
         self.assertEqual(self.generation, self.player_state.generation, "should be the same as set")
 
     def test_get_player(self):
+        # Test player id is set and retrieved correctly
         self.assertEqual(self.player, self.player_state.player, "Should be the same as set")
 
     def test_get_new_action(self):
+        # Test player state has no new action at the start
         self.assertEqual(None, self.player_state.new_action, "Should be None to start with")
 
     def test_set_then_get_new_action_notify(self):
         action = IdleAction(3, self.player, self.generation, "reason")
         self.player_state.new_action = action
-        self.assertEqual(None, self.player_state.new_action, "Should be none as the state is clear after the notification to"
-                                                   "observers")
-        self.assertEqual(self.observer.latest_observations['action'], action, "Should have notified the observer"
-                                                                             "of the latest action")
+        self.assertEqual(None, self.player_state.new_action,
+                         "Should be none as the state is clear after the notification to observers")
+        self.assertEqual(self.observer.latest_observations['action'], action,
+                         "Should have notified the observer of the latest action")
 
     def test_get_fitness_update(self):
         self.assertEqual(None, self.player_state.new_action, "Should be None to start with")
 
     def test_set_then_fitness_update(self):
         self.player_state.fitness_update = 2
-        self.assertEqual(0, self.player_state.fitness_update, "Should be reset to zero as the observers would be"
-                                                              " notified in the setting of it")
-        self.assertEqual(2, self.observer.latest_observations['fitness'], "Should have notified the observer"
-                                                                               " of the fitness update")
+        self.assertEqual(0, self.player_state.fitness_update,
+                         "Should be reset to zero as the observers would be notified in the setting of it")
+        self.assertEqual(2, self.observer.latest_observations['fitness'],
+                         "Should have notified the observer of the fitness update")
 
     def test_detach(self):
         action = IdleAction(3, self.player, self.generation, "reason")
         self.player_state.detach(self.observer)
         self.player_state.fitness_update = 2
-        self.assertEqual(0, self.player_state.fitness_update, "Should be reset to zero as the observers would be"
-                                                              " notified in the setting of it")
-        self.assertEqual(0, self.observer.latest_observations['fitness'], "Should not notify the observer"
-                                                                          "as it is detached")
+        self.assertEqual(0, self.player_state.fitness_update,
+                         "Should be reset to zero as the observers would be notified in the setting of it")
+        self.assertEqual(0, self.observer.latest_observations['fitness'],
+                         "Should not notify the observer as it is detached")
         self.player_state.new_action = action
         self.assertEqual(None, self.player_state.new_action,
                          "Should be none as the state is clear after the notification to"
@@ -251,11 +263,13 @@ class PlayerStateTests(unittest.TestCase):
 
 
 class PlayerAndStateIntegrationTests(unittest.TestCase):
+    """Test integrating the player and PlayerState"""
 
     def setUp(self):
         self.app = create_app(TestConfig)
         self.app_context = self.app.app_context()
         self.app_context.push()
+        # Create community, generation, player, state and observer
         self.community = requests.request("POST", Config.AGENTS_URL + 'community').json()['id']
         self.generation = 0
         self.player = 0

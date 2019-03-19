@@ -2,7 +2,7 @@
 simulation of a whole tournament,setup of a tournament etc."""
 
 import requests
-from typing import List, Dict
+from typing import List, Dict, NoReturn
 from .generation_logic import Generation
 import random
 from .observation_logic import Observer
@@ -35,7 +35,12 @@ class Community:
         :param length_of_generations: The number of rounds each generation will run for
         :type length_of_generations: int
         """
-        self._community_id = requests.request("POST", Config.AGENTS_URL + 'community').json()['id']
+        # Create the community in the
+        community_response = requests.request("POST", Config.AGENTS_URL + 'community')
+        self._community_id = community_response.json()['id']
+        if community_response.status_code != 200:
+            raise CommunityCreationException("Failed to create community in agents service")
+        # Ensure the set parameters match the correct conditions, or raise creation exception
         if num_of_onlookers <= 0:
             raise CommunityCreationException("number of onlookers <= 0")
         if length_of_generations <= 5:
@@ -52,6 +57,7 @@ class Community:
         self._generations: List[Generation] = []
         self._current_time: int = 0
         self._generation_size: int = 0
+        # Count the size of each generation in terms of number of players
         for _, count in strategies.items():
             self._generation_size += count
         self._strategy_count_by_generation: List[Dict[Strategy, int]] = []
@@ -97,23 +103,29 @@ class Community:
         """
         return self._strategy_count_by_generation
 
-    def extend_observers(self, observers: List[Observer]) -> None:
+    def extend_observers(self, observers: List[Observer]) -> NoReturn:
         """
         Extend the current observers of the community with the list provided
         :param observers: The observers to add to the observers of the community
-        :return: None
+        :return: NoReturn
+        :rtype: NoReturn
         """
         self._observers.extend(observers)
 
-    def simulate(self):
+    def simulate(self) -> NoReturn:
         """
         Simulate the community, building an initial generation simulating that generation and then for the specified
-        number of generations reproducing and simulating the next generation
-        :return: void
+        number of generations running the reproduction mechanism and simulating the next generation
+        :return: NoReturn
+        :rtype: NoReturn
         """
+        # For the number of generations specified at the creation
         for i in range(self._num_of_generations):
+            # Attach observers that record the statistics on the game
             for observer in self._observers:
                 observer.add_generation(i)
+            # Create the new generation (the first from the initial set of players, the rest from the reproduciton
+            # mechanism)
             generation = self._build_generation(i)
             generation.simulate()
             self._current_time += self._length_of_generations
@@ -128,9 +140,11 @@ class Community:
         :rtype: Generation
         """
         if len(self._generations) <= 0:
+            # Use the first selected generation of players
             return Generation(self._first_strategies, gen_id, self._community_id, 0,
                               self._length_of_generations, self._num_of_onlookers, self._observers)
         else:
+            # Use the reproduction mechanism to build a new generation from the last
             return self._reproduce(gen_id)
 
     def _reproduce(self, gen_id: int) -> Generation:
@@ -154,16 +168,16 @@ class Community:
             # use stochastic acceptance
             selected_player: Player = random.choice(last_gen_players)
             if random.random() <= maximal_fitness:
+                # Randomly mutate some based on a chosen probability
                 if random.random() < self._mutation_chance:
                     selected_strategy = random.choice(mutation_strategies)
                 else:
                     selected_strategy = selected_player.strategy
+                # Count the strategies as they go in
                 if selected_strategy in new_gen_strategies:
                     new_gen_strategies[selected_strategy] += 1
                 else:
                     new_gen_strategies[selected_strategy] = 1
                 new_gen_size += 1
-        print("gen_size="+str(self._generation_size))
-        print("new_gen_size="+str(new_gen_size))
         return Generation(new_gen_strategies, gen_id, self._community_id, self._current_time,
                           self._current_time+self._length_of_generations, self._num_of_onlookers, self._observers)

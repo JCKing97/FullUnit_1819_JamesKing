@@ -7,6 +7,7 @@ from app.models import Match, Round, Player, Action
 from tests.test_config import TestConfig
 import unittest
 
+
 class MatchTest(unittest.TestCase):
 
     def setUp(self):

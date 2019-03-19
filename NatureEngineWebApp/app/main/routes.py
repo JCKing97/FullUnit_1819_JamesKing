@@ -41,6 +41,7 @@ def match(level):
     form = MatchSelectPlayersForm()
     edit_players(form, strategies)
     if form.validate_on_submit():
+        # Handle validated posted form
         players = (strat_dict[form.strats_field1.data], strat_dict[form.strats_field2.data])
         result = axl.Match(players, turns=form.rounds.data).play()
         match_id = match_result_to_database(results=result, players=players)
@@ -100,7 +101,8 @@ def tournament(level):
         strategies = [{'id': axl.basic_strategies.index(s), 'name': s.name} for s in axl.basic_strategies]
     strat_dict = {s().name: s() for s in axl.strategies}
     if request.method == 'GET':
-        return render_template('tournament.html', level=level, title='Tournament', strategies=strategies, strat_dict=strat_dict)
+        return render_template('tournament.html', level=level, title='Tournament', strategies=strategies,
+                               strat_dict=strat_dict)
     if request.method == 'POST':
         strategy_counts = request.get_json()['strategy_counts']
         players = []
@@ -111,10 +113,12 @@ def tournament(level):
             new_tournament = Tournament()
             db.session.add(new_tournament)
             db.session.commit()
-            job = current_app.task_queue.enqueue('app.main.axelrod_database_conversion.tournament_run', players, new_tournament.id)
+            job = current_app.task_queue.enqueue('app.main.axelrod_database_conversion.tournament_run', players,
+                                                 new_tournament.id)
             return jsonify({'url': url_for('main.tournament_run', tournament_id=new_tournament.id, job_id=job.get_id())})
         else:
-            return render_template('tournament.html', title='Tournament', level=level, strategies=strategies, strat_dict=strat_dict)
+            return render_template('tournament.html', title='Tournament', level=level, strategies=strategies,
+                                   strat_dict=strat_dict)
 
 
 @bp.route('/tournament_run/<tournament_id>/', defaults={'job_id': None})
@@ -153,7 +157,8 @@ def tournament_run(tournament_id, job_id):
             return render_template('tournament_running.html', title='Tournament', tournament_id=tournament_id,
                                    job_id=job_id)
     else:
-        return render_template('tournament_running.html', title='Tournament', tournament_id=tournament_id, job_id=job_id)
+        return render_template('tournament_running.html', title='Tournament', tournament_id=tournament_id,
+                               job_id=job_id)
 
 
 @bp.route('/is_tournament_finished/<tournament_id>/<job_id>')
@@ -241,7 +246,8 @@ def experiment_search(search_query):
     if not current_user.is_authenticated:
         return redirect(url_for('main.index'))
     page = request.args.get('page', 1, type=int)
-    experiments = current_user.experiments.filter(FullTextSearch(search_query, Experiment)).paginate(page, current_app.config['EXPERIMENTS_PER_PAGE'], False)
+    experiments = current_user.experiments.filter(
+        FullTextSearch(search_query,Experiment)).paginate(page, current_app.config['EXPERIMENTS_PER_PAGE'], False)
     next_url = url_for('main.experiment_search', search_query=search_query,
                        page=experiments.next_num) if experiments.has_next else None
     prev_url = url_for('main.experiment_search', search_query=search_query,

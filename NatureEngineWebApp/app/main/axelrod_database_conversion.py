@@ -10,13 +10,15 @@ app.app_context().push()
 
 def match_result_to_database(results, players):
     """Store the data for a match that has run in the database"""
+    # Add match and players into database
     m = Match()
     db.session.add(m)
     db.session.flush()
-    players = [Player(id=i, match_id=m.id, strategy=players[i].name) for i in range(0,2)]
+    players = [Player(id=i, match_id=m.id, strategy=players[i].name) for i in range(0, 2)]
     db.session.add_all(players)
     db.session.flush()
     i = 1
+    # Add actions into database
     for round in results:
         r = Round(num=i, match_id=m.id)
         db.session.add(r)

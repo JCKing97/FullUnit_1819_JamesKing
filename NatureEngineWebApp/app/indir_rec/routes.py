@@ -3,24 +3,27 @@
 from flask import render_template, url_for, request, jsonify, current_app
 from app.indir_rec import bp
 import requests
-from ..models import ReputationCommunity, ReputationGeneration, ReputationPlayer, ReputationStrategy, ReputationActionOnlookers
+from ..models import ReputationCommunity, ReputationGeneration, ReputationPlayer, ReputationStrategy,\
+    ReputationActionOnlookers
 from app import db
 import random
 from sqlalchemy.sql import func
 from flask_login import current_user
 from rq.job import Job
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Tuple
 from .action_logic import ActionType
-import pprint
 
 
 @bp.route('/reputation', methods=['GET', 'POST'])
 def reputation():
+    """The handler for the route to set up of reputation games"""
     response = requests.get(current_app.config['AGENTS_URL'] + "strategy")
     strategies = response.json()['strategies']
     if request.method == 'GET':
+        # Handle sending the web page with the form for setting up a reputation game
         return render_template('reputation.html', title='Reputation', strategies=strategies)
     if request.method == 'POST':
+        # Validate form data
         form_data = request.get_json()
         strategy_counts = form_data['strategy_counts']
         player_count = 0
@@ -30,9 +33,11 @@ def reputation():
                 and 2 <= int(form_data['num_of_generations']) <= 20 \
                 and 5 <= int(form_data['length_of_generations']) <= 200 \
                 and 0 <= float(form_data['mutation_chance']) <= 1:
+            # Set up community in database
             community = ReputationCommunity(simulated=False, timed_out=False)
             db.session.add(community)
             db.session.commit()
+            # Put the game into the task queue
             if current_user.is_authenticated:
                 job = current_app.task_queue.enqueue('app.indir_rec.run_game.reputation_run', strategy_counts,
                                                int(form_data['num_of_onlookers']), int(form_data['num_of_generations']),
@@ -44,15 +49,23 @@ def reputation():
                                                int(form_data['num_of_onlookers']), int(form_data['num_of_generations']),
                                                int(form_data['length_of_generations']),
                                                float(form_data['mutation_chance']), community.id)
+            # Send details to redirect if appropriate
             return jsonify({'url': url_for('indir_rec.reputation_finished', reputation_id=community.id,
                                            job_id=job.get_id())})
+        # If form data doesn't validate return to form page
         return render_template('reputation.html', title='Reputation', strategies=strategies)
 
 
 @bp.route('/is_reputation_finished/<reputation_id>/<job_id>')
 def is_reputation_finished(reputation_id, job_id):
-    """The route to ping to check whether a reputation game has been finished or not"""
+    """
+    The route to ping to check whether a reputation game has been finished or not
+    :param reputation_id: The id of the reputation game from the database
+    :param job_id: The id of the job in the queue running this game
+    :return: A json stating whether to redirect or not
+    """
     community = ReputationCommunity.query.filter_by(id=reputation_id).first_or_404()
+    # Detect if finished or failed
     if community.is_finished():
         finished = True
     elif Job(job_id, current_app.redis).is_failed:
@@ -61,6 +74,7 @@ def is_reputation_finished(reputation_id, job_id):
         finished = True
     else:
         finished = False
+    # return url to redirect to, when finished
     return jsonify({'finished': finished,
                     'url': url_for('indir_rec.reputation_finished', reputation_id=reputation_id)})
 
@@ -68,12 +82,21 @@ def is_reputation_finished(reputation_id, job_id):
 @bp.route('/reputation_finished/<reputation_id>/', defaults={'job_id': None})
 @bp.route('/reputation_finished/<reputation_id>/<job_id>')
 def reputation_finished(reputation_id, job_id):
+    """
+    The handler for the route when a game is running or has finished
+    :param reputation_id: The database id of the reputation
+    :param job_id: The id of the job running the game (defaults to None)
+    :return: The rendered template to serve to the client
+    """
+    # Get the strategies in the agents service and the community from the database
     response = requests.get(current_app.config['AGENTS_URL'] + "strategy")
     strategies = response.json()['strategies']
     community: ReputationCommunity = ReputationCommunity.query.filter_by(id=reputation_id).first_or_404()
     if community.timed_out:
+        # Notify user of timeout
         return render_template('reputation_timed_out.html', title='Reputation Timed Out', reputation_id=reputation_id)
     if community.is_finished():
+        #
         population_chart_data, strategy_colours = get_population_chart_data_and_strategy_colours(community)
         measurement_chart_data = get_measurements_chart_data(community)
         community_fitness_stats = db.session.query(func.max(ReputationCommunity.fitness).label("max_fit"),
@@ -92,29 +115,44 @@ def reputation_finished(reputation_id, job_id):
                                strategy_colours=strategy_colours, num_of_players_per_gen=num_of_players_per_gen,
                                players=players, actions=actions)
     elif job_id is not None:
+        # Detect if timed out and set that into the database, or show that game is still running to the user
         if Job(job_id, current_app.redis).is_failed:
             community.timed_out = True
             db.session.commit()
-            return render_template('reputation_timed_out.html', title='Reputation Timed Out', reputation_id=reputation_id)
+            return render_template('reputation_timed_out.html', title='Reputation Timed Out',
+                                   reputation_id=reputation_id)
         else:
             return render_template('reputation_running.html', title='Reputation Running', reputation_id=reputation_id,
                                    job_id=job_id)
     else:
+        # Show the user that the game is still running
         return render_template('reputation_running.html', title='Reputation Running', reputation_id=reputation_id,
                                job_id=job_id)
 
 
-def get_players_and_actions(community: ReputationCommunity):
+def get_players_and_actions(community: ReputationCommunity) \
+        -> Tuple[Dict[int, Dict[int, Dict[str, int]]], Dict[int, Dict[int, List[Dict]]]]:
+    """
+    Get the players and their stats (indexed by generation) and
+    actions of each player (indexed by generation) in format that is javascript readable (json-convertible).
+    First layer of dictionary keys is the generation ids, second is the player ids.
+    :param community: the community to get the players and actions from
+    :type community: ReputationCommunity
+    :return: the players and their stats, and the players actions
+    :rtype: Tuple[Dict[int, Dict[int, Dict[str, int]]], Dict[int, Dict[int, List[Dict]]]]
+    """
     players: Dict[int, Dict[int, Dict[str, int]]] = {}
     actions: Dict[int, Dict[int, List[Dict]]] = {}
     for generation in community.generations:
         gen_players: Dict[int, Dict[str, int]] = {}
         gen_actions: Dict[int, List[Dict]] = {}
         for player in generation.players:
+            # add the players stats in the players dictionary
             gen_players[player.player_id] = {'cooperation_rate': player.cooperation_rate,
                                              'social_activeness': player.social_activeness,
                                              'positivity_of_gossip': player.positivity_of_gossip,
                                              'fitness': player.fitness, 'strategy': player.strategy}
+            # make action data json-convertible and add it to the actions dictionary
             for action in player.actions:
                 if action.type is ActionType.INTERACTION:
                     onlookers = ReputationActionOnlookers.query.filter_by(action_id=action.id).all()
@@ -151,8 +189,16 @@ def get_players_and_actions(community: ReputationCommunity):
 
 
 def get_population_chart_data_and_strategy_colours(community: ReputationCommunity):
+    """
+    Get the data in the correct format for graph.js to create the population line chart on the reputation finished
+    page and also the colours for each strategy
+    :param community: The community to build the graph data for and get the strategy colours for
+    :type community: ReputationCommunity
+    :return: The chart data for the population chart and the strategy colours
+    """
+    # Create the dictionary for the chart data to populate
     chart_data = {'type': 'line', 'data': {'datasets': [], 'labels': []},
-                  'options': {'title': {'display': True,'text': "Population fluctuation across the generations"},
+                  'options': {'title': {'display': True, 'text': "Population fluctuation across the generations"},
                               'scales': {'yAxes': [{'scaleLabel': {'display': True, 'labelString': "Strategy Count"}}],
                                          'xAxes': [{'scaleLabel': {'display': True, 'labelString': "Generation"}}]}}}
     strategy_colours: Dict[int, Dict[str, Any]] = {}
@@ -167,7 +213,9 @@ def get_population_chart_data_and_strategy_colours(community: ReputationCommunit
                     strategy.trust_model + " " + strategy.options not in created_datasets:
                 created_datasets.append(strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +
                     strategy.trust_model + " " + strategy.options)
+                # Add to strategy colours
                 hex_colour = "#" + ''.join([hex_digits[random.randint(0, len(hex_digits) - 1)] for _ in range(6)])
+                # Add to chart data
                 chart_data['data']['datasets']. \
                     append({'label': strategy.donor_strategy + " " + strategy.non_donor_strategy + " " +
                                      strategy.trust_model + " " + strategy.options,
@@ -188,6 +236,13 @@ def get_population_chart_data_and_strategy_colours(community: ReputationCommunit
 
 
 def get_measurements_chart_data(community: ReputationCommunity):
+    """
+    Get the chart data for the cooperation rate, social activeness and positivity of gossip chart
+    :param community: The community to build the chart data for
+    :type community: ReputationCommunity
+    :return: The chart data for the cooperation rate, social activeness and positivity of gossip chart
+    """
+    # Set up chart data outline to add to
     chart_data = {'type': 'bar', 'data': {'datasets': [
         {'label': "Cooperation rate", 'data': [0 for _ in range(len(community.generations.all()))], 'fill': False,
          'backgroundColor': "#0074D9",
@@ -206,6 +261,7 @@ def get_measurements_chart_data(community: ReputationCommunity):
                                                                    'labelString': "Measurement value"}}],
                                          'xAxes': [{'scaleLabel': {'display': True,
                                                                    'labelString': "Generation"}}]}}}
+    # Add data to chart data for measurements
     for generation in community.generations:
         gen: ReputationGeneration = generation
         chart_data['data']['labels'].append(gen.generation_id)
@@ -220,6 +276,11 @@ def get_measurements_chart_data(community: ReputationCommunity):
 
 
 def get_fitness_chart_data(community: ReputationCommunity):
+    """
+    Get the data for graph.js for the fitness chart of this community and how it fluctuates over the generations
+    :param community: The community to get the chart data for
+    :return: The chart data for the fitness of each generation
+    """
     return {'type': 'bar', 'data': {'labels': [gen.generation_id for gen in community.generations],
                                     'datasets': [{'label': "Fitness",
                                                   'data': [gen.fitness for gen in community.generations],
@@ -234,6 +295,10 @@ def get_fitness_chart_data(community: ReputationCommunity):
 
 @bp.route('/reputation_historical')
 def reputation_historical():
+    """
+    The handler for the route that deals with displaying data on historical reputation games in the system
+    :return: The rendered template to send to the client
+    """
     response = requests.get(current_app.config['AGENTS_URL'] + "strategy")
     strategies = response.json()['strategies']
     social_vs_cooperation_rate_chart_data = get_social_vs_cooperation_rate_chart_data()
@@ -248,6 +313,11 @@ def reputation_historical():
 
 
 def get_social_vs_cooperation_rate_chart_data():
+    """
+    Get the data for the chart on the historical reputation game data page, that compares the social activeness and
+    positivity of gossip of a community to the cooperation rate of that community
+    :return: The chart data
+    """
     communities = ReputationCommunity.query.filter_by(corrupted_observations=False, simulated=True).all()
     chart_data = {'type': 'scatter',
                   'data': {'datasets': [
@@ -281,6 +351,11 @@ def get_social_vs_cooperation_rate_chart_data():
 
 
 def get_gen_length_vs_cooperation_rate_chart_data():
+    """
+    Get data for the chart on the historical reputation game data page that compares the length of generations in a
+    community to the cooperation rate of that community
+    :return: The chart data
+    """
     communities = ReputationCommunity.query.filter_by(corrupted_observations=False, simulated=True).all()
     chart_data = {'type': 'line',
                  'data': {'labels': [],
@@ -349,6 +424,10 @@ def get_gen_length_vs_cooperation_rate_chart_data():
 
 
 def get_cooperation_rate_vs_social_welfare_chart_data():
+    """
+    Get the chart data that compares the social welfare of a community to the cooperation rate of that community
+    :return: the chart data
+    """
     communities = ReputationCommunity.query.filter_by(corrupted_observations=False, simulated=True).all()
     chart_data = {'type': 'scatter',
                   'data': {'datasets': [
@@ -379,6 +458,11 @@ def get_cooperation_rate_vs_social_welfare_chart_data():
 
 
 def get_strategies_vs_cooperation_rate_chart_data():
+    """
+    Get the chart data for the reputation game historical data page chart that concerns itself with comparing the
+    concentration of each strategy in each community to the cooperation rate of that community
+    :return: The chart data
+    """
     # A dataset for each strategy, a datapoint for each generation they are in, x is the count of the strategy in that
     # generation, y is the cooperation rate of that generation
     communities = ReputationCommunity.query.filter_by(corrupted_observations=False, simulated=True).all()
