@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{# Template to display an analysis of a finished match #}
 {% block app_content %}
     <div class="jumbotron" style="padding: 20px">
         <h1>Match Completed</h1>
@@ -9,10 +10,12 @@
     </div>
     <div class="container-fluid">
         <div class="row">
+        {# Along the side give the strategies the players are associated with #}
         <div class="col-md-2">
             {% include "_player_strategy_description.html" %}
         </div>
         <div class="col-md-10">
+            {# Display an animation of the events #}
             <h2>An animation of what happened</h2>
             <p>
                 See here an animation of the actions that happened in the game, stepping through each timepoint in order,
@@ -21,15 +24,19 @@
             <canvas id="anim_canvas" style="border:1px solid #d3d3d3; margin: auto; display: block;">
                 Your browser does not support the HTML5 canvas tag.
             </canvas>
+            {# The script to control animations #}
             <script type="application/javascript">
+                // Get passed information regarding the match
                 const player_colours = {{ player_colours|tojson }};
                 const player_strats = {{ player_strats|tojson }};
                 const actions = {{ actions|tojson }}
+                // Set up the canvas
                 const canvas = document.getElementById('anim_canvas');
                 canvas.width = 1.5*(window.innerWidth/2);
                 canvas.height = 1.5*(window.innerHeight/3);
-                radius = Math.min(canvas.width/10, canvas.height/3);
                 const ctx = canvas.getContext('2d');
+                // Set up the sizes of elements in the canvas
+                radius = Math.min(canvas.width/10, canvas.height/3);
                 let font_size = (0.05*canvas.width);
                 if (font_size > 30) {
                     font_size = 30;
@@ -40,6 +47,8 @@
                 ctx.textBaseline = "top";
                 let interactions = [];
                 let interaction_count = 0;
+                // Draw the circle for a player, with the colour given by their strategy
+                // Draw the action they made at that timepoint
                 function drawMatchPlayer(center_x, center_y, strategy, action) {
                     colour = player_colours[strategy];
                     // Draw player circle
@@ -89,6 +98,7 @@
                         ctx.stroke();
                     }
                 }
+                // Draw the current timepoints players and actions
                 function drawMatch() {
                     let circle_center = [[canvas.width/6, canvas.height/2],[5*(canvas.width/6), canvas.height/2]];
                     for (player in player_strats) {
@@ -103,20 +113,24 @@
                     interaction_count += 1;
                     interaction_count = interaction_count % {{ round_count }};
                 }
+                // Clear and rerender the canvas
                 function renderMatch(){
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     drawMatch();
                 }
+                // Start again from the beginning
                 function restart(){
                     interaction_count = 0;
                     renderMatch();
                     window.clearInterval(interval);
                     interval = setInterval(renderMatch, 1000);
                 }
+                // Begin rendering
                 renderMatch();
                 let interval = setInterval(renderMatch, 1000);
             </script>
             <button type="button" class="btn btn-primary" onclick="restart()">Restart</button>
+            {# Display the points the players accrued #}
             <h2>How did the players points stack up?</h2>
             {% for players_name, points in player_points.items() %}
                 <label>Player {{ players_name }}: {{ points }} points</label>
@@ -125,6 +139,7 @@
                 </div>
             {% endfor %}
             <hr />
+            {# Display the actions taken #}
             <h2>What interactions occurred?</h2>
             <div class="container">
                 <table class="table">
@@ -148,6 +163,7 @@
                 </table>
             </div>
             <hr />
+            {# Include descriptions of the strategies used #}
             {% include "_strategies_description.html" %}
         </div>
     </div>

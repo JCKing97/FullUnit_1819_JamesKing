@@ -1,3 +1,7 @@
+/** <module> This file runs the service on compilation
+ * @author James King
+ */
+
 ?-['./main'].
 
 :- initialization main.

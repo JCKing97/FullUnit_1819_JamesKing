@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {%  import 'bootstrap/wtf.html' as wtf %}
 
+{# Template for setting up an iterated prisoner's dilemma match between two players #}
 {% block app_content %}
+    {# Initial description for user #}
     <div class="jumbotron" style="padding: 20px">
         <h1>Match</h1>
         <p>
@@ -14,6 +16,7 @@
             If you're unsure of any strategies have a look at the descriptions in the information panel at the bottom.
         </p>
     </div>
+    {# Form to select agents and length of match #}
     <div class="container">
         <h1>Set up</h1>
         <div class="row">
@@ -22,6 +25,7 @@
             </div>
         </div>
         <hr/>
+        {# Include a description of the strategies available #}
         <div class="row">
             {% include "_strategies_description.html" %}
         </div>

@@ -1,3 +1,7 @@
+{# The code to include canvas animation of a reputation game #}
+{# For inclusion in another web page #}
+
+{# Display introduction to animation #}
 <h2>An animation of the interactions in the community</h2>
 <p>
     Blue lines indicate a cooperation and red indicates a defection, the arrowhead points to the recipient.
@@ -8,6 +12,7 @@
     The colours of each strategy are the same as those in the population tracker above. If you are unsure of a players
     strategy read the descriptions in the information box at the bottom of this page.
 </p>
+{# Set up the canvas and relevant control buttons #}
 <div id="canvas-container" style="text-align: center; margin: 0 auto;">
     <canvas id="anim_canvas" style="border:1px solid #d3d3d3; margin: auto; display: block;">
         Your browser does not support the HTML5 canvas tag.
@@ -24,25 +29,29 @@
     <button type="button" class="btn btn-primary" onclick="resume()">Resume ></button>
     <button type="button" class="btn btn-primary" onclick="forward()">Forward >></button>
 </div>
+{# Animation script #}
 <script type="application/javascript">
+    // Get data passed to template for use in animation
     const strat_colours = {{ strategy_colours|tojson }};
     const num_of_players_per_gen = {{ num_of_players_per_gen }};
     const players = {{ players|tojson }};
     const actions = {{ actions|tojson }};
+    // Create initial animation state
     let timepoint = 0;
     let generation = 0;
     let actionIndex = 0;
     let firstRound = true;
     let newGen = false;
-    let nextTimepoint = false;
     let interval_time = 800;
+    // Set up and resize canvas
     const canvas = document.getElementById('anim_canvas');
     canvas_side_length = 1.8*(Math.min(window.innerWidth, window.innerHeight)/2);
     let canvas_container = document.getElementById('canvas-container');
     canvas_container.style.width = canvas_side_length+'px';
-    const player_radius = canvas_side_length/(4*num_of_players_per_gen);
     canvas.width = canvas_side_length;
     canvas.height = canvas_side_length;
+    // Set sizes for elements based on size of canvas
+    const player_radius = canvas_side_length/(4*num_of_players_per_gen);
     const ctx = canvas.getContext('2d');
     let font_size = (0.05*canvas.width);
     if (font_size > 30) {
@@ -52,6 +61,8 @@
     }
     ctx.font = font_size.toString()+"px Arial";
     ctx.textBaseline = "top";
+    // draw a circle for a player at the specified center with the colour from the strategy
+    // on the passed canvas context (uses player_radius global variable)
     function drawPlayer(center_x, center_y, strat, canvas_context){
         canvas_context.beginPath();
         canvas_context.fillStyle = strat['colour'];
@@ -62,15 +73,21 @@
         canvas_context.stroke();
         canvas_context.closePath();
     }
+    // Loop through players of the generation (using global variable for the generation) and draw them
     function drawPlayers(){
         for(let playerIndex = 0; playerIndex < num_of_players_per_gen; playerIndex++){
             drawPlayer(players[generation][playerIndex]["coord_x"], players[generation][playerIndex]["coord_y"],
                 strat_colours[players[generation][playerIndex]['strategy']], ctx);
         }
     }
+    // Calculate the euclidean distance between 2 dimensional vector v1 and 2D vector v2
     function euclideanDistance(v1, v2){
         return Math.sqrt(((v2[0]-v1[0])*(v2[0]-v1[0]))+((v2[1]-v1[1])*(v2[1]-v1[1])))
     }
+    // Find the interaction point between the circle formed by the first 3 parameters and the line that starts
+    // at the next two params and ends at the last two
+    // One of the last two points (from the last 4 params) is the center of the circle return the intersection
+    // point that is closest to the point that is not the center of the circle
     function find_intersection_point(circle_center_x, circle_center_y, circle_radius, to_x, to_y, from_x, from_y){
         let m = (to_y-from_y)/(to_x-from_x);
         let c = from_y-(m*from_x);
@@ -83,7 +100,8 @@
         let possible_return_subtract = [(a + (b * m) - (c * m) - Math.sqrt(delta)) / (1 + (m * m)),
             (c + (a * m) + (b * m * m) - (m * Math.sqrt(delta))) / (1 + (m * m))];
         if(to_x===circle_center_x) {
-            if(euclideanDistance([from_x, from_y], possible_return_add) < euclideanDistance([from_x, from_y], possible_return_subtract)){
+            if(euclideanDistance([from_x, from_y], possible_return_add) < euclideanDistance([from_x, from_y],
+                possible_return_subtract)){
                 return possible_return_add;
             } else {
                 return possible_return_subtract;
@@ -96,9 +114,13 @@
             }
         }
     }
+    // Draw a visualisation of an action
     function drawAction(){
         action = actions[generation][timepoint][actionIndex];
+        // An action taken as a donor of the interaction (line from donor to recipient, and lines from onlooker to
+        // donor)
         if(action["type"]==="interaction"){
+            // Calculate points for line from donor to recipient
             let donor_x = players[generation][action["donor"]]["coord_x"];
             let donor_y = players[generation][action["donor"]]["coord_y"];
             let recipient_x = players[generation][action["recipient"]]["coord_x"];
@@ -108,8 +130,10 @@
             let to_points = find_intersection_point(recipient_x, recipient_y, player_radius,
                 recipient_x, recipient_y, donor_x, donor_y);
             ctx.lineWidth = player_radius/5;
+            // Calculate the angle of the arrowhead and it's size
             let length_of_arrow_head = player_radius;
             let head_angle = Math.atan2(to_points[1]-from_points[1], to_points[0]-from_points[0]);
+            // Draw line
             ctx.beginPath();
             ctx.moveTo(from_points[0], from_points[1]);
             ctx.lineTo(to_points[0], to_points[1]);
@@ -119,6 +143,7 @@
             ctx.moveTo(to_points[0], to_points[1]);
             ctx.lineTo(to_points[0]-length_of_arrow_head*Math.cos(head_angle+Math.PI/6),
                 to_points[1]-length_of_arrow_head*Math.sin(head_angle+Math.PI/6));
+            // Blue line for cooperation, red for defection
             if(action["action"]==="InteractionContent.COOPERATE"){
                 ctx.strokeStyle = "#0000CE";
             } else {
@@ -126,10 +151,11 @@
             }
             ctx.stroke();
             ctx.strokeStyle = "black";
-            console.log(action['onlookers']);
+            // Draw a line from each onlooker to the donor
             for(let i = 0; i < action['onlookers'].length; i++){
                 if(action['onlookers'][i] !== action["recipient"]) {
                     ctx.beginPath();
+                    // Calculate line coordinates and the angle of the arrowhead
                     let player_coord_x = players[generation][action['onlookers'][i]]["coord_x"];
                     let player_coord_y = players[generation][action['onlookers'][i]]["coord_y"];
                     let onlooker_points = find_intersection_point(player_coord_x, player_coord_y, player_radius, donor_x,
@@ -149,6 +175,8 @@
                 }
             }
         } else if(action["type"]==="gossip") {
+            // Draw a gossip action
+            // Calculate points for line from  gossiper to recipient
             let gossiper_x = players[generation][action["gossiper"]]["coord_x"];
             let gossiper_y = players[generation][action["gossiper"]]["coord_y"];
             let recipient_x = players[generation][action["recipient"]]["coord_x"];
@@ -160,9 +188,11 @@
             let recipient_to_points = find_intersection_point(recipient_x, recipient_y, player_radius, gossiper_x, gossiper_y,
                 recipient_x, recipient_y);
             ctx.lineWidth = player_radius / 5;
+            // Calculate arrowhead
             let length_of_arrow_head_gossip_recipient = player_radius;
             let head_angle_gossip_recipient = Math.atan2(recipient_to_points[1] - recipient_from_points[1],
                 recipient_to_points[0] - recipient_from_points[0]);
+            // Draw line from gossiper to recipient
             ctx.beginPath();
             ctx.moveTo(recipient_from_points[0], recipient_from_points[1]);
             ctx.lineTo(recipient_to_points[0], recipient_to_points[1]);
@@ -172,21 +202,26 @@
             ctx.moveTo(recipient_to_points[0], recipient_to_points[1]);
             ctx.lineTo(recipient_to_points[0] - length_of_arrow_head_gossip_recipient * Math.cos(head_angle_gossip_recipient + Math.PI / 6),
                 recipient_to_points[1] - length_of_arrow_head_gossip_recipient * Math.sin(head_angle_gossip_recipient + Math.PI / 6));
+            // Green if positive, purple if not
             if (action["gossip"] === "GossipContent.POSITIVE") {
                 ctx.strokeStyle = "#00CE00";
             } else {
                 ctx.strokeStyle = "#ce00ce";
             }
             ctx.stroke();
+            // If the action is about an agent other than the gossiper draw a black line to indicate who it is about
             if (action["about"] !== action["gossiper"]) {
+                // Calculate points for line
                 let about_from_points = find_intersection_point(gossiper_x, gossiper_y, player_radius,
                     about_x, about_y, gossiper_x, gossiper_y);
                 let about_to_points = find_intersection_point(about_x, about_y, player_radius,
                     about_x, about_y, gossiper_x, gossiper_y);
                 ctx.lineWidth = player_radius / 5;
+                // Calculate arrowhead details
                 let length_of_arrow_head_gossip_about = player_radius;
                 let head_angle_gossip_about = Math.atan2(about_to_points[1] - about_from_points[1],
                     about_to_points[0] - about_from_points[0]);
+                // Draw line
                 ctx.beginPath();
                 ctx.moveTo(about_from_points[0], about_from_points[1]);
                 ctx.lineTo(about_to_points[0], about_to_points[1]);
@@ -200,12 +235,14 @@
                 ctx.stroke();
             }
         }
+        // Draw the agents reason behind committing to this action
         ctx.fillStyle = 'black';
         ctx.textAlign = "center";
         ctx.textBaseline = "bottom";
         ctx.font = (font_size/1.8).toString()+"px Arial";
         let reason_string = "Reason: " + action["reason"];
         // Credit to https://stackoverflow.com/questions/2936112/text-wrap-in-a-canvas-element
+        // Ensure that the line for the reason doesn't go over the edge of the canvas
         let words = reason_string.split(" ");
         let lines = [];
         let currentLine = words[0];
@@ -223,8 +260,11 @@
         for(let j = 0; j < lines.length; j++){
             ctx.fillText(lines[j], canvas.width/2, canvas_side_length/2+canvas_side_length/3+canvas_side_length/10+(j*20));
         }
+        // reset font size
         ctx.font = font_size.toString()+"px Arial";
     }
+    // Draw all the details of the timepoint (the generation number, timepoint, players and action (the action at this
+    // action index (a global var)))
     function drawTimepoint(){
         ctx.fillStyle = 'black';
         ctx.textAlign = "left";
@@ -233,6 +273,8 @@
         drawPlayers();
         drawAction();
     }
+    // At the start of each new generation calculate coordinates to place each player on the canvas in a circle
+    // Using the circle theorem
     function calculatePlayerCoords(){
         let radius = (canvas_side_length/3);
         for(let playerIndex = 0; playerIndex < num_of_players_per_gen; playerIndex++){
@@ -242,6 +284,8 @@
                 (canvas_side_length/2)+radius*Math.sin(playerIndex*((2*Math.PI)/num_of_players_per_gen));
         }
     }
+    // Draw an indication to the user that reproduction is occurring and call to calculate the new generation's
+    // player's coordinates
     function drawReproduction(){
         ctx.fillStyle = 'black';
         ctx.textAlign = "center";
@@ -249,6 +293,7 @@
         ctx.fillText("Reproduce", canvas.width/2, canvas.height/2);
         calculatePlayerCoords();
     }
+    // Draw an indication that the first generation is about to commence
     function drawFirstGen(){
         ctx.fillStyle = 'black';
         ctx.textAlign = "center";
@@ -256,7 +301,9 @@
         ctx.fillText("First Gen", canvas.width/2, canvas.height/2);
         calculatePlayerCoords();
     }
+    // Control the stepping through of generations, timepoints and action indices for each time the canvas is rendered
     function draw(step){
+        // Detect when the end of all generations, timepoints and action indices has been met and loop back
         if(timepoint%{{ community.length_of_generations }} === 0 &&
                 generation%{{ community.generations.all()|length }} === 0 && !firstRound && !newGen){
             timepoint=0;
@@ -264,6 +311,7 @@
             firstRound = false;
             newGen=false;
         }
+        // Detect if we are starting a new generation and set it up
         if(!firstRound && newGen) {
             generation += step;
             newGen = false;
@@ -271,28 +319,35 @@
                 drawReproduction();
             }
         } else if(!firstRound && !newGen) {
+            // Draw a particular action in a timepoint
             drawTimepoint();
+            // Move to the next action in the timepoint
             if (!(actionIndex >= actions[generation][timepoint].length)) {
                 actionIndex += step;
             }
+            // If drawn all the possible actions of a timepoint go to the next timepoint
             if (actionIndex >= actions[generation][timepoint].length){
                 timepoint += step;
                 actionIndex = 0;
+                // If drawn all timepoints of a generation move to the next generation
                 if(timepoint%{{ community.length_of_generations }} === 0){
                     newGen = true;
                     timepoint = 0;
                 }
             }
         }
+        // Draw the first generation
         if(firstRound){
             drawFirstGen();
             firstRound=false;
         }
     }
+    // Rerender the canvas, stepping through at the integer rate given by step
     function render(step){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         draw(step);
     }
+    // Skip the generation passed
     function toGeneration(gen_id){
         timepoint = 0;
         generation = gen_id-1;
@@ -301,6 +356,7 @@
         window.clearInterval(interval);
         interval = setInterval(function(){render(1)}, interval_time);
     }
+    // Decrease the interval between rerenders to speed up rerendering
     function increaseSpeed(){
         if(interval_time>=200){
             interval_time -= 100;
@@ -308,6 +364,7 @@
         clearInterval(interval);
         interval = setInterval(function(){render(1)}, interval_time);
     }
+    // Increase the interval between rerenders to slow the canvas speed down
     function decreaseSpeed(){
         if(interval_time<=1200){
             interval_time += 100;
@@ -315,13 +372,16 @@
         clearInterval(interval);
         interval = setInterval(function(){render(1)}, interval_time);
     }
+    // Prevent rerendering, pausing the canvas at a specific point
     function pause(){
         clearInterval(interval);
     }
+    // Start rerendering with a new interval
     function resume(){
         clearInterval(interval);
         interval = setInterval(function(){render(1)}, interval_time);
     }
+    // Move backwards through the actions, timepoints and generations one step
     function back(){
         if(actionIndex<=1){
             if(timepoint<=0){
@@ -337,17 +397,12 @@
             }
         } else {
             actionIndex-=1;
-            console.log(actionIndex);
         }
-        console.log("actionIndex: " + actionIndex);
-        console.log("timepoint: " + timepoint);
-        console.log("generation: " + generation);
         render(0);
     }
+    // Move forwards through the actions, timepoints and generations one step
     function forward(){
         if(actions[generation][timepoint].length<=actionIndex+1){
-            console.log(actionIndex);
-            console.log(actions[generation][timepoint]);
             if(Object.keys(actions[generation]).length<=timepoint+1){
                 actionIndex=0;
                 timepoint=0;
@@ -362,6 +417,7 @@
            render(1);
         }
     }
+    // Begin the canvas rendering
     render();
     let interval = setInterval(function(){render(1)}, interval_time);
 </script>

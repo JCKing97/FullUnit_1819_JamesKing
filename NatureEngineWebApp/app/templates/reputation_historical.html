@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{# The template to display historical data to a user #}
 {% block app_content %}
     <div class="jumbotron" style="padding: 20px">
         <h1 style="">Reputation Games Historical Data</h1>
@@ -10,6 +11,7 @@
 
     <div class="container-fluid">
         <div class="row">
+            {# A definition of the measurements used in the analysis #}
             <div class="col-md-3">
                 <div class="panel panel-info" style="margin: 10px">
                     <div class="panel-heading">Measurements Definition. Unsure of what the measurements mean? Read these descriptions!</div>
@@ -47,6 +49,7 @@
                 </div>
             </div>
             <div class="col-md-9">
+                {# Compare the use of social actions and the rate of coopertion of all games #}
                 <h3>Social Actions vs. Cooperation Rate</h3>
                 <p>
                     One possible factor to increased cooperation between players could be the social interaction between each other.
@@ -64,6 +67,7 @@
                 </div>
                 <hr/>
 
+                {# Compare the length of generations and the cooperation rate of those generations #}
                 <h3>Generation Length vs. Cooperation Rate</h3>
                 <p>
                     Another suggested factor in increased cooperation is the length of generations in a community.
@@ -80,6 +84,8 @@
                 </div>
                 <hr/>
 
+                {# Compare the social welfare (fitness of a generation or community) and the cooperation rate of that
+                    generation or community#}
                 <h3>Cooperation Rate vs. Social Welfare</h3>
                 <p>
                     Social welfare is the overall fitness accrued by all players of a community or generation.
@@ -97,6 +103,7 @@
                 </div>
                 <hr/>
 
+                {# Compare the count of strategies to the cooperation rate of a generation #}
                 <h3>Generation Strategy Count vs. Generation Cooperation Rate</h3>
                 <p>
                     The count of each strategy in each generation vs the cooperation rate

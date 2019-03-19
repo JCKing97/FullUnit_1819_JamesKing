@@ -1,7 +1,9 @@
-{# Author: James King adapted from code in https://www.youtube.com/watch?v=Ke90Tje7VS0&t=3352s and Phil's comment on https://stackoverflow.com/questions/11456771/using-json-post-request#11457051 #}
+{# Author: James King adapted from code in https://www.youtube.com/watch?v=Ke90Tje7VS0&t=3352s and Phil's
+ comment on https://stackoverflow.com/questions/11456771/using-json-post-request#11457051 #}
 
 {% extends "base.html" %}
 
+{# The template to set up an iterated prisoner's dilemma tournament #}
 {% block app_content %}
     <div class="jumbotron" style="padding: 20px">
         <h1>Tournament</h1>
@@ -15,15 +17,18 @@
         </p>
     </div>
 
+    {# Include the form to select agents #}
     <div class="container">
         <div id="select_agents"></div>
         <hr />
         <div class="row">
+            {# The description of strategies in the system #}
             {% include "_strategies_description.html" %}
         </div>
     </div>
 {% endblock %}
 
+{# The script to manage the form to add agents to the  #}
 {% block scripts %}
     {{ super() }}
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>actions.pl</title>
+<title>Agent Mind as a Service Documentation</title>
 
 <link rel="stylesheet" type="text/css" href="pldoc.css">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -13,6 +13,58 @@
 <h1 class="file"><span style="float:right"></span>actions.pl</h1>
 
 <dl>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="capabilities/5"><b class="pred">capabilities</b><var class="arglist">(++Timepoint:int, ++CommunityID:int, ++GenerationID:int, ++AgentID:int, -Capabilities:list)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Get the actions the agent with <var>AgentID</var> believes that it is capable of at the given timepoint.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>Timepoint</var></td><td class="argdescr">- The timepoint at which to get the action commitment at</td></tr>
+<tr><td><var>CommunityID</var></td><td class="argdescr">- The community the agent belongs to</td></tr>
+<tr><td><var>GenerationID</var></td><td class="argdescr">- The generation of the community the agent belongs to</td></tr>
+<tr><td><var>AgentID</var></td><td class="argdescr">- The id of the agent</td></tr>
+<tr><td><var>Capabilities</var></td><td class="argdescr">- A list of actions an agent believes it is capable of</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="capable/5"><b class="pred">capable</b><var class="arglist">(++Timepoint:int, ++CommunityID:int, ++GenerationID:int, ++AgentID:int, -Action:term)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Unifies with an action the given agent is capable of at the given timepoint.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>Timepoint</var></td><td class="argdescr">- The timepoint at which to get the action commitment at</td></tr>
+<tr><td><var>CommunityID</var></td><td class="argdescr">- The community the agent belongs to</td></tr>
+<tr><td><var>GenerationID</var></td><td class="argdescr">- The generation of the community the agent belongs to</td></tr>
+<tr><td><var>AgentID</var></td><td class="argdescr">- The id of the agent</td></tr>
+<tr><td><var>Action</var></td><td class="argdescr">- An action the agent is capable of</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="get_action/6"><b class="pred">get_action</b><var class="arglist">(++Timepoint:int, ++CommunityID:int, ++GenerationID:int, ++AgentID:int, -Success:string, -Action:term)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Get the action for the given agent and check whether the agent is capable of it.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>Timepoint</var></td><td class="argdescr">- The timepoint at which to get the action commitment at</td></tr>
+<tr><td><var>CommunityID</var></td><td class="argdescr">- The community the agent belongs to</td></tr>
+<tr><td><var>GenerationID</var></td><td class="argdescr">- The generation of the community the agent belongs to</td></tr>
+<tr><td><var>AgentID</var></td><td class="argdescr">- The id of the agent</td></tr>
+<tr><td><var>Success</var></td><td class="argdescr">- true if getting an action was successful, error message otherwise</td></tr>
+<tr><td><var>Action</var></td><td class="argdescr">- The action that the agent has decided upon</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
 <dt class="pubdef"><span style="float:right">&nbsp;</span><a name="agent_action/6"><b class="pred">agent_action</b><var class="arglist">(++Timepoint:int, ++CommunityID:int, ++GenerationID:int, ++AgentID:int, -Success:atom, -Action:dict)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Get an agents commitment to an action, responds unsuccessful if there is no such community, generation of the community or agent belonging to the generation of the community passed.
 
 <dl class="tags">
