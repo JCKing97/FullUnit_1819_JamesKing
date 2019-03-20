@@ -600,9 +600,9 @@ In summary, I have presented a MAS that uses a variant of a genetic algorithm to
 
 \section{Implementation}
 \subsection{Introduction}
+In this section I will discuss the details of the implementation of the theoretical framework outlined above as well as the architecture of the system that is hosting it. I will also be discussing the software engineering techniques, tools and processes I have employed in the development of my system.
 
 \subsection{Development}
-\textcolor{red}{Learning flask + Prolog web, Proof of concept applications, Talk about web dev practices, Architecture, Amaas, Web Application (+environment), Database (SQLAlchemy + SQLite + MySQL), Deployment}
 \subsubsection{Architecture}
 \begin{wrapfigure}{l}{0.5\textwidth}
 \vspace{-30pt}
@@ -681,25 +681,75 @@ The server then puts a method to create and run the game in a redis queue and th
 \end{framed}
 \vspace{-30pt}
 \end{wrapfigure}
-In addition to this I have created a feature that allows users to create accounts, login and associates games of my theoretical framework to their account. These games can be given a label so they can keep track of the experiments the have run (illustrated in figure~\ref{fig:user_experiments}. User data is recorded in the database and passwords are hashed to keep them secret. 
+In addition to this I have created a feature that allows users to create accounts, login and associates games of my theoretical framework to their account. These games can be given a label so they can keep track of the experiments the have run (illustrated in figure~\ref{fig:user_experiments}). User data is recorded in the database and passwords are hashed to keep them secret.\par
+The web application, database and AMAAS system has been deployed to an Ubuntu Server and has a domain name (natureengine.tech) that is accessible to all across the internet.
 
 \subsection{Framework}
-\textcolor{red}{Agents based, Strategies, environment etc.}
+\subsubsection{Introduction}
+In this section I will lay out the implementation of the environment, agents and strategies I have described in the theoretical framework (section~\ref{sec:theo}). 
 \subsubsection{Environment and Agent's Bodies}
-The environment and agent's bodies from the theoretical framework described in section~\ref{sec:theo} has been implemented within the nature engine. 
+The environment and agent's bodies from the theoretical framework described in section~\ref{sec:theo} has been implemented within the nature engine web application in it's own package. As such the environment and agent's bodies components have been written in Python.\par 
+This has taken an object oriented approach. A Community object is the overarching object that simulates the specified number of generations and handles the reproduction of strategies between generations assigning the strategies that should be associated with players in a Generation. A Generation object creates a set of players from these passed strategies.\par 
+The Generation is then simulated. Simulation of a generation involves running the synchronised cycle steps from the start timepoint of that generation to the end timepoint. In each perceive step a donor-recipient pair is selected at random by a method of the Generation object and the relevant agents are notified.\par 
+In the previous timepoint a set of percepts is generated - from the actions of that timepoint - for the current timepoint and are set into the perception bank ready to be transmitted at the current timepoint. These are sent in the perceive step. Agents are then asked to decide on an action at the current timepoint. Once these actions have been returned to the Generation they are executed, affecting players fitness and generating more percepts.\par 
+A Player is also an object in the system, and is associated with a strategy that describes how it should act at each timepoint. The Player object handles the sending of percepts and getting of actions from their decision making component in the AMAAS system. The Player object also encapsulates the player's state including the fitness of that player.\par 
+The 3 classes that implement the Action abstract class represent the three possible types of action that are available and the relevant data associated with an instance of an action.
 
 \subsubsection{Agent Mind as a Service (AMAAS)}
 
+The AMAAS system was developed in Prolog. This system handles the management of communities, generations and agents by assigning them with an ID generated using a similar system to the Prolog gensym library. These are assigned to the predicates $community(CommunityID)$, $generation(Community, GenerationID)$ where $Community$ unifies with a community and $agent(Strategy, Community, Generation, AgentID)$ where $Strategy$ unifies with a strategy in the system and Generation with a generation.\par
+the community/1, generation/2 and agent/3 predicates are dynamic and can be asserted and retracted. The possible strategies that unify with $Strategy$ are not dynamic and are defined with a strategy predicate (strategy/5). The first 4 arguments are strings and are in the correct order: the strategy to use when a donor, the strategy to use when not a donor, the trust model, the description of the strategy. The final argument is a list of any type that contains options to augment the strategy that are not a necessity to define for every strategy.\par 
+Some of the available strategies (any associated with the donor strategies ``Standing Discriminator'', ``Image Scoring Discriminator'' and ``Veritability Discerner'') hold beliefs about other agents and the environment. These beliefs are stored with fluents in the MVFCEC. The value of these fluents are revised by the definition for initiates\_at/4 and terminates\_at/4 of that agents strategy and trust model and the events and conditions that cause these predicates to fire.\par
+These predicates are caused to fire by the receiving of percepts to the agents service that then asserts a new event observation (the observed\_at/2 predicate) and calling an update on the MVFCEC using the update\_at/2 predicate. The process of firing these is controlled for all possible percepts by the add\_new\_action\_gossip\_percept/2, add\_new\_action\_interaction\_percept/2 and add\_new\_interaction\_percept/2 predicates.\par
+The beliefs formed by the firing of these predicates and the initiating and terminating of fluents is then used by the teleo-reactive program created for each strategy to decide on actions at certain points in time. An agent decides on an action by the firing of the agent\_action/6 predicate. A set of agent\_action/6 definitions is given for each donor and non-donor strategy. The first four arguments are input arguments being the timepoint to decide at, the id of the community and the generation the agent belongs to and finally the id of the agent.\par 
+The second to last argument stores true if a decision has been successfully made or provides an error message if it has not been. The last argument unifies with an action (the dictionary representation of that action). The program is teleo-reactive as the system is designed so only one of the bodies of the set of agent\_action/6 definitions satisfies the conditions required, and this forces unification with one action.\par 
+The higher level predicate get\_action/6 checks if an agent has already committed to an action at a specific timepoint. This predicate also ensures that an agent only commits to actions that it believes it is capable of using capable/5 predicate, which is only satisfied if the agent is committing to a donor action as a donor or a gossip or idle action if it is not a donor.
+
 \subsubsection{Simple Agent Gossip Language}
+The specification of SAGL (subsection~\ref{subs:sagl}) is remarkably similar to data structures used in Python (Dicts), the JSON structure and dictionaries in Prolog. As such, it made sense to implement SAGL by storing it as Python Dicts in the environment and agent's bodies, transferring it with JSON (as is used for the API in general) and then storing it as dictionaries in Prolog. 
 
 \subsection{Software Engineering}
-\textcolor{red}{Unit testing (PLUnit + unittest), Web App Testing, API Testing, UML design, Design Patterns (Observer of player state), GUI Design, Scrum (Sprints, Task Backlog), Documentation (sphinx and restructured text, pldoc) and commenting, API Documentation, Agent Oriented Programming, Git (VCS), Tools (Pycharm, UMLet, Linting, Syntax highlighting, packager)}
+\subsubsection{Introduction}
+In this section I will discuss and reflect on engineering tools, techniques, methodologies and approaches that I have used, and some that I possibly should have used.
+
 \subsubsection{Process}
+The development process I decided on when starting the project was a scrum like structure, with a task backlog that was subject to change and fortnightly sprints. Although I have mostly stuck to these sprints, the backlog was in constant flux, far more than was expected. This is likely due to me still learning lots about the topic during the project. This was not due to a lack of research, but a focus on game-theory over multi-agent system design.\par 
+I feel that I could have managed this better with a more structured approach to design of the system, and by opening up my focus to all areas of the topic. However, I believe this structure allowed me to be open to new ideas and aspects to add to the project. I was then able to incorporate aspects of multi-agent systems and game-theory fields I may have not been able to with a more structured approach.\par 
+As it was, the design phase of the process was greatly interleaved with both learning the concepts for designing the system and the implementation of it. The implementation of the system then followed a Test-Driven Development (TDD) approach, developing tests and then creating code to work for those tests, and afterwards refactoring. This followed with a deeper more fully encompassing testing using a bottom-up integration testing strategy.\par 
+This highly interleaved process worked quite well for my project as it allowed me to design, develop and test features in the system separately all in the same slice of tasks. This process also allowed me to discover new features, ideas and strategies to incorporate in the system and then extend the project by adding a new slice of tasks to the task backlog which I could then choose when to implement based on urgency and importance.\par 
+I followed a bottom-up strategy when developing the components of the system. The multi-agent system is dependent on the agents service being fully functional and safe to use. As such I focused on developing and testing the AMAAS system and a base set of strategies for this first.\par 
+From this I then developed and tested a base set of components for the environment of the MAS. Once I had a safe and working base system I incorporated the MAS into the web application. From there I worked on adding new strategies and testing them in the AMAAS system, and then onto adding features to the multi-agent system such as the selection of onlookers and the reproduction mechanism.\par 
+This incremental development using slices of tasks for each feature allowed me to be secure that the developed parts of the system were safe for use by other parts of the system.
 
 \subsubsection{Design}
+Most of the early design of my system went into learning how the operation of a MAS works, and drawing from multiple sources how to implement it myself. Further to this, I researched agent architectures and fused together multiple styles of design into my own. Both the design of the environment and agents can be viewed in my theoretical framework section (section~\ref{sec:theo}).\par 
+I designed the API for the AMAAS system using a RAML specification and then added to this as I went along. This drove the design and implementation of the AMAAS system, by designing what I needed from the service I derived what I needed to implement for the functionality. I also created a theoretical design for the strategies in the system using logical predicates, to translate into Prolog.\par 
+The environment and agent's bodies for the multi-agent system were developed using the OOP features of Python. To approach this I used object-oriented design UML design tools (UMLet), and added to this as I enhanced the features of the system. This included a UML class diagram for designing the environment and agent body class structure (figure~\ref{fig:class}) and a sequence diagram to portray the message passing sequence (figure~\ref{fig:sequence}).\par 
+In the design of the environment classes I included an observer design pattern to observer player states and collect data on the player and their actions throughout the course of the game. I then created a facade for this so a simple Results class is returned after an object of the ReputationGame type has been run. The ReputationGame class is also a facade on the simulation of the communities and generations, making the system easy to set up a game with (preventing the need to know the underlying implementation).\par 
+This project is not focused on interface design and I have not researched or learnt any strategies for user experience design. However, with the knowledge I have of bootstrap components, css and some web development I developed templates for the client side as an informal method of design. I then refined these templates to improve the user experience simply by using the system and noticing any annoyances or issues I had with it.
+\begin{figure}
+	\begin{flushleft}
+	\includegraphics[width=\textwidth]{EnvClass.png}
+	\caption{The class diagram for my environment and agent bodies Python program, also can be found in the ProjectReports/NewFinalReport directory as EnvClass.png}
+	\label{fig:class}
+	\end{flushleft}
+\end{figure}
+\begin{figure}
+	\begin{center}
+	\includegraphics[width=\textwidth]{EnvSequence.png}
+	\caption{The sequence diagram for my environment and agent bodies Python program, also can be found in the ProjectReports/NewFinalReport directory as EnvSequence.png}
+	\label{fig:sequence}
+	\end{center}
+\end{figure}
 
 \subsubsection{Development}
-\textcolor{red}{styling}
+As I have mentioned the development phase has been strongly interleaved with testing and design to ensure the safety and correct running of the program. This included a TDD approach to development. I used a number of tools to assist me in this development.\par 
+The Python code that I have written follows the PEP 8 Style Guide. I used the Flask web application microframework to assist me in developing the web application and for the creation of the database I used the SQLAlchemy ORM. With SQLAlchemy way I was able to generate for both SQLite (for development) and MySQL (for deployment) databases from Python code. The use of SLQALchemy also assists in the prevention of SQL injection attacks that websites so often fall prey to.\par 
+I also used git as a version control system tool, with a master branch and various feature branches which I would develop features on and then once stable merge back into the master. The repository is hosted on GitHub. I mostly used the git command line tool for Linux, however I occasionally used the git support in the PyCharm integrated project support environment.\par 
+Pycharm provides more than just version control system tools. There is also a linter and support for the Python language, as well as Jinja2, HTML, CSS and Javascript which I used for front-end development. I have often used the visual debugger, Python environment setup support, Flask support and unittest library support.\par 
+There is far less tooling available for Prolog development. I ended up using a mix of Visual Studio Code as it has a linter that helped me catch errors earlier (though I would not recommend this, as it often crashes) and Sublime Text (limited to syntax highlighting).\par 
+Again with the development of the AMAAS system I followed a TDD approach, writing unit tests using the PLUnit library. I documented this code using the PLDoc library. There is a good HTTP library for Prolog, that allowed me to easily create a web service with handlers for certain routes that easily link up to functionality in the AMAAS system.
+
 
 \subsubsection{Testing}
 The testing of my system can be broken down into four parts: AMAAS bottom up integration testing, environment bottom up integration testing, application programming interface (API) testing and some extra early unit testing on other parts of the web application. The bulk of this testing comes from the first two, which were interleaved with the development of the system. The early unit testing was also interleaved with development. However API testing was carried out after development.\par 
@@ -709,14 +759,16 @@ I also used this testing framework for bottom up integration testing of the envi
 I would also like to have tested the web application including functionality, usability and compatibility testing~\cite{guru99_testing, software_testing_help}. I have developed the user interface to what I believe to be a good standard, but I'm sure it can be improved and it would be good to get feedback to understand where I can improve this. I also have developed the web application so it is responsive using the Bootstrap 3 library, and have used the website on Firefox on Android and Linux, and Chrome on Windows. It would be good to find out the compatibility with Safari and have more eyes to spot bugs in the functionality.
 
 \subsubsection{Documentation}
-In the API testing phase I tested the API against the claimed functionality in the API documentation. I created the specification for this documentation in the RESTful API Modelling Language (RAML) which is based on YAML specifically for the creation of RESTful API specifications. There is a good set of tools surrounding RAML, including a linter in the Atom text editor and the raml2html tool that creates a nicely laid out web page for a user readable documentation. I used this tool to convert my .raml file into a .html for readability.\par 
+In the API testing phase I tested the API against the claimed functionality in the API documentation. I created the specification for this documentation in the RESTful API Modelling Language (RAML) which is based on YAML specifically for the creation of RESTful API specifications. There is a good set of tools surrounding RAML, including a linter in the Atom text editor and the raml2html tool that creates a nicely laid out web page for a user readable documentation. I used this tool to convert my .raml file into a .html for readability. This documentation can be found by opening the main.html document in the AgentsService/api\_docs directory in a web browser.\par 
+I have also created documentation for the web application code. This is done in the form of writing python docstrings in the reStructuredText markup language for each package, module, class and function. These docstrings follow the ``PEP 257 Docstring Conventions'' proposal. I have then used the documentation generator to convert these docstrings into html format that could then be published. This documentation can be found by opening the index.html file in the NatureEngineWebApp/docs/build/html directory in a web browser.\par 
+Similarly to this I have created documentation for the AMAAS system code using PlDoc. PlDoc docstrings are similar in format to those in Javadoc. Once written I have used the utilities provided by SWI-Prolog to convert to html format. This documentation can be found by opening the index.html file in the AgentsServer/pldocs directory in a web browser.
 
-
-\subsubsection{Tools}
-
-\subsubsection{Version Control System}
+\subsubsection{Agent Oriented Programming}
+The software engineering techniques and methodologies I have used in my development have often followed a typical OOP design approach. I was not aware of the methodologies and techniques that exist for the AOP paradigm. On reflection adopting one of these methodologies to develop the environment and agents would have assisted me in the development and design process.\par 
+Many of these methodologies such as Tropos and Prometheus are extensions to the OOP methodologies~\cite{kostas_deductive}. Tropos is a full methodology but relies on UML extended with the Agent Unified Modelling Language (AUML). Using this would have allowed for easy integration with my traditional OOP design approach, while driving the MAS development with Tropos' four stages (early requirements, late requirements, architectural design and detailed design).
 
 \chapter{Experiment Evaluation}
+\textcolor{red}{Explain subset I have taken and why I have chosen it (middle, good and not so good) (Ratio for strategies and eighth) (Duplicate experiments) (R, IV, S)}
 \section{Introduction}
 
 \section{Strategies}
@@ -728,9 +780,7 @@ In the API testing phase I tested the API against the claimed functionality in t
 
 \subsection{Strategy Comparison}
 
-\section{Trust Models}
-
-\section{Gossip}
+\section{Trust Models and Gossip}
 
 \section{Discussion}
 
@@ -751,9 +801,6 @@ Move closer to using an agent model such as BDI?\\
 Using the GAIA methodology for development?~\cite{wooldridge2000gaia}.\\
 Reaching agreements\\
 Use an AOP language (GOAL or SARL?)}
-
-\chapter{Future Additions}
-\textcolor{red}{Things on to do list + in conclusions}
 
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE

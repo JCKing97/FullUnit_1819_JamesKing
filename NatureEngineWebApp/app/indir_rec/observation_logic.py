@@ -19,7 +19,7 @@ class Observer(ABC):
     """Ensure these methods are implemented for every subclassing observer"""
 
     @abstractmethod
-    def update(self, player_state: PlayerState) -> None:
+    def update(self, player_state: PlayerState) -> NoReturn:
         """Update the observer with new player state information"""
         raise NotImplementedError
 

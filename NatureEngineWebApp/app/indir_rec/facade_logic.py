@@ -23,7 +23,6 @@ class Results:
         self._player_observer = PlayerObserver(community.get_id())
         self._observers: List[Observer] = [self._action_observer, self._player_observer]
         self._community = community
-        self._populations: List[Dict[int, List]] = []
 
     @property
     def generations(self) -> List[int]:

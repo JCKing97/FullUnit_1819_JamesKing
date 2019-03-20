@@ -191,7 +191,7 @@ class Player:
         """
         return self._fitness
 
-    def update_fitness(self, change: int):
+    def update_fitness(self, change: int) -> NoReturn:
         """
         Update the fitness of the player, it cannot go below zero.
         :param change: The change in fitness to be applied
@@ -253,21 +253,23 @@ class Player:
         self.player_state.new_action = action
         return action
 
-    def set_perception(self, perception):
+    def set_perception(self, perception) -> NoReturn:
         """
         Set a perception into the player's perception bank, ready to be perceived
         :param perception: The perception to set into the player's perception bank
+        :return: NoReturn
         """
         if perception['timepoint'] not in self._percepts.keys():
             self._percepts[perception['timepoint']] = [perception]
         else:
             self._percepts[perception['timepoint']].append(perception)
 
-    def perceive(self, timepoint):
+    def perceive(self, timepoint: int) -> NoReturn:
         """
         Tell the agent to perceive the percepts set for the previous timepoint from this one
         :param timepoint: The timepoint we are currently at so is one in front of the percepts to perceive
-        :return: void
+        :type timepoint: int
+        :return: NoReturn
         """
         if timepoint > 0 and timepoint-1 in self._percepts:
             # Send all percepts for the relevant timepoint to the agents mind
