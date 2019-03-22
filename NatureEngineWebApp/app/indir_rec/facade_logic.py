@@ -5,7 +5,7 @@ __author__ = "James King"
 from .community_logic import Community
 from .observation_logic import ActionObserver, PlayerObserver, Observer
 from .action_logic import Action, InteractionAction
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Any
 from .strategy_logic import Strategy
 
 

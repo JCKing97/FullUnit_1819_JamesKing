@@ -18,7 +18,7 @@ class InteractionContent(Enum):
     """The two possible actions a player can commit in an interaction, the dictionary value
      contains the payoff matrix details and the string representaiton"""
     COOPERATE = {'donor_cost': -1, 'recipient_gain':  2, 'string': 'cooperate'}
-    DEFECT = {'donor_cost': 0, 'recipient_gain':  0, 'string': 'negative'}
+    DEFECT = {'donor_cost': 0, 'recipient_gain':  0, 'string': 'defect'}
 
 
 class GossipContent(Enum):

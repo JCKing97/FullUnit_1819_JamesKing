@@ -30,8 +30,8 @@ def reputation():
         for strategy in strategy_counts:
             player_count += strategy['count']
         if 4 < player_count < 200 and 0 <= int(form_data['num_of_onlookers']) \
-                and 2 <= int(form_data['num_of_generations']) <= 20 \
-                and 5 <= int(form_data['length_of_generations']) <= 200 \
+                and 2 <= int(form_data['num_of_generations']) \
+                and 5 <= int(form_data['length_of_generations']) \
                 and 0 <= float(form_data['mutation_chance']) <= 1:
             # Set up community in database
             community = ReputationCommunity(simulated=False, timed_out=False)

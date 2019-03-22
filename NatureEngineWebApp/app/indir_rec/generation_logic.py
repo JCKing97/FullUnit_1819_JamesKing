@@ -204,7 +204,6 @@ class Generation:
             self._id_player_map[interaction_action.recipient].update_fitness(interaction_action.action.value['recipient_gain'])
             onlookers = self._generate_onlookers(interaction_action)
             action.onlookers = onlookers
-            print("onlookers: " + str(onlookers))
             for onlooker in onlookers:
                 action_percept = {'type': interaction_action.type.value['percept_link'],
                                   'action': interaction_action.action.value['string'], 'perceiver': onlooker,
@@ -234,7 +233,6 @@ class Generation:
         else:
             deep_copy_onlookers.extend(random.sample(possible_onlookers, len(possible_onlookers)))
         for onlooker in deep_copy_onlookers:
-            print(onlooker)
             onlookers.append(onlooker.id)
         return onlookers
 

@@ -768,19 +768,34 @@ The software engineering techniques and methodologies I have used in my developm
 Many of these methodologies such as Tropos and Prometheus are extensions to the OOP methodologies~\cite{kostas_deductive}. Tropos is a full methodology but relies on UML extended with the Agent Unified Modelling Language (AUML). Using this would have allowed for easy integration with my traditional OOP design approach, while driving the MAS development with Tropos' four stages (early requirements, late requirements, architectural design and detailed design).
 
 \chapter{Experiment Evaluation}
-\textcolor{red}{Explain subset I have taken and why I have chosen it (middle, good and not so good) (Ratio for strategies and eighth) (Duplicate experiments) (R, IV, S)}
+\textcolor{red}{Explain subset I have taken and why I have chosen it (middle, good and not so good) (Ratio for strategies and eighth) (Duplicate experiments) (R, IV, S)\\ Because the environment is not visible and there is so much random chance in the system unlike other game-theoretic models, wildly different results are produced each time. Affirming that past game-theoretic analysis of systems isn't adequate.}
 \section{Introduction}
 
-\section{Strategies}
-\subsection{Standing Strategy}
 
-\subsection{Image Scoring Discriminator}
+\section{Robustness}
+The experiments I have run are similar to Axelrod and Hamilton's~\cite{evolution_of_cooperation} experiments on the robustness of strategies in the system. There are 199 strategies available to use in my system, if I included one of each of these in the experiments it would overload the system. As such, I selected a population using a subset of these strategies to for the experiments that remains the same throughout the robustness experiments (listed in appendix section~\ref{appendix:population}).\par 
+9 unique experiments were conducted with this population and each one was duplicated - I would have liked to triplicate the experiments, however due to time pressure this was not possible. The first 3 experiments ran for 10 generations with a generation length of 60. These 3 experiments were different due to the number of onlookers selected for each on - 5, 10 and 20 respectively.\par 
+The next 3 experiments were reduced to a generation number of 5 due to the time it took to run them with 10 generations. These experiments were conducted with a generation length of 120. Again the number of onlookers was changed between each with the values 5, 10 and 20 respectively. The final set of 3 experiments were again conducted with a generation number of 5 but this time with a generation length of 200, and the same selected number of onlookers for each as the other sets of 3 experiments.\par 
+These experiments fulfilled a number of purposes. One of these was to review my framework for how well it supports the evolution of cooperation, another was to review which strategies were most consistently successful and additionally I evaluated the effect gossip and trust models to interpret this gossip have on the games.
 
-\subsection{Veritability Discerner}
+\subsubsection{Remark: Consistency of Results}
+Originally I ran a number of experiments at generation length 20. Players in these games reached a maximum total fitness of 35. These low fitness scores did not provide the reproduction algorithm with much chance of reflecting how successful a strategy can be with the amount they were reproduced into the next generation. This led to a remarkably low level of reproducibility of results. Even duplicate experiments returned wildly dissimilar results.\par 
+I diregarded these results for the following reasons. If a particular strategy got lucky with an early round of reproduction, it is likely that they would dominate the society later on as agents using that strategy are more likely to be randomly chosen in the reproduction algorithm before being stochastically accepted or not.\par 
+Another factor in this is the way interactions are selected. The donor-recipient pairs are selected at random from the population. If an agent or multiple agents of the same strategy were lucky enough to be selected a number of times as a recipient and receive cooperation, they are more likely to be reproduced out of pure luck over a good strategy.
 
-\subsection{Strategy Comparison}
+\subsection{Evaluation: Generation Length}
 
-\section{Trust Models and Gossip}
+
+\subsection{Evaluation: Evolution of Cooperation and The Framework}
+
+
+\subsection{Evaluation: Strategies}
+\textcolor{red}{Defection and cooperation able to exist alongside each other}
+
+
+\subsection{Evaluation: Trust Models and Gossip}
+
+
 
 \section{Discussion}
 
@@ -791,7 +806,8 @@ Successful?\\
 Future enhancements\\
 Focus on project\\
 Compare to deliverables at beginning\\
-Reflect on initial focus on game theory over MASs}
+Reflect on initial focus on game theory over MASs\\
+Low fitness values suggest I need a better measure for how well the agents are doing.}
 
 \chapter{Conclusions}
 \textcolor{red}{Mechanism has to work with and without re-meeting.\\
@@ -800,7 +816,11 @@ Opportunity for extra work? Further exploration of network reciprocity as outlin
 Move closer to using an agent model such as BDI?\\
 Using the GAIA methodology for development?~\cite{wooldridge2000gaia}.\\
 Reaching agreements\\
-Use an AOP language (GOAL or SARL?)}
+Use an AOP language (GOAL or SARL?)\\
+It's difficult to run a genetic algorithm with a multi-agent system in a web server, because it requires so many resources, next time I may develop a desktop application or command line application which are easily distributable to put onto powerful systems without needing to think about timeout for security (could create a mix). Make it easy to run automated experiments (Run experiments on an API????)!!!!! I have developed it in a way that the code could easily be ported for this. Also use a faster language that allows parrallelisation of perceptions, decisions, etc.\\
+Have agents select who to interact with rather than a random choice.\\
+A better fitness measure for the algorithm?\\
+Lo}
 
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
@@ -909,5 +929,38 @@ Refer to last chapter of russell and norvig}
 \subsection{Strategies}
 \label{appendix:strats}
 \textcolor{red}{include list of strategy components and trust models, all associated together}.
+
+\section{Robustness Experiments Population}
+\label{appendix:populations}
+\begin{itemize}
+	\item 1 x Cooperator, Lazy
+	\item 1 x Cooperator, Promote Self
+	\item 2 x Defector, Lazy
+	\item 2 x Defector, Promote Self
+	\item 2 x Defector, Spread Negative
+	\item 2 x Random
+	\item 1 x Standing Discriminator, Promote Self, Trusting
+	\item 1 x Standing Discriminator, Spread Accurate Negative, Trusting
+	\item 1 x Standing Discriminator, Lazy, Distrusting
+	\item 1 x Standing Discriminator, Lazy, Naive Trusting
+	\item 1 x Image Scoring Discriminator, Lazy, Distrusting, K=-2
+	\item 1 x Image Scoring Discriminator, Promote Self, Trusting, Personal Grievance, K=-2
+	\item 1 x Image Scoring Discriminator, Spread Accurate Negative, Trusting, Personal Grievance, K=-2
+	\item 1 x Image Scoring Discriminator, Lazy, Trusting, K=0
+	\item 1 x Image Scoring Discriminator, Promote Self, Trusting, K=0
+	\item 1 x Image Scoring Discriminator, Promote Self, Naive Trusting, Personal Grievance, K=0
+	\item 1 x Image Scoring Discriminator, Lazy, Naive Trusting, K=2
+	\item 1 x Image Scoring Discriminator, Spread Accurate Negative, Trusting, K=2, Personal Grievance
+	\item 1 x Image Scoring Discriminator, Spread Accurate Positive, Distrusting, K=2, Personal Grievance
+	\item 1 x Veritability Discerner, Spread Negative Untrusted, Strong Reactor, K=-5
+	\item 1 x Veritability Discerner, Spread Positive Trusted, Balanced Reactor, K=-5
+	\item 1 x Veritability Discerner, Lazy, Forgiving Reactor, K=-5
+	\item 1 x Veritability Discerner, Lazy, Strong Reactor, K=0
+	\item 1 x Veritability Discerner, Spread Negative Untrusted, Balanced Reactor, K=0
+	\item 1 x Veritability Discerner, Spread Negative Untrusted, Forgiving Reactor, K=0
+	\item 1 x Veritability Discerner, Lazy, Balanced Reactor, K=5
+	\item 1 x Veritability Discerner, Promote Self, Forgiving Reactor, K=5
+	\item 1 x Veritability Discerner, Spread Positive Trusted, Forgiving Reactor, K=5
+\end{itemize}
 
 \end{document}

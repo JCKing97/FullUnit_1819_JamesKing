@@ -1,0 +1,57 @@
+[
+    {
+        "gen_length": 60,
+        "num_of_onlookers": 10,
+        "gen_num": 10
+    },
+    {
+        "gen_length": 60,
+        "num_of_onlookers": 20,
+        "gen_num": 10
+    },
+    {
+        "gen_length": 200,
+        "num_of_onlookers": 5,
+        "gen_num": 10
+    },
+    {
+        "gen_length": 200,
+        "num_of_onlookers": 10,
+        "gen_num": 10
+    },
+    {
+        "gen_length": 200,
+        "num_of_onlookers": 20,
+        "gen_num": 10
+    },
+    {
+        "gen_length": 400,
+        "num_of_onlookers": 5,
+        "gen_num": 10
+    },
+    {
+        "gen_length": 400,
+        "num_of_onlookers": 10,
+        "gen_num": 10
+    },
+    {
+        "gen_length": 400,
+        "num_of_onlookers": 20,
+        "gen_num": 10
+    },
+    {
+        "gen_length": 800,
+        "num_of_onlookers": 5,
+        "gen_num": 10
+    },
+    {
+        "gen_length": 800,
+        "num_of_onlookers": 10,
+        "gen_num": 10
+    },
+    {
+        "gen_length": 800,
+        "num_of_onlookers": 20,
+        "gen_num": 10
+    }
+]

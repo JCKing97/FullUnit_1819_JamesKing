@@ -173,7 +173,7 @@
                         <form>
                             <label>Number of onlookers for each interaction: <input onChange={this.handleOnlookerChange} value={this.state.num_of_onlookers} type="number" min="0"/></label><br/>
                             <label>Number of generations: <input onChange={this.handleNumOfGenChange} value={ this.state.num_of_generations } type="number" min="3" max="20"/></label><br/>
-                            <label>Length of generation (timepoints): <input onChange={this.handleLenOfGenChange} value={this.state.length_of_generations} type="number" min="6" max="200"/></label><br/>
+                            <label>Length of generation (timepoints): <input onChange={this.handleLenOfGenChange} value={this.state.length_of_generations} type="number" min="6" max="1200"/></label><br/>
                             <label>Chance of mutation in offspring (between 0 and 1): <input onChange={this.handleMutationChange} value={this.state.mutation_chance} type="number" min="0" max="1" step="0.01"/></label><br/>
                             {% if current_user.is_authenticated %}
                                 <label>Label to attach to the experiment: <input onChange={this.handleLabelChange} value={this.state.label} type="text"/></label><br/>

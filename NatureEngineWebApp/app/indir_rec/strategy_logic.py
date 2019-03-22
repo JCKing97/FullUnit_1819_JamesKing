@@ -1,6 +1,6 @@
 """strategy_logic.py: Contains the logic surrounding the assigning of strategies to players"""
 
-from typing import List, Any
+from typing import List, Any, Dict
 
 
 class Strategy:
@@ -58,6 +58,10 @@ class Strategy:
         :rtype: List[Any]
         """
         return self._options
+
+    def to_dict(self) -> Dict:
+        return {'donor_strat': self.donor_strategy, 'non_donor_strat': self.non_donor_strategy,
+                'trust_model': self.trust_model, 'options': self.options}
 
     def __str__(self):
         """Return a string representation of the strategy"""

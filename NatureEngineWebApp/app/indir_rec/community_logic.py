@@ -139,6 +139,7 @@ class Community:
         :return: The next generation to simulate
         :rtype: Generation
         """
+        print("New generation: " + str(gen_id))
         if len(self._generations) <= 0:
             # Use the first selected generation of players
             return Generation(self._first_strategies, gen_id, self._community_id, 0,
@@ -167,7 +168,8 @@ class Community:
         while new_gen_size < self._generation_size:
             # use stochastic acceptance
             selected_player: Player = random.choice(last_gen_players)
-            if random.random() <= maximal_fitness:
+            chance_of_reproduction = 1 if maximal_fitness == 0 else selected_player.fitness/maximal_fitness
+            if random.random() <= chance_of_reproduction:
                 # Randomly mutate some based on a chosen probability
                 if random.random() < self._mutation_chance:
                     selected_strategy = random.choice(mutation_strategies)
