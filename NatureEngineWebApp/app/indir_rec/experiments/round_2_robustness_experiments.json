@@ -1,0 +1,17 @@
+[
+    {
+        "gen_length": 200,
+        "num_of_onlookers": 5,
+        "gen_num": 10
+    },
+    {
+	"gen_length": 200,
+	"num_of_onlookers": 10,
+	"gen_num": 20
+    },
+    {
+	"gen_length": 200,
+	"gen_num": 10,
+	"num_of_onlookers": 20
+    }
+]

@@ -8,6 +8,7 @@ from app.indir_rec.facade_logic import *
 
 
 def run_experiments(experiments_json_filename, population_json_filename, output_file_path):
+    print("here")
     experiments = json.loads(open(experiments_json_filename).read())
     populations = json.loads(open(population_json_filename).read())
     experiment_num = 1
@@ -15,7 +16,6 @@ def run_experiments(experiments_json_filename, population_json_filename, output_
         print("Experiment: "+str(experiment_num))
         output_filename = "gen_length="+str(experiment['gen_length'])+",gen_num="+str(experiment['gen_num'])+\
                           ",num_of_onlookers="+str(experiment['num_of_onlookers'])+":"+str(time.time())+".json"
-        output_file = open(output_file_path+output_filename, "w+")
         results: Results = ReputationGame(populations, experiment['num_of_onlookers'], experiment['gen_num'],
                                           experiment['gen_length'], 0).run()
         json_write_data = {'experiment': experiment, 'coop_rate': results.cooperation_rate,
@@ -33,7 +33,8 @@ def run_experiments(experiments_json_filename, population_json_filename, output_
             populations_data.append([{'strategy': strategy.to_dict(), 'count': count} for strategy, count
                                      in generation_population.items()])
         json_write_data['populations'] = populations_data
-        json.dump(json_write_data, output_file, indent=4)
+        with open(output_file_path+output_filename, "w+") as output_file:
+            json.dump(json_write_data, output_file, indent=4)
         experiment_num += 1
 
 
