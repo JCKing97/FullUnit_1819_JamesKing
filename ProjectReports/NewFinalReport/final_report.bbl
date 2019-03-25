@@ -41,6 +41,11 @@ Robert Axelrod and William~D. Hamilton.
 \newblock The evolution of cooperation.
 \newblock {\em Science}, 211:1390--1396, 1981.
 
+\bibitem{barabasi1999emergence}
+Albert-L{\'a}szl{\'o} Barab{\'a}si and R{\'e}ka Albert.
+\newblock Emergence of scaling in random networks.
+\newblock {\em science}, 286(5439):509--512, 1999.
+
 \bibitem{baumeister2004gossip}
 Roy~F Baumeister, Liqing Zhang, and Kathleen~D Vohs.
 \newblock Gossip as cultural learning.
@@ -61,6 +66,11 @@ Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman,
 Rodney~A Brooks.
 \newblock Intelligence without representation.
 \newblock {\em Artificial intelligence}, 47(1-3):139--159, 1991.
+
+\bibitem{selfish_gene}
+Richard Dawkins.
+\newblock {\em The Selfish Gene}.
+\newblock Oxford University Press, 2016.
 
 \bibitem{axelrodproject}
 Vince Knight; Owen Campbell;~Marc; eric-s-s; VSN Reddy Janga; James Campbell;
@@ -121,6 +131,11 @@ Mr.~David Gunning.
   \url{https://www.darpa.mil/program/explainable-artificial-intelligence},
   2018.
 \newblock Accessed: 8/3/2019.
+
+\bibitem{kinhamilton}
+W.~D. Hamilton.
+\newblock The genetical evolution of social behaviour.
+\newblock {\em Journal of Theoretical Biology}, 7:1--16, July 1964.
 
 \bibitem{harper2017reinforcement}
 Marc Harper, Vincent Knight, Martin Jones, Georgios Koutsovoulos, Nikoleta~E
@@ -236,6 +251,11 @@ Martin~A. Nowak.
 \newblock Five rules for the evolution of cooperation.
 \newblock {\em Science}, 314, 2006.
 
+\bibitem{spatial}
+Martin~A. Nowak and Robert~M. May.
+\newblock Evolutionary games and spatial chaos.
+\newblock {\em Nature}, 359:826--829, 1992.
+
 \bibitem{evol_indirect_image}
 Martin~A. Nowak and Karl Sigmund.
 \newblock Evolution of indirect reciprocity by image scoring.
@@ -269,6 +289,11 @@ Sebastian Rodriguez, Nicolas Gaud, and St{\'e}phane Galland.
 \newblock In {\em 2014 IEEE/WIC/ACM International Joint Conferences on Web
   Intelligence (WI) and Intelligent Agent Technologies (IAT)}, volume~3, pages
   103--110. IEEE, 2014.
+
+\bibitem{russell2011artificial}
+Stuart Russell and Peter Norvig.
+\newblock Artificial intelligence a modern approach 3rd edition pdf.
+\newblock {\em Hong Kong: Pearson Education Asia}, 2011.
 
 \bibitem{russell2016artificial}
 Stuart~J Russell and Peter Norvig.
