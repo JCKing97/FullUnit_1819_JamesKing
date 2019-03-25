@@ -96,4 +96,5 @@
 \contentsline {subsection}{\numberline {8.2.1}Environment Properties}{59}{subsection.8.2.1}
 \contentsline {section}{\numberline {8.3}Experiments}{60}{section.8.3}
 \contentsline {subsection}{\numberline {8.3.1}Robustness Experiments Population}{60}{subsection.8.3.1}
-\contentsline {subsection}{\numberline {8.3.2}Strategies}{61}{subsection.8.3.2}
+\contentsline {subsection}{\numberline {8.3.2}Stability Experiment Strategies}{61}{subsection.8.3.2}
+\contentsline {section}{\numberline {8.4}Strategies}{62}{section.8.4}

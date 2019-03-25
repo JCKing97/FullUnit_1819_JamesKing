@@ -820,8 +820,8 @@ However, my robustness experiments revealed no cooperative strategies capable in
 
 \section{Stability}
 Axelrod and Hamilton~\cite{evolution_of_cooperation} also ran another set of experiments to test what strategies could prevent defection from taking hold in societies that are predominantly cooperative. Again I had planned to take successful strategies from my robustness experiments and use them in this. However, of course I did not find any successful strategies.\par 
-This type of experiment is different to initial viability though, and gives cooperation more of a chance. As such I designed and ran experiments similar to Axelrod and Hamilton's stability experiments. I selected 9 strategies with a variety of strategies and trust models (listed in the appendix in section~\ref{appendix:stab_strats}) that I believe could be successful in upholding cooperation against a small group of defectors.\par 
-This small group of defectors are 3 Defector strategies, one for each of the non-donor strategies: Lazy, Promote Self and Spread Negative. For each of the 10 selected strategies I ran 6 experiments. This can be again split into two sets of 3 experiments with the first set of generation length 100 and the second of generation length 300. All experiments ran for 10 generations and again each set of 3 experiments had one experiment with 5 onlookers per interaction, one with 10 and another with 20.
+This type of experiment is different to initial viability though, and gives cooperation more of a chance. As such I designed and ran experiments similar to Axelrod and Hamilton's stability experiments. I selected 9 strategies with a variety of strategies and trust models (listed in the appendix in section~\ref{appendix:stab_strats}) that I believe could be successful in upholding cooperation against a group of 6 defectors.\par 
+In this group of defectors are 2 for each of the non-donor strategies: Lazy, Promote Self and Spread Negative. For each of the 10 selected strategies I ran 6 experiments. This can be again split into two sets of 3 experiments with the first set of generation length 100 and the second of generation length 300. All experiments ran for 10 generations and again each set of 3 experiments had one experiment with 5 onlookers per interaction, one with 10 and another with 20.
 
 \subsection{Evaluation: The Stability of Cooperation}
 
@@ -1000,7 +1000,21 @@ In summary the environment I have outlined in this section is partially observal
 	\item 1 x Veritability Discerner, Spread Positive Trusted, Forgiving Reactor, K=5
 \end{itemize}
 
-\subsection{Strategies}
+\subsection{Stability Experiment Strategies}
+\label{appendix:stab_strats}
+\begin{itemize}
+	\item Standing Discriminator, Spread Accurate Negative, Trusting
+	\item Standing Discriminator, Spread Accurate Positive, Distrusting
+	\item Standing Discriminator, Promote Self, Naive Trusting
+	\item Image Scoring Discriminator, Spread Accurate Negative, Trusting, K=-2, Personal Grievance
+	\item Image Scoring Discriminator, Promote Self, Trusting, K=0
+	\item Image Scoring Discriminator, Spread Accurate Positive, Distrusting, K=0, Personal Grievance
+	\item Veritability Discerner, Spread Negative Untrusted, Strong Reactor, K=-5
+	\item Veritability Discerner, Spread Positive Trusted, Forgiving Reactor, K=0
+	\item Veritability Discerner, Promote Self, Balanced Reactor, K=0
+\end{itemize}
+
+\section{Strategies}
 \label{appendix:strats}
 Below is a list of all the strategies available and a description for each strategy which can be associated with an agent in a game in my MAS.
 \inputminted[breaklines]{json}{strategies.json}
