@@ -1,0 +1,1395 @@
+[
+  {
+    "description":"Cooperates every time, does not bother to actively gossip",
+    "donor_strategy":"Cooperator",
+    "non_donor_strategy":"Lazy",
+    "options": [],
+    "trust_model":"Void"
+  },
+  {
+    "description":"Cooperates every time, actively gossips and promotes positive information on self",
+    "donor_strategy":"Cooperator",
+    "non_donor_strategy":"Promote Self",
+    "options": [],
+    "trust_model":"Void"
+  },
+  {
+    "description":"Cooperates every time, actively gossips and promotes positive information on any random agent",
+    "donor_strategy":"Cooperator",
+    "non_donor_strategy":"Spread Positive",
+    "options": [],
+    "trust_model":"Void"
+  },
+  {
+    "description":"Defects every time, does not bother to actively gossip",
+    "donor_strategy":"Defector",
+    "non_donor_strategy":"Lazy",
+    "options": [],
+    "trust_model":"Void"
+  },
+  {
+    "description":"Defects every time, actively gossips and promotes positive information about self",
+    "donor_strategy":"Defector",
+    "non_donor_strategy":"Promote Self",
+    "options": [],
+    "trust_model":"Void"
+  },
+  {
+    "description":"Defects every time, actively gossips and spreads negative information about others",
+    "donor_strategy":"Defector",
+    "non_donor_strategy":"Spread Negative",
+    "options": [],
+    "trust_model":"Void"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts gossip from agents with a good standing, does not actively gossip",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts gossip from agents with a good standing, actively promotes own image with gossip",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts gossip from agents with a good standing, actively promotes positive image of good agents",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts gossip from agents with a good standing, actively promotes negative image of bad agents",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn't trust other agents gossip, does not actively gossip",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn't trust other agents gossip, actively promotes own image with gossip",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn't trust other agents gossip, actively promotes positive image of good agents",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Doesn't trust other agents gossip, actively promotes negative image of bad agents",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Randomly selects from actions it is capable of at each timepoint",
+    "donor_strategy":"Random",
+    "non_donor_strategy":"Random",
+    "options": [],
+    "trust_model":"Void"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts other agents gossip, does not actively gossip",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts other agents gossip, actively promotes own image with gossip",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts other agents gossip, actively promotes positive image of good agents",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Considers every other agent to start on a good standing, if they observe a defection towards an agent with good standing the donor that defected is given a bad standing. Cooperates with agents they deem to have good standing, defects against those with bad standing. Trusts other agents gossip, actively promotes negative image of bad agents",
+    "donor_strategy":"Standing Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent never spreads gossip, but trusts others gossip (if the gossiper is of a value greater than K) ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-2 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent never spreads gossip and never trusts gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-2 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent never spreads gossip, but always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-2 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) and trusts other trusted agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-2 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) but never trusts others gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-2 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K). Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-2 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K) and trusts others trusted agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-2 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K), but never trusts others gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-2 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K). Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-2 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, trusts gossip from agents it trusts (value >= K) ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-2 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, doesn't trust other agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-2 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself. Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-2 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent never spreads gossip, but trusts others gossip (if the gossiper is of a value greater than K) Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent never spreads gossip and never trusts gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent never spreads gossip, but always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) and trusts other trusted agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) but never trusts others gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K). Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K) and trusts others trusted agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K), but never trusts others gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K). Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, trusts gossip from agents it trusts (value >= K) Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, doesn't trust other agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself. Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-2, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent never spreads gossip, but trusts others gossip (if the gossiper is of a value greater than K) ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-1 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent never spreads gossip and never trusts gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-1 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent never spreads gossip, but always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-1 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) and trusts other trusted agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-1 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) but never trusts others gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-1 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K). Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-1 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K) and trusts others trusted agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-1 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K), but never trusts others gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-1 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K). Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-1 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, trusts gossip from agents it trusts (value >= K) ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-1 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, doesn't trust other agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-1 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself. Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-1 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent never spreads gossip, but trusts others gossip (if the gossiper is of a value greater than K) Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent never spreads gossip and never trusts gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent never spreads gossip, but always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) and trusts other trusted agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) but never trusts others gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K). Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K) and trusts others trusted agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K), but never trusts others gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K). Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, trusts gossip from agents it trusts (value >= K) Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, doesn't trust other agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=-1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself. Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [-1, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent never spreads gossip, but trusts others gossip (if the gossiper is of a value greater than K) ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [0 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent never spreads gossip and never trusts gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [0 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent never spreads gossip, but always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [0 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) and trusts other trusted agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [0 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) but never trusts others gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [0 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K). Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [0 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K) and trusts others trusted agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [0 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K), but never trusts others gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [0 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K). Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [0 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, trusts gossip from agents it trusts (value >= K) ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [0 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, doesn't trust other agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [0 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself. Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [0 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent never spreads gossip, but trusts others gossip (if the gossiper is of a value greater than K) Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent never spreads gossip and never trusts gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent never spreads gossip, but always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) and trusts other trusted agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) but never trusts others gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K). Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K) and trusts others trusted agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K), but never trusts others gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K). Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, trusts gossip from agents it trusts (value >= K) Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, doesn't trust other agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=0 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself. Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [0, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent never spreads gossip, but trusts others gossip (if the gossiper is of a value greater than K) ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [1 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent never spreads gossip and never trusts gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [1 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent never spreads gossip, but always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [1 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) and trusts other trusted agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [1 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) but never trusts others gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [1 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K). Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [1 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K) and trusts others trusted agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [1 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K), but never trusts others gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [1 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K). Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [1 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, trusts gossip from agents it trusts (value >= K) ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [1 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, doesn't trust other agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [1 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself. Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [1 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent never spreads gossip, but trusts others gossip (if the gossiper is of a value greater than K) Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent never spreads gossip and never trusts gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent never spreads gossip, but always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) and trusts other trusted agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) but never trusts others gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K). Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K) and trusts others trusted agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K), but never trusts others gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K). Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, trusts gossip from agents it trusts (value >= K) Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, doesn't trust other agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=1 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself. Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [1, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent never spreads gossip, but trusts others gossip (if the gossiper is of a value greater than K) ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [2 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent never spreads gossip and never trusts gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [2 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent never spreads gossip, but always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [2 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) and trusts other trusted agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [2 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) but never trusts others gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [2 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K). Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [2 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K) and trusts others trusted agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [2 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K), but never trusts others gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [2 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K). Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [2 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, trusts gossip from agents it trusts (value >= K) ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [2 ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, doesn't trust other agents gossip ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [2 ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself. Always trusts gossip no matter who is gossiping. ",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [2 ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent never spreads gossip, but trusts others gossip (if the gossiper is of a value greater than K) Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent never spreads gossip and never trusts gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent never spreads gossip, but always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Lazy",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) and trusts other trusted agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K) but never trusts others gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads negative gossip about those it distrusts (value < K). Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Negative",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K) and trusts others trusted agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K), but never trusts others gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip about those it trusts (value >= K). Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Spread Accurate Positive",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, trusts gossip from agents it trusts (value >= K) Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Trusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself, doesn't trust other agents gossip Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Distrusting"
+  },
+  {
+    "description":"Holds a value for each player starting on 0, when interacting if the agent holds a value of greater than or equal to K=2 for the recipient they cooperate, else they defect. Agent spreads positive gossip to promote themself. Always trusts gossip no matter who is gossiping. Cooperation and defection against an agent using this strategy have a doubly large effect on the donors image score.",
+    "donor_strategy":"Image Scoring Discriminator",
+    "non_donor_strategy":"Promote Self",
+    "options": [2, "Personal Grievance" ],
+    "trust_model":"Naive Trusting"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [-10 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [-10 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [-10 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [-10 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [-10 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [-10 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [-10 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [-10 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [-10 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [-10 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [-10 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [-10 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [-5 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [-5 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [-5 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [-5 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [-5 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [-5 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [-5 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [-5 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [-5 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [-5 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [-5 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>-5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [-5 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [0 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [0 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [0 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [0 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [0 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [0 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [0 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [0 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [0 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [0 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [0 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>0 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [0 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [5 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [5 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [5 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [5 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [5 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [5 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [5 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [5 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [5 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [5 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [5 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>5 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [5 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [10 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [10 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [10 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. Weights for negative percepts are 2, no weight for positive percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [10 ],
+    "trust_model":"Strong Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [10 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [10 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [10 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. No weights for either positive or negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [10 ],
+    "trust_model":"Balanced Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Always commits to idle actions when not a donor. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Lazy",
+    "options": [10 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip about itself when not a donor. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Promote Self",
+    "options": [10 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads positive gossip to trusted agents about trusted agents. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Positive Trusted",
+    "options": [10 ],
+    "trust_model":"Forgiving Reactor"
+  },
+  {
+    "description":"Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>10 the agent the beliefs are about is trusted. Will cooperate with trusted agents. Spreads negative gossip to trusted agents about untrusted agents. Weights for positive percepts are 2, no weight for negative percepts.",
+    "donor_strategy":"Veritability Discerner",
+    "non_donor_strategy":"Spread Negative Untrusted",
+    "options": [10 ],
+    "trust_model":"Forgiving Reactor"
+  }
+]

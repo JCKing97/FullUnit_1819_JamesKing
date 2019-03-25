@@ -101,14 +101,14 @@ The final two main chapters of this report discuss my findings from the experime
 \chapter{Background}
 
 \section{Introduction}
-In the following sections of this chapter I will be exploring and describing past work relevant to this project including MAS techniques and related studies in game theory. First I will describe MAS techniques and concepts that are important to this project including subsections on agents, an agents environment and agent communication. Secondly I will discuss game-theoretical approaches to modelling and studying multi-agent interactions in regards to the evolution of cooperation in MASs.
+In the following sections of this chapter I will be exploring and describing past work relevant to this project including MAS techniques and related studies in game theory. First I will describe MAS techniques and concepts that are important to this project including subsections on agents, agent environments and agent communication. Secondly I will discuss game-theoretical approaches to modelling and studying multi-agent interactions in regards to the evolution of cooperation between agents.
 
 \section{Multi-Agent Systems and Intelligent Agents}
 \label{sec:backgroundmas}
-MASs are a field in computer science concerning the development of societies of agents in which agents are computer systems are computer systems that are capable of deciding on what actions to take in order to reach a delegated goal or the agent's design objectives~\cite{wooldridge2009introduction}. These agents typically interact using agent communication languages (ACLs).\par 
+MASs is a field in computer science concerning the development of societies of agents. Wooldridge~\cite{wooldridge2009introduction} describes agents as computer systems capable of autonomous decision making to reach delegated goals or design objectives. These agents are often designed to work together and typically interact using agent communication languages (ACLs).\par 
 
 \subsection{Environments}
-Russell and Norvig~\cite{russell2016artificial} state that an agent is designed to work in an environment class or a set of environments. According to Wooldridge~\cite{wooldridge_jennings_1995} an agent is built to fulfil design objectives. These design objectives work within the restriction of the agents environment. Following from this Russell and Norvig~\cite{russell2016artificial} define an agent in terms of it's environment, stating that an agent is any system that uses sensors to perceive it's environment and effectors to act upon it's environment.\par
+Design objectives and delegated goals for agents are constrained by the environment the agent is situated in. As such, agents are designed to work within a class or set of environments~\cite{russell2016artificial}. Often agents are defined in terms of their environment. Russell and Norvig~\cite{russell2016artificial} described an agent as being any system that uses sensors to perceive it's environment and actuators to act upon it's environment.\par
 \begin{wrapfigure}{l}{0.5\textwidth}
 \vspace{-20pt}
 \begin{framed}
@@ -119,46 +119,60 @@ Russell and Norvig~\cite{russell2016artificial} state that an agent is designed 
 \end{framed}
 \vspace{-20pt}
 \end{wrapfigure}
-A generic program was designed by Russell and Norvig~\cite{russell2016artificial} for how an environment program should run in which there are steps that run in a cycle. In the first step, perception of the environment occurs for each agent in which the agent can use it sensors to receive percepts from the environment. In the next step agents all decide on an action. After all have decided the state of the system is then changed based on the actions that the agents have decided on. A fourth step was added to update the performance scores of each agent.\par 
-The effect of these cycle steps is to keep agents synchronised preventing agent actions from changing the state of the environment while other agents are deliberating. A static environment is one that does not change whilst an agent is deliberating. Dynamicity is one of Russell and Norvig's~\cite{russell2016artificial} five properties of an environment. The synchronicity of this generic environment program helps keep the environment static, unless other forces (not agent actions) have an effect on the environment's state.\par 
-The opposite to a static environment is a dynamic one, in which the environment can change during decision making. Another environment property is accessibility. An accessible environment is one that gives an agent full access to the state of that environment. In an accessible environment there is no need for an agent to keep any internal state about the environment. Unlike in inaccessible environments, in which an agent cannot simply sense all aspects of that environment that are relevant for decision making.\par 
-A third property from Russell and Norvig~\cite{russell2016artificial} is whether the environment is episodic or not. An episodic environment is split into episodes where the quality of actions in each episode do not depend on previous episodes.\par 
-These properties determine how complex an environment is. The final two are whether the environment is deterministic or not and whether the environment is continuous or discrete. If an environment is deterministic it means the effects of an action given some conditions is guaranteed. If an agent can access the whole state of the environment (accessibility) and the environment is deterministic the agent can guarantee the outcome of their action.\par 
-An environment is considered discrete actions and percepts are clearly defined and there are a limited number of them. The more properties of an environment that match the following properties, the more complex the environment: continuous, non-deterministic, inaccessible, dynamic, non-episodic.\par 
+According to Russell and Norvig~\cite{russell2016artificial} to specify a task environment one needs to specify four aspects of the system: performance measure, environment, actuators and sensors. In the 2013 version of the textbook `Artificial Intelligence: A Modern Approach'~\cite{russell2011artificial} Russell and Norvig described a generic program for running an environment.\par 
+In this program a set of steps are run in a cycle. In the first step, perception of the environment occurs for each agent in which the agent can use it sensors to receive percepts from the environment. In the next step agents all decide on an action. After all have decided the state of the system is then changed based on the actions that the agents have decided on. A fourth step was added to update the performance scores of each agent.\par 
+The effect of these cycle steps is to keep agents synchronised, preventing agent actions from changing the state of the environment while other agents are deliberating. A static environment is one that does not change whilst an agent is deliberating. Dynamicity is one of Russell and Norvig's~\cite{russell2016artificial} seven properties of an environment. The synchronicity of this generic environment program helps keep the environment static, unless other forces (not agent actions) have an effect on the environment's state.\par 
+The opposite to a static environment is a dynamic one, in which the environment can change during decision making. Another environment property is observability. A fully observable/accessible environment is one that gives an agent full access to the state of that environment. In a fully observable environment there is no need for an agent to keep any internal state about the environment. Unlike in a partially observable environment, in which an agent cannot simply sense all aspects of that environment that are relevant for decision making.\par 
+A third property from Russell and Norvig~\cite{russell2016artificial} is whether the environment is episodic or sequential. An episodic environment is split into episodes where the quality of actions in each episode do not depend on previous episodes. Whereas, in a sequential environment an action taken at timepoint t may be affected by actions from previous episodes and the action at timepoint t may affect all future actions.\par 
+Another property is whether the system is multi-agent or single-agent. This seems simple, however, it massively depends on what we see as an agent. For example take a surveillance system, with a central agent collating the data and a number of connected pieces of surveillance systems (for example CCTV cameras). There are blurred lines as to whether these connected components are agents or are they simply governed in how to act by regular systems level programs?\par 
+The environment has a set of laws that govern how the state changes based on events and actions. Agents may or may not know these laws. It is said that if an agent knows the outcome or probability of the outcome of it's actions (for stochastic environments) then the environment is known by the agent. If not, the environment is unknownen by the agent.\par 
+These properties determine how complex an environment is. The final two are whether the environment is deterministic or stochastic and whether the environment is continuous or discrete. If an environment is deterministic it means the effects of an action given some conditions is guaranteed. If an agent can access the whole state of the environment (fully observable) and the environment is deterministic the agent can guarantee the outcome of their action.\par 
+An environment is considered discrete if actions and percepts are clearly defined and there are a limited number of them. The more properties of an environment that match the following properties, the more complex the environment: continuous, stochastic, partially observable, dynamic, sequential, multi-agent and unknown.
 
 \subsection{The Agent Model}
-Yoav Shoham introduced the agent-oriented programming (AOP) paradigm~\cite{shoham1993agent}. This paradigm is similar to object-oriented programming (OOP). In Shoham's formulation of AOP~\cite{shoham1991agent0} object units are replaced agents, the internal state of a unit is constrained to beliefs, commitments and capabilites, message passing is constrained to using speech act theory to communicate and constraints are placed on methods.
+Yoav Shoham introduced the agent-oriented programming (AOP) paradigm~\cite{shoham1993agent}. This paradigm is similar to object-oriented programming (OOP). In Shoham's formulation of AOP~\cite{shoham1991agent0} object units are replaced with agents, the internal state of a unit is constrained to beliefs, commitments and capabilites, message passing is constrained to using speech act theory to communicate and constraints are placed on methods.
 \subsubsection{What is an agent?}
+One of Russell and Norvig's properties~\cite{russell2016artificial} of an environment is whether the environment is multi-agent or single-agent. How we classify an environment as to this property is very much determined by what we class as an agent, which is not a trivial question. How do we define agency?\par 
 Since Shoham's formulation there has been much debate as to whether systems are agent systems or simply programs~\cite{franklin1996agent}. The exact definition of agency varies depending upon which source is consulted and the application of the concept.\par 
 Wooldridge and Jennings~\cite{wooldridge_jennings_1995} gave one of the most influential and powerful descriptions. They put forward a weak notion of agency by laying out four main properties: autonomy, social ability, reactivity and pro-activeness.\par 
-Autonomy refers to agents having control over their actions and internal state, and operating without outside intervention. Social ability is the use of an ACL to interact with other entities such as humans and other agents. Responding to environment changes in a timely fashion is what the property of reactivity refers to. Finally pro-activeness is the display of taking initiative to work towards a goal, not simply in reaction to environmental state changes.\par 
+Autonomy refers to agents having control over their actions and internal state, and operating without outside intervention. Social ability is the use of an ACL or other interaction medium to communicate with other entities such as humans and other agents. Responding to environment changes in a timely fashion is what the property of reactivity refers to. Finally pro-activeness is the display of taking initiative to work towards a goal, not simply in reaction to environmental state changes.\par 
 Wooldridge and Jennings go on to note that stronger notions of agency endow agents with human-like mental notions. These mental notions represent information in a symbolic model, and make decisions by reasoning with this symbolic model in a symbolic way. This representation and reasoning is no easy feat - known as the representation/reasoning problem~\cite{wooldridge2009introduction} - but it does allow agents to make explainable and transparent decisions.\par 
-A more up to date and stronger notion of agency may include the use of new developments such as computer vision, natural language processing and deep reinforcement learning concepts. Stronger notions of agency show a tendency towards more humanlike characteristics and AI concepts, drawing clear comparison with a long term goal of AI: to produce systems capable of beating The Imitation Game~\cite{machinery1950computing}.
+A stronger notion of agency may also include the use of new developments such as computer vision, natural language processing and deep reinforcement learning concepts. Stronger notions of agency show a tendency towards more humanlike characteristics and AI concepts, drawing clear comparison with a long term goal of AI: to produce systems capable of beating The Imitation Game~\cite{machinery1950computing}.
 \subsubsection{Russell and Norvig's Agent Program Components}
-Russell and Norvig~\cite{russell2016artificial} formulated a number of agent program models to describe the internal make up of agents that allow an agent to act in and understand their environment.\par
-The first model is simple reflex agents which keep no internal state, they simply use their percepts from the environment and condition-action rules to decide on actions. These are comparable to reactive agent architectures. Model-based reflex agents use percepts from their environment to form a state which to use alongside condition-action rules and a model of how the state of their world evolved to make decisions.\par 
-Goal and utility-based focus on the drives of an agent. The goal based architecture keeps an internal state, and combines this with search and planning decision making components to reach specified goals. States in which an agent is more successful can be formulated in terms of having a higher utility. Utility based agents work to maximise that utility, even in situations when an agent has conflicting goals in which the utility is formed by creating a tradeoff between the conflicting goals.
+Russell and Norvig~\cite{russell2016artificial} formulated a number of agent program models to describe the internal make up of agents that process percepts and make decisions on what actions to commit to.\par
+The first model is simple reflex agents which keep no internal state, they use only the percepts from their environment and condition-action rules to decide on actions. These are comparable to reactive agent architectures, but on a less complex scale. Model-based reflex agents use percepts from their environment to form an internal state. This state is used alongside condition-action rules and a model of how the state of their world evolves to make decisions.\par 
+Goal and utility-based agent models focus on the drives of an agent. The goal based architecture keeps an internal state, and combines this with search and planning decision making components to reach specified goals.\par
+States in which an agent is more successful can be formulated in terms of having a higher utility. Utility based agents work to maximise that utility, even in situations when an agent has conflicting goals in which the utility is formed by creating a tradeoff between the conflicting goals.
 \subsubsection{Learning Agents}
-Learning agents is the final agent model described by Russell and Norvig. Programs created using this model are not formed by a programmer specifying how to act. Instead these agents use a number of components to feed into a decision making system (performance element). Feedback is provided by the critic component to the learning element which makes changes to the performance element. The problem generator is another component that suggests actions that will hopefully lead to new knowledge.\par 
-Machine learning is exploding with new concepts and developments, most notably from the agents systems persepctive deep reinforcement learning. Agents using machine learning techniques often appear to satisfy stronger notions of agency. However, these techniques do not come from a symbolic AI background, and lead to a lack of explainability.\par 
+\begin{wrapfigure}{l}{0.5\textwidth}
+\vspace{-20pt}
+\begin{framed}
+	\center
+	\includegraphics[width=\textwidth]{LearningAgent.png}
+	\caption{Russell and and Norvig's~\cite{russell2016artificial} learning agent}
+	\label{fig:learning}
+\end{framed}
+\vspace{-25pt}
+\end{wrapfigure}
+Learning agents is the final agent model described by Russell and Norvig~\cite{russell2016artificial}. Programs created using this model are not formed by a programmer specifying how to act. Instead these agents use a number of components to feed into a decision making system (performance element). Feedback is provided by the critic component to the learning element which makes changes to the performance element. The problem generator is another component that suggests actions that will hopefully lead to new knowledge.\par 
+Machine learning is exploding with new concepts and developments, most notably from the agents systems persepctive deep reinforcement learning. Agents using machine learning techniques often appear to satisfy stronger notions of agency. However, these techniques do not come from a symbolic AI background, and lead to a lack of explainability~\cite{darpaxai}.\par 
 Unifying these techniques with symbolic AI approaches to produce agents which can explain their decisions in order to produce verifiable systems is a keenly researched topic~\cite{darpaxai, garnelo2016towards}. However, this is an even tougher version of the representation/reasoning problem as we are not only trying to reason with symbolic data, but reason in a complex manner with deeply mathematical techniques.
 \subsubsection{Deductive Reasoning Agents}
-Deductive reasoning agents use a form of symbolic AI. The symbolic representation of information is in the form of logical formulae and the reasoning component is done through logical deduction or theorem proving~\cite{wooldridge2009introduction}.\par 
-Shoham's AOP paradigm~\cite{shoham1993agent} and Agent0 language~\cite{shoham1991agent0} were developed to facilitate the creation of deductive reasoning agents. The symbolic representation was formulated in terms of beliefs, commitments and capabilities and agents were given a set of commitment rules to reason about what commitments to make.\par 
+Agents are built with certain architectures defining the internal structure of the agent~\cite{Maes:1991:ANA:122344.122367}. One type of architecture is the deductive reasoning agent architecture which use a form of symbolic AI. The symbolic representation of information is in the form of logical formulae and the reasoning component is done through logical deduction or theorem proving~\cite{wooldridge2009introduction}.\par 
+Shoham's AOP paradigm~\cite{shoham1993agent} and Agent0 language~\cite{shoham1991agent0} were developed to facilitate the creation of deductive reasoning agents. The symbolic representation was formulated in terms of beliefs, commitments and capabilities and agents were given a set of commitment rules to logically deduce what actiong to commit to in a given situation.\par 
 Concurrent MetateM is another language for the creation of deductive reasoning agents~\cite{fisher1993concurrent}.  The language is known for focusing on creating agents that work by theorem proving. Programmers essentially create deductive theorem provers using temporal logic that dictate agent behaviour.\par 
-Deductive reasoning agents suffer from two issues: the transduction problem and the representation/reasoning problem. The transduction problem refers to the difficult in translating from the real world into an accurate and adequate symbolic representation. The representation/reasoning problem are the difficulties in representing symbolic information and reasoning about that information.
+Deductive reasoning agents suffer from the same two issues as many symbolic AI approaches: the transduction problem and the representation/reasoning problem. The transduction problem refers to the difficulty in translating from the real world into an accurate and adequate symbolic representation. The representation/reasoning problem are the difficulties in representing symbolic information and reasoning about that information.
 \subsubsection{Practical Reasoning Agents}
-Symbolic AI approaches to agency aren't limited to deductive reasoning agents. Practical reasoning approaches focus reasoning towards actions, whereas theoeretical reasoning focuses on beliefs~\cite{wooldridge2009introduction}. However this does not mean that practical reasoning models do not incorporate mental notions such as beliefs.\par  
-Both deductive reasoning languages such as Agent0 and practical reasoning focused languages and frameworks such as GOAL~\cite{hindriks2000agent} and PRS (The Procedural Reasoning System)~\cite{georgeff1987reactive} have used the idea of beliefs to base actions on.\par 
-PRS uses the belief-desires-intentions (BDI) model~\cite{bratman1987intention}. BDI agents keep beliefs in a belief base, these are the information an agent sees as facts about the world and agents are capable of inferring beliefs based on the presence of other beliefs.\par 
-Desires are the drives behind an agent's actions. A desire is an objective or state an agent wishes to reach. When an agent is actively pursuing a desire it becomes a goal. These goals must be consistent. When an agent has committed to a desire this desire becomes an intention. Commitment to a desire is when an agent has begun executing a plan towards that desire. These plans are sequences of actions.\par 
-Rodriguez \textit{et al.}~\cite{rodriguez2014sarl} criticised agent-programming languages (APLs) for forcing the BDI agent architecture upon users of the language, where agent architecture refers to Pattie Maes' description~\cite{Maes:1991:ANA:122344.122367}. Their claim is that the use of BDI constrains agents to be endowed with reasoning capabilities that do not always apply to some problem instances. The language SARL - specified by Rodriguez \textit{et al.}~\cite{rodriguez2014sarl} - is a more generic language which aims to be architecture independent. 
+Agent architectures that utilize symbolic AI approaches aren't limited to deductive reasoning agents. Practical reasoning approaches focus reasoning towards actions, whereas theoeretical reasoning focuses on beliefs~\cite{wooldridge2009introduction}.\par 
+However, this does not mean that practical reasoning models do not incorporate mental notions such as beliefs. Both deductive reasoning languages such as Agent0 and practical reasoning focused languages and frameworks such as GOAL~\cite{hindriks2000agent} and PRS (The Procedural Reasoning System)~\cite{georgeff1987reactive} have used the idea of beliefs to base actions on.\par 
+This use is mostly inspired by the beliefs-desires-intentions (BDI) model~\cite{bratman1987intention}, which PRS uses directly. BDI agents keep beliefs in a belief base. These beliefs are the information an agent sees as facts about the world and agents are capable of inferring beliefs based on the presence of other beliefs.\par 
+Desires are the drives behind an agent's actions. A desire is an objective or state an agent wishes to reach. When an agent is actively pursuing a desire it becomes a goal. These goals must be consistent i.e. they cannot contradict each other. When an agent has committed to a desire this desire becomes an intention. Commitment to a desire is when an agent has begun executing a plan that works towards achieving that desire. These plans are sequences of actions.\par 
+Rodriguez \textit{et al.}~\cite{rodriguez2014sarl} criticised agent-programming languages (APLs) for forcing the BDI agent architecture upon users of the language, they believe that programmers should have the choice on what architecture to use. Their claim is that the use of BDI constrains agents to be endowed with reasoning capabilities that do not apply to some problem instances. The language SARL - specified by Rodriguez \textit{et al.}~\cite{rodriguez2014sarl} - is a more generic language which aims to be architecture independent. 
 \subsubsection{Reactive and Hybrid Architectures}
 Applications of agent technologies in robotics and embedded systems require architecures and programs to work in resource bound environments. Brooks~\cite{brooks1991intelligence} argues for intelligence as an emergent property of complex systems.\par
 Brooks criticised the use of symbolic AI in the creation of agent systems~\cite{brooks1991intelligence}. He claimed that the abstract reasoning and explicit representations of symbolic AI aren't required for the development of intelligent agents as intelligence is an emergent property of complex systems. In resource bound environments this abstract reasoning and explicit representation are often too resource hungry to be applicable.\par
-In reaction to this Brooks devised the subsumption architecture. In this architecture task-accomplishing behaviours map from percepts to actions, in order to accomplish tasks. These are also known as behviour modules. These modules are able to decide on actions at the same time as each other. Brooks employs a hierarchical structure to select which behaviours decision to use. The lower the layer a behaviour belongs to the greater it's priority.\par 
 \begin{wrapfigure}{l}{0.35\textwidth}
-\vspace{-20pt}
+\vspace{-30pt}
 \begin{framed}
 	\begin{center}
 		\begin{tabular}{c}
@@ -173,24 +187,24 @@ In reaction to this Brooks devised the subsumption architecture. In this archite
 \end{framed}
 \vspace{-30pt}
 \end{wrapfigure}
+In reaction to this Brooks devised the subsumption architecture. In this architecture task-accomplishing behaviours map from percepts to actions, in order to accomplish tasks. These are also known as behaviour modules. These modules are able to decide on actions at the same time as each other. Brooks employs a hierarchical structure to select which behaviours decision to use. The lower the layer a behaviour belongs to the greater it's priority.\par 
 This hierarchical selection of actions is notably similar to teleo-reactive programs~\cite{nilsson1993teleo}. These are programs which contain an ordered set of production rules. These rules map from conditions to actions, and the ordering of them defines which actions are more important.\par 
-A criticism of reactive architectures~\cite{wooldridge2009introduction} is that through lack of internal state an agent using these architectures can only view the local environment, forcing a short-term view. Hybrid architectures have been developed to combat these issues. One method in which to do this is to use free variables in teleo-reactive program conditions, with which beliefs bind to at run-time.
+A criticism of reactive architectures~\cite{wooldridge2009introduction} is that through lack of internal state an agent using these architectures can only view the local environment, forcing a short-term view. Hybrid architectures have been developed to combat these issues. One method in which to implement hybrid architectures is to use free variables in teleo-reactive program conditions, with which beliefs bind to at run-time.
 
 \subsection{Multi-Valued Fluent Cached Events Calculus}
-The aim of the event calculus is to reason about time periods and local events~\cite{kowalski1989logic}. Events occur at specific timepoints, these events initiate and terminate periods of time for which a fluent holds. For example at time $t1$ event $e1$ occurs, fluent $f$ did not hold prior to $e1$, but $e1$ initiated it and as such it holds after $t1$. A second event $e2$ then occurs at timepoint $t2$ where $t2>t1$, this event terminates $f$. Following this event $f$ no longer holds, but $f$ still holds in between $t1$ and $t2$.\par
-The multi-valued fluent cached events calculus (MVFCEC) is an implementation of the events calculus~\cite{mvfcec}. The implementation improves the speed of querying fluents using a caching system. In Kowalski \textit{et al.}'s~\cite{kowalski1989logic} original event calculus fluents were considered Boolean. Take fluent $F$, in the original event calculus $F=true$ if it holds or $F=false$ if not. With multi-valued fluents $F=V$ where V is a value specified by the programmer.\par 
-Agents often need to reason about time and states. Many of these agent systems are developed using a logic-based system. The events calculus is a very powerful logic-based tool for this purpose and as such variants of the event calculus have been used in the development of many MASs~\cite{artikis2009specifying, mvfcec}.\par 
-The Agent0 belief system reasons about the initiating and terminating of beliefs with certain values through time periods. This belief system is an example of when agents require reasoning about time, and it seems natural to use MVFCEC for the representation of a beliefs system.
+The aim of the event calculus is to create symbolic representations to reason about time periods and local events~\cite{kowalski1989logic}. Events occur at specific timepoints, these events initiate and terminate periods of time for which a fluent holds. For example at time $t1$ event $e1$ occurs, fluent $f$ did not hold prior to $e1$, but $e1$ initiated it and as such it holds after $t1$. A second event $e2$ then occurs at timepoint $t2$ where $t2>t1$, this event terminates $f$. Following this event $f$ no longer holds, but $f$ still holds in between $t1$ and $t2$.\par
+The multi-valued fluent cached events calculus (MVFCEC) is an implementation of the events calculus~\cite{mvfcec}. The implementation improves the speed of querying fluents using a caching system.\par 
+In Kowalski \textit{et al.}'s~\cite{kowalski1989logic} original event calculus fluents were considered Boolean. Take fluent $F$, in the original event calculus $F=true$ if it holds or $F=false$ if not. With multi-valued fluents $F=V$ where V is a value specified by the programmer.\par 
+Agents often need to reason about time and states. Agent systems can be developed using a symbolic approaches and their systems are often logic-based. The events calculus is a very powerful logic-based tool for this purpose and as such variants of the event calculus have been used in the development of many MASs~\cite{artikis2009specifying, mvfcec}.\par 
+The Agent0 belief system reasons about the initiating and terminating of beliefs with certain values through time periods. This belief system accentuates the prevalence of agents requiring methods to reason about time, and it seems natural to use MVFCEC for the representation of a beliefs like system.
 
 \subsection{Agent Communication}
-To build cooperative and coordinated societies agent communication is extremely important. In fact it's so important that Wooldridge and Jennings include social ability as one of his four key properties~\cite{wooldridge_jennings_1995}. In the AOP paradigm agents communicate socially via a message passing system.\par 
+To build cooperative and coordinated societies of agents, agent communication is extremely important. In fact it's so important that Wooldridge and Jennings include social ability as one of his four key properties~\cite{wooldridge_jennings_1995}. In the AOP paradigm agents communicate socially via a message passing system. This message passing can be achieved using an ACL in order to ensure communicative actions are understood by the recipient of the message.\par 
 Many of these languages use speech act theory. Speech act theory uses the idea that communication is an action often to achieve goals and intentions~\cite{austin1975things}. Both KQML~\cite{finin1994kqml} and FIPA ACL use performative verbs to specify the intent of the communication. Both have different performative verbs, but in combination with the message content these languages communicative acts generally fall into one of the five categories of speech acts described by Searle~\cite{searle1969speech}.\par 
-In human communication we generally have a shared understanding of certain concepts. Such as the definition of a book or plant. In KQML and FIPA ACL shared ontologies are used to define the meaning of commonly used vocabulary of certain subject domains in order to facilitate shared understanding of message content.\par 
-The theory of communication is complex. According to Singh~\cite{singh1998agent} a key limitation of existing ACLs (including KQML) is their focus on mental agency over social agency. This is the focus on using the mental state of an agent such as communicating about the beliefs of an agent. Singh claims that this supposes that agents can read each others' mind.
+In human communication we generally have a shared understanding of certain concepts. Such as the definition of a book or plant. In KQML and FIPA ACL shared ontologies are used to define the meaning of commonly used vocabulary for certain subject domains in order to facilitate shared understanding of message content.\par 
+The theory of communication is complex. According to Singh~\cite{singh1998agent} a key limitation of existing ACLs (including KQML) is their focus on mental agency over social agency. To overly simplify this Singh's description, current languages use the mental state of an agent such as communicating about the beliefs of an agent. Singh claims that this supposes that agents can read each others' mind.
 
 \subsection{Multi-Agent Interactions}
-\textcolor{red}{Strategic interaction, rationality, payoff matrices, dominant strategies, nash equilibrium, pareto optimality, social welfare maximisation}\\
-Agents are able to interact through communicative actions and by actions in the environment. In Jenning's~\cite{jennings2000agent} view of multi-agent interactions, interactions between agents often occur but are not limited to when the agents are linked by organisational relationships. Organisational relationships are subject to change. These agents have their own spheres of influence in an environment, which may overlap each others. An overview of this setup can be seen in figure~\ref{fig:jenningsmas}.\par 
 \begin{wrapfigure}{l}{0.6\textwidth}
 \vspace{-20pt}
 \begin{framed}
@@ -201,11 +215,16 @@ Agents are able to interact through communicative actions and by actions in the 
 \end{framed}
 \vspace{-30pt}
 \end{wrapfigure}
-When spheres of influences overlap an agent may need to make a decisions that is dependent upon other agents decisions. These overlaps can be described as interactions. Agents in these interactions are assumed to be self-interested, and want to improve their utility. Utility is the the representation of how beneficial events and actions in a system that transform the state of that system are to agents. Game-theoretic techniques can be used to model and simulate agent interactions using these utility functions. 
+Agents are able to interact through communicative actions and by actions in the environment. In Jenning's~\cite{jennings2000agent} view of multi-agent interactions, interactions between agents often occur but are not limited to when the agents are linked by organisational relationships. Organisational relationships are subject to change. These agents have their own spheres of influence in an environment, which may overlap each others. An overview of this setup can be seen in figure~\ref{fig:jenningsmas}.\par 
+When spheres of influences overlap an agent may need to make a decisions that is dependent upon other agents decisions. These overlaps can be described as interactions. When agents are making decisions in regards to interactions, it is known as strategic interaction.\par 
+When studying multi-agent interactions agents are generally assumed to be self-interested. Russell and Norvig~\cite{russell2016artificial} define rationality as being self-interested, claiming that rational agents actively seek to maximise their performance measure/utility. Utility is the the representation of how beneficial events and actions in a system that transform the state of that system are to agents. The utility produced for all agents is the social welfare. Some agents seek to maximise social welfare, so may have an interest in other's utility.\par
+This aim to maximise social welfare may seem contrary to the presumed self-interested nature of these agents, however, mechanisms can be used to encourage self-interested agents into increasing social welfare when it benefits their performance measure. Some of these mechanisms come from game-theory and can be used to model and simulate agent interactions using these utility functions. 
 
 \section{Game Theory}
 \label{sec:backgroundgametheory}
+
 \subsection{Introduction}
+As discussed we can use game-theoretic techniques to model and study multi-agent interactions. In the following subsections I will explore past studies that model societies of individuals interacting with certain games, and the concepts surrounding.
 
 \subsection{Cooperative Phenomena}
 Game theory formulates mathematical models to study conflict and cooperation between intelligent rational decision-makers~\cite{myerson2013game}. In these mathematical models actions are often defined in terms of cooperation and defection. These models apply to more than just multi-agent interactions, including the natural world.\par 
@@ -273,6 +292,7 @@ Axelrod and Hamilton's program was not created as a MAS. However, the importance
 Extensive interest in reciprocal altruism in recent years has been focused towards direct reciprocity, including a number of available libraries such as the Axelrod Python library~\cite{axelrodproject}. I argue that to gain a better understanding of how we can work to facilitate cooperation between IAs, we must look at a wider berth of options.
 
 \subsection{Indirect Reciprocity}
+\label{sec:indir}
 \begin{wrapfigure}{l}{0.5\textwidth}
 \vspace{-20pt}
 \begin{framed}
@@ -283,7 +303,7 @@ Extensive interest in reciprocal altruism in recent years has been focused towar
 \end{framed}
 \vspace{-20pt}
 \end{wrapfigure}
-Nowak~\cite{five_rules_coop} presents five mechanisms that aim to facilitate the evolution of cooperation. Direct reciprocity is used in the iterated prisoner's dilemma. I discuss three others in my appendix (subsections~\ref{appendix:kin, appendix:groupselection, appendix:netreciprocity}) and the final one I shall discuss here: indirect reciprocity\par
+Nowak~\cite{five_rules_coop} presents five mechanisms that aim to facilitate the evolution of cooperation. Direct reciprocity is used in the iterated prisoner's dilemma. I discuss three others in my appendix (subsections [~\ref{appendix:kin},~\ref{appendix:groupselection},~\ref{appendix:netreciprocity}]) and the final one I shall discuss here: indirect reciprocity\par
 This concept is promising for use in MASs as it solves the failure of direct reciprocity's failure with regards to when re-meeting is low. In a large society or a vast network in which agents are likely to operate in success when re-meeting is low is an important property. We will see later on that the two mechanisms can be combined.\par
 Indirect reciprocity uses the group mechanic of reputation to encourage cooperation. Alexander~\cite{alexander1987biology}, who was an early advocate the idea, focused on human reciprocal altruism, however, subsequent research has abstracted away from the biology~\cite{phelps_game_theoretic_analysis, imagevsstanding, evol_indirect_image, evoldirindir, five_rules_coop, leimarhammer, sugden2004economics, gossip_alt, mui2002computational}. The idea is that if an individual cooperates with another individual, then their reputation will be enhanced in the community. This boost of reputation makes it more likely that they will be helped by others later on. Thus this mechanism a form of reciprocal altruism.\par
 According to Nowak and Sigmund~\cite{evol_indirect_image} the reputation mechanic requires a higher level of intelligence than direct reciprocity, due to the complexity of group mechanics in the system. It is this kind of higher level intelligence which is required to reason about events in a group that could be a key part in the development of MASs.\par
@@ -387,7 +407,7 @@ Proportional selection translated to my system and simplified would look somethi
 	\label{fig:roulette_wheel}
 	\end{center}
 \end{figure}
-Tournament selection could be translated in the following way. Have an empty list which will contain an ordered list of agents. In a loop (until the population is of size 1): select two agents from the population, remove the lowest fitness one and insert it into the list. After the loop insert the last agent into the top of the list. The top of the list always contains the highest fitness agent. Using the same population of agents in the proportional selection algorithm we can give an example of this in table~\ref{tab:tournament_selection}.
+Tournament selection could be translated in the following way. Have an empty list which will contain an ordered list of agents. In a loop (until the population is of size 1): select two agents from the population, remove the lowest fitness one and insert it into the list. After the loop insert the last agent into the top of the list. The top of the list always contains the highest fitness agent. Using the same population of agents as we did in the proportional selection algorithm we give an example of this in table~\ref{tab:tournament_selection}.
 \begin{framed}
 	\begin{center}
 		\begin{tabular}{c|c|c|c}
@@ -401,7 +421,7 @@ Tournament selection could be translated in the following way. Have an empty lis
 		${B_3}$ & $(B_3, C_1)$ & $C_1$ & ${A_1, B_1, A_2, B_4, B_2, C_1}$\\
 		$\emptyset$	& & $B_3$ & ${A_1, B_1, A_2, B_4, B_2, C_1, B_3}$
 		\end{tabular}
-		\captionof{table}{The payoff for my indirect reciprocity model}
+		\captionof{table}{Tournament selection}
 		\label{tab:tournament_selection}
 	\end{center}	
 \end{framed}
@@ -409,6 +429,9 @@ Fitness proportionate selection seems to translate best to my system as there is
 Lipowski \textit{et al.}~\cite{lipowski2012roulette} presented an efficient version of roulette wheel selection using stochastic acceptance rather than the searching method used by Francq~\cite{genetic_algorithms}. The stochastic acceptance algorithm works like this: select randomly one of the individuals from the last generations population, with fitness of the individual as $w_i$ and $w_{max}$ the maximal fitness of the generation use the probability $w_i / w_{max}$ to select whether or not to use this agents strategy for a new generation agent, if not repeat. Lipowski \textit{et al.} proved mathematically that the probability distribution of this method and general roulette wheel selection are the same, and that the stochastic acceptance algorithm is more efficient as well.
 
 \subsection{Summary}
+I have discussed and described a number of concepts in the field of multi-agent systems, including multi-agent interactions which are the focus of this project. I have also explored game-theoretic techniques that can be used for modelling and simulating agent interactions. This includes the mechanisms of direct and indirect reciprocity as well as a review of a number of past experiments with these mechanism.\par 
+In my review I came to the decision that direct reciprocity is not likely to be adequate for facilitating cooperation in multi-agent systems due to the sparse number of interactions between these agents. I have also remarked as to how many past studies have used programs that do not satisfy the multi-agent system paradigm.\par 
+I seek to create a system that does match this paradigm, and uses a mixed reciprocity model in which agents can utilise communicative acts to inform others about agents that they have had no past view one. Further to this, I aim to build agents with a variety of possible strategies that are capable of explaining their actions, using a symbolic AI approach. The multi-agent system will be run within a genetic algorithm to select the optimal agents.
 
 \chapter{Framework}
 
@@ -430,18 +453,18 @@ The environment will work using a cycle in which each step follows the process p
 The key to the cycle steps is that all agents perceive, after which all agents decide and then all actions are executed. The effect is to synchronise agents steps and prevent actions from a timepoint affecting other agents decisions at the same timepoint. Synchronicity keeps the environment static for the period in which an agent is deciding.\par
 In each timepoint there is exactly one donor-recipient pair selected at random from the generation's pool of players. For that pair there is a group of onlookers, again randomly selected from the remaining players in the generation's pool.\par
 As discussed, each generation contains a set of players which participate in the cycle steps for each timepoint of that generation. But how are these sets of players selected? For the first generation, a number of agents and associated strategies (subsection~\ref{subs:stratstrustmodels}) are selected by the user. For subsequent generations, the set of players is selected using fitness proportionate selection using Lipowski \textit{et al.}'s roulette wheel selection via stochastic acceptance~\cite{lipowski2012roulette} (discussed in subsection~\ref{subs:backgroundreproduction}).\par
-Each player has a fitness score which is used in the reproduction mechanism. A fitness score starts at zero - it cannot drop below zero - and is affected by the actions of the agent and others as described in subsection~\ref{subs:actions}. On top of this reproduction algorithm is a chance of mutation $c$ where $0\le c\le 1$ which the user is able to set at the start.\par
+Each player has a fitness score (the system's performance measure)  which is used in the reproduction mechanism. A fitness score starts at zero - it cannot drop below zero - and is affected by the actions of the agent and others as described in subsection~\ref{subs:actions}. On top of this reproduction algorithm is a chance of mutation $c$ where $0\le c\le 1$ which the user is able to set at the start.\par
 One of the aims of this project is to discover successful agent strategies for the mixed reciprocity model. This problem can be formulated as an optimisation problem, which can be solved using genetic algorithms. The effect of using fitness proportionate selection and the generations of players is to create a genetic algorithm. When experimenting with agent strategies, the strategies which were most successful will hopefully become obvious at the end of a community's generations by the concentration of agents using those strategies.\par
 In summary, the components of this environment are the community, the generations, the sets of agents within the generations, the timepoints throughout the community's life, the onlooker mechanism, the reproduction mechanism, the cycle steps, the donor-recipient pairs, the percepts and the actions. For a discussion on the properties of my environment see appendix subsection~\ref{appendix:envprop}.
 
-\subsection{Percepts}
+\subsection{Sensors}
 \label{subs:percepts}
-Percepts are the information received at an agent's sensors from it's environment. They are received in the first stage in each cycle step. In my system, percepts are a direct observation of an interaction, hearing gossip from another agent or sensing whether they are the donor or recipient in a donor-recipient pair.\par
+Percepts are the information received at an agent's sensors from it's environment. In my system they are transmitted to each agent in the first stage of each cycle step. In my system, percepts are a direct observation of an interaction, hearing gossip from another agent or sensing whether they are the donor or recipient in a donor-recipient pair.\par
 In each timepoint, there is a donor and a recipient selected at random from that generation's pool of players. The two agents are made aware of this fact by receiving a percept of the role that they are taking and which other agent is in that pair in the cycle step's perceive stage. Agents can then act accordingly.\par
 For each interaction, there is a set of onlookers selected at random from the generation's pool of players (not including the recipient or donor). In the cycle step after the interaction takes place the onlookers and the recipient receive percepts containing information as to who the donor and recipient were and the action the donor decided on.\par
 In the gossip (\ref{subs:sagl}) and action (\ref{subs:actions}) subsections, I discuss an agent's ability to act by gossiping to another agent. The action of gossip produces a percept. This percept contains the message sent using the Simple Agent Gossip Language. The percept is received by the agent given as the recipient by the gossiper.
 
-\subsection{Actions}
+\subsection{Actuators}
 \label{subs:actions}
 My system focuses on interactions between agents and as such, agents require a number of action possibilities by which to interact with one another. To simplify the action there are 3 possible main actions: idle actions, any action when the agent is a donor and gossip actions. Idle actions are simple: an agent is idle in that timepoint, their action has no effect on the environment or other agents, except for through inaction.\par
 Actions when an agent is a donor are more complex. As discussed in subsection~\ref{subs:percepts}, an agent perceives when they are a donor in a donor-recipient pair. When an agent perceives that they are a donor, they have no choice but to commit one of the following two actions: cooperate or defect. In this interaction where the actor is the donor, the recipient has no control over what happens.\par
@@ -600,9 +623,9 @@ In summary, I have presented a MAS that uses a variant of a genetic algorithm to
 
 \section{Implementation}
 \subsection{Introduction}
-In this section I will discuss the details of the implementation of the theoretical framework outlined above as well as the architecture of the system that is hosting it. I will also be discussing the software engineering techniques, tools and processes I have employed in the development of my system.
+In this section I will discuss the details of the implementation of the theoretical framework outlined above as well as the architecture of the system that is hosting it. I will also be discussing the development of that system and the software engineering techniques, tools and processes I have employed for this development.
 
-\subsection{Development}
+\subsection{Development and Software Engineering}
 \subsubsection{Architecture}
 \begin{wrapfigure}{l}{0.5\textwidth}
 \vspace{-30pt}
@@ -615,15 +638,15 @@ In this section I will discuss the details of the implementation of the theoreti
 \end{framed}
 \vspace{-30pt}
 \end{wrapfigure}
-One of the objectives of my project is to create a system that is distributable, in order for it to be an experimentation and learning tool for those interested in studying multi-agent interactions. This distributability is reflected in the architecture I have used to develop my system. A web application acts as the `shop front' of the system and allows anyone with internet access to create, run and view analysis of the available games.\par 
-I named the web application `The Nature Engine' and it is of typical web architecture: the client-server model. Built into this web application is an implementation of my theoretical framework which runs the environment and the agent's bodies. Notably this part of the system doesn't include agent decision making components. These components are hosted in a separate web service, that has been named the Agent Mind as a Service (AMAAS). This web service exposes an API for the web application to interact with.\par 
-The final component of the system is a database for the long term storage of data about users of the site (to enable users to record and label experiments) and game data. This is a relational database that due to the use of and ORM (SQLAlchemy) I have been able to create as both SQLite for development and MySql for deployment. An illustration of this is in figure~\ref{fig:architecture}. The system is deployed on an ubuntu server and the database is situated on another machine.
+One of the objectives of my project is to create a system that is distributable, in order for it to be an experimentation and learning tool for those interested in studying multi-agent interactions. This distributability is reflected in the architecture I have used to develop my system. A web application provides the client side interface for users across the internet. This interface allows users to create, run and view analysis of the available games.\par 
+I named the web application `The Nature Engine' and it is of typical web architecture: the client-server model. Built into this web application is an implementation of my theoretical framework which runs the environment and the agent's bodies. Notably this part of the system doesn't include agent decision making components. These components are hosted in a separate web service, that has been named the Agent Mind as a Service (AMAAS). This web service exposes an API for the web application to interact with to facilitate sending percepts and getting decisions.\par 
+The final component of the system is a database for the long term storage of data about users of the site (to enable users to record and label experiments) and game data. This is a relational database that due to the use of an ORM (SQLAlchemy) I have been able to create as both a SQLite database for development and a MySql database for deployment. An illustration of the overall architecture is in figure~\ref{fig:architecture}. The system is deployed on an Ubuntu server and the database is situated on another machine.
 
 
 \subsubsection{Proof of Concepts and Learning}
 At the very beginning of this project I had a good amount of software development experience, some experience with database development and logic programming, and less experience with web development. Before undertaking the development I decided I needed to learn more about some of these areas (especially web development).\par 
-I had decided that I wanted to extend my experience with Python due to it's nice language features, good library support and it's lack of use in the development of MASs (in comparison to Java and Prolog). As such I decided to use the Flask web development micro-framework and partake in Miguel Grinberg's course "The Flask Mega-Tutorial"~\cite{flask_tut}. Flask is a micro-framework as it only includes a minimal amount of functionality in comparison to frameworks such as Django. Nevertheless Flask is extensible and there are a lot of libraries a programmer can use to bring in required functionality.\par 
-Using inspiration and the techniques learnt in this course I developed an early prototype of The Nature Engine. This prototype provided a number of web pages and navigation between them including a home page, pages to set up and run two player iterated prisoner's dilemma games and pages to set up and run tournaments of the iterated prisoner's dilemma and the respective analysis of both game types. Both of these games are run using the Axelrod-Python library~\cite{axelrodproject}. This early prototype also included a database set up, a redis queue to run the tournaments and a front-end that used bootstrap for styling and React.js for a dynamic form to set up tournaments.\par
+I had decided that I wanted to extend my experience with Python due to it's nice language features, good library support and it being often overlooked for the development of MASs (in comparison to Java and Prolog). As such I decided to use the Flask web development micro-framework and partake in Miguel Grinberg's course "The Flask Mega-Tutorial"~\cite{flask_tut}. Flask is a micro-framework as it only includes a minimal amount of functionality in comparison to frameworks such as Django. Nevertheless Flask is extensible and there are a lot of libraries a programmer can use to bring in required functionality.\par 
+Using inspiration and the techniques learnt in this course I developed an early prototype of The Nature Engine. This prototype provided a number of web pages and navigation between them including a home page, pages to set up and run two player iterated prisoner's dilemma games and pages to set up and run tournaments of the iterated prisoner's dilemma and the respective analysis of both game types. Both of these games are run in the backend using the Axelrod-Python library~\cite{axelrodproject}. This early prototype also included a database set up, a redis queue to run the tournaments, a front-end that used bootstrap for styling and React.js for a dynamic form to set up tournaments.\par
 \begin{figure}
 \begin{framed}
 \begin{subfigure}{.55\textwidth}
@@ -640,14 +663,14 @@ Using inspiration and the techniques learnt in this course I developed an early 
 \caption{Two screenshots of two pages of the Prolog web service proof of concept}
 \label{fig:prologproof}
 \end{figure}
-Prolog is a logic-language traditionally used for the development of symbolic AI systems. The language allows a programmer to elegantly lay out how an agent makes decisions and interprets percepts. There are limited libraries for interfacing between Prolog and Python, and creating a method for interfacing between them reliably would have taken a while. It was easier to create a web service to host agent minds and became a good opportunity to hone my skills in web development.\par 
-To develop these skills I used Anne Ogborn's `Creating Web Applications in SWI-Prolog' tutorial~\cite{swi_web_tut} and the swi-prolog documentation. Using this tutorial I created a basic web application that imitates managing the creation of strategies and agents within the system. This was far simpler than The Nature Engine prototype (figure~\ref{fig:prologproof}) as it did not build up to a final application (the development of AMAAS was separate to this proof of concept).
+Prolog is a logic-language traditionally used for the development of symbolic AI systems. The language allows a programmer to elegantly lay out how an agent makes decisions and interprets percepts. There are limited libraries for interfacing between Prolog and Python, and creating a method for interfacing between them reliably would have been a project within itself. However, Prolog has a good HTTP support and as such I saw an opportunity to further hone my web skills by developing a web service to host agent minds.\par 
+To develop these skills I used Anne Ogborn's `Creating Web Applications in SWI-Prolog' tutorial~\cite{swi_web_tut} and the swi-prolog documentation. Using this tutorial I created a basic web application that imitates managing the creation of strategies and agents within the system. This was far simpler than The Nature Engine prototype (figure~\ref{fig:prologproof}) as it did not build up to a final application (the development of AMAAS used skills learnt from this proof of concept, but was developed separately).
 
 \subsubsection{The Nature Engine}
 I built on top of the early prototype of The Nature Engine to develop the final web application. This included improving the front end content, adding a section to run the theoretical framework I have devised and adding a couple of extra features.\par 
 To improve the front end content I worked on improving the form that allows users to dynamically select and remove agents from a tournament. This also translated into the form that allows users to do the same for my game. Other improvements were the use of a bootstrap carousel for the homepage to prevent text overload on the screen, better text descriptions on the website and improved game and tournament analysis.\par 
-\begin{wrapfigure}{l}{0.7\textwidth}
-\vspace{-30pt}
+\begin{wrapfigure}{l}{0.6\textwidth}
+\vspace{-20pt}
 \begin{framed}
 	\begin{center}
 	\includegraphics[width=\textwidth]{Animation.png}
@@ -655,11 +678,10 @@ To improve the front end content I worked on improving the form that allows user
 	\label{fig:animation}
 	\end{center}
 \end{framed}
-\vspace{-30pt}
+\vspace{-20pt}
 \end{wrapfigure}
 The main bulk of the development was implementing the theoretical framework. However, to run this game in the web application required a front-end, processing of user requests and storing of data in the database. This development is a vertical slice of the web application. The process is as follows. A user sets up a game on the set up page using a React.js form (decisions are informed by strategy information in an information box), this form is submitted which sends a post request with the relevant information to the server.\par 
-\begin{wrapfigure}{l}{\textwidth}
-\vspace{-30pt}
+\begin{figure}
 \begin{framed}
 	\begin{center}
 	\includegraphics[width=\textwidth]{PopulationTracker.png}
@@ -667,11 +689,9 @@ The main bulk of the development was implementing the theoretical framework. How
 	\label{fig:population_tracker}
 	\end{center}
 \end{framed}
-\vspace{-30pt}
-\end{wrapfigure}
-The server then puts a method to create and run the game in a redis queue and then store the resulting data in the database. The user is redirected to a waiting page, which either notifies them of a timeout on their game or sends them through to the analysis page. The analysis page includes a run down of the statistics in terms of cooperation, gossip and the success of each strategy and agent. A visualisation of the game that has been run is also included in an animation on the analysis page.\par 
-\begin{wrapfigure}{l}{\textwidth}
-\vspace{-30pt}
+\end{figure}
+The server then puts a method to create and run the game in a redis queue and then store the resulting data in the database. The user is redirected to a waiting page, which either notifies them of a timeout on their game or sends them through to the analysis page. The analysis page includes a run down of the statistics in terms of cooperation, gossip and the success of each strategy and agent (part of this is illustrated in figure~\ref{fig:population_tracker}). A visualisation of the game that has been run is also included in an animation on the analysis page (figure~\ref{fig:animation}).\par 
+\begin{figure}
 \begin{framed}
 	\begin{center}
 	\includegraphics[width=\textwidth]{UserExperiments.png}
@@ -679,9 +699,8 @@ The server then puts a method to create and run the game in a redis queue and th
 	\label{fig:user_experiments}
 	\end{center}
 \end{framed}
-\vspace{-30pt}
-\end{wrapfigure}
-In addition to this I have created a feature that allows users to create accounts, login and associates games of my theoretical framework to their account. These games can be given a label so they can keep track of the experiments the have run (illustrated in figure~\ref{fig:user_experiments}). User data is recorded in the database and passwords are hashed to keep them secret.\par
+\end{figure}
+In addition to this I have created a feature that allows users to create accounts, login and associate games of my theoretical framework to their account. These games can be given a label so they can keep track of the experiments the have run (illustrated in figure~\ref{fig:user_experiments}). User data is recorded in the database and passwords are hashed to keep them secret.\par
 The web application, database and AMAAS system has been deployed to an Ubuntu Server and has a domain name (natureengine.tech) that is accessible to all across the internet.
 
 \subsection{Framework}
@@ -768,33 +787,50 @@ The software engineering techniques and methodologies I have used in my developm
 Many of these methodologies such as Tropos and Prometheus are extensions to the OOP methodologies~\cite{kostas_deductive}. Tropos is a full methodology but relies on UML extended with the Agent Unified Modelling Language (AUML). Using this would have allowed for easy integration with my traditional OOP design approach, while driving the MAS development with Tropos' four stages (early requirements, late requirements, architectural design and detailed design).
 
 \chapter{Experiment Evaluation}
-\textcolor{red}{Explain subset I have taken and why I have chosen it (middle, good and not so good) (Ratio for strategies and eighth) (Duplicate experiments) (R, IV, S)\\ Because the environment is not visible and there is so much random chance in the system unlike other game-theoretic models, wildly different results are produced each time. Affirming that past game-theoretic analysis of systems isn't adequate.}
 \section{Introduction}
-
+In the following chapter I will be running experiments with the implementation of my theoretical framework to review the effectiveness of the mechanisms and concepts I have used as to facilitating the evolution of cooperation. I will also be discussing and evaluating the effectiveness of the strategies available to associate agents with. These experiments will use the three experiment ideas put forward by Axelrod and Hamilton: robustness, initial viability and stability.
 
 \section{Robustness}
-The experiments I have run are similar to Axelrod and Hamilton's~\cite{evolution_of_cooperation} experiments on the robustness of strategies in the system. There are 199 strategies available to use in my system, if I included one of each of these in the experiments it would overload the system. As such, I selected a population using a subset of these strategies to for the experiments that remains the same throughout the robustness experiments (listed in appendix section~\ref{appendix:population}).\par 
-9 unique experiments were conducted with this population and each one was duplicated - I would have liked to triplicate the experiments, however due to time pressure this was not possible. The first 3 experiments ran for 10 generations with a generation length of 60. These 3 experiments were different due to the number of onlookers selected for each on - 5, 10 and 20 respectively.\par 
-The next 3 experiments were reduced to a generation number of 5 due to the time it took to run them with 10 generations. These experiments were conducted with a generation length of 120. Again the number of onlookers was changed between each with the values 5, 10 and 20 respectively. The final set of 3 experiments were again conducted with a generation number of 5 but this time with a generation length of 200, and the same selected number of onlookers for each as the other sets of 3 experiments.\par 
-These experiments fulfilled a number of purposes. One of these was to review my framework for how well it supports the evolution of cooperation, another was to review which strategies were most consistently successful and additionally I evaluated the effect gossip and trust models to interpret this gossip have on the games.
+The experiments I have run are similar to Axelrod and Hamilton's~\cite{evolution_of_cooperation} experiments on the robustness of strategies in the system. However, there are 199 strategies available to use in my system, if I included one of each of these in the experiments it would take far too long to execute them.\par 
+As such, I selected a population using a subset of these strategies for the experiments that remains the same throughout the robustness experiments (listed in appendix section~\ref{appendix:populations}). This population was extremely varied in terms of how cooperative each agent is and the strategies and trust models used by the agents. I would have liked to experiment with a number of different varied populations, however due to time constratints this was not possible.\par 
+12 unique experiments were conducted with this population. I would have liked to duplicated all the experiments (only those of generation length 60 and 200 were duplicated). However, again due to time constraints (the experiments take hours to run with long generation lengths) and the overwhelmingly similar results between all experiments I did not deem this necessary nor beneficial. These experiments can be divided into sets of 3 experiments.\par 
+All experiments were run for 10 generations, and in the sets of 3 one experiments ran with 5 onlookers per interaction, the next with 10 and the final with 20. The first set of 3 experiments was run with a generation length of 60, the next 200, then 400 and finally 800.\par
+These experiments fulfilled a number of purposes. One of these was to review my framework for how well it supports the evolution of cooperation in an environment with a varied set of strategies, another was to review which strategies were most consistently successful and additionally to glean an understanding of the effect gossip and trust models to interpret this gossip have on the games.
 
-\subsubsection{Remark: Consistency of Results}
-Originally I ran a number of experiments at generation length 20. Players in these games reached a maximum total fitness of 35. These low fitness scores did not provide the reproduction algorithm with much chance of reflecting how successful a strategy can be with the amount they were reproduced into the next generation. This led to a remarkably low level of reproducibility of results. Even duplicate experiments returned wildly dissimilar results.\par 
-I diregarded these results for the following reasons. If a particular strategy got lucky with an early round of reproduction, it is likely that they would dominate the society later on as agents using that strategy are more likely to be randomly chosen in the reproduction algorithm before being stochastically accepted or not.\par 
-Another factor in this is the way interactions are selected. The donor-recipient pairs are selected at random from the population. If an agent or multiple agents of the same strategy were lucky enough to be selected a number of times as a recipient and receive cooperation, they are more likely to be reproduced out of pure luck over a good strategy.
-
-\subsection{Evaluation: Generation Length}
-
-
-\subsection{Evaluation: Evolution of Cooperation and The Framework}
-
+\subsection{Evaluation: Evolution of Cooperation}
+The overwhelming outcome of the experiments is that cooperation does not evolve under the conditions of the experiments. By roughly halfway through the generations for all but 2 of the experiments cooperating agents were completely wiped out and the cooperation rate had fallen to zero. All the strategies that were left were either Defectors or Veritability Discerners and Image Scoring Discriminators with high K values that consistently defected.\par 
+Nowak and Sigmund~\cite{evol_indirect_image} discovered that for their game cooperation could occur under certain conditions. These conditions included an increased generation length. This variable seemed to have little if no effect on the evolution of cooperation in my system. With the increase in length of generations, cooperation did not survive any longer and did not increase in earlier generations. Though if I had time I would have liked to try for again longer generations to see if I simply had not found the lowest length of generation at which cooperation evolves.\par 
+For their model Nowak and Sigmund~\cite{evol_indirect_image} also found that for cooperation to evolve it is extremely important for agents to know the image score of other agents. I would surmise that my agents also need to be well informed as to the reputation of others. Following this idea, increasing the number of onlookers per interaction, would logically increase cooperation. However this is not backed up by the data I have received from my experiments. In fact at some points the data seems contradictory, with the number of onlookers increasing and the cooperation rate decreasing.\par 
+The only 2 exceptional experiments in which cooperation managed to survive until the later generations - one of which cooperation remained present until the end - were of generation length 60. The more cooperative of these experiments had 20 onlookers per interactions, and the less cooperative had five.\par 
+It is very possible these two experiments were simply lucky chance, especially as both had duplicates that were notably unsuccessful. Maybe cooperative agents were consistently lucky with reproduction, or it just happened to be that donors and recipients were chosen far more often as cooperative agents. Having said these I would have liked to have time to repeat the experiments many more times to either confirm or deny this speculation.
 
 \subsection{Evaluation: Strategies}
-\textcolor{red}{Defection and cooperation able to exist alongside each other}
-
+\label{subs:eval_strats}
+Due to the lack of stable cooperation in the experiments overall there were not many stand out strategies. From the most cooperative experiment one cooperative strategy remained to the end in large numbers. This was a Standing Strategy with a non-donor strategy of Spread Accurate Negative and a trust model of Trusting. This strategy may have been able to survive so long as the agents used it warn each other of the defectors in the population.\par 
+In the second most cooperative experiment the second to last generation still remained partially cooperative. In this generation one Image Scoring Discriminator using the Lazy non-donor strategy, Trusting trust model and with K=0 survived and four Veritability Discerner's using the Spread Positive Trusted non-donor strategy, Balanced Reactor trust model and with K=-5 survived.
 
 \subsection{Evaluation: Trust Models and Gossip}
+As I have noted above increasing the number of onlookers per interaction in a game does not seem to increase the cooperation rate of the agents in that game. This could be due to a number of factors, but the data points to a possibly overall negative effect of gossip on the evolution of cooperation. Sommerfeld \textit{et al.} reported that gossip had to both accurately describe the behaviour of the subject and be acted upon appropriately to help facilitate cooperation.\par 
+I believe there are three possible explanations (that may overlap) as to how gossip has not helped facilitate cooperation in these experiments. The first is the use of gossip to deceive and manipulate other agents. This feature was actively designed into some of the agents in the system to study how misinformation may affect games. There is a distinct possibility that this has had the effect of reinfocing defection in these experiments.\par 
+Secondly there is a possibility that gossip that did not intend to deceive others did not accurately represent the actions of the subject of the gossip. For example, Discriminators and Discerners often base their communicative actions on reputation information that can be formed by gossip from others. If the original gossip is innaccurate, the effect may be to perpetuate the innaccurate information.\par 
+Lastly gossip may have not been acted on correctly. The trust models that I have developed may not adequately interpret the received gossip to revise beliefs about other agents. As such, the agents may not be able to use these formed beliefs to correctly act towards the subject of the gossip.
 
+\section{Initial Viability}
+My plan had originally been to review the outcomes of my robustness experiments and pick ten strategies which has been successful for the next set of experiments. However, my robustness experiments revealed a very limited amount of cooperative strategies capable in surviving in a varied environment. Due to this, I have only run the initial viability experiments for the three strategies I have identified in subsection~\ref{subs:eval_strats}.\par 
+For each of these three strategies I have run 6 experiments. This can be again split into two sets of 3 experiments with the first set of generation length 100 and the second of generation length 300. All experiments ran for 10 generations and again each set of 3 experiments had one experiment with 5 onlookers per interaction, one with 10 and another with 20.
+
+\subsection{Evaluation}
+
+\section{Stability}
+Axelrod and Hamilton~\cite{evolution_of_cooperation} also ran another set of experiments to test what strategies could prevent defection from taking hold in societies that are predominantly cooperative. Again I had planned to take successful strategies from my robustness experiments and use them in this. However, of course I did not find many successful strategies.\par 
+This type of experiment is different to initial viability though, and gives cooperation more of a chance. As such I designed and ran experiments similar to Axelrod and Hamilton's stability experiments. I selected 9 strategies (including the strategies I used in the initial viability experiments) with a variety of strategies and trust models (listed in the appendix in section~\ref{appendix:stab_strats}) that I believe could be successful in upholding cooperation against a group of 6 defectors.\par 
+In this group of defectors are 2 for each of the non-donor strategies: Lazy, Promote Self and Spread Negative. For each of the 10 selected strategies I ran 6 experiments. Where I matched up 25 of the selected strategy against the group of defectors. These experiments follow the same layout as the initial viability experiments except with the populations I have described here.
+
+\subsection{Evaluation: The Stability of Cooperation}
+
+\subsection{Evaluation: Strategies}
+
+\subsection{Evaluation: Trust Models and Gossip}
 
 
 \section{Discussion}
@@ -807,9 +843,15 @@ Future enhancements\\
 Focus on project\\
 Compare to deliverables at beginning\\
 Reflect on initial focus on game theory over MASs\\
-Low fitness values suggest I need a better measure for how well the agents are doing.}
+Low fitness values suggest I need a better measure for how well the agents are doing.\\
+Running lots of experiments is not efficient with my system, I should've made an easy way to automate them.\\
+It's difficult to run a genetic algorithm with a multi-agent system in a web server, because it requires so many resources, next time I may develop a desktop application or command line application which are easily distributable to put onto powerful systems without needing to think about timeout for security (could create a mix). Make it easy to run automated experiments (Run experiments on an API????)!!!!! I have developed it in a way that the code could easily be ported for this. Also use a faster language that allows parrallelisation of perceptions, decisions, etc.\\
+Reflect on my experience with running experiments on the system\\
+I could scale the system with more hardware to run experiments in the backend, however that is expensive
+}
 
 \chapter{Conclusions}
+\textcolor{red}{Inspired by discussion and analysis}
 \textcolor{red}{Mechanism has to work with and without re-meeting.\\
 Mechanism has to encourage cooperation between unknown entities.\\
 Opportunity for extra work? Further exploration of network reciprocity as outline in background and background summary. Extend indirect reciprcoty so individuals can choose who they wish to interact with. Symbolic reinforcement learning strategies~\cite{harper2017reinforcement}.\\
@@ -817,10 +859,8 @@ Move closer to using an agent model such as BDI?\\
 Using the GAIA methodology for development?~\cite{wooldridge2000gaia}.\\
 Reaching agreements\\
 Use an AOP language (GOAL or SARL?)\\
-It's difficult to run a genetic algorithm with a multi-agent system in a web server, because it requires so many resources, next time I may develop a desktop application or command line application which are easily distributable to put onto powerful systems without needing to think about timeout for security (could create a mix). Make it easy to run automated experiments (Run experiments on an API????)!!!!! I have developed it in a way that the code could easily be ported for this. Also use a faster language that allows parrallelisation of perceptions, decisions, etc.\\
 Have agents select who to interact with rather than a random choice.\\
-A better fitness measure for the algorithm?\\
-Lo}
+A better fitness measure for the algorithm?}
 
 
 %%%% ADD YOUR BIBLIOGRAPHY HERE
@@ -843,10 +883,12 @@ Refer to last chapter of russell and norvig}
 \chapter{Appendix}
 \label{appendix}
 \textcolor{red}{Describe the contents of my appendix.}
-\section{Background}
+\section{Game Theory Background}
+\subsection{Introduction}
+The theories that attempt to explain cooperative phenomena are not simply limited to direct and indirect reciprocity. Those two are simply the ones I chose, as I believe they could be used best as a mechanism to help cooperation evolve in multi-agent interactions. There are a multitude of mechanisms proposed including the three I will described here: Kinship Theory, Network Reciprocity and Group Selection.
 \subsection{Kinship Theory}
 \label{appendix:kin}
-% Axelrod and Hamilton~\cite{evolution_of_cooperation} described the way in which cooperation in nature (with the exception of homo-sapiens) is almost always between related individuals. An earlier paper by Hamilton~\cite{kinhamilton} argues that individuals don't only work toward improving their own fitness, but towards what Hamilton defines as `inclusive fitness'. Inclusive fitness is the sum of a player's fitness and the fitness of each of their relations multiplied by a coefficient. The coefficient used by Hamilton is Wright's coefficient of relatedness, as illustrated in figure~\ref{fig:coefrelate}. It could be possible to create a similar coefficient of relatedness for use in a MAS.
+Axelrod and Hamilton~\cite{evolution_of_cooperation} described the way in which cooperation in nature (with the exception of homo-sapiens) is almost always between related individuals. An earlier paper by Hamilton~\cite{kinhamilton} argues that individuals don't only work toward improving their own fitness, but towards what Hamilton defines as `inclusive fitness'. Inclusive fitness is the sum of a player's fitness and the fitness of each of their relations multiplied by a coefficient. The coefficient used by Hamilton is Wright's coefficient of relatedness, as illustrated in figure~\ref{fig:coefrelate}. It could be possible to create a similar coefficient of relatedness for use in a MAS.
 \begin{figure}
 	\center
 	\includegraphics[width=0.5\textwidth]{coefrelate.png}
@@ -854,10 +896,9 @@ Refer to last chapter of russell and norvig}
 	\label{fig:coefrelate}
 \end{figure}
 \par
-% Richard Dawkins~\cite{selfish_gene} advocated for the idea of the selfish gene. From a biological perspective, this idea postulates that actors are hardwired to propagate their genes. Dawkins asserts that this drive is due to the fact that genes are the true replicators evolutionarily rather than the actors themselves. Those with a high coefficient of relatedness to an individual are far more likely to carry their genes and to help them proliferate. This mechanism is similar to that presented by Hamilton~\cite{kinhamilton}, but with a biological backing. From a biological perspective this may make sense. However, it does not seem natural to translate an agent's strategy to the idea of genes.\par
-% Further, although it is possible to create a coefficient and an idea of relatedness similar to that of Hamilton's model~\cite{kinhamilton} for a MAS, it does not seem a natural translation. Another limitation to the use of kinship theory for MASs is that systems are ideally inclusive of individuals that can contribute to the society. For example, if an agent is looking to actively contribute to a society, but is not kin with the members, a MAS using kinship theory would exclude them and thus limit the abilities of that society.\par
-% Furthermore, Axelrod and Hamilton~\cite{evolution_of_cooperation} highlight that humanity is the exceptional society which does not limit itself to cooperating mostly only with kin. I would surmise that this exception is due to the higher level of intellect of homo-sapiens in comparison to other species. Many have suggested that the capabilities of AI could match or even surpass the intelligence of humans. Therefore, I would suggest that societies of IAs should also not be limited to the use of kinship theory to facilitate cooperation.\par
-% As such, I shall not be using kinship theory for my theoretical framework. I will be aiming to use a  mechanism that is inclusive of agents that aim to become valuable members of the society and also a mechanism which fits naturally into the agent's paradigm. 
+Richard Dawkins~\cite{selfish_gene} advocated for the idea of the selfish gene. From a biological perspective, this idea postulates that actors are hardwired to propagate their genes. Dawkins asserts that this drive is due to the fact that genes are the true replicators evolutionarily rather than the actors themselves. Those with a high coefficient of relatedness to an individual are far more likely to carry their genes and to help them proliferate. This mechanism is similar to that presented by Hamilton~\cite{kinhamilton}, but with a closer biological backing. From a biological perspective this may make sense. However, it does not seem natural to translate an agent's strategy to the idea of genes.\par
+Further, although it is possible to create a coefficient and an idea of relatedness similar to that of Hamilton's model~\cite{kinhamilton} for a MAS, it does not seem a natural translation. Another limitation to the use of Kinship Theory for MASs is that systems are ideally inclusive of individuals that can contribute to the society. For example, if an agent is looking to actively contribute to a society, but is not kin with the members, a MAS using kinship theory would exclude them and thus limit the abilities of that society.\par
+Furthermore, Axelrod and Hamilton~\cite{evolution_of_cooperation} highlight that humanity is the exceptional society which does not limit itself to cooperating only with kin. I would surmise that this exception is due to the higher level of intellect of homo-sapiens in comparison to other species. Many have suggested that the capabilities of AI could match or even surpass the intelligence of humans. Therefore, I would suggest that societies of IAs should also not be limited to the use of kinship theory to facilitate cooperation.
 \begin{figure}
 	\center
 	\includegraphics[width=0.5\textwidth]{green-wood-hoopoe.jpg}
@@ -867,15 +908,16 @@ Refer to last chapter of russell and norvig}
 
 \subsection{Network Reciprocity}
 \label{appendix:netreciprocity}
-% Nowak - in his paper `The Five Rules of Cooperation'~\cite{five_rules_coop} - identified and compared five key mechanisms that can aid in the evolution of cooperation, two of which I have already discussed (direct reciprocity in section~\ref{sec:ipd} and kin selection in ~\ref{sec:kin}). The other three are network reciprocity (which I shall examine here), group selection and indirect reciprocity (both of which have their own sections).\par
-% Network reciprocity uses a graph of players and their connections. The players are represented by the nodes in the graph, with arcs representing connections between players. This idea ties closely to the networks that IAs may work across. Players with arcs between them interact with each other in rounds of The Prisoner's Dilemma. Nowak and May's~\cite{spatial} ealier work - which inspired Nowak's later paper~\cite{five_rules_coop} - did not give individual's any memory of past interaction.\par
-% This lack of memory limited Nowak and May to pure cooperators and pure defectors. In Nowak's book `Evolutionary Dynamics'~\cite{nowak2006evolutionary}, his exploration of evolutionary graph theory and spatial games (chapters 8 and 9) showed that the shapes of the lattice linking the players and different concentrations of cooperators and defectors on those shapes has a great effect on the evolution of cooperation. Visualised in figures~\ref{fig:coopinvdef} and ~\ref{fig:funnel}.\par
-% Nowak's~\cite{five_rules_coop, nowak2006evolutionary} and Nowak and May's~\cite{spatial} work on these games on graphs is limited in terms of strategies and also in terms of the fixed shape of its graphs. However, the work proves a key point: the structure of who interacts with whom can play a key role in supporting cooperation in large populations.\par
-% In real life, individuals will often mostly interact in their close social circles. For example, a Meerkat may interact with others of their family group, a drongo bird which calls to warn of predators, the predators and others who are geographically close to them. The graph in this case represents the close geographic ties.\par
-% I imagine the use of Nowak~\cite{five_rules_coop, nowak2006evolutionary} and Nowak and May's~\cite{spatial} work to employ a network not as a representation of a physical network structure or geography, but as a representation of the choices made by IAs with whom they wish to interact with.\par
-% This network would be a constantly changing and adapting network of IAs. The IAs would not concern themselves with the strategy they employ towards whom they are forced to interact with. Instead, their strategy is to select those whom they wish to interact with, thus, effectively constructing a graph of network reciprocation. How these changing graph connections would affect cooperation is unbeknownst to me. Indeed, whether Nowak's rules would still apply would be interesting to find out.\par
-% Nowak~\cite{nowak2006evolutionary} found that some shapes supported cooperators in groups. Cooperators could make use of these shapes by deliberately forming them to protect one another. While another set of shapes were found as `amplifiers' for evolution, maybe defectors could make use of these sorts of shapes to invade groups of cooperators.\par
-% I can see IAs having strategies as to how to build these shapes. However, an issue may arise in which cooperative agents find it hard to reach out to other cooperators which are not part of their current shape.As such, there may be possible prevention of the spread of cooperation, thus limiting these groups. However, this concept is worth investigating, and the problem could possibly be overcome using some kind of bridging mechanism.\textcolor{red}{Compare to \cite{jennings2000agent} organisational relationships}.
+Nowak - in his paper `The Five Rules of Cooperation'~\cite{five_rules_coop} - identified and compared five key mechanisms that can aid in the evolution of cooperation, three of which I have already discussed (direct reciprocity in section~\ref{sec:ipd}, indirect reciprocity in section~\ref{sec:indir} and kin selection in ~\ref{appendix:kin}). The other two are network reciprocity and group selection.\par
+Network reciprocity uses a graph of players and their connections. The players are represented by the nodes in the graph, with arcs representing connections between players. This idea ties closely to the networks that IAs may work across. Players with arcs between them interact with each other in rounds of The Prisoner's Dilemma. Nowak and May's~\cite{spatial} ealier work - which inspired Nowak's later paper~\cite{five_rules_coop} - did not give individual's any memory of past interaction.\par
+This lack of memory limited Nowak and May to pure cooperators and pure defectors. In Nowak's book `Evolutionary Dynamics'~\cite{nowak2006evolutionary}, his exploration of evolutionary graph theory and spatial games (chapters 8 and 9) showed that the shapes of the lattice linking the players and different concentrations of cooperators and defectors on those shapes has a great effect on the evolution of cooperation. Visualised in figures~\ref{fig:coopinvdef} and ~\ref{fig:funnel}.\par
+Nowak's~\cite{five_rules_coop, nowak2006evolutionary} and Nowak and May's~\cite{spatial} work on these games on graphs is limited in terms of strategies and also in terms of the fixed shape of its graphs. However, the work proves a key point: the structure of who interacts with whom can play a key role in supporting cooperation in large populations.\par
+In real life, individuals will often mostly interact in their close social circles. For example, a Meerkat may interact with others of their family group, a drongo bird which calls to warn of predators, the predators and others who are geographically close to them. The graph in this case represents the close geographic ties.\par 
+I imagine the use of Nowak~\cite{five_rules_coop, nowak2006evolutionary} and Nowak and May's~\cite{spatial} work to employ a network not as a representation of a physical network structure or geography, but as a representation of the choices made by IAs with whom they wish to interact with.\par
+This network would be a constantly changing and adapting network of IAs. The IAs would not concern themselves with the strategy they employ towards whom they are forced to interact with. Instead, their strategy is to select those whom they wish to interact with, thus, effectively constructing a graph of network reciprocation. How these changing graph connections would affect cooperation is unbeknownst to me. Indeed, whether Nowak's rules would still apply would be interesting to find out.\par
+Nowak~\cite{nowak2006evolutionary} found that some shapes supported cooperators in groups. Cooperators could make use of these shapes by deliberately forming them to protect one another. While another set of shapes were found as `amplifiers' for evolution, maybe defectors could make use of these sorts of shapes to invade groups of cooperators.\par
+I can see IAs having strategies as to how to build these shapes. However, an issue may arise in which cooperative agents find it hard to reach out to other cooperators which are not part of their current shape. As such, there may be possible prevention of the spread of cooperation, thus limiting these groups. However, this concept is worth investigating, and the problem could possibly be overcome using some kind of bridging mechanism.\par 
+This is comparable to Jennings'~\cite{jennings2000agent} organisational relationships between agents, and could described strategies for agents to form and manage these relationships. Furthermore it would be interesting to see how this work could compare to Barab\`asi's breakthroughs in network science~\cite{barabasi1999emergence} and the impact it could have on technologies such as the semantic web.
 \begin{framed}
 	\begin{center}
 		\begin{tabular}{c|cc}
@@ -903,12 +945,12 @@ Refer to last chapter of russell and norvig}
 
 \subsection{Group Selection}
 \label{appendix:groupselection}
-% Group selection is another mechanism described by Nowak~\cite{five_rules_coop}. This mechanism splits one population into multiple groups. Within these groups, The Prisoner's Dilemma is played and reproduction occurs which is proportional to each players payoff. If using the payoff matrix in table~\ref{tab:payoffmatrix}, then cooperators can work together to produce a payoff of three, while defectors can only produce five or two for both players in the interaction.\par
-% The group size increases until a certain point, at which the group may split. If the group does split (which is stochastically chosen) then another group is destroyed. The effect is multi-level selection.\par
-% Nowak found that due to the higher payoff between cooperators, reproduction will occur more quickly within the groups they dominate, than the groups filled with defectors. The faster the reproduction, the quicker the group size grows, making it more likely for groups of cooperators to survive while groups of defectors will shrink and be destroyed. These dynamics are displayed in figure~\ref{fig:group}.\par
-% Traulsen and Nowak~\cite{multilevel_nowak} limited themselves to cooperators and defectors, but noted that other strategies could be built into their model. A limitation to applying group selection to MASs is the groups themselves. In this model, individuals do not interact with individuals in other groups, creating a barrier between them.\par
-% Even our current networks span the globe and don't always have harsh barriers between them - even when security is high, these barriers can often be broken. Furthermore, IAs are often built to be of service to others and limiting them to being of service only to one group greatly reduces the service an agent can supply and limits the society as a whole . Finally, the group mechanics of splitting and destroying another group of individuals does not naturally match the paradigm of MASs.\par
-% I would suggest that this is not a mechanism which would be useful to apply to MASs unless you are modelling clusters of agents, with each cluster in competition. This idea is not the aim of my project; however it could be another interesting project to take up.
+Group selection is another mechanism described by Nowak~\cite{five_rules_coop}. This mechanism splits one population into multiple groups. Within these groups, The Prisoner's Dilemma is played and reproduction occurs which is proportional to each players payoff. If using the payoff matrix in table~\ref{tab:payoffmatrix}, then cooperators can work together to produce a payoff of three, while defectors can only produce five or two for both players in the interaction.\par
+The group size increases until a certain point, at which the group may split. If the group does split (which is stochastically chosen) then another group is destroyed. The effect is multi-level selection.\par
+Nowak found that due to the higher payoff between cooperators, reproduction will occur more quickly within the groups they dominate, than the groups filled with defectors. The faster the reproduction, the quicker the group size grows, making it more likely for groups of cooperators to survive while groups of defectors will shrink and be destroyed. These dynamics are displayed in figure~\ref{fig:group}.\par
+Traulsen and Nowak~\cite{multilevel_nowak} limited themselves to cooperators and defectors, but noted that other strategies could be built into their model. A limitation to applying group selection to MASs is the groups themselves. In this model, individuals do not interact with individuals in other groups, creating a barrier between them.\par
+Even our current networks span the globe and don't always have harsh barriers between them - even when security is high, these barriers can often be broken. Furthermore, IAs are often built to be of service to others and limiting them to being of service only to one group greatly reduces the service an agent can supply and limits the society as a whole. Finally, the group mechanics of splitting and destroying another group of individuals does not naturally match the paradigm of MASs.\par
+I would suggest that this is not a mechanism which would be useful to apply to MASs unless you are modelling clusters of agents split into local area network like structures, with each cluster in competition. This idea is not the aim of my project; however it could be another interesting project to take up.
 \begin{figure}
 	\center
 	\includegraphics[width=\textwidth]{GroupSelection.png}
@@ -920,17 +962,15 @@ Refer to last chapter of russell and norvig}
 \section{Theoretical Framework}
 \subsection{Environment Properties}
 \label{appendix:envprop}
-% I have already discussed how the synchronised cycle steps makes my environment static, but what about Russell and Norvig's~\cite{russell2016artificial} 4 other properties. Knowing the intention of other agents is key to deciding on whether other agents should cooperate or not. However, agents cannot view all interactions, and gossip may be distorted so an agent may not know all details it needs to know for action decisions. As such, the environment I have delineated is only partially observable.\par
-% I also argue that the environment is deterministic from a generational point of view. Milinski \textit{et al.}~\cite{imagevsstanding} claimed that individuals using the standing strategy aim for a good standing, and Leimar and Hammerstein~\cite{leimarhammer} argue that the standing strategy is good as it allows individuals to punish bad individuals. However take 3 agents a, b, c and d. Agent b has defected previously against d who has a good standing according to a. Agent a then chooses to punish b but is still believing this won't reduce their standing. However, agent c did not observe b's defection against d but is an onlooker for c's defection against b.\par
-% From the proceedings the environment appears to be non-deterministic, as there is more than one outcome to an action. However, this is due to the partial observability of the environment not the determinism, as highlighted is possible by Russell and Norvig~\cite{russell2016artificial}. The current state (c's lack of knowledge on b) and the actions selected by a and b completely determine the next state of the system.\par
-% However, from a community point of view the game can be seen as non-deterministic due to the reproduction mechanism. This includes a chance of mutation and the actual selection of agents is stochastic. As such the actions of the agents cannot guarantee that their strategy will be highly propagated, the higher the fitness they get (which is decided by state and actions) affects their chances greatly but not fully.\par
-% The environment is also nonepisodic. To take a proof by contradiction approach suppose the environment is episodic. According to Russell and Norvig~\cite{russell2016artificial} an environment is episodic if subsequent episodes do not depend on what action occurs in previous episodes. Episodes consist of perceiving and then deciding. But from the percepts and actions subsections (\ref{subs:percepts} and \ref{subs:actions}) we know that actions from one timepoint can generate percepts in the next. This is a contradiction and as such the environment is nonepisodic.\par
-% In summary the environment I have outlined in this section is inaccessible, deterministic from a generational point of view yet non-deterministic from a community point of view, nonepisodic, static and discrete.
-\subsection{Strategies}
-\label{appendix:strats}
-\textcolor{red}{include list of strategy components and trust models, all associated together}.
+I have already discussed how the synchronised cycle steps makes my environment static, but what about Russell and Norvig's~\cite{russell2016artificial} 6 other properties. Knowing the intention of other agents is key to deciding on whether other agents should cooperate or not. However, agents cannot view all interactions, and gossip may be distorted so an agent may not know all details it needs to know for action decisions. As such, the environment I have delineated is only partially observable.\par
+I also argue that the environment is deterministic. Milinski \textit{et al.}~\cite{imagevsstanding} claimed that individuals using the standing strategy aim for a good standing, and Leimar and Hammerstein~\cite{leimarhammer} argue that the standing strategy is good as it allows individuals to punish bad individuals. However take 3 agents a, b, c and d. Agent b has defected previously against d who has a good standing according to a. Agent a then chooses to punish b but is still believing this won't reduce their standing. However, agent c did not observe b's defection against d but is an onlooker for c's defection against b.\par
+From the proceedings the environment appears to be non-deterministic, as there is more than one outcome to an action. However, this is due to the partial observability of the environment not the determinism, which is highlighted as possible by Russell and Norvig~\cite{russell2016artificial}. The current state (c's lack of knowledge on b) and the actions selected by a and b completely determine the next state of the system.\par
+The environment is also sequential. To take a proof by contradiction approach suppose the environment is episodic. According to Russell and Norvig~\cite{russell2016artificial} an environment is episodic if subsequent episodes do not depend on what action occurs in previous episodes. Episodes consist of perceiving and then deciding. But from the percepts and actions subsections (\ref{subs:percepts} and \ref{subs:actions}) we know that actions from one timepoint can generate percepts in the next. This is a contradiction and as such the environment is nonepisodic.\par
+My environment is used to study interactions between multiple agents in an environment and as such has the property multi-agent. My environment is also known unto the agents, there is nothing stopping an agent being aware of the utility produced by their actions and the generated percepts of their actions. Though these may not have the effect an agent wishes for in terms of increasing their image score etc. this is down to the mental states of other agents not the environment itself.\par 
+In summary the environment I have outlined in this section is partially observale, deterministic, sequential, static, discrete, multi-agent and known.
 
-\section{Robustness Experiments Population}
+\section{Experiments}
+\subsection{Robustness Experiments Population}
 \label{appendix:populations}
 \begin{itemize}
 	\item 1 x Cooperator, Lazy
@@ -962,5 +1002,24 @@ Refer to last chapter of russell and norvig}
 	\item 1 x Veritability Discerner, Promote Self, Forgiving Reactor, K=5
 	\item 1 x Veritability Discerner, Spread Positive Trusted, Forgiving Reactor, K=5
 \end{itemize}
+
+\subsection{Stability Experiment Strategies}
+\label{appendix:stab_strats}
+\begin{itemize}
+	\item Standing Discriminator, Spread Accurate Negative, Trusting
+	\item Standing Discriminator, Spread Accurate Positive, Distrusting
+	\item Standing Discriminator, Promote Self, Naive Trusting
+	\item Image Scoring Discriminator, Spread Accurate Negative, Trusting, K=-2, Personal Grievance
+	\item Image Scoring Discriminator, Lazy, Trusting, K=0
+	\item Image Scoring Discriminator, Spread Accurate Positive, Distrusting, K=0, Personal Grievance
+	\item Veritability Discerner, Spread Positive Trusted, Balanced Reactor, K=-5
+	\item Veritability Discerner, Spread Negative Untrusted, Strong Reactor, K=0
+	\item Veritability Discerner, Promote Self, Forgiving Reactor, K=0
+\end{itemize}
+
+\section{Strategies}
+\label{appendix:strats}
+Below is a list of all the strategies available and a description for each strategy which can be associated with an agent in a game in my MAS.
+\inputminted[breaklines]{json}{strategies.json}
 
 \end{document}

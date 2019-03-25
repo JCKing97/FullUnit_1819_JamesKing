@@ -10,45 +10,45 @@ Warning--to sort, need author or key in software_testing_help
 Warning--empty journal in alexander1987biology
 Warning--empty year in sugden2004economics
 Warning--empty journal in thomas1993placa
-You've used 64 entries,
+You've used 69 entries,
             2118 wiz_defined-function locations,
-            844 strings with 13673 characters,
-and the built_in function-call counts, 18817 in all, are:
-= -- 1861
-> -- 749
+            874 strings with 14273 characters,
+and the built_in function-call counts, 20184 in all, are:
+= -- 1996
+> -- 802
 < -- 14
-+ -- 316
-- -- 238
-* -- 1170
-:= -- 3111
-add.period$ -- 199
-call.type$ -- 64
-change.case$ -- 299
++ -- 339
+- -- 254
+* -- 1255
+:= -- 3348
+add.period$ -- 214
+call.type$ -- 69
+change.case$ -- 321
 chr.to.int$ -- 0
-cite$ -- 71
-duplicate$ -- 750
-empty$ -- 1601
-format.name$ -- 238
-if$ -- 3993
+cite$ -- 76
+duplicate$ -- 805
+empty$ -- 1716
+format.name$ -- 254
+if$ -- 4276
 int.to.chr$ -- 0
-int.to.str$ -- 64
-missing$ -- 62
-newline$ -- 324
-num.names$ -- 120
-pop$ -- 367
+int.to.str$ -- 69
+missing$ -- 68
+newline$ -- 349
+num.names$ -- 130
+pop$ -- 388
 preamble$ -- 1
-purify$ -- 246
+purify$ -- 264
 quote$ -- 0
-skip$ -- 539
+skip$ -- 576
 stack$ -- 0
-substring$ -- 1088
-swap$ -- 141
+substring$ -- 1173
+swap$ -- 146
 text.length$ -- 14
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 236
+type$ -- 254
 warning$ -- 7
-while$ -- 179
-width$ -- 66
-write$ -- 689
+while$ -- 193
+width$ -- 71
+write$ -- 742
 (There were 7 warnings)
