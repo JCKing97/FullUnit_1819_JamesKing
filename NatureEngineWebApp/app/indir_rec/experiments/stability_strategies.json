@@ -25,7 +25,7 @@
   },
   {
     "donor_strategy": "Image Scoring Discriminator",
-    "non_donor_strategy": "Promote Self",
+    "non_donor_strategy": "Lazy",
     "trust_model":  "Trusting",
     "options": [0]
   },
@@ -37,20 +37,20 @@
   },
   {
     "donor_strategy": "Veritability Discerner",
-    "non_donor_strategy": "Spread Negative Untrusted",
-    "trust_model":  "Strong Reactor",
+    "non_donor_strategy": "Spread Positive Trusted",
+    "trust_model":  "Balanced Reactor",
     "options": [-5]
   },
   {
     "donor_strategy": "Veritability Discerner",
-    "non_donor_strategy": "Spread Positive Trusted",
-    "trust_model":  "Forgiving Reactor",
+    "non_donor_strategy": "Spread Negative Untrusted",
+    "trust_model":  "Strong Reactor",
     "options": [0]
   },
   {
     "donor_strategy": "Veritability Discerner",
     "non_donor_strategy": "Promote Self",
-    "trust_model":  "Balanced Reactor",
+    "trust_model":  "Forgiving Reactor",
     "options": [0]
   }
 ]

@@ -75,26 +75,27 @@
 \contentsline {subsection}{\numberline {4.2.1}Evaluation: Evolution of Cooperation}{45}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Evaluation: Strategies}{46}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Evaluation: Trust Models and Gossip}{46}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}Initial Viability}{46}{section.4.3}
+\contentsline {section}{\numberline {4.3}Initial Viability}{47}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Evaluation}{47}{subsection.4.3.1}
 \contentsline {section}{\numberline {4.4}Stability}{47}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Evaluation: The Stability of Cooperation}{47}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Evaluation: Strategies}{47}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}Evaluation: Trust Models and Gossip}{47}{subsection.4.4.3}
-\contentsline {section}{\numberline {4.5}Discussion}{47}{section.4.5}
-\contentsline {chapter}{\numberline {5}Critical Analysis and Discussion}{48}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusions}{49}{chapter.6}
-\contentsline {chapter}{Bibliography}{53}{chapter*.53}
-\contentsline {chapter}{\numberline {7}Professional Issues}{54}{chapter.7}
-\contentsline {chapter}{\numberline {8}Appendix}{55}{chapter.8}
-\contentsline {section}{\numberline {8.1}Game Theory Background}{55}{section.8.1}
-\contentsline {subsection}{\numberline {8.1.1}Introduction}{55}{subsection.8.1.1}
-\contentsline {subsection}{\numberline {8.1.2}Kinship Theory}{55}{subsection.8.1.2}
-\contentsline {subsection}{\numberline {8.1.3}Network Reciprocity}{57}{subsection.8.1.3}
-\contentsline {subsection}{\numberline {8.1.4}Group Selection}{58}{subsection.8.1.4}
-\contentsline {subsection}{\numberline {8.1.5}Alternate Agent Architectures}{59}{subsection.8.1.5}
-\contentsline {section}{\numberline {8.2}Theoretical Framework}{59}{section.8.2}
-\contentsline {subsection}{\numberline {8.2.1}Environment Properties}{59}{subsection.8.2.1}
-\contentsline {section}{\numberline {8.3}Experiments}{60}{section.8.3}
-\contentsline {subsection}{\numberline {8.3.1}Robustness Experiments Population}{60}{subsection.8.3.1}
-\contentsline {subsection}{\numberline {8.3.2}Stability Experiment Strategies}{61}{subsection.8.3.2}
-\contentsline {section}{\numberline {8.4}Strategies}{62}{section.8.4}
+\contentsline {subsection}{\numberline {4.4.1}Evaluation: The Stability of Cooperation}{48}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Evaluation: Strategies}{48}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}Evaluation: Trust Models and Gossip}{48}{subsection.4.4.3}
+\contentsline {section}{\numberline {4.5}Discussion}{48}{section.4.5}
+\contentsline {chapter}{\numberline {5}Critical Analysis and Discussion}{49}{chapter.5}
+\contentsline {chapter}{\numberline {6}Conclusions}{50}{chapter.6}
+\contentsline {chapter}{Bibliography}{54}{chapter*.53}
+\contentsline {chapter}{\numberline {7}Professional Issues}{55}{chapter.7}
+\contentsline {chapter}{\numberline {8}Appendix}{56}{chapter.8}
+\contentsline {section}{\numberline {8.1}Game Theory Background}{56}{section.8.1}
+\contentsline {subsection}{\numberline {8.1.1}Introduction}{56}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {8.1.2}Kinship Theory}{56}{subsection.8.1.2}
+\contentsline {subsection}{\numberline {8.1.3}Network Reciprocity}{58}{subsection.8.1.3}
+\contentsline {subsection}{\numberline {8.1.4}Group Selection}{59}{subsection.8.1.4}
+\contentsline {subsection}{\numberline {8.1.5}Alternate Agent Architectures}{60}{subsection.8.1.5}
+\contentsline {section}{\numberline {8.2}Theoretical Framework}{60}{section.8.2}
+\contentsline {subsection}{\numberline {8.2.1}Environment Properties}{60}{subsection.8.2.1}
+\contentsline {section}{\numberline {8.3}Experiments}{61}{section.8.3}
+\contentsline {subsection}{\numberline {8.3.1}Robustness Experiments Population}{61}{subsection.8.3.1}
+\contentsline {subsection}{\numberline {8.3.2}Stability Experiment Strategies}{62}{subsection.8.3.2}
+\contentsline {section}{\numberline {8.4}Strategies}{63}{section.8.4}
