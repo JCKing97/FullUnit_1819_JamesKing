@@ -69,33 +69,52 @@
 \contentsline {subsubsection}{Testing}{43}{section*.50}
 \contentsline {subsubsection}{Documentation}{44}{section*.51}
 \contentsline {subsubsection}{Agent Oriented Programming}{44}{section*.52}
-\contentsline {chapter}{\numberline {4}Experiment Evaluation}{45}{chapter.4}
-\contentsline {section}{\numberline {4.1}Introduction}{45}{section.4.1}
-\contentsline {section}{\numberline {4.2}Robustness}{45}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Evaluation: Evolution of Cooperation}{45}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Evaluation: Strategies}{46}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Evaluation: Trust Models and Gossip}{46}{subsection.4.2.3}
-\contentsline {section}{\numberline {4.3}Initial Viability}{47}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Evaluation}{47}{subsection.4.3.1}
-\contentsline {section}{\numberline {4.4}Stability}{47}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Evaluation: The Stability of Cooperation}{48}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Evaluation: Strategies}{48}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}Evaluation: Trust Models and Gossip}{48}{subsection.4.4.3}
-\contentsline {section}{\numberline {4.5}Discussion}{48}{section.4.5}
-\contentsline {chapter}{\numberline {5}Critical Analysis and Discussion}{49}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusions}{50}{chapter.6}
-\contentsline {chapter}{Bibliography}{54}{chapter*.53}
-\contentsline {chapter}{\numberline {7}Professional Issues}{55}{chapter.7}
-\contentsline {chapter}{\numberline {8}Appendix}{56}{chapter.8}
-\contentsline {section}{\numberline {8.1}Game Theory Background}{56}{section.8.1}
-\contentsline {subsection}{\numberline {8.1.1}Introduction}{56}{subsection.8.1.1}
-\contentsline {subsection}{\numberline {8.1.2}Kinship Theory}{56}{subsection.8.1.2}
-\contentsline {subsection}{\numberline {8.1.3}Network Reciprocity}{58}{subsection.8.1.3}
-\contentsline {subsection}{\numberline {8.1.4}Group Selection}{59}{subsection.8.1.4}
-\contentsline {subsection}{\numberline {8.1.5}Alternate Agent Architectures}{60}{subsection.8.1.5}
-\contentsline {section}{\numberline {8.2}Theoretical Framework}{60}{section.8.2}
-\contentsline {subsection}{\numberline {8.2.1}Environment Properties}{60}{subsection.8.2.1}
-\contentsline {section}{\numberline {8.3}Experiments}{61}{section.8.3}
-\contentsline {subsection}{\numberline {8.3.1}Robustness Experiments Population}{61}{subsection.8.3.1}
-\contentsline {subsection}{\numberline {8.3.2}Stability Experiment Strategies}{62}{subsection.8.3.2}
-\contentsline {section}{\numberline {8.4}Strategies}{63}{section.8.4}
+\contentsline {section}{\numberline {3.4}Running the Software}{44}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}AMAAS}{45}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}The Nature Engine}{45}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}The Multi-Agent System}{45}{subsection.3.4.3}
+\contentsline {chapter}{\numberline {4}Experiment Evaluation}{47}{chapter.4}
+\contentsline {section}{\numberline {4.1}Introduction}{47}{section.4.1}
+\contentsline {section}{\numberline {4.2}Robustness}{47}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Evaluation: Evolution of Cooperation}{47}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Evaluation: Strategies}{49}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Evaluation: Trust Models and Gossip}{49}{subsection.4.2.3}
+\contentsline {section}{\numberline {4.3}Stability}{49}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Strategies}{50}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Evaluation: The Stability of Cooperation}{50}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Evaluation: Trust Models and Gossip}{50}{subsection.4.3.3}
+\contentsline {section}{\numberline {4.4}Initial Viability}{50}{section.4.4}
+\contentsline {section}{\numberline {4.5}Discussion}{50}{section.4.5}
+\contentsline {chapter}{\numberline {5}Critical Analysis and Discussion}{51}{chapter.5}
+\contentsline {section}{\numberline {5.1}Introduction}{51}{section.5.1}
+\contentsline {section}{\numberline {5.2}Discovery}{51}{section.5.2}
+\contentsline {section}{\numberline {5.3}Theoretical Foundation}{52}{section.5.3}
+\contentsline {section}{\numberline {5.4}Implementation}{52}{section.5.4}
+\contentsline {section}{\numberline {5.5}Consolidation}{54}{section.5.5}
+\contentsline {section}{\numberline {5.6}Achievements}{54}{section.5.6}
+\contentsline {section}{\numberline {5.7}Project Process}{54}{section.5.7}
+\contentsline {section}{\numberline {5.8}Future Enhancements}{54}{section.5.8}
+\contentsline {chapter}{\numberline {6}Conclusions}{55}{chapter.6}
+\contentsline {chapter}{Bibliography}{60}{chapter*.54}
+\contentsline {chapter}{\numberline {7}Professional Issues}{61}{chapter.7}
+\contentsline {subsubsection}{Autonomous Agents and AI}{61}{section*.55}
+\contentsline {subsubsection}{Seed AI}{61}{section*.56}
+\contentsline {subsubsection}{Explainable AI}{61}{section*.57}
+\contentsline {subsubsection}{State Estimation}{62}{section*.58}
+\contentsline {subsubsection}{Utility Functions}{62}{section*.59}
+\contentsline {subsubsection}{Learning}{62}{section*.60}
+\contentsline {subsubsection}{Conclusion}{63}{section*.61}
+\contentsline {chapter}{\numberline {8}Appendix}{64}{chapter.8}
+\contentsline {section}{\numberline {8.1}Game Theory Background}{64}{section.8.1}
+\contentsline {subsection}{\numberline {8.1.1}Introduction}{64}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {8.1.2}Kinship Theory}{64}{subsection.8.1.2}
+\contentsline {subsection}{\numberline {8.1.3}Network Reciprocity}{66}{subsection.8.1.3}
+\contentsline {subsection}{\numberline {8.1.4}Group Selection}{67}{subsection.8.1.4}
+\contentsline {section}{\numberline {8.2}Theoretical Framework}{68}{section.8.2}
+\contentsline {subsection}{\numberline {8.2.1}Environment Properties}{68}{subsection.8.2.1}
+\contentsline {section}{\numberline {8.3}Experiments}{69}{section.8.3}
+\contentsline {subsection}{\numberline {8.3.1}Robustness Experiments Population}{69}{subsection.8.3.1}
+\contentsline {subsection}{\numberline {8.3.2}Stability Experiments Evaluation: Strategies}{70}{subsection.8.3.2}
+\contentsline {subsubsection}{Strategy 1: Standing Discriminator, Spread Accurate Negative, Trusting}{70}{section*.67}
+\contentsline {subsubsection}{Strategy 2: Standing Discriminator, Spread Accurate Positive, Distrusting}{70}{section*.70}
+\contentsline {section}{\numberline {8.4}Strategies}{73}{section.8.4}

@@ -21,10 +21,22 @@ Web application testing complete guide (how to test a website).
   2018.
 \newblock Accessed: 04/01/2019.
 
+\bibitem{abel2016reinforcement}
+David Abel, James MacGlashan, and Michael~L Littman.
+\newblock Reinforcement learning as a framework for ethical decision making.
+\newblock In {\em Workshops at the Thirtieth AAAI Conference on Artificial
+  Intelligence}, 2016.
+
 \bibitem{alexander1987biology}
 Richard Alexander.
 \newblock The biology of moral systems (foundations of human behavior).
 \newblock 1987.
+
+\bibitem{armstrong2015motivated}
+Stuart Armstrong.
+\newblock Motivated value selection for artificial agents.
+\newblock In {\em Workshops at the Twenty-Ninth AAAI Conference on Artificial
+  Intelligence}, 2015.
 
 \bibitem{artikis2009specifying}
 Alexander Artikis, Marek Sergot, and Jeremy Pitt.
@@ -50,6 +62,12 @@ Albert-L{\'a}szl{\'o} Barab{\'a}si and R{\'e}ka Albert.
 Roy~F Baumeister, Liqing Zhang, and Kathleen~D Vohs.
 \newblock Gossip as cultural learning.
 \newblock {\em Review of general psychology}, 8(2):111, 2004.
+
+\bibitem{bostrom2003ethical}
+Nick Bostrom.
+\newblock Ethical issues in advanced artificial intelligence.
+\newblock {\em Science Fiction and Philosophy: From Time Travel to
+  Superintelligence}, pages 277--284, 2003.
 
 \bibitem{bratman1987intention}
 Michael Bratman.
@@ -124,6 +142,12 @@ Michael~P Georgeff and Amy~L Lansky.
 \newblock Reactive reasoning and planning.
 \newblock In {\em AAAI}, volume~87, pages 677--682, 1987.
 
+\bibitem{good1966speculations}
+Irving~John Good.
+\newblock Speculations concerning the first ultraintelligent machine.
+\newblock In {\em Advances in computers}, volume~6, pages 31--88. Elsevier,
+  1966.
+
 \bibitem{darpaxai}
 Mr.~David Gunning.
 \newblock Explainable artificial intelligence.
@@ -165,6 +189,13 @@ Nicholas~R Jennings.
 \newblock Agent-oriented activity recognition in the event calculus: an
   application for diabetic patients.
 \newblock {\em Computational Intelligence}, 33:899--925, August 2017.
+
+\bibitem{khedher2009state}
+Atef Khedher, Kamel Benothman, Didier Maquin, and Mohamed Benrejeb.
+\newblock State and sensor faults estimation via a proportional integral
+  observer.
+\newblock In {\em 2009 6th International Multi-Conference on Systems, Signals
+  and Devices}, pages 1--6. IEEE, 2009.
 
 \bibitem{kowalski1989logic}
 Robert Kowalski and Marek Sergot.
@@ -214,10 +245,28 @@ Arjun Mani.
   \url{https://www.quora.com/What-is-the-prisoners-dilemma-in-laymans-terms-What-are-its-applications},
   September 2013.
 
+\bibitem{mill1987utilitarianism}
+John~Stuart Mill and Jeremy Bentham.
+\newblock {\em Utilitarianism and other essays}.
+\newblock Penguin UK, 1987.
+
 \bibitem{mitchell1998introduction}
 Melanie Mitchell.
 \newblock {\em An introduction to genetic algorithms}.
 \newblock MIT press, 1998.
+
+\bibitem{mnih2016asynchronous}
+Volodymyr Mnih, Adria~Puigdomenech Badia, Mehdi Mirza, Alex Graves, Timothy
+  Lillicrap, Tim Harley, David Silver, and Koray Kavukcuoglu.
+\newblock Asynchronous methods for deep reinforcement learning.
+\newblock In {\em International conference on machine learning}, pages
+  1928--1937, 2016.
+
+\bibitem{mnih2013playing}
+Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Alex Graves, Ioannis
+  Antonoglou, Daan Wierstra, and Martin Riedmiller.
+\newblock Playing atari with deep reinforcement learning.
+\newblock {\em arXiv preprint arXiv:1312.5602}, 2013.
 
 \bibitem{mui2002computational}
 Lik Mui.
@@ -272,6 +321,11 @@ Steve Phelps.
   in small groups.
 \newblock {\em Journal of Artificial Societies and Social Simulation}, 2016.
 
+\bibitem{popper1971open}
+Karl~Raimund Popper.
+\newblock {\em The open society and its enemies: The spell of Plato}, volume~1.
+\newblock Princeton University Press, 1971.
+
 \bibitem{rapoport1965prisoner}
 Anatol Rapoport, Albert~M Chammah, and Carol~J Orwant.
 \newblock {\em Prisoner's dilemma: A study in conflict and cooperation}, volume
@@ -289,6 +343,13 @@ Sebastian Rodriguez, Nicolas Gaud, and St{\'e}phane Galland.
 \newblock In {\em 2014 IEEE/WIC/ACM International Joint Conferences on Web
   Intelligence (WI) and Intelligent Agent Technologies (IAT)}, volume~3, pages
   103--110. IEEE, 2014.
+
+\bibitem{watsoncancer}
+Casey Ross.
+\newblock Ibm pitched its watson supercomputer as a revolution in cancer care.
+  it’s nowhere close.
+\newblock \url{https://www.statnews.com/2017/09/05/watson-ibm-cancer/}, 2017.
+\newblock Accessed: 25/03/2019.
 
 \bibitem{russell2011artificial}
 Stuart Russell and Peter Norvig.
@@ -326,6 +387,11 @@ Barry~G Silverman, Nancy Hanrahan, Gnana Bharathy, Kim Gordon, and Dan Johnson.
 Munindar~P Singh.
 \newblock Agent communication languages: Rethinking the principles.
 \newblock {\em Computer}, 31(12):40--47, 1998.
+
+\bibitem{smith2014ai}
+Aaron Smith and Janna Anderson.
+\newblock Ai, robotics, and the future of jobs.
+\newblock {\em Pew Research Center}, 6, 2014.
 
 \bibitem{gossip_alt}
 Ralf~D. Sommerfeld, Hans-J{\"u}rgen Krambeck, Dirk Semmann, and Manfred
@@ -366,6 +432,13 @@ Robert~L Trivers.
 \newblock The evolution of reciprocal altruism.
 \newblock {\em The Quarterly review of biology}, 46(1):35--57, 1971.
 
+\bibitem{vinge1993coming}
+Vernor Vinge.
+\newblock The coming technological singularity: How to survive in the
+  post-human era.
+\newblock {\em Science Fiction Criticism: An Anthology of Essential Writings},
+  pages 352--363, 1993.
+
 \bibitem{wooldridge2009introduction}
 Michael Wooldridge.
 \newblock {\em An introduction to multiagent systems}.
@@ -386,5 +459,11 @@ Sea~Turtle World.
 \newblock Green sea turtle cleaning station.
 \newblock
   \url{https://www.seaturtle-world.com/green_sea_turtle_cleaning_station/green_sea_turtle_cleaning_station_600/}.
+
+\bibitem{yudkowsky2001creating}
+Eliezer Yudkowsky.
+\newblock Creating friendly ai 1.0: The analysis and design of benevolent goal
+  architectures.
+\newblock {\em The Singularity Institute, San Francisco, USA}, 2001.
 
 \end{thebibliography}

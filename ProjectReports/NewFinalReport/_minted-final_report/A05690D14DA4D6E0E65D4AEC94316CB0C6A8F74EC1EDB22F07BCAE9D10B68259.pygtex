@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}
+  \PYG{n+nt}{\PYGZdq{}donor\PYGZus{}strategy\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}Veritability Discerner\PYGZdq{}}\PYG{p}{,}
+  \PYG{n+nt}{\PYGZdq{}non\PYGZus{}donor\PYGZus{}strategy\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}Lazy\PYGZdq{}}\PYG{p}{,}
+  \PYG{n+nt}{\PYGZdq{}trust\PYGZus{}model\PYGZdq{}}\PYG{p}{:} \PYG{l+s+s2}{\PYGZdq{}Balanced Reactor\PYGZdq{}}\PYG{p}{,}
+  \PYG{n+nt}{\PYGZdq{}options\PYGZdq{}}\PYG{p}{:} \PYG{p}{[}\PYG{l+m+mi}{5}\PYG{p}{],}
+  \PYG{n+nt}{\PYGZdq{}count\PYGZdq{}}\PYG{p}{:} \PYG{l+m+mi}{6}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
