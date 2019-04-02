@@ -1,0 +1,325 @@
+{
+    "experiment": {
+        "gen_length": 300,
+        "num_of_onlookers": 20,
+        "gen_num": 10
+    },
+    "coop_rate": 26,
+    "coop_rate_by_gen": {
+        "0": 82,
+        "1": 75,
+        "2": 52,
+        "3": 30,
+        "4": 18,
+        "5": 6,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    },
+    "social_activeness": 99,
+    "social_activeness_by_gen": {
+        "0": 94,
+        "1": 100,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 100,
+        "7": 100,
+        "8": 100,
+        "9": 100
+    },
+    "positivity_of_gossip_percentage": 46,
+    "positivity_of_gossip_percentage_by_gen": {
+        "0": 93,
+        "1": 77,
+        "2": 64,
+        "3": 55,
+        "4": 55,
+        "5": 39,
+        "6": 10,
+        "7": 19,
+        "8": 19,
+        "9": 29
+    },
+    "corrupted_observations": false,
+    "community_fitness": 1096,
+    "fitness_by_generation": {
+        "0": 303,
+        "1": 294,
+        "2": 215,
+        "3": 148,
+        "4": 100,
+        "5": 36,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    },
+    "populations": [
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Standing Discriminator",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Naive Trusting",
+                    "options": []
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 7
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Standing Discriminator",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Naive Trusting",
+                    "options": []
+                },
+                "count": 22
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 11
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 4
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Standing Discriminator",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Naive Trusting",
+                    "options": []
+                },
+                "count": 16
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Standing Discriminator",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Naive Trusting",
+                    "options": []
+                },
+                "count": 9
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 8
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 14
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Standing Discriminator",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Naive Trusting",
+                    "options": []
+                },
+                "count": 5
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 12
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 14
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 19
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Standing Discriminator",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Naive Trusting",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 10
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 28
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 3
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 6
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 6
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 22
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 9
+            }
+        ]
+    ]
+}

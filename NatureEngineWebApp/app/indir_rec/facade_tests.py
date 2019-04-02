@@ -14,9 +14,11 @@ from .strategy_logic import Strategy
 
 
 class FacadeTests(unittest.TestCase):
+    """Test the Results and ReputationGame classes"""
 
     @classmethod
     def setUpClass(cls):
+        # Build the first generation of strategies for all tests
         response = requests.get('http://127.0.0.1:8080/strategy')
         cls.received_strategies = response.json()['strategies']
         cls.strat_count = 0
@@ -31,11 +33,13 @@ class FacadeTests(unittest.TestCase):
                                                     strategy['trust_model'], strategy['options']))
             cls.strat_count += count
         cls.pp = pprint.PrettyPrinter()
+        # Create the relevant parameters for the reputation game that is run
         cls.num_of_onlookers = random.randint(1, 10)
         cls.num_of_generations = random.randint(3, 5)
         cls.length_of_generations = random.randint(6, 10)
         cls.mutation_chance = random.random()
         print(cls.strategies)
+        # Create and run the reputation game and get the results
         cls.reputation_game: ReputationGame = ReputationGame(cls.strategies, cls.num_of_onlookers,
                                                              cls.num_of_generations, cls.length_of_generations,
                                                              cls.mutation_chance)
@@ -50,6 +54,7 @@ class FacadeTests(unittest.TestCase):
         self.app_context.push()
 
     def test_corruption(self):
+        # Test that results aren't corrupted
         self.assertEqual(False, self.results.corrupted_observations, "Observations should not have corrupted "
                                                                      "when running")
 
@@ -131,6 +136,7 @@ class FacadeTests(unittest.TestCase):
                                     "An agent should carry out one action for each timepoint in their generation")
 
     def test_interactions_by_generation(self):
+        # Test there are the correct amount of interactions at each timepoint for each generation
         interactions_by_generation = self.results.interactions_by_generation
         generations = self.results.generations
         for generation in generations:
@@ -142,10 +148,12 @@ class FacadeTests(unittest.TestCase):
                                 "There should be 1 interaction per timepoint")
 
     def test_cooperation_rate(self):
+        # Test that the cooperation rate is a percentage
         self.assertLessEqual(self.results.cooperation_rate, 100, "Should be a percentage therefore le 100")
         self.assertGreaterEqual(self.results.cooperation_rate, 0, "Should be a percentage therefore ge 0")
 
     def test_cooperation_rate_by_generation(self):
+        # Check that the cooperation rate of each generation is a percentage
         generations = self.results.generations
         cooperation_rate_by_gen = self.results.cooperation_rate_by_generation
         self.assertEqual(self.num_of_generations, len(cooperation_rate_by_gen))
@@ -154,6 +162,7 @@ class FacadeTests(unittest.TestCase):
             self.assertGreaterEqual(cooperation_rate_by_gen[generation], 0, "Should be a percentage therefore ge 0")
 
     def test_cooperation_rate_by_gen_and_player(self):
+        # Check that the cooperation rate for each player is a percentage
         generations = self.results.generations
         players = self.results.players
         cooperation_rate_by_gen_and_player = self.results.cooperation_rate_by_generation_and_player
@@ -167,10 +176,12 @@ class FacadeTests(unittest.TestCase):
                                             "Should be a percentage therefore ge 0")
 
     def test_social_activeness(self):
+        # Check that the social activeness is a percentage
         self.assertLessEqual(self.results.social_activeness, 100, "Should be a percentage therefore le 100")
         self.assertGreaterEqual(self.results.social_activeness, 0, "Should be a percentage therefore ge 0")
 
     def test_social_activeness_by_gen(self):
+        # Check that the social activeness of each generation is a percentage and that each generation has a rating
         generations = self.results.generations
         social_activeness_by_gen = self.results.social_activeness_by_generation
         self.assertEqual(self.num_of_generations, len(social_activeness_by_gen))
@@ -179,6 +190,7 @@ class FacadeTests(unittest.TestCase):
             self.assertGreaterEqual(social_activeness_by_gen[generation], 0, "Should be a percentage therefore ge 0")
 
     def test_social_activeness_by_gen_and_player(self):
+        # Check that the social activeness of each player is a percentage and that each player has a rating
         generations = self.results.generations
         players = self.results.players
         social_activeness_by_gen_and_player = self.results.social_activeness_by_generation_and_player
@@ -191,12 +203,14 @@ class FacadeTests(unittest.TestCase):
                                         "Should be a percentage therefore ge 0")
 
     def test_positivity_of_gossip(self):
+        # Check that the positivity of the gossip in the community is a percentage
         self.assertLessEqual(self.results.positivity_of_gossip_percentage, 100,
                              "Should be a percentage therefore le 100")
         self.assertGreaterEqual(self.results.positivity_of_gossip_percentage, 0,
                                 "Should be a percentage therefore ge 0")
 
     def test_positivity_of_gossip_percentage_by_gen(self):
+        # Check that the positivity of gossip for each generation is a percentage and that each generation has a rating
         generations = self.results.generations
         positivity_of_gossip_percentage_by_gen = self.results.positivity_of_gossip_percentage_by_generation
         self.assertEqual(self.num_of_generations, len(positivity_of_gossip_percentage_by_gen))
@@ -207,6 +221,7 @@ class FacadeTests(unittest.TestCase):
                                     "Should be a percentage therefore ge 0")
 
     def test_positivity_of_gossip_percentage_by_gen_and_player(self):
+        # Check that the positivity of gossip for each player is a percentage and that each player has a rating
         generations = self.results.generations
         players = self.results.players
         positivity_of_gossip_percentage_by_gen_and_player = \
@@ -221,9 +236,12 @@ class FacadeTests(unittest.TestCase):
                                             "Should be a percentage therefore ge 0")
 
     def test_community_fitness(self):
+        # Check that the summation of all players fitness is positive
         self.assertGreaterEqual(self.results.community_fitness, 0, "Community fitness should be positive")
 
     def test_fitness_by_gen(self):
+        # Check that the summation of all players fitness for each generation is positive
+        # Check that the summation of all generations fitness is the same as the community fitness
         fitness_total = 0
         generations = self.results.generations
         fitness_by_gen = self.results.fitness_by_generation
@@ -234,6 +252,9 @@ class FacadeTests(unittest.TestCase):
                          "The total of the fitness of each generation should add up to the overall community fitness")
 
     def test_fitness_by_gen_and_player(self):
+        # Check that the fitness for each player is positive
+        # Check that the summation of all players fitness is the same as the community fitness
+        # Check that the summation of all players for a generation has the same fitness as the fitness of that gen
         fitness_total = 0
         fitness_by_gen = self.results.fitness_by_generation
         fitness_by_gen_and_players = self.results.fitness_by_generation_and_player
@@ -254,6 +275,8 @@ class FacadeTests(unittest.TestCase):
                          "The total of the fitness of each generation should add up to the overall community fitness")
 
     def test_populations(self):
+        # Test getting the population for each generation, that there are the same amount of players for each generation
+        # Check that strategies in teh community correspond to those in the agents service
         generations = self.results.generations
         populations = self.results.populations
         print(populations)
@@ -268,27 +291,10 @@ class FacadeTests(unittest.TestCase):
                 print(this_strat_count)
                 self.assertGreaterEqual(this_strat_count, 0, "Should be greater than 1 of each strategy")
                 strat_count += this_strat_count
-                self.assertTrue(strategy in self.type_strategies, "Should correspond to a strategy in the agents service")
+                self.assertTrue(strategy in self.type_strategies, "Should correspond to a strategy in the agents"
+                                                                  " service")
             self.assertEqual(self.strat_count, strat_count, "Should be the same amount of players for each generation")
 
-    def test_id_to_strat_map(self):
-        generations = self.results.generations
-        players = self.results.players
-        populations = self.results.populations
-        id_to_strat_map = self.results.id_to_strategy_map
-        self.pp.pprint(id_to_strat_map)
-        # id_to_populations_community = {}
-        # for generation in generations:
-        #     ids_to_population_generation = []
-        #     for player in players[generation]:
-        #         found_strategy = False
-        #         for strategy in ids_to_population_generation:
-        #             if strategy['strategy'] == id_to_strat_map[player]:
-        #                 found_strategy = True
-        #                 strategy['count'] += 1
-        #         if not found_strategy:
-        #         ids_to_population_generation = {'strategy': }
-        #     id_to_populations_community[generation] = ids_to_population_generation
 
 
 

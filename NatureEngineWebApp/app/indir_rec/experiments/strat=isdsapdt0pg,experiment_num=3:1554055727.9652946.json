@@ -1,0 +1,451 @@
+{
+    "experiment": {
+        "gen_length": 300,
+        "num_of_onlookers": 5,
+        "gen_num": 10
+    },
+    "coop_rate": 40,
+    "coop_rate_by_gen": {
+        "0": 81,
+        "1": 75,
+        "2": 63,
+        "3": 59,
+        "4": 41,
+        "5": 33,
+        "6": 34,
+        "7": 11,
+        "8": 4,
+        "9": 0
+    },
+    "social_activeness": 77,
+    "social_activeness_by_gen": {
+        "0": 94,
+        "1": 90,
+        "2": 84,
+        "3": 87,
+        "4": 84,
+        "5": 84,
+        "6": 84,
+        "7": 77,
+        "8": 52,
+        "9": 35
+    },
+    "positivity_of_gossip_percentage": 73,
+    "positivity_of_gossip_percentage_by_gen": {
+        "0": 93,
+        "1": 86,
+        "2": 81,
+        "3": 74,
+        "4": 58,
+        "5": 61,
+        "6": 65,
+        "7": 42,
+        "8": 81,
+        "9": 100
+    },
+    "corrupted_observations": false,
+    "community_fitness": 1620,
+    "fitness_by_generation": {
+        "0": 301,
+        "1": 284,
+        "2": 247,
+        "3": 240,
+        "4": 171,
+        "5": 153,
+        "6": 142,
+        "7": 58,
+        "8": 24,
+        "9": 0
+    },
+    "populations": [
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Spread Accurate Positive",
+                    "trust_model": "Distrusting",
+                    "options": [
+                        0,
+                        "Personal Grievance"
+                    ]
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Spread Accurate Positive",
+                    "trust_model": "Distrusting",
+                    "options": [
+                        0,
+                        "Personal Grievance"
+                    ]
+                },
+                "count": 23
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 4
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 1
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 3
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Spread Accurate Positive",
+                    "trust_model": "Distrusting",
+                    "options": [
+                        0,
+                        "Personal Grievance"
+                    ]
+                },
+                "count": 20
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 5
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 5
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 1
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Spread Accurate Positive",
+                    "trust_model": "Distrusting",
+                    "options": [
+                        0,
+                        "Personal Grievance"
+                    ]
+                },
+                "count": 18
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 4
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 7
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 11
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Spread Accurate Positive",
+                    "trust_model": "Distrusting",
+                    "options": [
+                        0,
+                        "Personal Grievance"
+                    ]
+                },
+                "count": 13
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 5
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 10
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 5
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 5
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Spread Accurate Positive",
+                    "trust_model": "Distrusting",
+                    "options": [
+                        0,
+                        "Personal Grievance"
+                    ]
+                },
+                "count": 11
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Spread Accurate Positive",
+                    "trust_model": "Distrusting",
+                    "options": [
+                        0,
+                        "Personal Grievance"
+                    ]
+                },
+                "count": 10
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 5
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 9
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 7
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 7
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 14
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 6
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Spread Accurate Positive",
+                    "trust_model": "Distrusting",
+                    "options": [
+                        0,
+                        "Personal Grievance"
+                    ]
+                },
+                "count": 4
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 12
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 15
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Spread Accurate Positive",
+                    "trust_model": "Distrusting",
+                    "options": [
+                        0,
+                        "Personal Grievance"
+                    ]
+                },
+                "count": 1
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 3
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 20
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 11
+            }
+        ]
+    ]
+}

@@ -1,0 +1,318 @@
+{
+    "experiment": {
+        "gen_length": 100,
+        "num_of_onlookers": 5,
+        "gen_num": 10
+    },
+    "coop_rate": 67,
+    "coop_rate_by_gen": {
+        "0": 83,
+        "1": 76,
+        "2": 79,
+        "3": 97,
+        "4": 89,
+        "5": 74,
+        "6": 58,
+        "7": 62,
+        "8": 33,
+        "9": 21
+    },
+    "social_activeness": 32,
+    "social_activeness_by_gen": {
+        "0": 13,
+        "1": 16,
+        "2": 19,
+        "3": 7,
+        "4": 10,
+        "5": 26,
+        "6": 39,
+        "7": 45,
+        "8": 64,
+        "9": 81
+    },
+    "positivity_of_gossip_percentage": 97,
+    "positivity_of_gossip_percentage_by_gen": {
+        "0": 50,
+        "1": 80,
+        "2": 100,
+        "3": 100,
+        "4": 100,
+        "5": 100,
+        "6": 100,
+        "7": 100,
+        "8": 100,
+        "9": 100
+    },
+    "corrupted_observations": false,
+    "community_fitness": 983,
+    "fitness_by_generation": {
+        "0": 118,
+        "1": 110,
+        "2": 116,
+        "3": 137,
+        "4": 118,
+        "5": 104,
+        "6": 86,
+        "7": 98,
+        "8": 58,
+        "9": 38
+    },
+    "populations": [
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Trusting",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 4
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Trusting",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 1
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 1
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Trusting",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 6
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Trusting",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 29
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Trusting",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 28
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 3
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Trusting",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 23
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 8
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 12
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Trusting",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 19
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Trusting",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 17
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 14
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Trusting",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 11
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 20
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Image Scoring Discriminator",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Trusting",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 6
+            }
+        ]
+    ]
+}

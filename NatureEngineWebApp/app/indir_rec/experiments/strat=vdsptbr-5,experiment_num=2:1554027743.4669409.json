@@ -1,0 +1,321 @@
+{
+    "experiment": {
+        "gen_length": 100,
+        "num_of_onlookers": 20,
+        "gen_num": 10
+    },
+    "coop_rate": 36,
+    "coop_rate_by_gen": {
+        "0": 79,
+        "1": 74,
+        "2": 55,
+        "3": 67,
+        "4": 48,
+        "5": 22,
+        "6": 10,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    },
+    "social_activeness": 86,
+    "social_activeness_by_gen": {
+        "0": 94,
+        "1": 90,
+        "2": 87,
+        "3": 81,
+        "4": 78,
+        "5": 65,
+        "6": 71,
+        "7": 100,
+        "8": 100,
+        "9": 100
+    },
+    "positivity_of_gossip_percentage": 42,
+    "positivity_of_gossip_percentage_by_gen": {
+        "0": 93,
+        "1": 86,
+        "2": 67,
+        "3": 76,
+        "4": 62,
+        "5": 40,
+        "6": 9,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    },
+    "corrupted_observations": false,
+    "community_fitness": 556,
+    "fitness_by_generation": {
+        "0": 108,
+        "1": 108,
+        "2": 91,
+        "3": 110,
+        "4": 78,
+        "5": 41,
+        "6": 20,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    },
+    "populations": [
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Spread Positive Trusted",
+                    "trust_model": "Balanced Reactor",
+                    "options": [
+                        -5
+                    ]
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Spread Positive Trusted",
+                    "trust_model": "Balanced Reactor",
+                    "options": [
+                        -5
+                    ]
+                },
+                "count": 24
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 4
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 3
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Spread Positive Trusted",
+                    "trust_model": "Balanced Reactor",
+                    "options": [
+                        -5
+                    ]
+                },
+                "count": 18
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 9
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 4
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Spread Positive Trusted",
+                    "trust_model": "Balanced Reactor",
+                    "options": [
+                        -5
+                    ]
+                },
+                "count": 19
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 6
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 6
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 7
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Spread Positive Trusted",
+                    "trust_model": "Balanced Reactor",
+                    "options": [
+                        -5
+                    ]
+                },
+                "count": 15
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 9
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 12
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 11
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Spread Positive Trusted",
+                    "trust_model": "Balanced Reactor",
+                    "options": [
+                        -5
+                    ]
+                },
+                "count": 8
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 20
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 9
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Spread Positive Trusted",
+                    "trust_model": "Balanced Reactor",
+                    "options": [
+                        -5
+                    ]
+                },
+                "count": 2
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 31
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 31
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 31
+            }
+        ]
+    ]
+}

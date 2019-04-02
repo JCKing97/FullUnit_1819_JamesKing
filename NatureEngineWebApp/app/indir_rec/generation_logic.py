@@ -2,7 +2,7 @@
 managing actions, percepts and players"""
 
 import requests
-from typing import Dict, List
+from typing import Dict, List, NoReturn
 from .player_logic import Player, PlayerCreationException, DecisionException, PerceptionException
 from .action_logic import Action, ActionType, GossipAction, InteractionAction
 from .observation_logic import Observer
@@ -54,6 +54,7 @@ class Generation:
         :param num_of_onlookers: The number of onlookers for each action in this generation
         :type num_of_onlookers: int
         """
+        # There should be a positive amount of timepoints in a generation that is greater than 1
         if start_point >= end_point:
             raise GenerationCreationException("start point >= end point")
         self._generation_id: int = generation_id
@@ -62,12 +63,14 @@ class Generation:
         self._end_point: int = end_point
         self._num_of_onlookers = num_of_onlookers
         self._strategies: Dict[Strategy, int] = {}
+        # Create the generation in the agents service, throw exception if fails to
         creation_response = requests.request("POST", Config.AGENTS_URL + 'generation',
                                              json={"community": community_id, "generation": generation_id})
         if creation_response.status_code != 200:
             raise GenerationCreationException("bad status code: " + str(creation_response.status_code))
         if not creation_response.json()['success']:
             raise GenerationCreationException(creation_response.json()['message'])
+        # Create the players for the generation, and attach the relevant observers
         self._players: List[Player] = []
         self._id_player_map: Dict[int, Player] = {}
         player_id = 0
@@ -92,7 +95,7 @@ class Generation:
             raise GenerationCreationException("Incorrect strategies dictionary keys")
 
     @property
-    def id(self):
+    def id(self) -> int:
         """
         Get the id of this generation
         :return: The id of this generation
@@ -100,7 +103,7 @@ class Generation:
         """
         return self._generation_id
 
-    def get_start_point(self):
+    def get_start_point(self) -> int:
         """
         Get the start timepoint of this generation
         :return: The start timepoint of this generation
@@ -108,7 +111,7 @@ class Generation:
         """
         return self._start_point
 
-    def get_end_point(self):
+    def get_end_point(self) -> int:
         """
         Get the end timepoint of this generation
         :return: The end timepoint of this generation
@@ -132,16 +135,19 @@ class Generation:
         """
         return self._strategies
 
-    def simulate(self):
+    def simulate(self) -> NoReturn:
         """
         Run the cycle steps: perceive, decide, execute between the start and end points of this generation
-        :return: void
+        :return: NoReturn
         """
         for timepoint in range(self._start_point, self._end_point):
+            # Send percepts to the donor and recipient of this timepoint
             try:
                 self._set_and_send_donor_recipient_pair(timepoint)
             except SimulationException as e:
                 raise e
+            # Run a synchronised version of the perceive, decide, execute cycle
+            # Synchronised due to the way percepts are created from actions for the next timepoint
             for player in self._players:
                 try:
                     player.perceive(timepoint)
@@ -153,19 +159,21 @@ class Generation:
                 except DecisionException as e:
                     raise SimulationException("Error in player decision: " + str(e))
 
-    def _set_and_send_donor_recipient_pair(self, timepoint: int):
+    def _set_and_send_donor_recipient_pair(self, timepoint: int) -> NoReturn:
         """
         Decides on a donor-recipient pair for this timepoint and sends the percept to the agents service
         :param timepoint: The timepoint to set the pair for
         :type timepoint: int
-        :return: void
+        :return: NoReturn
         """
+        # Generate the percepts
         players = copy.deepcopy(self._players)
         donor: Player = random.choice(players)
         players.remove(donor)
         recipient: Player = random.choice(players)
         interaction_payload = {'donor': donor.id, 'recipient': recipient.id, 'timepoint': timepoint,
                                'community': self._community_id, 'generation': self._generation_id}
+        # Send them
         interaction_response = requests.request("POST", Config.AGENTS_URL + 'percept/interaction',
                                                 json=interaction_payload)
         if interaction_response.status_code != 200:
@@ -174,12 +182,13 @@ class Generation:
         if not interaction_response.json()['success']:
             raise SimulationException(interaction_response.json()['message'])
 
-    def _execute(self, action: Action, timepoint: int):
+    def _execute(self, action: Action, timepoint: int) -> NoReturn:
         """
         Execute the actions at this given timepoint, setting percepts for the players where necessary
         and updating players fitness
         :param action: The action to process
-        :type action: Dict
+        :type action: Action
+        :return: NoReturn
         """
         # Process gossip action into a percept
         if action.type is ActionType.GOSSIP:
@@ -195,7 +204,6 @@ class Generation:
             self._id_player_map[interaction_action.recipient].update_fitness(interaction_action.action.value['recipient_gain'])
             onlookers = self._generate_onlookers(interaction_action)
             action.onlookers = onlookers
-            print("onlookers: " + str(onlookers))
             for onlooker in onlookers:
                 action_percept = {'type': interaction_action.type.value['percept_link'],
                                   'action': interaction_action.action.value['string'], 'perceiver': onlooker,
@@ -207,23 +215,24 @@ class Generation:
         """
         Generate onlookers for an action including the donor and recipient
         :param action: The action to generate onlookers for
-        :type action: Dict
-        :return: A list of onlookers including the donor and recipient
-        :rtype: List[Player]
+        :type action: InteractionAction
+        :return: A list of onlooker ids including the donor and recipient
+        :rtype: List[int]
         """
         onlookers: List[int] = []
         possible_onlookers = copy.deepcopy(self._players)
+        # Add donor and recipient to the onlookers and remove them from being added again
         onlookers.extend([action.donor, action.recipient])
         for onlooker_choice in possible_onlookers:
             if onlooker_choice.id == action.donor or onlooker_choice.id == action.recipient:
                 possible_onlookers.remove(onlooker_choice)
+        # Add a random sample of other onlookers
         deep_copy_onlookers = []
         if self._num_of_onlookers <= len(possible_onlookers):
             deep_copy_onlookers.extend(random.sample(possible_onlookers, self._num_of_onlookers))
         else:
             deep_copy_onlookers.extend(random.sample(possible_onlookers, len(possible_onlookers)))
         for onlooker in deep_copy_onlookers:
-            print(onlooker)
             onlookers.append(onlooker.id)
         return onlookers
 

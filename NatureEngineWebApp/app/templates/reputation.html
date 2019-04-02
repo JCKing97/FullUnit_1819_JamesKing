@@ -1,25 +1,31 @@
 {% extends "base.html" %}
 
+{# The template to set up reputation games #}
 {% block app_content %}
+    {# Header and description #}
     <div class="jumbotron" style="padding: 20px">
         <h1>Reputation Game</h1>
         <p>
             Select the population of the first generation using the form below and set the parameters as you wish for the game.
             After each generation the population will be altered based on the fitness of each player.
             Games with more and longer generations and with more players will take longer to run and may timeout if they take too long.
-            The first property of the image scoring discriminator is the value K that the player will use to decide whether to cooperate or not (the higher the less likely they are to cooperate).
+            The first option of the Image Scoring Discriminator and Veritability Discerner is the value K that the player will use to decide whether
+            to cooperate or not (the higher the less likely they are to cooperate).
         </p>
     </div>
 
+    {# A div to include the react form for selecting agents #}
     <div class="container">
         <div id="select_agents"></div>
         <hr />
+        {# Give a description of the strategies #}
         <div class="row">
             {% include "_indir_rec_strategies_description.html" %}
         </div>
     </div>
 {% endblock %}
 
+{# The script to display and process the react form to select agents #}
 {% block scripts %}
     {{ super() }}
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -29,6 +35,8 @@
     <script type="text/babel">
 
 
+        // The high level component for the react form
+        // Form fields to pass parameters to run the game
         class SelectAgents extends React.Component{
             constructor(props){
                 super(props);
@@ -49,6 +57,7 @@
                 this.handleLabelChange = this.handleLabelChange.bind(this);
             }
 
+            // Add a strategy to the list of selected strategies, or increment the amount of them
             add = (donor_strategy, non_donor_strategy, trust_model, options) => {
                 const { players } = this.state;
                 // Check the count of the players added so far
@@ -80,6 +89,7 @@
                 }
             };
 
+            // Remove 1 of the passed strategy from the selected list
             remove = (donor_strategy, non_donor_strategy, trust_model, options) => {
                 const { players } = this.state;
                 // Find if their is an instance of this strategy in the list
@@ -105,6 +115,7 @@
                 }
             };
 
+            // Handle submission of the form to the server with client side validation
             handleSubmit = () => {
                 const { players } = this.state;
                 // Check the count of the players added so far
@@ -130,6 +141,7 @@
                 }
             };
 
+            // Handle changes in form fields, changing the state of the params
             handleOnlookerChange(event) {
                 this.setState({num_of_onlookers:event.target.value})
             };
@@ -146,6 +158,7 @@
                 this.setState({mutation_chance:event.target.value})
             };
 
+            // Only change the label if the user is registered
             handleLabelChange(event){
                 {% if current_user.is_authenticated %}
                     this.setState({label:event.target.value});
@@ -154,13 +167,14 @@
                 {% endif %}
             };
 
+            //  Render the form with parameter fields and the possible strategies to select and those selected
             render(){
                 return(
                     <div>
                         <form>
                             <label>Number of onlookers for each interaction: <input onChange={this.handleOnlookerChange} value={this.state.num_of_onlookers} type="number" min="0"/></label><br/>
                             <label>Number of generations: <input onChange={this.handleNumOfGenChange} value={ this.state.num_of_generations } type="number" min="3" max="20"/></label><br/>
-                            <label>Length of generation (timepoints): <input onChange={this.handleLenOfGenChange} value={this.state.length_of_generations} type="number" min="6" max="200"/></label><br/>
+                            <label>Length of generation (timepoints): <input onChange={this.handleLenOfGenChange} value={this.state.length_of_generations} type="number" min="6" max="1200"/></label><br/>
                             <label>Chance of mutation in offspring (between 0 and 1): <input onChange={this.handleMutationChange} value={this.state.mutation_chance} type="number" min="0" max="1" step="0.01"/></label><br/>
                             {% if current_user.is_authenticated %}
                                 <label>Label to attach to the experiment: <input onChange={this.handleLabelChange} value={this.state.label} type="text"/></label><br/>
@@ -180,6 +194,7 @@
             }
         }
 
+        // The component of a list of selected players with their fields and a button to remove them from the list
         class SelectedPlayersList extends React.Component {
             state = {};
 
@@ -202,6 +217,7 @@
             }
         }
 
+        // Display the properties (options) of a strategy
         function displayProperty(value, propertyIndex, propertyArray){
             if (propertyIndex >= propertyArray.length-1) {
                 return value;
@@ -211,6 +227,7 @@
             }
         }
 
+        // A singular strategy that has been selected
         class SelectedPlayer extends React.Component {
             state = {
                 donor_strategy: this.props.donor_strategy,
@@ -266,6 +283,7 @@
             }
         }
 
+        // A selectable strategy and it's button to select
         class Strategy extends React.Component {
             state = {
                 donor_strategy: this.props.donor_strategy,
@@ -297,6 +315,7 @@
             }
         }
 
+        // Render the form
         ReactDOM.render(
             <SelectAgents/>,
             document.getElementById('select_agents')

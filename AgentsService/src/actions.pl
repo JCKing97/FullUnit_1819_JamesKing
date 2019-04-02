@@ -368,6 +368,8 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, Action):-
 	random_element(SelfPromotionCapabilities, SelectedAction),
 	put_dict(reason, SelectedAction, "I promote myself because I want to encourage others to cooperate with me", Action), !.
 
+% If the agent is not a donor and is using the spead Accurate positive non-donor-strategy, 
+% spread positive gossip about agents with an image score of greater than or equal to K
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: gossip, value: positive, about: GoodAgent, recipient: RecipientID,
 	reason: "I believe the agent this gossip is about is good and want to spread that belief to other agents I believe are good"}):-
 	community(CommunityID),
@@ -392,6 +394,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: g
 	delete(GoodAgents, GoodAgent, OtherGoodAgents),
 	random_element(OtherGoodAgents, RecipientID).
 
+% If there are no two agents known to the agent with an image score greater than or equal to K, be idle
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type:idle,
  reason: "I know no two good agents to be the recipient and the target of positive gossip"}):-
 	community(CommunityID),
@@ -399,6 +402,8 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type:id
 	agent(strategy("Image Scoring Discriminator", "Spread Accurate Positive", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	\+capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: _, recipient: _, reason: _}), !.
 
+% If the agent is not a donor and is using the spead Accurate negative non-donor-strategy, 
+% spread negative gossip to agents with an image score of greater than or equal to K, about agents with an image score less than K
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: gossip, value: negative, about: BadAgent, recipient: RecipientID,
  reason: "I believe the agent the gossip is about to have a bad image, I am warning those I believe are good"}):-
 	community(CommunityID),
@@ -434,6 +439,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: g
 	is_empty(BadAgents, false), is_empty(GoodAgents, false),
 	random_element(BadAgents, BadAgent),random_element(GoodAgents, RecipientID), !.
 
+% If there are no agents with an image score greater than or equal to K, be idle and give correct reason
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type:idle,
  reason: "I know of no agents with good standing to warn of the agents with bad standing"}):-
 	community(CommunityID),
@@ -454,6 +460,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type:id
 		GoodAgents
 	), is_empty(GoodAgents, true), !.
 
+% If there are no agents with an image score less than  K, be idle and give correct reason
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type:idle,
  reason: "I know of no agents with bad standing to warn others about"}):-
 	community(CommunityID),
@@ -478,6 +485,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type:id
 -------- Veritability Discerner --------
 --------------------------------------*/
 
+% If the agent is a donor and the agent trusts (according to the veritability discerners rules for trust) the recipient, cooperate
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: action, value: Action, recipient: RecipientID, reason: Reason}):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
@@ -486,30 +494,35 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: a
 	trusted(agent(strategy("Veritability Discerner", _, _, _, [K]), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID), Timepoint),
 	Action=cooperate, !,
+	% Give correct reason
 	(holds_at(percept_count(agent(strategy("Veritability Discerner", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=_, Timepoint) ->
 			Reason="The recipient has generally acted in a good manner" ;
 			Reason="I don't know anything about the recipient, but I am giving them a chance"
 	).
 
+% If the agent is a donor and the agent doesn't trust (according to the veritability discerners rules for trust) the recipient, defect
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: action, value: Action, recipient: RecipientID, reason: Reason}):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
 	agent(strategy("Veritability Discerner", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: action, value: cooperate, recipient: RecipientID, reason: _}),
 	Action=defect, !,
+	% Give correct reason
 	( holds_at(percept_count(agent(strategy("Veritability Discerner", _, _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 		agent(_, community(CommunityID), generation(community(CommunityID), GenerationID), RecipientID))=_, Timepoint) ->
 			Reason="The recipient's actions haven't been worthy of cooperation" ;
 		 	Reason="I don't know anything about the recipient, so I will protect myself and defect"
 	).
 
+% If the agent is not a donor and uses the lazy non-donor-strategy be idle
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: idle, reason: "I only act when I have to"}):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
 	agent(strategy("Veritability Discerner", "Lazy", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID),
 	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: idle, reason: _}), !.
 	
+% If the agent is not a donor and uses the promote self non-donor-strategy, promote themself to anyone
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, Action):-
 	community(CommunityID),
 	generation(community(CommunityID), GenerationID),
@@ -520,6 +533,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, Action):-
 	random_element(SelfPromotionCapabilities, SelectedAction),
 	put_dict(reason, SelectedAction, "I promote myself because I want to encourage others to cooperate with me", Action), !.
 
+% Make a list of trusted and not trusted agents from a list of agents and the perceiver who may or may not trust them
 filter_trusted_agents([], _, [], [], _).
 filter_trusted_agents([Agent|OtherAgents], Perceiver, TrustedAgents, UntrustedAgents, Timepoint):-
 	filter_trusted_agents(OtherAgents, Perceiver, OtherTrustedAgents, OtherUntrustedAgents, Timepoint),
@@ -527,6 +541,7 @@ filter_trusted_agents([Agent|OtherAgents], Perceiver, TrustedAgents, UntrustedAg
 		( append([Agent], OtherTrustedAgents, TrustedAgents), UntrustedAgents=OtherUntrustedAgents );
 		( append([Agent], OtherUntrustedAgents, UntrustedAgents), TrustedAgents=OtherTrustedAgents )).
 
+% If the agent is not a donor and uses the spread positive trusted non-donor-strategy, spread positive gossip about trusted agents to trusted agents
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: gossip, value: positive, about: TrustedAgentID, recipient: RecipientID,
 	reason: "I believe the agent this gossip is about is trustworthy and want to spread that belief to other agents I believe are trustworthy"}):-
 	community(CommunityID),
@@ -549,6 +564,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: g
 	random_element(OtherTrustedAgents, Recipient),
 	Recipient=agent(_, _, _, RecipientID).
 
+% If the agent is not a donor and uses the spread postiive trusted non-donor-strategy, but doesn't know enough agents to gossip too and about be idle
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: idle,
 	reason: "I know no two trustworthy agents to spread positive gossip to and about."}):-
 	community(CommunityID),
@@ -556,6 +572,8 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: i
 	capable(Timepoint, CommunityID, GenerationID, AgentID, action{type: idle, reason: _}),
 	agent(strategy("Veritability Discerner", "Spread Positive Trusted", _, _, _), community(CommunityID), generation(community(CommunityID), GenerationID), AgentID), !.
 
+% If the agent is not a donor and uses the spread negative untrusted non-donor-strategy, spread negative gossip about untrusted agents 
+% to trusted agents 
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: gossip, value: negative, about: UnrustedAgentID, recipient: TrustedAgentID,
 	reason: "I believe the agent this gossip is about is untrustworthy and want to warn agents I believe are trustworthy"}):-
 	community(CommunityID),
@@ -578,6 +596,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: g
 	random_element(UntrustedAgents, UntrustedAgent), 
 	UntrustedAgent=agent(_, _, _, UnrustedAgentID), !.
 
+% If the agent is not a donor and uses the spread negative untrusted non-donor-strategy, but knows no agents it neither trusts nor distrusts, be idle
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: idle,
 	reason: "I do not know any trustworthy or untrustworthy agents to gossip to or about"}):-
 	community(CommunityID),
@@ -596,6 +615,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: i
 	is_empty(TrustedAgents, true),
 	is_empty(UntrustedAgents, true), !.
 
+% If the agent is not a donor and uses the spread negative untrusted non-donor-strategy, but trusts no one be idle
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: idle,
 	reason: "I do not know any trustworthy agents to warn about untrustworthy agents"}):-
 	community(CommunityID),
@@ -613,6 +633,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: i
 		TrustedAgents, _, Timepoint),
 	is_empty(TrustedAgents, true), !.
 
+% If the agent is not a donor and uses the spread negative untrusted non-donor-strategy, but trusts all agents it knows, be idle
 agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: idle,
 	reason: "I do not know any untrustworthy agents to warn trustworthy agents about"}):-
 	community(CommunityID),
@@ -637,6 +658,7 @@ agent_action(Timepoint, CommunityID, GenerationID, AgentID, true, action{type: i
 ----------- Failure -----------
 -----------------------------*/
 
+% Fail to find the agent to get an action from, but do it nicely with a message 
 agent_action(_, CommunityID, _, _, Success, Action):-
 	\+community(CommunityID),
 	Success = 'No such community', Action = false, !.

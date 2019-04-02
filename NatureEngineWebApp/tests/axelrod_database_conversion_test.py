@@ -1,4 +1,5 @@
-"""axelrod_database_conversion_test.py: A set of test caases to test the conversion between my database and the axelrod library representation"""
+"""axelrod_database_conversion_test.py: A set of test caases to test the conversion
+between my database and the axelrod library representation"""
 
 __author__ = "James King adapted from Miguel Grinberg"
 
@@ -8,6 +9,7 @@ from app.main.axelrod_database_conversion import match_result_to_database
 from app import create_app, db
 from app.models import Match, Player, Round, Action
 from tests.test_config import TestConfig
+
 
 class TestConversion(unittest.TestCase):
 

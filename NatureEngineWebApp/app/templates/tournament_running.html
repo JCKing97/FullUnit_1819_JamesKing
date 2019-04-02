@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{# The template to let the user know that their tournament is running in the server #}
+
 {% block app_content %}
     <div class="jumbotron" style="padding: 20px">
         <h1 style="">Tournament Running</h1>
@@ -8,6 +10,8 @@
         </p>
     </div>
 {% endblock %}
+
+{# Ping the server to check if the tournament has finished, redirect if so #}
 
 {% block scripts %}
     {{ super() }}

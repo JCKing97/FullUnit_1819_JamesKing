@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Agent Mind as a Service Documentation</title>
+
+<link rel="stylesheet" type="text/css" href="pldoc.css">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+</head>
+<body>
+
+
+<h1 class="file"><span style="float:right"></span>utilities.pl</h1>
+
+<dl>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="random_element/2"><b class="pred">random_element</b><var class="arglist">(+List:list, -Elem:elem)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Get a random element from the list, this element unifies with <var>Elem</var>.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>List</var></td><td class="argdescr">- The list to get a random element from</td></tr>
+<tr><td><var>Elem</var></td><td class="argdescr">- The random element</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="random_element/3"><b class="pred">random_element</b><var class="arglist">(+List:list, -Elem:elem, +ElemNotIncl:elem)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Get a random element from the list that is not <var>ElemNotIncl</var>, this element unifies with <var>Elem</var>.
+
+<dl class="tags">
+<dt class="tag">Arguments:</dt><dd>
+
+<table class="arglist">
+<tr><td><var>List</var></td><td class="argdescr">- The list to get a random element from</td></tr>
+<tr><td><var>Elem</var></td><td class="argdescr">- The random element</td></tr>
+<tr><td><var>ElemNotIncl</var></td><td class="argdescr">- The element to not get from the list</td></tr>
+</table>
+
+</dd>
+</dl>
+
+</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="is_empty/2"><b class="pred">is_empty</b><var class="arglist">(+List:list, -IsIt:bool)</var></a> is <b class="det">nondet</b></dt><dd class="defbody">Is the list input empty?
+@arg <var>List</var> The list to check for emptiness
+@arg <var>IsIt</var> Whether the list is empty or not</dd>
+<dt class="pubdef"><span style="float:right">&nbsp;</span><a name="is_list_length_less_than/3"><b class="pred">is_list_length_less_than</b><var class="arglist">(+List:list, +Val:int, -LessThan:bool)</var></a></dt><dd class="defbody">Is the list length less than the value <var>Val</var>.
+@arg <var>List</var> The list to check
+@arg <var>Val</var> The value to check it's length is less than
+@arg <var>LessThan</var> Whether the length is less than <var>Val</var> or not</dd>
+</dl>
+
+</body>
+</html>

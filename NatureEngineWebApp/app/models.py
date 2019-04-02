@@ -11,6 +11,7 @@ from sqlalchemy_fulltext import FullText
 
 
 class User(UserMixin, db.Model):
+    """A database model for a user in the system"""
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
@@ -33,6 +34,7 @@ def load_user(id):
 
 
 class Experiment(FullText, db.Model):
+    """A database model for an experiment of the reputation game run by a registered user"""
     __fulltext_columns__ = 'label'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
@@ -167,6 +169,7 @@ class ReputationGeneration(db.Model):
 
 
 class ReputationActionOnlookers(db.Model):
+    """An onlooker for an action"""
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     community_id = db.Column(db.Integer, db.ForeignKey('reputation_community.id'))
     generation_id = db.Column(db.Integer, db.ForeignKey('reputation_generation.id'))

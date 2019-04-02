@@ -1,5 +1,9 @@
+{# The home page of the application #}
+
 {% extends "base.html" %}
 
+{# Display a carousel with introductory information on the website with pictures #}
+{# Display the caption above the picture and allow movement between slides #}
 {% block app_content %}
     <div id="homeCarousel" class="carousel slide">
         <ol class="carousel-indicators">
@@ -10,7 +14,8 @@
         </ol>
         <div class="carousel-inner" style="width: 100%; height: 100%;">
             <div class="item active">
-                <div class="carousel-caption" style="color: black; position: static; padding-left: 5px; padding-right: 5px;">
+                <div class="carousel-caption" style="color: black; position: static; padding-left: 5px;
+                 padding-right: 5px; text-shadow: none;">
                     <h2>Welcome to the Nature Engine</h2>
                     <p>
                         In the early days of evolutionary theory there was an issue surrounding the idea of the "survival of the fittest".
@@ -18,25 +23,26 @@
                         However, there are many examples of cooperation between animals in nature,
                         so how did this cooperation evolve? How did this cooperation pass down the generations and become "evolutionarily stable"?
                         There are a number of theories put forward to explain the phenomena of cooperation, some you can simulate on this website.
-                        Below there is a description of some.
+                        Click right to learn more.
                     </p>
                 </div>
                 <img src="/static/images/james-carol-lee-642040-unsplash.jpg" alt="Fish in corals" width="100%">
             </div>
             <div class="item">
-                <div class="carousel-caption" style="color: black; position: static; padding-left: 5px; padding-right: 5px;">
+                <div class="carousel-caption" style="color: black; position: static; padding-left: 5px;
+                padding-right: 5px; text-shadow: none;">
                     <h2>The Iterated Prisoner's Dilemma</h2>
                     <p>
                         In a match of the Iterated Prisoner's Dilemma there are two players and a number of rounds.
                         In each round both players choose simultaneously whether they want to cooperate or defect.
                         If both players defect then they get a payoff of 1 each. If both cooperate they both get a payoff of 3.
-                        However there is always a temptation to defect as if one player defects the cooperates, the defecting player
+                        However there is always a temptation to defect as, if one player defects the cooperates, the defecting player
                         gets a payoff of 5 and the cooperating player gets a payoff of 0.
                         Players can use a number of different strategies to decide whether to defect or cooperate based on the previous interactions
                         between the two players in the match.
                         You can simulate a match of this by selecting "Match" in the navbar, if you select the basic version you will be
-                        limited to the most popular strategies, if you select the advanced option you will be able to use the wide array of strategies
-                        available in the Axelrod-Python library used to run the matches.
+                        limited to the most popular strategies, if you select the advanced option you will be able to select a wide array of strategies
+                        available in the Axelrod-Python library.
                     </p>
                     <h2>Tournaments and Beyond</h2>
                     <p>
@@ -45,51 +51,56 @@
                         The players accrue points throughout the tournament.
                         You can simulate one of these tournaments by selecting "Tournament" in the navbar and then selecting what range of strategies you wish to have available.<br />
                         Further applications of the Iterated Prisoner's Dilemma have used evolutionary algorithms to simulate how players in a society
-                        may evolve in regards to their strategy of how they cooperate or defect. You cannot run the Iterated Prisoner's Dilemma
-                        here with an evolutionary algorithm, however you can run indirect reciprocity with evolution (more details further on).
+                        may evolve in regards to their strategy when it comes to the interactions they take part in. You cannot run the Iterated Prisoner's Dilemma
+                        here with an evolutionary algorithm, however you can do with a reputation game.
+                        Click right to learn more about reputation games.
                     </p>
                 </div>
                 <img src="/static/images/chris-lawton-218274-unsplash.jpg" alt="jellyfish" width="100%">
             </div>
             <div class="item">
-                <div class="carousel-caption" style="color: black; position: static; padding-left: 5px; padding-right: 5px;">
+                <div class="carousel-caption" style="color: black; position: static; padding-left: 5px;
+                padding-right: 5px; text-shadow: none;">
                     <h2>Reputation</h2>
                     <p>
                         The Iterated Prisoner's Dilemma uses direct reciprocity to aid in the evolution of cooperation, this is the idea: "I'll scratch your back, if you scratch mine".
-                        Indirect reciprocity is less intuitive, but is still applicable to many domains. The idea is: "If I scratch your back, someone else with scratch mine later on".
+                        Indirect reciprocity is less intuitive. The idea is: "If I scratch your back, someone else with scratch mine later on".
                         Indirect reciprocity relies on the idea of reputation: a group mechanic in which if someone acts well their reputation is enhanced,
                         if they act badly it is diminished. This mechanism means that we don't need many interactions between any two individuals for them to know
                         how to act towards each other.<br/>
                         Indirect reciprocity is also different from the Iterated Prisoner's dilemma in that interactions
-                        consist of a donor-recipient pair, only the donor acts in this interaction pair, not the both of them. If the
+                        consist of a donor-recipient pair, only the donor acts in this interaction pair, not both of them. If the
                         donor chooses to cooperate the recipient gets a payoff of 2, but this is at a cost of 1 to the donor. If the
                         donor defects neither receive any payoff.<br />
-                        Indirect reciprocity suits societies with more advanced capabilities in terms of social ability and brain-power. Two such
-                        societies are human societies and multi-agent systems (more details below).<br />
-                        In my version of indirect reciprocity there is a community, and in each community there are generations of players.
+                        Indirect reciprocity suits societies with more advanced capabilities in terms of social ability. Two such
+                        societies are human societies and multi-agent systems (more details to the right).<br />
+                        A reputation game can utilize both direct and indirect reciprocity.
+                        These games are made up of a community, and in each community there are generations of players.
                         Each generation has a number of timepoints over which events happen, in each timepoint there is one donor-recipient pair.
                         Any members of the generation that are not part of this pair may choose to either be idle for a turn or to gossip to
                         other agents (either positive or negative information about another agent).<br />
-                        For each interaction pair a number of agents are "onlookers" and observe the interaction, then being able to
-                        revise their beliefs about the donor. Agents that receive gossip will also be able to revise their beliefs about the agent the gossip is about.
+                        The evolution of cooperation in these games relies on the ability of a donor to know the reputation of a recipient.
+                        However not every agent can observer every interaction, only a select group of onlookers.
+                        We can attempt to make up for this by agents using their social ability to spread reputation information.
                         At the end of each generation another generation is built depending on how well each strategy does in the previous generation.<br />
-                        You are able to simulate a community of indirect reciprocity by selecting "Reputation" in the navbar.
+                        You are able to simulate a community by selecting "Reputation" in the navbar.
                     </p>
                 </div>
                 <img src="/static/images/rawpixel-653764-unsplash.jpg" alt="society" width="100%">
             </div>
             <div class="item">
-                <div class="carousel-caption" style="color: black; position: static; padding-left: 5px; padding-right: 5px;">
+                <div class="carousel-caption" style="color: black; position: static; padding-left: 5px;
+                 padding-right: 5px; text-shadow: none;">
                     <h2>Intelligent Agents and Multi-Agent Systems</h2>
                     <p>
-                        Artificial Intelligence is pushing our computing and problem solving abilities to the next level. One idea in AI
-                        is agents, these are autonomous systems that have the capability to decide on actions based on what they perceive of their environment.
-                        The combination of a number of agents and their environment is known as a multi-agent system.<br />
+                        Multi-agent systems are made up of a number of interacting autonomous agents. These autonomous agents
+                        often incorporate ideas from Artificial Intelligence. Agents have the capability to decide on actions
+                        based on what they perceive of their environment.<br />
                         The problem is how to get these agents to cooperate when each agent cannot know for sure the intentions of another? The agent
-                        cannot know whether the other agent will cooperate back or not.<br />
-                        The mechanisms (direct and indirect reciprocity) highlighted above can be applied to multi-agent systems
+                        cannot know whether the other agent will cooperate back or whether their altruism would be exploited.<br />
+                        The mechanisms (direct and indirect reciprocity) highlighted in previous slides can be applied to multi-agent systems
                         to encourage cooperation and hopefully prevent cooperating agents from being taken advantage of by defecting agents.
-                        My project is to study indirect reciprocity and how effective this is in multi-agent systems.
+                        My project is to study a mixture of both direct and indirect reciprocity and how effective these mechanisms are in multi-agent systems.
                     </p>
                 </div>
                 <img src="/static/images/brian-kostiuk-252865-unsplash.jpg" alt="computer chip" width="100%">

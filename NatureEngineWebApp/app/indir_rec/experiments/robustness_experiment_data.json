@@ -1,0 +1,12 @@
+[
+    {
+        "gen_length": 800,
+        "num_of_onlookers": 10,
+        "gen_num": 10
+    },
+    {
+        "gen_length": 800,
+        "num_of_onlookers": 20,
+        "gen_num": 10
+    }
+]

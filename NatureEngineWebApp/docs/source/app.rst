@@ -13,6 +13,14 @@ Subpackages
 Submodules
 ----------
 
+app.forms module
+----------------
+
+.. automodule:: app.forms
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 app.models module
 -----------------
 

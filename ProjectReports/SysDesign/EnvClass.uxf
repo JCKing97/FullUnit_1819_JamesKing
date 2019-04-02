@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>765</x>
+      <y>980</y>
+      <w>105</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+Action
+--
+-timepoint: int
+-actor: int
+-generation: int
+-reason: str
+--
+/+getType(): ActionType/
++getGeneration(): int
++getTimepoint(): int
++getActor(): int
++getReason(): str
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>1025</y>
+      <w>105</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+ActionType
+--
+INTERACTION
+GOSSIP
+IDLE
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>1230</y>
+      <w>105</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+InteractionContent
+--
+COOPERATE
+DEFECT
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>780</x>
+      <y>1230</y>
+      <w>105</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumeration&gt;&gt;
+GossipContent
+--
+POSITIVE
+NEGATIVE
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>1110</y>
+      <w>105</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>IdleAction
+--
++getType(): ActionType
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>780</x>
+      <y>1110</y>
+      <w>105</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>GossipAction
+--
+-gossiper: int
+-about: int
+-recipient: int
+-gossip: GossipContent
+--
++getType(): ActionType
++getGossiper(): int
++getAbout(): int
++getRecipient(): int
++getGossip(): GossipContent
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>805</x>
+      <y>1200</y>
+      <w>65</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;40.0;110.0;40.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>915</x>
+      <y>1110</y>
+      <w>105</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>InteractionAction
+--
+-donor: int
+-recipient: int
+-action: InteractionContent
+-onlookers: List[int]
+--
++getType(): ActionType
++getDonor(): int
++getRecipient(): int
++getAction(): InteractionContent
++getOnlookers(): List[int]
++setOnlookers(onlookers: List[int]): NoReturn
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>945</x>
+      <y>1205</y>
+      <w>60</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;30.0;100.0;30.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>865</x>
+      <y>1045</y>
+      <w>55</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-
+uses &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>1075</y>
+      <w>95</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>170.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>1075</y>
+      <w>15</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>825</x>
+      <y>1075</y>
+      <w>120</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;220.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1015</x>
+      <y>845</y>
+      <w>105</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>Strategy
+--
+-donor_strategy: str
+-trust_model: str
+-non_donor_strategy: str
+-options: List[Any]
+--
++toString(): str
++equals(): bool
++notEquals(): bool
++hash(): hashSequence
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>665</x>
+      <y>785</y>
+      <w>130</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>PlayerState
+--
+-generation: int
+-player: int
+-observers: List[Observer]
+-new_action: Action
+-fitness_update: int
+--
++attach(observer: Observer): 
+         NoReturn
++detach(observer: Observer): 
+         NoReturn
+-notify(): NoReturn
++getGeneration(): int
++getPlayer(): int
++getNewAction(): Action
++setNewAction(action: Action): 
+         NoReturn
++getFitnessUpdate(): int
++setFitnessUpdate(fitness_update: 
+         int): NoReturn
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>760</x>
+      <y>945</y>
+      <w>75</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>130.0;70.0;130.0;40.0;10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>850</x>
+      <y>785</y>
+      <w>115</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+-community_id: int
+-generation_id: int
+-player_id: int
+-percepts: Dict
+-fitness: int
++player_state: PlayerState
+-strategy: Strategy
+--
++getId(): int
++getFitness(): int
++updateFitness(change: int):
+         NoReturn
++getStrategy(): Strategy
++decide(timepoint: int): Action
++setPerception(percept: Dict): 
+         NoReturn
++perceive(timepoint: int):
+         NoReturn
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>790</x>
+      <y>890</y>
+      <w>70</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses
+</panel_attributes>
+    <additional_attributes>120.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>885</y>
+      <w>65</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-
+uses &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>865</x>
+      <y>940</y>
+      <w>125</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; commit to</panel_attributes>
+    <additional_attributes>150.0;10.0;150.0;120.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>805</x>
+      <y>575</y>
+      <w>160</w>
+      <h>185</h>
+    </coordinates>
+    <panel_attributes>Generation
+--
+-generation_id: int
+-community_id: int
+-start_point: int
+-end_point: int
+-num_of_onlookers: int
+-strategies: Dict[Strategy, int]
+-players: List[Player]
+-id_to_player_map: Dict[int, Player]
+-observers: List[Observer]
+--
++getId(): int
++getStartPoint(): int
++getEndPoint(): int
++getPlayers(): List[Player]
++getStategyCount(): Dict[Strategy, int]
++simulate(): NoReturn
+-setAndSendDonorRecipientPair(timepoint:
+         int): NoReturn
+-execute(action: Action, timepoint: int):
+         NoReturn
+-generateOnlookers(action:
+         InteractionAction): List[int]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>960</x>
+      <y>740</y>
+      <w>85</w>
+      <h>115</h>
+    </coordinates>
+    <panel_attributes>lt=-
+uses &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;150.0;20.0;150.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>905</x>
+      <y>755</y>
+      <w>15</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>705</y>
+      <w>185</w>
+      <h>295</h>
+    </coordinates>
+    <panel_attributes>lt=-
+gen 
+uses
+action
+</panel_attributes>
+    <additional_attributes>350.0;10.0;10.0;10.0;10.0;570.0;270.0;570.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>325</y>
+      <w>140</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>Community
+--
+-firstGenStrategies: Dict[Strategy, int]
+-community_id: int
+-mutation_chance: float
+-num_of_onlookers: int
+-num_of_generations: int
+-length_of_generations: int
+-generations: List[Generation]
+-current_time: int
+-generation_size: int
+-strategy_count_by_gen: 
+            List[Dict[Strategy, int]]
+-observers: List[Observer]
+--
++getId(): int
++getNumOfOnlookers(): int
++getLengthOfGenerations(): int
++getGenerations(): List[Generation]
++getStrategyCountByGeneration():
+            List[Dict[Strategy, int]]
++extendObservers(observers: 
+            List[Observer]): NoReturn
++simulate(): NoReturn
+-buildGeneration(gen_id: int): 
+            Generation
+-reproduce(gen_id: int):
+            Generation
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>955</x>
+      <y>525</y>
+      <w>125</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>lt=-
+uses &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;230.0;20.0;230.0;640.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>895</x>
+      <y>545</y>
+      <w>15</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>530</y>
+      <w>110</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=-
+uses &gt;
+</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0;10.0;480.0;130.0;480.0;130.0;600.0;200.0;600.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>815</x>
+      <y>180</y>
+      <w>125</w>
+      <h>125</h>
+    </coordinates>
+    <panel_attributes>ReputationGame
+--
+-firstGenStrategies: 
+        Dict[Strategy, int]
+-mutation_chance: float
+-num_of_onlookers: int
+-num_of_generations: int
+-length_of_generations: int
+--
++getfirstGenStrategies(): 
+        Dict[Strategy, int]
++getNumOfOnlookers(): int
++getLengthOfGenerations(): int
++getNumOfGenerations(): int
++getMutationChance(): float
++run(): Results
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>105</y>
+      <w>205</w>
+      <h>335</h>
+    </coordinates>
+    <panel_attributes>Results
+--
+-action_observer: ActionObserver
+-player_observer: PlayerObserver
+-observers: List[Observer]
+-community: Community
+--
++getGenIds(): List[int]
++getPlayerIds(): Dict[int, List[int]]
++getObservers(): List[Observer]
++getActions(): Dict[int, List[Action]]
++getActionsByGeneration():
+     Dict[int, Dict[int, List[Action]]]
++getActionsByGenerationAndPlayer():
+     Dict[int, Dict[int, Dict[int, List[Action]]]]
++getInteractions(): Dict[int, InteractionAction]
++getInteractionsByGeneration(): 
+    Dict[int, Dict[int, InteractionAction]]
++getInteractionsByGenerationAndPlayer(): 
+    Dict[int, Dict[int, Dict[int, InteractionAction]]]
++getCooperationRate():  Union[int, None]
++getCooperationRateByGeneration(): 
+    Dict[int,  Union[int, None]]
++getCooperationRateByGenerationAndPlayer():
+   Dict[int, Dict[int, Union[int, None]]]
++getSocialActiveness():  Union[int, None]
++getSocialActivenessByGeneration():
+   Dict[int,  Union[int, None]]
++getSocialActivenessByGenerationAndPlayer():
+   Dict[int, Dict[int,  Union[int, None]]]
++getPositivityOfGossipPercentage(): Union[int, None]
++getPositivityOfGossipByGeneration():
+   Dict[int,  Union[int, None]]
++getPositivityOfGossipByGenerationAndPlayer():
+   Dict[int, Dict[int,  Union[int, None]]]
++getCorruptedObservations(): bool
++getFitness(): int
++getFitnessByGeneration(): Dict[int, int]
++getFitnessByGenerationAndPlayer():
+   Dict[int, Dict[int, int]]
++getPopulations(): List[Dict[Strategy, int]]
++idToStrategyMap(): Dict[int, Dict[int, Strategy]]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>740</x>
+      <y>245</y>
+      <w>85</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; builds</panel_attributes>
+    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>740</x>
+      <y>365</y>
+      <w>90</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=-
+uses &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>875</x>
+      <y>300</y>
+      <w>30</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+runs</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>740</x>
+      <y>150</y>
+      <w>365</w>
+      <h>705</h>
+    </coordinates>
+    <panel_attributes>lt=-
+uses &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;710.0;20.0;710.0;1390.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>435</y>
+      <w>175</w>
+      <h>600</h>
+    </coordinates>
+    <panel_attributes>lt=-
+uses &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;1180.0;330.0;1180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>315</x>
+      <y>380</y>
+      <w>140</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interface&gt;&gt;
+Observer
+--
+/+update(player_state: PlayerState):/
+/       NoReturn/
+/+getCommunityId(): int/
+/+getGenerationIds(): List[int]/
+/+getPlayerIds(): Dict[int, List[int]]/
+/+addGeneration(generation: int):/
+/       NoReturn/
+/+addPlayer(generation: int, player:/
+/       int): NoReturn/
+/+areObservationsCorrupted(): bool/
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>175</x>
+      <y>520</y>
+      <w>200</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>ActionObserver
+--
+-community_id: int
+-corrupted_observations: bool
+-defection_count: int
+-cooperation_count: int
+-positive_social_action_count: int
+-negative_social_action_count: int
+-idle_action_count: int
+-non_donor_action_count: int
+--
++getActions(): Dict[int, List[Action]]
++getActionsByGeneration():
+     Dict[int, Dict[int, List[Action]]]
++getActionsByGenerationAndPlayer():
+     Dict[int, Dict[int, Dict[int, List[Action]]]]
++getInteractions(): Dict[int, InteractionAction]
++getInteractionsByGeneration(): 
+    Dict[int, Dict[int, InteractionAction]]
++getInteractionsByGenerationAndPlayer(): 
+    Dict[int, Dict[int, Dict[int, InteractionAction]]]
++getCooperationRate():  Union[int, None]
++getCooperationRateByGeneration(): 
+    Dict[int,  Union[int, None]]
++getCooperationRateByGenerationAndPlayer():
+   Dict[int, Dict[int, Union[int, None]]]
++getSocialActiveness():  Union[int, None]
++getSocialActivenessByGeneration():
+   Dict[int,  Union[int, None]]
++getSocialActivenessByGenerationAndPlayer():
+   Dict[int, Dict[int,  Union[int, None]]]
++getPositivityOfGossipPercentage(): Union[int, None]
++getPositivityOfGossipByGeneration():
+   Dict[int,  Union[int, None]]
++getPositivityOfGossipByGenerationAndPlayer():
+   Dict[int, Dict[int,  Union[int, None]]]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>225</x>
+      <y>480</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>280.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>525</y>
+      <w>150</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>PlayerObserver
+--
+-community_id: int
+-corrupted_observations: bool
+-generation_ids: List[int]
+--
++getFitness(): int
++getFitnessByGeneration(): Dict[int, int]
++getFitnessByGenerationAndPlayer():
+   Dict[int, Dict[int, int]]</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>385</x>
+      <y>480</y>
+      <w>100</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;180.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>320</y>
+      <w>140</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+&lt; uses</panel_attributes>
+    <additional_attributes>260.0;20.0;10.0;20.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>450</x>
+      <y>450</y>
+      <w>225</w>
+      <h>380</h>
+    </coordinates>
+    <panel_attributes>lt=-
+observes &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;220.0;10.0;220.0;740.0;430.0;740.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>800</y>
+      <w>435</w>
+      <h>265</h>
+    </coordinates>
+    <panel_attributes>lt=-
+uses &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;510.0;850.0;510.0</additional_attributes>
+  </element>
+</diagram>

@@ -10,6 +10,7 @@ from app.models import User
 
 
 class LoginForm(FlaskForm):
+    """The login form for users"""
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
@@ -17,6 +18,7 @@ class LoginForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
+    """The registration form to create a user"""
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -36,6 +38,7 @@ class RegistrationForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
+    """The search form to search labels of experiments"""
     search_query = StringField('Label Search', validators=[DataRequired()])
     submit = SubmitField('Search')
 

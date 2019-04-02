@@ -44,7 +44,7 @@ strategy("Veritability Discerner", NonDonorStrategy, TrustModel, Description, [K
 	veritability_discerner_possible_options(NonDonorStrategy, TrustModel, OptionsDescription),
 	format(string(Description), "Holds a veritability rating v for each other agent which is affected by percepts when that agent is a donor or gossip about that agent (+20*weight when viewing a cooperation, -20*weight when viewing a defecting against a trusted agent, +10*weight for positive gossip from a trusted source, -10*weight for negative gossip from a trusted source, +1*weight for positive gossip from an untrusted source and -1* weight for negative gossip from an untrusted source). Keeps a count of the percepts received about that agent n. If the v/n>~d the agent the beliefs are about is trusted. Will cooperate with trusted agents. ~w", [K, OptionsDescription]).
 
-
+% Get the possible additions to the image scoring Discriminator donor strategy
 image_score_possible_options("Lazy", "Trusting", "Agent never spreads gossip, but trusts others gossip (if the gossiper is of a value greater than K)").
 image_score_possible_options("Lazy", "Distrusting", "Agent never spreads gossip and never trusts gossip").
 image_score_possible_options("Lazy", "Naive Trusting", "Agent never spreads gossip, but always trusts gossip no matter who is gossiping.").
@@ -58,7 +58,7 @@ image_score_possible_options("Promote Self", "Trusting", "Agent spreads positive
 image_score_possible_options("Promote Self", "Distrusting", "Agent spreads positive gossip to promote themself, doesn't trust other agents gossip").
 image_score_possible_options("Promote Self", "Naive Trusting", "Agent spreads positive gossip to promote themself. Always trusts gossip no matter who is gossiping.").
 
-
+% Get the possible additions to the veritability discerner donor strategy
 veritability_discerner_possible_options(NonDonorStrat, TrustModel, Description):-
 	veritability_discerner_possible_trust_model(TrustModel, TrustModelDesc),
 	veritability_discerner_possible_non_donor_strat(NonDonorStrat, NonDonorStratDesc),

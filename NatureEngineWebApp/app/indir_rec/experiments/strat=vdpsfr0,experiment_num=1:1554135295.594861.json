@@ -1,0 +1,348 @@
+{
+    "experiment": {
+        "gen_length": 100,
+        "num_of_onlookers": 10,
+        "gen_num": 10
+    },
+    "coop_rate": 36,
+    "coop_rate_by_gen": {
+        "0": 81,
+        "1": 85,
+        "2": 72,
+        "3": 58,
+        "4": 33,
+        "5": 23,
+        "6": 11,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    },
+    "social_activeness": 90,
+    "social_activeness_by_gen": {
+        "0": 94,
+        "1": 90,
+        "2": 94,
+        "3": 97,
+        "4": 87,
+        "5": 84,
+        "6": 94,
+        "7": 90,
+        "8": 81,
+        "9": 93
+    },
+    "positivity_of_gossip_percentage": 40,
+    "positivity_of_gossip_percentage_by_gen": {
+        "0": 93,
+        "1": 89,
+        "2": 76,
+        "3": 60,
+        "4": 41,
+        "5": 23,
+        "6": 14,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    },
+    "corrupted_observations": false,
+    "community_fitness": 559,
+    "fitness_by_generation": {
+        "0": 113,
+        "1": 125,
+        "2": 111,
+        "3": 86,
+        "4": 62,
+        "5": 41,
+        "6": 21,
+        "7": 0,
+        "8": 0,
+        "9": 0
+    },
+    "populations": [
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Forgiving Reactor",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Forgiving Reactor",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 3
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 3
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Forgiving Reactor",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 22
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 7
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Forgiving Reactor",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 18
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 12
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 1
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 4
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Forgiving Reactor",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 11
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 16
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 5
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 20
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Forgiving Reactor",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 6
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Veritability Discerner",
+                    "non_donor_strat": "Promote Self",
+                    "trust_model": "Forgiving Reactor",
+                    "options": [
+                        0
+                    ]
+                },
+                "count": 4
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 28
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 3
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 25
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 6
+            }
+        ],
+        [
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Spread Negative",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 29
+            },
+            {
+                "strategy": {
+                    "donor_strat": "Defector",
+                    "non_donor_strat": "Lazy",
+                    "trust_model": "Void",
+                    "options": []
+                },
+                "count": 2
+            }
+        ]
+    ]
+}

@@ -1,3 +1,6 @@
+{# The base for all other web pages including a navigation bar and facilities for displaying message alerts #}
+{# All webpages are included in app_contect block at the bottom #}
+
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}
@@ -72,6 +75,7 @@
     </nav>
 {% endblock %}
 
+{# All webpages are included in app_contect block #}
 {% block content %}
     {% with messages = get_flashed_messages() %}
     {% if messages %}

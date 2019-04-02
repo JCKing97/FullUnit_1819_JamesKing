@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {%  import 'bootstrap/wtf.html' as wtf %}
 
+{# The template to display a users experiments to them with links to details on those experiments #}
 {% block app_content %}
     <div class="container">
         <h1>Welcome to your experiments {{ username }}</h1>
@@ -8,6 +9,7 @@
             To create a new experiment create a new reputation game, select your strategies and variables and
             add a label for the game.
         </p>
+        {# There are search facilities on a mysql database ( which is used when deployed) #}
         {% if deployed %}
             <h2>Experiment Search</h2>
             <div class="row">
@@ -16,6 +18,7 @@
                 </div>
             </div>
         {% endif %}
+        {# List experiments with links to their analysis #}
         <h2>My Experiments</h2>
         <table class="table table-hover">
             <thead>
@@ -39,6 +42,7 @@
             {% endfor %}
             </tbody>
         </table>
+        {# Paginate the links if there are too many #}
         {% if prev_url %}
             <a href="{{ prev_url }}" style="float: left;">Earlier experiments</a>
         {% endif %}

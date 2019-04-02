@@ -5,48 +5,50 @@ The style file: plain.bst
 Database file #1: refs.bib
 Warning--to sort, need author or key in flask_tut
 Warning--to sort, need author or key in swi_web_tut
+Warning--to sort, need author or key in guru99_testing
+Warning--to sort, need author or key in software_testing_help
 Warning--empty journal in alexander1987biology
 Warning--empty year in sugden2004economics
 Warning--empty journal in thomas1993placa
-You've used 59 entries,
+You've used 78 entries,
             2118 wiz_defined-function locations,
-            823 strings with 12801 characters,
-and the built_in function-call counts, 17455 in all, are:
-= -- 1731
-> -- 689
-< -- 14
-+ -- 290
-- -- 218
-* -- 1076
-:= -- 2899
-add.period$ -- 185
-call.type$ -- 59
-change.case$ -- 274
+            910 strings with 15944 characters,
+and the built_in function-call counts, 23229 in all, are:
+= -- 2287
+> -- 954
+< -- 20
++ -- 401
+- -- 306
+* -- 1411
+:= -- 3844
+add.period$ -- 245
+call.type$ -- 78
+change.case$ -- 372
 chr.to.int$ -- 0
-cite$ -- 64
-duplicate$ -- 707
-empty$ -- 1478
-format.name$ -- 218
-if$ -- 3703
+cite$ -- 85
+duplicate$ -- 944
+empty$ -- 1954
+format.name$ -- 306
+if$ -- 4940
 int.to.chr$ -- 0
-int.to.str$ -- 59
-missing$ -- 60
-newline$ -- 300
-num.names$ -- 114
-pop$ -- 331
+int.to.str$ -- 78
+missing$ -- 78
+newline$ -- 397
+num.names$ -- 148
+pop$ -- 468
 preamble$ -- 1
-purify$ -- 226
+purify$ -- 308
 quote$ -- 0
-skip$ -- 505
+skip$ -- 680
 stack$ -- 0
-substring$ -- 1013
-swap$ -- 136
-text.length$ -- 14
+substring$ -- 1278
+swap$ -- 192
+text.length$ -- 20
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 216
-warning$ -- 5
-while$ -- 170
-width$ -- 61
-write$ -- 639
-(There were 5 warnings)
+type$ -- 286
+warning$ -- 7
+while$ -- 218
+width$ -- 80
+write$ -- 843
+(There were 7 warnings)
