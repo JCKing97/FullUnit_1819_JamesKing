@@ -1,53 +1,5 @@
 [
   {
-    "donor_strategy": "Standing Discriminator",
-    "non_donor_strategy": "Spread Accurate Negative",
-    "trust_model":  "Trusting",
-    "options": []
-  },
-  {
-    "donor_strategy": "Standing Discriminator",
-    "non_donor_strategy": "Spread Accurate Positive",
-    "trust_model":  "Distrusting",
-    "options": []
-  },
-  {
-    "donor_strategy": "Standing Discriminator",
-    "non_donor_strategy": "Promote Self",
-    "trust_model":  "Naive Trusting",
-    "options": []
-  },
-  {
-    "donor_strategy": "Image Scoring Discriminator",
-    "non_donor_strategy": "Spread Accurate Negative",
-    "trust_model":  "Trusting",
-    "options": [-2, "Personal Grievance"]
-  },
-  {
-    "donor_strategy": "Image Scoring Discriminator",
-    "non_donor_strategy": "Lazy",
-    "trust_model":  "Trusting",
-    "options": [0]
-  },
-  {
-    "donor_strategy": "Image Scoring Discriminator",
-    "non_donor_strategy": "Spread Accurate Positive",
-    "trust_model":  "Distrusting",
-    "options": [0, "Personal Grievance"]
-  },
-  {
-    "donor_strategy": "Veritability Discerner",
-    "non_donor_strategy": "Spread Positive Trusted",
-    "trust_model":  "Balanced Reactor",
-    "options": [-5]
-  },
-  {
-    "donor_strategy": "Veritability Discerner",
-    "non_donor_strategy": "Spread Negative Untrusted",
-    "trust_model":  "Strong Reactor",
-    "options": [0]
-  },
-  {
     "donor_strategy": "Veritability Discerner",
     "non_donor_strategy": "Promote Self",
     "trust_model":  "Forgiving Reactor",

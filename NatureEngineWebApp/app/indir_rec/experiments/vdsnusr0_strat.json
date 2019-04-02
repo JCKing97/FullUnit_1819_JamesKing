@@ -1,0 +1,8 @@
+[
+  {
+    "donor_strategy": "Veritability Discerner",
+    "non_donor_strategy": "Spread Negative Untrusted",
+    "trust_model":  "Strong Reactor",
+    "options": [0]
+  }
+]

@@ -1,0 +1,8 @@
+[
+  {
+    "donor_strategy": "Image Scoring Discriminator",
+    "non_donor_strategy": "Lazy",
+    "trust_model":  "Trusting",
+    "options": [0]
+  }
+]

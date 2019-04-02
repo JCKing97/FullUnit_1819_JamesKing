@@ -1,0 +1,8 @@
+[
+  {
+    "donor_strategy": "Image Scoring Discriminator",
+    "non_donor_strategy": "Spread Accurate Positive",
+    "trust_model":  "Distrusting",
+    "options": [0, "Personal Grievance"]
+  }
+]
