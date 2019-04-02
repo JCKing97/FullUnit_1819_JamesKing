@@ -1,0 +1,23 @@
+[
+    {
+<<<<<<< HEAD
+	"gen_length": 200,
+	"gen_num": 10,
+	"num_of_onlookers": 20
+=======
+        "gen_length": 200,
+        "num_of_onlookers": 5,
+        "gen_num": 10
+    },
+    {
+      "gen_length": 200,
+      "num_of_onlookers": 10,
+      "gen_num": 10
+    },
+    {
+      "gen_length": 200,
+      "gen_num": 10,
+      "num_of_onlookers": 20
+>>>>>>> 5a5f87b28ca76383e612a0136b87e084af020f4d
+    }
+]
