@@ -107,17 +107,18 @@ Tim Finin, Richard Fritzson, Don McKay, and Robin McEntire.
 \newblock In {\em Proceedings of the third international conference on
   Information and knowledge management}, pages 456--463. ACM, 1994.
 
-\bibitem{fisher1993concurrent}
-Michael Fisher.
-\newblock Concurrent metatem—a language for modelling reactive systems.
-\newblock In {\em International Conference on Parallel Architectures and
-  Languages Europe}, pages 185--196. Springer, 1993.
-
 \bibitem{genetic_algorithms}
 Pascal Francq.
 \newblock Genetic algorithms.
 \newblock \url{http://www.otlet-institute.org/wikics/Genetic_Algorithms.html},
   2011.
+\newblock Accessed: 04/01/2019.
+
+\bibitem{optimisation_problems}
+Pascal Francq.
+\newblock Optimisation problems.
+\newblock
+  \url{http://www.otlet-institute.org/wikics/Optimization_Problems.html}, 2011.
 \newblock Accessed: 04/01/2019.
 
 \bibitem{franklin1996agent}
@@ -221,11 +222,6 @@ Adam Lipowski and Dorota Lipowska.
 \newblock {\em Physica A: Statistical Mechanics and its Applications},
   391(6):2193--2196, 2012.
 
-\bibitem{machinery1950computing}
-Computing Machinery.
-\newblock Computing machinery and intelligence-am turing.
-\newblock {\em Mind}, 59(236):433, 1950.
-
 \bibitem{Maes:1991:ANA:122344.122367}
 Pattie Maes.
 \newblock The agent network architecture (ana).
@@ -309,11 +305,6 @@ Martin~A. Nowak and Robert~M. May.
 Martin~A. Nowak and Karl Sigmund.
 \newblock Evolution of indirect reciprocity by image scoring.
 \newblock {\em Nature}, 393:573--577, 1998.
-
-\bibitem{o1998fipa}
-Paul~D O'Brien and Richard~C Nicol.
-\newblock Fipa—towards a standard for software agents.
-\newblock {\em BT Technology Journal}, 16(3):51--59, 1998.
 
 \bibitem{phelps_game_theoretic_analysis}
 Steve Phelps.
@@ -406,11 +397,6 @@ Herbert Spencer.
 \newblock The principles of biology (2 vols) london: Williams and norgate.
 \newblock {\em Google Scholar}, 1864.
 
-\bibitem{kostas_deductive}
-Professor~Kostas Stathis.
-\newblock Lecture notes in intelligent agents and multi-agent systems, November
-  2018.
-
 \bibitem{sugden2004economics}
 Robert Sugden et~al.
 \newblock {\em The economics of rights, co-operation and welfare}.
@@ -448,11 +434,6 @@ Michael Wooldridge.
 Michael Wooldridge and Nicholas~R. Jennings.
 \newblock Intelligent agents: theory and practice.
 \newblock {\em The Knowledge Engineering Review}, 10(2):115--152, 1995.
-
-\bibitem{wooldridge2000gaia}
-Michael Wooldridge, Nicholas~R Jennings, and David Kinny.
-\newblock The gaia methodology for agent-oriented analysis and design.
-\newblock {\em Autonomous Agents and multi-agent systems}, 3(3):285--312, 2000.
 
 \bibitem{turtle}
 Sea~Turtle World.
