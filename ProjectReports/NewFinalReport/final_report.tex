@@ -38,7 +38,7 @@ This report has been prepared on the basis of my own work. Where other published
 
 \vskip3em
 
-Word Count: 16,347
+Word Count: 16,467
 
 \vskip3em
 
@@ -79,6 +79,10 @@ It is desirable for agents in a MAS to work together to complete tasks and fulfi
 Many of these tools rely on the idea of reciprocal altruism~\cite{trivers1971evolution}, which stipulates that cooperation can occur between selfish individuals if they expect cooperation to be reciprocated. Two such mechanisms are direct and indirect reciprocity. Indirect reciprocity refers to when an agent cooperates with another agent with the expectation that this cooperation will increase the chance of receiving cooperation from others later. Direct reciprocity, on the other hand, refers to the expectation of reciprocating cooperation from the agent who initially received the cooperation.\par
 There are many factors to consider surrounding the mechanisms. One key factor is the level of visibility of the interactions within the MAS. Nowak and Sigmund~\cite{evol_indirect_image} limit this visibility to a randomly selected group of individuals in the population (onlookers). Another factor to consider is how information about the interactions can be conveyed. Sommerfeld \textit{et al.} suggested the use of gossip~\cite{gossip_alt}.\par 
 So how can we use these mechanisms to facilitate cooperation between IAs? What options can we use and how can we make use of them to encourage cooperation between these agents?
+
+\section{Future Career}
+The work involved in this project will directly affect my future career as the design, implementation and testing of the system involves the use of software engineering techniques, tools and processes. Further, I have learnt frameworks and techniques for web development, which is a very useful skill for any software development role.\par 
+One of my plans for my future career is to research AI and MAS techniques. I believe this project is one step on the ladder to learning more about those techniques, the skills required to conduct research in these areas and to delve into the history of MAS development to better understand the field.
 
 \section{Aims and Objectives}
 \label{sec:aao}
@@ -460,14 +464,16 @@ Agents can attempt to improve bonds between themselves and others, by spreading 
 Russell and Norvig's~\cite{russell2016artificial} model-based reflex agent is the closest of their agent architectures to the architecture I will be using. The architecture includes using a trust model to revise beliefs from received percepts and then using these beliefs with teleo-reactive programs to make action decisions.\par 
 \begin{wrapfigure}{l}{0.5\textwidth}
 	\vspace{-30pt}
+	\begin{framed}
 	\begin{center}
-	\includegraphics[width=0.5\textwidth]{AgentArchitecture.png}
+	\includegraphics[width=\textwidth]{AgentArchitecture.png}
 	\caption{The agent architecture in my system.}
 	\label{fig:model_reflex}
 	\end{center}
+	\end{framed}
 	\vspace{-30pt}
 \end{wrapfigure}
-The trust model and beliefs system use the multi-valued fluent cached events calculus. The beliefs are a combination of the value and the fluent of multi-valued fluents~\cite{artikis2009specifying}. For example the fluent $standing(agent1, agent2, t)=value$ is the belief of $agent1$ on the standing of $agent2$ at timepoint $t$. In this fluent the value can either be `good' or `bad'. The trust model controls the interpretting of percepts and updating of these fluents.\par
+The trust model and beliefs system use the MVFCEC. The beliefs are a combination of the value and the fluent of multi-valued fluents~\cite{artikis2009specifying}. For example the fluent $standing(agent1, agent2, t)=value$ is the belief of $agent1$ on the standing of $agent2$ at timepoint $t$. In this fluent the value can either be `good' or `bad'. The trust model controls the interpretting of percepts and updating of these fluents.\par
 Capabilities are also a part of the beliefs system that are revised during the interpretation of percepts. These capability beliefs constrain an agent as to the actions to which they can commit i.e. an agent can only commit to an action if they believe that they are capable of it. For example, at a time when an agent is a donor in a donor-recipient pair, they will only believe themself capable of a donor action, constraining their action choice.\par 
 To make a decision on an action the agent architecture combines the agent's beliefs with a teleo-reactive program that makes up an agent's strategy. A strategy is made up of strategy `components'. Of which one I have already discussed: the trust model. The trust model is combined with a component determining how to act as a donor and another determining how to act when not a donor. The decision is a commitment at that timepoint to carry out that action.
 
@@ -536,7 +542,7 @@ In this section I will discuss the details of the implementation of the theoreti
 \end{wrapfigure}
 One objective of my project is to create a distributable system, suitable as an experimentation and learning tool for those interested in studying multi-agent interactions. This distributability is reflected in my system architecture. A web application provides the client side interface for users across the internet, allowing users to create, run and view analysis of the available games.\par 
 The web application is named `The Nature Engine' and uses the client-server model. Built into this web application is an implementation of my theoretical framework which runs the environment and the agents' bodies. Notably, this part of the system doesn't include agent decision-making components, which are hosted in a separate web service named the Agent Mind as a Service (AMAAS). This web service exposes an API for the web application to interact with to facilitate sending percepts and getting decisions.\par 
-The final component of the system is a relational database for user information (to enable users to record and label experiments) and game data. The database was developed using the SQLAlchemy ORM, which I have used to create a SQLite database for development and a MySql database for deployment. An illustration of the overall architecture is in figure~\ref{fig:architecture}. The system is deployed on an Ubuntu server (with a domain name natureengine.tech) and the database is situated on another machine.
+The final component of the system is a relational database for user information (to enable users to record and label experiments) and game data. An illustration of the overall architecture is in figure~\ref{fig:architecture}. The system is deployed on an Ubuntu server (with a domain name natureengine.tech) and the database is situated on another machine.
 
 \subsubsection{Proof of Concepts and Learning}
 I have discussed my proof of concept applications in the interim report and as such shall not go into details about them here. For these proof of concept applications I needed to learn about the creation of web services in Prolog - for which I used Anne Ogborn's `Creating Web Applications in SWI-Prolog' tutorial~\cite{swi_web_tut} - and web development in Flask and Python - for which I used Miguel Grinberg's course ``The Flask Mega-Tutorial"~\cite{flask_tut}. I also did some research into boostrap and React.js for the development of front-end components.
@@ -589,26 +595,26 @@ The 3 classes that implement the Action abstract class represent three possible 
 
 \subsubsection{Agent Mind as a Service (AMAAS)}
 The AMAAS system was developed in Prolog. Commununities, generations and agents are managed by asserting and retracting the dynamic community/1, generation/2 and agent/4 predicates. The first argument of the agent/4 predicate is a strategy/5 predicate. These are static predicates representing the available strategies in the system.\par 
-Agent beliefs are managed using fluent values in the MVFCEC. The value of these fluents are revised using the initiates\_at/4 predicates associated with an agent's strategy when an event is observed by asserting the observed\_at/2 predicate and the MVFCEC is updated update\_at/2 predicate. This is handled by the add\_new\_action\_gossip\_percept/2, add\_new\_action\_interaction\_percept/2 and add\_new\_interaction\_percept/2 predicates.\par 
+Agent beliefs are managed using fluent values in the MVFCEC. The value of these fluents are revised using the initiates\_at/4 predicate associated with an agent's strategy and trust model. The initiates\_at/4 is called when an event is observed by asserting the observed\_at/2 predicate and the MVFCEC is updated using the update\_at/2 predicate. Event observations and updating is handled by the add\_new\_action\_gossip\_percept/2, add\_new\_action\_interaction\_percept/2 and add\_new\_interaction\_percept/2 predicates.\par 
 The fluent values are then used when the agent is deciding how to act. This decision is driven by the agent\_action/6 predicates which form a teleo-reactive program for each strategy. This predicate checks whether the agent is capable of an action using the capable/5 predicate. The get\_action/6 predicate is a higher level that uses the agent\_action/6 and capable/5 predicates as well as ensuring that the agent has not already committed to an action at that timepoint.
 
 \subsubsection{Simple Agent Gossip Language}
 The specification of SAGL (subsection~\ref{subs:sagl}) is remarkably similar to data structures used in Python (Dicts), the JSON structure and dictionaries in Prolog. As such, it made sense to use these data structures for the transferring and storing of SAGL messages.
 
 \subsection{Software Engineering}
-I have used a scrum-like process with a task backlog subject to change and fortnightly. This backlog was in flux far more than expected. I believe this is due to my ongoing learning of the topic during development. The backlog could have been managed better with a more structure approach to system design. However, I believe this constant learning allowed me to incorporate many interesting ideas from game theory into the project.\par 
-In practice the design, implementation and testing was a greatly interleaved process. I interleaved design and testing with a TDD approach for both the MAS and the AMAAS system with the unittest and PLUnit libraries. Further testing occurred after development with bottom-up integration testing for the MAS and AMAAS system and API testing.\par 
-I would also like to have tested the web application for functionality, usability and compatibility~\cite{guru99_testing, software_testing_help}. I developed the user interface in to what I believe to be a good standard. However, I'm sure that it can be improved and it would be productive to receive feedback so that I can understand where to improve. I have developed the web application so that it is responsive using the Bootstrap 3 library, and have used the website on Firefox on Android and Linux, and Chrome on Windows. I would also, in the future, like to compatibility test in Safari.\par 
-I used an incremental development strategy, in which I created a functioning but basic AMAAS and then built on top of this with basic functionality for the MAS. I then added to this functionality developing slices of the system each time.\par 
-In the design phase I learnt about the operation of MASs and agent architectures to inspire my own work. I designed the API for the AMAAS system using a RESTful API Modelling Language (RAML) specification, which I added to as I went along. The specification laid out the functionality required from the service, driving the implementation of the AMAAS system and the API testing.\par 
-For the environment I used the OOP features of Python and as such used object-oriented design techniques, including the creation of a class structure (figure~\ref{fig:class}) and message passing sequence (figure~\ref{fig:sequence}). With UMLet I created a class structure with an observer pattern to observe game events and record statistic, I also added a two facades for the class structure so that a simple Results class is returned after an object of the ReputationGame type has been run.\par 
-My Python code follows the PEP 8 Style Guide. I used the Flask web application microframework to assist me in developing the web application and for the creation of the database I used the SQLAlchemy ORM. With SQLAlchemy I was able to generate a database for both SQLite (for development) and MySQL (for deployment) from Python code. The use of SLQALchemy also assists in the prevention of SQL injection attacks that websites so often fall prey to.\par 
+I have used a scrum-like process with fortnightly sprints and a task backlog, subject to change. This backlog was in flux far more than expected, which I believe is due to my ongoing learning of the topic during development. The backlog could have been managed better with a more structured approach to system design. However, I believe this constant learning allowed me to incorporate many interesting ideas from game theory into the project.\par 
+In practice the design, implementation and testing was a greatly interleaved process. I interleaved implementation and testing with a Test-Driven Development (TDD) approach for both the MAS and the AMAAS system supported by the unittest and PLUnit libraries. At times I did not follow my planned TDD approach, especially prior to submitting the interim report as I was simply trying to produce code faster. I regretted this oversight as it led to code with more bugs, many of which I caught in the following bottom-up integration testing for the MAS and AMAAS system. After development of the AMAAS system I also API tested the service.\par 
+I would also like to have tested the web application for functionality, usability and compatibility~\cite{guru99_testing, software_testing_help}. Using my knowledge of Bootstrap 3, CSS and React.js I have developed a responsive application fit for many screen sizes. However, it would be productive to get feedback on the interface so that I can understand where to improve and to test on more devices and browsers to ensure compatibility.\par 
+I used an incremental development strategy, in which I created a functioning but basic AMAAS and then built on top of this with basic functionality for the MAS. I then added to this functionality, developing slices of the system each time.\par 
+Prior to development in the design phase, I learnt about the operation of MASs and agent architectures to inspire my own work. I designed the API for the AMAAS system using a RESTful API Modelling Language (RAML) specification, which I added to as I went along. The specification laid out the functionality required from the service, driving the implementation of the AMAAS system and the API testing.\par 
+For the environment, I used the OOP features of Python and as such used object-oriented design techniques, including the creation of a class structure (figure~\ref{fig:class}) and message passing sequence (figure~\ref{fig:sequence}). With UMLet I created a class structure with an observer pattern to observe game events and record statistics. I also added two facades for the class structure so that a simple Results class is returned after an object of the ReputationGame type has been run.\par 
+My Python code follows the PEP 8 Style Guide. I used the Flask web application microframework to assist me in developing the web application and for the creation of the database I used the SQLAlchemy ORM. With SQLAlchemy, I was able to generate a database for both SQLite (for development) and MySQL (for deployment) from Python code. The use of SLQALchemy also assists in the prevention of SQL injection attacks that websites so often fall prey to.\par 
 I used git as a version control system, with a master branch and various feature branches which I developed features on. Once a branch was stable I merged it back into the master. The repository is hosted on GitHub. I used the git command line tool for Linux and the vimdiff mergetool.\par 
 Pycharm provides a linter and support for the Python language, as well as Jinja2, HTML, CSS and Javascript which I used for front-end development. I have used the visual debugger, Python environment setup support, Flask support and unittest library support.\par 
 There is far less tooling available for Prolog development. To catch errors early I used the Visual Studio Code linter, but this often crashed so I ended up using Sublime Text with syntax highlighting. I used the HTTP library for Prolog to create the web service.\par 
-The specification I have used for the API has then been converted using the raml2html tool to create documentation for the API. This documentation can be found by opening the main.html document in the AgentsService/api\_docs directory in a web browser.\par 
-Documentation has also been created for The Nature Engine and MAS by writing reStructuredTest docstrings in the PEP 257 format and generating website with the sphinx tool from these docstrings. This documentation can be found by opening the index.html file in the NatureEngineWebApp/docs/build/html directory in a web browser.\par 
-Similarly, there is documentation for the AMAAS system code created by writing PLDoc docstrings and then generating web pages using the built-in SWI-Prolog utilities. This documentation can be found by opening the index.html file in the AgentsService/pldocs directory in a web browser.
+The specification I have created for the API has then been converted using the raml2html tool to create documentation for the API. This documentation can be found by opening the main.html document in the AgentsService/api\_docs directory in a web browser.\par 
+Documentation has also been created for The Nature Engine and MAS by writing reStructuredText docstrings in the PEP 257 format and generating a website with the sphinx tool from these docstrings. This documentation can be found by opening the index.html file in the NatureEngineWebApp/docs/build/html directory in a web browser.\par 
+Similarly, there is documentation for the AMAAS system code created by writing PLDoc docstrings and then generating web pages using built-in SWI-Prolog utilities. This documentation can be found by opening the index.html file in the AgentsService/pldocs directory in a web browser.
 
 \begin{figure}
 	\begin{flushleft}
@@ -826,7 +832,7 @@ An overview of the directory structure:\\
 	.2 Documents.
 	.2 AgentsService. 
 	.3 api\_docs. 
-	.3 pldocs
+	.3 pldocs.
 	.3 src. 
 	.4 mvfcec. 
 	.4 tests.

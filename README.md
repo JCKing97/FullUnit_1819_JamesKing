@@ -3,6 +3,7 @@
 Project title: Cooperative Strategies in Multi-Agent Systems
 
 In this README I shall be describing the programs I have written and planned.
+The structure of the submission directories is documented in the first section of the appendix in the final report which can be found in the Documents directory.
 
 # Programs
 

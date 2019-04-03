@@ -1057,15 +1057,16 @@ body .markdown-body
 .codehilite .gc{color:#999;background-color:#EAF2F5}
 </style><title>README</title></head><body><article class="markdown-body"><h1 id="fullunit95181995jamesking">FullUnit_1819_JamesKing<a class="headerlink" href="#fullunit95181995jamesking" title="Permanent link"></a></h1>
 <p>Project title: Cooperative Strategies in Multi-Agent Systems</p>
-<p>In this README I shall be describing the programs I have written and planned.</p>
+<p>In this README I shall be describing the programs I have written and planned.
+The structure of the submission directories is documented in the first section of the appendix in the final report which can be found in the Documents directory.</p>
 <h1 id="programs">Programs<a class="headerlink" href="#programs" title="Permanent link"></a></h1>
 <p>This is a brief description of my programs and how to run them. Background theory and more details are provided in my final report.</p>
 <h2 id="prolog-service-proof-of-concept">Prolog Service Proof of Concept<a class="headerlink" href="#prolog-service-proof-of-concept" title="Permanent link"></a></h2>
 <p>Kept in the PrologServiceProof directory.
 To run this make sure you have SWI-Prolog installed, it has been run and tested on version 7.6.4.
 To run navigate to the directory PrologServiceProof/src in a terminal and run the command &ldquo;prolog main.pl&rdquo;.
-This will compile the Prolog files and open a Prolog environment. In this terminal run the predicate: &ldquo;server(PORT)&rdquo; with PORT as the port number you want to run it on such as 5000 or 8080.
-You will then be able to access the web service on <a href="http://localhost:PORT/">http://localhost:PORT/</a>
+This will compile the Prolog files and open a Prolog environment. In this terminal run the predicate: &ldquo;server(PORT)&rdquo; with PORT as the port number you want to run it on such as 5000 or 8080.</p>
+<p>You will then be able to access the web service on <a href="http://localhost:PORT/">http://localhost:PORT/</a>
 The web service has a simple home page, with links in a banner across the top.
 The New Agent page allows you to input a new agent into the service using the form. The Agents page allows you to view the agents currently in the system. The Session Agents page allows you to select an agent for your current session from the agents in the system (appending it to the current session agents).
 The reason for this proof of concept was to learn to write and practice writing web services in Prolog. It was done by following a tutorial online for Prolog web applications and as such is mostly code adapted from that tutorial (the link to which is in the bibliography of my interim report).
@@ -1077,8 +1078,8 @@ Again make sure you have SWI-Prolog installed, it has been run and tested on ver
 To run this navigate to the directory AgentsService/src and run either the command &ldquo;prolog main.pl&rdquo; or &ldquo;prolog run.pl&rdquo;
 If you use &ldquo;prolog run.pl&rdquo; a server will be spun up on the port 8080. 8080 is the recommended port for working with The Nature Engine web app, unless you set the environment variable AGENTS_URL to the url with the port you wish i.e. &ldquo;<a href="http://localhost:PORT/">http://localhost:PORT/</a>&rdquo;.
 To run the service on the port you wish use &ldquo;prolog main.pl&rdquo; and then run the predicate: server(PORT) with PORT as the port number you want to run the service on.
-You will then be able to access the web service on <a href="http://localhost:PORT/">http://localhost:PORT/</a>
-This service is not built to deliver any kind of web page front-end but work as an API for applications/developers to use. If you go to the URL above you will receive a JSON file containing all the strategies available in the service.
+You will then be able to access the web service on <a href="http://localhost:PORT/">http://localhost:PORT/</a></p>
+<p>This service is not built to deliver any kind of web page front-end but work as an API for applications/developers to use. If you go to the URL above you will receive a JSON file containing all the strategies available in the service.
 The API is documented in the file main.raml, converted to a user-understandable format in the file main.html under the AgentsService/api_docs directory. Access this file using a javascript enabled web browser. You can then use the API as you wish, maybe testing it with Postman or using it for your own app.
 The functionality is mostly explained in this HTML, but as an overview the API allows you to create communities, generations and agents - that can use a variety of available strategies - in the service and then input percepts to these agents, query agents beliefs and ask the agents for commitments to actions.
 This API has been tested using the python requests library and unittest framework. The tests for the API can be found under the directory NatureEngineWebApp/tests/api_testing.</p>
@@ -1121,8 +1122,8 @@ You can then create a new ReputationGame object &ldquo;game = ReputationGame(pop
     &ldquo;trust_model&rdquo;: &ldquo;Balanced Reactor&rdquo;,
     &ldquo;options&rdquo;: [5],
     &ldquo;count&rdquo;: 6 
-}
-You will need to use the strategies from the agent service. To find these open a web browser and navigate to the url &ldquo;<a href="http://localhost:8080/">http://localhost:8080/</a>&rdquo; and a json will describe to you the strategies available. The &ldquo;count&rdquo; key points to the number of this specific strategy you wish to include in the initial population.
+}</p>
+<p>You will need to use the strategies from the agent service. To find these open a web browser and navigate to the url &ldquo;<a href="http://localhost:8080/">http://localhost:8080/</a>&rdquo; and a json will describe to you the strategies available. The &ldquo;count&rdquo; key points to the number of this specific strategy you wish to include in the initial population.
 You can then run the game, and view an analysis using the returned Results object with &ldquo;results = game.run()&rdquo;.
 This runs a game which you can find described in my final report in the Theoretical Framework section.
 The tests are contained alongside the business logic of in separate packages, for example, the tests for the &ldquo;facade_logic.py&rdquo; package are tested in &ldquo;facade_tests.py&rdquo;.</p>
