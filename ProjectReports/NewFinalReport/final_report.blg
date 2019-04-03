@@ -3,53 +3,52 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: final_report.aux
 The style file: plain.bst
 Database file #1: refs.bib
-Warning--I didn't find a database entry for "gossipalt"
-Warning--to sort, need author or key in flask_tut
 Warning--to sort, need author or key in swi_web_tut
+Warning--to sort, need author or key in flask_tut
 Warning--to sort, need author or key in guru99_testing
 Warning--to sort, need author or key in software_testing_help
 Warning--empty journal in alexander1987biology
 Warning--empty year in sugden2004economics
 Warning--empty journal in thomas1993placa
-You've used 79 entries,
+You've used 78 entries,
             2118 wiz_defined-function locations,
-            917 strings with 16072 characters,
-and the built_in function-call counts, 23544 in all, are:
-= -- 2320
-> -- 967
+            912 strings with 15560 characters,
+and the built_in function-call counts, 23334 in all, are:
+= -- 2300
+> -- 960
 < -- 20
-+ -- 406
-- -- 310
-* -- 1435
-:= -- 3897
-add.period$ -- 248
-call.type$ -- 79
-change.case$ -- 377
++ -- 403
+- -- 308
+* -- 1427
+:= -- 3862
+add.period$ -- 245
+call.type$ -- 78
+change.case$ -- 373
 chr.to.int$ -- 0
-cite$ -- 86
-duplicate$ -- 955
-empty$ -- 1979
-format.name$ -- 310
-if$ -- 5004
+cite$ -- 85
+duplicate$ -- 948
+empty$ -- 1957
+format.name$ -- 308
+if$ -- 4958
 int.to.chr$ -- 0
-int.to.str$ -- 79
+int.to.str$ -- 78
 missing$ -- 79
-newline$ -- 402
-num.names$ -- 150
-pop$ -- 471
+newline$ -- 397
+num.names$ -- 148
+pop$ -- 463
 preamble$ -- 1
-purify$ -- 312
+purify$ -- 309
 quote$ -- 0
-skip$ -- 688
+skip$ -- 681
 stack$ -- 0
-substring$ -- 1302
-swap$ -- 193
+substring$ -- 1297
+swap$ -- 192
 text.length$ -- 20
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 290
+type$ -- 286
 warning$ -- 7
-while$ -- 222
-width$ -- 81
-write$ -- 854
-(There were 8 warnings)
+while$ -- 220
+width$ -- 80
+write$ -- 844
+(There were 7 warnings)
